@@ -40,8 +40,11 @@ git remote add origin https://github.com/nubiofs/bookmark.git
 //Enviando alterações para o remoto (github)
 
 git commit -am ""
+
 git push origin master
 
+** COMANDO INICIAIS DO GIT **
+http://tableless.com.br/alguns-comandos-git/
 
 
 
