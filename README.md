@@ -46,7 +46,10 @@ git push origin master
 ** COMANDO INICIAIS DO GIT **
 http://tableless.com.br/alguns-comandos-git/
 
-** ver ** http://www.akitaonrails.com/2010/08/17/screencast-comecando-com-git
+** ver ** 
+
+http://www.akitaonrails.com/2010/08/17/screencast-comecando-com-git
+https://try.github.io/levels/1/challenges/1
 
 
 
