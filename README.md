@@ -8,17 +8,18 @@ git --version
 git config --list
 
 git config --global user.email "nubiofs@gmail.com"
+
 git config --global user.name "nubiofs"
 
 //Criar projetos
 
-mkdir projeto
-cd projeto
+mkdir projeto;
+cd projeto;
 git init
 
 //Criar arquivo no projeto
 
-touch projeto.txt
+touch projeto.txt;
 echo "oi" >> projeto.txt
 
 //Ver estado
