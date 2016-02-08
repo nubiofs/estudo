@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)chrome-extension://eemcgdkfndhakfknompkggombfjjjeno/main.html#7 -->
+<html i18n-values="dir:textdirection;lang:language" dir="ltr" lang="en" i18n-processed="" class=""><!--
+
+Copyright (c) 2012 The Chromium Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+
+--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="google" value="notranslate">
+<meta charset="utf-8">
+<title i18n-content="title">Bookmark Manager</title>
+
+<link rel="stylesheet" href="chrome://resources/css/text_defaults.css">
+<link rel="stylesheet" href="chrome://resources/css/i18n_process.css">
+<link rel="stylesheet" href="chrome://resources/css/list.css">
+<link rel="stylesheet" href="chrome://resources/css/tree.css">
+<link rel="stylesheet" href="chrome://resources/css/menu.css">
+<link rel="stylesheet" href="chrome://resources/css/menu_button.css">
+<link rel="stylesheet" href="chrome://resources/css/widgets.css">
+<style>/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. */
+
+/* Copyright 2014 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. */
+
+/* This is a common file for pages that have a title and search box as their
+ * header. This visually looks like:
+ * _____________________________________________________________________________
+ * |                                                                           |
+ * |  I Am So Great!                                  [ Search greatness... ]  |
+ * |___________________________________________________________________________|
+ * | Summary (90235 things currently great)                      _Great links_ |
+ *
+ * The title expands to fill any space it needs and the search bar is locked to
+ * the end of the header (e.g., right in LTR, left in RTL).
+ */
+
+header,
+.summary {
+  min-width: 400px;
+}
+
+header {
+  align-items: center;
+  display: flex;
+  padding: 0 12px;
+}
+
+header h1 {
+  flex: 1;
+  /* TODO(dbeam): reconcile font/line-height/margin with chrome_shared.css */
+  font-size: 1.5em;
+  font-weight: normal;
+  line-height: 1;
+  margin: 15px 0;
+}
+
+header > :-webkit-any(form, input[type='search']) {
+  flex: none;
+}
+
+.summary {
+  background-color: rgb(235, 239, 249);
+  border-top: 1px solid rgb(156, 194, 239);
+  display: flex;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.summary > * {
+  flex: none;
+}
+
+.summary > :first-child {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+html,
+body {
+  cursor: default;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+list {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: visible; /* let the container do the scrolling */
+}
+
+list > * {
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 3px;
+  color: hsl(0, 0%, 70%);
+  display: flex;
+  line-height: 20px;
+  margin: 0;
+  overflow: visible;
+  padding-bottom: 0;
+  padding-top: 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+list > * > * {
+  -webkit-padding-start: 20px;
+  background: 0 50% no-repeat;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre; /* Don't collapse whitespace */
+}
+
+list > * > .label {
+  -webkit-transition: all 150ms;
+  color: black;
+  display: inline-block; /* We need to use inline-block here due to RTL. */
+}
+
+list > * > .url {
+  direction: ltr; /* URLs always read LTR */
+  display: none;
+  flex: 1;
+}
+
+list > :hover > .url,
+list > [selected] > .url {
+  display: block;
+}
+
+/* Handle proper padding for URL field in an RTL context, where field order is
+ * |div.url||div.label| - so we need padding at the right of URL, not at the
+ * left. And since url is always LTR, that is padding at the end, not the start.
+ */
+html[dir=rtl] .url {
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 0;
+}
+
+html[dir=rtl] list .label {
+  background-position: 100% 50%;
+}
+
+list > .folder > .label {
+  background-image: -webkit-image-set(
+      url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAASCAYAAAC5DOVpAAABLElEQVR4Xs2Ur0oEURhHz10UwQkmg6DNZvQFDAafYsHiGgwGg8lg1S5jEcEiNvEBLPZFQbC5yWCSdZf5ez/5wQUHlpW7sqAHPhi+4R4OA3ecmTEtWkyRGYDj7Y0dIGWUztHF/flEMon2DvcRSZIgXl+euL66TYF4maoWV1bpPT4gnPOIls9YXlpQtSEiqlWW7h60wQAMMwQYrG0Gj4V9eFm89zg9uVS1xjVlmBnOV4DhzIPG+/Bc43wddjUif3v+4Zt5QLKGCEmqofZhJKwZT7OsLiVSBTQlEoQy8s8IWS1ZARKVA7AgUiGqNMj6ABEyHaoKKPvfNRJoMMgHBOLKUFmVAUESkOjvrtNH9475uVliGeblWFnn7KabMiHrW21GMDPs99AclQn37/5nX4eJ9e7eNnr7AAAAAElFTkSuQmCC) 1x);
+}
+
+/* We need to ensure that even empty labels take up space */
+list > * > .label:empty::after,
+list > * > .url:empty::after {
+  content: ' ';
+  white-space: pre;
+}
+
+list > .folder > .url:empty::after {
+  content: '';
+}
+
+list > * > button {
+  -webkit-transition: opacity 150ms;
+  background: #fff
+      url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiMwMDAiIHdpZHRoPSI2IiBoZWlnaHQ9IjMiIHZpZXdib3g9IjAgMCA2IDMiPgogIDxwYXRoIGQ9Ik0wIDAgTDYgMCBMMyAzIiB3aWR0aD0iNiIgaGVpZ2h0PSIzIi8+Cjwvc3ZnPgo=)
+      no-repeat center center;
+  border: 1px solid hsl(214, 91%, 85%);
+  border-radius: 3px;
+  bottom: 1px;
+  display: none;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  right: 3px;
+  top: 1px;
+  width: 15px;
+}
+
+list > [selected]:hover > button,
+list > * > button[menu-shown] {
+  border-color: hsl(214, 91%, 65%);
+}
+
+list > :hover > button {
+  display: block;
+}
+
+list > * > button:hover,
+list > * > button[menu-shown] {
+  display: block;
+}
+
+html[dir=rtl] list > * > button {
+  left: 3px;
+  right: auto;
+}
+
+/* Edit mode */
+
+list [editing] .label input,
+list [editing] .url input {
+  -webkit-margin-end: 4px;
+  -webkit-margin-start: -4px;
+  -webkit-padding-end: 3px;
+  -webkit-padding-start: 3px;
+  box-sizing: content-box;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  /* Do not inherit the line-height. */
+  line-height: normal;
+  margin-bottom: 0;
+  margin-top: 0;
+  min-height: 0;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+
+.tree-item [editing] input {
+  line-height: normal;
+  margin: 0;
+  min-height: 0;
+  padding: 1px 0;
+}
+
+
+
+list > [editing] {
+  overflow: visible;
+}
+
+list [editing] .label,
+list [editing] .url,
+list [editing] > * {
+  overflow: visible;
+}
+
+list [editing] .url {
+  -webkit-padding-start: 5px;
+}
+
+list [editing] input {
+  padding: 1px 0;
+}
+
+/* end editing */
+
+html[dir=rtl] list > .folder > .label {
+  background-image: -webkit-image-set(
+      url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAASCAYAAAC5DOVpAAABRUlEQVR4Xs2UPUvEQBCG39mLnvhZXSEoWghWguAfsNPK1kYUG6+00fYKbSwtBLlrBFv/hKWVpVaWYiESReJdNNlxdhIRwkLIcYhDhmcHss/skuwSM2NQYTDACKoIjnZX9wRtj6fZurjuVJI50ebWBuYXl7SIokh5dnLqGnSCCt0xMz2F+OUB9zePWjMbZWN2QecVZexwcLiD4cYcNIjco4RCqEOBkrC8Bhzvt9rebfLTHYLJUWiYGkAGrMzGMEapCQKboOQDxKFCBCokN0GSA2liawVhmaz7lrE+DlgDmETFlH6pFCLln1VTvURm01/pyATArnbSXCZSGhrTVTNxhZ+2957JbaISJD3JLhC/Cj/B1lY8AXEkYIBtLs6lqchS/qPj9BFL1+fQIwjhf//WL1tZ38b51SX6iCaYuZB9h3eb9C/us28Uf7F5VS9BsgAAAABJRU5ErkJggg==) 1x);
+}
+
+
+
+.main {
+  border-top: 1px solid rgb(156, 194, 239);
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.pane,
+.splitter {
+  display: flex;
+  flex-direction: column;
+}
+
+.pane > :first-child,
+.splitter > :first-child {
+  background-color: rgb(235, 239, 249);
+  flex: none;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.splitter > :first-child {
+  overflow: hidden;
+  padding-left: 0;
+  padding-right: 0;
+  width: 15px;
+}
+
+.splitter button {
+  visibility: hidden;  /* This button is only used for height matching. */
+}
+
+#tree-pane {
+  /* min-width and max-width are used by the split pane. */
+  max-width: 50%;
+  min-width: 150px;
+  width: 200px;
+}
+
+#list-pane {
+  flex: 1;
+  min-width: 0;
+}
+
+#list-pane > :first-child {
+  -webkit-padding-start: 0;  /* Accounts for extra splitter resize width. */
+}
+
+#tree-container {
+  overflow: auto;
+}
+
+#list,
+#tree-container {
+  flex: 1;
+}
+
+#tree,
+#list {
+  -webkit-padding-end: 5px;
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: 100%;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+#tree {
+  /* Only pad the tree as the splitter adds a lot of whitespace for the list. */
+  -webkit-padding-start: 10px;
+}
+
+.tree-item > .tree-row {
+  line-height: 20px;
+}
+
+.tree-row .expand-icon {
+  top: 2px;
+}
+
+.splitter {
+  border-left: 5px solid rgb(235, 239, 249);
+  cursor: e-resize;
+
+  overflow-x: hidden;
+}
+
+.tree-row.drag-on,
+.drag-on {
+  background-color: hsla(214, 91%, 85%, .5);
+  border: 1px solid hsl(214, 91%, 85%);
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.drag-above::before,
+.drag-below::after {
+  background-clip: padding-box;
+  background-color: black;
+  border: 3px solid black;
+  border-bottom-color: transparent;
+  border-radius: 0;
+  border-top-color: transparent;
+  box-sizing: border-box;
+  content: '';
+  display: block;
+  height: 8px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 10;
+}
+
+.drag-above::before {
+  top: calc((8px/2 + 1px) * -1)
+}
+
+.drag-below::after {
+  bottom: calc((8px/2 + 1px) * -1)
+}
+
+list.drag-above::before {
+  top: 0
+}
+
+list > .drag-below,
+list > .drag-above {
+  overflow: visible;
+}
+
+.summary > * {
+  font-size: 100%;
+  margin: 0;
+}
+
+#folders-button,
+#organize-button,
+.splitter button {
+  -webkit-appearance: none;
+  -webkit-padding-end: 11px;
+  -webkit-padding-start: 0;
+  background: transparent
+      url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiMwMDAiIHdpZHRoPSI2IiBoZWlnaHQ9IjMiIHZpZXdib3g9IjAgMCA2IDMiPgogIDxwYXRoIGQ9Ik0wIDAgTDYgMCBMMyAzIiB3aWR0aD0iNiIgaGVpZ2h0PSIzIi8+Cjwvc3ZnPgo=)
+      no-repeat right center;
+  border: 0;
+  font: inherit;
+  font-weight: bold;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+#folders-button {
+  -webkit-margin-start: 16px;
+}
+
+#organize-button {
+  -webkit-margin-start: 4px;
+}
+
+html[dir=rtl] #folders-button,
+html[dir=rtl] #organize-button {
+  background-position: left center;
+}
+
+@media (pointer:coarse) {
+  list > *,
+  cr-menu > button,
+  .tree-item > .tree-row {
+    line-height: 28px;
+  }
+
+  list [editing] input,
+  .tree-item [editing] input {
+    padding: 3px 0;
+  }
+
+  .tree-row .expand-icon {
+    top: 6px;
+  }
+}
+</style>
+
+<script src="chrome://resources/js/event_tracker.js"></script>
+
+<script src="chrome://resources/js/cr.js"></script>
+<script src="chrome://resources/js/cr/event_target.js"></script>
+<script src="chrome://resources/js/cr/link_controller.js"></script>
+<script src="chrome://resources/js/cr/ui.js"></script>
+<script src="chrome://resources/js/cr/ui/touch_handler.js"></script>
+<script src="chrome://resources/js/cr/ui/array_data_model.js"></script>
+<script src="chrome://resources/js/cr/ui/command.js"></script>
+<script src="chrome://resources/js/cr/ui/focus_outline_manager.js"></script>
+<script src="chrome://resources/js/cr/ui/menu_item.js"></script>
+<script src="chrome://resources/js/cr/ui/menu.js"></script>
+<script src="chrome://resources/js/cr/ui/position_util.js"></script>
+<script src="chrome://resources/js/cr/ui/menu_button.js"></script>
+<script src="chrome://resources/js/cr/ui/context_menu_button.js"></script>
+<script src="chrome://resources/js/cr/ui/context_menu_handler.js"></script>
+<script src="chrome://resources/js/cr/ui/list_selection_model.js"></script>
+<script src="chrome://resources/js/cr/ui/list_selection_controller.js"></script>
+<script src="chrome://resources/js/cr/ui/list_item.js"></script>
+<script src="chrome://resources/js/cr/ui/list.js"></script>
+<script src="chrome://resources/js/cr/ui/tree.js"></script>
+<script src="chrome://resources/js/cr/ui/splitter.js"></script>
+
+<script src="chrome://resources/js/i18n_template_no_process.js"></script>
+<script src="chrome://resources/js/load_time_data.js"></script>
+<script src="chrome://resources/js/util.js"></script>
+
+<script src="chrome-extension://eemcgdkfndhakfknompkggombfjjjeno/js/bmm.js"></script>
+<script src="chrome-extension://eemcgdkfndhakfknompkggombfjjjeno/js/bmm/bookmark_list.js"></script>
+<script src="chrome-extension://eemcgdkfndhakfknompkggombfjjjeno/js/bmm/bookmark_tree.js"></script>
+<script src="chrome-extension://eemcgdkfndhakfknompkggombfjjjeno/js/dnd.js"></script>
+</head>
+<body>
+
+<header>
+  <h1 i18n-content="title">Bookmark Manager</h1>
+  <form>
+    <input type="search" id="term" i18n-values="placeholder:search_button" autofocus="" incremental="" placeholder="Search bookmarks">
+  </form>
+</header>
+
+<div class="main">
+  <div id="tree-pane" class="pane">
+    <div>
+      <button menu="#folders-menu" i18n-content="folders_menu" id="folders-button" class="custom-appearance menu-button using-mouse">Folders</button>
+    </div>
+    <div id="tree-container">
+      <tree id="tree" role="tree" tabindex="0" contextmenu="#context-menu" aria-activedescendant="tree-item-autogen-id-2"><div class="tree-item" role="treeitem" id="tree-item-autogen-id-1" draggable="false" has-children="true" may-have-children="" expanded=""><div class="tree-row" has-children="true" may-have-children="" style="-webkit-padding-start: 0px;"><span class="expand-icon"></span><span class="tree-label">Bookmarks bar</span></div><div class="tree-children" expanded=""><div class="tree-item" role="treeitem" id="tree-item-autogen-id-2" draggable="true" has-children="true" may-have-children="" expanded="" selected=""><div class="tree-row" has-children="true" may-have-children="" style="-webkit-padding-start: 20px;" selected=""><span class="expand-icon"></span><span class="tree-label">Imported From Firefox</span></div><div class="tree-children" expanded=""><div class="tree-item" role="treeitem" id="tree-item-autogen-id-3" draggable="true"><div class="tree-row" style="-webkit-padding-start: 40px;"><span class="expand-icon"></span><span class="tree-label">Ubuntu and Free Software links</span></div><div class="tree-children"></div></div><div class="tree-item" role="treeitem" id="tree-item-autogen-id-4" draggable="true"><div class="tree-row" style="-webkit-padding-start: 40px;"><span class="expand-icon"></span><span class="tree-label">Mozilla Firefox</span></div><div class="tree-children"></div></div><div class="tree-item" role="treeitem" id="tree-item-autogen-id-5" draggable="true" has-children="true" may-have-children="" expanded=""><div class="tree-row" has-children="true" may-have-children="" style="-webkit-padding-start: 40px;"><span class="expand-icon"></span><span class="tree-label">Unsorted Bookmarks</span></div><div class="tree-children" expanded=""><div class="tree-item" role="treeitem" id="tree-item-autogen-id-6" draggable="true"><div class="tree-row" style="-webkit-padding-start: 60px;"><span class="expand-icon"></span><span class="tree-label">VMware</span></div><div class="tree-children"></div></div><div class="tree-item" role="treeitem" id="tree-item-autogen-id-7" draggable="true"><div class="tree-row" style="-webkit-padding-start: 60px;"><span class="expand-icon"></span><span class="tree-label">Aprendendo</span></div><div class="tree-children"></div></div></div></div></div></div></div></div><div class="tree-item" role="treeitem" id="tree-item-autogen-id-8" draggable="false"><div class="tree-row" style="-webkit-padding-start: 0px;"><span class="expand-icon"></span><span class="tree-label">Other bookmarks</span></div><div class="tree-children"></div></div></tree>
+    </div>
+  </div>
+  <div class="splitter">
+    <div>
+      <!-- Used to occupy the correct amount of vertical space. -->
+      <button menu="#no-menu" i18n-content="folders_menu" class="custom-appearance menu-button">Folders</button>
+    </div>
+  </div>
+  <div id="list-pane" class="pane">
+    <div>
+      <button menu="#organize-menu" i18n-content="organize_menu" id="organize-button" class="custom-appearance menu-button">Organize</button>
+    </div>
+    <!-- The list doesn't use a scroll container as it truncates horizontally
+         and handles its own vertical overflow. -->
+    <list id="list" role="list" tabindex="0" contextmenu="#context-menu"><div class="spacer" style="height: 0px;"></div><div role="listitem" draggable="true" class="folder"><div class="label">Ubuntu and Free Software links</div><div class="url"></div></div><div role="listitem" draggable="true" class="folder"><div class="label">Mozilla Firefox</div><div class="url"></div><button tabindex="-1" class="custom-appearance menu-button"></button></div><div role="listitem" draggable="true" class="folder"><div class="label">Unsorted Bookmarks</div><div class="url"></div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://demoiselle.c3sl.ufpr.br/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://demoiselle.c3sl.ufpr.br/&quot;) 2x); background-size: 16px;">demoiselle repositorio</div><div class="url">http://demoiselle.c3sl.ufpr.br/</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://demoiselle.sourceforge.net/repository/archetype-catalog.xml&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://demoiselle.sourceforge.net/repository/archetype-catalog.xml&quot;) 2x); background-size: 16px;">demoiselle.sourceforge.net/repository/archetype-catalog.xml</div><div class="url">http://demoiselle.sourceforge.net/repository/archetype-catalog.xml</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://demoisellelab.wordpress.com/2014/04/25/crud-e-rest-o-basico-das-aplicacoes/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://demoisellelab.wordpress.com/2014/04/25/crud-e-rest-o-basico-das-aplicacoes/&quot;) 2x); background-size: 16px;">CRUD e REST, o básico das aplicações | Demoiselle Lab</div><div class="url">https://demoisellelab.wordpress.com/2014/04/25/crud-e-rest-o-basico-das-aplicacoes/</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://demoisellelab.wordpress.com/2015/05/13/lancada-a-tao-esperada-versao-2-5-final/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://demoisellelab.wordpress.com/2015/05/13/lancada-a-tao-esperada-versao-2-5-final/&quot;) 2x); background-size: 16px;">Lançada a tão esperada versão 2.5 final | Demoiselle Lab</div><div class="url">https://demoisellelab.wordpress.com/2015/05/13/lancada-a-tao-esperada-versao-2-5-final/</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://github.com/demoiselle/laboratory/tree/master/WebREST&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://github.com/demoiselle/laboratory/tree/master/WebREST&quot;) 2x); background-size: 16px;">laboratory/WebREST at master · demoiselle/laboratory · GitHub</div><div class="url">https://github.com/demoiselle/laboratory/tree/master/WebREST</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://github.com/demoiselle/laboratory/tree/master/estacionamento/v25X&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://github.com/demoiselle/laboratory/tree/master/estacionamento/v25X&quot;) 2x); background-size: 16px;">laboratory/estacionamento/v25X at master · demoiselle/laboratory · GitHub</div><div class="url">https://github.com/demoiselle/laboratory/tree/master/estacionamento/v25X</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://demoiselle.sourceforge.net/docs/framework/reference/2.5.0-RC1/html_single/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://demoiselle.sourceforge.net/docs/framework/reference/2.5.0-RC1/html_single/&quot;) 2x); background-size: 16px;">Framework Demoiselle 2.5.0-RC1</div><div class="url">http://demoiselle.sourceforge.net/docs/framework/reference/2.5.0-RC1/html_single/</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://demoiselle.c3sl.ufpr.br/stable/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://demoiselle.c3sl.ufpr.br/stable/&quot;) 2x); background-size: 16px;">Index of /stable DEMOISELLE c3sl.ufpr</div><div class="url">http://demoiselle.c3sl.ufpr.br/stable/</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://github.com/demoiselle/example&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://github.com/demoiselle/example&quot;) 2x); background-size: 16px;">demoiselle/example - Java - GitHub</div><div class="url">https://github.com/demoiselle/example</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://demoiselle.github.io/example/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://demoiselle.github.io/example/&quot;) 2x); background-size: 16px;">Demoiselle by demoiselle (2.5.1)</div><div class="url">http://demoiselle.github.io/example/</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://demoisellelab.wordpress.com/2014/04/16/primeiros-passos-com-rest/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://demoisellelab.wordpress.com/2014/04/16/primeiros-passos-com-rest/&quot;) 2x); background-size: 16px;">Primeiros passos com REST | Demoiselle Lab</div><div class="url">https://demoisellelab.wordpress.com/2014/04/16/primeiros-passos-com-rest/</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://repo1.maven.org/maven2/archetype-catalog.xml&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://repo1.maven.org/maven2/archetype-catalog.xml&quot;) 2x); background-size: 16px;">(REPO para demoiselle-html-rest-2.5.1) repo1.maven.org/maven2/archetype-catalog.xml</div><div class="url">http://repo1.maven.org/maven2/archetype-catalog.xml</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://github.com/demoiselle/example/tree/master/estacionamento251AngularJS&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://github.com/demoiselle/example/tree/master/estacionamento251AngularJS&quot;) 2x); background-size: 16px;">example/estacionamento251AngularJS at master · demoiselle/example · GitHub</div><div class="url">https://github.com/demoiselle/example/tree/master/estacionamento251AngularJS</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://www.hongkiat.com/blog/free-angular-ebooks/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://www.hongkiat.com/blog/free-angular-ebooks/&quot;) 2x); background-size: 16px;">7 Free eBooks To Learn AngularJS - Hongkiat</div><div class="url">http://www.hongkiat.com/blog/free-angular-ebooks/</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://speckyboy.com/2015/01/12/free-web-design-ebooks-2014/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://speckyboy.com/2015/01/12/free-web-design-ebooks-2014/&quot;) 2x); background-size: 16px;">50 Free Books for Web Designers &amp; Developers</div><div class="url">http://speckyboy.com/2015/01/12/free-web-design-ebooks-2014/</div><button tabindex="-1" class="custom-appearance menu-button"></button></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://www.thoughtworks.com/radar/languages-and-frameworks&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://www.thoughtworks.com/radar/languages-and-frameworks&quot;) 2x); background-size: 16px;">Technology Radar | Emerging Technology Trends for 2015 | ThoughtWorks</div><div class="url">https://www.thoughtworks.com/radar/languages-and-frameworks</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/&quot;) 2x); background-size: 16px;">The Cathedral and the Bazaar</div><div class="url">http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/</div></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://w3techs.com/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://w3techs.com/&quot;) 2x); background-size: 16px;">W3Techs - extensive and reliable web technology surveys</div><div class="url">http://w3techs.com/</div><button tabindex="-1" class="custom-appearance menu-button"></button></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://hotframeworks.com/#top-frameworks&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://hotframeworks.com/#top-frameworks&quot;) 2x); background-size: 16px;">Web framework rankings | HotFrameworks</div><div class="url">http://hotframeworks.com/#top-frameworks</div><button tabindex="-1" class="custom-appearance menu-button"></button></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://dzone.com/articles/j2ee-dead-long-live-javascript&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://dzone.com/articles/j2ee-dead-long-live-javascript&quot;) 2x); background-size: 16px;">J2EE is Dead: Long-live Javascript Backed by JSON Services - DZone Java</div><div class="url">https://dzone.com/articles/j2ee-dead-long-live-javascript</div><button tabindex="-1" class="custom-appearance menu-button"></button></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://www.programmableweb.com/news/what-mean-stack-and-why-it-better-lamp/analysis/2015/12/22&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://www.programmableweb.com/news/what-mean-stack-and-why-it-better-lamp/analysis/2015/12/22&quot;) 2x); background-size: 16px;">What is the MEAN Stack and Why is it Better than LAMP? | ProgrammableWeb</div><div class="url">http://www.programmableweb.com/news/what-mean-stack-and-why-it-better-lamp/analysis/2015/12/22</div><button tabindex="-1" class="custom-appearance menu-button"></button></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/https://www.google.com.br/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8&amp;client=ubuntu#q=google%20tradutor&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/https://www.google.com.br/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8&amp;client=ubuntu#q=google%20tradutor&quot;) 2x); background-size: 16px;">google tradutor - Pesquisa Google</div><div class="url">https://www.google.com.br/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8&amp;client=ubuntu#q=google%20tradutor</div><button tabindex="-1" class="custom-appearance menu-button"></button></div><div role="listitem" draggable="true"><div class="label" style="background-image: -webkit-image-set(url(&quot;chrome://favicon/size/16@1x/http://getcloudify.org/&quot;) 1x, url(&quot;chrome://favicon/size/16@2x/http://getcloudify.org/&quot;) 2x); background-size: 16px;">Pure-Play Cloud Orchestration &amp; Automation Based on TOSCA | Cloudify</div><div class="url">http://getcloudify.org/</div><button tabindex="-1" class="custom-appearance menu-button"></button></div><div class="spacer" style="height: 66px;"></div></list>
+  </div>
+</div>
+
+<!-- Organize menu -->
+<command i18n-values=".label:rename_folder" id="rename-folder-command"></command>
+
+<command i18n-values=".label:edit" id="edit-command" disabled="disabled" hidden=""></command>
+<command i18n-values=".label:show_in_folder" id="show-in-folder-command" disabled="disabled"></command>
+
+<command i18n-values=".label:cut" id="cut-command"></command>
+<command i18n-values=".label:copy" id="copy-command"></command>
+<command i18n-values=".label:paste" id="paste-from-organize-menu-command" disabled="disabled"></command>
+
+<command i18n-values=".label:delete" id="delete-command"></command>
+<command i18n-values=".label:undo_delete" id="undo-delete-command" disabled="disabled"></command>
+<command i18n-values=".label:sort" id="sort-command"></command>
+<command i18n-values=".label:add_new_bookmark" id="add-new-bookmark-command"></command>
+
+<command i18n-values=".label:new_folder" id="new-folder-command"></command>
+
+<!-- Folders menu -->
+<command i18n-values=".label:cut" id="cut-from-folders-menu-command"></command>
+<command i18n-values=".label:copy" id="copy-from-folders-menu-command"></command>
+
+<command i18n-values=".label:paste" id="paste-from-folders-menu-command" disabled="disabled"></command>
+
+<command i18n-values=".label:new_folder" id="new-folder-from-folders-menu-command"></command>
+<command i18n-values=".label:delete" id="delete-from-folders-menu-command"></command>
+
+<command i18n-values=".label:undo_delete" id="undo-delete-from-folders-menu-command" disabled="disabled"></command>
+
+<!-- Tools menu -->
+<command i18n-values=".label:import_menu" id="import-menu-command"></command>
+<command i18n-values=".label:export_menu" id="export-menu-command"></command>
+
+<!-- Context menu -->
+<command i18n-values=".label:paste" id="paste-from-context-menu-command" disabled="disabled"></command>
+
+
+<!-- open * are handled in canExecute handler -->
+<command id="open-in-new-tab-command" label="Open all bookmarks"></command>
+<command id="open-in-background-tab-command"></command>
+<command id="open-in-new-window-command" label="Open all bookmarks in new window"></command>
+<command id="open-incognito-window-command" label="Open all bookmarks in incognito window"></command>
+<command id="open-in-same-window-command" disabled="disabled"></command>
+
+<command id="undo-command"></command>
+
+<command i18n-values=".label:rename_folder" id="rename-folder-from-folders-menu-command"></command>
+<command i18n-values=".label:paste" id="paste-from-folders-menu-command" disabled="disabled"></command>
+
+
+<!-- TODO(arv): I think the commands might be better created in code? -->
+
+<cr-menu id="folders-menu" class="decorated" role="menu" hidden="" style="bottom: auto; top: 73px; right: auto; left: 26px;">
+  <button command="#new-folder-from-folders-menu-command" class="custom-appearance" role="menuitem">Add folder...</button>
+  <hr class="custom-appearance">
+  <button command="#rename-folder-from-folders-menu-command" class="custom-appearance" role="menuitem">Rename...</button>
+  <hr class="custom-appearance">
+  <button command="#cut-from-folders-menu-command" class="custom-appearance" role="menuitem">Cut</button>
+  <button command="#copy-from-folders-menu-command" class="custom-appearance" role="menuitem">Copy</button>
+  <button command="#paste-from-folders-menu-command" class="custom-appearance" role="menuitem" disabled="disabled">Paste</button>
+  <hr class="custom-appearance">
+  <button command="#delete-from-folders-menu-command" class="custom-appearance" role="menuitem">Delete</button>
+  <button command="#undo-delete-from-folders-menu-command" class="custom-appearance" role="menuitem" disabled="disabled">Undo Delete</button>
+</cr-menu>
+
+<cr-menu id="no-menu" class="decorated" role="menu" hidden=""></cr-menu>
+
+<cr-menu id="organize-menu" class="decorated" role="menu" hidden="">
+  <button command="#add-new-bookmark-command" class="custom-appearance" role="menuitem">Add page...</button>
+  <button command="#new-folder-command" class="custom-appearance" role="menuitem">Add folder...</button>
+  <hr class="custom-appearance">
+  <button command="#rename-folder-command" class="custom-appearance" role="menuitem">Rename...</button>
+  <button command="#edit-command" class="custom-appearance" role="menuitem" disabled="disabled">Edit...</button>
+  <button command="#show-in-folder-command" class="custom-appearance" role="menuitem" disabled="disabled">Show in folder</button>
+  <hr class="custom-appearance">
+  <button command="#cut-command" class="custom-appearance" role="menuitem">Cut</button>
+  <button command="#copy-command" class="custom-appearance" role="menuitem">Copy</button>
+  <button command="#paste-from-organize-menu-command" class="custom-appearance" role="menuitem" disabled="disabled">Paste</button>
+  <hr class="custom-appearance">
+  <button command="#delete-command" class="custom-appearance" role="menuitem">Delete</button>
+  <button command="#undo-delete-command" class="custom-appearance" role="menuitem" disabled="disabled">Undo Delete</button>
+  <hr class="custom-appearance">
+  <button command="#sort-command" class="custom-appearance" role="menuitem">Reorder by title</button>
+  <hr class="custom-appearance">
+  <button command="#import-menu-command" class="custom-appearance" role="menuitem">Import bookmarks from HTML file...</button>
+  <button command="#export-menu-command" class="custom-appearance" role="menuitem">Export bookmarks to HTML file...</button>
+</cr-menu>
+
+<cr-menu id="context-menu" class="decorated" role="menu" style="bottom: auto; top: 179px; right: auto; left: 103px;" hidden="">
+  <button command="#open-in-new-tab-command" class="custom-appearance" role="menuitem">Open all bookmarks</button>
+  <button command="#open-in-new-window-command" class="custom-appearance" role="menuitem">Open all bookmarks in new window</button>
+  <button command="#open-incognito-window-command" class="custom-appearance" role="menuitem">Open all bookmarks in incognito window</button>
+  <hr class="custom-appearance">
+  <button command="#rename-folder-command" class="custom-appearance" role="menuitem">Rename...</button>
+  <button command="#edit-command" class="custom-appearance" role="menuitem" disabled="disabled">Edit...</button>
+  <button command="#show-in-folder-command" class="custom-appearance" role="menuitem" disabled="disabled">Show in folder</button>
+  <hr class="custom-appearance">
+  <button command="#cut-command" class="custom-appearance" role="menuitem">Cut</button>
+  <button command="#copy-command" class="custom-appearance" role="menuitem">Copy</button>
+  <button command="#paste-from-context-menu-command" class="custom-appearance" role="menuitem" disabled="disabled">Paste</button>
+  <hr class="custom-appearance">
+  <button command="#delete-command" class="custom-appearance" role="menuitem">Delete</button>
+  <button command="#undo-delete-command" class="custom-appearance" role="menuitem" disabled="disabled">Undo Delete</button>
+  <hr class="custom-appearance">
+  <button command="#add-new-bookmark-command" class="custom-appearance" role="menuitem">Add page...</button>
+  <button command="#new-folder-command" class="custom-appearance" role="menuitem">Add folder...</button>
+</cr-menu>
+
+<script src="chrome-extension://eemcgdkfndhakfknompkggombfjjjeno/js/main.js"></script>
+
+
+</body></html>
