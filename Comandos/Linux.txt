@@ -2,3 +2,5 @@
 
 grep -R -H -i " Git " ./ >> ver.txt
 
+grep -R  "Meu Texto" /home/blablabla/ | cut -d: -f1 | uniq
+
