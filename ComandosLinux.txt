@@ -1,0 +1,4 @@
+** Buscando arquivos (pelo conteúdo contido no mesmo):
+
+grep -R -H -i " Git " ./ >> ver.txt
+
