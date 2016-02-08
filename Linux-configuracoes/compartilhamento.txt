@@ -1,0 +1,7 @@
+(Em Connect to Server)
+
+smb://LENOVO-PC-NUBIO
+
+user: clenubio
+pwd: ieshuaeu01
+
