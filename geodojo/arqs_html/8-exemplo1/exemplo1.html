@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exemplo1 - Enviando um geotwitt &mdash; GeoDOJO vGeoDOJO documentation</title>
+    <link rel="stylesheet" href="../_static/geotools-tutorial.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'GeoDOJO',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GeoDOJO vGeoDOJO documentation" href="../index.html" />
+    <link rel="next" title="Exemplo2 - Construindo um visualizador de consultas espaciais" href="../9-exemplo2/exemplo2.html" />
+    <link rel="prev" title="Disponibilizando os mapas de forma rica na web - OpenLayers &amp; Ol4JSF" href="../7-ol4jsf/ol4jsf.html" /> 
+  </head>
+  <body>
+    <div class="header">
+        <div class="wrap">
+            <ul id="top-nav">
+                <li><a href="http://www.latinoware.org/">Latinoware 2010</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 accesskey="I">index</a></li>
+            <li class="right" >
+              <a href="../9-exemplo2/exemplo2.html" title="Exemplo2 - Construindo um visualizador de consultas espaciais"
+                 accesskey="N">next</a> |</li>
+            <li class="right" >
+              <a href="../7-ol4jsf/ol4jsf.html" title="Disponibilizando os mapas de forma rica na web - OpenLayers & Ol4JSF"
+                 accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Exemplo1 - Enviando um geotwitt</a></li>
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="exemplo1-enviando-um-geotwitt">
+<h1><a class="toc-backref" href="#id3">Exemplo1 - Enviando um geotwitt</a><a class="headerlink" href="#exemplo1-enviando-um-geotwitt" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#exemplo1-enviando-um-geotwitt" id="id3">Exemplo1 - Enviando um geotwitt</a><ul>
+<li><a class="reference internal" href="#instalando-twitter4j" id="id4">Instalando Twitter4J</a></li>
+<li><a class="reference internal" href="#construindo-o-formulario-e-testando" id="id5">Construindo o Formulário e Testando</a></li>
+<li><a class="reference internal" href="#visualizando-os-twitts" id="id6">Visualizando os Twitts</a></li>
+<li><a class="reference internal" href="#atualizando-o-twitter-de-verdade" id="id7">Atualizando o Twitter de Verdade</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Vamos começar a aplicar o conhecimento aprendido até o momento para desenvolver funcionalidades muito próximas do que necessitamos nos sistemas da atualidade.
+Neste exemplo, vamos construir um formulário de inclusão de dados onde um dos campos deste formulário é um mapa para permitir o cadastro de um ponto. O objetivo do formulário é enviar um twitt com a geolocalização do usuário através da api Twitter4J.</p>
+<div class="section" id="instalando-twitter4j">
+<h2><a class="toc-backref" href="#id4">Instalando Twitter4J</a><a class="headerlink" href="#instalando-twitter4j" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Adicionar o repositorio e a dependencia para o Twitter4J no arquivo <em>pom.xml</em> do nosso projeto:</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre>	<span class="nt">&lt;repository&gt;</span>
+       <span class="nt">&lt;id&gt;</span>twitter4j.org<span class="nt">&lt;/id&gt;</span>
+       <span class="nt">&lt;name&gt;</span>twitter4j.org Repository<span class="nt">&lt;/name&gt;</span>
+       <span class="nt">&lt;url&gt;</span>http://twitter4j.org/maven2<span class="nt">&lt;/url&gt;</span>
+       <span class="nt">&lt;releases&gt;</span>
+          <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+       <span class="nt">&lt;/releases&gt;</span>
+       <span class="nt">&lt;snapshots&gt;</span>
+          <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+       <span class="nt">&lt;/snapshots&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+
+	
+
+	<span class="c">&lt;!-- TWITTER4J DEPENDENCY --&gt;</span>
+	      <span class="nt">&lt;dependency&gt;</span>
+	          <span class="nt">&lt;groupId&gt;</span>org.twitter4j<span class="nt">&lt;/groupId&gt;</span>
+	          <span class="nt">&lt;artifactId&gt;</span>twitter4j-core<span class="nt">&lt;/artifactId&gt;</span>
+	          <span class="nt">&lt;version&gt;</span>2.1.6-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+	      <span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p class="first">Execute o comando para a atualização do projeto java:</p>
+<div class="highlight-python"><pre>user@geodojo-vm:~/geodojo/geodojo$ mvn -Dwtpversion=1.5 eclipse:eclipse</pre>
+</div>
+</li>
+</ol>
+<p>Vamos fazer um teste para ver se a api está funcionando corretamente. Este teste vai enviar um twitt para o usuário &#64;geodojo.</p>
+<ol class="arabic simple" start="3">
+<li>Crie o caso de teste org.latinoware.geodojo.app.teste.TesteTwitter4j.java</li>
+</ol>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">teste</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">twitter4j.Status</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">twitter4j.Twitter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">twitter4j.TwitterException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">twitter4j.TwitterFactory</span><span class="o">;</span>
+
+
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TesteTwitter4j</span> <span class="o">{</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">TwitterException</span>
+	<span class="o">{</span>
+		 <span class="c1">// The factory instance is re-useable and thread safe.</span>
+	    <span class="n">Twitter</span> <span class="n">twitter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TwitterFactory</span><span class="o">().</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;geodojo&quot;</span><span class="o">,</span><span class="s">&quot;latinoware&quot;</span><span class="o">);</span>
+	    <span class="n">Status</span> <span class="n">status</span> <span class="o">=</span> <span class="n">twitter</span><span class="o">.</span><span class="na">updateStatus</span><span class="o">(</span><span class="s">&quot;Testando o  twitter4j&quot;</span><span class="o">);</span>
+	    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Successfully updated the status to [&quot;</span> <span class="o">+</span> <span class="n">status</span><span class="o">.</span><span class="na">getText</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;].&quot;</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<ol class="arabic" start="4">
+<li><p class="first">Se tudo correr bem o profile deve ser atualizado com o novo status.</p>
+<blockquote>
+<img alt="../_images/twitt.png" src="../_images/twitt.png" />
+</blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="construindo-o-formulario-e-testando">
+<h2><a class="toc-backref" href="#id5">Construindo o Formulário e Testando</a><a class="headerlink" href="#construindo-o-formulario-e-testando" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Criar o arquivo <em>addGeotwitt.xhtml</em> na pasta webapp e adicionar o conteudo abaixo.</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="na">xmlns:h=</span><span class="s">&quot;http://java.sun.com/jsf/html&quot;</span>
+      <span class="na">xmlns:f=</span><span class="s">&quot;http://java.sun.com/jsf/core&quot;</span>
+      <span class="na">xmlns:ui=</span><span class="s">&quot;http://java.sun.com/jsf/facelets&quot;</span>
+      <span class="na">xmlns:m=</span><span class="s">&quot;http://www.ol4jsf.org&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;h:head&gt;</span>
+        <span class="nt">&lt;style</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
+            table.featureInfo {
+                width: 100%;
+            }
+
+            .olControlPanel div {
+                display: block;
+                width: 24px;
+                height: 24px;
+                margin: 5px;
+                background-color: red;
+            }
+
+            .olControlPanel .olControlNavigationItemActive {
+                background-color: blue;
+                background-image:
+                    url(&quot;#{resource[&#39;ol4jsf:theme/default/img/pan_on.png&#39;]}&quot;);
+            }
+
+            .olControlPanel .olControlNavigationItemInactive {
+                background-color: orange;
+                background-image:
+                    url(&quot;#{resource[&#39;ol4jsf:theme/default/img/pan_off.png&#39;]}&quot;);
+            }
+
+            .olControlPanel .olControlZoomBoxItemInactive {
+                width: 22px;
+                height: 22px;
+                background-color: orange;
+                background-image:
+                    url(&quot;#{resource[&#39;ol4jsf:theme/default/img/drag-rectangle-off.png&#39;]}&quot;);
+            }
+
+            .olControlPanel .olControlZoomBoxItemActive {
+                width: 22px;
+                height: 22px;
+                background-color: blue;
+                background-image:
+                    url(&quot;#{resource[&#39;ol4jsf:theme/default/img/drag-rectangle-on.png&#39;]}&quot;);
+            }
+
+            .olControlPanel .olControlZoomToMaxExtentItemInactive {
+                width: 18px;
+                height: 18px;
+                background-image:
+                    url(&quot;#{resource[&#39;ol4jsf:img/zoom-world-mini.png&#39;]}&quot;);
+            }
+
+            .olControlPanel .olControlDrawFeatureItemActive {
+                width:  22px;
+                height: 22px;
+                background-image:
+                    url(&quot;#{resource[&#39;ol4jsf:theme/default/img/draw_point_on.png&#39;]}&quot;);
+            }
+            .olControlPanel .olControlDrawFeatureItemInactive {
+                width:  22px;
+                height: 22px;
+                background-image:
+                    url(&quot;#{resource[&#39;ol4jsf:theme/default/img/draw_point_off.png&#39;]}&quot;);
+            }
+        <span class="nt">&lt;/style&gt;</span>
+    <span class="nt">&lt;/h:head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Geodojo Send GeoTwitt<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;h:messages/&gt;</span>
+        <span class="nt">&lt;h:form</span> <span class="na">prependId=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+       
+           Usuario: <span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">&quot;#{geotwittBean.twitt.autor}&quot;</span> <span class="nt">/&gt;&lt;br/&gt;</span>
+           Senha:   <span class="nt">&lt;h:inputSecret</span> <span class="na">value=</span><span class="s">&quot;#{geotwittBean.passwd}&quot;</span> <span class="na">redisplay=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;&lt;br/&gt;</span>
+           Status:  <span class="nt">&lt;h:inputTextarea</span> <span class="na">value=</span><span class="s">&quot;#{geotwittBean.twitt.mensagem}&quot;</span> <span class="na">maxLength=</span><span class="s">&quot;140&quot;</span> <span class="nt">/&gt;&lt;br/&gt;</span>
+
+            <span class="nt">&lt;m:map</span> <span class="na">width=</span><span class="s">&quot;512px&quot;</span> <span class="na">height=</span><span class="s">&quot;480px&quot;</span>
+            <span class="na">options=</span><span class="s">&quot;{controls: [], </span>
+<span class="s">						maxExtent: new OpenLayers.Bounds(</span>
+<span class="s">	                    			-73.991, -33.751,</span>
+<span class="s">	                    			-32.378, 5.272</span>
+<span class="s">	                			),</span>
+<span class="s">						maxResolution: 0.16255078125					</span>
+<span class="s">						}&quot;</span> <span class="na">renderOnWindowLoad=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;m:wmsLayer</span> <span class="na">name=</span><span class="s">&quot;OpenLayers WMS&quot;</span>
+					<span class="na">url=</span><span class="s">&quot;#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms&quot;</span>
+					<span class="na">params=</span><span class="s">&quot;{layers:&#39;limite_politico&#39;}&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;m:inputVectorLayer</span> <span class="na">name=</span><span class="s">&quot;Features&quot;</span> <span class="na">value=</span><span class="s">&quot;#{geotwittBean.twitt.location}&quot;</span> <span class="na">jsVariable=</span><span class="s">&quot;point&quot;</span> <span class="na">dropFeaturesBeforeDraw=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;m:panelControl&gt;</span>
+                    <span class="nt">&lt;m:navigationControl</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;m:zoomBoxControl</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;m:drawFeatureControl</span> <span class="na">layer=</span><span class="s">&quot;point&quot;</span> <span class="na">handler=</span><span class="s">&quot;OpenLayers.Handler.Point&quot;</span> <span class="na">jsVariable=</span><span class="s">&quot;iControl&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;m:zoomToMaxExtentControl</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;/m:panelControl&gt;</span>
+                <span class="nt">&lt;m:mousePositionControl&gt;&lt;/m:mousePositionControl&gt;</span>
+                <span class="nt">&lt;m:scaleLineControl&gt;&lt;/m:scaleLineControl&gt;</span>
+                <span class="nt">&lt;m:script&gt;</span>iControl.activate();<span class="nt">&lt;/m:script&gt;</span>
+            <span class="nt">&lt;/m:map&gt;</span>
+
+            <span class="nt">&lt;h:commandButton</span> <span class="na">value=</span><span class="s">&quot;Update&quot;</span> <span class="na">action=</span><span class="s">&quot;#{geotwittBean.update}&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/h:form&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Vamos criar o nosso bean <em>org.latinoware.geodojo.app.bean.GeotwittBean</em> para tratar as requisições da view</li>
+</ol>
+<div class="highlight-python"><pre>package org.latinoware.geodojo.app.bean;
+
+import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+@Model
+public class GeotwittBean {
+
+	private Geotwitt twitt = new Geotwitt();
+
+	private String passwd;
+	
+	@Inject
+	private EntityManager em;
+	
+	
+	public Geotwitt getTwitt() {
+		return twitt;
+	}
+
+	public void setTwitt(Geotwitt twitt) {
+		this.twitt = twitt;
+	}
+
+	public String getPasswd() {
+		return passwd;
+	}
+
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+	
+	public void update() throws TwitterException
+	{
+		try {
+			this.persistGeoTwitt();
+			
+			this.inicializaBean();
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Twitter Enviado!"));
+		} catch (Throwable e) {
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um Erro - [" + e.getCause() + "] - " + e.getMessage()));
+		}
+		
+		
+	}
+	
+	
+	private void persistGeoTwitt()
+	{
+		this.em.getTransaction().begin();
+		
+			this.em.persist(this.twitt);
+		
+		this.em.getTransaction().commit();
+	}
+	
+	private void inicializaBean()
+	{
+		this.twitt = new Geotwitt();
+		this.passwd = "";
+	}
+	
+	
+}
+</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>Para que a nossa geometria seja criada corretamente vamos precisar criar o converter <a href="#id1"><span class="problematic" id="id2">*</span></a>org.latinoware.geodojo.app.converter. para o atributo geo.</li>
+</ol>
+<div class="highlight-python"><pre>package org.latinoware.geodojo.app.converter;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
+
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
+
+/**
+ *
+ * @author ranophoenix
+ */
+@FacesConverter(forClass = Geometry.class)
+public class GeometryConverter implements Converter {
+
+    @Override
+    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        Geometry geom = null;
+        if (value != null) {
+            try {
+                WKTReader reader = new WKTReader();
+                geom = reader.read(value);
+                geom.setSRID(4326);
+            } catch (ParseException ex) {
+                Logger.getLogger(GeometryConverter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return geom;
+    }
+
+    @Override
+    public String getAsString(FacesContext context, UIComponent component, Object value) {
+        return value.toString();
+    }
+}
+</pre>
+</div>
+<ol class="arabic simple" start="4">
+<li>Vamos testar e ver o que acontece.</li>
+</ol>
+</div>
+<div class="section" id="visualizando-os-twitts">
+<h2><a class="toc-backref" href="#id6">Visualizando os Twitts</a><a class="headerlink" href="#visualizando-os-twitts" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Vamos construir a view <em>viewGeotwitt.xhtml</em> na pasta webapp para podermos visualizar a camada do geoserver <strong>geotwitt</strong> que já deve ter novos pontos.</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+	<span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+	<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span>
+		<span class="na">xmlns:h=</span><span class="s">&quot;http://java.sun.com/jsf/html&quot;</span>
+		<span class="na">xmlns:f=</span><span class="s">&quot;http://java.sun.com/jsf/core&quot;</span>
+		<span class="na">xmlns:ui=</span><span class="s">&quot;http://java.sun.com/jsf/facelets&quot;</span>
+		<span class="na">xmlns:m=</span><span class="s">&quot;http://www.ol4jsf.org&quot;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;h:head&gt;</span>
+		<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;title&gt;</span>View Geotwitt<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;/h:head&gt;</span>
+	<span class="nt">&lt;h:body&gt;</span>
+		<span class="nt">&lt;m:map</span> <span class="na">width=</span><span class="s">&quot;512px&quot;</span> <span class="na">height=</span><span class="s">&quot;256px&quot;</span>
+			<span class="na">options=</span><span class="s">&quot;{controls: [], numZoomLevels: 6}&quot;</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;m:wmsLayer</span> <span class="na">name=</span><span class="s">&quot;Brasil&quot;</span>
+				<span class="na">url=</span><span class="s">&quot;#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms&quot;</span>
+				<span class="na">params=</span><span class="s">&quot;{layers:&#39;limite_politico&#39;}&quot;</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;m:wmsLayer</span> <span class="na">name=</span><span class="s">&quot;Geotwitt&quot;</span>
+				<span class="na">url=</span><span class="s">&quot;#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms&quot;</span>
+				<span class="na">params=</span><span class="s">&quot;{layers:&#39;geodojo:geotwitt&#39;,transparent:true}&quot;</span>
+				<span class="na">options=</span><span class="s">&quot;{isBaseLayer:false}&quot;</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;m:featureInfoPopup</span>
+				<span class="na">url=</span><span class="s">&quot;#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms&quot;</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;/m:featureInfoPopup&gt;</span>
+			<span class="nt">&lt;m:navigationControl</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;m:panZoomBarControl</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;m:layerSwitcherControl</span> <span class="na">options=</span><span class="s">&quot;{ascending:false}&quot;</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;m:scaleLineControl</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;m:mousePositionControl</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;m:overviewMapControl</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;m:keyboardDefaultsControl</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;m:permalinkControl</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;/m:map&gt;</span>
+	<span class="nt">&lt;/h:body&gt;</span>
+	<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Vamos testar a view e verificar o resultado.</li>
+</ol>
+</div>
+<div class="section" id="atualizando-o-twitter-de-verdade">
+<h2><a class="toc-backref" href="#id7">Atualizando o Twitter de Verdade</a><a class="headerlink" href="#atualizando-o-twitter-de-verdade" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Vamos utilizar a api <em>Twitter4J</em> para nos comunicar com o twitter e poder enviar de verdade um twitt para o perfil. Para isso vamos atualizar o nosso GeotwittBean.java.</li>
+</ol>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">bean</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.enterprise.inject.Model</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.faces.application.FacesMessage</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.faces.context.FacesContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.inject.Inject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.EntityManager</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.latinoware.geodojo.app.entity.Geotwitt</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">twitter4j.GeoLocation</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">twitter4j.Twitter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">twitter4j.TwitterException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">twitter4j.TwitterFactory</span><span class="o">;</span>
+
+<span class="nd">@Model</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GeotwittBean</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="n">Geotwitt</span> <span class="n">twitt</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Geotwitt</span><span class="o">();</span>
+
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">passwd</span><span class="o">;</span>
+	
+	<span class="nd">@Inject</span>
+	<span class="kd">private</span> <span class="n">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+	
+	
+	<span class="kd">public</span> <span class="n">Geotwitt</span> <span class="nf">getTwitt</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">twitt</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTwitt</span><span class="o">(</span><span class="n">Geotwitt</span> <span class="n">twitt</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">twitt</span> <span class="o">=</span> <span class="n">twitt</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getPasswd</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">passwd</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPasswd</span><span class="o">(</span><span class="n">String</span> <span class="n">passwd</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">passwd</span> <span class="o">=</span> <span class="n">passwd</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">update</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">TwitterException</span>
+	<span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">persistGeoTwitt</span><span class="o">();</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">updateTwitter</span><span class="o">();</span>
+			
+			<span class="k">this</span><span class="o">.</span><span class="na">inicializaBean</span><span class="o">();</span>
+			
+			<span class="n">FacesContext</span><span class="o">.</span><span class="na">getCurrentInstance</span><span class="o">().</span><span class="na">addMessage</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="k">new</span> <span class="n">FacesMessage</span><span class="o">(</span><span class="s">&quot;Twitter Enviado!&quot;</span><span class="o">));</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			
+			<span class="n">FacesContext</span><span class="o">.</span><span class="na">getCurrentInstance</span><span class="o">().</span><span class="na">addMessage</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="k">new</span> <span class="n">FacesMessage</span><span class="o">(</span><span class="s">&quot;Ocorreu um Erro - [&quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getCause</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;] - &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()));</span>
+		<span class="o">}</span>
+		
+		
+	<span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">updateTwitter</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">TwitterException</span>
+	<span class="o">{</span>
+	    <span class="n">Twitter</span> <span class="n">twitter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TwitterFactory</span><span class="o">().</span><span class="na">getInstance</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">twitt</span><span class="o">.</span><span class="na">getAutor</span><span class="o">(),</span><span class="k">this</span><span class="o">.</span><span class="na">passwd</span><span class="o">);</span>
+	    <span class="n">twitter</span><span class="o">.</span><span class="na">updateStatus</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">twitt</span><span class="o">.</span><span class="na">getMensagem</span><span class="o">(),</span><span class="k">new</span> <span class="n">GeoLocation</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">twitt</span><span class="o">.</span><span class="na">getLocation</span><span class="o">().</span><span class="na">getY</span><span class="o">(),</span><span class="k">this</span><span class="o">.</span><span class="na">twitt</span><span class="o">.</span><span class="na">getLocation</span><span class="o">().</span><span class="na">getX</span><span class="o">()));</span>    
+	<span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">persistGeoTwitt</span><span class="o">()</span>
+	<span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">begin</span><span class="o">();</span>
+		
+			<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">twitt</span><span class="o">);</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">commit</span><span class="o">();</span>
+	<span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">inicializaBean</span><span class="o">()</span>
+	<span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">twitt</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Geotwitt</span><span class="o">();</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">passwd</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	
+<span class="o">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Se a internet estiver disponível podemos testar o funcionamento e verificar um novo post no twitter.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 >index</a></li>
+            <li class="right" >
+              <a href="../9-exemplo2/exemplo2.html" title="Exemplo2 - Construindo um visualizador de consultas espaciais"
+                 >next</a> |</li>
+            <li class="right" >
+              <a href="../7-ol4jsf/ol4jsf.html" title="Disponibilizando os mapas de forma rica na web - OpenLayers & Ol4JSF"
+                 >previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Exemplo1 - Enviando um geotwitt</a></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2010, Rafael Soto e Robert Anderson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>

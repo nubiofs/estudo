@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Trabalhando com a base de dados espacial (Postgis) &mdash; GeoDOJO vGeoDOJO documentation</title>
+    <link rel="stylesheet" href="../_static/geotools-tutorial.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'GeoDOJO',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GeoDOJO vGeoDOJO documentation" href="../index.html" />
+    <link rel="next" title="Discutindo a Arquitetura da Aplicação (GEO - JEE6)" href="../4-arquitetura/arquitetura.html" />
+    <link rel="prev" title="Quick Start - OSGEO Live DVD/Maven/Eclipse/Tomcat" href="../2-ambiente/ambiente.html" /> 
+  </head>
+  <body>
+    <div class="header">
+        <div class="wrap">
+            <ul id="top-nav">
+                <li><a href="http://www.latinoware.org/">Latinoware 2010</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 accesskey="I">index</a></li>
+            <li class="right" >
+              <a href="../4-arquitetura/arquitetura.html" title="Discutindo a Arquitetura da Aplicação (GEO - JEE6)"
+                 accesskey="N">next</a> |</li>
+            <li class="right" >
+              <a href="../2-ambiente/ambiente.html" title="Quick Start - OSGEO Live DVD/Maven/Eclipse/Tomcat"
+                 accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Trabalhando com a base de dados espacial (Postgis)</a></li>
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="trabalhando-com-a-base-de-dados-espacial-postgis">
+<h1><a class="toc-backref" href="#id1">Trabalhando com a base de dados espacial (Postgis)</a><a class="headerlink" href="#trabalhando-com-a-base-de-dados-espacial-postgis" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#trabalhando-com-a-base-de-dados-espacial-postgis" id="id1">Trabalhando com a base de dados espacial (Postgis)</a><ul>
+<li><a class="reference internal" href="#banco-de-dados-espacial-em-5-minutos-sfs-wkt" id="id2">Banco de Dados Espacial em 5 minutos - SFS/WKT</a><ul>
+<li><a class="reference internal" href="#primeiros-passos-criando-a-base-de-dados" id="id3">Primeiros Passos - Criando a Base de Dados</a></li>
+<li><a class="reference internal" href="#primeiros-passos-criando-uma-tabela-geo" id="id4">Primeiros Passos - Criando uma tabela geo</a></li>
+<li><a class="reference internal" href="#primeiros-passos-inserindo-dados-na-base-geo" id="id5">Primeiros Passos - Inserindo dados na base geo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#importacao-de-dados-geograficos" id="id6">Importação de Dados Geograficos</a><ul>
+<li><a class="reference internal" href="#shp2pgsql-criando-os-scripts-sql" id="id7">SHP2PGSQL - Criando os scripts SQL</a></li>
+<li><a class="reference internal" href="#executando-os-scripts-sql" id="id8">Executando os scripts SQL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#operacoes-espaciais" id="id9">Operações Espaciais</a><ul>
+<li><a class="reference internal" href="#criando-a-tabela-de-estados" id="id10">Criando a tabela de estados</a></li>
+<li><a class="reference internal" href="#criando-visao-com-todas-as-estradas-que-passam-pelo-estado-de-sao-paulo" id="id11">Criando visão com todas as estradas que passam pelo estado de são paulo</a></li>
+<li><a class="reference internal" href="#criando-visao-dos-10-maiores-municipios-do-brasil-em-populacao" id="id12">Criando visão dos 10 maiores municipios do brasil em população</a></li>
+<li><a class="reference internal" href="#criando-visao-dos-10-maiores-municipios-do-brasil-em-area" id="id13">Criando visão dos 10 maiores municipios do brasil em área</a></li>
+<li><a class="reference internal" href="#calculando-quantos-km-de-rodovias-o-estado-do-rio-de-janeiro-possui" id="id14">Calculando quantos KM de rodovias o estado do Rio de Janeiro possui</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Neste capitulo do roteiro, iremos abordar questões relacionadas ao banco de dados postgis. O PostGIS estende o PostgreSQL, seguindo as especificações da SFSSQL. O PostgreSQL é um sistema de gerência de banco de dados objeto-relacional, gratuito e de código fonte aberto. Foi desenvolvido a partir do projeto Postgres, iniciado em 1986, na Universidade da Califórnia em Berkeley.</p>
+<div class="section" id="banco-de-dados-espacial-em-5-minutos-sfs-wkt">
+<h2><a class="toc-backref" href="#id2">Banco de Dados Espacial em 5 minutos - SFS/WKT</a><a class="headerlink" href="#banco-de-dados-espacial-em-5-minutos-sfs-wkt" title="Permalink to this headline">¶</a></h2>
+<p>Postgis é um banco de dados espacial. Oracle Spatial e SQL Server 2008 também são banco de dados espacial. Mas o que isso quer nos dizer? Qual a diferença? É um novo banco de dados que veio para revolucionar o mundo? :)</p>
+<p>A resposta mais direta seria...</p>
+<p><strong>Banco de Dados Espacial é capaz de armazenar e manipular dados espaciais da mesma forma que manipula os demais tipos de dados na base de dados</strong></p>
+<p>Ao adicionar em um SGBD o seu cartucho espacial, estamos adicionando 3 itens ao mesmo:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Tipo de dados espacial;</li>
+<li>Indexação espacial para otimizar a manipulação de dados espaciais;</li>
+<li>Funções espaciais para manipular os dados espaciais;</li>
+</ol>
+</blockquote>
+<div class="sidebar">
+<p class="first sidebar-title">FOSS4G Postgis Tutorial</p>
+<p class="last">Dica para quem quiser aprofundar os estudos no postgis
+<a class="reference external" href="http://tinyurl.com/25m5om9">http://tinyurl.com/25m5om9</a></p>
+</div>
+<p>Bancos de dados tradicionais possuem string, numeros e datas. Os bancos de dados espaciais incluiram tipos adicionais de dados para armazenar a representação espacial de uma feição. No postgis este tipo de dado é denominado <em>geometry</em>. Na sua forma genérica qualquer representação espacial é uma geometria mas se formos descer o nível podemos encontrar uma taxonomia com outros tipos de dados que derivam de geometria.</p>
+<a class="reference internal image-reference" href="../_images/sfs.png"><img alt="../_images/sfs.png" src="../_images/sfs.png" style="width: 360.0px; height: 157.8px;" /></a>
+<p>Para este curso vamos aprender a trabalhar com 3 tipos básico de representação de dados espacial:</p>
+<blockquote>
+<ul class="simple">
+<li>Ponto = (X , Y)</li>
+<li>Linha = (Ponto 1 , Ponto 2) = ( (X , Y) , (X , Y) )</li>
+<li>Poligono = (Ponto 1 , Ponto 2, Ponto 3 , Ponto 1) = ( (X , Y) , (X , Y) , (X , Y) , (X , Y) )</li>
+</ul>
+</blockquote>
+<a class="reference internal image-reference" href="../_images/sfs2.png"><img alt="../_images/sfs2.png" src="../_images/sfs2.png" style="width: 237.0px; height: 95.4px;" /></a>
+<div class="section" id="primeiros-passos-criando-a-base-de-dados">
+<h3><a class="toc-backref" href="#id3">Primeiros Passos - Criando a Base de Dados</a><a class="headerlink" href="#primeiros-passos-criando-a-base-de-dados" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Vamos iniciar a ferramenta <em>pgAdmin</em> que será utilizada como a nossa ferramenta padrão para administração da base de dados</li>
+<li>Conectar-se a instância do <em>postgres</em> local</li>
+</ol>
+<a class="reference internal image-reference" href="../_images/conectar_pgadmin.png"><img alt="../_images/conectar_pgadmin.png" src="../_images/conectar_pgadmin.png" style="width: 519.6px; height: 255.6px;" /></a>
+<ol class="arabic simple" start="3">
+<li>Criar uma nova base de dados</li>
+</ol>
+<a class="reference internal image-reference" href="../_images/criar_banco.png"><img alt="../_images/criar_banco.png" src="../_images/criar_banco.png" style="width: 415.8px; height: 298.2px;" /></a>
+<ol class="arabic simple" start="4">
+<li>O nome da nossa base será <em>geodojo</em> e o template de criação que vamos usar é o <em>postgis_template</em>. Atente que o template possui a infra básica para que possamos utilizar o cartucho geo postgis. Sem definir o template não teremos as funções de geo!</li>
+</ol>
+<a class="reference internal image-reference" href="../_images/criar_banco2.png"><img alt="../_images/criar_banco2.png" src="../_images/criar_banco2.png" style="width: 202.2px; height: 276.6px;" /></a>
+<p>A partir deste momento já temos o nosso banco pronto para iniciar os trabalhos.</p>
+</div>
+<div class="section" id="primeiros-passos-criando-uma-tabela-geo">
+<h3><a class="toc-backref" href="#id4">Primeiros Passos - Criando uma tabela geo</a><a class="headerlink" href="#primeiros-passos-criando-uma-tabela-geo" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Vamos criar uma nova tabela na base <em>geodojo</em></li>
+</ol>
+<a class="reference internal image-reference" href="../_images/new_table.png"><img alt="../_images/new_table.png" src="../_images/new_table.png" style="width: 316.8px; height: 298.2px;" /></a>
+<ol class="arabic simple" start="2">
+<li>Definir o nome para a tabela(geometrias)</li>
+</ol>
+<a class="reference internal image-reference" href="../_images/nome_tabela.png"><img alt="../_images/nome_tabela.png" src="../_images/nome_tabela.png" style="width: 286.8px; height: 298.2px;" /></a>
+<ol class="arabic simple" start="3">
+<li>Definir as colunas <em>id:serial</em> , <em>nome:character varying</em></li>
+</ol>
+<a class="reference internal image-reference" href="../_images/colunas_tabela.png"><img alt="../_images/colunas_tabela.png" src="../_images/colunas_tabela.png" style="width: 289.8px; height: 298.2px;" /></a>
+<p>Para este exemplo inicial iremos criar 3 colunas de dados geometricos para a mesma tabela. Uma para armazenar ponto, outra para armazenar linha e finalmente uma para armazenar um poligono. Note que as boas práticas definem que uma tabela deve possuir apenas uma coluna de dado geográfico. Por questóes de demonstração e tutoria iremos utilizar as 3 colunas.</p>
+<ol class="arabic" start="4">
+<li><p class="first">Utilizamos a função <em>addGeometryColumn</em> do postgis para criar a nossa coluna geometrica. Diferentemente da estrutura de criação de uma coluna de dados convencional, as colunas de dados geométricos precisam ter:</p>
+<blockquote>
+<ul class="simple">
+<li>Regras de validação</li>
+<li>Entrada na tabela <em>geometry columns</em></li>
+</ul>
+<p>4.1 - Criação da coluna para armazenar ponto:</p>
+<div class="highlight-python"><pre>SELECT AddGeometryColumn ('geometrias','the_geom_point',4326,'POINT',2);</pre>
+</div>
+<p>Descrevendo a função temos:</p>
+<div class="highlight-python"><pre>SELECT AddGeometryColumn (&lt;nome da tabela&gt;,&lt;nome da coluna geo&gt;,&lt;srid&gt;,&lt;tipo de dados geo&gt;,&lt;dimensoes&gt;);
+
+.. image:: images/add_column_point.png</pre>
+</div>
+<p>4.2 - Criação da coluna para armazenar linha:</p>
+<div class="highlight-python"><pre>SELECT AddGeometryColumn ('geometrias','the_geom_line',4326,'LINESTRING',2);</pre>
+</div>
+<p>4.3 - Criação da coluna para armazenar poligono:</p>
+<div class="highlight-python"><pre>SELECT AddGeometryColumn ('geometrias','the_geom_poly',4326,'POLYGON',2);</pre>
+</div>
+<p>Observer ao final destes passos a estrutura final da tabela</p>
+<blockquote>
+<img alt="../_images/estrutura_tabela_geo.png" src="../_images/estrutura_tabela_geo.png" />
+</blockquote>
+</blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="primeiros-passos-inserindo-dados-na-base-geo">
+<h3><a class="toc-backref" href="#id5">Primeiros Passos - Inserindo dados na base geo</a><a class="headerlink" href="#primeiros-passos-inserindo-dados-na-base-geo" title="Permalink to this headline">¶</a></h3>
+<p>Para inserir dados na tabela, vamos precisar executar scripts de <em>INSERT</em>. Para apoiar a inserção dos dados geo vamos utilizar a funcão <em>ST_GeomFromText</em>. Esta função é responsável por converter uma representação WKT textual da geometria para o formato binário o qual o banco de dados necessita para persistir a informação. Para saber um pouco mais sobre WKT acesse o site <a class="reference external" href="http://tinyurl.com/24r9zvu">http://tinyurl.com/24r9zvu</a></p>
+<ol class="arabic">
+<li><p class="first">Inserção de um conjunto de pontos</p>
+<div class="highlight-python"><pre>    INSERT INTO geometrias(nome,the_geom_point)
+    VALUES('Primeiro Ponto', ST_GeomFromText('POINT(3 3)',4326));
+
+    INSERT INTO geometrias(nome,the_geom_point)
+    VALUES ('Segundo Ponto', ST_GeomFromText('POINT(1 1)',4326));
+
+INSERT INTO geometrias(nome,the_geom_point)
+VALUES ('Terceiro Ponto', ST_GeomFromText('POINT(5 5)',4326));</pre>
+</div>
+</li>
+</ol>
+<img alt="../_images/add_point.png" src="../_images/add_point.png" />
+<ol class="arabic" start="2">
+<li><p class="first">Inserção de uma linha</p>
+<div class="highlight-python"><pre>INSERT INTO geometrias(nome,the_geom_line)
+VALUES('Primeira Linha', ST_GeomFromText('LINESTRING(1 1, 4 4)',4326));</pre>
+</div>
+</li>
+<li><p class="first">Inserção de um poligono</p>
+<div class="highlight-python"><pre>INSERT INTO geometrias(nome,the_geom_poly)
+VALUES('Primeiro Poligono', ST_GeomFromText('POLYGON((4 1, 1 1, 1 4, 4 4, 4 1),(4 1, 1 1, 1 4, 4 4, 4 1))',4326));</pre>
+</div>
+</li>
+<li><p class="first">Vamos conferir as geometrias inseridas na tabela:</p>
+<div class="highlight-python"><pre>Select * from geometrias</pre>
+</div>
+</li>
+</ol>
+<img alt="../_images/consulta_geometrias.png" src="../_images/consulta_geometrias.png" />
+<ol class="arabic" start="5">
+<li><p class="first">Para transformar o dado da coluna geometrica para uma representação WKT utilizamos a função <em>astext</em>:</p>
+<div class="highlight-python"><pre>Select astext(the_geom_point) from geometrias where id = 1</pre>
+</div>
+</li>
+</ol>
+<img alt="../_images/astext.png" src="../_images/astext.png" />
+<ol class="arabic" start="6">
+<li><p class="first">O postgis tambem oferece inumeros formatos de saida como KML e GML:</p>
+<div class="highlight-python"><pre>Select askml(the_geom_poly) from geometrias where id = 5
+
+Select asgml(the_geom_line) from geometrias where id = 4</pre>
+</div>
+</li>
+</ol>
+<p><em>Resultado KML</em></p>
+<img alt="../_images/askml.png" src="../_images/askml.png" />
+<p><em>Resultado GML</em></p>
+<img alt="../_images/asgml.png" src="../_images/asgml.png" />
+<p>A representação espacial destas 5 geometrias inseridas seria algo parecido com a representação abaixo.</p>
+<img alt="../_images/plano.png" src="../_images/plano.png" />
+</div>
+</div>
+<div class="section" id="importacao-de-dados-geograficos">
+<h2><a class="toc-backref" href="#id6">Importação de Dados Geograficos</a><a class="headerlink" href="#importacao-de-dados-geograficos" title="Permalink to this headline">¶</a></h2>
+<p>Para a nossa aplicação vamos precisar utilizar uma serie de layers de informação geográficas vetoriais oriundas do provedor IBGE. Estas informações estão disponiveis no formato shapefile e podem ser baixadas a partir do site do IBGE. <a class="reference external" href="http://www.ibge.gov.br">http://www.ibge.gov.br</a>. Para facilitar o trabalho deste minicurso os arquivos foram baixados e estão disponiveis no caminho <em>~/Desktop/GeoDojoEnv/data</em>.</p>
+<p>Vamos importar dados para construir as camadas de:</p>
+<blockquote>
+<ul class="simple">
+<li>Paises Vizinhos</li>
+<li>Municipios</li>
+<li>Trechos Rodoviarios</li>
+<li>Picos</li>
+<li>Pontes</li>
+<li>Postos Fiscais</li>
+<li>Aeroportos</li>
+</ul>
+</blockquote>
+<div class="section" id="shp2pgsql-criando-os-scripts-sql">
+<h3><a class="toc-backref" href="#id7">SHP2PGSQL - Criando os scripts SQL</a><a class="headerlink" href="#shp2pgsql-criando-os-scripts-sql" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Abrir o console do linux no local onde estão os arquivos shapefiles de <em>municipioMMA</em></p>
+</li>
+<li><p class="first">Executar a ferramenta <em>SHP2PGSQL</em> para a geração do script sql contendo os comandos de insert que será utilizado para inserir os dados do shape na base de dados <em>geodojo</em> do nosso postgres:</p>
+<div class="highlight-python"><pre>Estrutura: shp2pgsql -s &lt;SRID&gt; dado.shp nome_tabela &gt; nome_arquivo.sql
+
+$ shp2pgsql -s 4326 municipsocio.shp municipio &gt; municipio.sql</pre>
+</div>
+</li>
+</ol>
+<div class="sidebar">
+<p class="first sidebar-title">Encontrando o SRID</p>
+<p class="last">Para descobrir qual o srid utilizar
+a ferramenta <a class="reference external" href="http://tinyurl.com/2bcu7hl">http://tinyurl.com/2bcu7hl</a></p>
+</div>
+</div>
+<div class="section" id="executando-os-scripts-sql">
+<h3><a class="toc-backref" href="#id8">Executando os scripts SQL</a><a class="headerlink" href="#executando-os-scripts-sql" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Executar o script <em>municipio.sql</em> gerado no passo anterior no banco de dados:</p>
+<div class="highlight-python"><pre>$ sudo su  - {senha user}
+$ su postgres
+$ psql -U postgres -d geodojo -f municipio.sql</pre>
+</div>
+</li>
+<li><p class="first">Verificando a criação da tabela e importação dos dados no pgAdmin</p>
+</li>
+</ol>
+<img alt="../_images/listagem_municipio.png" src="../_images/listagem_municipio.png" />
+<ol class="arabic" start="3">
+<li><p class="first">Para poupar tempo na importação das camadas existe um script que foi criado para a criação de todas as camadas de uma só vez:</p>
+<div class="highlight-python"><pre>$ cd ../mergedShapes/
+$ ./import.sh</pre>
+</div>
+</li>
+<li><p class="first">Para questões de performance vamos executar o script index.sh que é responsavel pela criação dos indices espaciais para todas as tabelas</p>
+<blockquote>
+<p>$ ./index.sh</p>
+</blockquote>
+</li>
+<li><p class="first">Verificando a criação de todas as tabelas restantes no pgAdmin</p>
+</li>
+</ol>
+<img alt="../_images/lista_tabelas.png" src="../_images/lista_tabelas.png" />
+</div>
+</div>
+<div class="section" id="operacoes-espaciais">
+<h2><a class="toc-backref" href="#id9">Operações Espaciais</a><a class="headerlink" href="#operacoes-espaciais" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="criando-a-tabela-de-estados">
+<h3><a class="toc-backref" href="#id10">Criando a tabela de estados</a><a class="headerlink" href="#criando-a-tabela-de-estados" title="Permalink to this headline">¶</a></h3>
+<p>Para obtermos os poligonos dos estados precisamos realizar uma operação espacial. O postgis disponibiliza uma função <em>ST_UNION</em> que é capaz de unir um conjunto de poligonos e gerar apenas um único poligono. Vamos utilizar esta função para agrupar os poligonos dos municipios de um estado e obter o mesmo.</p>
+<ol class="arabic">
+<li><p class="first">Executar a instrução sql para criação da tabela de UF:</p>
+<div class="highlight-python"><pre>        CREATE TABLE uf
+(
+  id serial NOT NULL,
+  nome character varying(254),
+  the_geom geometry,
+  CONSTRAINT uf_pkey PRIMARY KEY (id),
+  CONSTRAINT enforce_dims_the_geom CHECK (st_ndims(the_geom) = 2),
+  CONSTRAINT enforce_geotype_the_geom CHECK (geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL),
+  CONSTRAINT enforce_srid_the_geom CHECK (st_srid(the_geom) = 4326)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE uf OWNER TO postgres;</pre>
+</div>
+</li>
+<li><p class="first">Executar a instrução sql para união e geração das geometrias dos estados:</p>
+<div class="highlight-python"><pre>INSERT INTO uf (nome,the_geom)
+SELECT uf, multi(ST_UNION(the_geom)) from municipio group by uf</pre>
+</div>
+</li>
+</ol>
+<p>Note que a operação de união é uma das funções de grande custo computacional logo a mesma pode demorar alguns segundos para ser executada.</p>
+<ol class="arabic simple" start="3">
+<li>Ao final teremos 27 registros na tabela de uf que representam todos os estados do brasil e o distrito federal.</li>
+</ol>
+<img alt="../_images/union_municipio.png" src="../_images/union_municipio.png" />
+</div>
+<div class="section" id="criando-visao-com-todas-as-estradas-que-passam-pelo-estado-de-sao-paulo">
+<h3><a class="toc-backref" href="#id11">Criando visão com todas as estradas que passam pelo estado de são paulo</a><a class="headerlink" href="#criando-visao-com-todas-as-estradas-que-passam-pelo-estado-de-sao-paulo" title="Permalink to this headline">¶</a></h3>
+<p>A potencialidade de um banco de dados espacial é avaliada numa situação como a descrita neste tópico: Precisamos realizar um &#8220;join&#8221; entre o estado de são paulo e as estradas brasileiras sendo que na tabela de estradas e rodovias não temos nenhuma associação(chave estrangeira) com a tabela de UF. Como resolver? Simples!... utilizando as funções de análise topológica que possibilite um &#8220;join&#8221; espacial.</p>
+<ol class="arabic">
+<li><p class="first">Primeiro vamos criar a consulta que nos retorna os dados que precisamos:</p>
+<div class="highlight-python"><pre>SELECT rodovia.gid, rodovia.sigla, rodovia.the_geom
+FROM via_rodoviaria rodovia, uf
+WHERE uf.nome = 'SP' AND ST_INTERSECTS(rodovia.the_geom,uf.the_geom)</pre>
+</div>
+</li>
+<li><p class="first">Agora vamos criar uma view com o resultado da consulta para utilizarmos futuramente no nosso servidor de mapas:</p>
+<div class="highlight-python"><pre>CREATE VIEW rodovias_sp AS
+SELECT rodovia.gid, rodovia.sigla, rodovia.the_geom
+FROM via_rodoviaria rodovia, uf
+WHERE uf.nome = 'SP' AND ST_INTERSECTS(rodovia.the_geom,uf.the_geom)</pre>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="criando-visao-dos-10-maiores-municipios-do-brasil-em-populacao">
+<h3><a class="toc-backref" href="#id12">Criando visão dos 10 maiores municipios do brasil em população</a><a class="headerlink" href="#criando-visao-dos-10-maiores-municipios-do-brasil-em-populacao" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Primeiro vamos criar a consulta que nos retorna os 10 maiores municipios por população:</p>
+<div class="highlight-python"><pre>SELECT
+
+  municipio.nome,
+  municipio.uf,
+  CAST(municipio.pop00 as numeric) as populacao,
+  municipio.the_geom
+FROM
+  public.municipio
+ORDER BY
+  CAST(municipio.pop00 as numeric) DESC
+
+LIMIT 10;</pre>
+</div>
+</li>
+<li><p class="first">Agora vamos criar uma view para utilizarmos futuramente:</p>
+<div class="highlight-python"><pre>CREATE VIEW municipio_pop AS
+SELECT
+  municipio.nome,
+  municipio.uf,
+  CAST(municipio.pop00 as numeric) as populacao,
+  municipio.the_geom
+FROM
+  public.municipio
+ORDER BY
+  CAST(municipio.pop00 as numeric) DESC
+
+LIMIT 10</pre>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="criando-visao-dos-10-maiores-municipios-do-brasil-em-area">
+<h3><a class="toc-backref" href="#id13">Criando visão dos 10 maiores municipios do brasil em área</a><a class="headerlink" href="#criando-visao-dos-10-maiores-municipios-do-brasil-em-area" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Para descobrir a área de um poligono, utilizamos a funcão <em>ST_AREA</em>. Vamos precisar usar a função <em>ST_TRANSFORM</em> para obter os valores de área em metros. Para a função ST_TRANSFORM funcionar corretamente vamos precisar inserir a seguinte linha no banco de dados:</p>
+<div class="highlight-python"><pre>INSERT into spatial_ref_sys (srid, auth_name, auth_srid, proj4text, srtext) values ( 96687, 'sr-org', 6687, '+proj=poly +lat_0=0 +lon_0=-54 +x_0=5000000
++y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs ', 'PROJCS["SIRGAS 2000 / Brazil Polyconic",GEOGCS["SIRGAS 2000",DATUM
+["Sistema_de_Referencia_Geocentrico_para_America_del_Sur_2000",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84
+[0,0,0,0,0,0,0],AUTHORITY["EPSG","6674"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.01745329251994328,AUTHORITY
+["EPSG","9122"]],AUTHORITY["EPSG","4674"]],PROJECTION["Polyconic"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridian",-54],PARAMETER
+["false_easting",5000000],PARAMETER["false_northing",10000000],UNIT["metre",1,AUTHORITY["EPSG","9001"]]]');</pre>
+</div>
+</li>
+<li><p class="first">Na sequencia vamos criar a consulta:</p>
+<div class="highlight-python"><pre>SELECT
+  municipio.nome,
+  municipio.uf,
+  ST_AREA(ST_TRANSFORM(municipio.the_geom,96687)) as area,
+  municipio.the_geom
+FROM
+  public.municipio
+ORDER BY
+  ST_AREA(municipio.the_geom) DESC
+
+LIMIT 10;</pre>
+</div>
+</li>
+<li><p class="first">Criar uma view para consultas futuras:</p>
+<div class="highlight-python"><pre>CREATE VIEW municipio_area AS
+SELECT
+  municipio.nome,
+  municipio.uf,
+  ST_AREA(ST_TRANSFORM(municipio.the_geom,96687)) as area,
+  municipio.the_geom
+FROM
+  public.municipio
+ORDER BY
+  ST_AREA(municipio.the_geom) DESC
+
+LIMIT 10;</pre>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="calculando-quantos-km-de-rodovias-o-estado-do-rio-de-janeiro-possui">
+<h3><a class="toc-backref" href="#id14">Calculando quantos KM de rodovias o estado do Rio de Janeiro possui</a><a class="headerlink" href="#calculando-quantos-km-de-rodovias-o-estado-do-rio-de-janeiro-possui" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Primeiro vamos encontrar todas as rodovias que cruzam o estado do rio:</p>
+<div class="highlight-python"><pre>SELECT rodovia.sigla
+FROM via_rodoviaria rodovia, uf
+WHERE uf.nome = 'RJ' AND ST_INTERSECTS(rodovia.the_geom,uf.the_geom)</pre>
+</div>
+</li>
+<li><p class="first">Agora vamos calcular o tamanho de cada rodovia em km somente para os trechos que estão dentro do estado do rio:</p>
+<div class="highlight-python"><pre>SELECT
+        sum(ST_LENGTH(ST_TRANSFORM(
+        ST_Intersection(rodovia.the_geom,uf.the_geom),96687))
+        ) / 1000 as km,
+
+        rodovia.sigla
+FROM via_rodoviaria rodovia, uf
+WHERE uf.nome = 'RJ' AND ST_INTERSECTS(rodovia.the_geom,uf.the_geom)
+GROUP BY rodovia.sigla</pre>
+</div>
+</li>
+<li><p class="first">Agora vamos calcular o somatorio total em km:</p>
+<div class="highlight-python"><pre>        SELECT
+        sum(ST_LENGTH(ST_TRANSFORM(
+        ST_Intersection(rodovia.the_geom,uf.the_geom),96687))
+        ) / 1000 as km
+
+FROM via_rodoviaria rodovia, uf
+WHERE uf.nome = 'RJ' AND ST_INTERSECTS(rodovia.the_geom,uf.the_geom)</pre>
+</div>
+</li>
+<li><p class="first">Para finalizar vamos criar uma tabela contendo apenas os trechos das rodovias federais que cruzam o estado do rio. Para cada trecho vamos disponibilizar o valor em km do seu tamanho, a sua sigla e a geometria resultado:</p>
+<div class="highlight-python"><pre>CREATE TABLE trechos_br_rio AS
+SELECT
+        sum(ST_LENGTH(ST_TRANSFORM(
+        ST_Intersection(rodovia.the_geom,uf.the_geom),96687))
+        ) / 1000 as km,
+        rodovia.sigla,
+        ST_Intersection(rodovia.the_geom,uf.the_geom)
+
+FROM via_rodoviaria rodovia, uf
+WHERE uf.nome = 'RJ' AND rodovia.sigla like '%BR%' AND ST_INTERSECTS(rodovia.the_geom,uf.the_geom)
+GROUP BY rodovia.sigla, rodovia.the_geom, uf.the_geom</pre>
+</div>
+</li>
+</ol>
+<p>Finalizamos os trabalhos desta etapa com o postgis. Na próxima etapa, veremos como acessar bases de dados espaciais na plataforma Java.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 >index</a></li>
+            <li class="right" >
+              <a href="../4-arquitetura/arquitetura.html" title="Discutindo a Arquitetura da Aplicação (GEO - JEE6)"
+                 >next</a> |</li>
+            <li class="right" >
+              <a href="../2-ambiente/ambiente.html" title="Quick Start - OSGEO Live DVD/Maven/Eclipse/Tomcat"
+                 >previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Trabalhando com a base de dados espacial (Postgis)</a></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2010, Rafael Soto e Robert Anderson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>

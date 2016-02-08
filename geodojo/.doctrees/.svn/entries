@@ -1,0 +1,140 @@
+10
+
+dir
+0
+https://geodojo.googlecode.com/svn/trunk/roteiro/build/.doctrees
+https://geodojo.googlecode.com/svn
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+e6791326-9150-4ff1-db7a-2f0afe25d0be
+
+8-exemplo1
+dir
+
+
+
+add
+
+9-exemplo2
+dir
+
+
+
+add
+
+2-ambiente
+dir
+
+
+
+add
+
+6-geoserver
+dir
+
+
+
+add
+
+7-ol4jsf
+dir
+
+
+
+add
+
+11-referencias
+dir
+
+
+
+add
+
+4-arquitetura
+dir
+
+
+
+add
+
+extra-arquitetura
+dir
+
+
+
+add
+
+3-postgis
+dir
+
+
+
+add
+
+5-hbspatial
+dir
+
+
+
+add
+
+environment.pickle
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+10-exemplo3
+dir
+
+
+
+add
+
+index.doctree
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+1-codingdojo
+dir
+
+
+
+add
+

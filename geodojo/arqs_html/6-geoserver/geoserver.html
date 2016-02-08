@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Serviço de Mapas na Web - Geoserver &mdash; GeoDOJO vGeoDOJO documentation</title>
+    <link rel="stylesheet" href="../_static/geotools-tutorial.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'GeoDOJO',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GeoDOJO vGeoDOJO documentation" href="../index.html" />
+    <link rel="next" title="Disponibilizando os mapas de forma rica na web - OpenLayers &amp; Ol4JSF" href="../7-ol4jsf/ol4jsf.html" />
+    <link rel="prev" title="Persistência de Dados Espacial - Hibernate Spatial" href="../5-hbspatial/hbspatial.html" /> 
+  </head>
+  <body>
+    <div class="header">
+        <div class="wrap">
+            <ul id="top-nav">
+                <li><a href="http://www.latinoware.org/">Latinoware 2010</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 accesskey="I">index</a></li>
+            <li class="right" >
+              <a href="../7-ol4jsf/ol4jsf.html" title="Disponibilizando os mapas de forma rica na web - OpenLayers & Ol4JSF"
+                 accesskey="N">next</a> |</li>
+            <li class="right" >
+              <a href="../5-hbspatial/hbspatial.html" title="Persistência de Dados Espacial - Hibernate Spatial"
+                 accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Serviço de Mapas na Web - Geoserver</a></li>
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="servico-de-mapas-na-web-geoserver">
+<h1><a class="toc-backref" href="#id1">Serviço de Mapas na Web - Geoserver</a><a class="headerlink" href="#servico-de-mapas-na-web-geoserver" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#servico-de-mapas-na-web-geoserver" id="id1">Serviço de Mapas na Web - Geoserver</a><ul>
+<li><a class="reference internal" href="#inicializando-o-geoserver" id="id2">Inicializando o Geoserver</a></li>
+<li><a class="reference internal" href="#configurando-layer-mundo" id="id3">Configurando Layer Mundo</a></li>
+<li><a class="reference internal" href="#configurando-layers-postgis" id="id4">Configurando Layers Postgis</a><ul>
+<li><a class="reference internal" href="#camada-limites-politicos" id="id5">Camada Limites Politicos</a></li>
+<li><a class="reference internal" href="#camada-rodovias-paulista" id="id6">Camada Rodovias Paulista</a></li>
+<li><a class="reference internal" href="#camada-geotwitter" id="id7">Camada GeoTwitter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Uma das principais componentes de um solução webgis é o servidor de mapas. O servidor de mapas é o responsavel por processar todas as fontes de dados presentes em diferentes tipos de bases, sejam elas arquivo, banco de dados, serviços na web e outros. Os dados processados são organizados na estrutura de layers e estas estarão disponiveis na web, através do protocolo HTTP, para serem consumidas no formato de imagem ou textual(vetores).</p>
+<p>A OGC(Open Geospatial Consortium - <a class="reference external" href="http://www.ogc.org">http://www.ogc.org</a>) regulamenta diversos padrões e formatos com especificações abertos para serem utilizados omo base nos OGC WebServices. Dentre estes serviços podemos destacar o WMS(Web Map Service), WFS(Web Feature Service) e o WCS(Web Coverage Services) que iremos trabalhar durante este modulo do roteiro.</p>
+<p>No mundo opensource existem diversos servidores de mapas disponíveis onde podemos destacar o mapserver(<a class="reference external" href="http://umnmapserver.org">http://umnmapserver.org</a>) e geoserver(<a class="reference external" href="http://geoserver.org">http://geoserver.org</a>), ambos mantidos pela OSGEO(<a class="reference external" href="http://osgeo.org">http://osgeo.org</a>). O mapserver é considerado um dos mais antigos servidores de mapas opensource, escrito em <em>c/c++</em> e amplamente utilizado. Não iremos abordar o mapserver neste roteiro.</p>
+<p>Geoserver é um servidor de mapas opensource escrito em Java que possibilita aos seus usuários o compartilhamento e edição de dados geoespaciais. Concebido sob uma otica de interoperabilidade de informações a partir do uso massivo de padrões abertos o geoserver hoje é considerado um dos melhores softwares do seu seguimento. A partir de uma interface totalmente web de gerenciamento, com alguns clicks e pouco entendimento já é possível publicar uma camada de dados geográficos na web.</p>
+<p>Durante este capítulo iremos abordar assuntos práticos, totalmente direcionados a configuração e disponibilização de camadas de dados geográficos na web. Como de praxe, sem muita conversa vamos ao que interessa!</p>
+<div class="section" id="inicializando-o-geoserver">
+<h2><a class="toc-backref" href="#id2">Inicializando o Geoserver</a><a class="headerlink" href="#inicializando-o-geoserver" title="Permalink to this headline">¶</a></h2>
+<p>Para poupar tempo, estamos utilizando o geoserver instalado na distribuição <em>LIVE DVD OSGEO</em>. Não iremos precisar seguir nenhum passo de instalação, apenas configurar o que for necessário para o nosso trabalho. Vamos inicializar o geoserver e fazer as primeiras demonstrações.</p>
+<ol class="arabic simple">
+<li>Acessar a opção no menu <em>Geospatial &gt;&gt; Web Services &gt;&gt; Start Geoserver</em></li>
+</ol>
+<img alt="../_images/menu_start_geoserver.png" src="../_images/menu_start_geoserver.png" />
+<ol class="arabic simple" start="2">
+<li>Se tudo correr bem uma tela com um OK deve surgir</li>
+</ol>
+<img alt="../_images/finish_init.png" src="../_images/finish_init.png" />
+<ol class="arabic" start="3">
+<li><p class="first">O geoserver disponibiliza toda a sua interface de administração em formato web. Para iniciarmos as nossas configurações vamos efetuar o login como administrador do geoserver.</p>
+<blockquote>
+<ul class="simple">
+<li>Usuario: admin</li>
+<li>Senha: geoserver</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Na proxima sessão vamos iniciar configurando as nossas camadas.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="configurando-layer-mundo">
+<h2><a class="toc-backref" href="#id3">Configurando Layer Mundo</a><a class="headerlink" href="#configurando-layer-mundo" title="Permalink to this headline">¶</a></h2>
+<p>Vamos criar nesta sessão as nossas camadas que serão utilizadas como base de fundo para os nossos mapas(BASE LAYER) e tambem como base de sobreposição.</p>
+<ol class="arabic simple">
+<li>A nossa camada mundo é composta de um arquivo raster com uma imagem de satelite no formato tiff e um arquivo shapefile com os poligonos de todos os países do planeta. Vamos abrir a pasta <em>~/Desktop/GeoDojoEnv/data/world</em></li>
+</ol>
+<img alt="../_images/pasta_world.png" src="../_images/pasta_world.png" />
+<ol class="arabic simple" start="2">
+<li>Agora vamos copiar a pasta world para a pasta <em>~/Desktop/GeoDojoEnv/geoserver_data_dir/data/</em></li>
+</ol>
+<img alt="../_images/copy_world.png" src="../_images/copy_world.png" />
+<ol class="arabic simple" start="3">
+<li>Vamos criar um namespace <em>geodojo</em> para o nosso roteiro para que tudo fique centralizado nele.</li>
+</ol>
+<img alt="../_images/create_workspace.png" src="../_images/create_workspace.png" />
+<img alt="../_images/new_workspace.png" src="../_images/new_workspace.png" />
+<ol class="arabic" start="4">
+<li><p class="first">Vamos criar um novo <em>datastore</em> para adicionar os arquivos que irão compor a camada mundo.</p>
+<blockquote>
+<p>4.1. Primeiro vamos criar um datastore para o arquivo shapefile</p>
+<ol class="loweralpha">
+<li><dl class="first docutils">
+<dt>Acessando opção para criar um novo datastore shapefile</dt>
+<dd><img alt="../_images/new_data_store1.png" class="first last" src="../_images/new_data_store1.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Configurando o datastore shapefile</dt>
+<dd><img alt="../_images/new_vector_datastore1.png" class="first last" src="../_images/new_vector_datastore1.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Datasource criado e pronto para a publicação dos seus dados</dt>
+<dd><img alt="../_images/new_vector_datastore2.png" class="first last" src="../_images/new_vector_datastore2.png" />
+</dd>
+</dl>
+</li>
+</ol>
+<p>4.2. Vamos criar um outro datastore para o arquivo raster</p>
+<ol class="loweralpha">
+<li><dl class="first docutils">
+<dt>Acessando opção para criar um novo datastore raster</dt>
+<dd><img alt="../_images/new_data_store2.png" class="first last" src="../_images/new_data_store2.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Configurando o datastore raster</dt>
+<dd><img alt="../_images/new_raster_datastore1.png" class="first last" src="../_images/new_raster_datastore1.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Datasource criado e pronto para a publicação dos seus dados</dt>
+<dd><img alt="../_images/new_raster_datastore2.png" class="first last" src="../_images/new_raster_datastore2.png" />
+</dd>
+</dl>
+</li>
+</ol>
+<p>4.3. Vamos publicar uma nova <em>layer</em> com os dados do nosso shapefile datastore que acabamos de configurar</p>
+<ol class="loweralpha">
+<li><dl class="first docutils">
+<dt>Acessando opção para criar nova layer</dt>
+<dd><img alt="../_images/add_new_layer.png" class="first last" src="../_images/add_new_layer.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Configurando a nova layer. Atentar para a geração dos enquadramentos</dt>
+<dd><img alt="../_images/add_new_layer2.png" class="first last" src="../_images/add_new_layer2.png" />
+</dd>
+</dl>
+</li>
+</ol>
+<p>4.4. Vamos publicar a <em>layer</em> com os dados do datastore raster</p>
+<ol class="loweralpha">
+<li><dl class="first docutils">
+<dt>Acessando opção para criar nova layer</dt>
+<dd><img alt="../_images/add_new_layer_raster.png" class="first last" src="../_images/add_new_layer_raster.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Configurando a nova layer</dt>
+<dd><img alt="../_images/add_new_layer2_raster.png" class="first last" src="../_images/add_new_layer2_raster.png" />
+</dd>
+</dl>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p class="first">Apos a criação de datastore e publicação dos dados no formato de serviço, podemos testar se tudo está funcionando corretamente. O geoserver disponibiliza uma ferramenta chamada <em>LayerPreview</em> onde é possível consumir os serviços e testa-los.</p>
+</li>
+</ol>
+<ol class="loweralpha">
+<li><dl class="first docutils">
+<dt>Acessando a ferramenta layer preview</dt>
+<dd><img alt="../_images/layer_preview_1.png" class="first last" src="../_images/layer_preview_1.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Visualizando a camada mundo vetorial publicada</dt>
+<dd><img alt="../_images/shapefile_layer_preview.png" class="first last" src="../_images/shapefile_layer_preview.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Visualizando a camada mundo raster publicada</dt>
+<dd><img alt="../_images/raster_layer_preview.png" class="first last" src="../_images/raster_layer_preview.png" />
+</dd>
+</dl>
+</li>
+</ol>
+<ol class="arabic simple" start="6">
+<li>Vamos precisar agrupar as duas camadas em apenas uma para poupar requisições ao servidor de aplicação e compor a nossa camada base. Para isso vamos usar o recurso do geoserver denominado <em>LayerGroup</em></li>
+</ol>
+<ol class="loweralpha">
+<li><dl class="first docutils">
+<dt>Acessando a funcionalidade para a criação de um layer group.</dt>
+<dd><img alt="../_images/new_layer_group.png" class="first last" src="../_images/new_layer_group.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Agrupando as camadas. Atente para a sobreposição correta.</dt>
+<dd><img alt="../_images/new_layer_group.png" class="first last" src="../_images/new_layer_group.png" />
+</dd>
+</dl>
+</li>
+</ol>
+<ol class="arabic simple" start="7">
+<li>Agora vamos visualizar a nossa nova camada que na verdade é uma agregação de camadas.</li>
+</ol>
+<img alt="../_images/layer_group_preview.png" src="../_images/layer_group_preview.png" />
+<ol class="arabic" start="8">
+<li><p class="first">O próximo passo é estilizar a camada vetorial mundo. Note que da forma atual, o preenchimento dos poligonos está sobrepondo a camada raster. A nossa layer tambem não possui nenhuma label com os nomes dos paises. O geoserver utiliza o padrão <em>SLD</em> para definir estilos visuais de mapas.</p>
+<blockquote>
+<p>Dica para quem quiser aprofundar os estudos no SLD
+<a class="reference external" href="http://tinyurl.com/34oqolf">http://tinyurl.com/34oqolf</a></p>
+</blockquote>
+</li>
+</ol>
+<p>Para facilitar o trabalho neste tutorial, já existe um arquivo SLD prontinho que foi criado especialmente para atender a nossa camada mundo. Vamos aprender nesta etapa como se define um estilo no geoserver.. Tomem cuidado pois é algo muitoooooo dificil! :)</p>
+<ol class="loweralpha">
+<li><dl class="first docutils">
+<dt>Arquivo SLD</dt>
+<dd><div class="first last highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;sld:StyledLayerDescriptor</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/sld&quot;</span> <span class="na">xmlns:sld=</span><span class="s">&quot;http://www.opengis.net/sld&quot;</span> <span class="na">xmlns:ogc=</span><span class="s">&quot;http://www.opengis.net/ogc&quot;</span> <span class="na">xmlns:gml=</span><span class="s">&quot;http://www.opengis.net/gml&quot;</span> <span class="na">version=</span><span class="s">&quot;1.0.0&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;sld:UserLayer&gt;</span>
+        <span class="nt">&lt;sld:LayerFeatureConstraints&gt;</span>
+            <span class="nt">&lt;sld:FeatureTypeConstraint/&gt;</span>
+        <span class="nt">&lt;/sld:LayerFeatureConstraints&gt;</span>
+        <span class="nt">&lt;sld:UserStyle&gt;</span>
+            <span class="nt">&lt;sld:Name&gt;</span>Default Styler<span class="nt">&lt;/sld:Name&gt;</span>
+            <span class="nt">&lt;sld:Title/&gt;</span>
+            <span class="nt">&lt;sld:IsDefault&gt;</span>1<span class="nt">&lt;/sld:IsDefault&gt;</span>
+            <span class="nt">&lt;sld:FeatureTypeStyle&gt;</span>
+                <span class="nt">&lt;sld:Name&gt;</span>simple<span class="nt">&lt;/sld:Name&gt;</span>
+                <span class="nt">&lt;sld:FeatureTypeName&gt;</span>Feature<span class="nt">&lt;/sld:FeatureTypeName&gt;</span>
+                <span class="nt">&lt;sld:SemanticTypeIdentifier&gt;</span>generic:geometry<span class="nt">&lt;/sld:SemanticTypeIdentifier&gt;</span>
+                <span class="nt">&lt;sld:SemanticTypeIdentifier&gt;</span>simple<span class="nt">&lt;/sld:SemanticTypeIdentifier&gt;</span>
+                <span class="nt">&lt;sld:Rule&gt;</span>
+                    <span class="nt">&lt;sld:PolygonSymbolizer&gt;</span>
+                        <span class="nt">&lt;sld:Stroke&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;stroke&quot;</span><span class="nt">&gt;</span>#1A1A1A<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;stroke-opacity&quot;</span><span class="nt">&gt;</span>0.5<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Stroke&gt;</span>
+                    <span class="nt">&lt;/sld:PolygonSymbolizer&gt;</span>
+                    <span class="nt">&lt;sld:TextSymbolizer&gt;</span>
+                        <span class="nt">&lt;sld:Label&gt;</span>
+                            <span class="nt">&lt;ogc:PropertyName&gt;</span>NAME<span class="nt">&lt;/ogc:PropertyName&gt;</span>
+                        <span class="nt">&lt;/sld:Label&gt;</span>
+                        <span class="nt">&lt;sld:Font&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-family&quot;</span><span class="nt">&gt;</span>Sans<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-size&quot;</span><span class="nt">&gt;</span>8.0<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-style&quot;</span><span class="nt">&gt;</span>normal<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-weight&quot;</span><span class="nt">&gt;</span>bold<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Font&gt;</span>
+                        <span class="nt">&lt;sld:LabelPlacement&gt;</span>
+                            <span class="nt">&lt;sld:PointPlacement&gt;</span>
+                                <span class="nt">&lt;sld:AnchorPoint&gt;</span>
+                                    <span class="nt">&lt;sld:AnchorPointX&gt;</span>
+                                        <span class="nt">&lt;ogc:Literal&gt;</span>0.5<span class="nt">&lt;/ogc:Literal&gt;</span>
+                                    <span class="nt">&lt;/sld:AnchorPointX&gt;</span>
+                                    <span class="nt">&lt;sld:AnchorPointY&gt;</span>
+                                        <span class="nt">&lt;ogc:Literal&gt;</span>0.5<span class="nt">&lt;/ogc:Literal&gt;</span>
+                                    <span class="nt">&lt;/sld:AnchorPointY&gt;</span>
+                                <span class="nt">&lt;/sld:AnchorPoint&gt;</span>
+                              
+                            <span class="nt">&lt;/sld:PointPlacement&gt;</span>
+                        <span class="nt">&lt;/sld:LabelPlacement&gt;</span>
+                        <span class="nt">&lt;Halo&gt;</span>
+                        	<span class="nt">&lt;Radius&gt;</span>
+                        		<span class="nt">&lt;ogc:Literal&gt;</span>2<span class="nt">&lt;/ogc:Literal&gt;</span>
+                        	<span class="nt">&lt;/Radius&gt;</span>
+                        
+                        	<span class="nt">&lt;sld:Fill&gt;</span>
+                            		<span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            		<span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill-opacity&quot;</span><span class="nt">&gt;</span>0.65<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        	<span class="nt">&lt;/sld:Fill&gt;</span>
+                        <span class="nt">&lt;/Halo&gt;</span>
+                        <span class="nt">&lt;sld:Fill&gt;</span>
+                            	<span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#00000F<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Fill&gt;</span>
+                        <span class="nt">&lt;sld:VendorOption</span> <span class="na">name=</span><span class="s">&quot;spaceAround&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/sld:VendorOption&gt;</span>
+                    <span class="nt">&lt;/sld:TextSymbolizer&gt;</span>
+                <span class="nt">&lt;/sld:Rule&gt;</span>
+            <span class="nt">&lt;/sld:FeatureTypeStyle&gt;</span>
+        <span class="nt">&lt;/sld:UserStyle&gt;</span>
+    <span class="nt">&lt;/sld:UserLayer&gt;</span>
+<span class="nt">&lt;/sld:StyledLayerDescriptor&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Acessando a funcionalidade para adicionar um novo estilo</dt>
+<dd><img alt="../_images/add_new_style.png" class="first last" src="../_images/add_new_style.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Copiar e colar o xml SLD acima.</dt>
+<dd><img alt="../_images/define_sld_country.png" class="first last" src="../_images/define_sld_country.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Acessar a layer group e definir o estilo country para a camada vetorial</dt>
+<dd><img alt="../_images/define_sld_country_2.png" class="first last" src="../_images/define_sld_country_2.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Verificar o resultado no layer preview</dt>
+<dd><img alt="../_images/sld_layer_preview.png" class="first last" src="../_images/sld_layer_preview.png" />
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="configurando-layers-postgis">
+<h2><a class="toc-backref" href="#id4">Configurando Layers Postgis</a><a class="headerlink" href="#configurando-layers-postgis" title="Permalink to this headline">¶</a></h2>
+<p>Na seção anterior configuramos a camada mundo a partir de arquivos de dados geograficos. Nesta seção vamos aprender a configurar camadas a partir de tabelas de dados geográficos presentes na base postgis.</p>
+<p>Primeiramento vamos criar um novo datastore que vai apontar para o nosso banco de dados <em>geodojo</em></p>
+<img alt="../_images/add_postgis_datasource_1.png" src="../_images/add_postgis_datasource_1.png" />
+<p>Em seguida adicionar o datasource Postgis. Será exibida uma lista com todas as tabelas e views que possuem colunas geograficas presente no base de dados.</p>
+<img alt="../_images/lista_layers_geodojo.png" src="../_images/lista_layers_geodojo.png" />
+<p>Vamos iniciar a publicação de algumas tabelas que configuramos anteriormente no Postgis. Note que algumas tabelas são derivadas de operações espaciais realizadas logo será possível visualizar o resultado.</p>
+<div class="section" id="camada-limites-politicos">
+<h3><a class="toc-backref" href="#id5">Camada Limites Politicos</a><a class="headerlink" href="#camada-limites-politicos" title="Permalink to this headline">¶</a></h3>
+<p>A camada de limites politicos consiste na divisão dos estados e divisão de municipios.</p>
+<ol class="arabic simple">
+<li>Publicar as layers <em>UF</em> e <em>Municipio</em>.</li>
+</ol>
+<ol class="loweralpha">
+<li><dl class="first docutils">
+<dt>Resultado da camada de UF</dt>
+<dd><img alt="../_images/layer_preview_uf.png" class="first last" src="../_images/layer_preview_uf.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Resultado da camada de Municipio</dt>
+<dd><img alt="../_images/layer_preview_municipio.png" class="first last" src="../_images/layer_preview_municipio.png" />
+</dd>
+</dl>
+</li>
+</ol>
+<ol class="arabic simple" start="2">
+<li>Criar uma layer group com as layers <em>uf</em> e <em>municipio</em></li>
+<li>Definir o estilo SLD para a camada UF.</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;sld:StyledLayerDescriptor</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/sld&quot;</span> <span class="na">xmlns:sld=</span><span class="s">&quot;http://www.opengis.net/sld&quot;</span> <span class="na">xmlns:ogc=</span><span class="s">&quot;http://www.opengis.net/ogc&quot;</span> <span class="na">xmlns:gml=</span><span class="s">&quot;http://www.opengis.net/gml&quot;</span> <span class="na">version=</span><span class="s">&quot;1.0.0&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;sld:UserLayer&gt;</span>
+        <span class="nt">&lt;sld:LayerFeatureConstraints&gt;</span>
+            <span class="nt">&lt;sld:FeatureTypeConstraint/&gt;</span>
+        <span class="nt">&lt;/sld:LayerFeatureConstraints&gt;</span>
+        <span class="nt">&lt;sld:UserStyle&gt;</span>
+            <span class="nt">&lt;sld:Name&gt;</span>Default Styler<span class="nt">&lt;/sld:Name&gt;</span>
+            <span class="nt">&lt;sld:Title/&gt;</span>
+            <span class="nt">&lt;sld:IsDefault&gt;</span>1<span class="nt">&lt;/sld:IsDefault&gt;</span>
+            <span class="nt">&lt;sld:FeatureTypeStyle&gt;</span>
+                <span class="nt">&lt;sld:Name&gt;</span>simple<span class="nt">&lt;/sld:Name&gt;</span>
+                <span class="nt">&lt;sld:FeatureTypeName&gt;</span>Feature<span class="nt">&lt;/sld:FeatureTypeName&gt;</span>
+                <span class="nt">&lt;sld:SemanticTypeIdentifier&gt;</span>generic:geometry<span class="nt">&lt;/sld:SemanticTypeIdentifier&gt;</span>
+                <span class="nt">&lt;sld:SemanticTypeIdentifier&gt;</span>simple<span class="nt">&lt;/sld:SemanticTypeIdentifier&gt;</span>
+                <span class="nt">&lt;sld:Rule&gt;</span>
+                	
+                    <span class="nt">&lt;sld:PolygonSymbolizer&gt;</span>
+                        <span class="nt">&lt;sld:Stroke&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;stroke&quot;</span><span class="nt">&gt;</span>#1B9E77<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;stroke-opacity&quot;</span><span class="nt">&gt;</span>0.75<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Stroke&gt;</span>
+                       
+                    <span class="nt">&lt;/sld:PolygonSymbolizer&gt;</span>
+               <span class="nt">&lt;/sld:Rule&gt;</span>
+               <span class="nt">&lt;sld:Rule&gt;</span>
+               	    <span class="nt">&lt;sld:MinScaleDenominator&gt;</span>1.180186E7<span class="nt">&lt;/sld:MinScaleDenominator&gt;</span>     
+                    <span class="nt">&lt;sld:TextSymbolizer&gt;</span>
+                        <span class="nt">&lt;sld:Label&gt;</span>
+                            <span class="nt">&lt;ogc:PropertyName&gt;</span>nome<span class="nt">&lt;/ogc:PropertyName&gt;</span>
+                        <span class="nt">&lt;/sld:Label&gt;</span>
+                        <span class="nt">&lt;sld:Font&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-family&quot;</span><span class="nt">&gt;</span>Sans<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-size&quot;</span><span class="nt">&gt;</span>8.0<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-style&quot;</span><span class="nt">&gt;</span>normal<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-weight&quot;</span><span class="nt">&gt;</span>bold<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Font&gt;</span>
+                        <span class="nt">&lt;sld:LabelPlacement&gt;</span>
+                            <span class="nt">&lt;sld:PointPlacement&gt;</span>
+                                <span class="nt">&lt;sld:AnchorPoint&gt;</span>
+                                    <span class="nt">&lt;sld:AnchorPointX&gt;</span>
+                                        <span class="nt">&lt;ogc:Literal&gt;</span>0.5<span class="nt">&lt;/ogc:Literal&gt;</span>
+                                    <span class="nt">&lt;/sld:AnchorPointX&gt;</span>
+                                    <span class="nt">&lt;sld:AnchorPointY&gt;</span>
+                                        <span class="nt">&lt;ogc:Literal&gt;</span>0.5<span class="nt">&lt;/ogc:Literal&gt;</span>
+                                    <span class="nt">&lt;/sld:AnchorPointY&gt;</span>
+                                <span class="nt">&lt;/sld:AnchorPoint&gt;</span>
+                              
+                            <span class="nt">&lt;/sld:PointPlacement&gt;</span>
+                        <span class="nt">&lt;/sld:LabelPlacement&gt;</span>
+                        <span class="nt">&lt;Halo&gt;</span>
+                        	<span class="nt">&lt;Radius&gt;</span>
+                        		<span class="nt">&lt;ogc:Literal&gt;</span>2<span class="nt">&lt;/ogc:Literal&gt;</span>
+                        	<span class="nt">&lt;/Radius&gt;</span>
+                        
+                        	<span class="nt">&lt;sld:Fill&gt;</span>
+                            		<span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            		<span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill-opacity&quot;</span><span class="nt">&gt;</span>0.65<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        	<span class="nt">&lt;/sld:Fill&gt;</span>
+                        <span class="nt">&lt;/Halo&gt;</span>
+                        <span class="nt">&lt;sld:Fill&gt;</span>
+                            	<span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#00000F<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Fill&gt;</span>
+                        <span class="nt">&lt;sld:VendorOption</span> <span class="na">name=</span><span class="s">&quot;spaceAround&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/sld:VendorOption&gt;</span>
+                    <span class="nt">&lt;/sld:TextSymbolizer&gt;</span>
+                <span class="nt">&lt;/sld:Rule&gt;</span>
+            <span class="nt">&lt;/sld:FeatureTypeStyle&gt;</span>
+        <span class="nt">&lt;/sld:UserStyle&gt;</span>
+    <span class="nt">&lt;/sld:UserLayer&gt;</span>
+<span class="nt">&lt;/sld:StyledLayerDescriptor&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Definir o estilo SLD para a camada Municipio.</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;sld:StyledLayerDescriptor</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/sld&quot;</span> <span class="na">xmlns:sld=</span><span class="s">&quot;http://www.opengis.net/sld&quot;</span> <span class="na">xmlns:ogc=</span><span class="s">&quot;http://www.opengis.net/ogc&quot;</span> <span class="na">xmlns:gml=</span><span class="s">&quot;http://www.opengis.net/gml&quot;</span> <span class="na">version=</span><span class="s">&quot;1.0.0&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;sld:UserLayer&gt;</span>
+        <span class="nt">&lt;sld:LayerFeatureConstraints&gt;</span>
+            <span class="nt">&lt;sld:FeatureTypeConstraint/&gt;</span>
+        <span class="nt">&lt;/sld:LayerFeatureConstraints&gt;</span>
+        <span class="nt">&lt;sld:UserStyle&gt;</span>
+            <span class="nt">&lt;sld:Name&gt;</span>Default Styler<span class="nt">&lt;/sld:Name&gt;</span>
+            <span class="nt">&lt;sld:Title/&gt;</span>
+            <span class="nt">&lt;sld:IsDefault&gt;</span>1<span class="nt">&lt;/sld:IsDefault&gt;</span>
+            <span class="nt">&lt;sld:FeatureTypeStyle&gt;</span>
+                <span class="nt">&lt;sld:Name&gt;</span>simple<span class="nt">&lt;/sld:Name&gt;</span>
+                <span class="nt">&lt;sld:FeatureTypeName&gt;</span>Feature<span class="nt">&lt;/sld:FeatureTypeName&gt;</span>
+                <span class="nt">&lt;sld:SemanticTypeIdentifier&gt;</span>generic:geometry<span class="nt">&lt;/sld:SemanticTypeIdentifier&gt;</span>
+                <span class="nt">&lt;sld:SemanticTypeIdentifier&gt;</span>simple<span class="nt">&lt;/sld:SemanticTypeIdentifier&gt;</span>
+                <span class="nt">&lt;sld:Rule&gt;</span>
+                    <span class="nt">&lt;sld:MaxScaleDenominator&gt;</span>1.280186E7<span class="nt">&lt;/sld:MaxScaleDenominator&gt;</span>
+                    <span class="nt">&lt;sld:PolygonSymbolizer&gt;</span>
+                        <span class="nt">&lt;sld:Fill&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#FFF4C7<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill-opacity&quot;</span><span class="nt">&gt;</span>0.5<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Fill&gt;</span>
+                        <span class="nt">&lt;sld:Stroke&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;stroke&quot;</span><span class="nt">&gt;</span>#B9BB7B<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Stroke&gt;</span>
+                    <span class="nt">&lt;/sld:PolygonSymbolizer&gt;</span>
+                <span class="nt">&lt;/sld:Rule&gt;</span>
+                <span class="nt">&lt;sld:Rule&gt;</span>
+                <span class="nt">&lt;sld:MaxScaleDenominator&gt;</span>1011147.0<span class="nt">&lt;/sld:MaxScaleDenominator&gt;</span>
+                 <span class="nt">&lt;sld:TextSymbolizer&gt;</span>
+                 
+                        <span class="nt">&lt;sld:Label&gt;</span>
+                            <span class="nt">&lt;ogc:PropertyName&gt;</span>nome<span class="nt">&lt;/ogc:PropertyName&gt;</span>
+                        <span class="nt">&lt;/sld:Label&gt;</span>
+                        <span class="nt">&lt;sld:Font&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-family&quot;</span><span class="nt">&gt;</span>Sans<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-size&quot;</span><span class="nt">&gt;</span>5.0<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-style&quot;</span><span class="nt">&gt;</span>normal<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            <span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-weight&quot;</span><span class="nt">&gt;</span>bold<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Font&gt;</span>
+                        <span class="nt">&lt;sld:LabelPlacement&gt;</span>
+                            <span class="nt">&lt;sld:PointPlacement&gt;</span>
+                                <span class="nt">&lt;sld:AnchorPoint&gt;</span>
+                                    <span class="nt">&lt;sld:AnchorPointX&gt;</span>
+                                        <span class="nt">&lt;ogc:Literal&gt;</span>0.5<span class="nt">&lt;/ogc:Literal&gt;</span>
+                                    <span class="nt">&lt;/sld:AnchorPointX&gt;</span>
+                                    <span class="nt">&lt;sld:AnchorPointY&gt;</span>
+                                        <span class="nt">&lt;ogc:Literal&gt;</span>0.5<span class="nt">&lt;/ogc:Literal&gt;</span>
+                                    <span class="nt">&lt;/sld:AnchorPointY&gt;</span>
+                                <span class="nt">&lt;/sld:AnchorPoint&gt;</span>
+                              
+                            <span class="nt">&lt;/sld:PointPlacement&gt;</span>
+                        <span class="nt">&lt;/sld:LabelPlacement&gt;</span>
+                        <span class="nt">&lt;Halo&gt;</span>
+                        	<span class="nt">&lt;Radius&gt;</span>
+                        		<span class="nt">&lt;ogc:Literal&gt;</span>2<span class="nt">&lt;/ogc:Literal&gt;</span>
+                        	<span class="nt">&lt;/Radius&gt;</span>
+                        
+                        	<span class="nt">&lt;sld:Fill&gt;</span>
+                            		<span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                            		<span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill-opacity&quot;</span><span class="nt">&gt;</span>0.65<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        	<span class="nt">&lt;/sld:Fill&gt;</span>
+                        <span class="nt">&lt;/Halo&gt;</span>
+                        <span class="nt">&lt;sld:Fill&gt;</span>
+                            	<span class="nt">&lt;sld:CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#00000F<span class="nt">&lt;/sld:CssParameter&gt;</span>
+                        <span class="nt">&lt;/sld:Fill&gt;</span>
+                        <span class="nt">&lt;sld:VendorOption</span> <span class="na">name=</span><span class="s">&quot;spaceAround&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/sld:VendorOption&gt;</span>
+                    <span class="nt">&lt;/sld:TextSymbolizer&gt;</span>
+                <span class="nt">&lt;/sld:Rule&gt;</span>  
+            <span class="nt">&lt;/sld:FeatureTypeStyle&gt;</span>
+        <span class="nt">&lt;/sld:UserStyle&gt;</span>
+    <span class="nt">&lt;/sld:UserLayer&gt;</span>
+<span class="nt">&lt;/sld:StyledLayerDescriptor&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>O resultado final deve ser algo parecido com as screens abaixo</li>
+</ol>
+<img alt="../_images/municipio_uf_1.png" src="../_images/municipio_uf_1.png" />
+<img alt="../_images/municipio_uf_2.png" src="../_images/municipio_uf_2.png" />
+</div>
+<div class="section" id="camada-rodovias-paulista">
+<h3><a class="toc-backref" href="#id6">Camada Rodovias Paulista</a><a class="headerlink" href="#camada-rodovias-paulista" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Publicar a layer <em>rodovias_sp</em></li>
+<li>Definir estilo para a camada.</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;StyledLayerDescriptor</span> <span class="na">version=</span><span class="s">&quot;1.0.0&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/sld StyledLayerDescriptor.xsd&quot;</span>
+  <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/sld&quot;</span> <span class="na">xmlns:ogc=</span><span class="s">&quot;http://www.opengis.net/ogc&quot;</span> <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span>
+  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;NamedLayer&gt;</span>
+    <span class="nt">&lt;Name&gt;</span>Simple Roads<span class="nt">&lt;/Name&gt;</span>
+    <span class="nt">&lt;UserStyle&gt;</span>
+
+      <span class="nt">&lt;Title&gt;</span>Default Styler for simple road segments<span class="nt">&lt;/Title&gt;</span>
+      <span class="nt">&lt;Abstract&gt;</span>Light red line, 2px wide<span class="nt">&lt;/Abstract&gt;</span>
+      <span class="nt">&lt;FeatureTypeStyle&gt;</span>
+        <span class="nt">&lt;Rule&gt;</span>
+          <span class="nt">&lt;Title&gt;</span>Roads<span class="nt">&lt;/Title&gt;</span>
+          <span class="nt">&lt;LineSymbolizer&gt;</span>
+            <span class="nt">&lt;Stroke&gt;</span>
+              <span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;stroke&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;ogc:Literal&gt;</span>#AA3333<span class="nt">&lt;/ogc:Literal&gt;</span>
+              <span class="nt">&lt;/CssParameter&gt;</span>
+              <span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;stroke-width&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;ogc:Literal&gt;</span>2<span class="nt">&lt;/ogc:Literal&gt;</span>
+              <span class="nt">&lt;/CssParameter&gt;</span>
+            <span class="nt">&lt;/Stroke&gt;</span>
+          <span class="nt">&lt;/LineSymbolizer&gt;</span>
+          <span class="nt">&lt;TextSymbolizer&gt;</span>
+						<span class="nt">&lt;Label&gt;</span>
+							<span class="nt">&lt;ogc:PropertyName&gt;</span>sigla<span class="nt">&lt;/ogc:PropertyName&gt;</span>
+					 	<span class="nt">&lt;/Label&gt;</span>
+
+						<span class="nt">&lt;Font&gt;</span>
+							<span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-family&quot;</span><span class="nt">&gt;</span>Times New Roman<span class="nt">&lt;/CssParameter&gt;</span>
+							<span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-style&quot;</span><span class="nt">&gt;</span>Normal<span class="nt">&lt;/CssParameter&gt;</span>
+							<span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;font-size&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/CssParameter&gt;</span>
+						<span class="nt">&lt;/Font&gt;</span>
+					
+						<span class="nt">&lt;LabelPlacement&gt;</span>
+						  <span class="nt">&lt;LinePlacement&gt;</span>
+						    <span class="nt">&lt;PerpendicularOffset&gt;</span>10<span class="nt">&lt;/PerpendicularOffset&gt;</span>	       
+						 <span class="nt">&lt;/LinePlacement&gt;</span>
+						<span class="nt">&lt;/LabelPlacement&gt;</span>
+
+						<span class="nt">&lt;Halo&gt;</span>
+							<span class="nt">&lt;Radius&gt;</span>
+								<span class="nt">&lt;ogc:Literal&gt;</span>2<span class="nt">&lt;/ogc:Literal&gt;</span>
+							<span class="nt">&lt;/Radius&gt;</span>
+							<span class="nt">&lt;Fill&gt;</span>
+								<span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/CssParameter&gt;</span>
+								<span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill-opacity&quot;</span><span class="nt">&gt;</span>0.85<span class="nt">&lt;/CssParameter&gt;</span>				
+							<span class="nt">&lt;/Fill&gt;</span>
+						<span class="nt">&lt;/Halo&gt;</span>
+
+						<span class="nt">&lt;Fill&gt;</span>
+							<span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#000000<span class="nt">&lt;/CssParameter&gt;</span>
+						<span class="nt">&lt;/Fill&gt;</span>
+						<span class="nt">&lt;VendorOption</span> <span class="na">name=</span><span class="s">&quot;group&quot;</span><span class="nt">&gt;</span>yes<span class="nt">&lt;/VendorOption&gt;</span>
+					<span class="nt">&lt;/TextSymbolizer&gt;</span>
+        <span class="nt">&lt;/Rule&gt;</span>
+      <span class="nt">&lt;/FeatureTypeStyle&gt;</span>
+    <span class="nt">&lt;/UserStyle&gt;</span>
+  <span class="nt">&lt;/NamedLayer&gt;</span>
+<span class="nt">&lt;/StyledLayerDescriptor&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Resultado</li>
+</ol>
+<img alt="../_images/rodoias_sp_preview.png" src="../_images/rodoias_sp_preview.png" />
+</div>
+<div class="section" id="camada-geotwitter">
+<h3><a class="toc-backref" href="#id7">Camada GeoTwitter</a><a class="headerlink" href="#camada-geotwitter" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Inserir dados na tabela geotwitt:</p>
+<div class="highlight-python"><pre>insert into geotwitt(autor,mensagem,the_geom) values ('rafikdabahia','Estamos no @latinoware',ST_GeomFromText('POINT(-54.5820 -25.4607)',4326));
+
+insert into geotwitt(autor,mensagem,the_geom) values ('rafikdabahia','Regional SERPRO Brasilia',ST_GeomFromText('POINT(-47.87242 -15.78782)',4326));</pre>
+</div>
+</li>
+<li><p class="first">Definir a layer geotwitt</p>
+</li>
+<li><p class="first">Definir o estilo SLD twitt</p>
+</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span>
+<span class="nt">&lt;StyledLayerDescriptor</span> <span class="na">version=</span><span class="s">&quot;1.0.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/sld&quot;</span> <span class="na">xmlns:ogc=</span><span class="s">&quot;http://www.opengis.net/ogc&quot;</span>
+  <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/sld http://schemas.opengis.net/sld/1.0.0/StyledLayerDescriptor.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;NamedLayer&gt;</span>
+    <span class="nt">&lt;Name&gt;</span>Default Point<span class="nt">&lt;/Name&gt;</span>
+    <span class="nt">&lt;UserStyle&gt;</span>
+      <span class="nt">&lt;Title&gt;</span>Default point<span class="nt">&lt;/Title&gt;</span>
+      <span class="nt">&lt;Abstract&gt;</span>A sample style that just prints out a 6px wide red square<span class="nt">&lt;/Abstract&gt;</span>
+
+      <span class="nt">&lt;FeatureTypeStyle&gt;</span>
+        <span class="c">&lt;!--FeatureTypeName&gt;Feature&lt;/FeatureTypeName--&gt;</span>
+        <span class="nt">&lt;Rule&gt;</span>
+          <span class="nt">&lt;Title&gt;</span>Twitter Point<span class="nt">&lt;/Title&gt;</span>
+          <span class="nt">&lt;PointSymbolizer&gt;</span>
+            <span class="nt">&lt;Graphic&gt;</span>
+              <span class="nt">&lt;ExternalGraphic&gt;</span>
+              	<span class="nt">&lt;OnlineResource</span> <span class="na">xlink:type=</span><span class="s">&quot;simple&quot;</span> <span class="na">xlink:href=</span><span class="s">&quot;twitter.png&quot;</span> <span class="nt">/&gt;</span>
+              	<span class="nt">&lt;Format&gt;</span>image/png<span class="nt">&lt;/Format&gt;</span>
+              <span class="nt">&lt;/ExternalGraphic&gt;</span>
+              <span class="nt">&lt;Size&gt;</span>24<span class="nt">&lt;/Size&gt;</span>
+            <span class="nt">&lt;/Graphic&gt;</span>
+          <span class="nt">&lt;/PointSymbolizer&gt;</span>
+        <span class="nt">&lt;/Rule&gt;</span>
+      <span class="nt">&lt;/FeatureTypeStyle&gt;</span>
+    <span class="nt">&lt;/UserStyle&gt;</span>
+  <span class="nt">&lt;/NamedLayer&gt;</span>
+<span class="nt">&lt;/StyledLayerDescriptor&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>O resultado final deve ser algo parecido com a figura abaixo</li>
+</ol>
+<img alt="../_images/layer_twitter.png" src="../_images/layer_twitter.png" />
+<p>Finalizamos o capitulo sobre geoserver. O próximo capítulo vai contemplar a aplicação java propriamente dita com a utilização de CDI, JSF e OL4JSF.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 >index</a></li>
+            <li class="right" >
+              <a href="../7-ol4jsf/ol4jsf.html" title="Disponibilizando os mapas de forma rica na web - OpenLayers & Ol4JSF"
+                 >next</a> |</li>
+            <li class="right" >
+              <a href="../5-hbspatial/hbspatial.html" title="Persistência de Dados Espacial - Hibernate Spatial"
+                 >previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Serviço de Mapas na Web - Geoserver</a></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2010, Rafael Soto e Robert Anderson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>

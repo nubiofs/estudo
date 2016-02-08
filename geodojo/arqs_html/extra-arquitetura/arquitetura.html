@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Arquitetura sem cortes - Versão do Diretor &mdash; GeoDOJO vGeoDOJO documentation</title>
+    <link rel="stylesheet" href="../_static/geotools-tutorial.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'GeoDOJO',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GeoDOJO vGeoDOJO documentation" href="../index.html" />
+    <link rel="prev" title="Exemplo 3" href="../10-exemplo3/exemplo3.html" /> 
+  </head>
+  <body>
+    <div class="header">
+        <div class="wrap">
+            <ul id="top-nav">
+                <li><a href="http://www.latinoware.org/">Latinoware 2010</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 accesskey="I">index</a></li>
+            <li class="right" >
+              <a href="../10-exemplo3/exemplo3.html" title="Exemplo 3"
+                 accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Arquitetura sem cortes - Versão do Diretor</a></li>
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="arquitetura-sem-cortes-versao-do-diretor">
+<h1><a class="toc-backref" href="#id1">Arquitetura sem cortes - Versão do Diretor</a><a class="headerlink" href="#arquitetura-sem-cortes-versao-do-diretor" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#arquitetura-sem-cortes-versao-do-diretor" id="id1">Arquitetura sem cortes - Versão do Diretor</a><ul>
+<li><a class="reference internal" href="#java-enterprise-edition" id="id2">Java Enterprise Edition</a></li>
+<li><a class="reference internal" href="#arquitetura-de-nossa-aplicacao" id="id3">Arquitetura de nossa aplicação</a><ul>
+<li><a class="reference internal" href="#java-server-faces-jsf" id="id4">Java Server Faces - JSF</a></li>
+<li><a class="reference internal" href="#context-and-dependency-injection-cdi" id="id5">Context and Dependency Injection - CDI</a></li>
+<li><a class="reference internal" href="#java-persistence-api-jpa" id="id6">Java Persistence Api - JPA</a></li>
+<li><a class="reference internal" href="#geoserver" id="id7">Geoserver</a></li>
+<li><a class="reference internal" href="#postgis" id="id8">Postgis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Devido a redução de tempo do minicurso, foi necessário abreviar o conteúdo de alguns capitulos. Neste capitulo, tornamos disponível a versão original do capítulo que trata sobre a arquitetura da aplicação.</p>
+<p>Nesse capítulo vamos fazer um breve comentário sobre alguns recursos disponíveis no JEE 6, além de propor uma arquitetura simples, porém funcional, para elaboração de SIGs Web.</p>
+<div class="section" id="java-enterprise-edition">
+<h2><a class="toc-backref" href="#id2">Java Enterprise Edition</a><a class="headerlink" href="#java-enterprise-edition" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/jee_evolution1.png"><img alt="../_images/jee_evolution1.png" src="../_images/jee_evolution1.png" style="width: 414.0px; height: 238.8px;" /></a>
+<p>Podemos perceber pela imagem acima que o JEE vem evoluindo consideravelmente desde sua primeira versão em meados de 1999. Dessa forma, a versão JEE 6 carrega consigo muita maturidade, obtida ao longo de todos esses anos.</p>
+<p>A cada versão torna-se mais fácil se desenvolver com JEE. As anotações introduzidas no JEE 5, foram o primeiro passo para viabilizar a adoção da tecnologia em massa, pois, até então, desenvolver em JEE era um grande martírio: dezenas de arquivos de configuração, necessidade de criação de várias classes somente para &#8220;agradar&#8221; a especificação, etc.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Introducing the Java EE 6 Platform</p>
+<p class="last">Como uma visão completa do JEE foge do escopo do curso, sugerimos a leitura do artigo <a class="reference external" href="http://tinyurl.com/255gcaj">http://tinyurl.com/255gcaj</a> para ter um overview das principais novidades dessa versão.</p>
+</div>
+<p>No nosso minicurso, não utilizaremos todos os recursos da nova especificação. Mas não se preocupem, o que veremos aqui será o suficiente para o desenvolvimento de aplicações reais. Além disso, não utilizaremos um servidor JEE completo como o JBoss ou Glassfish, por exemplo, utilizaremos o bom e velho Tomcat, ou seja, é muito fácil arranjar planos de hospedagem a um preço acessível.</p>
+</div>
+<div class="section" id="arquitetura-de-nossa-aplicacao">
+<h2><a class="toc-backref" href="#id3">Arquitetura de nossa aplicação</a><a class="headerlink" href="#arquitetura-de-nossa-aplicacao" title="Permalink to this headline">¶</a></h2>
+<p>A figura abaixo demonstra de forma sucinta a arquitetura que elaboramos para nossa aplicação:</p>
+<a class="reference internal image-reference" href="../_images/architecture1.png"><img alt="../_images/architecture1.png" src="../_images/architecture1.png" style="width: 297.6px; height: 298.2px;" /></a>
+<p>Vamos agora dar uma visão geral das responsabilidades de cada camada.</p>
+<div class="section" id="java-server-faces-jsf">
+<h3><a class="toc-backref" href="#id4">Java Server Faces - JSF</a><a class="headerlink" href="#java-server-faces-jsf" title="Permalink to this headline">¶</a></h3>
+<p>É nessa camada onde desenvolveremos as interfaces com o usuário. A tecnologia JSF proporciona uma melhor separação entre as camadas, tendo em vista que o código responsável pelo layout da página (.xhtml) e as regras do negócio (.java) residem em locais distintos.</p>
+<p>Além disso, o JSF é uma tecnologia orientada a componentes. Sendo assim, a reutilização de códigos UI é levada a patamares incríveis, onde quase esquecemos da natureza <em>request/response</em> do protocolo HTTP. Com JSF passamos a programar orientado a eventos (Quem não lembra dos tempos do VB/Delphi? :) ).</p>
+<p>Para exemplificar, vejamos o exemplo abaixo. Nele o usuário digita o nome e clica no botão &#8220;Diga olá&#8221;.</p>
+<a class="reference internal image-reference" href="../_images/jsf_example11.png"><img alt="../_images/jsf_example11.png" src="../_images/jsf_example11.png" style="width: 406.8px; height: 240.0px;" /></a>
+<p>A partir desse momento é executada uma ação no servidor e retornada a mensagem para o usuário.</p>
+<a class="reference internal image-reference" href="../_images/jsf_example21.png"><img alt="../_images/jsf_example21.png" src="../_images/jsf_example21.png" style="width: 451.8px; height: 266.4px;" /></a>
+<p>Hora de olhar o código! hellojsf.xhtml:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+    <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="na">xmlns:h=</span><span class="s">&quot;http://java.sun.com/jsf/html&quot;</span>
+          <span class="na">xmlns:f=</span><span class="s">&quot;http://java.sun.com/jsf/core&quot;</span>
+          <span class="na">xmlns:ui=</span><span class="s">&quot;http://java.sun.com/jsf/facelets&quot;</span>
+          <span class="na">xmlns:m=</span><span class="s">&quot;http://www.ol4jsf.org&quot;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;h:head&gt;</span>
+        <span class="nt">&lt;/h:head&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;h1&gt;</span>Exemplo JSF<span class="nt">&lt;/h1&gt;</span>
+            <span class="nt">&lt;h:form</span> <span class="na">prependId=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+                Nome: <span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">&quot;#{helloJSF.nome}&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;h:commandButton</span> <span class="na">value=</span><span class="s">&quot;Diga olá&quot;</span> <span class="na">action=</span><span class="s">&quot;#{helloJSF.sayHello}&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;/h:commandButton&gt;</span>
+                <span class="nt">&lt;br/&gt;</span>
+                <span class="nt">&lt;h:outputText</span> <span class="na">id=</span><span class="s">&quot;output&quot;</span>  <span class="na">binding=</span><span class="s">&quot;#{helloJSF.output}&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/h:form&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>HelloJSF.java:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">beans</span><span class="o">;</span>
+
+    <span class="kn">import</span> <span class="nn">javax.enterprise.inject.Model</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.faces.component.UIOutput</span><span class="o">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Bean para exemplificar o modelo orientado a eventos do JSF</span>
+<span class="cm">     *</span>
+<span class="cm">     * @author ranophoenix</span>
+<span class="cm">     *</span>
+<span class="cm">     */</span>
+    <span class="nd">@Model</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloJSF</span> <span class="o">{</span>
+            <span class="kd">private</span> <span class="n">String</span> <span class="n">nome</span><span class="o">;</span>
+            <span class="kd">private</span> <span class="n">UIOutput</span> <span class="n">output</span><span class="o">;</span>
+
+            <span class="kd">public</span> <span class="n">String</span> <span class="nf">getNome</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="k">return</span> <span class="n">nome</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNome</span><span class="o">(</span><span class="n">String</span> <span class="n">nome</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">nome</span> <span class="o">=</span> <span class="n">nome</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="kd">public</span> <span class="n">UIOutput</span> <span class="nf">getOutput</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="k">return</span> <span class="n">output</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOutput</span><span class="o">(</span><span class="n">UIOutput</span> <span class="n">output</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="n">output</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="s">&quot;Olá &quot;</span> <span class="o">+</span> <span class="n">nome</span> <span class="o">+</span> <span class="s">&quot;!!!&quot;</span><span class="o">);</span>
+            <span class="o">}</span>
+
+
+    <span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Simples e organizado! Não quer submeter a página? Prefere Ajax? Então lá vai:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+    <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="na">xmlns:h=</span><span class="s">&quot;http://java.sun.com/jsf/html&quot;</span>
+          <span class="na">xmlns:f=</span><span class="s">&quot;http://java.sun.com/jsf/core&quot;</span>
+          <span class="na">xmlns:ui=</span><span class="s">&quot;http://java.sun.com/jsf/facelets&quot;</span>
+          <span class="na">xmlns:m=</span><span class="s">&quot;http://www.ol4jsf.org&quot;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;h:head&gt;</span>
+        <span class="nt">&lt;/h:head&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;h1&gt;</span>Exemplo JSF<span class="nt">&lt;/h1&gt;</span>
+            <span class="nt">&lt;h:form</span> <span class="na">prependId=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+                Nome: <span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">&quot;#{helloJSF.nome}&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;h:commandButton</span> <span class="na">value=</span><span class="s">&quot;Diga olá&quot;</span> <span class="na">action=</span><span class="s">&quot;#{helloJSF.sayHello}&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;f:ajax</span> <span class="na">execute=</span><span class="s">&quot;@form&quot;</span> <span class="na">render=</span><span class="s">&quot;output&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;/h:commandButton&gt;</span>
+                <span class="nt">&lt;br/&gt;</span>
+                <span class="nt">&lt;h:outputText</span> <span class="na">id=</span><span class="s">&quot;output&quot;</span>  <span class="na">binding=</span><span class="s">&quot;#{helloJSF.output}&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/h:form&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Bastou adicionar a linha 14!</p>
+<p>No nosso pequeno projeto geo, além da biblioteca JSF padrão utilizaremos o conjunto de componentes <a class="reference external" href="https://ol4jsf.dev.java.net">OL4JSF</a>. Ele encapsula muito do código necessário para a renderização de mapas nos navegadores.
+Em um projeto maior, provavelmente utilizaremos também outras bibliotecas, como: <a class="reference external" href="http://www.primefaces.org">PrimeFaces</a>, <a class="reference external" href="http://www.openfaces.org">OpenFaces</a> e <a class="reference external" href="http://www.jboss.org/richfaces">RichFaces</a>.</p>
+</div>
+<div class="section" id="context-and-dependency-injection-cdi">
+<h3><a class="toc-backref" href="#id5">Context and Dependency Injection - CDI</a><a class="headerlink" href="#context-and-dependency-injection-cdi" title="Permalink to this headline">¶</a></h3>
+<div class="sidebar">
+<p class="first sidebar-title">Weld - JSR-299 Reference Implementation</p>
+<p class="last">Para maiores informações consultar a <a class="reference external" href="http://docs.jboss.org/weld/reference/1.0.0/en-US/html/">documentação oficial</a>.</p>
+</div>
+<p>O CDI é tão simples que utilizamos no exemplo anterior quase sem perceber. Os menos atentos talvez nem tenham percebido a existência da anotação <strong>&#64;Model</strong>. Sabe o que aconteceu pela simples presença dessa anotação? Basicamente:</p>
+<ul class="simple">
+<li>A classe HelloJSF passou a ficar disponível nas páginas JSF através do nome &#8220;#{helloJSF}&#8221; ;</li>
+<li>A classe ganhou o escopo de requisição.</li>
+</ul>
+<p>Tudo isso porque a anotação <strong>&#64;Model</strong> é definida da forma:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="nd">@Named</span>
+
+<span class="nd">@RequestScoped</span>
+
+<span class="nd">@Stereotype</span>
+
+<span class="nd">@Target</span><span class="o">({</span><span class="n">TYPE</span><span class="o">,</span> <span class="n">METHOD</span><span class="o">})</span>
+
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RUNTIME</span><span class="o">)</span>
+
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">Model</span> <span class="o">{}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Certo! Já entendemos a primeira parte do nome CDI: &#8220;Context&#8221;. Por padrão, a especificação define, a princípio, 4 contextos: &#64;ApplicationScoped, &#64;SessionScoped, &#64;RequestScoped e &#64;ConversationScoped. Mas nada impede que você desenvolvedor crie o seu próprio contexto.</p>
+<p>E quanto ao &#8220;Dependency Injection&#8221;? Essa parte auxilia muito os arquitetos na elaboração de camadas menos acopladas e mais coesas. Explicando de forma bastante sucinta, isso significa que declaramos as nossas variáveis, mas deixamos a instanciação por conta do CDI.</p>
+<p>Por exemplo, nos nossos exemplos de JPA, precisaremos obter um EntityManager para realizar operações sobre os dados no SGBD. Os nossos beans precisam somente fazer assim:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="nd">@RequestScoped</span>
+<span class="nd">@Named</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PontoManager</span> <span class="o">{</span>
+
+    <span class="nd">@Inject</span>
+    <span class="kd">private</span> <span class="n">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Lembre-se que estamos utilizando o Tomcat, não podemos utilizar a anotação PersistenceContext para injetar o EntityManager. Então qual a &#8220;mágica&#8221;? Declaramos um &#8220;producer&#8221; que o CDI utilizará para instanciar o nosso objeto quando necessário.</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span class="nd">@ApplicationScoped</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EntityManagerProducer</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">EntityManagerFactory</span> <span class="n">emf</span><span class="o">;</span>
+
+    <span class="nd">@PostConstruct</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createEntityManagerFactory</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">emf</span> <span class="o">=</span> <span class="n">Persistence</span><span class="o">.</span><span class="na">createEntityManagerFactory</span><span class="o">(</span><span class="s">&quot;geodojodbspatial&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Produces</span>
+    <span class="kd">public</span> <span class="n">EntityManager</span> <span class="nf">createEntityManager</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">emf</span><span class="o">.</span><span class="na">createEntityManager</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">disposeEntityManager</span><span class="o">(</span><span class="nd">@Disposes</span> <span class="n">EntityManager</span> <span class="n">em</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Uau! Quanta informação! Vamos por partes:</p>
+<ol class="arabic simple">
+<li>Criamos uma classe como escopo de aplicação (&#64;ApplicationScoped);</li>
+<li>Após a criação dessa classe pelo CDI, &#64;PostConstruct, obtemos o EntityManagerFactory e guardamos numa variável privada;</li>
+<li>Ao precisar injetar alguma classe do tipo EntityManager, durante o deploy da aplicação, tenta resolver a dependência e encontra um método anotado com &#64;Produces retornando o mesmo tipo a ser injetado;</li>
+<li>Como não declaramos nenhum escopo, o EntityManager é colocado no escopo &#64;Dependent, ou seja, o seu ciclo de vida vai depender do objeto no qual foi injetado;</li>
+<li>Ao fim do ciclo de vida, o CDI chama o método que tem a anotação &#64;Disposes no tipo que foi injetado e fecha o entityManager.</li>
+</ol>
+<p>O CDI possui diversos recursos que tornam a vida do arquiteto mais fácil: Interceptors, decorators, qualifiers, stereotypes, etc. Vale a pena dar uma leitura na documentação.</p>
+</div>
+<div class="section" id="java-persistence-api-jpa">
+<h3><a class="toc-backref" href="#id6">Java Persistence Api - JPA</a><a class="headerlink" href="#java-persistence-api-jpa" title="Permalink to this headline">¶</a></h3>
+<p>Quem nunca ouviu falar do Hibernate? É isso mesmo. Essa especificação veio padronizar aquilo que muitos desenvolvedores já utilizavam há bastante tempo. Hoje, o Hibernate é somente uma das possíveis implementações de JPA.</p>
+<p>Certo, a utilização do Hibernate eu até compreendo, por que apareceu esse tal de hibernate-spatial? A JPA resolve muito bem o mapeamento objeto-relacional de tipos convencionais dos SGBDs (varchar, numeric, date, etc), porém em aplicações geoespaciais precisamos lidar com estruturas de dados geométricas e é aí onde a Java Persistence Api não é mais suficiente. Precisamos de alguma forma mapear esses tipos em nossas classes e o Hibernate fornece uma anotação (&#64;Type) que nos permite isso.</p>
+<div class="sidebar">
+<p class="first sidebar-title">HIBERNATE - Persistência Relacional para Java Idiomático</p>
+<p class="last">Para saber mais sobre o Hibernate e JPA consultar <a class="reference external" href="http://tinyurl.com/269wmak">http://tinyurl.com/269wmak</a>.</p>
+</div>
+<p>Já o hibernate-spatial, fornece um dialeto do hibernate responsável por reconhecer esses novos tipos e fazer o &#8220;trabalho sujo&#8221; para nós, gerando os SQLs necessários e tornando a tão sonhada independência de banco menos traumática.</p>
+<p>Vejamos uma tabela PostgreSQL/PostGIS:</p>
+<div class="highlight-sql"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">create</span> <span class="k">table</span> <span class="n">ponto</span> <span class="p">(</span>
+        <span class="n">id</span> <span class="nb">serial</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+        <span class="n">nome</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+        <span class="n">localizacao</span> <span class="n">geometry</span>
+<span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Podemos fazer o mapeamento da seguinte forma:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72</pre></div></td><td class="code"><div class="highlight"><pre><span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&quot;serial&quot;</span><span class="o">)</span>
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Ponto</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+
+        <span class="nd">@Id</span>
+        <span class="nd">@GeneratedValue</span>
+        <span class="kd">public</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">nome</span><span class="o">;</span>
+
+        <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;org.hibernatespatial.GeometryUserType&quot;</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="n">Point</span> <span class="n">localizacao</span><span class="o">;</span>
+
+
+
+        <span class="kd">public</span> <span class="n">Point</span> <span class="nf">getLocalizacao</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">localizacao</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLocalizacao</span><span class="o">(</span><span class="n">Point</span> <span class="n">localizacao</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">localizacao</span> <span class="o">=</span> <span class="n">localizacao</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getNome</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">nome</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNome</span><span class="o">(</span><span class="n">String</span> <span class="n">nome</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">nome</span> <span class="o">=</span> <span class="n">nome</span><span class="o">;</span>
+        <span class="o">}</span>
+
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+                <span class="kd">final</span> <span class="kt">int</span> <span class="n">prime</span> <span class="o">=</span> <span class="mi">31</span><span class="o">;</span>
+                <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">prime</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="o">((</span><span class="n">id</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">id</span><span class="o">.</span><span class="na">hashCode</span><span class="o">());</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">prime</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="o">((</span><span class="n">nome</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">nome</span><span class="o">.</span><span class="na">hashCode</span><span class="o">());</span>
+                <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">obj</span><span class="o">)</span>
+                        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+                        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">obj</span><span class="o">.</span><span class="na">getClass</span><span class="o">())</span>
+                        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="n">Ponto</span> <span class="n">other</span> <span class="o">=</span> <span class="o">(</span><span class="n">Ponto</span><span class="o">)</span> <span class="n">obj</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">id</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">id</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(!</span><span class="n">id</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">nome</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">nome</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(!</span><span class="n">nome</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">nome</span><span class="o">))</span>
+                        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Observem que, com exceção do tipo Point, todos os atributos são mapeados com anotações JPA padrão. Entretanto, para mapearmos o tipo geométrico, nesse caso Point, precisamos recorrer à extensão &#64;Type disponibilizada pelo Hibernate.</p>
+<p>OK! Como JSF, CDI e JPA fechamos a parte JEE de nossa aplicação. Agora restam somente dois artefatos: o GeoServer e o Postgis.</p>
+</div>
+<div class="section" id="geoserver">
+<h3><a class="toc-backref" href="#id7">Geoserver</a><a class="headerlink" href="#geoserver" title="Permalink to this headline">¶</a></h3>
+<p>Não detalharemos o geoserver, pois ele será visto em capítulos posteriores. Mas para atiçar a curiosidade, podemos dizer que ele é responsável por disponibilizar os mapas, obtidos através de diversas origens, em formatos padronizados e reconhecíveis pelo OL4JSF. Achou interessante? Espere então só mais um pouco para ver o que esse cara é capaz de fazer.</p>
+</div>
+<div class="section" id="postgis">
+<h3><a class="toc-backref" href="#id8">Postgis</a><a class="headerlink" href="#postgis" title="Permalink to this headline">¶</a></h3>
+<p>Se não detalhamos o geoserver pelo fato dele ser abordado mais adiante, não detalharemos o Postgis, pois ele já foi abordado anteriormente. Somente para relembrar, é nele que estão armazenadas as nossas tabelas com atributos espaciais. ;)</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 >index</a></li>
+            <li class="right" >
+              <a href="../10-exemplo3/exemplo3.html" title="Exemplo 3"
+                 >previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Arquitetura sem cortes - Versão do Diretor</a></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2010, Rafael Soto e Robert Anderson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>

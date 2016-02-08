@@ -1,0 +1,189 @@
+10
+
+dir
+0
+https://geodojo.googlecode.com/svn/trunk/roteiro/build
+https://geodojo.googlecode.com/svn
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+e6791326-9150-4ff1-db7a-2f0afe25d0be
+
+_sources
+dir
+
+
+
+add
+
+2-ambiente
+dir
+
+
+
+add
+
+objects.inv
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+.doctrees
+dir
+
+
+
+add
+
+_static
+dir
+
+
+
+add
+
+extra-arquitetura
+dir
+
+
+
+add
+
+3-postgis
+dir
+
+
+
+add
+
+.buildinfo
+file
+
+
+
+add
+
+8-exemplo1
+dir
+
+
+
+add
+
+9-exemplo2
+dir
+
+
+
+add
+
+genindex.html
+file
+
+
+
+add
+
+_images
+dir
+
+
+
+add
+
+6-geoserver
+dir
+
+
+
+add
+
+7-ol4jsf
+dir
+
+
+
+add
+
+11-referencias
+dir
+
+
+
+add
+
+4-arquitetura
+dir
+
+
+
+add
+
+searchindex.js
+file
+
+
+
+add
+
+search.html
+file
+
+
+
+add
+
+5-hbspatial
+dir
+
+
+
+add
+
+10-exemplo3
+dir
+
+
+
+add
+
+index.html
+file
+
+
+
+add
+
+1-codingdojo
+dir
+
+
+
+add
+

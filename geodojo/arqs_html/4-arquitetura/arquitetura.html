@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Discutindo a Arquitetura da Aplicação (GEO - JEE6) &mdash; GeoDOJO vGeoDOJO documentation</title>
+    <link rel="stylesheet" href="../_static/geotools-tutorial.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'GeoDOJO',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GeoDOJO vGeoDOJO documentation" href="../index.html" />
+    <link rel="next" title="Persistência de Dados Espacial - Hibernate Spatial" href="../5-hbspatial/hbspatial.html" />
+    <link rel="prev" title="Trabalhando com a base de dados espacial (Postgis)" href="../3-postgis/postgis.html" /> 
+  </head>
+  <body>
+    <div class="header">
+        <div class="wrap">
+            <ul id="top-nav">
+                <li><a href="http://www.latinoware.org/">Latinoware 2010</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 accesskey="I">index</a></li>
+            <li class="right" >
+              <a href="../5-hbspatial/hbspatial.html" title="Persistência de Dados Espacial - Hibernate Spatial"
+                 accesskey="N">next</a> |</li>
+            <li class="right" >
+              <a href="../3-postgis/postgis.html" title="Trabalhando com a base de dados espacial (Postgis)"
+                 accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Discutindo a Arquitetura da Aplicação (GEO - JEE6)</a></li>
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="discutindo-a-arquitetura-da-aplicacao-geo-jee6">
+<h1><a class="toc-backref" href="#id1">Discutindo a Arquitetura da Aplicação (GEO - JEE6)</a><a class="headerlink" href="#discutindo-a-arquitetura-da-aplicacao-geo-jee6" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#discutindo-a-arquitetura-da-aplicacao-geo-jee6" id="id1">Discutindo a Arquitetura da Aplicação (GEO - JEE6)</a><ul>
+<li><a class="reference internal" href="#java-enterprise-edition" id="id2">Java Enterprise Edition</a></li>
+<li><a class="reference internal" href="#arquitetura-de-nossa-aplicacao" id="id3">Arquitetura de nossa aplicação</a><ul>
+<li><a class="reference internal" href="#java-server-faces-jsf" id="id4">Java Server Faces - JSF</a></li>
+<li><a class="reference internal" href="#context-and-dependency-injection-cdi" id="id5">Context and Dependency Injection - CDI</a></li>
+<li><a class="reference internal" href="#java-persistence-api-jpa" id="id6">Java Persistence Api - JPA</a></li>
+<li><a class="reference internal" href="#geoserver" id="id7">Geoserver</a></li>
+<li><a class="reference internal" href="#postgis" id="id8">Postgis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#definindo-a-arquitetura-no-projeto-java" id="id9">Definindo a Arquitetura no Projeto JAVA</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Nesse capítulo vamos fazer um breve comentário sobre alguns recursos disponíveis no JEE 6 que iremos utilizar, além de propor uma arquitetura simples, porém funcional, para elaboração de aplicações WebGIS</p>
+<div class="section" id="java-enterprise-edition">
+<h2><a class="toc-backref" href="#id2">Java Enterprise Edition</a><a class="headerlink" href="#java-enterprise-edition" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/jee_evolution.png"><img alt="../_images/jee_evolution.png" src="../_images/jee_evolution.png" style="width: 414.0px; height: 238.8px;" /></a>
+<p>Podemos perceber pela imagem acima que o JEE vem evoluindo consideravelmente desde sua primeira versão em meados de 1999. Dessa forma, a versão JEE 6 carrega consigo muita maturidade, obtida ao longo de todos esses anos.</p>
+<p>A cada versão podemos perceber a existência de objetivo central que deveria ser atendido. Consideramos a versão 5 da especificação um marco no desenvolvimento de aplicações Java. O grande objetivo do lançamento foi facilitar o desenvolvimento ou seja, tornar o mesmo mais produtivo. O recurso de metaprogramação mais conhecido como anotações na JEE5, foi o primeiro passo para tornar o desenvolvimento mais atraente e menos burocrático, pois, até então, desenvolver em JEE era um grande martírio: dezenas de arquivos de configuração, necessidade de criação de várias classes somente para &#8220;agradar&#8221; a especificação dentre outros fatores que afastaram consideravelmente os desenvolvedores do mundo Java.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Introducing the Java EE 6 Platform</p>
+<p class="last">Como uma visão completa do JEE foge do escopo do curso, sugerimos a leitura do artigo <a class="reference external" href="http://tinyurl.com/255gcaj">http://tinyurl.com/255gcaj</a> para ter um overview das principais novidades dessa versão.</p>
+</div>
+<p>No nosso minicurso, não utilizaremos todos os recursos da nova especificação. Mas não se preocupem, o que veremos aqui será o suficiente para o desenvolvimento de aplicações reais. Além disso, não utilizaremos um servidor JEE completo como o JBoss ou Glassfish, por exemplo, utilizaremos o bom e velho Tomcat, ou seja, é muito fácil arranjar planos de hospedagem a um preço acessível.</p>
+<p>Ao final deste roteiro, elaboramos de cortesia um detalhamento prático sobre as tecnologias discutidas neste capítulo.</p>
+</div>
+<div class="section" id="arquitetura-de-nossa-aplicacao">
+<h2><a class="toc-backref" href="#id3">Arquitetura de nossa aplicação</a><a class="headerlink" href="#arquitetura-de-nossa-aplicacao" title="Permalink to this headline">¶</a></h2>
+<p>A figura abaixo demonstra de forma sucinta a arquitetura que vamos adotar na nossa aplicação:</p>
+<a class="reference internal image-reference" href="../_images/architecture.png"><img alt="../_images/architecture.png" src="../_images/architecture.png" style="width: 297.6px; height: 298.2px;" /></a>
+<p>Vamos agora dar uma visão geral das responsabilidades de cada camada.</p>
+<div class="section" id="java-server-faces-jsf">
+<h3><a class="toc-backref" href="#id4">Java Server Faces - JSF</a><a class="headerlink" href="#java-server-faces-jsf" title="Permalink to this headline">¶</a></h3>
+<p>É nessa camada onde desenvolveremos as interfaces com o usuário. A tecnologia JSF proporciona uma melhor separação entre as camadas, tendo em vista que o código responsável pelo layout da página (.xhtml) e as regras do negócio (.java) residem em locais distintos.</p>
+<p>Para trazer os recursos de geoprocessamento aos formulários e telas da nossa aplicação, vamos utilizar a componente OL4JSF. Desenvolvida a partir da arquitetura de componentes JSF e a api para mapas na web OpenLayers(<a class="reference external" href="http://www.openlayers.org">http://www.openlayers.org</a>) é possível alcançar um alto nível de integração com aplicações JSF além de ampliar o potencial de produtividade do desenvolvimento.</p>
+</div>
+<div class="section" id="context-and-dependency-injection-cdi">
+<h3><a class="toc-backref" href="#id5">Context and Dependency Injection - CDI</a><a class="headerlink" href="#context-and-dependency-injection-cdi" title="Permalink to this headline">¶</a></h3>
+<div class="sidebar">
+<p class="first sidebar-title">Weld - JSR-299 Reference Implementation</p>
+<p class="last">Para maiores informações consultar a <a class="reference external" href="http://docs.jboss.org/weld/reference/1.0.0/en-US/html/">documentação oficial</a>.</p>
+</div>
+<p>Não é nenhuma novidade para os projetos em JAVA modernos utilizarem recursos de injeção de dependencia e contextos. Depois de diversos frameworks lograrem sucesso ao desenvolver mecanismos de injeção e contextos personalizados, eis que a JCP termina por decidir analisar todos os pontos positivos de cada framework e empacotar tudo numa especificação dentro da stack da JEE6 batizada de Context and Dependency Injection ou para os intimos CDI. O mais interessante desta nova especificação foi a integração do ciclo de vida de todos os componentes JEE(servlets, managed beans jsf, enterprise java beans e etc) dentro de um conjunto de contextos(AplicaçÃo, Sessão, Requisição, Conversação). Em resumo toda componente é reduzido ao conceito de bean gerenciado pelo CDI possibilitando a injeção de forma genérica e integrado.</p>
+<p>Para o nosso projeto vamos utilizar o CDI para:</p>
+<ul class="simple">
+<li>Injetar o EntityManager JPA nas classes onde se faz necessário o acesso a dados;</li>
+<li>Criar e injetar managed beans para tratar eventos, ações e dados das views JSF;</li>
+<li>Gerenciar os contextos da aplicação <em>ResquestScope</em> e <em>SessionScope</em>;</li>
+</ul>
+<p>De uma forma geral, vamos ver na prática como ficou RIDICULO o desenvolvimento de aplicações JEE com baixo acoplamento e alta coesão.</p>
+<p>O CDI possui diversos recursos que tornam a vida do arquiteto mais fácil: Interceptors, decorators, qualifiers, stereotypes, etc. Vale a pena fazer uma leitura na documentação de referência do CDI.</p>
+</div>
+<div class="section" id="java-persistence-api-jpa">
+<h3><a class="toc-backref" href="#id6">Java Persistence Api - JPA</a><a class="headerlink" href="#java-persistence-api-jpa" title="Permalink to this headline">¶</a></h3>
+<p>Quem nunca ouviu falar do Hibernate? É isso mesmo. Essa especificação veio padronizar aquilo que muitos desenvolvedores já utilizavam há bastante tempo. Hoje, o Hibernate é somente uma das possíveis implementações de JPA.</p>
+<p>Certo, a utilização do Hibernate eu até compreendo, por que apareceu esse tal de hibernate-spatial? A JPA resolve muito bem o mapeamento objeto-relacional de tipos convencionais dos SGBDs (varchar, numeric, date, etc), porém em aplicações geoespaciais precisamos lidar com estruturas de dados geométricas e é aí onde a Java Persistence Api não é mais suficiente. Precisamos de alguma forma mapear esses tipos em nossas classes e o Hibernate fornece uma anotação (&#64;Type) que nos permite isso.</p>
+<div class="sidebar">
+<p class="first sidebar-title">HIBERNATE - Persistência Relacional para Java Idiomático</p>
+<p class="last">Para saber mais sobre o Hibernate e JPA consultar <a class="reference external" href="http://tinyurl.com/269wmak">http://tinyurl.com/269wmak</a>.</p>
+</div>
+<p>Já o hibernate-spatial, fornece um dialeto do hibernate responsável por reconhecer esses novos tipos e fazer o &#8220;trabalho sujo&#8221; para nós, gerando os SQLs necessários e tornando a tão sonhada independência de banco menos traumática.</p>
+<p>OK! Como JSF, CDI e JPA fechamos a parte JEE de nossa aplicação. Agora restam somente dois artefatos: o GeoServer e o Postgis.</p>
+</div>
+<div class="section" id="geoserver">
+<h3><a class="toc-backref" href="#id7">Geoserver</a><a class="headerlink" href="#geoserver" title="Permalink to this headline">¶</a></h3>
+<p>Não detalharemos o geoserver, pois ele será visto em capítulos posteriores. Mas para aguçar a curiosidade, podemos dizer que ele é responsável por disponibilizar os mapas, obtidos através de diversas origens, em formatos padronizados e reconhecíveis pelo OL4JSF. Achou interessante? Espere então só mais um pouco para ver o que esse cara é capaz de fazer.</p>
+</div>
+<div class="section" id="postgis">
+<h3><a class="toc-backref" href="#id8">Postgis</a><a class="headerlink" href="#postgis" title="Permalink to this headline">¶</a></h3>
+<p>Se não detalhamos o geoserver pelo fato dele ser abordado mais adiante, não detalharemos o Postgis, pois ele já foi abordado anteriormente. Somente para relembrar, é nele que estão armazenadas as nossas tabelas com atributos espaciais. ;)</p>
+</div>
+</div>
+<div class="section" id="definindo-a-arquitetura-no-projeto-java">
+<h2><a class="toc-backref" href="#id9">Definindo a Arquitetura no Projeto JAVA</a><a class="headerlink" href="#definindo-a-arquitetura-no-projeto-java" title="Permalink to this headline">¶</a></h2>
+<p>Vamos preparar a nossa aplicação para realizar a arquitetura descrita. Para isso vamos complementar o nosso projeto maven com as dependencias necessárias e definir os arquivos de configuração para que tudo funcione.</p>
+<ol class="arabic">
+<li><p class="first">Vamos adicionar as seguintes dependencias no arquivo <em>pom.xml</em> do nosso projeto.</p>
+<blockquote>
+<ul>
+<li><p class="first">JSTL</p>
+</li>
+<li><dl class="first docutils">
+<dt>SERVLET API</dt>
+<dd><ul class="first last simple">
+<li>JSF / JSF-API</li>
+<li>CDI-API</li>
+<li>WELD</li>
+<li>Hibernate / Hibernate Spatial</li>
+<li>Postgres / Postgis JDBC Driver</li>
+<li>OL4JSF</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<p>Arquivo pom.xml atualizado</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>org.latinoware.geodojo.app<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>geodojo<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;packaging&gt;</span>war<span class="nt">&lt;/packaging&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;name&gt;</span>geodojo Maven Webapp<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;url&gt;</span>http://www.latinoware.org<span class="nt">&lt;/url&gt;</span>
+  
+  
+  <span class="nt">&lt;repositories&gt;</span>
+ 	    <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>java.net2<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Repository hosting the jee6 artifacts<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://download.java.net/maven/2<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>OSGEO GeoTools repo<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://download.osgeo.org/webdav/geotools<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>Hibernate Spatial repo<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://www.hibernatespatial.org/repository<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>JBOSS<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://repository.jboss.com/maven2<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>		      
+    <span class="nt">&lt;/repositories&gt;</span>
+
+  
+  
+  
+  <span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>4.0<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    		<span class="c">&lt;!-- SERVLET --&gt;</span>
+       		<span class="nt">&lt;dependency&gt;</span>
+	            <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+	            <span class="nt">&lt;artifactId&gt;</span>jstl<span class="nt">&lt;/artifactId&gt;</span>
+	            <span class="nt">&lt;version&gt;</span>1.2<span class="nt">&lt;/version&gt;</span>
+	        <span class="nt">&lt;/dependency&gt;</span>
+	        <span class="nt">&lt;dependency&gt;</span>
+	            <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+	            <span class="nt">&lt;artifactId&gt;</span>servlet-api<span class="nt">&lt;/artifactId&gt;</span>
+	            <span class="nt">&lt;version&gt;</span>2.5<span class="nt">&lt;/version&gt;</span>
+	        <span class="nt">&lt;/dependency&gt;</span>
+	        <span class="c">&lt;!-- CDI --&gt;</span>
+	        <span class="nt">&lt;dependency&gt;</span>
+	            <span class="nt">&lt;groupId&gt;</span>javax.enterprise<span class="nt">&lt;/groupId&gt;</span>
+	            <span class="nt">&lt;artifactId&gt;</span>cdi-api<span class="nt">&lt;/artifactId&gt;</span>
+	            <span class="nt">&lt;version&gt;</span>1.0-SP1<span class="nt">&lt;/version&gt;</span>
+	            <span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+	        <span class="nt">&lt;/dependency&gt;</span>
+	        <span class="nt">&lt;dependency&gt;</span>
+	            <span class="nt">&lt;groupId&gt;</span>org.jboss.weld<span class="nt">&lt;/groupId&gt;</span>
+	            <span class="nt">&lt;artifactId&gt;</span>weld-api<span class="nt">&lt;/artifactId&gt;</span>
+	            <span class="nt">&lt;version&gt;</span>1.0-SP1<span class="nt">&lt;/version&gt;</span>
+	            <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+	        <span class="nt">&lt;/dependency&gt;</span>
+	        <span class="nt">&lt;dependency&gt;</span>
+	            <span class="nt">&lt;groupId&gt;</span>org.jboss.weld.servlet<span class="nt">&lt;/groupId&gt;</span>
+	            <span class="nt">&lt;artifactId&gt;</span>weld-servlet<span class="nt">&lt;/artifactId&gt;</span>
+	            <span class="nt">&lt;version&gt;</span>1.0.1-Final<span class="nt">&lt;/version&gt;</span>
+	            <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+	        <span class="nt">&lt;/dependency&gt;</span>
+	        
+	        <span class="c">&lt;!-- JSF --&gt;</span>
+	        <span class="nt">&lt;dependency&gt;</span>
+	            <span class="nt">&lt;groupId&gt;</span>com.sun.faces<span class="nt">&lt;/groupId&gt;</span>
+	            <span class="nt">&lt;artifactId&gt;</span>jsf-api<span class="nt">&lt;/artifactId&gt;</span>
+	            <span class="nt">&lt;version&gt;</span>2.0.3<span class="nt">&lt;/version&gt;</span>
+	            <span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+	        <span class="nt">&lt;/dependency&gt;</span>
+	        <span class="nt">&lt;dependency&gt;</span>
+	            <span class="nt">&lt;groupId&gt;</span>com.sun.faces<span class="nt">&lt;/groupId&gt;</span>
+	            <span class="nt">&lt;artifactId&gt;</span>jsf-impl<span class="nt">&lt;/artifactId&gt;</span>
+	            <span class="nt">&lt;version&gt;</span>2.0.3<span class="nt">&lt;/version&gt;</span>
+	            <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+	        <span class="nt">&lt;/dependency&gt;</span>
+	        
+    	<span class="c">&lt;!-- JPA/Hibernate --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>hibernate<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>hibernate-entitymanager<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>3.4.0.GA<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>slf4j-simple<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.5.6<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>slf4j-api<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.5.6<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        
+        <span class="c">&lt;!-- Hibernate Spatial Postgis --&gt;</span>     
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.hibernatespatial<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>hibernate-spatial-postgis<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        
+		<span class="c">&lt;!-- Postgis JDBC driver --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.postgis<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>postgis-jdbc<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.3.3<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        
+		<span class="c">&lt;!-- Postgresql JDBC driver --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>postgresql<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>postgresql<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>8.4-701.jdbc3<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+		 <span class="c">&lt;!-- OL4JSF --&gt;</span>
+	        <span class="nt">&lt;dependency&gt;</span>
+	            <span class="nt">&lt;groupId&gt;</span>org.ol4jsf<span class="nt">&lt;/groupId&gt;</span>
+	            <span class="nt">&lt;artifactId&gt;</span>ol4jsf-core<span class="nt">&lt;/artifactId&gt;</span>
+	            <span class="nt">&lt;version&gt;</span>2.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+	            <span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+	        <span class="nt">&lt;/dependency&gt;</span>
+ 
+  <span class="nt">&lt;/dependencies&gt;</span>
+  
+  
+    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+
+    <span class="nt">&lt;build&gt;</span>
+    	<span class="nt">&lt;finalName&gt;</span>geodojo<span class="nt">&lt;/finalName&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;source&gt;</span>1.6<span class="nt">&lt;/source&gt;</span>
+                    <span class="nt">&lt;target&gt;</span>1.6<span class="nt">&lt;/target&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p class="first">Na sequência vamos rodar o comando do maven para preparar as novas dependencias dentro do ambiente de desenvolvimento:</p>
+<div class="highlight-python"><pre>user@geodojo-vm:~/geodojo/geodojo$ mvn -Dwtpversion=1.5 eclipse:eclipse</pre>
+</div>
+</li>
+<li><p class="first">Precisamos agora configurar a nossa aplicação web para atuar com o JSF e CDI. Para isso vamos deixar o arquivo <em>web.xml</em> como abaixo</p>
+</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;web-app</span> <span class="na">version=</span><span class="s">&quot;3.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee&quot;</span>
+	<span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;listener&gt;</span>
+        <span class="nt">&lt;listener-class&gt;</span>org.jboss.weld.environment.servlet.Listener<span class="nt">&lt;/listener-class&gt;</span>
+    <span class="nt">&lt;/listener&gt;</span>
+   
+	
+    <span class="nt">&lt;resource-env-ref&gt;</span>
+        <span class="nt">&lt;description&gt;</span>Object factory for the CDI Bean Manager<span class="nt">&lt;/description&gt;</span>
+        <span class="nt">&lt;resource-env-ref-name&gt;</span>BeanManager<span class="nt">&lt;/resource-env-ref-name&gt;</span>
+        <span class="nt">&lt;resource-env-ref-type&gt;</span>javax.enterprise.inject.spi.BeanManager<span class="nt">&lt;/resource-env-ref-type&gt;</span>
+    <span class="nt">&lt;/resource-env-ref&gt;</span>
+
+    <span class="nt">&lt;servlet&gt;</span>
+        <span class="nt">&lt;servlet-name&gt;</span>Faces Servlet<span class="nt">&lt;/servlet-name&gt;</span>
+        <span class="nt">&lt;servlet-class&gt;</span>javax.faces.webapp.FacesServlet<span class="nt">&lt;/servlet-class&gt;</span>
+        <span class="nt">&lt;load-on-startup&gt;</span>1<span class="nt">&lt;/load-on-startup&gt;</span>
+    <span class="nt">&lt;/servlet&gt;</span>
+  
+    <span class="nt">&lt;servlet-mapping&gt;</span>
+        <span class="nt">&lt;servlet-name&gt;</span>Faces Servlet<span class="nt">&lt;/servlet-name&gt;</span>
+        <span class="nt">&lt;url-pattern&gt;</span>*.jsf<span class="nt">&lt;/url-pattern&gt;</span>
+    <span class="nt">&lt;/servlet-mapping&gt;</span>
+
+<span class="nt">&lt;/web-app&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Na sequência vamos criar um simbolico <em>faces-config.xml</em>. No final deste roteiro vamos entender o porque de simbolico.</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;faces-config</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee&quot;</span>
+ <span class="na">xmlns:xi=</span><span class="s">&quot;http://www.w3.org/2001/XInclude&quot;</span>
+ <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Para que o CDI funcione corretamente vamos precisar adicionar os arquivos <em>context.xml</em> e <em>beans.xml</em> na pasta META-INF do projeto</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;Resource</span>
+ <span class="na">name=</span><span class="s">&quot;BeanManager&quot;</span>
+ <span class="na">auth=</span><span class="s">&quot;Container&quot;</span>
+ <span class="na">type=</span><span class="s">&quot;javax.enterprise.inject.spi.BeanManager&quot;</span>
+ <span class="na">factory=</span><span class="s">&quot;org.jboss.weld.resources.ManagerObjectFactory&quot;</span>
+<span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/beans_1_0.xsd&quot;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/beans&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic" start="5">
+<li><p class="first">Para testar o funcionamento vamos criar um pequeno exemplo. Nele o usuário digita o nome e clica no botão &#8220;Diga olá&#8221;.</p>
+<blockquote>
+<dl class="docutils">
+<dt>5.1. Vamos criar uma view jsf denominada <em>hellojsfcdi.xhtml</em> na pasta <em>src/main/webapp/hellojsfcdi.xhtml</em>:</dt>
+<dd><div class="first last highlight-xml"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+	<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="na">xmlns:h=</span><span class="s">&quot;http://java.sun.com/jsf/html&quot;</span>
+	      <span class="na">xmlns:f=</span><span class="s">&quot;http://java.sun.com/jsf/core&quot;</span>
+	      <span class="na">xmlns:ui=</span><span class="s">&quot;http://java.sun.com/jsf/facelets&quot;</span>
+	      <span class="na">xmlns:m=</span><span class="s">&quot;http://www.ol4jsf.org&quot;</span><span class="nt">&gt;</span>
+	
+	    <span class="nt">&lt;h:head&gt;</span>
+	    <span class="nt">&lt;/h:head&gt;</span>
+	    <span class="nt">&lt;body&gt;</span>
+	        <span class="nt">&lt;h1&gt;</span>Exemplo JSF - CDI<span class="nt">&lt;/h1&gt;</span>
+	        <span class="nt">&lt;h:form</span> <span class="na">prependId=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+	            Nome: <span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">&quot;#{helloJSF.nome}&quot;</span> <span class="nt">/&gt;</span>                        
+	            <span class="nt">&lt;h:commandButton</span> <span class="na">value=</span><span class="s">&quot;Diga olá&quot;</span> <span class="na">action=</span><span class="s">&quot;#{helloJSF.sayHello}&quot;</span><span class="nt">&gt;</span>
+	            <span class="nt">&lt;/h:commandButton&gt;</span>
+	            <span class="nt">&lt;br/&gt;</span>
+	            <span class="nt">&lt;h:outputText</span> <span class="na">id=</span><span class="s">&quot;output&quot;</span>  <span class="na">binding=</span><span class="s">&quot;#{helloJSF.output}&quot;</span> <span class="nt">/&gt;</span>
+	        <span class="nt">&lt;/h:form&gt;</span>
+	    <span class="nt">&lt;/body&gt;</span>
+	<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</dd>
+<dt>5.2. Vamos criar a classe java org.latinoware.geodojo.app.bean.HelloJSF que vai atender as necessidades da view hellojsfcdi</dt>
+<dd><div class="first last highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">bean</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.enterprise.inject.Model</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.faces.component.UIOutput</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Bean para exemplificar o modelo orientado a eventos do JSF</span>
+<span class="cm"> * </span>
+<span class="cm"> * @author ranophoenix</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="nd">@Model</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloJSF</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">nome</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">UIOutput</span> <span class="n">output</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getNome</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">nome</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNome</span><span class="o">(</span><span class="n">String</span> <span class="n">nome</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">nome</span> <span class="o">=</span> <span class="n">nome</span><span class="o">;</span>
+	<span class="o">}</span>	
+	
+	<span class="kd">public</span> <span class="n">UIOutput</span> <span class="nf">getOutput</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">output</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOutput</span><span class="o">(</span><span class="n">UIOutput</span> <span class="n">output</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">output</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="s">&quot;Olá &quot;</span> <span class="o">+</span> <span class="n">nome</span> <span class="o">+</span> <span class="s">&quot;!!!&quot;</span><span class="o">);</span>
+	<span class="o">}</span> 
+	
+	
+<span class="o">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>5.3. Executar o exemplo e verificar os resultados. Se tudo estiver correto no nosso projeto as telas abaixo devem ser verdadeiras.</p>
+<blockquote>
+<img alt="../_images/jsf_example1.png" src="../_images/jsf_example1.png" />
+<p>A partir desse momento é executada uma ação no servidor e retornada a mensagem para o usuário.</p>
+<img alt="../_images/jsf_example2.png" src="../_images/jsf_example2.png" />
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<p>O CDI é tão simples que utilizamos no exemplo quase sem perceber. Os menos atentos talvez nem tenham percebido a existência da anotação <strong>&#64;Model</strong> e que nenhum <em>ManagedBean</em> foi definido no arquivo faces-config.xml. Sabe o que aconteceu após a simples presença da anotação <em>&#64;Model</em> ? Basicamente:</p>
+<ul class="simple">
+<li>A classe HelloJSF passou a ficar disponível nas páginas JSF através do nome &#8220;#{helloJSF}&#8221;;</li>
+<li>A classe ganhou o escopo de requisição automático;</li>
+</ul>
+<p>No próximo capítulo, iremos abordar falar sobre o HibernateSpatial.</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 >index</a></li>
+            <li class="right" >
+              <a href="../5-hbspatial/hbspatial.html" title="Persistência de Dados Espacial - Hibernate Spatial"
+                 >next</a> |</li>
+            <li class="right" >
+              <a href="../3-postgis/postgis.html" title="Trabalhando com a base de dados espacial (Postgis)"
+                 >previous</a> |</li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Discutindo a Arquitetura da Aplicação (GEO - JEE6)</a></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2010, Rafael Soto e Robert Anderson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>
