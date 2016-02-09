@@ -44,5 +44,16 @@ $ cd geodojo/
 
 >> New server "JBoss EAP 6.4.0.GA (AS 7.5.0.Final-redhat-21)"
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Instalação PostgreSQL:
 
+http://www.postgresql.org/download/linux/ubuntu/
+
+>> Graphical installer
+
+Installers are available for 32 and 64-bit Linux distributions and include PostgreSQL, pgAdmin and the StackBuilder utility for installation of additional packages.
+
+Download the installer from EnterpriseDB for all supported versions: 
+
+http://www.enterprisedb.com/products-services-training/pgdownload
 	
