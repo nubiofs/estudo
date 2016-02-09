@@ -1,0 +1,48 @@
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxx       Via (prompt & eclipse)
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+$ mvn archetype:generate
+$ Choose a number: 705
+$ Choose a number: 6
+$ Define value for property 'groupId': org.home.geodojo.app
+$ Define value for property 'artifactId': : geodojo
+$ Define value for property 'version': 1.0-SNAPSHOT:
+$ Define value for property 'package': org.latinoware.geodojo.app:
+Confirm properties configuration:
+groupId: org.latinoware.geodojo.app
+artifactId: geodojo-app
+version: 1.0-SNAPSHOT
+package: org.latinoware.geodojo.app
+$ Y: Y
+
+$ cd geodojo/
+$ mvn eclipse:eclipse
+
+* No eclipse:
+>> File >> Import... >> General >> Existing Projects in Workspace >> Next
+
+Configure >> Convert to Maven Project
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxx       Via (eclipse demoiselle)
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+$ mvn archetype:generate
+
+* No eclipse:
+>> New Maven Project
+
+'archetype': demoiselle-jsf-jpa 
+'versão': 2.5.1
+'groupId': org.home
+'artifactId': geodojo
+'Version': 0.0.1-SNAPSHOT
+
+$ cd geodojo/
+
+>> New server "JBoss EAP 6.4.0.GA (AS 7.5.0.Final-redhat-21)"
+
+
+	
