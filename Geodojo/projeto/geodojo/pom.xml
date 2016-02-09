@@ -10,7 +10,11 @@
 	<packaging>war</packaging>
 
 	<name></name>
-	<description></description>
+	<description>
+	Projeto Geodojo. 
+	Construido no eclipse via archetype "demoiselle-jsf-jpa-2.5.1".
+	Rodando no JBoss EAP 6.4.
+	</description>
 	<url></url>
 
 	<parent>
