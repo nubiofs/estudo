@@ -4,3 +4,7 @@ grep -R -H -i " Git " ./ >> ver.txt
 
 grep -R  "Meu Texto" /home/blablabla/ | cut -d: -f1 | uniq
 
+** Criando links simbólicos:
+
+ln -s /local/do/exec /local/onde/ficará/o/link/do/exec
+
