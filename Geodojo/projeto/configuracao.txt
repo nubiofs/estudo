@@ -111,7 +111,36 @@ http://www.postgresonline.com/journal/archives/145-PgAdmin-III-Plug-in-Registrat
 
 $ shp2pgsql-gui &
 
+>> Importando (municipios_br.shp em "estudo/Geodojo/shapes-brasil.zip")
+
 Obs.: utilizar "latin1"
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+>> Criando a tabela de estados
+
+(Executar a instrução sql para criação da tabela de UF):
+
+CREATE TABLE uf
+(
+  id serial NOT NULL,
+  nome character varying(254),
+  the_geom geometry,
+  CONSTRAINT uf_pkey PRIMARY KEY (id),
+  CONSTRAINT enforce_dims_the_geom CHECK (st_ndims(the_geom) = 2),
+  CONSTRAINT enforce_geotype_the_geom CHECK (geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE uf
+  OWNER TO postgres;
+
+>> Executar a instrução sql para união e geração das geometrias dos estados:
+
+INSERT INTO uf (nome,the_geom)
+SELECT nomeuf, st_multi(ST_UNION(geom)) from municipios_br group by nomeuf;
+
 
 
 
