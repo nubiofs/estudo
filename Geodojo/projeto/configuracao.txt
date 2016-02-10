@@ -86,3 +86,23 @@ Download the installer from EnterpriseDB for all supported versions:
 http://www.enterprisedb.com/products-services-training/pgdownload
 
 postgresql-9.5.0-1-linux-x64.run
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxx
+Configuração QGIS (ubuntu):
+
+https://www.qgis.org/en/site/forusers/alldownloads.html
+
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key 3FF5FFCAD71472C4
+
+** Add the lines for one of the repositories to your /etc/apt/sources.list:
+
+deb     http://qgis.org/debian wily main
+
+deb-src http://qgis.org/debian wily main
+
+$ sudo apt-get update
+
+$ sudo apt-get install qgis python-qgis qgis-plugin-grass
+
+
+
