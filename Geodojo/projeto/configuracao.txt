@@ -136,7 +136,7 @@ WITH (
 ALTER TABLE uf
   OWNER TO postgres;
 
->> Executar a instrução sql para união e geração das geometrias dos estados:
+>> Executar a instrução sql para união e geração das geometrias dos estados (sobre tabela Geo "municipios_br" importanda anteriormente):
 
 INSERT INTO uf (nome,the_geom)
 SELECT nomeuf, st_multi(ST_UNION(geom)) from municipios_br group by nomeuf;
