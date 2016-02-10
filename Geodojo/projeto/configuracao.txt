@@ -111,7 +111,7 @@ http://www.postgresonline.com/journal/archives/145-PgAdmin-III-Plug-in-Registrat
 
 $ shp2pgsql-gui &
 
->> Importando (municipios_br.shp em "estudo/Geodojo/shapes-brasil.zip")
+>> Importando (municipios_br.shp, rodovias.shp em "estudo/Geodojo/shapes-brasil.zip")
 
 Obs.: utilizar "latin1"
 
@@ -140,6 +140,13 @@ ALTER TABLE uf
 
 INSERT INTO uf (nome,the_geom)
 SELECT nomeuf, st_multi(ST_UNION(geom)) from municipios_br group by nomeuf;
+
+>> Criando View rodovias_rn:
+
+CREATE VIEW rodovias_rn AS
+SELECT rodovia.id, rodovia.rodovia1, rodovia.geom
+FROM rodovias rodovia, uf
+WHERE uf.nome = 'RIO GRANDE DO NORTE' AND ST_INTERSECTS(rodovia.geom,uf.the_geom)
 
 
 
