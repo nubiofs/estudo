@@ -148,6 +148,30 @@ SELECT rodovia.id, rodovia.rodovia1, rodovia.geom
 FROM rodovias rodovia, uf
 WHERE uf.nome = 'RIO GRANDE DO NORTE' AND ST_INTERSECTS(rodovia.geom,uf.the_geom)
 
+>> Criando tabela rodovias_rn_tb
+
+CREATE TABLE rodovias_rn_tb
+(
+  id serial NOT NULL,
+  nome character varying(254),
+  geom geometry,
+  CONSTRAINT rod_rn_pkey PRIMARY KEY (id),
+  CONSTRAINT enforce_dims_the_geom CHECK (st_ndims(geom) = 2),
+  CONSTRAINT enforce_geotype_the_geom CHECK (geometrytype(geom) = 'multilinestring'::text OR geom IS NULL)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE rodovias_rn_tb
+  OWNER TO postgres;
+
+>> Executar a instrução sql para união e geração das geometrias das rodovias (sobre tabela Geo "uf" importanda anteriormente):
+
+INSERT INTO rodovias_rn_tb (nome,geom)
+SELECT rodovia.rodovia1, rodovia.geom
+FROM rodovias rodovia, uf
+WHERE uf.nome = 'RIO GRANDE DO NORTE' AND ST_INTERSECTS(rodovia.geom,uf.the_geom)
+AND rodovia.rodovia1 <> NULL
 
 
 
