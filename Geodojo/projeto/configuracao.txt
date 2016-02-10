@@ -104,5 +104,14 @@ $ sudo apt-get update
 
 $ sudo apt-get install qgis python-qgis qgis-plugin-grass
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Importanto arquivos shapefiles para postGis (postgreSQL):
+
+http://www.postgresonline.com/journal/archives/145-PgAdmin-III-Plug-in-Registration-PostGIS-Shapefile-and-DBF-Loader.html
+
+$ shp2pgsql-gui &
+
+Obs.: utilizar "latin1"
+
 
 
