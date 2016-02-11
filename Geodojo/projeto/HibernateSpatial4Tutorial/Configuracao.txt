@@ -1,0 +1,20 @@
+http://www.hibernatespatial.org/documentation/02-Tutorial/01-tutorial4/
+
+$ mvn archetype:generate
+
+.......
+
+Define value for groupId: : org.hibernate.spatial.tutorials
+Define value for artifactId: : event-tutorial
+Define value for version: 1.0-SNAPSHOT: :
+Define value for package: : event
+Confirm properties configuration:
+groupId: org.hibernatespatial.tutorials
+artifactId: event-tutorial
+version: 1.0-SNAPSHOT
+package: event
+Y: : Y
+
+......
+
+$ mvn eclipse:eclipse
