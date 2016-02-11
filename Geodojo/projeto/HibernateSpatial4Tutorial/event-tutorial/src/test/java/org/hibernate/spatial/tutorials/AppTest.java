@@ -1,4 +1,4 @@
-package event;
+package org.hibernate.spatial.tutorials;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

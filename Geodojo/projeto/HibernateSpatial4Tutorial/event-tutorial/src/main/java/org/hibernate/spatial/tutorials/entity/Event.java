@@ -1,4 +1,4 @@
-package event;
+package org.hibernate.spatial.tutorials.entity;
 
 import com.vividsolutions.jts.geom.Point;
 import org.hibernate.annotations.GenericGenerator;
