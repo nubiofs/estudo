@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
@@ -23,20 +24,37 @@
 		<version>2.5.1</version>
 	</parent>
 
+	<repositories>
+
+		<!-- Hibernate Spatial and GeoTools repositories -->
+		<repository>
+			<id>OSGEO GeoTools repo</id>
+			<url>http://download.osgeo.org/webdav/geotools</url>
+		</repository>
+		<repository>
+			<id>Hibernate Spatial repo</id>
+			<url>http://www.hibernatespatial.org/repository</url>
+		</repository>
+
+		<!-- OL4JSF -->
+		<repository>
+			<id>OL4JSF Local Repository</id>
+			<name>OL4JSF</name>
+			<url>https://java.net/svn/ol4jsf~svn/repository/</url>
+		</repository>
+
+	</repositories>
+
 	<dependencies>
+
 		<dependency>
 			<groupId>br.gov.frameworkdemoiselle</groupId>
 			<artifactId>demoiselle-jpa</artifactId>
 			<scope>compile</scope>
 		</dependency>
 		<!-- If you are using a JTA transaction then use this extension -->
-		<!--
-		<dependency>
-		    <groupId>br.gov.frameworkdemoiselle</groupId>
-		    <artifactId>demoiselle-jta</artifactId>
-		    <scope>compile</scope>
-		</dependency>
-		-->
+		<!-- <dependency> <groupId>br.gov.frameworkdemoiselle</groupId> <artifactId>demoiselle-jta</artifactId> 
+			<scope>compile</scope> </dependency> -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
@@ -55,13 +73,33 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-			<scope>test</scope>
+<!-- 			<scope>test</scope> -->
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-spatial</artifactId>
+			<version>4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ol4jsf</groupId>
+			<artifactId>ol4jsf-core</artifactId>
+			<version>2.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- Uncomment if you are using JBoss 6 -->
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.4.0</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 </project>
