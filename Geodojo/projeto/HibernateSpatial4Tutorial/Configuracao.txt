@@ -1,3 +1,16 @@
+** Código-fonte hibernatespatial (testes) ver:
+
+http://www.hibernatespatial.org/documentation/01-download/03-repo/
+
+https://github.com/maesenka/hibernate-core
+
+https://github.com/nubiofs/hibernate-core/
+
+https://github.com/nubiofs/hibernate-core/tree/master/hibernate-spatial/src/test/java/org/hibernate/spatial
+
+
+** Tutorial (configurações e execução):
+
 http://www.hibernatespatial.org/documentation/02-Tutorial/01-tutorial4/
 
 $ mvn archetype:generate
