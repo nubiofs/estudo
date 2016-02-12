@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.home</groupId>
+	<artifactId>jpaexemplo01</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name></name>
+	<description></description>
+	<url></url>
+
+	<parent>
+		<groupId>br.gov.frameworkdemoiselle</groupId>
+		<artifactId>demoiselle-minimal-parent</artifactId>
+		<version>2.5.1</version>
+	</parent>
+
+    <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+    <build>
+		<finalName>${artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+            
+            <!-- Tirar o problema: (nenhum atributo de manifesto principal em target/jpaexemplo01.jar) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>HelloWorld</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>br.gov.frameworkdemoiselle.component</groupId>
+			<artifactId>demoiselle-junit</artifactId>
+			<version>2.3.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>test</scope>
+		</dependency>
+        
+        <!-- Para resolver o problema: (SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"). -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.2</version>
+            <scope>runtime</scope>
+        </dependency>
+        
+	</dependencies>
+</project>

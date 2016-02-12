@@ -1,0 +1,9 @@
+$ mvn compile
+$ mvn exec:java -Dexec.mainClass="br.home.HelloWorld"
+
+------------
+
+$ mvn clean package
+-- $ java -jar target/jpaexemplo01.jar
+$ java -cp target/jpaexemplo01.jar br.home.HelloWorld
+
