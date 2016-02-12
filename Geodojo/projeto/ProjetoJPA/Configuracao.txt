@@ -2,7 +2,7 @@ $ mvn compile
 $ mvn exec:java -Dexec.mainClass="br.home.HelloWorld"
 
 ------------
-
+-- Chama também a execução dos testes unitários:
 $ mvn clean package
 -- $ java -jar target/jpaexemplo01.jar
 $ java -cp target/jpaexemplo01.jar br.home.HelloWorld
