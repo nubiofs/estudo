@@ -38,4 +38,6 @@ $ mvn dependency:list
 
 $ mvn compile
 
-$ $ mvn exec:java -Dexec.mainClass="org.hibernate.spatial.tutorials.EventManager" -Dexec.args="store POINT(10 5)"
+$ mvn exec:java -Dexec.mainClass="org.hibernate.spatial.tutorials.EventManager" -Dexec.args="store POINT(10 5)"
+
+$ ~/mvn exec:java -Dexec.mainClass="org.hibernate.spatial.tutorials.EventManager" -Dexec.args="'find' 'POINT(10 5)'"
