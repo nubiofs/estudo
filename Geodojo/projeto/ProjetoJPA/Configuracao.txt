@@ -1,3 +1,11 @@
+Visual Studio code linux:
+
+https://code.visualstudio.com/Download
+
+VSCode-linux-x64-stable.zip
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
 $ mvn compile
 $ mvn exec:java -Dexec.mainClass="br.home.HelloWorld"
 
