@@ -7,12 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.hibernate.spatial.tutorials.entity.Event;
+import org.hibernate.spatial.tutorials.util.GeometryUtil;
 import org.hibernate.spatial.tutorials.util.JPAUtil;
 
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.io.ParseException;
-import com.vividsolutions.jts.io.WKTReader;
 
 public class EventManager {
 	
@@ -48,7 +47,7 @@ public class EventManager {
 
     private void createAndStoreEvent(String title, Date theDate, String wktPoint) {
     	
-        Geometry geom = wktToGeometry(wktPoint);
+        Geometry geom = GeometryUtil.wktToGeometry(wktPoint);
 
         if (!geom.getGeometryType().equals("Point")) {
             throw new RuntimeException("Geometry must be a point. Got a " + geom.getGeometryType());
@@ -65,21 +64,6 @@ public class EventManager {
         em.persist(theEvent);
         em.getTransaction().commit();
         em.close();
-        
-    }
-
-    private Geometry wktToGeometry(String wktPoint) {
-    	
-        WKTReader fromText = new WKTReader();
-        Geometry geom = null;
-        try {
-            geom = fromText.read(wktPoint);
-            System.out.println(geom.toText());
-        } catch (ParseException e) {
-            throw new RuntimeException("Not a WKT string:" + wktPoint);
-        }
-        
-        return geom;
         
     }
 
@@ -101,7 +85,7 @@ public class EventManager {
      * @return
      */
     private List find(String wktFilter) {
-        Geometry filter = wktToGeometry(wktFilter);
+        Geometry filter = GeometryUtil.wktToGeometry(wktFilter);
         EntityManager em = JPAUtil.createEntityManager();
         em.getTransaction().begin();
         Query query = em.createQuery("select e from Event e where st_within(e.location, :filter) = true", Event.class);

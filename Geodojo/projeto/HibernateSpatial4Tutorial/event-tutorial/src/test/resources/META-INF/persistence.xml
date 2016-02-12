@@ -5,7 +5,11 @@
 
 	<persistence-unit name="org.hibernate.events.jpa"
 		transaction-type="RESOURCE_LOCAL">
+
+		<class>org.hibernate.spatial.tutorials.entity.Event</class>
+		
 		<properties>
+			
 			<property name="hibernate.dialect"
 				value="org.hibernate.spatial.dialect.postgis.PostgisDialect" />
 
