@@ -7,6 +7,8 @@
 		transaction-type="RESOURCE_LOCAL">
 
 		<class>org.hibernate.spatial.tutorials.entity.Event</class>
+		<class>org.hibernate.spatial.tutorials.entity.Municipio</class>
+		<class>org.hibernate.spatial.tutorials.entity.UnidadeFederativa</class>
 		
 		<properties>
 			
@@ -25,7 +27,8 @@
 
 			<property name="hibernate.max_fetch_depth" value="5" />
 
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
 
 		</properties>
 	</persistence-unit>
