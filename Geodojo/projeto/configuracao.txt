@@ -183,7 +183,7 @@ CREATE TABLE geotwitt
   id serial NOT NULL,
   autor character varying(254),
   mensagem character varying(140),
-  CONSTRAINT geotwitt PRIMARY KEY (id) 
+  CONSTRAINT geotwitt_pk PRIMARY KEY (id) 
   )
 WITH (
   OIDS=FALSE
