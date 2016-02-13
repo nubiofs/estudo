@@ -176,5 +176,21 @@ FROM rodovias rodovia, uf
 WHERE uf.nome = 'RIO GRANDE DO NORTE' AND ST_INTERSECTS(rodovia.geom,uf.the_geom)
 -- AND rodovia.rodovia1 <> NULL
 
+>> Inclusão de tabela para testes CRUD (geotwitt) primeiro no projeto "event-tutorial" (HibernateSpatial4Tutorial)
+
+CREATE TABLE geotwitt
+(
+  id serial NOT NULL,
+  autor character varying(254),
+  mensagem character varying(140),
+  CONSTRAINT geotwitt PRIMARY KEY (id), 
+  )
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE geotwitt OWNER TO postgres;
+
+SELECT AddGeometryColumn('','geotwitt','the_geom','4326','POINT',2);
+
 
 
