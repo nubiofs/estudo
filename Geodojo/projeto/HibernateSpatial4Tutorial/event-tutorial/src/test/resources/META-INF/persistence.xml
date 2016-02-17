@@ -9,6 +9,7 @@
 		<class>org.hibernate.spatial.tutorials.entity.Event</class>
 		<class>org.hibernate.spatial.tutorials.entity.Municipio</class>
 		<class>org.hibernate.spatial.tutorials.entity.UnidadeFederativa</class>
+		<class>org.hibernate.spatial.tutorials.entity.Geotwitt</class>
 		
 		<properties>
 			
