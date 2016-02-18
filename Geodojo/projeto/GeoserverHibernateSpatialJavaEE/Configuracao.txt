@@ -1,0 +1,74 @@
+** Tutorial (configurações e execução):
+
+file:///home/clenubio/Desenvolvimento/Estudos/Geodojo/arqs_html/7-ol4jsf/ol4jsf.html#
+http://localhost:8080/geoserver/web/
+
+https://java.net/svn/ol4jsf~svn/maven/trunk/maven-jsf-plugin/pom.xml
+https://java.net/downloads/ol4jsf/documentation.pdf
+
+$ mvn archetype:generate
+
+.......
+17: remote -> br.gov.frameworkdemoiselle.archetypes:demoiselle-jsf-jpa (Archetype for web applications (JSF + JPA) using Demoiselle Framework)
+
+versão 2.5.1
+.......
+
+Define value for groupId: : org.home
+Define value for artifactId: : tutorial01
+Define value for version: 1.0-SNAPSHOT: :
+Define value for package: : tutorial
+Confirm properties configuration:
+groupId: org.home.tutorial01
+artifactId: tutorial01
+version: 1.0-SNAPSHOT
+package: war
+Y: : Y
+
+......
+
+$ mvn eclipse:eclipse
+
+>> import project (eclipse) 
+
+>> Configure "Convert to Maven Project"
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Configuração Jboss EAP 6.4:
+
+http://docs.jboss.org/overlord/rtgov/user/1.0.0.Final/html/_installation.html
+
+Ver (item "2.1.2.3. Database" --> "Postgres"):
+
+        <subsystem xmlns="urn:jboss:domain:datasources:1.2">
+            <datasources>
+                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                    <driver>h2</driver>
+                    <security>
+                        <user-name>sa</user-name>
+                        <password>sa</password>
+                    </security>
+                </datasource>
+                <datasource jndi-name="java:jboss/datasources/PostgreDS" pool-name="PostgreDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:postgresql://localhost:5432:postgres;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                    <driver>postgresql</driver>
+                    <security>
+                        <user-name>postgres</user-name>
+                        <password>post</password>
+                    </security>
+                </datasource>
+                <drivers>
+                    <driver name="h2" module="com.h2database.h2">
+                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    </driver>
+                    <driver name="postgresql" module="org.postgresql">
+                        <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+                    </driver>
+                </drivers>
+            </datasources>
+        </subsystem>
+
+
+

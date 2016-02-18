@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.home</groupId>
+	<artifactId>tutorial01</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name></name>
+	<description></description>
+	<url></url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<hibernate.version>4.0.0.Final</hibernate.version>
+	</properties>
+
+	<parent>
+		<groupId>br.gov.frameworkdemoiselle</groupId>
+		<artifactId>demoiselle-jsf-parent</artifactId>
+		<version>2.5.1</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>br.gov.frameworkdemoiselle</groupId>
+			<artifactId>demoiselle-jpa</artifactId>
+			<scope>compile</scope>
+<!-- 			<exclusions> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>hibernate-entitymanager</artifactId> -->
+<!-- 					<groupId>org.hibernate</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>hibernate-core</artifactId> -->
+<!-- 					<groupId>org.hibernate</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 			</exclusions> -->
+		</dependency>
+
+		<dependency>
+	      <groupId>org.hibernate</groupId>
+	      <artifactId>hibernate-entitymanager</artifactId>
+	      <version>4.0.0.Final</version>
+	      <scope>compile</scope>
+	    </dependency>
+
+		<!-- If you are using a JTA transaction then use this extension -->
+		<!--
+		<dependency>
+		    <groupId>br.gov.frameworkdemoiselle</groupId>
+		    <artifactId>demoiselle-jta</artifactId>
+		    <scope>compile</scope>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>5.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- (demoiselle-junit) Para Testes Unitários com Injeção de Dependência  -->
+		<dependency>
+			<groupId>br.gov.frameworkdemoiselle.component</groupId>
+			<artifactId>demoiselle-junit</artifactId>
+			<version>2.3.1</version>
+			<scope>test</scope>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>junit</groupId> -->
+<!-- 			<artifactId>junit</artifactId> -->
+<!-- 			<version>4.12</version> -->
+<!-- 		</dependency> -->
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Hibernate Spatial -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-spatial</artifactId>
+			<version>4.0</version>
+		</dependency>
+		
+		<!-- the postgresql driver -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>8.4-701.jdbc3</version>
+<!-- 			<version>8.4-701.jdbc4</version> -->
+		</dependency>
+		
+	</dependencies>
+	
+	<!-- add repositories for JTS and Hibernate Spatial and Hibernate (JBoss) -->
+	<repositories>
+		<repository>
+			<id>OSGEO GeoTools repo</id>
+			<url>http://download.osgeo.org/webdav/geotools</url>
+		</repository>
+		<repository>
+			<id>Hibernate Spatial repo</id>
+			<url>http://www.hibernatespatial.org/repository</url>
+		</repository>
+		<!-- add JBOSS repository for easy access to Hibernate libraries -->
+<!-- 		<repository> -->
+<!-- 			<id>JBOSS</id> -->
+<!-- 			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url> -->
+<!-- 		</repository> -->
+	</repositories>
+	
+</project>
