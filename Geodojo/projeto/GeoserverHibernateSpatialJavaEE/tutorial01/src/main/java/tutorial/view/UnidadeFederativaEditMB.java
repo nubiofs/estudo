@@ -47,4 +47,22 @@ public class UnidadeFederativaEditMB extends AbstractEditPageBean<UnidadeFederat
 		return this.ufBC.load(id);
 	}
 	
+	private String mostrarPE="";
+	
+	public String getMostrarPE() {
+		return this.mostrarPE;
+	}
+
+	public void setMostrarPE(String mostrarPE) {
+		this.mostrarPE = mostrarPE;
+	}
+	
+	@Transactional
+	public String mostrarPE(){
+		UnidadeFederativa uf = this.ufBC.getId(3L);
+		this.mostrarPE = " Nome de PE: [" + uf.getNome() + "]; Geo = [" + uf.getPoligono().toText() + "]";
+		//System.out.println(this.mostrarPE);
+		return this.mostrarPE;
+	}
+
 }

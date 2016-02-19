@@ -29,21 +29,12 @@
 			<groupId>br.gov.frameworkdemoiselle</groupId>
 			<artifactId>demoiselle-jpa</artifactId>
 			<scope>compile</scope>
-<!-- 			<exclusions> -->
-<!-- 				<exclusion> -->
-<!-- 					<artifactId>hibernate-entitymanager</artifactId> -->
-<!-- 					<groupId>org.hibernate</groupId> -->
-<!-- 				</exclusion> -->
-<!-- 				<exclusion> -->
-<!-- 					<artifactId>hibernate-core</artifactId> -->
-<!-- 					<groupId>org.hibernate</groupId> -->
-<!-- 				</exclusion> -->
-<!-- 			</exclusions> -->
 		</dependency>
 
 		<dependency>
 	      <groupId>org.hibernate</groupId>
 	      <artifactId>hibernate-entitymanager</artifactId>
+	      <!-- Importante utilizar essa versão (4.0.0.Final) para funcionar com o Hibernate Spatial 4.0 -->
 	      <version>4.0.0.Final</version>
 	      <scope>compile</scope>
 	    </dependency>
@@ -94,8 +85,17 @@
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>8.4-701.jdbc3</version>
-<!-- 			<version>8.4-701.jdbc4</version> -->
+			<!-- <version>8.4-701.jdbc4</version> -->
 		</dependency>
+		
+		<!-- cache-de-segundo-nivel-do-jpa -->
+		<!-- Ver depois (Erro idem para "hibernate-entitymanager" com versão diferente de "4.0.0.Final"): -->
+		<!-- javax.servlet.ServletException: java.lang.IllegalArgumentException: Can't convert object of type org.postgresql.util.PGobject -->
+<!-- 		<dependency> -->
+<!-- 			<artifactId>hibernate-ehcache</artifactId> -->
+<!-- 			<groupId>org.hibernate</groupId> -->
+<!-- 			<version>4.0.0.Final</version> -->
+<!-- 		</dependency> -->
 		
 	</dependencies>
 	

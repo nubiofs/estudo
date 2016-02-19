@@ -14,6 +14,8 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 
 @Entity
 @Table(name="uf")
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="tableRegion")
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class UnidadeFederativa implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
