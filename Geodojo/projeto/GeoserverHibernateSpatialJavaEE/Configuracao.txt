@@ -38,6 +38,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Configuração Jboss EAP 6.4:
 
 http://docs.jboss.org/overlord/rtgov/user/1.0.0.Final/html/_installation.html
+https://access.redhat.com/documentation/en-US/JBoss_Enterprise_BRMS_Platform/5/html/BRMS_Administrator_Guide/Configuring_a_Datasource_for_JBoss_Enterprise_Application_Platform_6.html
 
 ....
 
