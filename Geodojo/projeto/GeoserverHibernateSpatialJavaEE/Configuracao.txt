@@ -39,6 +39,63 @@ Configuração Jboss EAP 6.4:
 
 http://docs.jboss.org/overlord/rtgov/user/1.0.0.Final/html/_installation.html
 
+....
+
+(Postgres)
+
+    >> Create the $JBossAS/modules/org/postgresql/main folder (VER imagem "VirtualBox_Ubuntu-15.10_19_02_2016_11_20_04.png").
+    
+    Put the postgresql driver jar in the $JBossAS/modules/org/postgresql/main folder, e.g. postgresql-9.1-902.jdbc4.jar.
+    
+    Create a module.xml file, within the $JBossAS/modules/org/postgresql/main folder, with the contents: 
+
+<module xmlns="urn:jboss:module:1.1" name="org.postgresql">
+
+   <resources>
+
+     <resource-root path="postgresql-9.1-902.jdbc4.jar"/>
+
+   </resources>
+
+   <dependencies>
+
+     <module name="javax.api"/>
+
+     <module name="javax.transaction.api"/>
+
+   </dependencies>
+
+</module>
+
+    >> Edit the $JBossAS/standalone/configuration/standalone-full.xml file to include the PostgresSQL driver: 
+
+
+<subsystem xmlns="urn:jboss:domain:datasources:1.0">
+
+        <datasources>
+
+            .....
+
+            <drivers>
+
+                ...
+
+                <driver name="postgresql" module="org.postgresql">
+
+                    <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+
+                </driver>
+
+            </drivers>
+
+        </datasources>
+
+    </subsystem>
+
+
+
+....
+
 Ver (item "2.1.2.3. Database" --> "Postgres"):
 
         <subsystem xmlns="urn:jboss:domain:datasources:1.2">
