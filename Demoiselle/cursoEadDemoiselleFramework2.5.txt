@@ -8,7 +8,7 @@ Conteúdo programático:
 
 (BÁSICO M1C1: CALCULADORA JS); ==> OK
 
-(M1C2: SERVIÇO SOMA); ==> OK
+(M1C2: SERVIÇO SOMA); ==> PAREI EM "Utilizando JSON"
 
 (M1C3: PLAYLOAD); (M1C4: AJAX); (M1C5: HTTP 422). 
 
