@@ -1,3 +1,5 @@
+**  Abra o terminal ( o atalho para o mesmo é ctrl + alt + t ) e execute o comando
+
 ** Buscando arquivos (pelo conteúdo contido no mesmo):
 
 grep -R -H -i " Git " ./ >> ver.txt
