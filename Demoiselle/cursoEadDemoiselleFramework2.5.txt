@@ -4,3 +4,21 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 Conteúdo programático:
 MÓDULO 1: BÁSICO M1C1: CALCULADORA JS; M1C2: SERVIÇO SOMA; M1C3: PLAYLOAD; M1C4: AJAX; M1C5: HTTP 422. MÓDULO 2: BACK-END M2C1: HTTP É...; M2C2: SERVIÇO INSERIR; M2C3: SERVIÇO ATUALIZAR; M2C4: SERVIÇO LISTAR. MÓDULO 3: FRONT-END M3C1: HTML5 + CSS3; M3C2: CADASTRO DE PESSOAS; M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA; M3C4: LISTANDO AS PESSOAS.
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://moodle.ead.serpro.gov.br/login/index.php
+
+--------------------------------------------------------------------------------------------------------------------------
+
+https://demoisellelab.wordpress.com/preparando-o-terreno/ ==> OK
+
+** NO PROJETO (https://github.com/nubiofs/calc):
+
+(M1C1: calculadora JS)
+https://demoisellelab.wordpress.com/m1c1/ ==> OK
+
+(M1C2: serviço soma)
+https://demoisellelab.wordpress.com/m1c2/ ==> OK
+
+Obs.: utilizando (chromium-browser & Postman para "http://localhost:8080/calc/api/calculator/sum")
