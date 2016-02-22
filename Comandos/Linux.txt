@@ -1,4 +1,10 @@
-**  Abra o terminal ( o atalho para o mesmo é ctrl + alt + t ) e execute o comando
+**  Abrir um terminal (para execultar comandos):
+
+atalho --> ctrl + alt + t
+
+** Abrir / procurar programas:
+
+$ gnome-panel-control --run-dialog
 
 ** Buscando arquivos (pelo conteúdo contido no mesmo):
 
