@@ -9,6 +9,8 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 https://moodle.ead.serpro.gov.br/login/index.php
 
+Obs.: No Serpro utilizando: /opt/demoiselle/workspace_curso_moodle-ead_demoiselle2.5
+
 --------------------------------------------------------------------------------------------------------------------------
 
 https://demoisellelab.wordpress.com/preparando-o-terreno/ ==> OK
