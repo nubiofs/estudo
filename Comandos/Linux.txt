@@ -8,3 +8,19 @@ grep -R  "Meu Texto" /home/blablabla/ | cut -d: -f1 | uniq
 
 ln -s /local/do/exec /local/onde/ficará/o/link/do/exec
 
+** Criando lançadores (ubuntu debian):
+
+dica em -> http://www.akkiri.com/dicas/criarlancador.php
+
+$ sudo apt-get install gnome-panel
+
+$ sudo gnome-desktop-item-edit /usr/share/applications/ --create-new
+
+    sudo : dará poderes de administrador (super user do)
+
+    gnome-desktop-item-edit: programa que será executado
+
+    /usr/share/applications/ : local onde será criado o lançador / atalho
+
+    -- create-new : cria novo lançador / atalho
+
