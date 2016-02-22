@@ -1,0 +1,7 @@
+Projet bookmark em:
+
+https://github.com/nubiofs/bookmark
+
+com archetype "demoiselle-rest-parent"
+
+version 2.5.1
