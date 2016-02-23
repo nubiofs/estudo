@@ -22,6 +22,8 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 https://moodle.ead.serpro.gov.br/login/index.php
 
+Documentação rest versão 2.5: http://demoiselle.sourceforge.net/docs/framework/reference/2.5.0-RC1/html_single/
+
 Obs.: No Serpro utilizando: /opt/demoiselle/workspace_curso_moodle-ead_demoiselle2.5
 
 --------------------------------------------------------------------------------------------------------------------------
