@@ -5,3 +5,7 @@ https://github.com/nubiofs/bookmark
 com archetype "demoiselle-rest-parent"
 
 version 2.5.1
+
+Documentação inicial em:
+
+http://demoiselle.sourceforge.net/docs/framework/quickstart/2.5.0-RC1/html_single/
