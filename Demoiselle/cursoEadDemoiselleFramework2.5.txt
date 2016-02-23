@@ -8,9 +8,11 @@ Conteúdo programático:
 
 (BÁSICO M1C1: CALCULADORA JS); ==> OK
 
-(M1C2: SERVIÇO SOMA); ==> PAREI EM "Utilizando JSON"
+(M1C2: SERVIÇO SOMA); ==> OK
 
-(M1C3: PLAYLOAD); (M1C4: AJAX); (M1C5: HTTP 422). 
+(M1C3: PLAYLOAD); ==> ESTOU AQUI
+
+(M1C4: AJAX); (M1C5: HTTP 422). 
 
 MÓDULO 2: (BACK-END M2C1: HTTP É...); (M2C2: SERVIÇO INSERIR); (M2C3: SERVIÇO ATUALIZAR); (M2C4: SERVIÇO LISTAR). 
 
@@ -35,3 +37,5 @@ https://demoisellelab.wordpress.com/m1c1/ ==> OK
 https://demoisellelab.wordpress.com/m1c2/ ==> OK
 
 Obs.: utilizando (chromium-browser & Postman para "http://localhost:8080/calc/api/calculator/sum")
+
+Ver comentários em "CalculatorREST.java"
