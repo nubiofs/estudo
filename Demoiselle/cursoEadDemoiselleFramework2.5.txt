@@ -1,8 +1,10 @@
 CURSO DEMOISELLE FRAMEWORK 2.5, que será realizado no período de 01/02/2016 a 16/03/2016.
 
+* Link do curso:
+
 https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
-Conteúdo programático:
+* Conteúdo programático:
 
 [MÓDULO 1]: 
 
@@ -14,7 +16,9 @@ Conteúdo programático:
 
 (M1C4: AJAX); ==> OK
 
-(M1C5: HTTP 422) ==> ESTOU AQUI
+(M1C5: HTTP 422) ==> OK
+
+"Exercício - Módulo 1: Básico" - (Atividade Avaliativa - Módulo 1) ==> ESTOU AQUI
 
 MÓDULO 2: (BACK-END M2C1: HTTP É...); (M2C2: SERVIÇO INSERIR); (M2C3: SERVIÇO ATUALIZAR); (M2C4: SERVIÇO LISTAR). 
 
