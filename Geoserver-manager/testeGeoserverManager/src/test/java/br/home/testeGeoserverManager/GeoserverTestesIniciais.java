@@ -1,36 +1,45 @@
 package br.home.testeGeoserverManager;
 
-import java.net.MalformedURLException;
 import static org.junit.Assert.*;
+
+import java.net.MalformedURLException;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
+import it.geosolutions.geoserver.rest.decoder.RESTLayer;
 
-public class acessoGeoserverTest {
+public class GeoserverTestesIniciais {
 
 	private static final String RESTURL = "http://localhost:8080/geoserver";
 	private static final String RESTUSER = "admin";
 	private static final String RESTPW = "geoserver";
-	
+
+	private static GeoServerRESTReader reader;
+
 	@BeforeClass
 	public static void beforeClass() {
 		
-	}
-
-	@Test
-	public void acessoOK() {
-
-		GeoServerRESTReader reader;
-		
 		try {
 			reader = new GeoServerRESTReader(RESTURL, RESTUSER, RESTPW);
-			assertTrue(reader.existGeoserver());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 
+	}
+
+	@Test
+	public void existGeoserver() {
+		assertTrue(reader.existGeoserver());
+	}
+	
+	@Test
+	public void getLayerStates() {
+		String layer = "states";
+		RESTLayer states = reader.getLayer("topp", layer);
+		assertEquals(layer, states.getName());
 	}
 
 }
