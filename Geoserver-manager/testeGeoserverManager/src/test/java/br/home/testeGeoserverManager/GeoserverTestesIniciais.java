@@ -1,11 +1,14 @@
 package br.home.testeGeoserverManager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.RESTLayer;
@@ -18,6 +21,8 @@ public class GeoserverTestesIniciais {
 
 	private static GeoServerRESTReader reader;
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(GeoserverTestesIniciais.class);
+	
 	@BeforeClass
 	public static void beforeClass() {
 		
@@ -25,7 +30,7 @@ public class GeoserverTestesIniciais {
 			reader = new GeoServerRESTReader(RESTURL, RESTUSER, RESTPW);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
+			LOGGER.error(e.getMessage());
 		}
 
 	}
@@ -33,6 +38,7 @@ public class GeoserverTestesIniciais {
 	@Test
 	public void existGeoserver() {
 		assertTrue(reader.existGeoserver());
+		LOGGER.info("existGeoserver OK...");
 	}
 	
 	@Test
@@ -40,6 +46,7 @@ public class GeoserverTestesIniciais {
 		String layer = "states";
 		RESTLayer states = reader.getLayer("topp", layer);
 		assertEquals(layer, states.getName());
+		LOGGER.info("exist states Layer OK...");
 	}
 
 }
