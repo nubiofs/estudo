@@ -20,9 +20,14 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 "Exercício - Módulo 1: Básico" - (Atividade Avaliativa - Módulo 1) ==> OK
 
-MÓDULO 2: (BACK-END M2C1: HTTP É...) ==> ESTOU AQUI
+[MÓDULO 2]: 
 
-(M2C2: SERVIÇO INSERIR); (M2C3: SERVIÇO ATUALIZAR); (M2C4: SERVIÇO LISTAR). 
+(BACK-END M2C1: HTTP É...) ==> OK
+
+(M2C2: SERVIÇO INSERIR); ==> ESTOU AQUI
+
+
+(M2C3: SERVIÇO ATUALIZAR); (M2C4: SERVIÇO LISTAR). 
 
 MÓDULO 3: (FRONT-END M3C1: HTML5 + CSS3); (M3C2: CADASTRO DE PESSOAS); (M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); (M3C4: LISTANDO AS PESSOAS).
 
