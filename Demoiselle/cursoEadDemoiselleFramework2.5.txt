@@ -26,7 +26,6 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 (M2C2: SERVIÇO INSERIR); ==> ESTOU AQUI
 
-
 (M2C3: SERVIÇO ATUALIZAR); (M2C4: SERVIÇO LISTAR). 
 
 MÓDULO 3: (FRONT-END M3C1: HTML5 + CSS3); (M3C2: CADASTRO DE PESSOAS); (M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); (M3C4: LISTANDO AS PESSOAS).
@@ -43,14 +42,26 @@ Obs.: No Serpro utilizando: /opt/demoiselle/workspace_curso_moodle-ead_demoisell
 
 https://demoisellelab.wordpress.com/preparando-o-terreno/ ==> OK
 
-** NO PROJETO (https://github.com/nubiofs/calc):
+** NO PROJETO (https://github.com/nubiofs/calc), há o código para (ver tags em "https://github.com/nubiofs/calc/blob/master/README.md"):
 
-(M1C1: calculadora JS)
-https://demoisellelab.wordpress.com/m1c1/ ==> OK
+(M1C1: CALCULADORA JS); ==> OK
 
-(M1C2: serviço soma)
-https://demoisellelab.wordpress.com/m1c2/ ==> OK
+(M1C2: SERVIÇO SOMA); ==> OK
+
+(M1C3: PLAYLOAD); ==> OK
+
+(M1C4: AJAX); ==> OK
+
+(M1C5: HTTP 422) ==> OK
+
+(Atividade Avaliativa - Módulo 1) ==> OK
 
 Obs.: utilizando (chromium-browser & Postman para "http://localhost:8080/calc/api/calculator/sum")
 
 Ver comentários em "CalculatorREST.java"
+
+** NO PROJETO (https://github.com/nubiofs/cadastro), há o código para (ver tags em "https://github.com/nubiofs/cadastro/blob/master/README.md"):
+
+(M2C2: SERVIÇO INSERIR); ==> ESTOU AQUI
+
+
