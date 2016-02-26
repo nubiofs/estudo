@@ -60,7 +60,7 @@ Obs.: utilizando (chromium-browser & Postman para "http://localhost:8080/calc/ap
 
 Ver comentários em "CalculatorREST.java"
 
-** NO PROJETO (https://github.com/nubiofs/cadastro), há o código para (ver tags em "https://github.com/nubiofs/cadastro/blob/master/README.md"):
+** NO PROJETO (https://github.com/nubiofs/estudo/tree/master/Demoiselle/cadastro), há o código para:
 
 (M2C2: SERVIÇO INSERIR); ==> ESTOU AQUI
 
