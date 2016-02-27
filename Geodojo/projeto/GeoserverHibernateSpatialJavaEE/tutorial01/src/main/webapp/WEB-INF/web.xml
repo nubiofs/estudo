@@ -45,6 +45,22 @@
 		<url-pattern>*.jsf</url-pattern>
 	</servlet-mapping>
 
+	<!-- Existe uma restrição no OpenLayers que não permite que obtenhamos informações (via <m:getFeatureInfo />)
+	de uma camada a partir de um servidor de mapas, o nosso caso o GeoServer, que não esteja no subdomínio da aplicação. 
+	(VER DEPOIS SE AINDA HÁ ESSA RESTRIÇÃO!!!)
+	Para resolver essas e outras questões o OL4JSF vem com um servlet que funciona como um proxy 
+	(OL4JSF Proxy em 'ol4jsf-proxy.xml') entre a sua aplicação e o servidor de mapas -->
+	<!-- 
+	<servlet>
+	    <servlet-name>OL4JSFProxy</servlet-name>
+	    <servlet-class>org.ol4jsf.proxy.servlet.OL4JSFProxy</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>OL4JSFProxy</servlet-name>
+	    <url-pattern>/OL4JSFProxy/*</url-pattern>
+	</servlet-mapping>
+	-->
+	
 	<security-constraint>
 		<display-name>Restrict raw XHTML Documents</display-name>
 		<web-resource-collection>

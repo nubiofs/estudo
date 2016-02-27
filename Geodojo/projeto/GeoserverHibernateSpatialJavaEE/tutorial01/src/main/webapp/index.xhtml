@@ -1,16 +1,71 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:m="http://www.ol4jsf.org"
+	template="/template/main.xhtml">
 
 	<ui:define name="body">
+
 		<p:panel>
 			#{messages['main.app.welcome']}
 		</p:panel>
+		
+		<h1>Trabalhando com OL4JSF...</h1>
+		<br />
+<!-- 		<m:map width="1024px" height="512px"> -->
+<!-- 			<m:wmsLayer name="OpenLayers WMS" -->
+<!-- 				url="http://labs.metacarta.com/wms/vmap0" params="{layers:'basic'}" /> -->
+<!-- 			<m:wmsLayer name="NASA Global Mosaic" -->
+<!-- 				url="http://t1.hypercube.telascience.org/cgi-bin/landsat7" -->
+<!-- 				params="{layers:'landsat7'}" /> -->
+<!-- 			<m:layerSwitcherControl /> -->
+<!-- 		</m:map> -->
+		<br />
+		
+		<h1>USA Image...</h1>
+		<m:map width="768px" height="372px">
+			<m:wmsLayer name="USA Image" 
+                url="http://localhost:8080/geoserver/wms" params="{layers:'nurc:Img_Sample'}" />
+            <m:layerSwitcherControl />    
+        </m:map>
+		<br />
+		
+		<h1>USA Population...</h1>
+		<m:map width="768px" height="300px">
+			<m:wmsLayer name="USA Population" 
+                url="http://localhost:8080/geoserver/wms" 
+                params="{layers:'topp:states'}" />
+            <m:layerSwitcherControl />    
+        </m:map>
+		<br />
+		
+		<h1>USA Image + Population...</h1>
+		<m:map width="768px" height="372px" options="{controls: [], numZoomLevels: 6}">
+			<m:wmsLayer name="USA Image" 
+                url="http://localhost:8080/geoserver/wms" params="{layers:'nurc:Img_Sample'}" />
+            <m:wmsLayer name="USA Population" 
+                url="http://localhost:8080/geoserver/wms" 
+                params="{layers:'topp:states', transparent:true}" options="{isBaseLayer:false}"/>
+			<m:navigationControl />
+            <m:panZoomBarControl />
+            <m:layerSwitcherControl options="{ascending:false}" />
+            <m:scaleLineControl />
+            <m:mousePositionControl />
+            <m:overviewMapControl />
+            <m:keyboardDefaultsControl />
+            <m:permalinkControl /> 
+        </m:map>
+		<br />
+
 		<h:form prependId="false">
 			<h1>Mostrando o nome do estado de PE...</h1>
 			<br />
 			<p:commandButton value="#{messages['button.show']}" action="#{unidadeFederativaEditMB.mostrarPE}" ajax="false" />
 			<p:outputLabel value="#{unidadeFederativaEditMB.mostrarPE}"/>
 		</h:form>
+
 	</ui:define>
 
 </ui:composition>
