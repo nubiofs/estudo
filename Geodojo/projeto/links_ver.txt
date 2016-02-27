@@ -1,0 +1,1 @@
+http://www.geoservicos.ibge.gov.br/geoserver/ows?service=wfs&version=1.0.0&request=GetCapabilities
