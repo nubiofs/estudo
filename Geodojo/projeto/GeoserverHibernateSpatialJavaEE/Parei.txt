@@ -1,0 +1,3 @@
+Parei em file:///home/clenubio/Desenvolvimento/Estudos/Geodojo/arqs_html/7-ol4jsf/ol4jsf.html
+
+item "Obtendo features a partir de um backing bean"
