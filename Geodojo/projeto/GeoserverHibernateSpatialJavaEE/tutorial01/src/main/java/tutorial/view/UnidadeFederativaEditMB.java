@@ -2,7 +2,11 @@ package tutorial.view;
 
 import javax.inject.Inject;
 
+import org.ol4jsf.component.api.FeatureVector;
+import org.ol4jsf.util.WKTFeaturesCollection;
+
 import br.gov.frameworkdemoiselle.annotation.PreviousView;
+import br.gov.frameworkdemoiselle.lifecycle.Startup;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
@@ -21,24 +25,18 @@ public class UnidadeFederativaEditMB extends AbstractEditPageBean<UnidadeFederat
 	@Override
 	@Transactional
 	public String delete() {
-//		this.bookmarkBC.delete(getId());
-//		return getPreviousView();
 		return null;
 	}
 
 	@Override
 	@Transactional
 	public String insert() {
-//		this.bookmarkBC.insert(getBean());
-//		return getPreviousView();
 		return null;
 	}
 
 	@Override
 	@Transactional
 	public String update() {
-//		this.bookmarkBC.update(getBean());
-//		return getPreviousView();
 		return null;
 	}
 
@@ -46,23 +44,49 @@ public class UnidadeFederativaEditMB extends AbstractEditPageBean<UnidadeFederat
 	protected UnidadeFederativa handleLoad(Long id) {
 		return this.ufBC.load(id);
 	}
-	
-	private String mostrarPE="";
-	
-	public String getMostrarPE() {
-		return this.mostrarPE;
-	}
 
-	public void setMostrarPE(String mostrarPE) {
-		this.mostrarPE = mostrarPE;
+	private UnidadeFederativa ufPE;
+	private String descricaoPE="";
+	private String poligonoTextPE="";
+	private String wktPE="";
+	
+	@Startup
+	@Transactional
+	public void loadUfPE() {
+		
+		this.ufPE = this.handleLoad(3L);
+		this.poligonoTextPE = this.ufPE.getPoligono().toText();
+		
+		WKTFeaturesCollection features = new WKTFeaturesCollection();
+		features.addFeature(new FeatureVector(this.poligonoTextPE));
+		String[] geo = features.toMap().split("'");
+		System.out.println("VER wktPE: " + geo[1]);
+		this.setWktPE(geo[1]);
+		
+	}
+	
+	public String getDescricaoPE() {
+		return descricaoPE;
+	}
+	
+	public void setDescricaoPE(String descricaoPE) {
+		this.descricaoPE = descricaoPE;
 	}
 	
 	@Transactional
-	public String mostrarPE(){
-		UnidadeFederativa uf = this.ufBC.getId(3L);
-		this.mostrarPE = " Nome de PE: [" + uf.getNome() + "]; Geo = [" + uf.getPoligono().toText() + "]";
-		//System.out.println(this.mostrarPE);
-		return this.mostrarPE;
+	public String descricaoPE(){
+		this.descricaoPE = " Nome de PE: [" + this.ufPE.getNome() + "]; Geo = [" + this.poligonoTextPE + "]";
+		System.out.println("VER descricaoPE: " + this.descricaoPE);
+		return this.descricaoPE;
 	}
 
+	@Transactional
+	public String getWktPE(){
+        return this.wktPE;
+	}
+	
+	public void setWktPE(String wkt) {
+		this.wktPE = wkt;
+	}
+	
 }
