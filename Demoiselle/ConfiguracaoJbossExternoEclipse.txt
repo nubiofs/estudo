@@ -24,12 +24,12 @@ Port:8787
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Script para automatizar a build (via Maven) do Projeto "cadastro":
 
-No path (estudo.git/Demoiselle/cadastro):
+No path do projeto (estudo.git/Demoiselle/cadastro):
 #!/bin/sh
-$ cd /opt/demoiselle/estudo.git/Demoiselle/cadastro
-$ ~/mvn clean install -Dmaven.test.skip=true --offline 
-$ rm -rf /opt/demoiselle/jboss-eap-6.3/standalone/deployments/cadastro-0.0.1-SNAPSHOT.war
-$ cp /target/cadastro-0.0.1-SNAPSHOT.war /opt/demoiselle/jboss-eap-6.3/standalone/deployments
+# cd /opt/demoiselle/estudo.git/Demoiselle/cadastro
+$ ~/mvn clean install -Dmaven.test.skip=true --offline
+$ rm -rf /opt/demoiselle/jboss-eap-6.3/standalone/deployments/cadastro.war
+$ cp ./target/cadastro.war /opt/demoiselle/jboss-eap-6.3/standalone/deployments
 #END
 
 $ chmod +x build.sh
