@@ -69,6 +69,7 @@ Ver outros links (referências):
 
 https://github.com/jboss-developer/jboss-eap-quickstarts/blob/7.0.x-develop/h2-console/README.md
 http://www.h2database.com/html/quickstart.html
+http://andreyvoev.com/programming/java/jboss-initial-setup-and-datasource-configuration/
 
 ---------------
 
