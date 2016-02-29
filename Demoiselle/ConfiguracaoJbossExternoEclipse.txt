@@ -46,6 +46,7 @@ The reason for this is to be able to execute custom build commands and script fa
 
 ==> RESPOSTAS:
 1) There is a built-in feature in Eclipse than you may find helpful. Go to Window > Show View > Other... then select Remote Systems. Unfold the tree, right-click on Local Shells and select Lauch Shell.
+--> Problema dessa 1 opção "não encontra o jdk (JAVA_HOME)" como variável de ambiente!!!
 
 2) The Terminal/ Shell Plugin in Eclipse MarketPlace does that...
 
