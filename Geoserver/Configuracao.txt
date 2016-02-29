@@ -76,3 +76,27 @@ exit 0
 
 ~$ sudo update-rc.d tomcat defaults
 
+==> Em "deploying GeoServer on Tomcat" (do ebook "GeoServer Beginner's Guide")
+
+The war file for GeoServer is quite big, actually a little more than 64 MByte. In Tomcat Manager there is a default limit for deployable application that is at 50 MByte. 
+You will set it to a safe size for GeoServer. Open the $CATALINA_HOME/webapps/manager/WEB-INF/web.xml file and look for this section:
+
+<multipart-config>
+<!-- 50MB max -->
+<max-file-size>52428800</max-file-size>
+<max-request-size>52428800</max-request-size>
+<file-size-threshold>0</file-size-threshold>
+</multipart-config>
+
+Set the max-file-size to 72914560 value both in max-file-size and max-request-size parameters. Save the file and restart Tomcat.
+
+** Em "http://localhost:8888/manager/html"
+
+WAR file to deploy...
+Select WAR file to upload...
+<Deploy>
+
+=> Inicializar num browser:
+
+http://localhost:8888/geoserver/
+
