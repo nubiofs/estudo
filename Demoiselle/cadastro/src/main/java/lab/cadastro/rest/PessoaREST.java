@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ValidatePayload;
+import lab.cadastro.entity.Pessoa;
+import lab.cadastro.persistence.PessoaDAO;
 
 @Path("pessoa")
 public class PessoaREST {
@@ -60,11 +62,35 @@ public class PessoaREST {
 	@ValidatePayload
 	@Consumes("application/json")
 	@Transactional
-	public void inserir(Pessoa p){
+	public void inserir(PessoaBody p){
 		LOGGER.info("Pessoa (nome="+p.nome + ", email="+p.email+")");
+		
+		Pessoa entity = new Pessoa();
+        entity.setNome(p.nome);
+        entity.setEmail(p.email);
+        entity.setTelefone(p.telefone);
+
+		/*
+		 * Note que foi evitado a injeção da classe PessoaDAO em PessoaREST. 
+		 * É uma boa decisão não atrelar o ciclo de vida do DAO ao REST. 
+		 * Da forma que está feito, o DAO será criado e destruído durante a 
+		 * chamada ao método inserir.
+		 * Imagine agora essa classe REST com 4 métodos, sendo que cada um 
+		 * precisasse invocar um DAO diferente. Ao injetar os 4 DAOs como atributo 
+		 * da classe REST todos os 4 DAOs seriam instanciados, mas apenas 1 seria 
+		 * utilizado (Recursos desperdiçados). 
+		 */
+        PessoaDAO.getInstance().insert(entity);
+        
 	}
 	
-	public static class Pessoa {
+	//Obs.:  É realmente necessário manter as duas classes PessoaBody e Pessoa 
+	//já que elas são praticamente idênticas? Obrigatório não é, mas é interessante 
+	//separar sim. Em aplicações reais e mais complexas é comum que a entidade possua 
+	//muitos outros atributos que não interessam àquele serviço, mas a outro sim. 
+	//Do mesmo modo, os payloads podem possuir atributos, listas ou referenciar outras 
+	//classes que só fazem sentido no contexto dos serviços. Esta é apenas uma sugestão. 
+	public static class PessoaBody {
 		
 		@NotEmpty
 		@Size(min=3, max=50)

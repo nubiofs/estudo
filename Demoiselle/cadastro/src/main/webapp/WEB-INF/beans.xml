@@ -17,6 +17,8 @@ must be in the META-INF directory.
 
 <interceptors>
         <class>br.gov.frameworkdemoiselle.util.ValidatePayloadInterceptor</class>
+        <!-- Ativar o mecanismo de controle transacional do Demoiselle -->
+        <class>br.gov.frameworkdemoiselle.transaction.TransactionalInterceptor</class>
 </interceptors>
  
 </beans>
