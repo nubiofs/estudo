@@ -57,7 +57,9 @@ The reason for this is to be able to execute custom build commands and script fa
 3) Ctrl+Alt+Shift+T and click the "Terminal" toolbar button (plugin "TM Terminal" já instalado)
 ==> A MELHOR OPÇÃO !!!!
 
+==========================
 ==> Utilizando h2-console 
+==========================
 
 Ver https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.0.x-develop/h2-console (em https://github.com/jboss-developer/jboss-eap-quickstarts):
 
@@ -68,6 +70,19 @@ Ver outros links (referências):
 https://github.com/jboss-developer/jboss-eap-quickstarts/blob/7.0.x-develop/h2-console/README.md
 http://www.h2database.com/html/quickstart.html
 
+---------------
 
+Deploy the console by copying the h2console.war located in the root directory of this quickstart to the EAP_HOME/standalone/deployments directory.
+Access the H2 Console
+
+You can access the console at the following URL: http://localhost:8080/h2console.
+
+You need to enter the JDBC URL, and credentials. To access the "test" database that the greeter quickstart uses, enter these details:
+
+    JDBC URL: jdbc:h2:mem:greeter-quickstart;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
+    User Name: sa
+    Password: sa
+
+Click on the Test Connection button to make sure you can connect. If you can, go ahead and click Connect.
 
 
