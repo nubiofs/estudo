@@ -26,6 +26,9 @@ Script para automatizar a build (via Maven) do Projeto "cadastro":
 
 No path do projeto (estudo.git/Demoiselle/cadastro):
 #!/bin/sh
+# Pasta do execultado do Jboss:
+# cd /opt/demoiselle/jboss-eap-6.3/bin
+# Pasta do projeto:
 # cd /opt/demoiselle/estudo.git/Demoiselle/cadastro
 $ ~/mvn clean install -Dmaven.test.skip=true --offline
 $ rm -rf /opt/demoiselle/jboss-eap-6.3/standalone/deployments/cadastro.war
@@ -52,6 +55,7 @@ The reason for this is to be able to execute custom build commands and script fa
 --> por exemplo o "EasyShell"
 
 3) Ctrl+Alt+Shift+T and click the "Terminal" toolbar button (plugin "TM Terminal" já instalado)
+==> A MELHOR OPÇÃO !!!!
 
 
 
