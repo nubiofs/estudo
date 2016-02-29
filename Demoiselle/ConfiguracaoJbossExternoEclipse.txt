@@ -49,6 +49,7 @@ The reason for this is to be able to execute custom build commands and script fa
 --> Problema dessa 1 opção "não encontra o jdk (JAVA_HOME)" como variável de ambiente!!!
 
 2) The Terminal/ Shell Plugin in Eclipse MarketPlace does that...
+--> por exemplo o "EasyShell"
 
 3) Ctrl+Alt+Shift+T and click the "Terminal" toolbar button (plugin "TM Terminal" já instalado)
 
