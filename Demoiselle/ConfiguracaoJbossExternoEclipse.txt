@@ -47,7 +47,9 @@ The reason for this is to be able to execute custom build commands and script fa
 ==> RESPOSTAS:
 1) There is a built-in feature in Eclipse than you may find helpful. Go to Window > Show View > Other... then select Remote Systems. Unfold the tree, right-click on Local Shells and select Lauch Shell.
 
-2) The Terminal/ Shell Plugin in Eclipse MarketPlace does that..
+2) The Terminal/ Shell Plugin in Eclipse MarketPlace does that...
+
+3) Ctrl+Alt+Shift+T and click the "Terminal" toolbar button (plugin "TM Terminal" já instalado)
 
 
 
