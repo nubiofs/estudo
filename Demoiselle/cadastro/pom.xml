@@ -9,10 +9,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name></name>
-	<description></description>
-	<url></url>
-
 	<parent>
 		<groupId>br.gov.frameworkdemoiselle</groupId>
 		<artifactId>demoiselle-minimal-parent</artifactId>
@@ -84,6 +80,11 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		
+		<!-- Para gerar a build na pasta target 
+		sem o número da versão (cadastro-0.0.1-SNAPSHOT.war) -->
+		<finalName>${project.artifactId}</finalName>
+		
 	</build>
  	
 </project>
