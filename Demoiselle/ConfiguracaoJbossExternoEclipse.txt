@@ -32,8 +32,9 @@ $ rm -rf /opt/demoiselle/jboss-eap-6.3/standalone/deployments/cadastro-0.0.1-SNA
 $ cp /target/cadastro-0.0.1-SNAPSHOT.war /opt/demoiselle/jboss-eap-6.3/standalone/deployments
 #END
 
-& chmod +x build.sh
+$ chmod +x build.sh
 
+$ ./build.sh
 
 
 
