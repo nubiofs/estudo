@@ -36,6 +36,18 @@ $ chmod +x build.sh
 
 $ ./build.sh
 
+************
+**Observação
+************
+
+I'm looking for an Eclipse plug-in that shows a system (independent) command line in a view that is ideally synchronized with the current project's local path. So basically a shell within Eclipse.
+
+The reason for this is to be able to execute custom build commands and script faster than specifying them as launch configurations or having to open a command prompt every time I start eclipse.
+
+==> RESPOSTA:
+There is a built-in feature in Eclipse than you may find helpful. Go to Window > Show View > Other... then select Remote Systems. Unfold the tree, right-click on Local Shells and select Lauch Shell.
+
+
 
 
 
