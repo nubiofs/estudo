@@ -31,6 +31,7 @@ http://mirror.nbtelecom.com.br/apache/tomcat/tomcat-9/v9.0.0.M3/bin/apache-tomca
 
 $ ./catalina.sh start
 
+** Observação:
 ** Caso queira execultar o "tomcat" automaticamente no servidor Ubuntu (criar o seguinte script "/etc/init.d/tomcat"):
 
 #!/bin/sh
