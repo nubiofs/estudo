@@ -24,7 +24,7 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 (BACK-END M2C1: HTTP É...) ==> OK
 
-(M2C2: SERVIÇO INSERIR); ==> ESTOU AQUI "item beans.xml"
+(M2C2: SERVIÇO INSERIR); ==> ESTOU AQUI "Preparando o JPA"
 
 (M2C3: SERVIÇO ATUALIZAR); (M2C4: SERVIÇO LISTAR). 
 
