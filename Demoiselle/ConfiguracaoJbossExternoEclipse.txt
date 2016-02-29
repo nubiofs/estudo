@@ -1,0 +1,25 @@
+** Arquivo de configuração do Jboss fora do Eclipse **
+
+** Para execução do Jboss:
+
+Executar no prompt (em jboss-eap-6.3/bin):
+
+$ ./standalone.sh -b 0.0.0.0
+
+** Configurações para debug:
+
+Em /jboss-eap-6.3/bin/standalone.conf, descomentar (local onde há o endereço "address=8787"):
+
+JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,address=8787,server=y,suspend=n"
+
+No eclipse (para realizar debug), botão direito mouse sobre o projeto:
+
+Debug as...Debug Configuration...
+
+New para (Remote Java Application) com:
+
+Name:[Proje]_remote_debugt
+Port:8787
+
+
+
