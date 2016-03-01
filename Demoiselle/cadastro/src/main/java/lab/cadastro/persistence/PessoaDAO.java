@@ -25,4 +25,8 @@ public class PessoaDAO {
         em.persist(pessoa);
     }
 	
+	public Pessoa load(Integer id) {
+        return em.find(Pessoa.class, id);
+    }
+	
 }
