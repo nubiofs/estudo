@@ -24,9 +24,11 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 (BACK-END M2C1: HTTP É...) ==> OK
 
-(M2C2: SERVIÇO INSERIR); ==> ESTOU AQUI "De volta à PessoaREST"
+(M2C2: SERVIÇO INSERIR); ==> OK
 
-(M2C3: SERVIÇO ATUALIZAR); (M2C4: SERVIÇO LISTAR). 
+(M2C3: SERVIÇO ATUALIZAR); ==> ESTOU AQUI
+
+(M2C4: SERVIÇO LISTAR). 
 
 MÓDULO 3: (FRONT-END M3C1: HTML5 + CSS3); (M3C2: CADASTRO DE PESSOAS); (M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); (M3C4: LISTANDO AS PESSOAS).
 
@@ -62,6 +64,6 @@ Ver comentários em "CalculatorREST.java"
 
 ** NO PROJETO (https://github.com/nubiofs/estudo/tree/master/Demoiselle/cadastro), há o código para:
 
-(M2C2: SERVIÇO INSERIR); ==> ESTOU AQUI
+(M2C2: SERVIÇO INSERIR); OK com tag m2c2
 
 
