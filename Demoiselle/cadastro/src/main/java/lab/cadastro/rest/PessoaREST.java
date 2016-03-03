@@ -4,6 +4,7 @@ import javax.validation.constraints.Size;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -153,6 +154,53 @@ public class PessoaREST {
         return body;
         
     }
+	
+	//PUT para fazer a atualização completa da Pessoa
+	/**
+	 * - Exemplo de utilização com Postman:
+	 * 
+	 * URL: http://localhost:8080/cadastro/api/pessoa/10
+	 * Method: PUT
+     * Content-Type: application/json
+     * Payload Raw: o seguinte conteúdo:
+	 *
+	 * Request payload
+	 * {
+	 *    "nome" : "John",
+	 *    "email" : "john@gmail.com",
+	 *    "telefone" : "(71) 0000-0000"
+	 * }
+	 * 
+	 * Response payload
+ 	 * {
+	 *    "nome" : "John",
+	 *    "email" : "john@gmail.com",
+	 *    "telefone" : "(71) 0000-0000"
+	 * }
+	 * 
+	 */
+	@PUT
+	@Path("{id}")
+	@ValidatePayload
+	@Consumes("application/json")
+	@Transactional
+	public void atualizar(@PathParam("id") Integer id, PessoaBody body) throws Exception {
+		
+		PessoaDAO pessoaDAO = PessoaDAO.getInstance();
+		Pessoa pessoa = pessoaDAO.load(id);
+
+		if (pessoa == null) {
+			//Caso registro no banco de dados associado ao id não exista.
+			//O Demoiselle tratará a exceção e montará um response com status 404
+			throw new NotFoundException();
+		}
+
+		pessoa.setNome(body.nome);
+		pessoa.setEmail(body.email);
+		pessoa.setTelefone(body.telefone);
+		pessoaDAO.update(pessoa);
+		
+	}
 	
 	//Obs.:  É realmente necessário manter as duas classes PessoaBody e Pessoa 
 	//já que elas são praticamente idênticas? Obrigatório não é, mas é interessante 

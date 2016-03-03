@@ -14,19 +14,23 @@ public class PessoaDAO {
 	@Inject
 	@Name("cadastro-ds")
 	private EntityManager em;
-	
-	//Esse método estático "getInstance", retorna uma instância controlada 
-	//pelo CDI da classe PessoaDAO
+
+	// Esse método estático "getInstance", retorna uma instância controlada
+	// pelo CDI da classe PessoaDAO
 	public static PessoaDAO getInstance() {
-        return Beans.getReference(PessoaDAO.class);
-    }
-	
+		return Beans.getReference(PessoaDAO.class);
+	}
+
 	public void insert(Pessoa pessoa) {
-        em.persist(pessoa);
-    }
-	
+		em.persist(pessoa);
+	}
+
 	public Pessoa load(Integer id) {
-        return em.find(Pessoa.class, id);
-    }
+		return em.find(Pessoa.class, id);
+	}
+
+	public void update(Pessoa pessoa) {
+		em.merge(pessoa);
+	}
 	
 }
