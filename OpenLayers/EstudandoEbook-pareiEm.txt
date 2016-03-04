@@ -1,4 +1,4 @@
 Lendo "OpenLayers 3 Beginner's Guide 2015"
 
-"Preface"
-Parei na página 1
+"Getting Started with OpenLayers"
+Parei na página 7
