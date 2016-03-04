@@ -32,3 +32,17 @@ $ sudo gnome-desktop-item-edit /usr/share/applications/ --create-new
 
     -- create-new : cria novo lançador / atalho
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+*** utilizando ab (apache2-utils) ***
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+http://todsul.com/tech/install-and-test-with-apache-bench/
+
+* exemplo:
+
+ab -k -n 50000 -c 100 -t 20 http://example.com/
+
+** Utilizado:
+
+ab -k -n 50000000 -c 10000 -t 5 http://127.0.0.1:1337/
+>socket: Too many open files (24)
