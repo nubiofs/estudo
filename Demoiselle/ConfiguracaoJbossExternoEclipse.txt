@@ -39,6 +39,14 @@ $ chmod +x build.sh
 
 $ ./build.sh
 
+Obs.: no pom.xml do projeto (para ficar com o nome reduzido da build war "sem o número da versão") usar:
+
+<build>
+<!-- Para gerar a build na pasta target 
+sem o número da versão (cadastro-0.0.1-SNAPSHOT.war) -->
+<finalName>${project.artifactId}</finalName>
+</build>
+
 ************
 **Observação
 ************
