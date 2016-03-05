@@ -35,6 +35,18 @@ $ rm -rf /opt/demoiselle/jboss-eap-6.3/standalone/deployments/cadastro.war
 $ cp ./target/cadastro.war /opt/demoiselle/jboss-eap-6.3/standalone/deployments
 #END
 
+"Ou melhor":
+
+#!/bin/sh
+# Pasta do Jboss:
+export MY_JBOSS_PATH=/home/clenubio/Desenvolvimento/EAP-6.4.0
+# Nome da build do projeto:
+export PROJECT_BUILD=tutorial01.war
+~/mvn clean install -Dmaven.test.skip=true --offline
+rm -rf $MY_JBOSS_PATH/standalone/deployments/$PROJECT_BUILD
+cp ./target/$PROJECT_BUILD $MY_JBOSS_PATH/standalone/deployments
+#END
+
 $ chmod +x build.sh
 
 $ ./build.sh
@@ -43,7 +55,7 @@ Obs.: no pom.xml do projeto (para ficar com o nome reduzido da build war "sem o 
 
 <build>
 <!-- Para gerar a build na pasta target 
-sem o número da versão (cadastro-0.0.1-SNAPSHOT.war) -->
+sem o número da versão (XXXXX-0.0.1-SNAPSHOT.war) -->
 <finalName>${project.artifactId}</finalName>
 </build>
 
