@@ -141,5 +141,10 @@
 			<url>https://java.net/svn/ol4jsf~svn/repository/</url>
 		</repository>                
 	</repositories>
+
+	<build>
+		<!-- Para gerar a build na pasta target sem o número da versão (XXXXX-0.0.1-SNAPSHOT.war) -->
+		<finalName>${project.artifactId}</finalName>
+	</build>
 	
 </project>
