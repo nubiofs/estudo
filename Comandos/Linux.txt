@@ -32,6 +32,47 @@ $ sudo gnome-desktop-item-edit /usr/share/applications/ --create-new
 
     -- create-new : cria novo lançador / atalho
 
+
+** remove old kernel
+
+First check your kernel version, so you won't delete the in-use kernel image, running:
+
+1) uname -r
+
+2) 
+
+(Via ubuntu-tweak) 
+
+Baixar arquivo .deb "http://ubuntu-tweak.com/" ou
+
+$ sudo add-apt-repository ppa:tualatrix/ppa
+$ sudo apt-get update
+$ sudo apt-get install ubuntu-tweak
+
+==> "Janitor" ==> "System" ==> "Old Kernel" ==> "clean"
+
+ou 
+
+(Via comandos):
+
+Now run this command for a list of installed kernels:
+
+sudo dpkg --list 'linux-image*'
+
+and delete the kernels you don't want/need anymore by running this:
+
+sudo apt-get remove linux-image-VERSION
+
+Replace VERSION with the version of the kernel you want to remove.
+
+When you're done removing the older kernels, you can run this to remove ever packages you won't need anymore:
+
+sudo apt-get autoremove
+
+And finally you can run this to update grub kernel list:
+
+sudo update-grub
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 *** utilizando ab (apache2-utils) ***
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
