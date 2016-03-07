@@ -178,6 +178,27 @@ public class PessoaREST {
 	 *    "telefone" : "(71) 0000-0000"
 	 * }
 	 * 
+	 * 
+	 * IMPORTANTE, e Se (sem informar o telefone):
+	 * 
+	 * * Request payload
+	 * {
+	 *    "nome" : "JohnRambo",
+	 *    "email" : "JohnRambo@gmail.com"
+	 * }
+	 * 
+	 * No banco teriamos:
+	 * 
+	 * SELECT * FROM PESSOA;
+	 * 
+	 * ID 	| EMAIL  			| NOME  	| TELEFONE  
+	 * 10	JohnRambo@gmail.com	JohnRambo	null
+	 * 
+	 * A requisição foi concluída com status de sucesso. 
+	 * Porém, como o PUT substitui por completo o conteúdo do recurso e 
+	 * o telefone não foi informado (sendo opcional), faz sentido interpretar 
+	 * que o conteúdo para telefone será "nulo".
+	 * 
 	 */
 	@PUT
 	@Path("{id}")
@@ -222,6 +243,83 @@ public class PessoaREST {
 		@Size(max=15)
 		public String telefone;
 		
+	}
+
+	
+	//O método PATCH é atualizado para atualizar só uma parte do recurso, e não
+	//substiuí-lo por completo como o PUT faz. Ou seja, pode haver a
+	//necessidade de atualizar apenas o nome da pessoa sem ter que enviar junto
+	//o email (obrigatório) e o telefone (opcional), por exemplo. Para isso foi
+	//criado o método PATCH.
+	 /** 
+	 * - Exemplo de utilização com Postman:
+	 * 
+     * URL: http://localhost:8080/cadastro/api/pessoa/10
+	 * Method: PATCH
+	 * Payload Raw: o seguinte conteúdo:
+	 *
+	 * Request payload
+	 * {
+	 *   "telefone" : "(71) 0000-6666"
+	 * }
+	 * 
+	 * Em seguida:
+	 * 
+	 * 
+	 * URL: http://localhost:8080/cadastro/api/pessoas/10
+	 * Method: GET
+	 *
+	 * Note que o comportamento foi diferente do PUT. Agora sim a 
+	 * operação foi parcial, atualizando apenas o telefone:
+	 *
+	 * Response payload
+	 * {
+	 *    "nome" : "John Malkovich",
+	 *    "email" : "john.malkovich@gmail.com",
+	 *    "telefone" : "(71) 0000-6666"
+	 *}
+	 * 
+	 */
+	@PATCH
+	@Path("{id}")
+	@ValidatePayload
+	@Consumes("application/json")
+	@Transactional
+	public void atualizarParcial(@PathParam("id") Integer id, PessoaPatchBody body) throws Exception {
+		PessoaDAO pessoaDAO = PessoaDAO.getInstance();
+		Pessoa pessoa = pessoaDAO.load(id);
+
+		if (pessoa == null) {
+			throw new NotFoundException();
+		}
+
+		if (body.nome != null) {
+			pessoa.setNome(body.nome);
+		}
+
+		if (body.email != null) {
+			pessoa.setEmail(body.email);
+		}
+
+		if (body.telefone != null) {
+			pessoa.setTelefone(body.telefone);
+		}
+
+		pessoaDAO.update(pessoa);
+
+	}
+
+	public static class PessoaPatchBody {
+
+		@Size(min = 3, max = 50)
+		public String nome;
+
+		@Email
+		@Size(max = 255)
+		public String email;
+
+		@Size(max = 15)
+		public String telefone;
 	}
 	
 }
