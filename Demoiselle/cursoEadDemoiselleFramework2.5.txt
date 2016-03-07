@@ -29,15 +29,7 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 (M2C3: SERVIÇO ATUALIZAR); ==> ESTOU AQUI:
 
 ...
-PUT
-
-E se você fizer uma nova requisição PUT com o seguinte conteúdo:
-Request payload
-{
-    "nome" : "John Malkovich",
-    "email" : "john.malkovich@gmail.com"
-}
-
+Atualização parcial
 
 (M2C4: SERVIÇO LISTAR). 
 
