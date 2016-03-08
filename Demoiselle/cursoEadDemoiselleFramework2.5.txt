@@ -28,9 +28,11 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 (M2C3: SERVIÇO ATUALIZAR); ==> OK
 
-(M2C4: SERVIÇO LISTAR). ==> ESTOU AQUI
+(M2C4: SERVIÇO LISTAR). ==> OK
 
-MÓDULO 3: (FRONT-END M3C1: HTML5 + CSS3); (M3C2: CADASTRO DE PESSOAS); (M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); (M3C4: LISTANDO AS PESSOAS).
+MÓDULO 3: (FRONT-END M3C1: HTML5 + CSS3) ==> ESTOU AQUI
+
+(M3C2: CADASTRO DE PESSOAS); (M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); (M3C4: LISTANDO AS PESSOAS).
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
@@ -67,5 +69,7 @@ Ver comentários em "CalculatorREST.java"
 (M2C2: SERVIÇO INSERIR); OK com tag m2c2
 
 (M2C3: SERVIÇO ATUALIZAR); OK com tag m2c3
+
+(M2C4: SERVIÇO LISTAR); OK com tag m2c4
 
 
