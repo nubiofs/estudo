@@ -1,5 +1,8 @@
 package lab.cadastro.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.Size;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -8,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -16,6 +20,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.gov.frameworkdemoiselle.BadRequestException;
 import br.gov.frameworkdemoiselle.NotFoundException;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ValidatePayload;
@@ -244,7 +249,6 @@ public class PessoaREST {
 		public String telefone;
 		
 	}
-
 	
 	//O método PATCH é atualizado para atualizar só uma parte do recurso, e não
 	//substiuí-lo por completo como o PUT faz. Ou seja, pode haver a
@@ -321,5 +325,177 @@ public class PessoaREST {
 		@Size(max = 15)
 		public String telefone;
 	}
+	
+	//Se a lista estiver vazia, há o retorno do 
+	//status 204 (OK, sem conteúdo) com o body vazio.
+	/**
+	 * - Exemplo de utilização com Postman:
+	 * 
+	 * URL: http://localhost:8080/cadastro/api/pessoa
+	 * Method: GET
+	 *
+	 * Response payload "o body" de resposta  
+	 * 
+	 * [
+	 *  {
+	 *    "id" : 11,
+	 *    "nome" : "John Malkovich",
+	 *    "email" : "john.malkovich@gmail.com",
+	 *    "telefone" : "(71) 0000-6666"
+	 *  },
+	 *  {
+	 *    "id" : 10,
+	 *    "nome" : "nubio",
+	 *    "email" : "nubio@gmail.com",
+	 *    "telefone" : "(81) 2126-2270"
+	 *  }
+	 * ]
+	 * 
+	 */
+	//
+	//IMPORTANTE: Código comentado, pois esse método "buscar" sem informar nenhum 
+	//parâmetro de filtro, apresenta o mesmo resultado de execução do método "buscar"
+	//(que espera ou não a passagem do parâmetro filtro, via "query string").
+	//
+	/* 
+	@GET
+    @Produces("application/json")
+    public List<PessoaListBody> buscar() {
+        List<PessoaListBody> result = new ArrayList<PessoaListBody>();
+ 
+        for (Pessoa pessoa : PessoaDAO.getInstance().find()) {
+            PessoaListBody body = new PessoaListBody();
+            body.id = pessoa.getId();
+            body.nome = pessoa.getNome();
+            body.email = pessoa.getEmail();
+            body.telefone = pessoa.getTelefone();
+ 
+            result.add(body);
+        }
+ 
+        return result.isEmpty() ? null : result;
+    }
+    */
+		
+	//Como o método GET não possui request body, então os parâmetros 
+	//são passados na URL no padrão "query string".
+	/**
+	 * - Exemplo de utilização com Postman:
+	 * 
+	 * URL: http://localhost:8080/cadastro/api/pessoa?filtro=n
+	 * Method: GET
+	 *
+	 * Response payload "o body" de resposta  
+	 * 
+	 * [
+	 *  {
+	 *    "id" : 11,
+	 *    "nome" : "batman",
+	 *    "email" : "batman@gmail.com",
+	 *    "telefone" : "(81) 1234-5678"
+	 *  },
+	 *  {
+	 *    "id" : 10,
+	 *    "nome" : "nubio",
+	 *    "email" : "nubio@gmail.com",
+	 *    "telefone" : "(81) 2126-2270"
+	 *  }
+	 * ]
+	 * 
+	 */
+	/*
+	@GET
+	@Produces("application/json")
+	public List<PessoaListBody> buscar(@QueryParam("filtro") String filtro) {
+	    List<PessoaListBody> result = new ArrayList<PessoaListBody>();
+	 
+	    for (Pessoa pessoa : PessoaDAO.getInstance().find(filtro)) {
+	        PessoaListBody body = new PessoaListBody();
+	        body.id = pessoa.getId();
+	        body.nome = pessoa.getNome();
+	        body.email = pessoa.getEmail();
+	        body.telefone = pessoa.getTelefone();
+	 
+	        result.add(body);
+	    }
+	 
+	    return result.isEmpty() ? null : result;
+	}
+	*/
+	
+	//Como o método GET não possui request body, então os parâmetros 
+	//são passados na URL no padrão "query string".
+	/**
+	 * - Exemplo de utilização com Postman:
+	 * 
+	 * URL: http://localhost:8080/cadastro/api/pessoa?ordem=nome
+	 * Method: GET
+	 *
+	 * Response payload "o body" de resposta  
+	 * 
+	 * [
+	 *  
+	 *	{
+	 *    "id" : 11,
+	 *    "nome" : "batman",
+	 *    "email" : "batman@gmail.com",
+	 *    "telefone" : "(81) 1234-5678"
+	 *  },
+	 *  {
+	 *    "id": 12,
+	 *    "nome": "ela",
+	 *    "email": "ela@gmail.com",
+	 *    "telefone": "(81) 5678-3333"
+	 *  },
+	 *  {
+	 *    "id" : 10,
+	 *    "nome" : "nubio",
+	 *    "email" : "nubio@gmail.com",
+	 *    "telefone" : "(81) 2126-2270"
+	 *  }
+	 *  
+	 * ]
+	 * 
+	 */
+	@GET
+	@Produces("application/json")
+	public List<PessoaListBody> buscar(@QueryParam("filtro") String filtro, @QueryParam("ordem") String ordem) throws Exception {
+	    List<PessoaListBody> result = new ArrayList<PessoaListBody>();
+	    List<Pessoa> pessoas;
+	 
+	    try {
+	        pessoas = PessoaDAO.getInstance().find(filtro, ordem);
+	    } catch (IllegalArgumentException cause) {
+	    	//O Demoiselle automaticamente definirá o response status 
+	    	//com o código 400 (Bad Request), que representa erro de 
+	    	//sintaxe na requisição feita pelo front-end. 
+	        throw new BadRequestException();
+	    }
+	 
+	    for (Pessoa pessoa : pessoas) {
+	        PessoaListBody body = new PessoaListBody();
+	        body.id = pessoa.getId();
+	        body.nome = pessoa.getNome();
+	        body.email = pessoa.getEmail();
+	        body.telefone = pessoa.getTelefone();
+	 
+	        result.add(body);
+	    }
+	 
+	    return result.isEmpty() ? null : result;
+	}
+	
+	//Nova classe do tipo Pessoa devido necessidade de 
+	//buscar também o atributo "id" de Pessoa 
+	public static class PessoaListBody {
+		 
+        public Integer id;
+ 
+        public String nome;
+ 
+        public String email;
+ 
+        public String telefone;
+    }
 	
 }
