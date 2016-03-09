@@ -30,9 +30,13 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 (M2C4: SERVIÇO LISTAR). ==> OK
 
-MÓDULO 3: (FRONT-END M3C1: HTML5 + CSS3) ==> ESTOU AQUI
+[MÓDULO 3]: 
 
-(M3C2: CADASTRO DE PESSOAS); (M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); (M3C4: LISTANDO AS PESSOAS).
+(FRONT-END M3C1: HTML5 + CSS3) ==> OK
+
+(M3C2: CADASTRO DE PESSOAS) ==> ESTOU AQUI
+
+(M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); (M3C4: LISTANDO AS PESSOAS).
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
