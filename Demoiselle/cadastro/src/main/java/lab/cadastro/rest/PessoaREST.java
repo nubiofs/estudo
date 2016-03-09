@@ -33,8 +33,9 @@ public class PessoaREST {
 	private Logger LOGGER = LoggerFactory.getLogger(PessoaREST.class);
 
 	/**
-	 *
-	 * - Exemplo de utilização com Postman:
+	 * - Exemplos de utilização com Postman:
+	 * 
+	 * *(I)*
 	 * 
 	 * URL: http://localhost:8080/cadastro/api/pessoa
 	 * Method: POST
@@ -58,7 +59,7 @@ public class PessoaREST {
 	 * 
 	 * 10
 	 *
-	 * - Exemplo de utilização com Postman:
+	 * *(II)*
 	 * 
 	 * URL: http://localhost:8080/cadastro/api/pessoa
 	 * Method: POST
@@ -79,7 +80,34 @@ public class PessoaREST {
 	 *	        "message" : "não é um endereço de e-mail"
 	 *	    }
 	 * ]
+	 *
+	 * *(III)*
 	 * 
+	 * URL: http://localhost:8080/cadastro/api/pessoa
+	 * Method: POST
+	 * Content-Type: application/json
+	 * Payload Raw: o seguinte conteúdo:
+	 * {
+	 *     "nome" : "John Malkovich",
+	 *     "email" : "",
+	 *     "telefone" : "(71) 1234-5678"
+	 * }
+	 *
+	 * Com (mensagens de validação) - (status 422):
+	 *  
+	 *  Request payload
+	 * [
+	 *	    {
+	 *	        "property" : "email",
+	 *	        "message" : "não pode estar vazio"
+	 *	    }
+	 * ]
+	 * 
+	 * - Exemplo de utilização com cURL:
+	 * 
+	 * curl -X POST -H "Content-type:application/json" \ 
+	 * -d "{\"nome\" : \"teste3\", \"email\" : \"teste3@gmail.com\", \"telefone\" : \"(11) 2222-3333\"}" \
+	 * http://localhost:8080/cadastro/api/pessoa
 	 * 
 	 */
 	@POST
@@ -135,6 +163,10 @@ public class PessoaREST {
 	 * 	  "email" : "john.malkovich@gmail.com",
 	 *    "telefone" : "(71) 1234-5678"
 	 * }
+	 * 
+	 * - Exemplo de utilização com cURL:
+	 * 
+	 * curl -X GET http://localhost:8080/cadastro/api/pessoa
 	 * 
 	 */
 	@GET
