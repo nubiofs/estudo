@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html>
+<!-- Para saber se o código está correto: http://validator.w3.org/#validate_by_input -->
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<!-- meta tag viewport é usada para fazer dispositivos móveis 
+exibir a página responsivamente -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadastro REST - Tutorial Demoiselle 2.5</title>
+<link href="css/bootstrap-3.3.6.min.css" rel="stylesheet">
 </head>
 <body>
-Hello World (projeto cadastro)!
+	
+	<!-- A tag <div> define uma divisão ou uma seção em um documento HTML. É usada para 
+	agrupar blocos ou elementos, e não tem valor semântico sendo sua formatação toda através
+	de CSS, evidenciado a separação entre conteúdo e formatação -->
+	<!-- classe container determina que a div terá largura fixa e será responsiva. -->
+	<div class="container">
+		<div class="row" style="margin-top: 20px">
+			<!-- As classes col-* do bootstrap estão disponíveis para fazer seu layout em grid de forma rápida.
+			O conteúdo ocupará 2 colunas em um desktop (col-md-2 / md compõe o prefixo para dispositivo como desktop, 
+			um exemplo de uso do Media Query) -->
+			<!-- 
+		    col-xs para telas extremamente pequenas (largura da tela < 768px / ex: celulares)
+		    col-sm para telas menores (largura da tela ≥ 768px / ex: tablets)
+		    col-md para telas médias (largura da tela ≥ 992px / ex: desktop)
+		    col-lg para telas grandes (largura da tela ≥ 1200px / ex: televisores)
+			 -->
+			<div class="col-xs-6 col-sm-4 col-md-2 col-xs-offset-3 col-sm-offset-4 col-md-offset-5">
+				<a class="btn btn-primary btn-block" href="pessoa.html" role="button"> 
+					<span class="glyphicon glyphicon-user"></span>
+					Adicionar Pessoa
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Como os arquivos javascript quando carregados, usando a tag <script>, são bloqueantes (durante o download 
+	 e execução de cada arquivo javascript o processo de parser do DOM é bloqueado, impedindo a renderização do resto
+	 da página), uma boa prática é colocar os arquivos para serem carregados no final do body.
+	 Existem formas de carregar os scripts assincronamente: através dos atributos async e defer da tag <script> 
+	 conseguimos carregar os script assincronamente.  -->
+	<script src="js/lib/jquery-2.2.1.min.js"></script>
+	<script src="js/lib/bootstrap-3.3.6.min.js"></script>
+
 </body>
 </html>

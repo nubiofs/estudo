@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Cadastro Pessoa</title>
+<link href="css/bootstrap-3.3.6.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Cadastro de Pessoas</h1>
+        </div>
+        <form class="form" novalidate>
+            <input type="hidden" id="id" />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="nome" class="control-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" placeholder="Nome completo" maxlength="50" required pattern=".{3,}" title="Nome deve ter no mínimo 3 caracteres" />
+                        <span id="nome-message" class="text-danger" hidden></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="nome@provedor.com" maxlength="255" required />
+                        <span id="email-message" class="text-danger" hidden></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        <label for="telefone" class="control-label">Telefone</label>
+                        <input type="tel" class="form-control" id="telefone" placeholder="(99) 9999-9999 / (99) 99999-9999" maxlength="15" pattern="(\([0-9]{2}\))\s([9]{1})?([0-9]{4})-([0-9]{4})" title="O número de telefone deve seguir o padrão (99) 9999-9999 ou (99) 99999-9999" />
+                        <span id="telefone-message" class="text-danger" hidden></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-2 col-sm-offset-4 col-md-offset-5">
+                    <div class="form-group">
+                        <button id="salvar" class="btn btn-success btn-block" type="submit">
+                            <span class="glyphicon glyphicon-ok"></span> Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div id="global-message" class="alert text-center" role="alert" hidden></div>
+                </div>
+            </div>
+        </form>
+    </div>
+	<script src="js/lib/jquery-2.2.1.min.js"></script>
+	<script src="js/lib/bootstrap-3.3.6.min.js"></script>
+</body>
+</html>
