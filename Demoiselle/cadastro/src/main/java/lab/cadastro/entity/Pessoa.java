@@ -7,13 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
 public class Pessoa {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 
 	@NotNull
@@ -38,21 +40,21 @@ public class Pessoa {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj){
+		if (this == obj) {
 			return true;
 		}
-		if (obj == null){
+		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()){
+		if (getClass() != obj.getClass()) {
 			return false;
 		}
 		Pessoa other = (Pessoa) obj;
 		if (id == null) {
-			if (other.id != null){
+			if (other.id != null) {
 				return false;
 			}
-		} else if (!id.equals(other.id)){
+		} else if (!id.equals(other.id)) {
 			return false;
 		}
 		return true;
@@ -89,5 +91,15 @@ public class Pessoa {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
+
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE);
+		builder.append("id", this.id)
+		.append("nome", this.nome)
+		.append("email", this.email)
+		.append("telefone", this.telefone);
+		return builder.toString();
+	}
+
 }
