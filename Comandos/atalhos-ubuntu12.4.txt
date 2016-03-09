@@ -1,0 +1,42 @@
+** For 12.04 ,13.04 and 14.04, shows the desktop:
+
+Control-Super-D
+
+** Mostrar aba lateral:
+
+Super
+
+** Bloquear tela:
+
+Control-Alt-L
+
+** Lançador:
+
+    Super: Chama o Lançador.
+
+    Super+ 1 ou 2 ou 3 e até 0: abre ou foca o aplicativo.
+
+    Super+Shift + 1 ou 2 ou 3 e até 0: abre uma nova instância do aplicativo.
+
+    Super+T: Abre a lixeira.
+
+    Alt+F1: Chama o Lançador e dá foco para ser usado pelo teclado
+
+    Alt+F2: Chama o Lançador em modo especial para executar comando.
+
+    Ctrl+Alt+T: Abre uma janela do Terminal. 
+
+
+** Gerenciar área de trabalho:
+
+    Super+W ou Super+E: Modo de exposição, sai do zoom de todas as áreas.
+
+    Super+S: Modo de exposição, reduz o zoom em todos os espaços de trabalho e permite que você gerencie janelas.
+
+    Shift+Alt+Up: Modo de exposição, para todas as janelas na área de trabalho atual.
+
+    Ctrl+Alt+L: Bloquear a tela.
+
+    Ctrl+Alt+setas ↑←↓→: Alterna entre as áreas de trabalho existentes.
+
+    Ctrl+Alt+Shift+setas ↑←↓→: Desloca o programa em foco para outra área de trabalho. 

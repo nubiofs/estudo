@@ -1,0 +1,26 @@
+1) Subtituição:
+
+Em "Pesquisar Por:" => "(\d)(\d)/(\d)(\d) "
+Em "Substituir com:" => "\1\2/\3\4@"
+
+2) Substituição:
+
+Em "Pesquisar Por:" => " (\d)(\d),(\d)(\d)"
+Em "Substituir com:" => "@\1\2,\3\4"
+
+3) Substituição:
+
+Em "Pesquisar Por:" => " (\d),(\d)(\d)"
+Em "Substituir com:" => "@\1,\2\3"
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+*http://www.geany.org/manual/gtk/glib/glib-regex-syntax.html
+
+Escape 	Meaning
+\d 	any decimal digit
+\D 	any character that is not a decimal digit
+\s 	any whitespace character
+\S 	any character that is not a whitespace character
+\w 	any "word" character
+\W 	any "non-word" character

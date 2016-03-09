@@ -87,3 +87,90 @@ ab -k -n 50000 -c 100 -t 20 http://example.com/
 
 ab -k -n 50000000 -c 10000 -t 5 http://127.0.0.1:1337/
 >socket: Too many open files (24)
+
+***
+
+* Montar o disco J no linux (via comando prompt):
+
+nautilus smb://10.200.220.66/atrce_aplicati
+
+* Mostrar processos Zumbis:
+
+ps -aux | awk '{print $8 " " $2}' | grep Z
+
+* Buscando e removendo arquivos/diretorios:
+
+find -wholename '*/CVS/Base' | xargs rmdir
+find -wholename '*/CVS/Baserev' | xargs rm
+
+fonte: (http://polishlinux.org/console/regular-expressions-and-search-patterns/)
+
+* Mecanismo de busca visual:
+
+ gnome-search-tool --path=.
+
+* Buscas via prompt:
+
+find /home/02963357460/ -type f -iname "*{.mp3,.MP3,.mp4,.MP4}" 
+
+find /home/02963357460/ -iname '*.mp3'
+
+
+*.mp3, *.mp4, *.wma, *.aac, *.ogg, *.ac3, *.wav, *.wmv, *.wav
+*.MP3, *.MP4, *.WMA, *.AAC, *.OGG, *.AC3, *.WAV, *.WMV, *.WAV
+
+*.avi, *.mpeg, *.mov, *.rmvb, *.mkv, *.mpg, *.flv
+*.AVI, *.MPEG, *.MOV, *.RMVB, *.MKV, *.MPG, *.FLV
+
+*.bmp, *.gif, *.jpeg, *.png
+*.BMP, *.GIF, *.JPEG, *.PNG
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+02963357460@serpro-1455337:~$ chmod +x arqs
+02963357460@serpro-1455337:~$ ./arqs 
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxx  arqs xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+find /home/02963357460/ -iname '*.mp3' >> ver.txt
+find /home/02963357460/ -iname '*.mp4' >> ver.txt
+find /home/02963357460/ -iname '*.wma' >> ver.txt
+find /home/02963357460/ -iname '*.aac' >> ver.txt
+find /home/02963357460/ -iname '*.ogg' >> ver.txt
+find /home/02963357460/ -iname '*.ac3' >> ver.txt
+find /home/02963357460/ -iname '*.wav' >> ver.txt
+find /home/02963357460/ -iname '*.wmv' >> ver.txt
+find /home/02963357460/ -iname '*.wav' >> ver.txt
+find /home/02963357460/ -iname '*.MP3' >> ver.txt
+find /home/02963357460/ -iname '*.MP4' >> ver.txt
+find /home/02963357460/ -iname '*.WMA' >> ver.txt
+find /home/02963357460/ -iname '*.AAC' >> ver.txt
+find /home/02963357460/ -iname '*.OGG' >> ver.txt
+find /home/02963357460/ -iname '*.AC3' >> ver.txt
+find /home/02963357460/ -iname '*.WAV' >> ver.txt
+find /home/02963357460/ -iname '*.WMV' >> ver.txt
+find /home/02963357460/ -iname '*.WAV' >> ver.txt
+find /home/02963357460/ -iname '*.avi' >> ver.txt
+find /home/02963357460/ -iname '*.mpeg' >> ver.txt
+find /home/02963357460/ -iname '*.mov' >> ver.txt
+find /home/02963357460/ -iname '*.rmvb' >> ver.txt
+find /home/02963357460/ -iname '*.mkv' >> ver.txt
+find /home/02963357460/ -iname '*.mpg' >> ver.txt
+find /home/02963357460/ -iname '*.flv' >> ver.txt
+find /home/02963357460/ -iname '*.AVI' >> ver.txt
+find /home/02963357460/ -iname '*.MPEG' >> ver.txt
+find /home/02963357460/ -iname '*.MOV' >> ver.txt
+find /home/02963357460/ -iname '*.RMVB' >> ver.txt
+find /home/02963357460/ -iname '*.MKV' >> ver.txt
+find /home/02963357460/ -iname '*.MPG' >> ver.txt
+find /home/02963357460/ -iname '*.FLV' >> ver.txt
+find /home/02963357460/ -iname '*.bmp' >> ver.txt
+find /home/02963357460/ -iname '*.gif' >> ver.txt
+find /home/02963357460/ -iname '*.jpeg' >> ver.txt
+find /home/02963357460/ -iname '*.png' >> ver.txt
+find /home/02963357460/ -iname '*.BMP' >> ver.txt
+find /home/02963357460/ -iname '*.GIF' >> ver.txt
+find /home/02963357460/ -iname '*.JPEG' >> ver.txt
+find /home/02963357460/ -iname '*.PNG' >> ver.txt
+

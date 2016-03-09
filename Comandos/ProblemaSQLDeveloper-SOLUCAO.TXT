@@ -1,0 +1,7 @@
+Quem possuir o Linux Ubuntu 10.04 e estiver com problemas no gerenciador de Impressão (Agente Bureau) e na inicialização do SQL Developer pode executar os seguintes comandos a partir do "Terminal" do linux:
+
+sudo /etc/init.d/nscd stop
+sudo update-rc.d -f nscd remove
+sudo /etc/init.d/cups restart
+
+O usuário da máquina tem que ser administrador e a senha é a mesma de login na máquina.
