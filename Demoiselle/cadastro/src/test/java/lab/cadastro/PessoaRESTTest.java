@@ -1,16 +1,17 @@
 package lab.cadastro;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Set;
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 import static javax.servlet.http.HttpServletResponse.SC_NO_CONTENT;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -30,10 +31,13 @@ import org.codehaus.jackson.type.TypeReference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.gov.frameworkdemoiselle.HttpViolationException;
 import br.gov.frameworkdemoiselle.UnprocessableEntityException;
 import lab.cadastro.entity.Pessoa;
+import lab.cadastro.entity.domain.PessoaBody;
 
 public class PessoaRESTTest {
 
@@ -45,6 +49,8 @@ public class PessoaRESTTest {
 	private String urlPessoa;
 
 	//private static final String BASIC_CREDENTIALS = "Basic " + Base64.encodeBase64String("test:secret".getBytes());
+	
+	private Logger LOG = LoggerFactory.getLogger(PessoaRESTTest.class);
 
 	@Before
 	public void before() throws Exception {
@@ -63,8 +69,11 @@ public class PessoaRESTTest {
 	}
 
 	@Test
-	public void buscarPessoas() throws ClientProtocolException, IOException {
+	public void buscarPessoas() throws Exception {
 		
+		//
+		//Busca todas as Pessoas
+		//
 		HttpGet request = new HttpGet(urlPessoa);
 		
 		CloseableHttpResponse response = client.execute(request);
@@ -76,28 +85,48 @@ public class PessoaRESTTest {
 				new TypeReference<List<Pessoa>>() {
 				});
 		
+		LOG.info("* Busca todas as Pessoas...");
 		for(int i=0; i < pessoas.size(); i++){
-			System.out.println(pessoas.get(i).toString() + "\n");
+			LOG.info(pessoas.get(i).toString() + "\n");
 		}
-//		
-//		String filter = "po";
-//		request = new HttpGet(url + "/bookmark?q=" + filter);
-//		response = client.execute(request);
-//		response.close();
-//		List<Pessoa> filteredList = mapper.readValue(response.getEntity().getContent(),
-//				new TypeReference<List<Pessoa>>() {
-//				});
-//		assertEquals(SC_OK, response.getStatusLine().getStatusCode());
+		
+		//
+		//Buscar Pessoa por Filtro
+		//
+		String filtro = "n";
+		request = new HttpGet(urlPessoa + "?filtro=" + filtro);
+		
+		response = client.execute(request);
+		response.close();
+		
+		assertEquals(SC_OK, response.getStatusLine().getStatusCode());
 
-//		for (Pessoa bookmark : filteredList) {
-//			assertTrue(bookmark.getDescription().toLowerCase().contains(filter)
-//					|| bookmark.getLink().toLowerCase().contains(filter));
-//			assertTrue(listAll.contains(bookmark));
-//		}
+		List<Pessoa> pessoasFiltro = mapper.readValue(response.getEntity().getContent(),
+				new TypeReference<List<Pessoa>>() {
+				});
+
+		LOG.info("* Busca todas as Pessoas pelo filtro (" + filtro + ") ...");
+		for(int i=0; i < pessoasFiltro.size(); i++){
+			assertTrue(pessoas.contains(pessoasFiltro.get(i)));
+			LOG.info(pessoasFiltro.get(i).toString() + "\n");
+		}
+		
+		//
+		//Buscar Pessoa por ID
+		//
+		Integer id = Integer.valueOf(10);
+		request = new HttpGet(urlPessoa + "/" + id);
+		response = client.execute(request);
+		response.close();
+		
+		assertEquals(SC_OK, response.getStatusLine().getStatusCode());
+
+		PessoaBody pessoa = parseEntity(response.getEntity(), PessoaBody.class);
+		assertEquals("nubio", pessoa.getNome());
 		
 	}
 
-	//@Test
+	@Test
 	public void inserirPessoa() throws Exception {
 		CloseableHttpResponse response = createSample();
 		response.close();
@@ -115,58 +144,58 @@ public class PessoaRESTTest {
 
 		destroySample(id);
 	}
-	
-	//@Test
-	public void loadSuccessful() throws Exception {
+
+	@Test
+	public void deleteSuccessful() throws Exception {
 		Integer id = parseEntity(createSample().getEntity(), Integer.class);
 
-		HttpGet request = new HttpGet(urlPessoa + id);
-		CloseableHttpResponse response = client.execute(request);
-		response.close();
-		assertEquals(SC_OK, response.getStatusLine().getStatusCode());
-
-		Pessoa bookmark = parseEntity(response.getEntity(), Pessoa.class);
-		assertEquals(Long.valueOf(id), bookmark.getId());
-//		assertEquals("Google", bookmark.getDescription());
-//		assertEquals("http://google.com", bookmark.getLink());
-
-		destroySample(id);
-	}
-
-	//@Test
-	public void loadFailed() throws ClientProtocolException, IOException {
-		HttpGet request = new HttpGet(urlPessoa + "/99999999");
-		CloseableHttpResponse response = client.execute(request);
-		response.close();
-		assertEquals(SC_NOT_FOUND, response.getStatusLine().getStatusCode());
-	}
-
-	//@Test
-	public void deleteSuccessful() throws Exception {
-		Long id = parseEntity(createSample().getEntity(), Long.class);
-
-		HttpDelete request = new HttpDelete(urlPessoa + id);
+		HttpDelete request = new HttpDelete(urlPessoa + "/" + id);
 		//request.addHeader("Authorization", BASIC_CREDENTIALS);
 		CloseableHttpResponse response = client.execute(request);
 		response.close();
+		
 		assertEquals(SC_NO_CONTENT, response.getStatusLine().getStatusCode());
 	}
 
-	//@Test
-	public void deleteFailed() throws Exception {
-		HttpDelete request;
-		CloseableHttpResponse response;
+	@Test
+	public void updateSuccessful() throws Exception {
 
-		Integer id = parseEntity(createSample().getEntity(), Integer.class);
-		request = new HttpDelete(urlPessoa + id);
-		response = client.execute(request);
+		Integer id = Integer.valueOf(11);
+		String url = urlPessoa + "/" + id;
+		HttpGet requestGet = new HttpGet(url);
+		
+		CloseableHttpResponse response = client.execute(requestGet);
 		response.close();
-		assertEquals(SC_UNAUTHORIZED, response.getStatusLine().getStatusCode());
-		destroySample(id);
+		
+		assertEquals(SC_OK, response.getStatusLine().getStatusCode());
 
-		request = new HttpDelete(url + "/pessoa/99999999");
-		//request.addHeader("Authorization", BASIC_CREDENTIALS);
-		response = client.execute(request);
+		PessoaBody pessoa = parseEntity(response.getEntity(), PessoaBody.class);
+		pessoa.setNome("JohnRambo");
+		pessoa.setEmail("JohnRambo@gmail.com");
+
+		HttpRequestBase requestPut = new HttpPut(url);
+		((HttpPut) requestPut).setEntity(createEntity(pessoa));
+		requestPut.addHeader("Content-Type", "application/json");
+		//requestPut.addHeader("Authorization", BASIC_CREDENTIALS);
+		response = client.execute(requestPut);
+		response.close();
+		
+		assertEquals(SC_NO_CONTENT, response.getStatusLine().getStatusCode());
+
+		requestGet = new HttpGet(url);
+		response = client.execute(requestGet);
+		response.close();
+		
+		PessoaBody p = parseEntity(response.getEntity(), PessoaBody.class);
+		assertEquals(pessoa.getNome(), p.getNome());
+		assertEquals(pessoa.getEmail(), p.getEmail());
+
+	}
+
+	@Test
+	public void buscarFailed() throws ClientProtocolException, IOException {
+		HttpGet request = new HttpGet(urlPessoa + "/99999999");
+		CloseableHttpResponse response = client.execute(request);
 		response.close();
 		assertEquals(SC_NOT_FOUND, response.getStatusLine().getStatusCode());
 	}
@@ -234,36 +263,14 @@ public class PessoaRESTTest {
 		assertEquals(SC_BAD_REQUEST, response.getStatusLine().getStatusCode());
 	}
 
-	//@Test
-	public void updateSuccessful() throws Exception {
-		HttpRequestBase request;
-		CloseableHttpResponse response = createSample();
-		response.close();
-
-		Pessoa pessoa = new Pessoa();
-		pessoa.setNome("Google Maps");
-		pessoa.setEmail("mapsgoogle@gmail.com");
-
-		Integer id = parseEntity(response.getEntity(), Integer.class);
-		String resourceUrl = urlPessoa + id;
-
-		request = new HttpPut(resourceUrl);
-		((HttpPut) request).setEntity(createEntity(pessoa));
-		request.addHeader("Content-Type", "application/json");
+	@Test(expected=AssertionError.class)
+	public void deleteFailed() throws Exception {
+		HttpDelete request = new HttpDelete(urlPessoa + "/99999999");
 		//request.addHeader("Authorization", BASIC_CREDENTIALS);
-		response = client.execute(request);
+		CloseableHttpResponse response = client.execute(request);
 		response.close();
-		assertEquals(SC_NO_CONTENT, response.getStatusLine().getStatusCode());
-
-		request = new HttpGet(resourceUrl);
-		response = client.execute(request);
-		response.close();
-		Pessoa result = parseEntity(response.getEntity(), Pessoa.class);
-		assertEquals(id, result.getId());
-//		assertEquals(pessoa.getDescription(), result.getDescription());
-//		assertEquals(pessoa.getLink(), result.getLink());
-
-		destroySample(id);
+		
+		assertEquals(SC_NOT_FOUND, response.getStatusLine().getStatusCode());
 	}
 
 	//@Test
@@ -334,7 +341,8 @@ public class PessoaRESTTest {
 	}
 
 	private CloseableHttpResponse createSample() throws Exception {
-		Pessoa pessoa = new Pessoa();
+
+		PessoaBody pessoa = new PessoaBody();
 		pessoa.setNome("google");
 		pessoa.setEmail("google@gmail.com");
 		pessoa.setTelefone("(99) 9999-9999");
@@ -351,7 +359,7 @@ public class PessoaRESTTest {
 	}
 
 	private void destroySample(Integer id) throws Exception {
-		HttpDelete request = new HttpDelete(urlPessoa + id);
+		HttpDelete request = new HttpDelete(urlPessoa + "/" + id);
 		//request.addHeader("Authorization", BASIC_CREDENTIALS);
 		client.execute(request).close();
 	}

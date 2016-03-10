@@ -115,4 +115,8 @@ public class PessoaDAO {
 	    throw new IllegalArgumentException();
 	}
 	
+	public void remover(Integer id) {
+		em.remove(this.load(id));
+	}
+	
 }

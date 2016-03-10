@@ -11,6 +11,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Email;
 
+import lab.cadastro.entity.domain.PessoaBody;
+
 @Entity
 public class Pessoa {
 
@@ -30,6 +32,17 @@ public class Pessoa {
 	@Column(length = 15)
 	private String telefone;
 
+	public Pessoa() {
+		
+	}
+	
+	public Pessoa(PessoaBody pessoa) {
+		super();
+		this.nome = pessoa.getNome();
+		this.email = pessoa.getEmail();
+		this.telefone = pessoa.getTelefone();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

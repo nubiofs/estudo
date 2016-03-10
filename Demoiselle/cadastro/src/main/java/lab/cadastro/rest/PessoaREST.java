@@ -3,8 +3,8 @@ package lab.cadastro.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.Size;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -15,8 +15,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,11 +23,14 @@ import br.gov.frameworkdemoiselle.NotFoundException;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ValidatePayload;
 import lab.cadastro.entity.Pessoa;
+import lab.cadastro.entity.domain.PessoaBody;
+import lab.cadastro.entity.domain.PessoaListBody;
+import lab.cadastro.entity.domain.PessoaPatchBody;
 import lab.cadastro.persistence.PessoaDAO;
 
 @Path("pessoa")
 public class PessoaREST {
-	
+
 	private Logger LOGGER = LoggerFactory.getLogger(PessoaREST.class);
 
 	/**
@@ -72,7 +73,7 @@ public class PessoaREST {
 	 * }
 	 *
 	 * Com (mensagens de validação) - (status 422):
-	 *  
+	 * 
 	 *  Request payload
 	 * [
 	 *	    {
@@ -94,7 +95,7 @@ public class PessoaREST {
 	 * }
 	 *
 	 * Com (mensagens de validação) - (status 422):
-	 *  
+	 * 
 	 *  Request payload
 	 * [
 	 *	    {
@@ -115,13 +116,13 @@ public class PessoaREST {
 	@Consumes("application/json")
 	@Produces("text/plain")
 	@Transactional
-	public Response inserir(PessoaBody p){
-		LOGGER.info("Pessoa (nome="+p.nome + ", email="+p.email+")");
-		
+	public Response inserir(PessoaBody p) {
+		LOGGER.info("Pessoa (nome=" + p.getNome() + ", email=" + p.getEmail() + ")");
+
 		Pessoa entity = new Pessoa();
-        entity.setNome(p.nome);
-        entity.setEmail(p.email);
-        entity.setTelefone(p.telefone);
+		entity.setNome(p.getNome());
+		entity.setEmail(p.getEmail());
+		entity.setTelefone(p.getTelefone());
 
 		/*
 		 * Note que foi evitado a injeção da classe PessoaDAO em PessoaREST. 
@@ -133,20 +134,20 @@ public class PessoaREST {
 		 * da classe REST todos os 4 DAOs seriam instanciados, mas apenas 1 seria 
 		 * utilizado (Recursos desperdiçados). 
 		 */
-        PessoaDAO.getInstance().insert(entity);
-        
-        Integer id = entity.getId();
-        
-        String url = "http://localhost:8080/cadastro/api/pessoa/" + id;
-        //A requisição POST foi utilizada para criar um recurso, 
-        //logo deve ser gerado o status 201 "Created".
-        //return Response.status(201).
+		PessoaDAO.getInstance().insert(entity);
+
+		Integer id = entity.getId();
+
+		String url = "http://localhost:8080/cadastro/api/pessoa/" + id;
+		// A requisição POST foi utilizada para criar um recurso,
+		// logo deve ser gerado o status 201 "Created".
+		// return Response.status(201).
         return Response.status(Status.CREATED).
         		header("Location", url).//A URL deve estar presente o atributo Location do header (da resposta)
         		entity(id).build();//O body deve conter a identificação do novo recurso.
-        
+
 	}
-	
+
 	/**
 	 *
 	 * - Exemplo de utilização com Postman:
@@ -170,29 +171,24 @@ public class PessoaREST {
 	 * 
 	 */
 	@GET
-    @Path("{id}")
-    @Produces("application/json")
+	@Path("{id}")
+	@Produces("application/json")
 	@Transactional
-    public PessoaBody obter(@PathParam("id") Integer id) throws Exception {
-        Pessoa pessoa = PessoaDAO.getInstance().load(id);
- 
-        if (pessoa == null) {
-        	//Caso o recurso não exista responde com o status 404.
-        	//Lançando a exceção NotFoundException o próprio Demoiselle 
-        	//se encarregará de montar o response com o status apropriado.
-            throw new NotFoundException();
-        }
- 
-        PessoaBody body = new PessoaBody();
-        body.nome = pessoa.getNome();
-        body.email = pessoa.getEmail();
-        body.telefone = pessoa.getTelefone();
- 
-        return body;
-        
-    }
-	
-	//PUT para fazer a atualização completa da Pessoa
+	public PessoaBody obter(@PathParam("id") Integer id) throws Exception {
+		Pessoa pessoa = PessoaDAO.getInstance().load(id);
+
+		if (pessoa == null) {
+			// Caso o recurso não exista responde com o status 404.
+			// Lançando a exceção NotFoundException o próprio Demoiselle
+			// se encarregará de montar o response com o status apropriado.
+			throw new NotFoundException();
+		}
+
+		return new PessoaBody(pessoa);
+
+	}
+
+	// PUT para fazer a atualização completa da Pessoa
 	/**
 	 * - Exemplo de utilização com Postman:
 	 * 
@@ -243,51 +239,30 @@ public class PessoaREST {
 	@Consumes("application/json")
 	@Transactional
 	public void atualizar(@PathParam("id") Integer id, PessoaBody body) throws Exception {
-		
+
 		PessoaDAO pessoaDAO = PessoaDAO.getInstance();
 		Pessoa pessoa = pessoaDAO.load(id);
 
 		if (pessoa == null) {
-			//Caso registro no banco de dados associado ao id não exista.
+			// Caso registro no banco de dados associado ao id não exista.
 			//O Demoiselle tratará a exceção e montará um response com status 404
 			throw new NotFoundException();
 		}
 
-		pessoa.setNome(body.nome);
-		pessoa.setEmail(body.email);
-		pessoa.setTelefone(body.telefone);
+		pessoa.setNome(body.getNome());
+		pessoa.setEmail(body.getEmail());
+		pessoa.setTelefone(body.getTelefone());
+
 		pessoaDAO.update(pessoa);
-		
+
 	}
-	
-	//Obs.:  É realmente necessário manter as duas classes PessoaBody e Pessoa 
-	//já que elas são praticamente idênticas? Obrigatório não é, mas é interessante 
-	//separar sim. Em aplicações reais e mais complexas é comum que a entidade possua 
-	//muitos outros atributos que não interessam àquele serviço, mas a outro sim. 
-	//Do mesmo modo, os payloads podem possuir atributos, listas ou referenciar outras 
-	//classes que só fazem sentido no contexto dos serviços. Esta é apenas uma sugestão. 
-	public static class PessoaBody {
-		
-		@NotEmpty
-		@Size(min=3, max=50)
-		public String nome;
-		
-		@Email
-		@NotEmpty
-		@Size(max=255)
-		public String email;
-		
-		@Size(max=15)
-		public String telefone;
-		
-	}
-	
-	//O método PATCH é atualizado para atualizar só uma parte do recurso, e não
-	//substiuí-lo por completo como o PUT faz. Ou seja, pode haver a
-	//necessidade de atualizar apenas o nome da pessoa sem ter que enviar junto
-	//o email (obrigatório) e o telefone (opcional), por exemplo. Para isso foi
-	//criado o método PATCH.
-	 /** 
+
+	// O método PATCH é atualizado para atualizar só uma parte do recurso, e não
+	// substiuí-lo por completo como o PUT faz. Ou seja, pode haver a
+	// necessidade de atualizar apenas o nome da pessoa sem ter que enviar junto
+	// o email (obrigatório) e o telefone (opcional), por exemplo. Para isso foi
+	// criado o método PATCH.
+	/**
 	 * - Exemplo de utilização com Postman:
 	 * 
      * URL: http://localhost:8080/cadastro/api/pessoa/10
@@ -329,44 +304,35 @@ public class PessoaREST {
 			throw new NotFoundException();
 		}
 
-		if (body.nome != null) {
-			pessoa.setNome(body.nome);
+		//
+		//Apenas atuliza os campos preenchidos/atualizados em body "PessoaPatchBody"
+		//
+		
+		if (body.getNome() != null) {
+			pessoa.setNome(body.getNome());
 		}
 
-		if (body.email != null) {
-			pessoa.setEmail(body.email);
+		if (body.getEmail() != null) {
+			pessoa.setEmail(body.getEmail());
 		}
 
-		if (body.telefone != null) {
-			pessoa.setTelefone(body.telefone);
+		if (body.getTelefone() != null) {
+			pessoa.setTelefone(body.getTelefone());
 		}
 
 		pessoaDAO.update(pessoa);
 
 	}
 
-	public static class PessoaPatchBody {
-
-		@Size(min = 3, max = 50)
-		public String nome;
-
-		@Email
-		@Size(max = 255)
-		public String email;
-
-		@Size(max = 15)
-		public String telefone;
-	}
-	
-	//Se a lista estiver vazia, há o retorno do 
-	//status 204 (OK, sem conteúdo) com o body vazio.
+	// Se a lista estiver vazia, há o retorno do
+	// status 204 (OK, sem conteúdo) com o body vazio.
 	/**
 	 * - Exemplo de utilização com Postman:
 	 * 
 	 * URL: http://localhost:8080/cadastro/api/pessoa
 	 * Method: GET
 	 *
-	 * Response payload "o body" de resposta  
+	 * Response payload "o body" de resposta
 	 * 
 	 * [
 	 *  {
@@ -387,9 +353,9 @@ public class PessoaREST {
 	//
 	//IMPORTANTE: Código comentado, pois esse método "buscar" sem informar nenhum 
 	//parâmetro de filtro, apresenta o mesmo resultado de execução do método "buscar"
-	//(que espera ou não a passagem do parâmetro filtro, via "query string").
+	// (que espera ou não a passagem do parâmetro filtro, via "query string").
 	//
-	/* 
+	/*
 	@GET
     @Produces("application/json")
     public List<PessoaListBody> buscar() {
@@ -407,17 +373,17 @@ public class PessoaREST {
  
         return result.isEmpty() ? null : result;
     }
-    */
-		
-	//Como o método GET não possui request body, então os parâmetros 
-	//são passados na URL no padrão "query string".
+	 */
+
+	// Como o método GET não possui request body, então os parâmetros
+	// são passados na URL no padrão "query string".
 	/**
 	 * - Exemplo de utilização com Postman:
 	 * 
 	 * URL: http://localhost:8080/cadastro/api/pessoa?filtro=n
 	 * Method: GET
 	 *
-	 * Response payload "o body" de resposta  
+	 * Response payload "o body" de resposta
 	 * 
 	 * [
 	 *  {
@@ -453,20 +419,20 @@ public class PessoaREST {
 	 
 	    return result.isEmpty() ? null : result;
 	}
-	*/
-	
-	//Como o método GET não possui request body, então os parâmetros 
-	//são passados na URL no padrão "query string".
+	 */
+
+	// Como o método GET não possui request body, então os parâmetros
+	// são passados na URL no padrão "query string".
 	/**
 	 * - Exemplo de utilização com Postman:
 	 * 
 	 * URL: http://localhost:8080/cadastro/api/pessoa?ordem=nome
 	 * Method: GET
 	 *
-	 * Response payload "o body" de resposta  
+	 * Response payload "o body" de resposta
 	 * 
 	 * [
-	 *  
+	 * 
 	 *	{
 	 *    "id" : 11,
 	 *    "nome" : "batman",
@@ -485,49 +451,45 @@ public class PessoaREST {
 	 *    "email" : "nubio@gmail.com",
 	 *    "telefone" : "(81) 2126-2270"
 	 *  }
-	 *  
+	 * 
 	 * ]
 	 * 
 	 */
 	@GET
 	@Produces("application/json")
-	public List<PessoaListBody> buscar(@QueryParam("filtro") String filtro, @QueryParam("ordem") String ordem) throws Exception {
-	    List<PessoaListBody> result = new ArrayList<PessoaListBody>();
-	    List<Pessoa> pessoas;
-	 
-	    try {
-	        pessoas = PessoaDAO.getInstance().find(filtro, ordem);
-	    } catch (IllegalArgumentException cause) {
-	    	//O Demoiselle automaticamente definirá o response status 
-	    	//com o código 400 (Bad Request), que representa erro de 
-	    	//sintaxe na requisição feita pelo front-end. 
-	        throw new BadRequestException();
-	    }
-	 
-	    for (Pessoa pessoa : pessoas) {
-	        PessoaListBody body = new PessoaListBody();
-	        body.id = pessoa.getId();
-	        body.nome = pessoa.getNome();
-	        body.email = pessoa.getEmail();
-	        body.telefone = pessoa.getTelefone();
-	 
-	        result.add(body);
-	    }
-	 
-	    return result.isEmpty() ? null : result;
+	public List<PessoaListBody> buscar(@QueryParam("filtro") String filtro, @QueryParam("ordem") String ordem)
+			throws Exception {
+		List<PessoaListBody> result = new ArrayList<PessoaListBody>();
+		List<Pessoa> pessoas;
+
+		try {
+			pessoas = PessoaDAO.getInstance().find(filtro, ordem);
+		} catch (IllegalArgumentException cause) {
+			// O Demoiselle automaticamente definirá o response status
+			// com o código 400 (Bad Request), que representa erro de
+			// sintaxe na requisição feita pelo front-end.
+			throw new BadRequestException();
+		}
+
+		for (Pessoa pessoa : pessoas) {
+			result.add(new PessoaListBody(pessoa));
+		}
+
+		return result.isEmpty() ? null : result;
 	}
-	
-	//Nova classe do tipo Pessoa devido necessidade de 
-	//buscar também o atributo "id" de Pessoa 
-	public static class PessoaListBody {
-		 
-        public Integer id;
- 
-        public String nome;
- 
-        public String email;
- 
-        public String telefone;
-    }
-	
+
+	/**
+	 * - Exemplo de utilização com Postman:
+	 * 
+	 * URL: http://localhost:8080/cadastro/api/pessoa/14
+	 * Method: DELETE
+	 *
+	 */
+	@DELETE
+	@Path("{id}")
+	@Transactional
+	public void delete(@PathParam("id") Integer id) throws Exception {
+		PessoaDAO.getInstance().remover(id);
+	}
+
 }
