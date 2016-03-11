@@ -1,5 +1,11 @@
-Dominando JavaScript Com Jquery - Casa do Codigo.pdf
+* Dominando JavaScript Com Jquery - Casa do Codigo.pdf
 
 Parei em:
 
-pág 12 de 191
+pág 16 de 191
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Lugar dos códigos fontos do livro:
+
+https://github.com/nubiofs/livro-js-jquery
