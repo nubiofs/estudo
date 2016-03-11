@@ -4,6 +4,13 @@
  */
 $(function() {
 
+	var id = obterParametroDaUrlPorNome('id');
+	$("#id").val(id)
+
+	if (id) {
+		PessoaProxy.obter(id).done(obterOk).fail(obterFalhou);
+	}
+	
 	$("form")
 			.submit(
 					function(event) {
@@ -28,6 +35,32 @@ $(function() {
 					});
 
 });
+
+//Processa o id informado na URL, para carregar/"GET" nos inputs 
+//os dados da Pessoa de Id = 10, via:
+//http://localhost:8080/cadastro/pessoa.html?id=10
+function obterParametroDaUrlPorNome(name){
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function obterOk(data) {
+    $("#nome").val(data.nome);
+    $("#email").val(data.email);
+    $("#telefone").val(data.telefone);
+}
+ 
+function obterFalhou(request) {
+    switch (request.status) {
+        case 404:
+            alert("Você está tentando acessar um registro inexistente!");
+            break;
+ 
+        default:
+            break;
+    }
+}
 
 function inserirOk(data, textStatus, jqXHR) {
 	console.log("(inserirOk) Status: " + jqXHR.status);
