@@ -34,11 +34,11 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 (FRONT-END M3C1: HTML5 + CSS3) ==> OK
 
-(M3C2: CADASTRO DE PESSOAS) ==> ESTOU AQUI
+(M3C2: CADASTRO DE PESSOAS) ==> OK
 
-Topico "Controller (Carregando os dados da pessoa nos campos)"
+(M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA) ==> ESTOU AQUI
 
-(M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); (M3C4: LISTANDO AS PESSOAS).
+(M3C4: LISTANDO AS PESSOAS).
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
@@ -77,5 +77,7 @@ Ver comentários em "CalculatorREST.java"
 (M2C3: SERVIÇO ATUALIZAR); OK com tag m2c3
 
 (M2C4: SERVIÇO LISTAR); OK com tag m2c4
+
+(M3C2: CADASTRO DE PESSOAS); OK com tag m3c2
 
 
