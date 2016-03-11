@@ -36,9 +36,9 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 (M3C2: CADASTRO DE PESSOAS) ==> OK
 
-(M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA) ==> ESTOU AQUI
+(M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA) ==> OK
 
-(M3C4: LISTANDO AS PESSOAS).
+(M3C4: LISTANDO AS PESSOAS) ==> ESTOU AQUI
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
@@ -80,4 +80,4 @@ Ver comentários em "CalculatorREST.java"
 
 (M3C2: CADASTRO DE PESSOAS); OK com tag m3c2
 
-
+(M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); OK com tag m3c3
