@@ -1,9 +1,60 @@
-<html lang="">
-<meta name="" content="">
+<!DOCTYPE html>
+<html>
+<head lang="pt">
+
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+	<title>Testes</title>
+	<!--
+	<link href='css/rogus.css' type='text/css' rel='stylesheet'>
+	-->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src='js/teste.js' type='text/javascript'></script>
+
+</head>
 
 <body>
 
-	<h1>Hello World!</h1>
+	<h1 id="oi" hidden="true">Hello World!</h1>
+
+	<div>
+		Um pequeno exemplo de conversão...
+		<br />
+		<br />
+		Digite o um valor numérico.
+	</div>
+
+	<div id="entrada">
+
+		<!--
+		<input id="valor" type="text" value="Digite o um valor numérico (Formato R$ xx,yy)"
+			onblur="document.getElementById("botao").disabled = false;"/>
+		-->
+
+		<!--
+		<input id="botao" type="submit" value="Enviar" disabled>
+		-->
+
+		<input id="valor" type="text" value="(Formato R$ xx.yy)"
+			onblur="converter();"/>
+
+		<br />
+
+		<input id="show" type="text" value="" disabled>
+
+	</div>
 
 </body>
+
+<script type="text/javascript">
+// aqui dentro também pode vir o JavaScript (execultado no carregamento da página)
+	var msg = document.getElementById('oi');
+	alert(msg.innerHTML);
+
+	$("#valor").select(function(){
+	    alert("O input foi selecionado.");
+	});
+
+</script>
+
 </html>
