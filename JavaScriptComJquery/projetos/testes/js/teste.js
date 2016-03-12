@@ -1,3 +1,7 @@
+function valorMudou() {
+    $("#valor").val = " ";
+}
+
 function converter() {
 
     var v = document.getElementById('valor');
