@@ -1,0 +1,32 @@
+** Instalação apache web server (http server):
+
+$ sudo apt-get install apache2
+
+# The recommended method of invoking the httpd executable is to use the "apachectl" control script,
+# it can take the arguments start, restart, and stop and translate them into the appropriate signals to httpd. 
+# The first thing that httpd does when it is invoked is to locate and read the configuration file httpd.conf.
+
+$ /usr/local/apache2/bin/apachectl -f /usr/local/apache2/conf/httpd.conf
+
+# Para ver (Apache2 Ubuntu Default Page ==> It Works!):
+
+$ curl -X GET http://localhost
+
+Obs.:
+
+1) Diretórios
+
+- colocar arquivos em:
+/var/www/html/mynewsite
+
+Exemplo: http://www.example.com/work/ mostra o arquivo html "index.html" em /var/www/html/work/index.html
+
+- arquivos de configurações em:
+/etc/apache2
+/usr/local/apache2/conf
+
+2) sites referências
+
+http://httpd.apache.org/docs/2.4/
+https://help.ubuntu.com/lts/serverguide/httpd.html
+http://www.apachetoolbox.com/
