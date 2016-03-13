@@ -2,10 +2,47 @@
 
 Parei em:
 
-pág 16 de 191
+pág 45 (56 de 191)
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Lugar dos códigos fontos do livro:
 
 https://github.com/nubiofs/livro-js-jquery
+
+APIs (Javascript e jQuery):
+https://developer.mozilla.org/en-US/docs/Web/API
+http://api.jquery.com/
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Limitações dos browsers
+
+http://caniuse.com/
+
+//Retorna "true e msg not found" para Internet Explorer
+//inferior à versão 9
+if (document.getElementsByClassName == undefined) {
+
+    //alert(document.getElementsByClassName === undefined);
+    //alert("getElementsByClassName not found");
+
+    //Implementando getElementsByClassName de document.
+    //Ou melhor: utilizar o jQuery (que implementa as incompatibilidades)!!!
+    document.getElementsByClassName = function(className) {
+
+        //alert("Regozijai-vos, usuários de Internet Explorer");
+
+        var todosElementos = document.getElementsByTagName("*");
+        var resultados = [];
+        var elemento;
+        for (var i = 0; (elemento = todosElementos[i]) != null; i++) {
+            var elementoClass = elemento.className;
+            if (elementoClass &&
+                elementoClass.indexOf(className) != -1) {
+                resultados.push(elemento);
+            }
+        }
+        return resultados;
+    }
+}
