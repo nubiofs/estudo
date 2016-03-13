@@ -39,6 +39,7 @@ http://www.apachetoolbox.com/
 *************************************************
 
 https://gitlab.com/
+https://gitlab.com/users/sign_in
 
 obs.: login e senha idem ==> nubiofs@gmail.com
 
