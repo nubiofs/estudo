@@ -174,3 +174,33 @@ find /home/02963357460/ -iname '*.GIF' >> ver.txt
 find /home/02963357460/ -iname '*.JPEG' >> ver.txt
 find /home/02963357460/ -iname '*.PNG' >> ver.txt
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Controle de fluxo com o if
+
+Controle de fluxo são comandos que vão testando algumas alternativas, e de acordo com essas alternativas, vão executando comandos. Um dos comandos de controle de fluxo mais usados é certamente o if, que é baseado na lógica “se acontecer isso, irei fazer isso, se não, irei fazer aquilo”.
+
+Vamos dar um exemplo:
+
+if [ -e $linux ]
+then
+  echo 'A variável $linux existe.'
+else
+  echo 'A variável $linux não existe.'
+fi
+
+O que este pedaço de código faz? O if testa a seguinte expressão: Se a variável $linux existir, então (then) ele diz que que existe com o echo, se não (else), ele diz que não existe. O operador -e que usei é pré-definido, e você pode encontrar a listagem dos operadores na tabela:
+-eq	Igual
+-ne	Diferente
+-gt	Maior
+-lt	Menor
+-o	Ou
+-d	Se for um diretório
+-e	Se existir
+-z	Se estiver vazio
+-f	Se conter texto
+-o	Se o usuário for o dono
+-r	Se o arquivo pode ser lido
+-w	Se o arquivo pode ser alterado
+-x	Se o arquivo pode ser executado
+- See more at: http://www.devin.com.br/shell_script/#sthash.Bm0BDrJh.dpuf
