@@ -175,6 +175,7 @@ find /home/02963357460/ -iname '*.JPEG' >> ver.txt
 find /home/02963357460/ -iname '*.PNG' >> ver.txt
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+http://www.devin.com.br/shell_script/
 
 Controle de fluxo com o if
 
