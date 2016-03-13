@@ -1,4 +1,6 @@
+*************************************************
 ** Instalação apache web server (http server):
+*************************************************
 
 $ sudo apt-get install apache2
 
@@ -30,3 +32,42 @@ Exemplo: http://www.example.com/work/ mostra o arquivo html "index.html" em /var
 http://httpd.apache.org/docs/2.4/
 https://help.ubuntu.com/lts/serverguide/httpd.html
 http://www.apachetoolbox.com/
+
+*************************************************
+** Instalação servidor Web HTTP com nodeJS 
+(VER EXEMPLO EM "PROJETO PRIVADO"):
+*************************************************
+
+https://gitlab.com/
+
+obs.: login e senha idem ==> nubiofs@gmail.com
+
+-- Command line instructions
+
+- Git global setup:
+
+git config --global user.name "Nubio Souza"
+git config --global user.email "nubiofs@gmail.com"
+
+- Create a new repository:
+
+git clone https://gitlab.com/nubiofs/estudos.git
+
+$ Username for 'https://gitlab.com': nubiofs
+$ pwd : "idem gmail"
+
+cd estudos
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+
+- Existing folder or Git repository:
+
+cd existing_folder
+git init
+git remote add origin https://gitlab.com/nubiofs/estudos.git
+git add .
+git commit
+git push -u origin master
+
