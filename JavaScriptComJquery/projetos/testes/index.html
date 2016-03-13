@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
 	<title>Testes</title>
 	<!--
-	<link href='css/rogus.css' type='text/css' rel='stylesheet'>
+	<link href="css/rogus.css" rel="stylesheet">
 	-->
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
 	<script src='js/teste.js' type='text/javascript'></script>
@@ -17,7 +17,7 @@
 
 	<h1 id="oi" hidden="true">Hello World!</h1>
 
-	<div>
+	<div id="textoVer">
 		Um pequeno exemplo de conversão...
 		<br />
 		<br />
@@ -48,8 +48,11 @@
 
 <script type="text/javascript">
 // aqui dentro também pode vir o JavaScript (execultado no carregamento da página)
+
 	var msg = document.getElementById('oi');
 	alert(msg.innerHTML);
+	
+	console.log($("#textoVer").text());
 
 	$("#valor").select(function(){
 		console.log("O input foi selecionado.")

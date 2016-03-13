@@ -1,5 +1,41 @@
+/*
+Funcionalidade muito importante do jQuery:
+Evento, chamado ready, do documento que é
+executado assim que o documento
+terminar de ser carregado.
+*/
+
+//Substitui a antiga forma (apenas Javascript):
+
+function onDocumentLoad() {
+// faça alguma coisa
+}
+window.onload = onDocumentLoad;
+
+//
+//Novas formas (com jQuery):
+//
+
+jQuery(document).ready(function() {
+// faça alguma coisa
+});
+
+//ou
+
+$(document).ready(function() {
+// faça alguma coisa
+});
+
+//ou
+
+$(function() {
+// faça alguma coisa
+});
+
+//////////////
+
 function valorMudou() {
-    $("#valor").val = " ";
+    $("#valor").val(" ");
 }
 
 function converter() {
