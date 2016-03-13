@@ -176,6 +176,7 @@ find /home/02963357460/ -iname '*.PNG' >> ver.txt
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 http://www.devin.com.br/shell_script/
+http://rberaldo.com.br/curso-de-shell-script-modulo-1-scripts-shell-estruturas/
 
 Controle de fluxo com o if
 
