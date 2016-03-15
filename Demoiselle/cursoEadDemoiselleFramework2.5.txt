@@ -40,6 +40,9 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 (M3C4: LISTANDO AS PESSOAS) ==> ESTOU AQUI
 
+Execultar aplicação ... e depois ir para
+Item "Proxy"
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 https://moodle.ead.serpro.gov.br/login/index.php
