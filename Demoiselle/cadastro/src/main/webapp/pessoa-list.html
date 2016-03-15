@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Listagem Pessoa</title>
+<link href="css/bootstrap-3.3.6.min.css" rel="stylesheet">
+<style>
+th { cursor: pointer; }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Listagem de Pessoas</h1>
+        </div>
+        <form>
+            <div class="row">
+                <div class="col-md-4 pull-right">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="filtro" type="text" class="form-control" placeholder="Filtrar por ...">
+                            <span class="input-group-btn">
+                                <button id="buscar" class="btn btn-primary" type="button">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table id="pessoas" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th data-column="id">ID</th>
+    							<th data-column="nome">Nome</th>
+    							<th data-column="email">E-mail</th>
+    							<th data-column="telefone">Telefone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script src="js/lib/jquery-2.2.1.min.js"></script>
+	<script src="js/lib/bootstrap-3.3.6.min.js"></script>
+
+    <script src="js/proxy/pessoa-proxy.js"></script>
+    <script src="js/controller/pessoa-list.js"></script>
+</body>
+</html>
