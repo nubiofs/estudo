@@ -38,10 +38,9 @@ https://moodle.ead.serpro.gov.br/course/view.php?id=12962
 
 (M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA) ==> OK
 
-(M3C4: LISTANDO AS PESSOAS) ==> ESTOU AQUI
+(M3C4: LISTANDO AS PESSOAS) ==> OK
 
-Execultar aplicação ... e depois ir para
-Item "Aplicando a ordenação"
+Estou aqui ==> Falta fazer a avaliação do módulo 3 e questionário de satisfação final do curso!!!
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
@@ -84,3 +83,5 @@ Ver comentários em "CalculatorREST.java"
 (M3C2: CADASTRO DE PESSOAS); OK com tag m3c2
 
 (M3C3: ATUALIZANDO OS DADOS DE UMA PESSOA); OK com tag m3c3
+
+(M3C4: LISTANDO AS PESSOAS); OK com tag m3c4
