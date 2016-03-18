@@ -82,6 +82,8 @@ jetty-distribution-9.3.8.v20160314.tar.gz
 
 $ cp -R estudo.git/JavaScriptComJquery/projetos/todoList /opt/demoiselle/jetty-distribution-9.3.8.v20160314/webapps
 
+$ ./jdk1.8.0_72/bin/java -jar ./jetty-distribution-9.3.8.v20160314/start.jar --list-config
+
 $ ./jdk1.8.0_72/bin/java -jar jetty-distribution-9.3.8.v20160314/start.jar 
 
 
