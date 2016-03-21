@@ -80,7 +80,18 @@ $(function() {
     $(".tarefa-delete").click(onTarefaDeleteClick);
 
     $(".tarefa-item").click(onTarefaItemClick);
+    
+    /*
+    $("#tarefa").keydown(function(event) {
+        console.log('Oi!!!');
+    });
+    */
 
+    //Remover possíveis outras funções (anteriores) que 
+    //estejam associadas ao evento "keydown" do item que
+    //possui o id "tarefa".    
+    $("#tarefa").off("keydown");
+    
     $("#tarefa").keydown(onTarefaKeydown);
     
 });
