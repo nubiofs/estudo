@@ -81,17 +81,34 @@ $(function() {
 
     $(".tarefa-item").click(onTarefaItemClick);
     
+    //
+    //Remover possíveis outras funções (anteriores) que 
+    //estejam associadas ao evento "keydown" do item que
+    //possui o id "tarefa".    
+    //
+    
     /*
     $("#tarefa").keydown(function(event) {
         console.log('Oi!!!');
     });
-    */
-
-    //Remover possíveis outras funções (anteriores) que 
-    //estejam associadas ao evento "keydown" do item que
-    //possui o id "tarefa".    
-    $("#tarefa").off("keydown");
     
+    $("#tarefa").off("keydown");
+    */
+    
+    /*    
+    $("#tarefa").on("keydown.primeiro", function() {
+        console.log("Esse é o primeiro evento");
+    });
+    
+    $("#tarefa").on("keydown.segundo", function() {
+        console.log("Esse é o segundo evento");
+    });
+    
+    $("#tarefa").off("keydown.primeiro");
+    */
+    
+    //$("#tarefa").off();
+
     $("#tarefa").keydown(onTarefaKeydown);
     
 });
