@@ -1,3 +1,4 @@
+//IDEM a $(document).ready()
 $(function() {
     var $lastClicked;
 
@@ -8,6 +9,16 @@ $(function() {
             addTarefa($("#tarefa").val());
             $("#tarefa").val("");
         }
+    }
+
+    function onTarefaDeleteClick() {
+
+        $(this).parent('.tarefa-item')
+            .unbind('click')
+            .hide('slow', function() {
+                $(this).remove();
+            });
+
     }
 
     function onTarefaItemClick() {
@@ -29,15 +40,6 @@ $(function() {
             $(".tarefa-edit").keydown(onTarefaEditKeydown);
         }
 
-    }
-
-    function onTarefaDeleteClick() {
-
-        $(this).parent('.tarefa-item')
-            .unbind('click')
-            .hide('slow', function() {
-                $(this).remove();
-            });
     }
 
     function addTarefa(text) {
@@ -109,8 +111,8 @@ $(function() {
 
     $("#tarefa").keydown(onTarefaKeydown);
     
-    $(".tarefa-item").click(onTarefaItemClick);
-    
     $(".tarefa-delete").click(onTarefaDeleteClick);
     
+    $(".tarefa-item").click(onTarefaItemClick);
+           
 });
