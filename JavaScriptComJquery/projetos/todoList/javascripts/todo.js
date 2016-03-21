@@ -95,6 +95,7 @@ $(function() {
     $("#tarefa").off("keydown");
     */
     
+    //Bind "on" e Unbind "off" com "namespace"
     /*    
     $("#tarefa").on("keydown.primeiro", function() {
         console.log("Esse é o primeiro evento");
@@ -107,6 +108,7 @@ $(function() {
     $("#tarefa").off("keydown.primeiro");
     */
     
+    //Excluir todos os eventos de #tarefa
     //$("#tarefa").off();
 
     $("#tarefa").keydown(onTarefaKeydown);
