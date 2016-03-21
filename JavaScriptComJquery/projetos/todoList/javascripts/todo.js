@@ -1,6 +1,36 @@
 $(function() {
     var $lastClicked;
 
+    function onTarefaKeydown(event) {
+        //a propriedade "which" retorna o código Unicode da tecla usada
+        console.log("Código Unicode da tecla usada:", event.which, String.fromCharCode(event.which));
+        if (event.which === 13) {
+            addTarefa($("#tarefa").val());
+            $("#tarefa").val("");
+        }
+    }
+
+    function onTarefaItemClick() {
+
+        if (!$(this).is($lastClicked)) {
+            if ($lastClicked !== undefined) {
+                savePendingEdition($lastClicked);
+            }
+
+            $lastClicked = $(this);
+
+            var text = $lastClicked.children('.tarefa-texto').text();
+
+            var content = "<input type='text' class='tarefa-edit' value='" +
+                text + "'>";
+
+            $lastClicked.html(content);
+
+            $(".tarefa-edit").keydown(onTarefaEditKeydown);
+        }
+
+    }
+
     function onTarefaDeleteClick() {
 
         $(this).parent('.tarefa-item')
@@ -28,41 +58,11 @@ $(function() {
         $(".tarefa-item").click(onTarefaItemClick);
     }
 
-    function onTarefaKeydown(event) {
-        //a propriedade "which" retorna o código Unicode da tecla usada
-        console.log("Código Unicode da tecla usada:", event.which, String.fromCharCode(event.which));
-        if (event.which === 13) {
-            addTarefa($("#tarefa").val());
-            $("#tarefa").val("");
-        }
-    }
-
     function onTarefaEditKeydown(event) {
         if (event.which === 13) {
             savePendingEdition($lastClicked);
             $lastClicked = undefined;
         }
-    }
-
-    function onTarefaItemClick() {
-
-        if (!$(this).is($lastClicked)) {
-            if ($lastClicked !== undefined) {
-                savePendingEdition($lastClicked);
-            }
-
-            $lastClicked = $(this);
-
-            var text = $lastClicked.children('.tarefa-texto').text();
-
-            var content = "<input type='text' class='tarefa-edit' value='" +
-                text + "'>";
-
-            $lastClicked.html(content);
-
-            $(".tarefa-edit").keydown(onTarefaEditKeydown);
-        }
-
     }
 
     function savePendingEdition($tarefa) {
@@ -77,10 +77,6 @@ $(function() {
         $tarefa.click(onTarefaItemClick);
     }
 
-    $(".tarefa-delete").click(onTarefaDeleteClick);
-
-    $(".tarefa-item").click(onTarefaItemClick);
-    
     //
     //Remover possíveis outras funções (anteriores) que 
     //estejam associadas ao evento "keydown" do item que
@@ -112,5 +108,9 @@ $(function() {
     //$("#tarefa").off();
 
     $("#tarefa").keydown(onTarefaKeydown);
+    
+    $(".tarefa-item").click(onTarefaItemClick);
+    
+    $(".tarefa-delete").click(onTarefaDeleteClick);
     
 });
