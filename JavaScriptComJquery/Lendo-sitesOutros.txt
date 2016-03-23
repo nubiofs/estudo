@@ -1,0 +1,41 @@
+** http://www.newthinktank.com/2015/09/learn-javascript-one-video/
+
+In this video I did my best to create the most comprehensive JavaScript tutorial I could all in one video. 
+I cover all of the following topics : 
+
+Variables 
+Math 
+Random Numbers 
+Strings 
+Styling Strings 
+If 
+Switch 
+Ternary Operator 
+While 
+Do While 
+For 
+For In 
+Arrays 
+Functions 
+Pass Function as Parameter 
+Receive Variable Number of Arguments 
+Return Variable Number of Arguments 
+Recursive Functions 
+Event Handling 
+Mouse Events 
+Key Events 
+Change Tag Value 
+Change Class 
+Change Input Element 
+Mouse X / Y Coordinates 
+Element Styling 
+Manipulating URLs 
+Get Elements by Tag Name 
+Editing Child Nodes 
+Setting Attributes 
+Adding Elements 
+OO JavaScript 
+Form Validation 
+Exception Handling and much more.
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
