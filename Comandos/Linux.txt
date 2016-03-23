@@ -292,3 +292,37 @@ Backup() {
 Principal
 
 -----------------------------------------------------------------------
+
+* Problem: The NTFS partition is in an unsafe state error in Ubuntu
+(https://www.reddit.com/r/linuxquestions/comments/3n55iw/windows_is_hibernated_refused_to_mount/)
+
+$ sudo mount -t "ntfs" -o "uhelper=udisks2,nodev,nosuid,uid=1000,gid=1000" "/dev/sda5" "/media/clenubio/Windows8_OS"
+
+> The NTFS partition is in an unsafe state. Please resume and shutdown
+Windows fully (no hibernation or fast restarting), or mount the volume
+read-only with the ‘ro’ mount option.
+
+==> Soluções:
+
+$ sudo ntfsfix -d /dev/sda5
+$ sudo ntfsfix -b /dev/sda5
+
+> Mounting volume... Windows is hibernated, refused to mount. FAILED Attempting to correct errors... Processing $MFT and $MFTMirr... Reading $MFT... OK Reading $MFTMirr... OK Comparing $MFTMirr to $MFT... OK Processing of $MFT and $MFTMirr completed successfully. Setting required flags on partition... OK Going to empty the journal ($LogFile)... OK Windows is hibernated, refused to mount. Remount failed: Operation not permitted
+
+"ou": 
+
+$ sudo mount -t "ntfs" -o remove_hiberfile "/dev/sda5" "/media/clenubio/Windows8_OS"
+$ sudo ntfsfix -d /dev/sda5
+$ sudo ntfsfix -b /dev/sda5
+
+> NTFS partition /dev/sda5 was processed successfully.
+
+"ou":
+
+$ sudo ntfs-3g /dev/sda4 /mnt/windows
+$ sudo ntfs-3g -o remove_hiberfile /dev/sda4 /mnt/windows
+
+# better copy+paste, spaces are important
+sudo ntfsclone -mst -O - /dev/sda4 | gzip > metadata.gz
+
+
