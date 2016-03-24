@@ -5,5 +5,12 @@
     "editor.fontSize": 16,
     "window.zoomLevel": 1,
     "files.autoSave": "afterDelay",
-    "git.path": "/usr/bin/git"
+    "git.path": "/usr/bin/git",
+    // Shell commands, see default for examples.
+    "startanyshell.shells": [
+        {
+            "description": "bash",
+            "command": "gnome-terminal"
+        }
+    ]
 }
