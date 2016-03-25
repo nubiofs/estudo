@@ -34,7 +34,8 @@ elif [ $SERVER = "apache2" ]; then
 elif [ $SERVER = "tomcat" ]; then
 
 	#Caminho para o Build do(s) projeto(s) no servidor web tomcat
-	export SERVER_PATH=/opt/demoiselle/apache-tomcat-9.0.0.M3/webapps
+	#export SERVER_PATH=/opt/demoiselle/apache-tomcat-9.0.0.M3/webapps
+	export SERVER_PATH=/home/clenubio/Desenvolvimento/apache-tomcat-9.0.0.M4/webapps
 
 else
 	
