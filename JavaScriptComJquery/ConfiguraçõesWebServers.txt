@@ -1,4 +1,18 @@
 *************************************************
+** Instalação apache tomcat application/web server:
+*************************************************
+
+- Download:
+
+http://tomcat.apache.org/download-90.cgi
+
+http://mirror.nbtelecom.com.br/apache/tomcat/tomcat-9/v9.0.0.M4/bin/apache-tomcat-9.0.0.M4.tar.gz
+
+- Run:
+
+$ /apache-tomcat-9.0.0.M4/bin$ ./catalina.sh start
+
+*************************************************
 ** Instalação apache web server (http server):
 *************************************************
 
