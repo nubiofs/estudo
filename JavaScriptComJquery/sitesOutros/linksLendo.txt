@@ -38,6 +38,8 @@ OO JavaScript
 Form Validation 
 Exception Handling and much more.
 
+==> Parei, em "jstut.html", na linha: 368
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 http://pdf.coreservlets.com/HTTP-Request-Headers.pdf
