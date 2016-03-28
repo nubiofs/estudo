@@ -27,9 +27,24 @@
           
       </p>
       
-      <script src="jstut.js"></script>
+      <!-- Open alert on click -->
+      <a href="JavaScript:void(0)" onClick="alert('Hello');">Say Hello</a><br />
       
+      <!-- Call a function on click -->
+      <a href="JavaScript:void(0)" onClick="openAlert('Hi how are you');">Say Something</a><br />
+
+      <script src="js\jstut.js"></script>
+            
       <noscript>Your browser either does not support JavaScript, or has it turned off.</noscript>
+      
+      <script>
+          
+          function openAlert(msg) {
+            alert(msg);
+            console.log(msg);
+          }
+
+      </script>
       
   </body>
   

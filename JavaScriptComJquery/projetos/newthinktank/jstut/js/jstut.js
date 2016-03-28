@@ -8,7 +8,7 @@ if (yourName != null) {
 }
 
 //comando ok, pois "msg" não está em um escopo de função!
-console.log("consegui? " + msg);
+console.log("conseguindo... " + msg);
 
 /*
 function onDocumentLoad() {
