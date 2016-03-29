@@ -47,3 +47,9 @@ if (document.getElementsByClassName == undefined) {
         return resultados;
     }
 }
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+* JavaScript Unit Testing.pdf:
+
+parei na página 1 (12 de 191)
