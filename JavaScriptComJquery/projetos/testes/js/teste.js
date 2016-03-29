@@ -59,3 +59,26 @@ function moneyTextToFloat(text) {
     var cleanText = text.replace("R$ ", "").replace(",", ".");
     return parseFloat(cleanText);
 }
+
+//Retorna "true e msg not found" para Internet Explorer
+//inferior à versão 9
+if (document.getElementsByClassName == undefined) {
+    //alert(document.getElementsByClassName === undefined);
+    //alert("getElementsByClassName not found");
+    //Implementando getElementsByClassName de document.
+    //Ou melhor: utilizar o jQuery (que implementa as incompatibilidades)!!!
+    document.getElementsByClassName = function(className) {
+        //alert("Regozijai-vos, usuários de Internet Explorer");
+        var todosElementos = document.getElementsByTagName("*");
+        var resultados = [];
+        var elemento;
+        for (var i = 0; (elemento = todosElementos[i]) != null; i++) {
+            var elementoClass = elemento.className;
+            if (elementoClass &&
+                elementoClass.indexOf(className) != -1) {
+                resultados.push(elemento);
+            }
+        }
+        return resultados;
+    }
+}
