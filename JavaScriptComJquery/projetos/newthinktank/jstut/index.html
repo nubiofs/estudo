@@ -56,8 +56,6 @@
     <!-- Call a function on click -->
     <!--<a href="JavaScript:void(0)" onClick="openAlert('Hi how are you');">Say Something</a><br />-->
 
-    <!--<script src="js\jstut.js"></script>-->
-
     <noscript>Your browser either does not support JavaScript, or has it turned off.</noscript>
 
     <!--<script>
@@ -73,7 +71,7 @@
       onChange="var dataEntered=document.getElementById('randInput').value; alert('User Typed ' + dataEntered);"><br /><br />-->
 
     <!-- When a user clicks a key provide info on the key clicked -->
-    <form action="#" id="sampForm">
+    <!--<form action="#" id="sampForm">
         <input id='charInput' type="text">
         <p id="keyData">Key Data Here</p>
         <input type="submit" value="Submit">
@@ -217,7 +215,27 @@ document.body.onmousemove = function(e) {
         
     }
 
-    </script>
+    </script>-->
+
+<div>
+    Enter your city:
+    <input id="city" name="city" type="text" size="30" onblur="isTheFieldEmpty(this, document.getElementById('city_help'))" />
+    <span id="city_help"></span>
+</div>
+
+<div>
+    Enter your phone number:
+    <input id="phone" name="phone" type="text" size="15" onblur="isPhoneOk(this, document.getElementById('phone_help'))" />
+    <span id="phone_help"></span>
+</div>
+
+<div>
+    Enter your email:
+    <input id="email" name="email" type="text" size="30" onblur="isEmailOk(this, document.getElementById('email_help'))" />
+    <span id="email_help"></span>
+</div>
+
+<script src="js\jstut.js"></script>
 
 </body>
 

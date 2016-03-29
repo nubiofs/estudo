@@ -38,7 +38,7 @@ OO JavaScript
 Form Validation 
 Exception Handling and much more.
 
-==> Parei, em "jstut.html", na linha: 567
+==> Parei, em "jstut.html", na linha: 911
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
