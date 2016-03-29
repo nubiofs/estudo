@@ -87,3 +87,11 @@ div.todo h2 {
 	border: 1px solid black;
 }
 */
+
+.tarefaHelp {
+    
+    /*background-color: red;*/
+    color: red;
+    align-items: center;
+    
+}

@@ -9,9 +9,41 @@ $(function() {
         console.log("Código Unicode da tecla usada: ", event.which, String.fromCharCode(event.which));
         
         if (event.which === 13) {//ENTER
-            addTarefa($("#tarefa").val());
-            $("#tarefa").val("");
+            
+            var $tarefa = $("#tarefa");
+            
+            if(!isTheFieldEmpty($tarefa, $("#tarefaHelp"))){
+                addTarefa($tarefa.val());
+                $tarefa.val("");    
+            }
+            
         }
+        
+    }
+
+    // inputField – ID Number for the html text box
+    // helpId – ID Number for the child node I want to print a warning in
+    function isTheFieldEmpty(input, helpId) {
+
+        var retorno = false;
+        
+        if (helpId != null && helpId.length > 0) {
+
+            // Remove any warnings that may exist
+            helpId.empty();
+
+        }
+        
+        if (input.val() === "") {
+            
+            // Add new warning
+            helpId.append(document.createTextNode("* Entre com um valor."));
+            retorno = true;
+            
+        }
+
+        // See if the input value contains any text
+        return retorno;
         
     }
 
