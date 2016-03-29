@@ -1,6 +1,8 @@
 // Place your settings in this file to overwrite default and user settings.
 //https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync
 //ext install start any shell
+//ext install jquerysnippets
+//ext install Bookmarks
 {
     "editor.fontSize": 16,
     "window.zoomLevel": 1,
