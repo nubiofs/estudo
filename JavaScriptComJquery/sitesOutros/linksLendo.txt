@@ -49,3 +49,6 @@ https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
 
 http://httparchive.org/websites.php
 https://www.hurl.it/
+
+//Edição/Execução/Teste JS, CSS3 e HTML5:
+https://jsfiddle.net/
