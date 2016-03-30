@@ -1,0 +1,21 @@
+{
+  "name": "front_end",
+  "homepage": "https://github.com/nubiofs/estudo",
+  "authors": [
+    "nubiofs <nubiofs@gmail.com>"
+  ],
+  "description": "a parte front_end do projeto \"um\"",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "front_end"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
