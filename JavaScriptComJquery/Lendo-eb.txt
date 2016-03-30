@@ -1,3 +1,4 @@
+-------------------------------------------------------
 * Dominando JavaScript Com Jquery - Casa do Codigo.pdf
 
 Parei em:
@@ -5,24 +6,29 @@ Parei em:
 pág 63 (74 de 191)
 "Capítulo 7"
 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-Lugar dos códigos fontos do livro:
-
-https://github.com/nubiofs/livro-js-jquery
-
-APIs (Javascript e jQuery):
-https://developer.mozilla.org/en-US/docs/Web/API
-http://api.jquery.com/
-
-Limitações dos browsers:
-
-http://caniuse.com/
-
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
+-------------------------------------------------------
 * JavaScript Unit Testing.pdf:
 
 parei na página 13 (24 de 191)
 "Weather forecasting application"
+
+--------------------------------------------------------
+* Javascript Frameworks for Modern Web Dev:
+
+parei na página 1 (1 de 502)
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+* Lugar dos códigos fontos do livro:
+https://github.com/nubiofs/livro-js-jquery
+
+* APIs (Javascript e jQuery):
+https://developer.mozilla.org/en-US/docs/Web/API
+http://api.jquery.com/
+
+* Limitações dos browsers:
+http://caniuse.com/
+
+
+
 
