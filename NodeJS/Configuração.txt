@@ -1,4 +1,15 @@
 
+** (nodemon)
+
+Precisamos reiniciar o servidor toda vez que realizarmos alterações.
+
+Podemos resolver este problema usando o nodemon:
+
+npm install nodemon -g
+
+nodemon server.js
+
+O único detalhe é que somos obrigados a informar a extensão do arquivo.
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
