@@ -11,6 +11,13 @@ nodemon server.js
 
 O único detalhe é que somos obrigados a informar a extensão do arquivo.
 
+** (ERRO: "bower ECMDERR") 
+http://stackoverflow.com/questions/21789683/how-to-fix-bower-ecmderr
+
+Para corrigir esse erro:
+
+$ git config --global url."https://".insteadOf git://
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Links:
