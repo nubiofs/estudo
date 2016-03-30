@@ -11,7 +11,7 @@ nodemon server.js
 
 O único detalhe é que somos obrigados a informar a extensão do arquivo.
 
-** (ERRO: "bower ECMDERR") 
+** (ERRO: "bower ECMDERR ... bower ECMDERR Failed to execute "git ls-remote --tags --heads ") 
 http://stackoverflow.com/questions/21789683/how-to-fix-bower-ecmderr
 
 Para corrigir esse erro:
