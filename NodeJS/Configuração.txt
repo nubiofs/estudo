@@ -28,6 +28,7 @@ O único detalhe é que somos obrigados a informar a extensão do arquivo.
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 http://bower.io/
+http://bower.io/docs/api/
 
 $ npm install -g bower
 $ bower --version
@@ -62,7 +63,34 @@ $ touch .bowerrc
 $ echo "{\"directory\": \"public/bower_components\"}" >> .bowerrc 
 
 // "--save" coloca bootstrap como dependência em bower.json
+//passing the --save option, we instruct Bower to permanently store this package within its list of
+//dependencies.
 $ bower install bootstrap --save
+
+//Finding Packages
+$ bower search jquery
+
+//
+//To HTML References the jQuery Package Just Added:
+//
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bower Example</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#container').html('<p>Hello, world!</p>');
+        });
+    </script>
+</body>
+</html>
 
 Obs.: 
 1) "If we were to accidentally delete all of our project’s dependencies by removing the 
