@@ -1,15 +1,38 @@
+** Download do NodeJS:
+
+https://nodejs.org/en/download/stable/
+
+$ node-v5.9.1-linux-x86/bin/node
+$ node-v5.9.1-linux-x86/bin/npm
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ** (nodemon)
+https://github.com/remy/nodemon
 
 Precisamos reiniciar o servidor toda vez que realizarmos alterações.
 
 Podemos resolver este problema usando o nodemon:
 
-npm install nodemon -g
+$ npm install nodemon -g
 
-nodemon server.js
+$ nodemon server.js
+
+"ou"
+
+//2500ms = 2.5s
+$ nodemon --delay 2500ms server.js
 
 O único detalhe é que somos obrigados a informar a extensão do arquivo.
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+http://bower.io/
+
+$ npm install -g bower
+$ bower --version
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ** (ERRO: "bower ECMDERR ... bower ECMDERR Failed to execute "git ls-remote --tags --heads ") 
 http://stackoverflow.com/questions/21789683/how-to-fix-bower-ecmderr
@@ -18,7 +41,49 @@ Para corrigir esse erro:
 
 $ git config --global url."https://".insteadOf git://
 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+** Iniciando um projeto (full stack):
+
+$ mkdir projeto/
+$ cd projeto/
+
+//
+//Front-end
+//
+
+$ mkdir front_end/
+$ cd front_end/
+
+//Interactively create a bower.json file:
+$ bower init
+
+$ touch .bowerrc
+$ echo "{\"directory\": \"public/bower_components\"}" >> .bowerrc 
+
+// "--save" coloca bootstrap como dependência em bower.json
+$ bower install bootstrap --save
+
+Obs.: para posteriores instalações das dependências "front_end" do "projeto":
+$ bower install
+
+//
+//Back-end
+//
+
+$ mkdir back_end/
+$ cd back_end/
+
+//Interactively create a package.json file:
+$ npm init
+
+//Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
+$ npm install mongoose -g --save
+
+Obs.: para posteriores instalações das dependências "back_end" do "projeto":
+$ npm install
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Links:
 
