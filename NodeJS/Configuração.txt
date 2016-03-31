@@ -64,8 +64,17 @@ $ echo "{\"directory\": \"public/bower_components\"}" >> .bowerrc
 // "--save" coloca bootstrap como dependência em bower.json
 $ bower install bootstrap --save
 
-Obs.: para posteriores instalações das dependências "front_end" do "projeto":
+Obs.: 
+1) "If we were to accidentally delete all of our project’s dependencies by removing the 
+public/bower_components folder, we could easily restore our project to its previous state by issuing a single command, as
+shown next."
+(Para posteriores instalações das dependências "front_end" do "projeto")
 $ bower install
+
+2) As a result of this behavior, we have the option of ignoring our project’s /public/bower_components
+folder within version control. By committing only Bower’s manifest, and not the dependencies themselves,
+our project’s source code can be kept in a cleaner state, containing only files that pertain directly to our
+own work.
 
 //
 //Back-end
