@@ -12,12 +12,6 @@ pág 63 (74 de 191)
 parei na página 13 (24 de 191)
 "Weather forecasting application"
 
---------------------------------------------------------
-* Javascript Frameworks for Modern Web Dev:
-
-parei na página 5 (30 de 502)
-"Development Dependencies"
-
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 * Lugar dos códigos fontos do livro:
