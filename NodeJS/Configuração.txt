@@ -146,6 +146,7 @@ $ /usr/bin/grunt --version
 //Plugins whose names are prefixed with contrib- are officially maintained by the developers behind Grunt.
 $ npm install grunt-contrib-uglify --save-dev
 $ npm install grunt-contrib-concat --save-dev
+$ npm install grunt-contrib-qunit --save-dev
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
