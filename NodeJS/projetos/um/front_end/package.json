@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "grunt-cli": "^1.1.0"
+    "grunt": "^0.4.5"
   }
 }

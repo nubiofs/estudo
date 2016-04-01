@@ -8,7 +8,9 @@ module.exports = function(grunt) {
         interacting with the file system. We'll take a look at these in greater
         detail later in the chapter. */
         'pkg': grunt.file.readJSON('package.json'),
+        'my_src_files': ['public/js/*.js'],
         'uglify': {
+            // uglify task configuration goes here.
             'development': {
                 'files': {
                     'build/app.min.js': ['front_end/app.js', 'front_end/public/bower_components/jquery/dist/jquery.js']

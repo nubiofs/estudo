@@ -130,8 +130,11 @@ http://gruntjs.com/getting-started
 
 //Installing the grunt Command-Line Utility via npm
 $ sudo npm install grunt-cli -g
+$ npm install grunt --save-dev
 
 $ /usr/bin/grunt --version
+//grunt-cli v1.1.0
+//grunt v0.4.5
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
