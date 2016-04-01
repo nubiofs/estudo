@@ -129,12 +129,23 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 http://gruntjs.com/getting-started
 
 //Installing the grunt Command-Line Utility via npm
+//(installed Grunt’s command-line utility):
 $ sudo npm install grunt-cli -g
+
+//Na pasta do projeto
+//(we still need to add a local grunt dependency to each 
+//project we intend to use it with):
 $ npm install grunt --save-dev
 
 $ /usr/bin/grunt --version
+//Resultado:
 //grunt-cli v1.1.0
 //grunt v0.4.5
+
+//A list of all available Grunt plugins can be found at http://gruntjs.com/plugins. 
+//Plugins whose names are prefixed with contrib- are officially maintained by the developers behind Grunt.
+$ npm install grunt-contrib-uglify --save-dev
+$ npm install grunt-contrib-concat --save-dev
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 

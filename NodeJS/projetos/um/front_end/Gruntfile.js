@@ -9,15 +9,29 @@ module.exports = function(grunt) {
         detail later in the chapter. */
         'pkg': grunt.file.readJSON('package.json'),
         'my_src_files': ['public/js/*.js'],
+        'concat': {
+            options: {
+                separator: ';'
+            },
+            dist: {
+                //src: ['public/js/**/*.js'],
+                src: ['<%= my_src_files %>'],
+                //dest: 'dist/<%= pkg.name %>.js'
+                dest: 'public/js/dist/app.cat.js'
+            }
+        },
         'uglify': {
             // uglify task configuration goes here.
             'development': {
                 'files': {
-                    'build/app.min.js': ['front_end/app.js', 'front_end/public/bower_components/jquery/dist/jquery.js']
+                    'build/js/app.min.js': ['public/js/dist/app.cat.js', 'public/bower_components/jquery/dist/jquery.js']
                 }
             }
         }
+        
     });
+    
+    grunt.loadNpmTasks('grunt-contrib-concat');
     
     /**
     * Grunt plugins exist as Node packages, published via npm. Here, we load the
@@ -35,7 +49,7 @@ module.exports = function(grunt) {
     * multiple tasks (to be run in sequence) by adding multiple entries to the array
     * that is passed.
     */
-    grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('default', ['concat', 'uglify']);
     
     /**
     * Here we create a custom task that prints a message to the console (followed by

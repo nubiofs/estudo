@@ -2,13 +2,15 @@
   "name": "front_end",
   "version": "1.0.0",
   "description": "parte front_end do projeto \"um\"",
-  "main": "app.js",
+  "main": "public/js/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1"
   }
 }
