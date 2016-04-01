@@ -1,0 +1,14 @@
+{
+  "name": "front_end",
+  "version": "1.0.0",
+  "description": "parte front_end do projeto \"um\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt-cli": "^1.1.0"
+  }
+}
