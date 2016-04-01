@@ -92,6 +92,9 @@ $ bower search jquery
 </body>
 </html>
 
+$ bower list
+bower check-new     Checking for new versions of the project dependencies...
+
 Obs.: 
 1) "If we were to accidentally delete all of our project’s dependencies by removing the 
 public/bower_components folder, we could easily restore our project to its previous state by issuing a single command, as
@@ -119,6 +122,16 @@ $ npm install mongoose -g --save
 
 Obs.: para posteriores instalações das dependências "back_end" do "projeto":
 $ npm install
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+** grunt:
+http://gruntjs.com/getting-started
+
+//Installing the grunt Command-Line Utility via npm
+$ sudo npm install grunt-cli -g
+
+$ /usr/bin/grunt --version
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
