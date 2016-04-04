@@ -66,6 +66,12 @@ sudo passwd postgres
 
 su - postgres
 
+>> Alterando a senha do usuário admin do SGBD:
+
+(Em $ psql):
+
+ALTER ROLE postgres WITH PASSWORD 'postgres';
+
 >> Instalação do pgAdmin3: Via "Ubuntu Software Center"
 
 >> Instalação do postgis: Via "Ubuntu Software Center"
