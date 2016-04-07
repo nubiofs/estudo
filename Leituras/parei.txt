@@ -16,3 +16,8 @@ pag 253 # OK
 
 Dominando JavaScript Com Jquery - Casa do Codigo.pdf:
 pag 173 # OK
+
+SOA aplicado (Integrando com web services e além)
+pag ix (10 de 286)
+Ver fontes em:
+https://github.com/alesaudate/soa
