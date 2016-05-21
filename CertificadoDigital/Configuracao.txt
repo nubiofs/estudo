@@ -4,14 +4,19 @@
 
 para realizar autenticação via certificado digital no projeto bookmark
 
-"archetype: demoiselle-html-rest; version: 2.3.4"
+"archetype: demoiselle-jsf-jpa; version: 2.3.4"
 (https://repo1.maven.org/maven2/archetype-catalog.xml)
 
 em:
 
+Configuração:
+
+New maven project...
 
 
-* Versões dos sistemas:
+
+
+* Versões dos sistemas (/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital):
 
 jboss-eap-6.1.0
 
@@ -19,8 +24,10 @@ jdk-7u80-linux-x64
 
 apache-maven-3.1.0
 
+Workspace para
 Eclipse Java EE IDE for Web Developers.
-Version: Mars.1 Release (4.5.1)
+Version: Mars.2 Release (4.5.2)
+Build id: 20160218-0600
 
 
 
