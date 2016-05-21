@@ -1,0 +1,7 @@
+* Utilizando o projeto:
+
+https://github.com/nubiofs/demoiselle-loginmodule.git
+
+para realizar autenticação via certificado digital no "novo branch" (demoiselle-loginmodule) para o projeto:
+
+
