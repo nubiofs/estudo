@@ -1,0 +1,4 @@
+https://github.com/demoiselle/framework/blob/master/impl/extension/jaas/src/main/java/br/gov/frameworkdemoiselle/security/JAASAuthenticator.java
+
+https://github.com/demoiselle/framework/blob/master/impl/core/src/main/java/br/gov/frameworkdemoiselle/internal/implementation/SecurityContextImpl.java
+https://github.com/demoiselle/framework/blob/master/impl/core/src/main/java/br/gov/frameworkdemoiselle/security/SecurityContext.java
