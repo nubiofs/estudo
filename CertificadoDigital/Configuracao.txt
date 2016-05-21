@@ -1,0 +1,233 @@
+* Utilizando os projetos:
+
+"https://github.com/nubiofs/demoiselle-loginmodule.git"
+
+"https://github.com/nubiofs/certificate.git"
+
+para realizar autenticação via certificado digital no projeto "bookmark"
+
+"archetype: demoiselle-jsf-jpa; version: 2.3.4"
+(https://repo1.maven.org/maven2/archetype-catalog.xml)
+
+em:
+
+https://github.com/nubiofs/estudo/tree/master/CertificadoDigital/bookmarks
+https://github.com/nubiofs/estudo/tree/master/CertificadoDigital/demoiselle-loginmodule
+https://github.com/nubiofs/estudo/tree/master/CertificadoDigital/certificate
+
+==========================================================================================
+
+(CONFIGURAÇÃO DE AMBIENTE)
+* Versões dos sistemas (/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital):
+
+jboss-eap-6.1.0
+(Obs.: O jboss eap 6.1 depende da versão 1.7 do jdk para rodar)
+
+jdk-7u80-linux-x64
+
+apache-maven-3.1.0
+
+Workspace para
+Eclipse Java EE IDE for Web Developers.
+Version: Neon Release Candidate 1 (4.6.0RC1)
+Build id: 20160519-1933
+(Obs.: 
+Eclipse rodando com "em eclipse.ini": 
+-vm
+/home/clenubio/Desenvolvimento/jdk1.8.0_92/bin/java
+)
+
+(Installing -> Jboss Server EAP Tools - extension "Na tela criação servidor e buscar (redhat)")
+Obs.: Pois o Neon ainda (em 21-05-2016) não tinha versão do Jboss Tools no marketplace
+
+==========================================================================================
+
+** Configuração (bookmarks):
+
+$ mvn archetype:generate
+$ Choose a number: 17
+$ Choose a number: 7
+
+$ cd bookmarks
+
+$ mvn eclipse:eclipse
+
+...
+
+No eclipse:
+>> File >> Import... >> General >> Existing Projects in Workspace >> Next
+
+ou
+
+>> Import Maven Project
+
+Configure >> Convert to Maven Project
+
+>>> http://localhost:8080/bookmarks/index.jsf
+
+==========================================================================================
+
+** Configuração (demoiselle-loginmodule):
+
+para falta de obtenção da dependência:
+
+<dependency>
+            <groupId>javax.security</groupId>
+            <artifactId>jacc</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+</dependency>
+
+download: 
+
+https://maven-us.nuxeo.org/nexus/content/repositories/public/javax/security/jacc/1.0/
+http://mvnrepository.com/artifact/javax.security/jacc/1.0
+
+Obs.:
+installing 3rd party JARs:
+
+mvn install:install-file -Dfile=<path-to-file> -DgroupId=<group-id> \
+    -DartifactId=<artifact-id> -Dversion=<version> -Dpackaging=<packaging>
+
+--
+
+$ mvn install:install-file -Dfile=./jacc-1.0.jar -DgroupId=javax.security -DartifactId=jacc -Dversion=1.0 -Dpackaging=jar
+
+...
+[INFO] Installing /home/clenubio/Desenvolvimento/SNCR-CertificadoDigital/jacc-1.0.jar to /home/clenubio/.m2/repository/javax/security/jacc/1.0/jacc-1.0.jar
+
+>> No eclipse "Maven Update" e "clean install" para os três projetos (loginmodule; loginmodule-build; loginmodule-reference)...
+
+==========================================================================================
+
+** Configuração (demoiselle-loginmodule no Jboss e nas aplicações):
+
+1) criar arquivo "jboss-eap-6.1/modules/br/gov/frameworkdemoiselle/loginmodule/provider/main/module.xml" com:
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.0" name="br.gov.frameworkdemoiselle.loginmodule.provider">
+	
+	<resources>
+		<resource-root path="demoiselle-loginmodule-1.0.0.jar"/>
+
+	</resources>
+	
+	<dependencies>
+		<module name="javax.api"/>
+		<module name="javax.security.jacc.api"/>
+		<module name="javax.faces.api"/>
+	</dependencies>
+
+</module>	
+
+2) adicionado um domínio de segurança da aplicação em $JBoss/standalone/configuration/standalone.xml
+
+--> no subsistema urn:jboss:domain:security, conforme o exemplo abaixo:
+
+<!-- demoiselle-loginmodule -->
+<security-domain name="demoiselle-loginmodule-domain" cache-type="default">
+	<authentication>
+		<login-module code="br.gov.frameworkdemoiselle.loginmodule.provider.ProviderLoginModule" flag="sufficient" module="br.gov.frameworkdemoiselle.loginmodule.provider">
+			<module-option name="authentication-provider-class" value="br.gov.serpro.security.provider.authentication.SampleAuthenticationProvider"/>
+			<module-option name="authorization-provider-class" value="br.gov.serpro.security.provider.authentication.SampleAuthorizationProvider"/>
+			<module-option name="throwable-handler-class" value="br.gov.frameworkdemoiselle.loginmodule.message.implementation.RequestThrowableHandler"/>
+			<module-option name="system" value="sample"/>
+		</login-module>
+	</authentication>
+
+	<jsse keystore-password="123456" keystore-url="file:.../keystore-tibco.jks" truststore-password="changeit" truststore-url="file:.../truststore.jks"/>
+
+</security-domain>
+
+--> no subsistema urn:jboss:domain:web, conforme o exemplo abaixo:
+
+<!-- demoiselle-loginmodule -->
+<!-- (certificate-key-file) representa o certificado do servidor JBoss 6 EAP -->
+<!-- (ca-certificate-file) representa o repositório de certificados de todas 
+	as Autoridades Certificadoras reconhecidas pelo servidor JBoss 6 EAP. -->
+<!-- (verify-client): define se a conexão segura vai solicitar o certificado digital do usuário.-->
+<connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" secure="true">
+	<ssl key-alias="tibco" password="123456" 
+		certificate-key-file=".../keystore-tibco.jks"
+		ca-certificate-file=".../truststore.jks"
+		cipher-suite="ALL"
+		protocol="TLS"
+		verify-client="true"/>
+</connector>
+
+
+3) criar e configurar o arquivo /WEB-INF/jboss-web.xml (src/main/webapp/WEB-INF/jboss-web.xml) com o nome do security-domain:
+
+<jboss-web xmlns="http://www.jboss.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/j2ee/schema/jboss-web_6_0.xsd"
+	version="6.0">
+	
+	<security-domain>demoiselle-loginmodule-domain</security-domain>
+	
+</jboss-web>
+
+4) criar e configurar o arquivo /WEB-INF/jboss-deployment-structure.xml (src/main/webapp/WEB-INF/jboss-deployment-structure.xml), conforme o exemplo abaixo:
+
+<jboss-deployment-structure>
+	<deployment>
+		<dependencies>
+			<module name="br.gov.frameworkdemoiselle.loginmodule.provider"
+				slot="main" />
+		</dependencies>
+	</deployment>
+</jboss-deployment-structure>
+
+5) declarar a classe LoginMB no arquivo /WEB-INF/faces-config.xml, conforme o exemplo abaixo:
+
+<?xml version="1.0"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+	<managed-bean>
+		<managed-bean-name>login</managed-bean-name>
+		<managed-bean-class>br.gov.frameworkdemoiselle.loginmodule.LoginMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>successPageRedirect</property-name>
+			<value>default</value>
+		</managed-property>
+		<managed-property>
+			<property-name>errorPageRedirect</property-name>
+			<value>error</value>
+		</managed-property>
+	</managed-bean>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>default</from-outcome>
+			<to-view-id>/template/main.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/erro/error.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>
+
+
+6) Java build path (add jar external):
+
+<classpathentry kind="lib" path="/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital/jboss-eap-6.1/modules/br/gov/frameworkdemoiselle/loginmodule/provider/demoiselle-loginmodule-1.0.0.jar"/>
+
+
+
+
+
+
+
+
+
+
+
