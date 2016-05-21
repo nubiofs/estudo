@@ -1,7 +1,27 @@
-* Utilizando o projeto:
+* Utilizando os projetos:
 
-https://github.com/nubiofs/demoiselle-loginmodule.git
+"https://github.com/nubiofs/demoiselle-loginmodule.git"
 
-para realizar autenticação via certificado digital no "novo branch" (demoiselle-loginmodule) para o projeto:
+para realizar autenticação via certificado digital no projeto bookmark
+
+"archetype: demoiselle-html-rest; version: 2.3.4"
+(https://repo1.maven.org/maven2/archetype-catalog.xml)
+
+em:
+
+
+
+* Versões dos sistemas:
+
+jboss-eap-6.1.0
+
+jdk-7u80-linux-x64
+
+apache-maven-3.1.0
+
+Eclipse Java EE IDE for Web Developers.
+Version: Mars.1 Release (4.5.1)
+
+
 
 
