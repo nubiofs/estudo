@@ -30,6 +30,7 @@ Configure >> Convert to Maven Project
 * Versões dos sistemas (/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital):
 
 jboss-eap-6.1.0
+(Obs.: O jboss eap 6.1 depende da versão 1.7 do jdk para rodar)
 
 jdk-7u80-linux-x64
 
