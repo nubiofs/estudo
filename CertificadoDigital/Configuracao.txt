@@ -149,8 +149,8 @@ $ mvn install:install-file -Dfile=./jacc-1.0.jar -DgroupId=javax.security -Darti
 <!-- (verify-client): define se a conexão segura vai solicitar o certificado digital do usuário.-->
 <connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" secure="true">
 	<ssl key-alias="tibco" password="123456" 
-		certificate-key-file=".../keystore-tibco.jks"
-		ca-certificate-file=".../truststore.jks"
+		certificate-key-file="${jboss.server.home.dir}/conf/keystore-tibco.jks"
+		ca-certificate-file="${jboss.server.home.dir}/conf/truststore.jks"
 		cipher-suite="ALL"
 		protocol="TLS"
 		verify-client="true"/>
@@ -219,7 +219,17 @@ $ mvn install:install-file -Dfile=./jacc-1.0.jar -DgroupId=javax.security -Darti
 
 6) Java build path (add jar external):
 
-<classpathentry kind="lib" path="/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital/jboss-eap-6.1/modules/br/gov/frameworkdemoiselle/loginmodule/provider/demoiselle-loginmodule-1.0.0.jar"/>
+<classpathentry kind="lib" path="/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital/jboss-eap-6.1/modules/br/gov/frameworkdemoiselle/loginmodule/provider/main/demoiselle-loginmodule-1.0.0.jar"/>
+
+7) Gerar o nosso certificado ( keystore ):
+
+$ keytool -genkey -alias example -keystore example.keystore -keypass 123456 -keyalg RSA
+-- keytool -genkey -keystore my.keystore -storepass mypass -keypass mypass -keyalg RSA -alias my_key -validity 3650 -dname \   "cn=JBossdivers,ou=Desenv,c=Cuiaba,s=MT,c=BR"
+
+
+-- visualizar informações do certificado
+$ keytool -v -list -keystore example.keystore
+
 
 
 
