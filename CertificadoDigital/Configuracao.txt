@@ -9,6 +9,8 @@ para realizar autenticação via certificado digital no projeto bookmark
 
 em:
 
+https://github.com/nubiofs/estudo/tree/master/CertificadoDigital/bookmarks
+
 Configuração:
 
 $ mvn archetype:generate
@@ -26,6 +28,7 @@ No eclipse:
 
 Configure >> Convert to Maven Project
 
+>>> http://localhost:8080/bookmarks/index.jsf
 
 * Versões dos sistemas (/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital):
 
@@ -40,8 +43,14 @@ Workspace para
 Eclipse Java EE IDE for Web Developers.
 Version: Neon Release Candidate 1 (4.6.0RC1)
 Build id: 20160519-1933
+(Obs.: 
+Eclipse rodando com "em eclipse.ini": 
+-vm
+/home/clenubio/Desenvolvimento/jdk1.8.0_92/bin/java
+)
 
 (Installing -> Jboss Server EAP Tools - extension "Na tela criação servidor e buscar (redhat)")
+Obs.: Pois o Neon ainda (em 21-05-2016) não tinha versão do Jboss Tools no marketplace
 
 
 
