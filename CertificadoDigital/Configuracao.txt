@@ -11,7 +11,7 @@ em:
 
 https://github.com/nubiofs/estudo/tree/master/CertificadoDigital/bookmarks
 
-Configuração:
+** Configuração (bookmarks):
 
 $ mvn archetype:generate
 $ Choose a number: 17
@@ -52,6 +52,35 @@ Eclipse rodando com "em eclipse.ini":
 (Installing -> Jboss Server EAP Tools - extension "Na tela criação servidor e buscar (redhat)")
 Obs.: Pois o Neon ainda (em 21-05-2016) não tinha versão do Jboss Tools no marketplace
 
+** Configuração (demoiselle-loginmodule):
 
+para falta de obtenção da dependência:
+
+<dependency>
+            <groupId>javax.security</groupId>
+            <artifactId>jacc</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+</dependency>
+
+download: 
+
+https://maven-us.nuxeo.org/nexus/content/repositories/public/javax/security/jacc/1.0/
+http://mvnrepository.com/artifact/javax.security/jacc/1.0
+
+Obs.:
+installing 3rd party JARs:
+
+mvn install:install-file -Dfile=<path-to-file> -DgroupId=<group-id> \
+    -DartifactId=<artifact-id> -Dversion=<version> -Dpackaging=<packaging>
+
+--
+
+$ mvn install:install-file -Dfile=./jacc-1.0.jar -DgroupId=javax.security -DartifactId=jacc -Dversion=1.0 -Dpackaging=jar
+
+...
+[INFO] Installing /home/clenubio/Desenvolvimento/SNCR-CertificadoDigital/jacc-1.0.jar to /home/clenubio/.m2/repository/javax/security/jacc/1.0/jacc-1.0.jar
+
+>> No eclipse "Maven Update" e "clean install" para os três projetos (loginmodule; loginmodule-build; loginmodule-reference)...
 
 
