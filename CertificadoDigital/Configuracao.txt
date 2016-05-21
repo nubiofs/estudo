@@ -37,8 +37,10 @@ apache-maven-3.1.0
 
 Workspace para
 Eclipse Java EE IDE for Web Developers.
-Version: Mars.2 Release (4.5.2)
-Build id: 20160218-0600
+Version: Neon Release Candidate 1 (4.6.0RC1)
+Build id: 20160519-1933
+
+(Installing -> Jboss Server EAP Tools - extension "Na tela criação servidor e buscar (redhat)")
 
 
 
