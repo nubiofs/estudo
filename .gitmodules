@@ -1,3 +1,6 @@
 [submodule "CertificadoDigital/demoiselle-loginmodule"]
 	path = CertificadoDigital/demoiselle-loginmodule
 	url = ../demoiselle-loginmodule.git
+[submodule "CertificadoDigital/certificate"]
+	path = CertificadoDigital/certificate
+	url = ../certificate.git
