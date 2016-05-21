@@ -2,7 +2,9 @@
 
 "https://github.com/nubiofs/demoiselle-loginmodule.git"
 
-para realizar autenticação via certificado digital no projeto bookmark
+"https://github.com/nubiofs/certificate.git"
+
+para realizar autenticação via certificado digital no projeto "bookmark"
 
 "archetype: demoiselle-jsf-jpa; version: 2.3.4"
 (https://repo1.maven.org/maven2/archetype-catalog.xml)
@@ -10,26 +12,12 @@ para realizar autenticação via certificado digital no projeto bookmark
 em:
 
 https://github.com/nubiofs/estudo/tree/master/CertificadoDigital/bookmarks
+https://github.com/nubiofs/estudo/tree/master/CertificadoDigital/demoiselle-loginmodule
+https://github.com/nubiofs/estudo/tree/master/CertificadoDigital/certificate
 
-** Configuração (bookmarks):
+==========================================================================================
 
-$ mvn archetype:generate
-$ Choose a number: 17
-$ Choose a number: 7
-
-$ cd bookmarks
-
-$ mvn eclipse:eclipse
-
-...
-
-No eclipse:
->> File >> Import... >> General >> Existing Projects in Workspace >> Next
-
-Configure >> Convert to Maven Project
-
->>> http://localhost:8080/bookmarks/index.jsf
-
+(CONFIGURAÇÃO DE AMBIENTE)
 * Versões dos sistemas (/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital):
 
 jboss-eap-6.1.0
@@ -51,6 +39,29 @@ Eclipse rodando com "em eclipse.ini":
 
 (Installing -> Jboss Server EAP Tools - extension "Na tela criação servidor e buscar (redhat)")
 Obs.: Pois o Neon ainda (em 21-05-2016) não tinha versão do Jboss Tools no marketplace
+
+==========================================================================================
+
+** Configuração (bookmarks):
+
+$ mvn archetype:generate
+$ Choose a number: 17
+$ Choose a number: 7
+
+$ cd bookmarks
+
+$ mvn eclipse:eclipse
+
+...
+
+No eclipse:
+>> File >> Import... >> General >> Existing Projects in Workspace >> Next
+
+Configure >> Convert to Maven Project
+
+>>> http://localhost:8080/bookmarks/index.jsf
+
+==========================================================================================
 
 ** Configuração (demoiselle-loginmodule):
 
@@ -82,5 +93,8 @@ $ mvn install:install-file -Dfile=./jacc-1.0.jar -DgroupId=javax.security -Darti
 [INFO] Installing /home/clenubio/Desenvolvimento/SNCR-CertificadoDigital/jacc-1.0.jar to /home/clenubio/.m2/repository/javax/security/jacc/1.0/jacc-1.0.jar
 
 >> No eclipse "Maven Update" e "clean install" para os três projetos (loginmodule; loginmodule-build; loginmodule-reference)...
+
+==========================================================================================
+
 
 
