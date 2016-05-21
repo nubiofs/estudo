@@ -57,6 +57,10 @@ $ mvn eclipse:eclipse
 No eclipse:
 >> File >> Import... >> General >> Existing Projects in Workspace >> Next
 
+ou
+
+>> Import Maven Project
+
 Configure >> Convert to Maven Project
 
 >>> http://localhost:8080/bookmarks/index.jsf
