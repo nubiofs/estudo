@@ -11,9 +11,20 @@ em:
 
 Configuração:
 
-New maven project...
+$ mvn archetype:generate
+$ Choose a number: 17
+$ Choose a number: 7
 
+$ cd bookmarks
 
+$ mvn eclipse:eclipse
+
+...
+
+No eclipse:
+>> File >> Import... >> General >> Existing Projects in Workspace >> Next
+
+Configure >> Convert to Maven Project
 
 
 * Versões dos sistemas (/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital):
