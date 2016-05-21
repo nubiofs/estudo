@@ -1,0 +1,3 @@
+[submodule "CertificadoDigital/demoiselle-loginmodule"]
+	path = CertificadoDigital/demoiselle-loginmodule
+	url = ../demoiselle-loginmodule.git
