@@ -50,7 +50,44 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+<!-- 		https://sourceforge.net/projects/demoiselle/files/component/demoiselle-security/1.2.1/ -->
+<!-- 		http://demoiselle.sourceforge.net/component/demoiselle-security/1.2.1/docs.html -->
+
+		<dependency>
+            <groupId>br.gov.component.demoiselle</groupId>
+            <artifactId>demoiselle-security</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+		
 	</dependencies>
+	
+	<repositories>
+    <!-- Artefatos do SERPRO já liberados -->
+		<repository>
+			<id>serpro-nexus-componentes-corporativos</id>
+			<url>http://nexus.aic.serpro/content/repositories/componentes-corporativos</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+
+    <!-- Artefatos do SERPRO em fase de desenvolvimento (opcional) -->
+		<repository>
+			<id>serpro-nexus-snapshots</id>
+			<url>http://nexus.aic.serpro/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+	</repositories>
+	
 	
 	<build>
 		<finalName>${artifactId}</finalName>

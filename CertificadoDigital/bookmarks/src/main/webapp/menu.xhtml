@@ -9,8 +9,14 @@
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/bookmark_list.jsf" />
 			</p:submenu>
 
-			<p:menuitem value="#{messages['menu.menuitem.quit']}" url="http://www.frameworkdemoiselle.gov.br/"
-				action="#{securityContext.logout}" />
+<!-- 			<p:menuitem value="#{messages['menu.menuitem.quit']}" url="http://www.frameworkdemoiselle.gov.br/" -->
+<!-- 				action="#{securityContext.logout}" /> -->
+
+			<p:menuitem value="#{messages['menu.menuitem.login']}" rendered="#{!securityContext.loggedIn}" url="/login.jsf"/>
+			
+			<p:menuitem value="#{bookmarkEditMB.user.name}" rendered="#{securityContext.loggedIn}"/>
+			<p:menuitem value="#{messages['menu.menuitem.quit']}" rendered="#{securityContext.loggedIn}" url="/logout.jsf"/>
+				
 		</p:menubar>
 	</h:form>
 

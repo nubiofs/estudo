@@ -45,14 +45,14 @@
 		<auth-constraint />
 	</security-constraint>
 
-<error-page>
-<error-code>403</error-code>
-<location>/erro/erro.jsf</location>
-</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/erroCert.jsf</location>
+	</error-page>
 
-<error-page>
-<exception-type>java.lang.Throwable</exception-type>
-<location>/erro/erro.jsf</location>
-</error-page>
+<!-- <error-page> -->
+<!-- <exception-type>java.lang.Throwable</exception-type> -->
+<!-- <location>/erro/erro.jsf</location> -->
+<!-- </error-page> -->
 
 </web-app>
