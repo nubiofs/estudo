@@ -55,7 +55,7 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.util.Beans;
 
 @ViewController
-@Named("certificateAuthMB")
+//@Named("certificateAuthMB")
 public class CertificateAuthMB {
 
 	private static final Logger logger = LoggerFactory.getLogger(CertificateAuthMB.class);
@@ -65,6 +65,10 @@ public class CertificateAuthMB {
 
 	private static final String CERTIFICATES_ATTR = "javax.servlet.request.X509Certificate";
 	private Certificates certificates;
+	
+	public CertificateAuthMB() {
+		System.out.println("iniciando CertificateAuthMB...");
+	}
 
 	public void login() {
 
@@ -244,6 +248,22 @@ public class CertificateAuthMB {
 
 		}
 
+	}
+
+	public String getSuccessPageRedirect() {
+		return successPageRedirect;
+	}
+
+	public void setSuccessPageRedirect(String successPageRedirect) {
+		this.successPageRedirect = successPageRedirect;
+	}
+
+	public String getErrorPageRedirect() {
+		return errorPageRedirect;
+	}
+
+	public void setErrorPageRedirect(String errorPageRedirect) {
+		this.errorPageRedirect = errorPageRedirect;
 	}
 
 }
