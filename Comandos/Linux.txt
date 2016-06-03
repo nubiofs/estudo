@@ -326,5 +326,11 @@ $ sudo ntfs-3g -o remove_hiberfile /dev/sda4 /mnt/windows
 sudo ntfsclone -mst -O - /dev/sda4 | gzip > metadata.gz
 
 
+================================
 
+Backup and restore Pidgin chat logs
+
+ver http://superuser.com/questions/14138/backup-and-restore-pidgin-chat-logs
+
+$ ~/.purple/logs/jabber/clenubio.souza@sim.serpro.gov.br
 
