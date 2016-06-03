@@ -11,6 +11,9 @@ $ sudo apt-get install git
 Obs.: para remover o ppa:
 $ sudo add-apt-repository --remove ppa:git-core/ppa
 
+Instalar o smartgit:
+http://www.syntevo.com/smartgit/download
+
 ====================
 
 git --version
