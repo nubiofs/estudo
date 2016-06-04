@@ -234,6 +234,9 @@ To create the certificates and the keystore:
 
 $ openssl genrsa -des3 -out keys/CA-key-name.pem 1024
 
+Example:
+openssl genrsa –des3 –out keys/myCAK.pem 1024
+
 2. Generate the CA root certificate by using the following command syntax:
 
 Note: For the fields in the distinguished name, you can use any values except when you are prompted for a
@@ -252,10 +255,20 @@ In this instance, CA-name specifies a name that you want to use to reference the
 In this syntax, CA-key-name specifies the name of the CA private key.
 Note: The private key should be stored in a secure location in a production environment.
 
+Example:
+openssl req –new –key keys/myCAkey.pem –x509 –days 1024 –subj
+/C=US/OU=TSD/O=SAS/ST=NC/L=Cary/CN=sasbi -out certs/myCA.crt
+
 3. Generate the server-identity keystore, as follows:
 
 $ keytool -genkey -alias alias-name -keyalg RSA -keystore serverids.jks
 -keypass key-password -storepass store-password -dname "CN=sasbi.demo.sas.com,OU=blades,O=SAS Institute,
+L=Cary,S=NC,C=US"
+
+Example:
+keytool -genkey -alias JBossOneWayCert -keyalg RSA
+-keystore serverids.jks -keypass Jboss4 -storepass Jboss4
+-dname "CN=sasbi.demo.sas.com,OU=blades,O=SAS Institute,
 L=Cary,S=NC,C=US"
 
 4. Generate the server-identity request file, as follows:
@@ -268,6 +281,10 @@ The server-identity request file contains the server public key and the server i
 The value for certificate-signing-request-filename can be whatever name you want to use. For example, you can
 use your host name as the name of the generated .csr file.
 
+Example:
+keytool -certreq -alias JBossOneWayCert -keystore serverids.jks
+-keypass Jboss4 -storepass Jboss4 -file requests/JBoss.csr
+
 5. Generate the server-identity certificate by submitting a command with the following syntax:
 
 $ openssl x509 -req -days 365 -in requests/certificate-signing-request-
@@ -277,10 +294,18 @@ name.pem -CAcreateserial -out certs/server-certificate-name.crt
 This certificate contains the server public key, the name of the machine on which JBoss runs, and the CA
 identity. It is also signed with the CA private key.
 
+Example:
+openssl x509 -req -days 365 -in requests/JBoss.csr -CA certs/myCA.crt
+-CAkey keys/myCAkey.pem -CAcreateserial -out certs/JBoss.crt
+
 6. Import the CA root certificate into the server-identity keystore.
 
 $ keytool -import -alias alias-name –file certs/CA-certificate-name.crt
 –keystore serverids.jks
+
+Example:
+keytool -import -alias JBossRootCert -file certs/myCA.crt
+-keystore serverids.jks
 
 7. Import the server-identity certificate into the server-identity keystore, using the short host name for the alias
 value, as you did in step 3.
@@ -288,10 +313,74 @@ value, as you did in step 3.
 $ keytool -import -alias alias-name -file certs/server-certificate-name.crt
 -keystore serverids.jks
 
+Example:
+keytool -import -alias JBossOneWayCert -file certs/JBoss.crt
+-keystore serverids.jks
+
 8. Generate the Trusted CA Certificates keystore and import the CA root certificate into the trust store.
 
 $ keytool –import –alias alias-name –file certs/CA-certificate-name.crt
 –keystore trusted-certificate-keystore.jks
+
+Example:
+keytool -import -alias JBossRootCert -file certs/myCA.crt
+-keystore trustedca.jks
+
+If you use the examples given after each of the previous steps, you will create the following files (shown in red) in the SSL directories that are listed here:
+
+ SSL_directory\keys\myCAkey.pem : The private key for the CA certificate that is created in step 1.
+(CA-key-name.pem)
+
+ SSL_directory\certs\myCA.crt : The CA certificate that is created in step 2. (CA-certificate-name.crt)
+
+ SSL_directory\serverids.jks : The keystore that contains the server certificates. This keystore is
+created in step 3. (serverids.jks)
+
+ SSL_directory\requests\JBoss.csr : The certificate signing request file that is created in step 4.
+(certificate-signing-request-filename.csr)
+
+ SSL_directory\certs\JBoss.crt : The server certificate that is created in step 5. (server-certificate-
+name.crt)
+
+ SSL_directory\trustedca.jks : The keystore that contains the CA certificates. This keystore is created in
+step 8. (trusted-certificate-keystore.jks)
+
+You now have all of the certificates that you need to configure one-way SSL .
+
+Importing the CA Root Certificate into Your Browser
+
+You need to import the CA root certificate named CA-certificate-name.crt (for example, myCA.crt) that you created in the
+last section into your browser so that the browser trusts the server’s certificate. Copy the certificate to the machine where you access the browser.
+
+To import this certificate into Mozilla Firefox:
+
+1. Select Tools ► Options ► Advanced ► View Certificates ► Authorities.
+
+2. Click the Import button to start the Certificate Import Wizard, and follow the wizard’s instructions. You need to
+supply the path to the certificate file. For all other values, accept the default values.
+
+Configuring the JBoss Application Server for One-Way SSL
+
+Remove the comment delimiters around the <Connector> element and add the "keystoreFile",
+"keystorePass", and emptySessionPath parameters, as shown below.
+
+<Connector port="port-value" protocol="HTTP/1.1" SSLEnabled="true"
+maxThreads="150" scheme="https" secure="true"
+clientAuth="false"
+address="${jboss.bind.address}"
+strategy="ms"
+useBodyEncodingForURI="true"
+keystoreFile="${jboss.server.home.directory}/conf/serverids.jks"
+keystorePass="password"
+emptySessionPath="true"
+sslProtocol="TLS" />
+
+The password that you specify here should be the same keystore password that you specified in step 8 of the
+section “Creating the Certificates and Keystores.”
+
+Change the port number in the following parameter from 8080 to the port value that you use in step 2 of this
+section for <Connector port="port-value". . .> . (Note: The default HTTPS/SSL port for JBoss is
+8443 , and that value is used in this example.)
 
 ======
 
