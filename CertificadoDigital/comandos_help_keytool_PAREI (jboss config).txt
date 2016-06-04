@@ -219,7 +219,7 @@ Sources: http://shib.kuleuven.be/docs/ssl_commands.shtml, https://docs.oracle.co
 
 ======
 
-Creating the Certificates and Keystores
+Creating the Certificates and Keystores (ConfigureJBossforSSLandClient-CertAuthforSAS9.3.pdf)
 
 This section provides step-by-step instructions for creating the required certificates and keystore that are necessary for
 one-way SSL. In general, the example does the following:
@@ -235,7 +235,7 @@ To create the certificates and the keystore:
 $ openssl genrsa -des3 -out keys/CA-key-name.pem 1024
 
 Example:
-openssl genrsa –des3 –out keys/myCAK.pem 1024
+$ openssl genrsa –des3 –out keys/myCAK.pem 1024
 
 2. Generate the CA root certificate by using the following command syntax:
 
@@ -256,7 +256,7 @@ In this syntax, CA-key-name specifies the name of the CA private key.
 Note: The private key should be stored in a secure location in a production environment.
 
 Example:
-openssl req –new –key keys/myCAkey.pem –x509 –days 1024 –subj
+$ openssl req –new –key keys/myCAkey.pem –x509 –days 1024 –subj
 /C=US/OU=TSD/O=SAS/ST=NC/L=Cary/CN=sasbi -out certs/myCA.crt
 
 3. Generate the server-identity keystore, as follows:
@@ -266,7 +266,7 @@ $ keytool -genkey -alias alias-name -keyalg RSA -keystore serverids.jks
 L=Cary,S=NC,C=US"
 
 Example:
-keytool -genkey -alias JBossOneWayCert -keyalg RSA
+$ keytool -genkey -alias JBossOneWayCert -keyalg RSA
 -keystore serverids.jks -keypass Jboss4 -storepass Jboss4
 -dname "CN=sasbi.demo.sas.com,OU=blades,O=SAS Institute,
 L=Cary,S=NC,C=US"
@@ -282,7 +282,7 @@ The value for certificate-signing-request-filename can be whatever name you want
 use your host name as the name of the generated .csr file.
 
 Example:
-keytool -certreq -alias JBossOneWayCert -keystore serverids.jks
+$ keytool -certreq -alias JBossOneWayCert -keystore serverids.jks
 -keypass Jboss4 -storepass Jboss4 -file requests/JBoss.csr
 
 5. Generate the server-identity certificate by submitting a command with the following syntax:
@@ -295,7 +295,7 @@ This certificate contains the server public key, the name of the machine on whic
 identity. It is also signed with the CA private key.
 
 Example:
-openssl x509 -req -days 365 -in requests/JBoss.csr -CA certs/myCA.crt
+$ openssl x509 -req -days 365 -in requests/JBoss.csr -CA certs/myCA.crt
 -CAkey keys/myCAkey.pem -CAcreateserial -out certs/JBoss.crt
 
 6. Import the CA root certificate into the server-identity keystore.
@@ -304,7 +304,7 @@ $ keytool -import -alias alias-name –file certs/CA-certificate-name.crt
 –keystore serverids.jks
 
 Example:
-keytool -import -alias JBossRootCert -file certs/myCA.crt
+$ keytool -import -alias JBossRootCert -file certs/myCA.crt
 -keystore serverids.jks
 
 7. Import the server-identity certificate into the server-identity keystore, using the short host name for the alias
@@ -314,7 +314,7 @@ $ keytool -import -alias alias-name -file certs/server-certificate-name.crt
 -keystore serverids.jks
 
 Example:
-keytool -import -alias JBossOneWayCert -file certs/JBoss.crt
+$ keytool -import -alias JBossOneWayCert -file certs/JBoss.crt
 -keystore serverids.jks
 
 8. Generate the Trusted CA Certificates keystore and import the CA root certificate into the trust store.
@@ -323,7 +323,7 @@ $ keytool –import –alias alias-name –file certs/CA-certificate-name.crt
 –keystore trusted-certificate-keystore.jks
 
 Example:
-keytool -import -alias JBossRootCert -file certs/myCA.crt
+$ keytool -import -alias JBossRootCert -file certs/myCA.crt
 -keystore trustedca.jks
 
 If you use the examples given after each of the previous steps, you will create the following files (shown in red) in the SSL directories that are listed here:
@@ -359,7 +359,7 @@ To import this certificate into Mozilla Firefox:
 2. Click the Import button to start the Certificate Import Wizard, and follow the wizard’s instructions. You need to
 supply the path to the certificate file. For all other values, accept the default values.
 
-Configuring the JBoss Application Server for One-Way SSL
+Configuring the JBoss Application Server for One-Way SSL:
 
 Remove the comment delimiters around the <Connector> element and add the "keystoreFile",
 "keystorePass", and emptySessionPath parameters, as shown below.
@@ -381,6 +381,109 @@ section “Creating the Certificates and Keystores.”
 Change the port number in the following parameter from 8080 to the port value that you use in step 2 of this
 section for <Connector port="port-value". . .> . (Note: The default HTTPS/SSL port for JBoss is
 8443 , and that value is used in this example.)
+
+Verifying the SSL Connection:
+
+https://fully-qualified-hostname:port-number/SAS-application-name in the browser. (An example of the value for SAS-
+application-name is SASPortal ; an example for port-number is 8443 .
+
+[Configuring Two-Way SSL Authentication]
+
+With one-way SSL only the identity of the server is verified; while in two-way SSL, the
+identities of both the server and the client are verified.
+
+The following sections cover these topics related to the steps for configuring two-way SSL:
+ creating and importing personal certificates to your browser
+ configuring JBoss for two-way SSL
+ configuring SAS Remote Services for two-way SSL
+ configuring client-certificate authentication for JBoss
+
+Creating Personal Client Certificates
+
+You must create personal certificates for each client person or identity that needs to be verified.
+To create these personal certificates:
+
+1. Create a personal private key for the client identity.
+
+openssl genrsa –des3 -out keys/client-identity.pem 1024
+
+Example:
+$ openssl genrsa -des3 -out keys/sasdemo.pem 1024
+
+2. Generate the personal private-key x.509 request file (.csr) with a DN.
+
+openssl req -new -key keys/client-identity.pem -days 365
+–out requests/client-identity.csr
+
+Example:
+$ openssl req -new -key keys/sasdemo.pem -days 365
+-out requests/sasdemo-req.csr
+
+a. When you are prompted for the CN, enter the name of the user, as follows:
+prompt: Common Name (eg., server FQDN or YOUR name)[]: sasdemo
+
+3. Sign the certificate with the CA certificate, as follows:
+
+openssl ca -in requests/client-identity.csr
+-keyfile keys/CA-key-name.pem
+-out certs/client-identity.crt –notext
+-cert certs/CA-certificatename.crt
+
+Example:
+$ openssl ca –in requests/sasdemo-req.csr –keyfile keys/myCAkey.pem
+–out certs/sasdemo.crt –notext –cert certs/myCA.crt
+
+4. Combine the public and private keys into PKCS12 format.
+
+openssl pkcs12 –export –in certs/CA-certificate-name.pem
+–inkey keys/client-identity.pem
+–out certs/client-certificate-name.p12
+
+Example:
+$ openssl pkcs12 -export -in certs/sasdemo.crt -inkey keys/sasdemo.pem
+-out certs/sasdemo.p12
+
+5. Import the client certificate into the browser in the Personal area for Internet Explorer and the Your
+Certificates area for Firefox as described in the next section.
+
+Importing the Personal Certificate into Your Browser
+
+During one-way SSL configuration, you imported the CA certificate into the Trusted Certificate area of your
+browser. For two-way SSL, you also need to import the certificate that you just created to identify the client verification
+during the SSL message exchange (also known as a handshake). First, copy the certificate to the machine where you
+access the browser. Then perform the steps that follow for your particular browser.
+
+To import this certificate into Mozilla Firefox:
+
+1. Select Tools ► Options ► View Certificates ► Your Certificates.
+
+2. Click the Import button to start the Certificate Import Wizard. Follow the wizard’s instructions. You need to
+supply the path to the certificate file (client-certificate-name.p12) and the password. (In step 4 of the previous
+section, sasdemo.p12 is the example value for client-certificate-name.p12.) For any other values, accept the
+defaults.
+
+Configuring JBoss for Two-Way SSL:
+
+add the truststoreFile and truststorePass parameters to the
+<Connector> element, as follows:
+<Connector port="port-value" protocol="HTTP/1.1" SSLEnabled="true"
+maxThreads="150" scheme="https" secure="true"
+clientAuth="true"
+address="${jboss.bind.address}"
+strategy="ms"
+useBodyEncodingForURI="true"
+keystoreFile="${jboss.server.home.directory}/conf/serverids.jks"
+keystorePass="password"
+emptySessionPath="true"
+truststoreFile="${jboss.server.home.directory}/conf/trustedca.jks"
+truststorePass="password"
+sslProtocol="TLS" />
+
+The values presented above for the "truststoreFile" and "truststorePass" parameters are taken from the
+steps performed for one-way SSL. The keystore password should be the same password that you use in step 4
+of the section “Creating the Certificates and Keystores.” The trust-store password should be the same as the
+password that you use in step 8 of that same section.
+You now have the certificates that you need for two-way SSL.
 
 ======
 
