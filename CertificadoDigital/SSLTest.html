@@ -1,0 +1,455 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" dir="ltr" lang="pt-br"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+				<meta name="keywords" content="SSLTest">
+		<link rel="shortcut icon" href="http://himalaia.bhe.serpro/favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://himalaia.bhe.serpro/wiki/opensearch_desc.php" title="Supst (Português do Brasil)">
+		<link title="Creative Commons" type="application/rdf+xml" href="http://himalaia.bhe.serpro/wiki/index.php?title=SSLTest&amp;action=creativecommons" rel="meta">
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+		<title>SSLTest - Supst</title>
+		<style type="text/css" media="screen, projection">/*<![CDATA[*/
+			@import "/wiki/skins/common/shared.css?97";
+			@import "/wiki/skins/monobook/main.css?97";
+		/*]]>*/</style>
+		<link rel="stylesheet" type="text/css" media="print" href="SSLTest_arquivos/commonPrint.css">
+		<!--[if lt IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE50Fixes.css?97";</style><![endif]-->
+		<!--[if IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE55Fixes.css?97";</style><![endif]-->
+		<!--[if IE 6]><style type="text/css">@import "/wiki/skins/monobook/IE60Fixes.css?97";</style><![endif]-->
+		<!--[if IE 7]><style type="text/css">@import "/wiki/skins/monobook/IE70Fixes.css?97";</style><![endif]-->
+		<!--[if lt IE 7]><script type="text/javascript" src="/wiki/skins/common/IEFixes.js?97"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+		
+		<script type="text/javascript">/*<![CDATA[*/
+var skin = "monobook";
+var stylepath = "/wiki/skins";
+var wgArticlePath = "/wiki/index.php/$1";
+var wgScriptPath = "/wiki";
+var wgScript = "/wiki/index.php";
+var wgServer = "http://himalaia.bhe.serpro";
+var wgCanonicalNamespace = "";
+var wgCanonicalSpecialPageName = false;
+var wgNamespaceNumber = 0;
+var wgPageName = "SSLTest";
+var wgTitle = "SSLTest";
+var wgAction = "view";
+var wgRestrictionEdit = [];
+var wgRestrictionMove = [];
+var wgArticleId = "2720";
+var wgIsArticle = true;
+var wgUserName = null;
+var wgUserGroups = null;
+var wgUserLanguage = "pt-br";
+var wgContentLanguage = "pt-br";
+var wgBreakFrames = false;
+var wgCurRevisionId = "30360";
+/*]]>*/</script>
+                
+		<script type="text/javascript" src="SSLTest_arquivos/wikibits.js"><!-- wikibits js --></script>
+		<script type="text/javascript" src="SSLTest_arquivos/index.php"><!-- site js --></script>
+		<style type="text/css">/*<![CDATA[*/
+@import "/wiki/index.php?title=MediaWiki:Common.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+@import "/wiki/index.php?title=MediaWiki:Monobook.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+@import "/wiki/index.php?title=-&action=raw&gen=css&maxage=18000";
+/*]]>*/</style>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="SSLTest_arquivos/ajax.js"></script>
+	</head>
+<body class="mediawiki ns-0 ltr page-SSLTest">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+				<h1 class="firstHeading">SSLTest</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">De Supst</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Ir para: <a href="#column-one">navegação</a>, <a href="#searchInput">pesquisa</a></div>			<!-- start content -->
+			<table id="toc" class="toc" summary="Conteúdo"><tbody><tr><td><div id="toctitle"><h2>Conteúdo</h2> <span class="toctoggle">[<a href="javascript:toggleToc()" class="internal" id="togglelink">esconder</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#Utilit.C3.A1rio_SSLTest"><span class="tocnumber">1</span> <span class="toctext">Utilitário SSLTest</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Vis.C3.A3o_Geral_Handshake_SSL"><span class="tocnumber">1.1</span> <span class="toctext">Visão Geral Handshake SSL</span></a></li>
+<li class="toclevel-2"><a href="#Requisitos_para_Uso_do_Utilit.C3.A1rio_de_Teste"><span class="tocnumber">1.2</span> <span class="toctext">Requisitos para Uso do Utilitário de Teste</span></a></li>
+<li class="toclevel-2"><a href="#Gloss.C3.A1rio"><span class="tocnumber">1.3</span> <span class="toctext">Glossário</span></a></li>
+<li class="toclevel-2"><a href="#Configura.C3.A7.C3.A3o"><span class="tocnumber">1.4</span> <span class="toctext">Configuração</span></a></li>
+<li class="toclevel-2"><a href="#Exemplo_do_arquivo_profiles.properties"><span class="tocnumber">1.5</span> <span class="toctext">Exemplo do arquivo profiles.properties</span></a></li>
+<li class="toclevel-2"><a href="#Executando_o_Teste"><span class="tocnumber">1.6</span> <span class="toctext">Executando o Teste</span></a></li>
+<li class="toclevel-2"><a href="#Contato_T.C3.A9cnico"><span class="tocnumber">1.7</span> <span class="toctext">Contato Técnico</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Utilit.C3.A1rio_de_Teste_do_Servi.C3.A7o_de_Autentica.C3.A7.C3.A3o_Corporativo_Senha-rede"><span class="tocnumber">2</span> <span class="toctext">Utilitário de Teste do Serviço de Autenticação Corporativo Senha-rede</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Necessidades"><span class="tocnumber">2.1</span> <span class="toctext">Necessidades</span></a></li>
+<li class="toclevel-2"><a href="#Configura.C3.A7.C3.B5es_para_o_Teste_SOAP"><span class="tocnumber">2.2</span> <span class="toctext">Configurações para o Teste SOAP</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></tbody></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "mostrar"; var tocHideText = "esconder"; showTocToggle(); } </script>
+<a name="Utilit.C3.A1rio_SSLTest"></a><h1> <span class="mw-headline">Utilitário SSLTest</span></h1>
+<p>A adoção de certificado digital e protocolo SSL para realizar 
+integração segura e criptografada entre servidores de aplicação tem 
+gerado para os projetos de desenvolvimento e equipes de operação uma 
+quantidade variada de problemas no tocante a conectividade. Devido a 
+quantidade de possibilidade de erro que vão desde um certificado 
+expirado até mesmo uma URL mal formada, se torna um cenário difícil de 
+se diagnosticar e evitar erros.
+Tomando por base este cenário, a SUPST criou este utilitário para 
+realizar uma bateria de testes em todos os componentes utilizados no 
+processo de handshake SSL na infra-estrutura que utilizam esta 
+tecnologia, mais especificamente SSL mútuo (SSL 2-way). Além de ser um 
+componente genérico que atende a todas as demandas de SSL, foi incluído 
+no utilitário testes de acionamento aos serviços corporativos mantidos 
+pela SUPST a saber: (senha-rede, captcha, sms, etc) adotarem SSL mútuo.
+</p>
+<a name="Vis.C3.A3o_Geral_Handshake_SSL"></a><h2> <span class="mw-headline">Visão Geral Handshake SSL</span></h2>
+<p><a href="http://himalaia.bhe.serpro/wiki/index.php/Imagem:How_ssl_works_summary_of_SSL_handshake_2.jpg" class="image" title="Imagem:How_ssl_works_summary_of_SSL_handshake_2.jpg"><img alt="Imagem:How_ssl_works_summary_of_SSL_handshake_2.jpg" src="SSLTest_arquivos/How_ssl_works_summary_of_SSL_handshake_2.jpg" border="0" height="338" width="470"></a>
+</p>
+<a name="Requisitos_para_Uso_do_Utilit.C3.A1rio_de_Teste"></a><h2> <span class="mw-headline">Requisitos para Uso do Utilitário de Teste</span></h2>
+<ul><li> Servidor de destino com SSL ativo.
+</li><li> Para testes de SSL mútuo é necessário par de chaves com a senha da chave privada e o certificado de cliente.
+<ul><li> Normalmente estes artefatos são armazenados em apenas uma arquivo do tipo .pfx (PKCS12) ou .jks (Java JKS)
+</li></ul>
+</li><li> Cadeia de certificados com a Autoridade Certificadora que emitiu o certificado do servidor.
+<ul><li> Normalmente a cadeia é representada com todos os certificados 
+de autoridade desde a AC raiz até a AC que emitiu o certificado do 
+servidor.
+</li></ul>
+</li><li> Programa de teste
+<ul><li> JAR executável SSLTest <a href="http://himalaia.bhe.serpro/wiki/images/0/09/Ssltest.jar" class="external autonumber" title="http://himalaia.bhe.serpro/wiki/images/0/09/Ssltest.jar" rel="nofollow">[1]</a>
+<ul><li> ZIP contendo um exemplo completo de estrutura para execução de 
+teste SSL com o servidor de desenvolvimento do serviço senha-rede. <a href="http://himalaia.bhe.serpro/wiki/images/7/71/Ssltest.zip" class="external autonumber" title="http://himalaia.bhe.serpro/wiki/images/7/71/Ssltest.zip" rel="nofollow">[2]</a>
+</li></ul>
+</li></ul>
+</li><li> Java 1.6 ou posterior
+</li></ul>
+<a name="Gloss.C3.A1rio"></a><h2> <span class="mw-headline">Glossário</span></h2>
+<table border="1" cellspacing="1">
+
+<tbody><tr>
+<th scope="col"> Termo<br>
+</th><th scope="col"> Significado<br>
+</th></tr>
+<tr>
+<td> KeyStore<br>
+</td><td>
+<dl><dd>Arquivo que contém a chave privada, chave pública e o 
+certificado. É possível também conter a cadeia de autoridades que emitiu
+ o certificado em questão.
+</dd><dd>Este arquivo pode possuir uma senha para ser aberto, e esta senha geralmente é a mesma senha da chave privada contida nele.
+</dd><dd>Existem vários tipos de KeyStore e cada um armazena seus dados 
+de forma diferente, podendo utilizar algoritmos de criptografia 
+diferentes. A plataforma Java implementa um padrão próprio JKS, já o 
+padrão PKCS12 é implementado pela empresa RSA Security e é amplamente 
+utilizado nas diversas plataformas, inclusive java.
+</dd></dl>
+</td></tr>
+<tr>
+<td> TrustStore<br>
+</td><td>
+<dl><dd>Arquivo que contém os certificados das autoridades confiáveis.
+</dd><dd>Para o uso apenas leitura deste arquivo, não há necessidade de 
+informar senha para abrí-lo. No caso de validação se um determinado 
+certificado foi emitido por uma autoridade contida neste arquivo, não há
+ necessidade de informar a senha. Para editá-lo já há a necessidade de 
+utilizar senha.
+</dd><dd>Este arquivo é um arquivo do tipo "KeyStore", sem a necessidade
+ de armazenar tipos de chaves criptográficas, apenas os certificados das
+ autoridades confiáveis.
+</dd></dl>
+</td></tr></tbody></table>
+<a name="Configura.C3.A7.C3.A3o"></a><h2> <span class="mw-headline">Configuração</span></h2>
+<p>O programa de teste funciona apoiado em um arquivo de configuração de
+ nome "profiles.properties" o qual precisa ficar na mesma pasta do 
+programa de teste. A partir das configurações definidas pelo usuário o 
+programa realiza os testes desejados.
+</p><p>Abaixo descrevemos as possíveis configurações que podem ser utilizadas no arquivo "profiles.properties":
+</p><p><br>
+</p>
+<table border="1" cellspacing="1">
+
+<tbody><tr>
+<th scope="col"> Variável
+</th><th scope="col"> Significado
+</th></tr>
+<tr>
+<td> keyStoreFile
+</td><td>
+<dl><dd>Uso obrigatório para testes de SSL mútuo.
+</dd><dd>Apontamento para o arquivo que contenha o par de chaves, o 
+certificado e opcionalmente a cadeia de certificados de ACs do mesmo. 
+</dd><dd>Ao realizar teste de autenticação mútua, é obrigatório a configuração da senha da chave privada (keyStorePassword).
+</dd><dd>Ex:
+</dd></dl>
+<ul><li> Apontamento local
+</li></ul>
+<dl><dd>keyStoreFile=keystore-cliente.jks
+</dd></dl>
+<ul><li> Apontamento referencial
+</li></ul>
+<dl><dd>keyStoreFile=/opt/certs/keystore-cliente.jks
+</dd></dl>
+</td></tr>
+<tr>
+<td> keyStorePassword
+</td><td>
+<dl><dd>Uso obrigatório para testes de SSL mútuo.
+</dd><dd>Senha da chave privada contida no arquivo de par de chaves
+</dd></dl>
+</td></tr>
+<tr>
+<td> keyStoreType
+</td><td>
+<dl><dd>Existem alguns tipos de keyStore aceitos por padrão pela JVM, como por exemplo JKS, PKCS12 e JCEKS.
+</dd><dd>É comum nos ambientes java trabalhar com o tipo JKS, já nos 
+outros ambientes, microsoft por exemplo, o uso de PKCS12 é mais comum.
+</dd><dd>O tipo padrão JVM é JKS, então, caso seu keyStore for deste tipo, esta configuração é desnecessária.
+</dd><dd>Ex:
+</dd></dl>
+<ul><li> keyStoreType=JKS
+</li><li> keyStoreType=PKCS12
+</li></ul>
+</td></tr>
+<tr>
+<td> trustStoreFile
+</td><td>
+<dl><dd>Arquivo que contém os certificados das autoridades confiáveis.
+</dd><dd>Ex:
+</dd></dl>
+<ul><li> Apontamento local
+</li></ul>
+<dl><dd>trustStoreFile=truststore.jks
+</dd></dl>
+<ul><li> Apontamento referencial
+</li></ul>
+<dl><dd>trustStoreFile=/opt/certs/truststore.jks
+</dd></dl>
+</td></tr>
+<tr>
+<td> trustStoreType
+</td><td>
+<dl><dd>Idem ao KeyStoreType
+</dd></dl>
+</td></tr>
+<tr>
+<td> timeOut
+</td><td>
+<dl><dd>Tempo que a conexão irá esperar uma resposta do servidor configurado com SSL.
+</dd><dd>Tempo em milisegundos
+</dd></dl>
+</td></tr>
+<tr>
+<td> host
+</td><td>
+<dl><dd>Endereço do servidor a ser testado.
+</dd><dd>Não é permitido colocar o protocolo, como por exemplo <a href="http://google.com/" class="external free" title="http://google.com" rel="nofollow">http://google.com</a>, apenas o DNS do serviço, como por exemplo google.com.
+</dd><dd>Ex:
+</dd></dl>
+<ul><li>Ambiente de Desenvolvimento do Serviço Senha-Rede
+</li></ul>
+<dl><dd>desautenticacao.senharede.servicoscorporativos.serpro
+</dd></dl>
+<ul><li>Google
+</li></ul>
+<dl><dd>google.com
+</dd></dl>
+</td></tr>
+<tr>
+<td> port
+</td><td>
+<dl><dd>Porta no servidor que estará com o SSL ativado. A porta 80 geralmente NÃO utiliza SSL, sendo a porta padrão de SSL a 443.
+</dd><dd>Este valor pode ser alterado para que outros serviços sejam configurados de forma diferente no mesmo servidor.
+</dd><dd>Pode-se, por exemplo, ativar a porta 443 para SSL simples e a porta 8443 para SSL mútuo.
+</dd></dl>
+</td></tr>
+<tr>
+<td> sslDebug
+</td><td>
+<dl><dd>Valor passado para a JVM na variável "javax.net.debug".
+</dd><dd>A JVM irá gerar um buffer com as informações necessárias para o
+ handshake do SSL. Este buffer é descarregado no arquivo ssldebug.txt no
+ mesmo diretório da aplicação de teste.
+</dd><dd>Verificar a documentação da JVM para saber os valores a serem utilizados.
+</dd><dd>Ex:
+</dd></dl>
+<ul><li>Ativando o debug SSL
+</li></ul>
+<dl><dd>sslDebug=ssl
+</dd></dl>
+</td></tr></tbody></table>
+<a name="Exemplo_do_arquivo_profiles.properties"></a><h2> <span class="mw-headline">Exemplo do arquivo profiles.properties</span></h2>
+<dl><dd>Com o aplicativo de testes e os arquivos keystore.jks e 
+truststore.jks no mesmo diretório, o arquivo de configuração ficaria 
+assim:
+</dd></dl>
+<pre>keyStoreFile=keystore.jks
+keyStorePassword=changeit
+trustStoreFile=truststore.jks
+timeOut=10000
+sslDebug=ssl
+host=desautenticacao.senharede.servicoscorporativos.serpro
+port=8082
+</pre>
+<dl><dd>Com esta configuração, ao executar o programa de teste ele irá 
+tentar realizar um handshake no endereço 
+desautenticacao.senharede.servicoscorporativos.serpro, na porta 8082, 
+com timeout definido em 10 segundos, utilizando como certificado de 
+cliente um certificado que esteja no arquivo keystore.jks e verificar se
+ o certificado do servidor foi emitido por uma das autoridades 
+confiáveis que estão no arquivo truststore.jks.
+</dd></dl>
+<a name="Executando_o_Teste"></a><h2> <span class="mw-headline">Executando o Teste</span></h2>
+<dl><dd>O comando para executar o teste é:
+</dd></dl>
+<pre>java -jar ssltest.jar
+</pre>
+<dl><dd>A saída da execução deste teste é esta:
+</dd></dl>
+<pre>Truststore: truststore.jks
+Teste de conexão SSL com o servidor [desautenticacao.senharede.servicoscorporativos.serpro] na porta [8082]
+Iniciando conexão... OK!
+Iniciando handshake... OK!
+Testes de SSL executados com sucesso!
+</pre>
+<dl><dd>Como a configuração de debug está ativada, no mesmo diretório 
+foi gerado um arquivo de nome ssldebug.txt que contém as informações 
+trocadas entre as máquinas no momento do handshake.
+</dd></dl>
+<a name="Contato_T.C3.A9cnico"></a><h2> <span class="mw-headline">Contato Técnico</span></h2>
+<p>Caso tenha alguma dúvida ou sugestão parao utilitário, esta pode ser 
+encaminhada via nota para jose.campanario@serpro.gov.br ou 
+rafael.soto@serpro.gov.br.
+O código fonte do utilitário encontra-se no repositório <a href="http://gitlab.serpro/supst-stdcs/ssltest" class="external free" title="http://gitlab.serpro/supst-stdcs/ssltest" rel="nofollow">http://gitlab.serpro/supst-stdcs/ssltest</a>
+</p>
+<a name="Utilit.C3.A1rio_de_Teste_do_Servi.C3.A7o_de_Autentica.C3.A7.C3.A3o_Corporativo_Senha-rede"></a><h1> <span class="mw-headline">Utilitário de Teste do Serviço de Autenticação Corporativo Senha-rede</span></h1>
+<dl><dd>É possível utilizar o programa de testes acima para também testar o serviço web-service do senha-rede.
+</dd></dl>
+<a name="Necessidades"></a><h2> <span class="mw-headline">Necessidades</span></h2>
+<ul><li> As mesmas necessidades para testar o SSL.
+</li><li> Host / Porta de um dos ambientes do serviço corporativo
+<ul><li> Desenvolvimento: desautenticacao.senharede.servicoscorporativos.serpro&nbsp;: 8082
+</li><li> Homologação: homautenticacao.senharede.servicoscorporativos.serpro&nbsp;: 8444
+</li><li> Produção: autenticacao.senharede.servicoscorporativos.serpro&nbsp;: 443
+</li></ul>
+</li><li> Um usuário/senha válido no senha-rede e/ou um certificado digital de um usuário válido no senha-rede
+</li><li> Um certificado digital de máquina habilitado no serviço corporativo senha-rede
+</li><li> Um perfil de sistema válido no senha-rede
+</li></ul>
+<a name="Configura.C3.A7.C3.B5es_para_o_Teste_SOAP"></a><h2> <span class="mw-headline">Configurações para o Teste SOAP</span></h2>
+<table border="1" cellspacing="1">
+
+<tbody><tr>
+<th scope="col"> Variável
+</th><th scope="col"> Significado
+</th></tr>
+<tr>
+<td> soapUser
+</td><td>
+<dl><dd>Usuário senha-rede para realizara autenticação. É o CPF do usuário.
+</dd></dl>
+</td></tr>
+<tr>
+<td> soapPass
+</td><td>
+<dl><dd>Senha do usuário do senha-rede
+</dd></dl>
+</td></tr>
+<tr>
+<td> soapCert
+</td><td>
+<dl><dd>Certificado Digital de um usuário do senha-rede
+</dd></dl>
+</td></tr>
+<tr>
+<td> soapSystem
+</td><td>
+<dl><dd>Perfil do sistema em que o usuário deve estar habilitado.
+</dd></dl>
+</td></tr></tbody></table>
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2720-0!1!0!!pt-br!2!edit=0 and timestamp 20160527192711 -->
+<div class="printfooter">
+Retirado de  "<a href="http://himalaia.bhe.serpro/wiki/index.php/SSLTest">http://himalaia.bhe.serpro/wiki/index.php/SSLTest</a>"</div>
+						<!-- end content -->
+			<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Acessos</h5>
+		<div class="pBody">
+			<ul>
+					 <li id="ca-nstab-main" class="selected"><a href="http://himalaia.bhe.serpro/wiki/index.php/SSLTest" title="Ver a página de conteúdo [alt-c]" accesskey="c">Artigo</a></li>
+					 <li id="ca-talk" class="new"><a href="http://himalaia.bhe.serpro/wiki/index.php?title=Discuss%C3%A3o:SSLTest&amp;action=edit" title="Discussão sobre o conteúdo da página [alt-t]" accesskey="t">Discussão</a></li>
+					 <li id="ca-viewsource"><a href="http://himalaia.bhe.serpro/wiki/index.php?title=SSLTest&amp;action=edit" title="Esta página está protegida; você pode exibir seu código, no entanto. [alt-e]" accesskey="e">Ver código</a></li>
+					 <li id="ca-history"><a href="http://himalaia.bhe.serpro/wiki/index.php?title=SSLTest&amp;action=history" title="Edições anteriores desta página. [alt-h]" accesskey="h">História</a></li>
+				</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Ferramentas pessoais</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="http://himalaia.bhe.serpro/wiki/index.php?title=Especial:Userlogin&amp;returnto=SSLTest" title="Você é encorajado a autenticar-se, apesar disso não ser obrigatório. [alt-o]" accesskey="o">Entrar</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(http://10.200.109.97/wiki/images/logoSUPST.bmp);" href="http://himalaia.bhe.serpro/wiki/index.php/P%C3%A1gina_principal" title="Visitar a página principal [alt-z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+		<div class="portlet" id="p-navigation">
+		<h5>Navegação</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage"><a href="http://himalaia.bhe.serpro/wiki/index.php/P%C3%A1gina_principal" title="Visitar a página principal [alt-z]" accesskey="z">Página principal</a></li>
+				<li id="n-portal"><a href="http://himalaia.bhe.serpro/wiki/index.php/Supst:Portal_comunit%C3%A1rio" title="Sobre o projecto">Portal comunitário</a></li>
+				<li id="n-currentevents"><a href="http://himalaia.bhe.serpro/wiki/index.php/Eventos_actuais" title="Informação temática sobre eventos actuais">Eventos atuais</a></li>
+				<li id="n-recentchanges"><a href="http://himalaia.bhe.serpro/wiki/index.php/Especial:Recentchanges" title="A lista de mudanças recentes nesta wiki. [alt-r]" accesskey="r">Mudanças Recentes</a></li>
+				<li id="n-randompage"><a href="http://himalaia.bhe.serpro/wiki/index.php/Especial:Random" title="Carregar página aleatória [alt-x]" accesskey="x">Página aleatória</a></li>
+				<li id="n-help"><a href="http://himalaia.bhe.serpro/wiki/index.php/Supst:Ajuda" title="Um local reservado para auxílio.">Ajuda</a></li>
+				<li id="n-sitesupport"><a href="http://himalaia.bhe.serpro/wiki/index.php/Supst:Apoio" title="Ajude-nos">Doações</a></li>
+			</ul>
+		</div>
+	</div>
+		<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Busca</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/wiki/index.php/Especial:Search" id="searchform"><div>
+				<input id="searchInput" name="search" title="Pesquisar nesta wiki [alt-f]" accesskey="f" type="text">
+				<input name="go" class="searchButton" id="searchGoButton" value="Vai" type="submit">&nbsp;
+				<input name="fulltext" class="searchButton" id="mw-searchButton" value="Busca" type="submit">
+			</div></form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Ferramentas</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://himalaia.bhe.serpro/wiki/index.php/Especial:Whatlinkshere/SSLTest" title="Lista de todas as páginas que ligam-se a esta [alt-j]" accesskey="j">Artigos Relacionado</a></li>
+				<li id="t-recentchangeslinked"><a href="http://himalaia.bhe.serpro/wiki/index.php/Especial:Recentchangeslinked/SSLTest" title="Mudanças recentes em páginas relacionadas a esta [alt-k]" accesskey="k">Páginas relacionadas</a></li>
+<li id="t-upload"><a href="http://himalaia.bhe.serpro/wiki/index.php/Especial:Upload" title="Carregar imagens ou ficheiros media [alt-u]" accesskey="u">Carregar arquivo</a></li>
+<li id="t-specialpages"><a href="http://himalaia.bhe.serpro/wiki/index.php/Especial:Specialpages" title="Lista de páginas especiais [alt-q]" accesskey="q">Páginas especiais</a></li>
+				<li id="t-print"><a href="http://himalaia.bhe.serpro/wiki/index.php?title=SSLTest&amp;printable=yes" title="Versão para impressão desta página [alt-p]" accesskey="p">Versão para impressão</a></li>				<li id="t-permalink"><a href="http://himalaia.bhe.serpro/wiki/index.php?title=SSLTest&amp;oldid=30360" title="Link permanente para esta versão desta página">Ligação permanente</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="SSLTest_arquivos/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+				<div id="f-copyrightico"><a href="http://www.gnu.org/copyleft/fdl.html"><img src="SSLTest_arquivos/gnu-fdl.png" alt="GNU Free Documentation License 1.2"></a></div>
+			<ul id="f-list">
+				<li id="lastmod"> Está página foi modificada pela última vez em 19h47min, 16 de Janeiro de 2015.</li>
+				<li id="viewcount">Esta página foi acessada 290 vezes.</li>
+				<li id="copyright">Conteúdo disponível sob <a href="http://www.gnu.org/copyleft/fdl.html" class="external " title="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.2</a>.</li>
+				<li id="privacy"><a href="http://himalaia.bhe.serpro/wiki/index.php/Supst:Pol%C3%ADtica_de_privacidade" title="Supst:Política de privacidade">Política de privacidade</a></li>
+				<li id="about"><a href="http://himalaia.bhe.serpro/wiki/index.php/Supst:Sobre" title="Supst:Sobre">Sobre a Supst</a></li>
+				<li id="disclaimer"><a href="http://himalaia.bhe.serpro/wiki/index.php/Supst:Aviso_geral" title="Supst:Aviso geral">Alerta de Conteúdo</a></li>
+			</ul>
+		</div>
+		
+	
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+</div>
+<!-- Served in 0.115 secs. -->
+</body></html>
