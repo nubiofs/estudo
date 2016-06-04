@@ -1,0 +1,223 @@
+https://www.sslshopper.com/article-most-common-java-keytool-keystore-commands.html
+
+https://www.sslshopper.com/article-how-to-create-a-self-signed-certificate-using-java-keytool.html
+
+-----
+
+1) This command creates the keystore named "jboss.keystore" in the working
+directory, and assigns it the password "mypassword" . It generates a public/private
+key pair for the entity whose unique name has the common name "Francesco
+Marchioni , organization PacktPub , and two-letter country code GB".
+
+The result of this action will be a self-signed certificate (using the RSA signature
+algorithm) that includes the public key and the unique name's information. This
+certificate will be valid for 180 days, and is associated with the private key in a
+keystore entry referred to by the alias "as7alias".
+
+Obs.: A self-signed certificate is a certificate that has not been verified by a
+CA and thus leaves you vulnerable to the classic man-in-the-middle
+attack. A self-signed certificate is only suitable for in-house use or for
+testing while you wait for your real one to arrive.
+
+-- Server:
+
+$ keytool -genkey -v -alias localhost -keyalg RSA -keysize 1024 -keystore localhost_keystore.jks -validity 180 -keypass passhost -storepass passhost -dname "cn=localhost,o=host,c=br"
+
+Next, export the server's public key into a "self-signed" certificate
+
+$ keytool -export -keystore localhost_keystore.jks -alias localhost -file localhost_selfSigned_PublicKey.cer -keypass passhost -storepass passhost
+
+-- Client (Now we have finished with the server, we will now generate a key pair for the client
+too):
+
+$ keytool -genkey -v -alias my -keyalg RSA -keysize 1024 -keystore my_keystore.jks -validity 180 -keypass passeu -storepass passeu -dname "cn=clenubio,o=home,c=br"
+
+The client public key will also be exported into a "self-signed" certificate
+
+$ keytool -export -keystore my_keystore.jks -alias my -file my_selfSigned_PublicKey.cer -keypass passeu -storepass passeu
+
+Now, in order to complete the SSL handshake successfully, we need to first import
+the client's public key into the server's truststore object:
+
+$ keytool -import -v -trustcacerts -alias my -file my_PublicKey.cer -keystore localhost_keystore.jks -keypass passhost -storepass passhost
+
+2) Securing HTTP communication with a certificate signed by a CA
+Having your certificate signed requires a certificate-signing request (CSR) to be
+issued to a CA, which will return a signed certificate to be installed on your server.
+
+generate a CSR using the newly created keystore and keyentry:
+
+$ keytool -certreq -v -keyalg RSA -alias localhost -keystore localhost_keystore.jks -storepass passhost -keypass passhost -file locahost_certreq.csr
+
+3) If you need to check the information within a certificate, or Java keystore, use these commands.
+(Check which certificates are in a Java keystore)
+
+$ keytool -list -v -keystore my_keystore.jks 
+
+======
+
+Configuração Jboss (standalone.xml):
+
+...
+
+<subsystem xmlns="urn:jboss:domain:web:1.4" default-virtual-server="default-host" native="false">
+            
+            
+            <!-- (certificate-key-file) representa o certificado do servidor JBoss 6 EAP -->
+            <!-- (ca-certificate-file) representa o repositório de certificados de todas 
+				 as Autoridades Certificadoras reconhecidas pelo servidor JBoss 6 EAP. -->
+			<!-- (verify-client): define se a conexão segura vai solicitar o certificado digital do usuário.-->
+            <connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" secure="true">
+				<ssl name="https" key-alias="localhost" password="changeit"
+					certificate-key-file="${jboss.server.config.dir}/Keystore.jks"
+					ca-certificate-file="${jboss.server.config.dir}/Truststore.jks"
+					protocol="TLSv4"
+					cipher-suite="ALL"
+					verify-client="true"/>
+			</connector>
+
+...
+
+======
+
+"RESUMÃO-SOLUÇÃO" 
+
+(http://stackoverflow.com/questions/18183887/getting-ssl-error-bad-cert-alert-on-firefox-after-installing-self-signed-p12-cer):
+
+Obs.: "VER ACIMA ==> my_keystore.jks ; localhost_keystore.jks e locahost_certreq.csr"
+
+The ssl_error_bad_cert_alert error in this case means the server doesn't trust your self-signed cert. One way to solve this is to generate certs and CSR's, and then sign them with a local development CA. Then you just add your dev CA to the JVM truststore. It is slightly more setup, but is more flexible (e.g., you can create signed certs for a whole development team, test revocation via OCSP/CRL, etc).
+
+These steps are copied from my history and probably require changes:
+
+Obs.: 
+
+--> para a configuração do Jboss em "standalone.xml":
+
+ <connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" secure="true">
+				<ssl name="https" key-alias="localhost" password="passhost"
+					certificate-key-file="${jboss.server.config.dir}/keystore/localhost_keystore.jks"
+					ca-certificate-file="${jboss.server.config.dir}/keystore/localhost_keystore.jks"
+					protocol="TLSv4"
+					cipher-suite="ALL"
+					verify-client="true"/>
+ </connector>
+
+--> para jdk 1.7 em "standalone.conf":
+
+JAVA_HOME="/home/clenubio/Desenvolvimento/SNCR-CertificadoDigital/jdk1.7.0_80"
+
+--> rodar o jboss:
+
+$ jboss-eap-6.1/bin$ ./standalone.sh -b 0.0.0.0
+
+
+1) [Create a local dev CA]
+
+$ openssl genrsa -out ca.key -aes256 -passout pass:changeit 4096
+//$ openssl req -new -x509 -key ca.key -config openssl.conf -days 3560 -sha256 -out ca.pem -passin pass:changeit
+
+$ openssl req -new -x509 -key ca.key -days 3560 -sha256 -out ca.pem -passin pass:changeit
+
+obs.:
+Country Name (2 letter code) [AU]:br
+State or Province Name (full name) [Some-State]:pe
+Locality Name (eg, city) []:recife
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:home
+Organizational Unit Name (eg, section) []:sala
+Common Name (e.g. server FQDN or YOUR name) []:maquina
+Email Address []:eu@gmail.com
+
+$ openssl rsa -in ca.key -out ca.key -passin pass:changeit
+
+2) [Generate client and server keystores with a keypair in each]
+
+//"Pode-se utilizar os já criados acima"
+//Original:
+//$ keytool -genkey -keyalg RSA -alias client -keystore client.jks -storepass changeit -validity 1000
+//$ keytool -genkey -keyalg RSA -alias tomcat -keystore ~/.keystore -storepass changeit -validity 1000
+
+//Para teste:
+$ keytool -genkey -keyalg RSA -alias localhost -keystore localhost_keystore.jks -storepass passhost -keypass passhost -validity 1000 -dname "cn=localhost,o=host,c=br"
+$ keytool -genkey -keyalg RSA -alias my -keystore my_keystore.jks -storepass passmy -keypass passmy -validity 1000 -dname "cn=clenubio,o=host,c=br"
+
+3) [Generate client and server cert signing requests (csr) based on above keystore keypairs] 
+
+//"Pode-se utilizar os já criados acima"
+//Original:
+//$ keytool -certreq -v -alias client -keystore client.jks -storepass changeit -file client.csr
+//$ keytool -certreq -v -alias tomcat -keystore ~/.keystore -storepass changeit -file tomcat.csr
+
+//Para teste:
+$ keytool -certreq -v -alias localhost -keystore localhost_keystore.jks -storepass passhost -file localhost.csr
+$ keytool -certreq -v -alias my -keystore my_keystore.jks -storepass passmy -file my.csr
+
+4) ["certificate signed by a CA" Sign the requests (create certs) for client/server csr's]
+
+//"Pode-se utilizar os já criados acima"
+//Original:
+//$ openssl x509 -req -CA ca.pem -CAkey ca.key -in client.csr -out client.cer -days 1000 -CAcreateserial
+//$ openssl x509 -req -CA ca.pem -CAkey ca.key -in tomcat.csr -out tomcat.cer -days 1000 -CAcreateserial
+
+//Para teste:
+$ openssl x509 -req -CA ca.pem -CAkey ca.key -in localhost.csr -out localhost_caSigned_PublicKey.cer -days 1000 -CAcreateserial
+$ openssl x509 -req -CA ca.pem -CAkey ca.key -in my.csr -out my_caSigned_PublicKey.cer -days 1000 -CAcreateserial
+
+//Outros:
+//$ openssl x509 -req -CA ca.pem -CAkey ca.key -in locahost_certreq.csr -out localhost_caSigned_PublicKey.cer -days 1000 -CAcreateserial
+
+5) [Import the CA cert into client/server keystores (possibly not necessary, since it must be added to truststore anyway)] 
+
+//"Pode-se utilizar os já criados acima"
+//Original:
+//$ keytool -import -keystore client.jks -file ca.pem -alias rootca
+//$ keytool -import -keystore ~/.keystore -file ca.pem -alias rootca
+
+//Para teste:
+$ keytool -import -storepass passhost -keystore localhost_keystore.jks -file ca.pem -alias rootca
+$ keytool -import -storepass passmy -keystore my_keystore.jks -file ca.pem -alias rootca
+
+//Outros:
+//$ keytool -import -storepass passhost -keystore localhost_keystore.jks -file ca.pem -alias localhost
+
+6) [Import the client and server certs into their respective keystores] 
+
+//"Pode-se utilizar os já criados acima"
+//Original:
+//$ keytool -import -keystore client.jks -file client.cer -alias client
+//$ keytool -import -keystore ~/.keystore -file tomcat.cer -alias tomcat
+
+//Para teste:
+$ keytool -import -storepass passhost -keystore localhost_keystore.jks -file localhost_caSigned_PublicKey.cer -alias localhost
+$ keytool -import -storepass passmy -keystore my_keystore.jks -file my_caSigned_PublicKey.cer -alias my
+
+//Outros:
+//$ keytool -import -storepass passhost -keystore localhost_keystore.jks -file localhost_caSigned_PublicKey.cer -alias localhost
+
+7) [Convert the client cert to a p12 (PKCS12) so it can be imported into firefox or wherever]
+
+//Original:
+//$ keytool -importkeystore -srckeystore client.jks -destkeystore client.p12 -srcstoretype JKS -deststoretype PKCS12 -srcstorepass changeit -deststorepass //changeit -srcalias client -destalias client -srckeypass changeit -destkeypass changeit -noprompt
+
+//Para teste:
+$ keytool -importkeystore -srckeystore my_keystore.jks -destkeystore my.p12 -srcstoretype JKS -deststoretype PKCS12 -srcstorepass passmy -deststorepass passmy -srcalias my -destalias my -srckeypass passmy -destkeypass passmy -noprompt
+
+Obs.: 
+
+IMPORTAR NO CHROME "CERTIFICADO SSL DO CLIENTE" (Em Your Certificates ==> "my.p12") E "AUTORIDADE CERTIFICADORA" (Em Authorities ==> "ca.pem")
+
+8) [Import the CA cert into the JVM truststore]
+
+//Original:
+//$ sudo keytool -import -trustcacerts -alias suter-dev-ca -file ca.pem -keystore /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/security/cacerts
+
+Optionally, import the CA cert into your browser.
+
+Your post was hard to read because of the formatting. Hope this helps.
+
+Sources: http://shib.kuleuven.be/docs/ssl_commands.shtml, https://docs.oracle.com/cd/E19509-01/820-3503/ggezy/index.html
+
+======
+
+PAREI (j7d.pdf)
+pag 277 (294 de 326)
