@@ -219,5 +219,81 @@ Sources: http://shib.kuleuven.be/docs/ssl_commands.shtml, https://docs.oracle.co
 
 ======
 
+Creating the Certificates and Keystores
+
+This section provides step-by-step instructions for creating the required certificates and keystore that are necessary for
+one-way SSL. In general, the example does the following:
+
+ creates a CA certificate that you can use to sign a server-identity certificate
+ creates a server-identity certificate and a keystore to hold it
+ imports the CA certificate to a trusted signer's keystore	
+
+To create the certificates and the keystore:
+
+1. Generate the CA private key by using the following command syntax at a system prompt:
+
+$ openssl genrsa -des3 -out keys/CA-key-name.pem 1024
+
+2. Generate the CA root certificate by using the following command syntax:
+
+Note: For the fields in the distinguished name, you can use any values except when you are prompted for a
+value for Common Name . For this field, enter the name that you want to appear in user's list of trusted root
+certificates when the user imports the certificate into a browser.
+
+You can also just add all of the information in the command at one time, as follows, thereby avoiding the
+prompts:
+
+$ openssl req -new -key keys/CA-key-name.pem -x509 -days 1024
+-subj /C=US/OU=TSD/O=SAS/ST=NC/L=Cary/CN=CA-name
+-out certs/CA-certificate-name.crt
+
+In this instance, CA-name specifies a name that you want to use to reference the CA.
+
+In this syntax, CA-key-name specifies the name of the CA private key.
+Note: The private key should be stored in a secure location in a production environment.
+
+3. Generate the server-identity keystore, as follows:
+
+$ keytool -genkey -alias alias-name -keyalg RSA -keystore serverids.jks
+-keypass key-password -storepass store-password -dname "CN=sasbi.demo.sas.com,OU=blades,O=SAS Institute,
+L=Cary,S=NC,C=US"
+
+4. Generate the server-identity request file, as follows:
+
+$ keytool -certreq -alias alias-name -keystore serverids.jks
+–keypass key-password -storepass store-password
+-file requests/certificate-signing-request-filename.csr
+
+The server-identity request file contains the server public key and the server identity.
+The value for certificate-signing-request-filename can be whatever name you want to use. For example, you can
+use your host name as the name of the generated .csr file.
+
+5. Generate the server-identity certificate by submitting a command with the following syntax:
+
+$ openssl x509 -req -days 365 -in requests/certificate-signing-request-
+filename.csr -CA certs/CA-certificate-name.crt -CAkey keys/CA-key-
+name.pem -CAcreateserial -out certs/server-certificate-name.crt
+
+This certificate contains the server public key, the name of the machine on which JBoss runs, and the CA
+identity. It is also signed with the CA private key.
+
+6. Import the CA root certificate into the server-identity keystore.
+
+$ keytool -import -alias alias-name –file certs/CA-certificate-name.crt
+–keystore serverids.jks
+
+7. Import the server-identity certificate into the server-identity keystore, using the short host name for the alias
+value, as you did in step 3.
+
+$ keytool -import -alias alias-name -file certs/server-certificate-name.crt
+-keystore serverids.jks
+
+8. Generate the Trusted CA Certificates keystore and import the CA root certificate into the trust store.
+
+$ keytool –import –alias alias-name –file certs/CA-certificate-name.crt
+–keystore trusted-certificate-keystore.jks
+
+======
+
 PAREI (j7d.pdf)
 pag 277 (294 de 326)
