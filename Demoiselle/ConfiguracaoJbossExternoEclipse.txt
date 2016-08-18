@@ -83,6 +83,10 @@ The reason for this is to be able to execute custom build commands and script fa
 
 Ver https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.0.x-develop/h2-console (em https://github.com/jboss-developer/jboss-eap-quickstarts):
 
+NEW:
+
+https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.1.x-develop/h2-console
+
 Colocar https://github.com/jboss-developer/jboss-eap-quickstarts/blob/7.0.x-develop/h2-console/h2console.war no path do Jboss EAP (jboss-eap-6.3/standalone/deployments)...
 
 Ver outros links (referências): 
