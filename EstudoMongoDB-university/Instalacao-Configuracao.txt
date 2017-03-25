@@ -28,7 +28,9 @@ $ mkdir -p /home/clenubio/Desenvolvimento/mongodb-linux-x86_64-3.4.2/data/db
 
 $ cd /home/clenubio/Desenvolvimento/mongodb-linux-x86_64-3.4.2/
 
-$ mongod --dbpath ./data/db/ 
+$ mongod --dbpath ./data/db/
+
+$ mongo 
 
 Obs.: Uso em Java
 https://mongodb.github.io/mongo-java-driver/3.4/?_ga=1.265041103.177141583.1490449003
