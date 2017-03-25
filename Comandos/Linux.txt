@@ -6,6 +6,18 @@ atalho --> ctrl + alt + t
 
 $ gnome-panel-control --run-dialog
 
+* Mecanismo de busca visual:
+
+ gnome-search-tool --path=.
+
+** Recaregar atualização em arquivo bashrc:
+
+$ source .bashrc
+
+** Ferramenta busca de arquivos:
+
+$ sudo apt-get install gnome-search-tool
+
 ** Buscando arquivos (pelo conteúdo contido no mesmo):
 
 grep -R -H -i " Git " ./ >> ver.txt
@@ -104,10 +116,6 @@ find -wholename '*/CVS/Base' | xargs rmdir
 find -wholename '*/CVS/Baserev' | xargs rm
 
 fonte: (http://polishlinux.org/console/regular-expressions-and-search-patterns/)
-
-* Mecanismo de busca visual:
-
- gnome-search-tool --path=.
 
 * Buscas via prompt:
 

@@ -1,0 +1,36 @@
+* Tutorial instalacao MongoDB
+
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-linux/
+
+==> Link download
+https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon-3.4.2.tgz
+
+curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.4.2.tgz
+
+Obs.: 
+
+- Ou para Ubuntu
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
+- add the following line to your shell’s rc file (e.g. ~/.bashrc):
+
+export PATH=<mongodb-install-directory>/bin:$PATH
+
+* Configuracao:
+
+export PATH=/home/clenubio/Desenvolvimento/mongodb-linux-x86_64-3.4.2/bin:$PATH
+
+$ source .bashrc
+
+$ sudo chmod 777 -R mongodb-linux-x86_64-3.4.2/
+
+$ mkdir -p /home/clenubio/Desenvolvimento/mongodb-linux-x86_64-3.4.2/data/db
+
+$ cd /home/clenubio/Desenvolvimento/mongodb-linux-x86_64-3.4.2/
+
+$ mongod --dbpath ./data/db/ 
+
+Obs.: Uso em Java
+https://mongodb.github.io/mongo-java-driver/3.4/?_ga=1.265041103.177141583.1490449003
+
+
