@@ -6,6 +6,10 @@ atalho --> ctrl + alt + t
 
 $ gnome-panel-control --run-dialog
 
+* O Unity Tweak Tool é uma das melhores ferramentas para fazer ajustes na interface Unity:
+
+sudo apt install unity-tweak-tool
+
 * Mecanismo de busca visual:
 
  gnome-search-tool --path=.
