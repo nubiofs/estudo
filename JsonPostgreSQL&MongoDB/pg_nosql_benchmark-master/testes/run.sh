@@ -59,9 +59,21 @@ SAMPLEJSON="sample.json"
 PG_INSERTS="sample_pg_inserts.json"
 
 ################################################################################
+# set mongo variables.
+################################################################################
+MONGO="/usr/bin/mongo"
+MONGOIMPORT="/usr/bin/mongoimport"
+MONGOHOST="127.0.0.1"
+MONGOPORT="27017"
+MONGOUSER="mongo"
+MONGOPASSWORD="mongo"
+MONGODBNAME="benchmark"
+
+################################################################################
 # source library files
 ################################################################################
 source ${DIRECTORY}/lib/pg_func_lib.sh
+source ${DIRECTORY}/lib/mongo_func_lib.sh
 
 ################################################################################
 # declare require arrays
@@ -81,6 +93,12 @@ declare -a pg_copy_time
 declare -a pg_inserts_time
 declare -a pg_select_time
 
+# mongo specific arrays
+declare -a mongo_size_time
+declare -a mongo_copy_time
+declare -a mongo_inserts_time
+declare -a mongo_select_time
+
 ################################################################################
 # main function
 ################################################################################
@@ -93,6 +111,15 @@ pg_version=$(pg_version "${PGHOST}"          \
             )
 
 process_log "PostgreSQL Version $pg_version"
+
+mongodb_version=$(mongo_version "${MONGOHOST}"     \
+                                "${MONGOPORT}"     \
+                                "${MONGODBNAME}"   \
+                                "${MONGOUSER}"     \
+                                "${MONGOPASSWORD}"
+                  )
+                  
+process_log "MongoDB Version $mongodb_version"                  
 
 for (( indx=0 ; indx < ${#json_rows[@]} ; indx++ ))
 do
