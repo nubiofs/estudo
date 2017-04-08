@@ -55,3 +55,19 @@ $ mongo 127.0.0.1:27017
 > exit
 
 $ mongo 127.0.0.1:27017/benchmark --username mongo --password mongo --quiet
+
+Obs.:
+
+1)Aproveitar uma interface gráfica
+
+(o Mongo Management Studio: http://www.litixsoft.de/english/mms/)
+
+http://packages.litixsoft.de/mms/1.9.4/mms-v1.9.4-community-linux.tar.gz
+
+$ lx-mms
+
+http://127.0.0.1:3333/
+
+2) Json formatter:
+
+https://jsonformatter.curiousconcept.com/

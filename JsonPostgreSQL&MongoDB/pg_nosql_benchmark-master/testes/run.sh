@@ -86,7 +86,8 @@ source ${DIRECTORY}/lib/mongo_func_lib.sh
 # "levou mais de 2 minutos para contar 2182796 linhas"
 #
 #declare -a json_rows=(10000000)
-declare -a json_rows=(15000)
+#declare -a json_rows=(15000)
+declare -a json_rows=(5)
 
 declare -a pg_size_time
 declare -a pg_copy_time
@@ -218,6 +219,6 @@ print_result "PG SELECT (ns)"     "${pg_select_time[@]}"
 print_result "PG INSERT (ns)"     "${pg_inserts_time[@]}"
 print_result "PG SIZE (bytes)"    "${pg_size_time[@]}"
 
-rm -rf ${SAMPLEJSON}*
-rm -rf ${PG_INSERTS}
+#rm -rf ${SAMPLEJSON}*
+#rm -rf ${PG_INSERTS}
 
