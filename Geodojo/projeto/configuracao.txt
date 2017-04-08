@@ -52,6 +52,8 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 $ apt-get install postgresql-9.4
 
+"instalando em /usr/share/postgresql/"
+
 senha do superuser (postgres): post
 
 >> Alterando a senha do usuario postgres (no postgres):
