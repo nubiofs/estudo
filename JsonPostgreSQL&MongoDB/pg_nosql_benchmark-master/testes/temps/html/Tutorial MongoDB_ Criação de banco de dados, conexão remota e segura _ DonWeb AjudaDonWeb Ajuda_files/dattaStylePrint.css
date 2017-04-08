@@ -1,0 +1,28 @@
+@media print {
+
+    #contenedor-busqueda{
+        display:none;
+    }
+    #contenedor-marquesina{
+        display: none;
+    }
+    #titulo-post{
+        background: white;
+    }
+
+    .sidebar{
+        display: none !important;
+    }
+    #widget-postrelacionados{
+        display:none;
+    }
+    #contenedor-atencion-cliente{
+        display:none;
+    }
+    footer {
+        display: none;
+    }
+    .icono-categoria {
+        display:none;
+    }
+}

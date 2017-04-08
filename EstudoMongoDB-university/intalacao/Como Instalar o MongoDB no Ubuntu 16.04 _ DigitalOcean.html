@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<!-- saved from url=(0091)https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt -->
+<html lang="en" class="wf-proximanova-n4-active wf-proximanova-n3-active wf-proximanova-i4-active wf-proximanova-n6-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Como Instalar o MongoDB no Ubuntu 16.04 | DigitalOcean</title>
+
+<meta name="description" content="O MongoDB é um banco de dados livre e open-source de documentos NoSQL utilizado comumente nas modernas aplicações web. Este tutorial irá ajudá-lo a configurar o MongoDB em seu servidor para um ambiente de produção de aplicações. &amp;lt;$&amp;gt;[note] No mom">
+<meta name="keywords" content="MongoDB">
+
+<meta name="og:title" content="Como Instalar o MongoDB no Ubuntu 16.04 | DigitalOcean">
+<meta name="og:description" content="O MongoDB é um banco de dados livre e open-source de documentos NoSQL utilizado comumente nas modernas aplicações web. Este tutorial irá ajudá-lo a configurar o MongoDB em seu servidor para um ambiente de produção de aplicações. &amp;lt;$&amp;gt;[note] No mom">
+<meta name="og:site_name" content="DigitalOcean">
+<meta name="og:type" content="article">
+
+<meta name="twitter:site" content="DigitalOcean">
+<meta name="twitter:title" content="Como Instalar o MongoDB no Ubuntu 16.04 | DigitalOcean">
+<meta name="twitter:description" content="O MongoDB é um banco de dados livre e open-source de documentos NoSQL utilizado comumente nas modernas aplicações web. Este tutorial irá ajudá-lo a configurar o MongoDB em seu servidor para um ambiente de produção de aplicações. &amp;lt;$&amp;gt;[note] No mom">
+<meta name="twitter:creator" content="DigitalOcean">
+<meta name="twitter:card" content="photo">
+<meta name="twitter:url" content="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt">
+
+<meta property="og:image" content="https://www.digitalocean.com/assets/community/default_community_sharing-65c1cc547375d6e37cc45195b3686769.png">
+<meta name="twitter:image" content="https://www.digitalocean.com/assets/community/default_community_sharing-65c1cc547375d6e37cc45195b3686769.png">
+
+  <link rel="canonical" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt">
+
+        <link rel="alternate" hreflang="en" href="https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-16-04">
+      <link rel="alternate" hreflang="es" href="https://www.digitalocean.com/community/tutorials/como-instalar-mongodb-en-ubuntu-16-04-es">
+      <link rel="alternate" hreflang="pt" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt">
+      <link rel="alternate" hreflang="ru" href="https://www.digitalocean.com/community/tutorials/mongodb-ubuntu-16-04-ru">
+
+
+    <link rel="stylesheet" media="all" href="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/application-2f5c8e75993329b20a1f9ceeb715a5d8.css">
+
+    
+    <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="7C4Mfr09CvAbnYf9kvlH0mTaiaMrO0V4swK0i1QvrekyvxNY5gmqR7zfmhqGw/4wW2NYp0X8bovMKdb+mR4SVQ==">
+      <script type="text/javascript" async="" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/linkid.js"></script><script type="text/javascript" async="" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/munchkin.js"></script><script type="text/javascript" async="" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/analytics.js"></script><script async="" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/gtm.js"></script><script type="text/javascript" async="" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/analytics.min.js"></script><script src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/izu1uqu.js"></script>
+      <style type="text/css">.tk-proxima-nova{font-family:"proxima-nova",sans-serif;}</style><style type="text/css">@font-face{font-family:tk-proxima-nova-n6;src:url(https://use.typekit.net/af/921f74/00000000000000003b9ad1bb/27/l?subset_id=2&fvd=n6&v=3) format("woff2"),url(https://use.typekit.net/af/921f74/00000000000000003b9ad1bb/27/d?subset_id=2&fvd=n6&v=3) format("woff"),url(https://use.typekit.net/af/921f74/00000000000000003b9ad1bb/27/a?subset_id=2&fvd=n6&v=3) format("opentype");font-weight:600;font-style:normal;}@font-face{font-family:tk-proxima-nova-n4;src:url(https://use.typekit.net/af/edab9a/00000000000000003b9ad1b9/27/l?subset_id=2&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/edab9a/00000000000000003b9ad1b9/27/d?subset_id=2&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/edab9a/00000000000000003b9ad1b9/27/a?subset_id=2&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;}@font-face{font-family:tk-proxima-nova-i4;src:url(https://use.typekit.net/af/1b9fb4/00000000000000003b9ad1ba/27/l?subset_id=2&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/1b9fb4/00000000000000003b9ad1ba/27/d?subset_id=2&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/1b9fb4/00000000000000003b9ad1ba/27/a?subset_id=2&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;}@font-face{font-family:tk-proxima-nova-n3;src:url(https://use.typekit.net/af/015ec8/00000000000000003b9ad1b5/27/l?subset_id=2&fvd=n3&v=3) format("woff2"),url(https://use.typekit.net/af/015ec8/00000000000000003b9ad1b5/27/d?subset_id=2&fvd=n3&v=3) format("woff"),url(https://use.typekit.net/af/015ec8/00000000000000003b9ad1b5/27/a?subset_id=2&fvd=n3&v=3) format("opentype");font-weight:300;font-style:normal;}</style><script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <script src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/bugsnag-2.min.js" data-apikey="9ffc01bc3e1fa7891bfd20909d1bfb0e">
+    </script>
+    <!--<script src="//cdn.optimizely.com/js/701281621.js"></script>-->
+    <script type="text/javascript">
+      if(window.analytics=window.analytics||[],window.analytics.included)window.console&&console.error&&console.error("analytics.js included twice");else{window.analytics.included=!0,window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(a){return function(){var n=Array.prototype.slice.call(arguments);return n.unshift(a),window.analytics.push(n),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(a){var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+a+"/analytics.min.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(n,t)},window.analytics.SNIPPET_VERSION="2.0.9",
+      window.analytics.load("puo3uv968t")}
+      window.analytics.page();
+    </script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="https://www.digitalocean.com/community/tutorials/feed">
+    <script src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/polyfill.min.js"></script>
+    <script>
+      window.comApp = {
+        prefix: '/community',
+        svgIconPath: 'https://www.digitalocean.com/assets/community/icon-sprite-d76eb75d70ccf8ffb4c0b47b7dbc88ca.svg',
+        railsEnv: 'production',
+        rootUrl: 'https://www.digitalocean.com/community'
+      };
+    </script>
+      <script src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/forms2.min.js"></script>
+
+    <script src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/application-42f02f772423f1eb67ef6e6547fa530a.js"></script>
+  <style>.fluidvids {width: 100%; max-width: 100%; position: relative;}.fluidvids-item {position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;}</style><script id="twitter-wjs" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/widgets.js"></script><style type="text/css">@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/921f74/00000000000000003b9ad1bb/27/l?subset_id=2&fvd=n6&v=3) format("woff2"),url(https://use.typekit.net/af/921f74/00000000000000003b9ad1bb/27/d?subset_id=2&fvd=n6&v=3) format("woff"),url(https://use.typekit.net/af/921f74/00000000000000003b9ad1bb/27/a?subset_id=2&fvd=n6&v=3) format("opentype");font-weight:600;font-style:normal;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/edab9a/00000000000000003b9ad1b9/27/l?subset_id=2&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/edab9a/00000000000000003b9ad1b9/27/d?subset_id=2&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/edab9a/00000000000000003b9ad1b9/27/a?subset_id=2&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/1b9fb4/00000000000000003b9ad1ba/27/l?subset_id=2&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/1b9fb4/00000000000000003b9ad1ba/27/d?subset_id=2&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/1b9fb4/00000000000000003b9ad1ba/27/a?subset_id=2&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/015ec8/00000000000000003b9ad1b5/27/l?subset_id=2&fvd=n3&v=3) format("woff2"),url(https://use.typekit.net/af/015ec8/00000000000000003b9ad1b5/27/d?subset_id=2&fvd=n3&v=3) format("woff"),url(https://use.typekit.net/af/015ec8/00000000000000003b9ad1b5/27/a?subset_id=2&fvd=n3&v=3) format("opentype");font-weight:300;font-style:normal;}</style><script id="facebook-jssdk" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/all.js"></script><link id="mktoForms2BaseStyle" rel="stylesheet" type="text/css" href="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/forms2.css"><link id="mktoForms2ThemeStyle" rel="stylesheet" type="text/css" href="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/forms2-theme-simple.css"><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><script type="text/javascript" async="" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/munchkin(1).js"></script></head>
+  <body class="feature-filter-bar feature-upvotes tutorials-controller tutorial-single" data-env="production" data-prefix="/community" data-user-id="" data-facebook-app-id="694818843983011" data-completed-tutorial-id="" data-tutorial-id="2203" data-js="tutorial">
+    <script>
+//<![CDATA[
+
+//]]>
+</script>
+<!-- Google Tag Manager -->
+<noscript>&lt;iframe src="//www.googletagmanager.com/ns.html?id=GTM-KHWBBT"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;</noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KHWBBT');</script>
+<!-- End Google Tag Manager -->
+
+    
+
+    <div class="outside_viewport">
+        <div id="contents-modal" class="modal fade mini-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Contents</h1>
+          <button class="close-button icon icon-close-light" data-dismiss="modal" aria-label="close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="table-of-contents-modal tocify"><ul id="tocify-header0" class="tocify-header"><li class="tocify-item tocify-focus" data-unique="pré-requisitos"><a>Pré-requisitos</a></li></ul><ul id="tocify-header1" class="tocify-header"><li class="tocify-item" data-unique="passo-1-—-adicionando-o-repositório-mongodb"><a>Passo 1 — Adicionando o Repositório MongoDB</a></li></ul><ul id="tocify-header2" class="tocify-header"><li class="tocify-item" data-unique="passo-2-—-instalando-e-verificando-o-mongodb"><a>Passo 2 — Instalando e Verificando o MongoDB</a></li></ul><ul id="tocify-header3" class="tocify-header"><li class="tocify-item" data-unique="passo-3-—-ajustando-o-firewall-(opcional)"><a>Passo 3 — Ajustando o Firewall (Opcional)</a></li></ul><ul id="tocify-header4" class="tocify-header"><li class="tocify-item" data-unique="conclusão"><a>Conclusão</a></li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="share-modal" class="modal fade mini-modal" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1>Share</h1>
+        <button type="button" class="close-button icon icon-close-light" aria-label="close" data-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="social-sharing social-sharing-container">
+          <ul class="top ">
+            <li class="shareBtn" id="sbTwitter">
+              <a href="http://twitter.com/share?text=Como%20Instalar%20o%20MongoDB%20no%20Ubuntu%2016.04&amp;url=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=twshare" class="share-icon share-popup" title="Share on Twitter">
+                <span class="sIcon icon-bird"></span>
+              </a>
+              <a href="http://twitter.com/share?text=Como%20Instalar%20o%20MongoDB%20no%20Ubuntu%2016.04&amp;url=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=twshare" class="share-link share-popup" title="Share on Twitter">
+                Twitter
+              </a>
+            </li>
+            <li class="shareBtn" id="sbFacebook">
+              <a class="share-icon facebook-share" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=fbshare" onclick="" title="Share on Facebook">
+                <span class="sIcon icon-facebook-B"></span>
+              </a>
+
+              <a class="share-link facebook-share" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=fbshare" onclick="" title="Share on Facebook">
+                Facebook
+              </a>
+            </li>
+            <li class="shareBtn" id="sbGoogle">
+              <a href="https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=gpshare" class="share-icon share-popup" title="Share on Google+">
+                <span class="sIcon icon-google-plus-B"></span>
+              </a>
+              <a href="https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=gpshare" class="share-link share-popup" title="Share on Google+">
+                Google+
+              </a>
+            </li>
+            <li class="shareBtn" id="sbYC">
+              <a href="https://news.ycombinator.com/submitlink?t=Como%20Instalar%20o%20MongoDB%20no%20Ubuntu%2016.04&amp;u=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=hnshare" class="share-icon share-popup" target="_blank" title="Submit to Hacker News">
+                <span class="sIcon icon-hacker-news"></span>
+              </a>
+              <a href="https://news.ycombinator.com/submitlink?t=Como%20Instalar%20o%20MongoDB%20no%20Ubuntu%2016.04&amp;u=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=hnshare" class="share-link share-popup" target="_blank" title="Submit to Hacker News">
+                Hacker News
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="table-of-contents has-init sticky" style="top: 72px;">
+    <div data-js="tableOfContentsDesktop" class="tocify"><ul id="tocify-header0" class="tocify-header"><li class="tocify-item tocify-focus" data-unique="pré-requisitos"><a>Pré-requisitos</a></li></ul><ul id="tocify-header1" class="tocify-header"><li class="tocify-item" data-unique="passo-1-—-adicionando-o-repositório-mongodb" style="cursor: pointer;"><a>Passo 1 — Adicionando o Repositório MongoDB</a></li></ul><ul id="tocify-header2" class="tocify-header"><li class="tocify-item" data-unique="passo-2-—-instalando-e-verificando-o-mongodb"><a>Passo 2 — Instalando e Verificando o MongoDB</a></li></ul><ul id="tocify-header3" class="tocify-header"><li class="tocify-item" data-unique="passo-3-—-ajustando-o-firewall-(opcional)"><a>Passo 3 — Ajustando o Firewall (Opcional)</a></li></ul><ul id="tocify-header4" class="tocify-header"><li class="tocify-item" data-unique="conclusão"><a>Conclusão</a></li></ul></div>
+    <button type="button" class="Button--reset Tutorial-button " data-js="markAsComplete" data-tutorialinteraction="" data-tutorialsingle=""><svg class="svg-icon svg-icon-completed"><use xlink:href="https://www.digitalocean.com/assets/community/icon-sprite-d76eb75d70ccf8ffb4c0b47b7dbc88ca.svg#icon-completed"></use></svg><span>Mark as Complete</span></button>
+  </div>
+  
+  <div id="share-modal" class="modal fade mini-modal" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1>Share</h1>
+        <button type="button" class="close-button icon icon-close-light" aria-label="close" data-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="social-sharing social-sharing-container">
+          <ul class="bottom ">
+            <li class="shareBtn" id="sbTwitter">
+              <a href="http://twitter.com/share?text=Como%20Instalar%20o%20MongoDB%20no%20Ubuntu%2016.04&amp;url=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=twshare" class="share-icon share-popup" title="Share on Twitter">
+                <span class="sIcon icon-bird"></span>
+              </a>
+              <a href="http://twitter.com/share?text=Como%20Instalar%20o%20MongoDB%20no%20Ubuntu%2016.04&amp;url=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=twshare" class="share-link share-popup" title="Share on Twitter">
+                Twitter
+              </a>
+            </li>
+            <li class="shareBtn" id="sbFacebook">
+              <a class="share-icon facebook-share" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=fbshare" onclick="" title="Share on Facebook">
+                <span class="sIcon icon-facebook-B"></span>
+              </a>
+
+              <a class="share-link facebook-share" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=fbshare" onclick="" title="Share on Facebook">
+                Facebook
+              </a>
+            </li>
+            <li class="shareBtn" id="sbGoogle">
+              <a href="https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=gpshare" class="share-icon share-popup" title="Share on Google+">
+                <span class="sIcon icon-google-plus-B"></span>
+              </a>
+              <a href="https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=gpshare" class="share-link share-popup" title="Share on Google+">
+                Google+
+              </a>
+            </li>
+            <li class="shareBtn" id="sbYC">
+              <a href="https://news.ycombinator.com/submitlink?t=Como%20Instalar%20o%20MongoDB%20no%20Ubuntu%2016.04&amp;u=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=hnshare" class="share-icon share-popup" target="_blank" title="Submit to Hacker News">
+                <span class="sIcon icon-hacker-news"></span>
+              </a>
+              <a href="https://news.ycombinator.com/submitlink?t=Como%20Instalar%20o%20MongoDB%20no%20Ubuntu%2016.04&amp;u=https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt?utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt&amp;utm_medium=community&amp;utm_source=hnshare" class="share-link share-popup" target="_blank" title="Submit to Hacker News">
+                Hacker News
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="newsletter-signup-dialog" class="newsletter-signups-dialog reveal" data-newsletter-signup-dialog="" data-article-target=".content-body">
+  <div class="form-message">
+  <div class="pull-right">
+    <a href="javascript:;" class="newsletter-signups-dialog-dismiss" data-newsletter-signup-dismiss="">×</a>
+
+  </div>
+  <h4 class="newsletter-signups-dialog-title">
+    Sign up for our newsletter.
+  </h4>
+  <p class="newsletter-signups-dialog-description">
+    Get the latest tutorials on SysAdmin and open source topics.
+  </p>
+  <form class="newsletter-signup" id="new_newsletter_signup" data-newsletter-signup="true" action="https://www.digitalocean.com/community/newsletter" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">
+
+  <input data-newsletter-signup-field="url" type="hidden" name="newsletter_signup[url]" id="newsletter_signup_url">
+  <input data-newsletter-signup-field="title" type="hidden" name="newsletter_signup[title]" id="newsletter_signup_title">
+
+  <div class="newsletter-signup-ajax-error" data-newsletter-signup-ajax-error=""></div>
+
+
+  <div class="form-group">
+    <input placeholder="Enter your email address" required="required" class="field" type="email" name="newsletter_signup[email]" id="newsletter_signup_email">
+  </div>
+
+  <button data-disable-with="Sign Up" class="button blue-button">
+    Sign Up
+  </button>
+
+</form>
+
+</div>
+
+<div class="thanks-message hidden" data-newsletter-signup-successful=""> 
+  <div class="pull-right"> 
+    <a href="javascript:;" class="newsletter-signups-dialog-dismiss icon icon-close-light" data-newsletter-signup-dismiss=""></a> 
+  </div> 
+
+  <span class="newsletter-signups-dialog-success"> 
+    Thanks for signing up! 
+  </span> 
+</div>
+
+</div>
+
+
+      
+    </div>
+
+      <div class="mobile-nav">
+  
+<div class="account-buttons">
+    <div id="entrance">
+      <a id="sign-up" class="button" href="https://www.digitalocean.com/community/auth/digitalocean?display=sessionless+register">Sign Up</a>
+      <a id="log-in" class="button" href="https://www.digitalocean.com/community/auth/digitalocean">Log In</a>
+    </div>
+</div>
+
+  <button type="button" aria-label="close" class="close-panel icon-close"></button>
+
+  <form class="mobile-search" role="search" action="https://www.digitalocean.com/community/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+    <span class="icon icon-search-thin"></span>
+    <input type="text" name="q" id="q" title="Search" placeholder="Search">
+    <button name="button" type="submit" class="icon-btn">submit</button>
+</form>
+  
+<nav>
+
+  <ul>
+    <li><a class="active" href="https://www.digitalocean.com/community/tutorials">Tutorials</a></li>
+    <li><a href="https://www.digitalocean.com/community/questions">Questions</a></li>
+    <li><a href="https://www.digitalocean.com/community/projects">Projects</a></li>
+    <li><a href="https://www.meetup.com/pro/digitalocean/?utm_source=do_community" target="_blank">Meetups</a></li>
+    <li class="mobile-nav-only"><a href="https://www.digitalocean.com/">Main Site</a></li>
+  </ul>
+</nav>
+
+  
+</div>
+
+      
+      <header>
+  <div class="flash-container"></div>
+
+  <div class="main-menu-container">
+    <div class="wrapper">
+      <div class="logo">
+        <a class="logo-icon" href="https://www.digitalocean.com/">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 32" class="do-icon">
+<title>DigitalOcean</title>
+<path class="path1" d="M16.016 32v-6.204c6.584 0 11.648-6.52 9.147-13.42-0.95-2.564-2.975-4.59-5.539-5.539-6.9-2.501-13.42 2.564-13.42 9.147 0 0 0 0 0 0l-6.204 0.032c0-10.477 10.129-18.643 21.112-15.225 4.811 1.488 8.609 5.317 10.097 10.097 3.418 10.983-4.716 21.112-15.193 21.112z"></path>
+<path class="path2" d="M16.016 25.828h-6.172v-6.172h6.172z"></path>
+<path class="path3" d="M9.844 30.576h-4.748v-4.748h4.748v4.748z"></path>
+<path class="path4" d="M5.096 25.828h-3.988v-3.988h3.988z"></path>
+<path class="path5" d="M56.973 9.242c-1.836-1.266-4.115-1.931-6.773-1.931h-5.792v18.39h5.792c2.659 0 4.938-0.665 6.773-2.026 1.013-0.696 1.804-1.709 2.342-2.944s0.823-2.69 0.823-4.336c0-1.614-0.285-3.070-0.823-4.305-0.538-1.203-1.329-2.152-2.342-2.849zM47.794 10.445h1.836c2.026 0 3.703 0.411 4.969 1.171 1.393 0.855 2.121 2.469 2.121 4.779 0 2.406-0.728 4.083-2.121 5.001v0c-1.203 0.791-2.88 1.203-4.938 1.203h-1.867v-12.154z"></path>
+<path class="path6" d="M64.19 7.122c-0.57 0-1.044 0.19-1.424 0.57s-0.601 0.855-0.601 1.393c0 0.57 0.19 1.044 0.601 1.424 0.38 0.38 0.855 0.601 1.424 0.601s1.044-0.19 1.424-0.601c0.38-0.38 0.601-0.886 0.601-1.424 0-0.57-0.19-1.044-0.601-1.393-0.38-0.38-0.886-0.57-1.424-0.57z"></path>
+<path class="path7" d="M62.512 12.787h3.26v12.977h-3.26v-12.977z"></path>
+<path class="path8" d="M77.642 13.864c-0.981-0.886-2.089-1.393-3.26-1.393-1.804 0-3.292 0.633-4.463 1.836s-1.741 2.785-1.741 4.653c0 1.836 0.57 3.387 1.741 4.653 1.171 1.203 2.659 1.836 4.463 1.836 1.266 0 2.342-0.348 3.228-1.044v0.285c0 1.076-0.285 1.899-0.855 2.5-0.57 0.57-1.361 0.855-2.342 0.855-1.519 0-2.437-0.601-3.608-2.152l-2.216 2.121 0.063 0.095c0.475 0.665 1.203 1.329 2.184 1.962s2.184 0.95 3.64 0.95c1.931 0 3.513-0.601 4.653-1.773 1.171-1.171 1.741-2.754 1.741-4.716v-11.743h-3.197v1.076zM76.787 21.523c-0.57 0.633-1.298 0.95-2.247 0.95s-1.678-0.317-2.216-0.95c-0.57-0.633-0.855-1.488-0.855-2.532s0.285-1.931 0.855-2.564c0.57-0.633 1.298-0.981 2.216-0.981 0.95 0 1.678 0.317 2.247 0.981 0.57 0.633 0.855 1.519 0.855 2.564s-0.317 1.899-0.855 2.532z"></path>
+<path class="path9" d="M83.624 12.787h3.26v12.977h-3.26v-12.977z"></path>
+<path class="path10" d="M85.302 7.122c-0.57 0-1.044 0.19-1.424 0.57s-0.601 0.855-0.601 1.393c0 0.57 0.19 1.044 0.601 1.424 0.38 0.38 0.855 0.601 1.424 0.601s1.044-0.19 1.424-0.601c0.38-0.38 0.601-0.886 0.601-1.424 0-0.57-0.19-1.044-0.601-1.393-0.38-0.38-0.886-0.57-1.424-0.57z"></path>
+<path class="path11" d="M94.038 9.274h-3.197v3.513h-1.867v2.975h1.867v5.381c0 1.678 0.348 2.88 1.013 3.577s1.836 1.044 3.513 1.044c0.538 0 1.076-0.032 1.583-0.063h0.158v-2.975l-1.108 0.063c-0.791 0-1.298-0.127-1.551-0.411s-0.38-0.855-0.38-1.709v-4.906h3.039v-2.975h-3.039v-3.513z"></path>
+<path class="path12" d="M112.364 7.343h3.26v18.39h-3.26v-18.39z"></path>
+<path class="path13" d="M148.574 21.112c-0.57 0.665-1.171 1.234-1.646 1.519v0c-0.443 0.285-1.013 0.443-1.678 0.443-0.95 0-1.741-0.348-2.374-1.076s-0.95-1.646-0.95-2.754 0.317-2.026 0.918-2.722c0.633-0.728 1.393-1.076 2.342-1.076 1.044 0 2.152 0.665 3.102 1.773l2.152-2.057c-1.393-1.836-3.197-2.69-5.349-2.69-1.804 0-3.355 0.665-4.621 1.931s-1.899 2.912-1.899 4.843 0.633 3.545 1.899 4.843c1.266 1.298 2.817 1.931 4.621 1.931 2.374 0 4.273-1.013 5.539-2.88l-2.057-2.026z"></path>
+<path class="path14" d="M161.962 14.591c-0.475-0.633-1.108-1.171-1.867-1.551-0.791-0.38-1.678-0.57-2.69-0.57-1.836 0-3.323 0.665-4.431 1.994-1.076 1.329-1.646 2.944-1.646 4.874 0 1.962 0.601 3.577 1.804 4.843 1.171 1.234 2.785 1.867 4.716 1.867 2.184 0 4.020-0.886 5.349-2.659l0.063-0.095-2.121-2.057c-0.19 0.253-0.475 0.506-0.728 0.76-0.317 0.317-0.633 0.538-0.95 0.696-0.475 0.253-1.044 0.348-1.646 0.348-0.918 0-1.646-0.253-2.216-0.791-0.538-0.475-0.855-1.139-0.918-1.962h8.641l0.032-1.203c0-0.855-0.127-1.646-0.348-2.406-0.222-0.728-0.57-1.456-1.044-2.089zM154.841 17.63c0.158-0.633 0.443-1.139 0.855-1.551 0.443-0.443 1.013-0.665 1.709-0.665 0.791 0 1.393 0.222 1.804 0.665 0.38 0.411 0.601 0.918 0.665 1.519h-5.033z"></path>
+<path class="path15" d="M174.497 13.737v0c-0.981-0.855-2.342-1.266-4.051-1.266-1.076 0-2.089 0.253-3.007 0.696-0.855 0.443-1.678 1.139-2.216 2.089l0.032 0.032 2.089 1.994c0.855-1.361 1.804-1.836 3.070-1.836 0.696 0 1.234 0.19 1.678 0.538s0.633 0.823 0.633 1.393v0.633c-0.823-0.253-1.614-0.38-2.406-0.38-1.614 0-2.944 0.38-3.925 1.139s-1.488 1.867-1.488 3.229c0 1.203 0.411 2.216 1.266 2.944 0.855 0.696 1.899 1.076 3.134 1.076s2.406-0.506 3.45-1.361v1.076h3.197v-8.324c0.063-1.583-0.443-2.817-1.456-3.672zM168.704 20.795c0.38-0.253 0.886-0.38 1.551-0.38 0.791 0 1.614 0.158 2.469 0.475v1.266c-0.696 0.665-1.646 0.981-2.817 0.981-0.57 0-1.013-0.127-1.298-0.38s-0.443-0.538-0.443-0.95c0-0.443 0.19-0.76 0.538-1.013z"></path>
+<path class="path16" d="M188.55 13.99c-0.918-1.013-2.184-1.519-3.798-1.519-1.298 0-2.342 0.38-3.134 1.108v-0.791h-3.197v12.977h3.26v-7.185c0-0.981 0.222-1.773 0.696-2.311 0.475-0.57 1.076-0.823 1.931-0.823 0.728 0 1.298 0.253 1.709 0.728 0.411 0.506 0.633 1.171 0.633 2.026v7.501h3.26v-7.47c0-1.804-0.443-3.229-1.361-4.241z"></path>
+<path class="path17" d="M108.281 13.737v0c-0.981-0.855-2.342-1.266-4.051-1.266-1.076 0-2.089 0.253-3.007 0.696-0.855 0.443-1.678 1.139-2.216 2.089l0.032 0.032 2.089 1.994c0.855-1.361 1.804-1.836 3.070-1.836 0.696 0 1.234 0.19 1.678 0.538s0.633 0.823 0.633 1.393v0.633c-0.823-0.253-1.614-0.38-2.406-0.38-1.614 0-2.944 0.38-3.925 1.139s-1.488 1.867-1.488 3.229c0 1.203 0.411 2.216 1.266 2.944 0.855 0.696 1.899 1.076 3.134 1.076s2.406-0.506 3.45-1.361v1.076h3.197v-8.324c0.032-1.583-0.475-2.817-1.456-3.672zM102.489 20.795c0.38-0.253 0.886-0.38 1.551-0.38 0.791 0 1.614 0.158 2.469 0.475v1.266c-0.696 0.665-1.646 0.981-2.817 0.981-0.57 0-1.013-0.127-1.298-0.38s-0.443-0.538-0.443-0.95c0-0.443 0.158-0.76 0.538-1.013z"></path>
+<path class="path18" d="M127.462 26.018c-5.223 0-9.496-4.241-9.496-9.496s4.241-9.496 9.496-9.496 9.496 4.241 9.496 9.496-4.273 9.496-9.496 9.496zM127.462 10.382c-3.387 0-6.14 2.754-6.14 6.14s2.754 6.14 6.14 6.14 6.14-2.754 6.14-6.14-2.754-6.14-6.14-6.14z"></path>
+</svg>
+
+          <span class="sr-only">DigitalOcean</span>
+</a>
+        <span class="logo-separator"></span>
+
+        <a class="home-link" href="https://www.digitalocean.com/community">
+          <span class="logo-community-text">Community</span>
+</a>      </div>
+
+      <a class="mobile-nav-toggle icon-menu-thin" data-role="left">
+        <span>Menu</span>
+      </a>
+
+      
+<nav>
+
+  <ul>
+    <li><a class="active" href="https://www.digitalocean.com/community/tutorials">Tutorials</a></li>
+    <li><a href="https://www.digitalocean.com/community/questions">Questions</a></li>
+    <li><a href="https://www.digitalocean.com/community/projects">Projects</a></li>
+    <li><a href="https://www.meetup.com/pro/digitalocean/?utm_source=do_community" target="_blank">Meetups</a></li>
+    <li class="mobile-nav-only"><a href="https://www.digitalocean.com/">Main Site</a></li>
+  </ul>
+</nav>
+
+
+      
+<div class="account-buttons">
+    <div id="entrance">
+      <a id="sign-up" class="button" href="https://www.digitalocean.com/community/auth/digitalocean?display=sessionless+register">Sign Up</a>
+      <a id="log-in" class="button" href="https://www.digitalocean.com/community/auth/digitalocean">Log In</a>
+    </div>
+</div>
+      <div class="header-search open">
+  <form action="https://www.digitalocean.com/community/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+    <span class="icon icon-search-thin"></span>
+    <input type="text" name="q" id="q" title="Search" placeholder="Search" autocomplete="off" spellcheck="false" class="header-search-input" data-algolia-application-id="6ZHEUVKJ88" data-algolia-api-key="c5470567eae7fa1177d43222e18ba086">
+    <button name="button" type="submit" class="icon-btn">submit</button>
+</form></div>
+
+<div class="search-results-dropdown dropdown" data-root-path="https://www.digitalocean.com/community">
+  <div class="container">
+    <div class="header-search-results-list"></div>
+
+    <div id="btn-wrap">
+      <a class="more-search-results" data-search-path="/community/search" href="https://www.digitalocean.com/community/search">
+        <span class="icon-mag"></span>
+        View All Results
+</a>    </div>
+  </div>
+</div>
+
+<script type="text/template" id="autocomplete-hits-template">
+  <div class="inner-search">
+    <ul>
+        {{#hits}}
+          <li>
+            <span class='icon icon-{{type}}'></span>
+            <a href='{{url}}'>{{title}}</a>
+          </li>
+        {{/hits}}
+    </ul>
+  </div>
+</script>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    
+  </div>
+</header>
+
+
+      
+
+      <div class="wrapper layout-wrapper">
+
+        
+
+
+
+
+
+
+
+
+
+<div class="section-content section-content-growable content Tutorial-content">
+  <div class="postable-info-bar-container">
+  <div class="postable-info-bar">
+    <div class="left-section">
+        <div class="tutorial-author-avatar">
+    <a href="https://www.digitalocean.com/community/users/mati"><img alt="mati" class="avatar avatar-small" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/3dbc43ecbf78845181c103d5d0f251b7" width="80" height="80"></a>
+  </div>
+  <div class="author-and-date">
+    <div class="tutorial-author">
+      <div class="by">By: </div>
+      <a href="https://www.digitalocean.com/community/users/mati">Mateusz Papiernik</a>
+    </div>
+  </div>
+
+      
+    </div>
+
+    <div class="right-section">
+      
+
+
+      <div class="section-item section-item-subscribe">
+  <span class="opt-in-switch off signed-out-subscribe">
+    <span class="subscribe-label">
+      <span class="icon icon-subscribe"></span>
+      <span class="subscription-label subscribe">Subscribe</span>
+      <span class="icon icon-subscribed"></span>
+      <span class="subscription-label subscribed">Subscribed</span>
+    </span>
+    <a data-toggle="modal" data-target="#sign-in-modal" class="mini-switch-container" href="javascript:void(0);"><div class="mini-switch off signed-out-subscribe"><div class="switch-handle"></div></div></a>
+  </span>
+</div>
+
+<div class="section-item social-sharing-item">
+  <div class="sharing">
+  <a class="share-button" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt#" data-toggle="modal" data-target="#share-modal">
+    <span class="icon icon-share-square"></span>
+    <span class="share-button-text">Share</span>
+  </a>
+</div>
+
+</div>
+
+        <div class="section-item table-of-contents-triggers"><div class="toc-trigger-mobile" data-toggle="modal" data-target="#contents-modal">
+  <a href="javascript:void(0);">
+    <span class="icon icon-contents"></span>
+    <span class="title">Contents</span>
+    <span class="icon icon-arrow-down"></span>
+  </a>
+</div>
+
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="container tutorial-header">
+
+      <div class="info-cta">
+    <a class="icon-close-light" href="javascript:void();"></a>
+    We hope you find this tutorial helpful. In addition to guides like this one, we provide simple cloud infrastructure for developers. <a href="https://www.digitalocean.com/?utm_medium=community&amp;utm_source=community_gencta&amp;utm_campaign=needaserver&amp;utm_content=como-instalar-o-mongodb-no-ubuntu-16-04-pt">
+        Learn more →
+</a>  </div>
+
+
+    <button name="button" type="button" class="new-upvote-button" data-upvotable-id="2203" data-upvotable-type="Tutorial" data-include-caret="true"><span class="icon new-upvote-icon"><svg class="svg-icon svg-icon-upvote-empty"><use xlink:href="https://www.digitalocean.com/assets/community/icon-sprite-d76eb75d70ccf8ffb4c0b47b7dbc88ca.svg#icon-upvote-empty"></use></svg></span><span class="new-upvote-count">0</span></button>
+
+    <h1 class="content-title Tutorial-header">
+      <button type="button" class="Button--reset Tutorial-headerButton " data-toggle="tooltip" title="" data-js="markAsComplete" data-tutorialinteraction="" data-tutorialsingle="" data-original-title="Mark as Complete">
+        <svg class="svg-icon svg-icon-completed"><use xlink:href="https://www.digitalocean.com/assets/community/icon-sprite-d76eb75d70ccf8ffb4c0b47b7dbc88ca.svg#icon-completed"></use></svg>
+      </button> Como Instalar o MongoDB no Ubuntu 16.04
+    </h1>
+
+    <span class="meta-section timestamp"><span class="tutorial-date-text">Posted</span><span class="tutorial-date">December 23, 2016</span></span>
+
+    <span class="meta-section pageviews"><span class="icon icon-eye v-mid"></span><span class="views-count v-mid">13.6k</span><span class="sr-only"> views</span></span>
+
+    <span class="meta-section tags">
+      <a class="tag" href="https://www.digitalocean.com/community/tags/mongodb?type=tutorials">MongoDB</a>
+      <a class="tag" href="https://www.digitalocean.com/community/tags/ubuntu?type=tutorials">Ubuntu</a> <a class="tag" href="https://www.digitalocean.com/community/tags/ubuntu-16-04?type=tutorials">Ubuntu 16.04</a>
+    </span>
+  </div>
+    <div class="content-body tutorial-content" data-growable-markdown="">
+      <h3 id="introdução">Introdução</h3>
+
+<p>O MongoDB é um banco de dados livre e open-source de documentos NoSQL utilizado comumente nas modernas aplicações web. Este tutorial irá ajudá-lo a configurar o MongoDB em seu servidor para um ambiente de produção de aplicações.</p>
+
+<p><span class="note">No momento dessa publicação, os pacotes MongoDB oficiais do Ubuntu 16.04 ainda não haviam sido atualizados para utilizar o novo sistema init <code>systemd</code> <a href="https://www.digitalocean.com/community/tutorials/what-s-new-in-ubuntu-16-04#the-systemd-init-system">que é habilitado por padrão no Ubuntu 16.04</a>. A execução do MongoDB utilizando esses pacotes em um Ubuntu 16.04 limpo envolve seguir um passo adicional para configurar o MongoDB como um serviço <code>systemd</code> que irá inicializar no boot.<br></span></p>
+
+<div name="pré-requisitos" data-unique="pré-requisitos"></div><h2 id="pré-requisitos">Pré-requisitos</h2>
+
+<p>Para seguir esse tutorial, você vai precisar de:</p>
+
+<ul>
+<li>Um servidor Ubuntu 16.04 configurado seguindo esse <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04">tutorial de configuração inicial de servidor</a>, incluindo um usuário sudo não-root.</li>
+</ul>
+
+<div name="passo-1-—-adicionando-o-repositório-mongodb" data-unique="passo-1-—-adicionando-o-repositório-mongodb"></div><h2 id="passo-1-—-adicionando-o-repositório-mongodb">Passo 1 — Adicionando o Repositório MongoDB</h2>
+
+<p>O MongoDB já está incluído nos repositórios de pacotes do Ubuntu, mas o repositório oficial do MongoDB fornece versões mais atualizadas e é a maneira recomendada de instalar o software. Nesse passo, iremos adicionar esse repositório oficial ao nosso servidor.</p>
+
+<p>O Ubuntu garante a autenticidade dos pacotes de software através da verificação de que eles estejam assinados com chaves GPG, dessa forma primeiro temos que importar a chave para o repositório MongoDB oficial.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+</li></ul></code></pre>
+<p>Depois da importação da chave com sucesso, você verá:</p>
+<div class="code-label " title="Output">Output</div><pre class="code-pre "><code langs="">gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+</code></pre>
+<p>A seguir, temos que adicionar os detalhes do repositório MongoDB de forma que o <code>apt</code> saiba de onde baixar os pacotes.</p>
+
+<p>Execute o seguinte comando para criar um arquivo de lista para o MongoDB.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+</li></ul></code></pre>
+<p>Depois de adicionar os detalhes do repositório, precisamos atualizar a lista de pacotes.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">sudo apt-get update
+</li></ul></code></pre>
+<div name="passo-2-—-instalando-e-verificando-o-mongodb" data-unique="passo-2-—-instalando-e-verificando-o-mongodb"></div><h2 id="passo-2-—-instalando-e-verificando-o-mongodb">Passo 2 — Instalando e Verificando o MongoDB</h2>
+
+<p>Agora podemos instalar o pacote do MongoDB propriamente dito.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">sudo apt-get install -y mongodb-org
+</li></ul></code></pre>
+<p>Esse comando irá instalar vários pacotes contendo a última versão estável do MongoDB com ferramentas úteis de gerenciamento para o servidor MongoDB.</p>
+
+<p>De forma a colocar o MongoDB corretamente como um serviço no Ubuntu 16.04, precisamos adicionalmente criar um <em>arquivo de unidade</em> descrevendo o serviço. Um arquivo de unidade diz ao <code>systemd</code> como gerenciar um recurso. O tipo mais comum de unidade é um serviço, que determina como iniciar ou parar o serviço, quando ele deve ser iniciado no boot, e se ele é dependente de outros softwares para executar.</p>
+
+<p>Vamos criar um arquivo de unidade para gerenciar o serviço MongoDB. Crie um arquivo de configuração de nome <code>mongodb.service</code> no diretório <code>/etc/systemd/system</code> utilizando o <code>nano</code> ou o seu editor de textos favorito.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">sudo nano /etc/systemd/system/mongodb.service
+</li></ul></code></pre>
+<p>Cole nele o seguinte conteúdo, depois salve e feche o arquivo.</p>
+<div class="code-label " title="/etc/systemd/system/mongodb.service">/etc/systemd/system/mongodb.service</div><pre class="code-pre "><code langs="">[Unit]
+Description=High-performance, schema-free document-oriented database
+After=network.target
+
+[Service]
+User=mongodb
+ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>Esse arquivo tem uma estrutura simples:</p>
+
+<ul>
+<li><p>A seção <strong>Unit</strong> contém uma visão geral (isto é, uma descrição legível para o serviço MongoDB) bem como dependências que devem ser satisfeitas antes do serviço ser iniciado. No nosso caso, o MongoDB depende da rede já estar disponível, por isso <code>network.target</code> está aqui.</p></li>
+<li><p>A seção <strong>Service</strong> informa como o serviço deve ser iniciado. A diretiva <code>User</code> especifica que o servidor vai executar sob o usuário <code>mongodb</code>, e a diretiva <code>ExecStart</code> define o comando de inicialização para o servidor MongoDB. </p></li>
+<li><p>A última seção, <strong>Install</strong>, diz ao <code>systemd</code> quando o serviço deve ser automaticamente iniciado. O <code>multi-user.target</code> é uma sequência padrão de inicialização de sistema, o que significa que o servidor será iniciado durante o boot. </p></li>
+</ul>
+
+<p>A seguir, inicie o serviço recém-criado com <code>systemctl</code>.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">sudo systemctl start mongodb
+</li></ul></code></pre>
+<p>Embora não haja uma saída para esse comando, você também pode utilizar o <code>systemctl</code> para verificar que o serviço iniciou de maneira apropriada.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">sudo systemctl status mongodb
+</li></ul></code></pre><div class="code-label " title="Output">Output</div><pre class="code-pre "><code langs=""><span class="highlight">● mongodb.service</span> - High-performance, schema-free document-oriented database
+   Loaded: loaded (/etc/systemd/system/mongodb.service; enabled; vendor preset: enabled)
+   Active: <span class="highlight">active</span> (running) since Mon 2016-04-25 14:57:20 EDT; 1min 30s ago
+ Main PID: 4093 (mongod)
+    Tasks: 16 (limit: 512)
+   Memory: 47.1M
+      CPU: 1.224s
+   CGroup: /system.slice/mongodb.service
+           └─4093 /usr/bin/mongod --quiet --config /etc/mongod.conf
+</code></pre>
+<p>O último passo é habilitar o MongoDB para iniciar quando o sistema inicializar.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">sudo systemctl enable mongodb
+</li></ul></code></pre>
+<p>Agora o servidor MongoDB está configurado e executando, e você pode gerenciar o serviço MongoDB utilizando o comando <code>systemctl</code> (exemplo: <code>sudo systemctl mongodb stop</code>, <code>sudo systemctl mongodb start</code>).</p>
+
+<div name="passo-3-—-ajustando-o-firewall-(opcional)" data-unique="passo-3-—-ajustando-o-firewall-(opcional)"></div><h2 id="passo-3-—-ajustando-o-firewall-opcional">Passo 3 — Ajustando o Firewall (Opcional)</h2>
+
+<p>Assumindo que você seguiu as instruções do <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04">tutorial de configuração inicial de servidor</a> para habilitar o firewall no seu servidor, seu servidor MongoDB será inacessível pela Internet.</p>
+
+<p>Se sua intenção é utilizar o servidor MongoDB somente localmente com aplicações executando no mesmo servidor, essa é uma configuração recomendada e segura. Contudo, se você gostaria de ser capaz de conectar ao seu servidor MongoDB pela internet, temos que permitir as conexões de entrada no <code>ufw</code>.</p>
+
+<p>Para permitir acesso ao MongoDB em sua porta padrão <code>27017</code> para todos, você pode utilizar <code>sudo ufw allow <span class="highlight">27017</span></code>. Contudo, a habilitação do acesso internet para o servidor MongoDB em uma instalação padrão oferece acesso irrestrito a todo o servidor de banco de dados.</p>
+
+<p>Na maioria dos casos, o MongoDB deve ser acessado somente por algumas localizações confiáveis, como um outro servidor hospedando uma aplicação. Para cumprir essa tarefa, você pode permitir acesso à porta padrão do MongoDB enquanto especifica o endereço IP de outro servidor que será explicitamente permitido para se conectar.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">sudo ufw allow from <span class="highlight">seu_outro_endereço_IP_do_servidor</span>/32 to any port <span class="highlight">27017</span>
+</li></ul></code></pre>
+<p>Você pode verificar a alteração nas configurações de firewall com o <code>ufw</code>.</p>
+<pre class="code-pre command"><code langs=""><ul class="prefixed"><li class="line" prefix="$">sudo ufw status
+</li></ul></code></pre>
+<p>Você deve ver o tráfego permitido para a porta <code>27017</code> na saída. Se você tiver decidido a permitir apenas certos endereços IP se conectarem ao servidor MongoDB, o endereço IP do local permitido será listado em vez de <em>Anywhere</em> na saída.</p>
+<div class="code-label " title="Output">Output</div><pre class="code-pre "><code langs="">Status: active
+
+To                         Action      From
+--                         ------      ----
+<span class="highlight">27017</span>                      <span class="highlight">ALLOW</span>       <span class="highlight">Anywhere</span>
+OpenSSH                    ALLOW       Anywhere
+<span class="highlight">27017 (v6)</span>                 <span class="highlight">ALLOW</span>       <span class="highlight">Anywhere (v6)</span>
+OpenSSH (v6)               ALLOW       Anywhere (v6)
+</code></pre>
+<p>Mais configurações de firewall para restrição de acesso ao servidor estão descritas em <a href="https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands">UFW Essentials: Common Firewall Rules and Commands</a>.</p>
+
+<div name="conclusão" data-unique="conclusão"></div><h2 id="conclusão">Conclusão</h2>
+
+<p>Você pode encontrar mais instruções detalhadas a respeito da instalação e configuração do MongoDB <a href="https://www.digitalocean.com/community/search?q=mongodb">nesses artigos da comunidade DigitalOcean</a>.</p>
+
+    </div>
+</div>
+
+<div class="tutorial-footer">
+  <div class="tutorial-footer-details">
+
+  <div class="postable-info-bar-container">
+  <div class="postable-info-bar">
+    <div class="left-section">
+        <div class="tutorial-author-avatar">
+    <a href="https://www.digitalocean.com/community/users/mati"><img alt="mati" class="avatar avatar-small" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/3dbc43ecbf78845181c103d5d0f251b7" width="80" height="80"></a>
+  </div>
+  <div class="author-and-date">
+    <div class="tutorial-author">
+      <div class="by">By: </div>
+      <a href="https://www.digitalocean.com/community/users/mati">Mateusz Papiernik</a>
+    </div>
+  </div>
+
+    </div>
+    <div class="right-section">
+      <div class="upvote-container">
+        <button name="button" type="button" class="new-upvote-button" data-upvotable-id="2203" data-upvotable-type="Tutorial" data-include-caret="false"><span class="icon new-upvote-icon"><svg class="svg-icon svg-icon-heart"><use xlink:href="https://www.digitalocean.com/assets/community/icon-sprite-d76eb75d70ccf8ffb4c0b47b7dbc88ca.svg#icon-heart"></use></svg></span><span class="new-upvote-text">Upvote</span><span class="new-upvote-count">0</span></button>
+      </div>
+      <div class="section-item section-item-subscribe">
+  <span class="opt-in-switch off signed-out-subscribe">
+    <span class="subscribe-label">
+      <span class="icon icon-subscribe"></span>
+      <span class="subscription-label subscribe">Subscribe</span>
+      <span class="icon icon-subscribed"></span>
+      <span class="subscription-label subscribed">Subscribed</span>
+    </span>
+    <a data-toggle="modal" data-target="#sign-in-modal" class="mini-switch-container" href="javascript:void(0);"><div class="mini-switch off signed-out-subscribe"><div class="switch-handle"></div></div></a>
+  </span>
+</div>
+
+<div class="section-item social-sharing-item">
+  <div class="sharing">
+  <a class="share-button" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt#" data-toggle="modal" data-target="#share-modal">
+    <span class="icon icon-share-square"></span>
+    <span class="share-button-text">Share</span>
+  </a>
+</div>
+
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+  <div class="section-content tutorial-contributors three">
+
+      <div class="tutorial-footer-user">
+        <div class="tutorial-footer-user-avatar-container">
+          <a href="https://www.digitalocean.com/community/users/hazelnut"><div class="mod-avatar mod-avatar-small"><img class="avatar avatar-small" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/6cbcddbff2a699eb6c34ad6c4ca1a211b4e173a0.jpg" alt="6cbcddbff2a699eb6c34ad6c4ca1a211b4e173a0"><span class="mod-star" title="" data-toggle="tooltip" data-container="body" data-original-title="MOD"><span class="mod-star-icon"></span></span></div></a>
+        </div>
+        <div class="user-info">
+          <div class="tutorial-user-type">Editor:</div>
+          <a class="" href="https://www.digitalocean.com/community/users/hazelnut">Hazel Virdó</a>
+        </div>
+      </div>
+
+      <div class="tutorial-footer-user">
+        <div class="tutorial-footer-user-avatar-container">
+          <a href="https://www.digitalocean.com/community/users/fernandopimenta"><img alt="fernandopimenta" class="avatar avatar-small" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/3ec177b47883507aea505b1201bf9d8a" width="80" height="80"></a>
+        </div>
+        <div class="user-info">
+          <div class="tutorial-user-type">Translation:</div>
+          <a href="https://www.digitalocean.com/community/users/fernandopimenta">Fernando Pimenta</a>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+  
+    <div class="tutorial-ctas" style="background-image:url(https://assets.digitalocean.com/test/commfooter_geninteresttutorials.png); background-color:#1b78f8; background-position:bottom center; overflow:hidden;">
+  <div class="section-content">
+    <div class="cta-description">
+      <h2 style="color: rgb(255, 255, 255);">Related Tutorials:</h2><div style="text-align:center; padding:15px 0;"><a style="width:330px; height:130px; border-radius:3px; padding:12px 15px 15px; float:left; margin-bottom:100px; background-color: #f9fcff; color: #0080ff; border: 1px solid #7fc0ff; text-align:left; position:relative; margin-right:15px;" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-node-js-em-um-servidor-ubuntu-14-04-pt?utm_medium=btb_algo"><strong style="font-size:15px; line-height:1.3; width:100%; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2;">Como Instalar o Node.js em um Servidor Ubuntu 14.04</strong><hr style="border-top:1px solid #0080ff; opacity:0.25;"><span style="font-size: 13px; line-height:1.3; width:100%; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; max-height:2.6em;">O Node.js é uma plataforma Javascript para programação do lado servidor, que permite aos usuários construírem aplicações de rede rapidamente. Ao levar</span><div style="font-size: 13px; position: absolute; left: 15px; right: 15px; bottom: 10px;"> <span style="margin-right: 4px;"><svg style="height: 12px; width: 12px; stroke: currentColor; position: relative; top: -1px; color: #0080ff; vertical-align: middle;"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.digitalocean.com/assets/community/icon-sprite-d76eb75d70ccf8ffb4c0b47b7dbc88ca.svg#icon-comment"></use></svg> 2</span> <span style="margin-right: 4px;"><svg style="height: 12px; width: 12px; stroke: currentColor; fill:#0080ff; position: relative; top: -1px; color: #0080ff; vertical-align: middle;"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.digitalocean.com/assets/community/icon-sprite-d76eb75d70ccf8ffb4c0b47b7dbc88ca.svg#icon-heart"></use></svg> 8</span><span style="float:right; opacity:0.5;">2015-5-26</span></div></a></div>
+
+      
+
+      
+    </div>
+  </div>
+</div>
+    
+
+</div>
+
+<div class="content-comments">
+  <div class="section-content">
+    <div class="tutorial commentable" id="tutorial_2203">
+
+  <div class="comments-header">
+    <h4 class="comments-count"><span>0 Comments</span></h4>
+  </div>
+
+  <div class="response response-form no-avatar no-comments">
+  <div class="js-display-on-error flash error hidden"></div>
+
+
+  <form class="content-form disabled-form" id="new_comment" action="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓" disabled="disabled">
+
+    <div class="meltdown_wrap" style="height: auto;"><div class="meltdown_topmargin"></div><div class="meltdown_bar"><ul class="meltdown_controls meltdown_controls_preview"><li class="meltdown_control-preview meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Toggle Preview"><span>Preview</span></li></ul><div class="preview-header">Markdown Preview</div><ul class="meltdown_controls meltdown_controls_main"><li class="meltdown_control-bold meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Bold"><span unselectable="on">B</span></li><li class="meltdown_control-italics meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Italics"><span unselectable="on">I</span></li><li class="meltdown_control-h1 meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Header 1"><span unselectable="on">H1</span></li><li class="meltdown_control-h2 meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Header 2"><span unselectable="on">H2</span></li><li class="meltdown_control-h3 meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Header 3"><span unselectable="on">H3</span></li><li class="meltdown_control-ul meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Unordered List"><span unselectable="on">UL</span></li><li class="meltdown_control-ol meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Ordered List"><span unselectable="on">OL</span></li><li class="meltdown_control-link meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Link"><span unselectable="on">Link</span></li><li class="meltdown_control-code meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Code"><span unselectable="on">Code</span></li><li class="meltdown_control-highlight meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Highlight"><span unselectable="on">Highlight</span></li><li class="meltdown_control-table meltdown_control meltdown_controlbutton disabled" title="" data-original-title="Table"><span unselectable="on">Table</span></li></ul></div><div class="meltdown_editor-wrap"><div class="meltdown_editor-deco"><textarea name="comment[content]" id="comment_content" placeholder="Leave a comment..." class="js-comment-content tutorial-comment-field meltdown_editor" data-markdown="true" disabled="disabled" style="overflow: hidden; word-wrap: break-word; resize: none; height: 120px;"></textarea></div></div><div class="meltdown_preview-wrap"><div class="meltdown_preview-wrap2"><div class="meltdown_preview-error-message">Could not load preview. <a href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt#">Try again</a></div><div class="meltdown_preview-loading-message">Loading preview...</div><div class="meltdown_preview content-body"></div></div></div><div class="meltdown_bottommargin"></div></div>
+
+      <div class="log-in-notice "><a href="https://www.digitalocean.com/community/auth/digitalocean">Log In to Comment</a></div>
+
+    <div class="clearfix"></div>
+</form>
+</div>
+
+
+  <div class="comments">
+    <ul class="response-list">
+    </ul>
+
+  </div>
+
+  <div class="load-more-container"></div>
+</div>
+
+
+  </div>
+</div>
+
+<div class="creative-commons">
+  <a class="creative-commons-image" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img rel="license" alt="Creative Commons License" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/creativecommons-08b32a9279fcd47fcd78ac6a26331389.png"></a>
+    <div class="license-text">This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</div>
+</div>
+
+
+
+
+
+        <div class="clearfix"></div>
+      </div>
+
+      <footer class="Footer">
+  <span class="Footer-logo icon-sammy"></span>
+
+  <div>Copyright © 2017 DigitalOcean™ Inc.</div>
+
+  <ul class="Footer-nav">
+    <li><a href="https://www.digitalocean.com/community">Community</a></li>
+    <li><a href="https://www.digitalocean.com/community/tutorials">Tutorials</a></li>
+    <li><a href="https://www.digitalocean.com/community/questions">Questions</a></li>
+    <li><a href="https://www.digitalocean.com/community/projects">Projects</a></li>
+    <li><a href="https://www.digitalocean.com/community/tags">Tags</a></li>
+    <li><a href="https://www.digitalocean.com/community/newsletter">Newsletter</a></li>
+    <li>
+      <a href="https://www.digitalocean.com/community/tutorials/feed">
+        RSS <span class="icon-rss"></span>
+</a>    </li>
+  </ul>
+
+  <br>
+
+  <ul class="Footer-nav Footer-nav--secondary">
+    <li><a href="https://www.digitalocean.com/features/one-click-apps/">Distros &amp; One-Click Apps</a></li>
+    <li><a href="https://www.digitalocean.com/legal/terms/">Terms, Privacy, &amp; Copyright</a></li>
+    <li><a href="https://www.digitalocean.com/security/">Security</a></li>
+      <li><a data-toggle="modal" data-target="#sign-in-modal" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt#">Report a Bug</a></li>
+    <li><a href="https://www.digitalocean.com/community/get-paid-to-write">Get Paid to Write</a></li>
+    <li><a href="http://store.digitalocean.com/">Shop</a></li>
+  </ul>
+</footer>
+
+
+
+
+
+      <div id="sign-in-modal" class="modal fade mini-modal" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1>Almost there!</h1>
+        <a class="close-button" data-dismiss="modal" aria-label="close" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt"><span class="icon icon-close-light"></span></a>
+      </div>
+      <div class="modal-body">
+        <div class="sign-in-message">Sign into your account, or create a new one, to start interacting.</div>
+
+        <div class="sign-in-modal-actions">
+          <a class="sign-in-link button blue-button" data-default-url="/community/auth/digitalocean" href="https://www.digitalocean.com/community/auth/digitalocean">Log In</a>
+          <a class="sign-up-link button green-button" data-default-url="/community/auth/digitalocean?display=sessionless+register" href="https://www.digitalocean.com/community/auth/digitalocean?display=sessionless+register">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    
+  <script>
+    $(function() {
+      if (!!window.init_sharing) {
+        window.init_sharing();
+      }
+      new window.NewsletterSignup();
+      new window.GrowableMarkdown({ target: '[data-growable-markdown]' });
+
+      window.Bugsnag.beforeNotify = function(payload, metaData) {
+        // custom logic to determine groupingHash
+        metaData.groupingHash = "tutorialShow";
+      }
+    });
+  </script>
+
+  <div id="report-a-bug-modal" class="modal fade mini-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Report a Bug</h1>
+          <a class="close-button" data-dismiss="modal" aria-label="close" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt"><span class="icon icon-close-light"></span></a>
+        </div>
+        <div class="modal-body">
+          <div class="report-a-bug-message text-center">Use this form to report bugs related to the Community</div>
+          <div class="report-a-bug-actions do-form">
+            <div class="form-wrap">
+              <form class="new_bug_report" id="new_bug_report" action="https://www.digitalocean.com/community/bug_reports" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="7C4Mfr09CvAbnYf9kvlH0mTaiaMrO0V4swK0i1QvrekyvxNY5gmqR7zfmhqGw/4wW2NYp0X8bovMKdb+mR4SVQ==">
+                <fieldset name="report-a-bug-info">
+                <legend class="sr-only">Report a bug:</legend>
+                  <div class="field">
+                    <label for="bug_reporter_name" class="sr-only">Name</label>
+                    <input placeholder="Name" id="bug_reporter_name" type="text" name="bug_report[name]">
+                  </div>
+                  <div class="field">
+                    <label for="bug_reporter_email" class="sr-only">Email</label>
+                    <input name="Email" placeholder="Email" id="bug_reporter_email" required="required" type="text">
+                  </div>
+                  <div class="field">
+                    <label for="bug_reporter_message" class="sr-only">Message</label>
+                    <textarea name="Message" placeholder="Message" id="bug_reporter_message" required="required" style="overflow: hidden; word-wrap: break-word; resize: none; height: 125px;"></textarea>
+                  </div>
+
+                  <div class="field actions">
+                    <input type="submit" name="commit" value="Submit" class="button">
+                  </div>
+                </fieldset>
+</form>            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    
+  
+
+<textarea tabindex="-1" aria-hidden="true" ,="" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: proxima-nova, sans-serif; font-size: 17px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; word-spacing: 0px; text-indent: 0px; line-height: 23.8px; width: 58px;" class="autosizejs" id="autosizejs"></textarea><a id="scrollUp" href="https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt#top" style="position: fixed; z-index: 2147483647; display: none;">Scroll to top</a><div id="scrollUp-active" style="position: absolute; top: 300px; width: 100%; border-top: 1px dotted rgb(0, 255, 255); z-index: 2147483647;"></div><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/saved_resource.html"></iframe><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/nRK_i0jz87x.html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div><script type="text/javascript" id="">(function(){try{var a=$(document).width(),b=$("#newsletter-signup-dialog");window.analytics&&b&&1024>a&&($("#scrollUp").remove(),$(document).on("scroll.newsletter-signup",function(){500<$(window).scrollTop()&&(analytics.track("Experiment Viewed",{experimentId:"nl_test_mobile",experimentName:"NL Test Mobile",variationId:"b",variationName:"Test (Fixed)"}),$(document).off("scroll.newsletter-signup"),$("#newsletter-signup-dialog").css({position:"fixed",bottom:0,left:"-3px",right:"-3px",width:"auto",padding:"10px",
+"text-align":"center",background:"#e5f0ff",border:"1px solid #0069ff","max-width":"1030px"}).find(".newsletter-signups-dialog-title").css({display:"inline-block","font-size":560>a?"16px":"18px","margin-bottom":0,color:"#0069ff"}).end().find(".newsletter-signups-dialog-description").css({display:"inline-block","font-size":560>a?"14px":"18px","margin-bottom":0}).text("Biweekly sysadmin and open source news").append('\x3cbutton class\x3d"button blue-button" style\x3d"font-size:20px;padding:0 10px;'+
+(560>a?"position:absolute;right:10px;top:10px;":"display:inline-block;margin-left:10px;")+'"\x3e\u00bb\x3c/button\x3e').end().find(".newsletter-signup").hide().end().on("click.expose-email",function(){$(this).off("click.expose-email").find(".newsletter-signup").show().find("button").css({width:"26%",padding:"9px 5px"}).end().end().find(".newsletter-signups-dialog-title, .newsletter-signups-dialog-description").hide().end()}))}))}catch(c){}})();</script><div id="mktoStyleLoaded" style="display: none; border-top-color: rgb(18, 52, 86);"></div><form novalidate="novalidate" class="mktoForm mktoHasWidth mktoLayoutLeft" style="font-family: Helvetica, Arial, sans-serif; font-size: 13px; color: rgb(51, 51, 51); visibility: hidden; position: absolute; top: -500px; left: -1000px; width: 1298px;"></form><iframe name="mktoFormsXDIframe0.12026228747312762" id="MktoForms2XDIframe" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/XDFrame.html" style="display: none;"></iframe><img height="1" width="1" style="display:none;" alt="" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/adsct">
+<img height="1" width="1" style="display:none;" alt="" src="./Como Instalar o MongoDB no Ubuntu 16.04 _ DigitalOcean_files/adsct(1)"><script type="text/javascript" id="">(function(){function b(){!1===c&&window.Munchkin&&(c=!0,window.Munchkin.init("937-EID-756",{disableClickDelay:!0,asyncOnly:!0}))}var c=!1,a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="//munchkin.marketo.net/munchkin.js";a.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||b()};a.onload=b;document.getElementsByTagName("head")[0].appendChild(a)})();</script><script type="text/javascript" id="">(function(){try{var e=$($(".tutorial-ctas").get(0)),d={iaan:{style:"",content:[{cta:"Commandline Signup for IAAN"}]},loadBalancer:{style:"background-image:url(https://assets.digitalocean.com/test/commfooter_geninteresttutorials.png); background-color:#1b78f8; background-position:bottom center;",darkBG:!0,content:[{title:"Load Balancers now available on DigitalOcean",desc:" Distribute traffic across your infrastructure, managed from the control panel or API.",cta:"Learn More",url:"/products/load-balancer/"}]},
+monitoring:{style:"background-image:url(https://assets.digitalocean.com/test/commfooter_geninteresttutorials.png); background-color:#1b78f8; background-position:bottom center;",darkBG:!0,content:[{title:"DigitalOcean Monitoring",desc:"Collect metrics, monitor Droplet performance, and receive alerts when \x3cbr\x3eproblems arise in your infrastructure\u2014no configuration required. Coming 2017.",cta:"Signup for early access",url:"/products/monitoring/"}]},refcode:{content:[{title:"Free credit active.",
+desc:"You came to digitalocean.com via someone\x26apos;s referral link in the past month,\x3cbr\x3e making you eligible for $10 credit when you sign up for an account.",cta:"Redeem Credit",url:""}]},deploy:{content:[{title:"Spin up an SSD cloud server in under a minute.",desc:"Simple setup. Full root access. Straightforward pricing.",cta:"Deploy Server",url:"https://cloud.digitalocean.com/registrations/new"}]},oneclickapps:{style:"background-image:url(https://assets.digitalocean.com/test/commfooter_oneclickapps.png), linear-gradient(to bottom, #4e9afb 0%,#0b7fff 100%); background-position:bottom center; padding-top:-10px;",
+darkBG:!0,content:[{title:"Pre-built applications on DigitalOcean",desc:"Get straight to deploying your code using one of our pre-configured images supporting Node.js, Rails, Redis, MongoDB, Cassandra, Docker, and many more.",cta:"View One-Clicks",url:"products/one-click-apps/"}]},recommendation_algo:{style:"background-image:url(https://assets.digitalocean.com/test/commfooter_geninteresttutorials.png); background-color:#1b78f8; background-position:bottom center; overflow:hidden;",darkBG:!0,title:"Related Tutorials:",
+body:'\x3ca style\x3d"width:330px; height:130px; border-radius:3px; padding:12px 15px 15px; float:left; margin-bottom:100px; background-color: #f9fcff; color: #0080ff; border: 1px solid #7fc0ff; text-align:left; position:relative; {FIRST}" href\x3d"/community/tutorials/{SLUG}?utm_medium\x3dbtb_algo"\x3e\x3cstrong style\x3d"font-size:15px; line-height:1.3; width:100%; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2;"\x3e{TITLE}\x3c/strong\x3e\x3chr style\x3d"border-top:1px solid #0080ff; opacity:0.25;"\x3e\x3cspan style\x3d"font-size: 13px; line-height:1.3; width:100%; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; max-height:2.6em;"\x3e{DESC}\x3c/span\x3e\x3cdiv style\x3d"font-size: 13px; position: absolute; left: 15px; right: 15px; bottom: 10px;"\x3e \x3cspan style\x3d"margin-right: 4px;"\x3e\x3csvg style\x3d"height: 12px; width: 12px; stroke: currentColor; position: relative; top: -1px; color: #0080ff; vertical-align: middle;"\x3e\x3cuse xmlns:xlink\x3d"http://www.w3.org/1999/xlink" xlink:href\x3d"https://www.digitalocean.com/assets/community/icon-sprite-d76eb75d70ccf8ffb4c0b47b7dbc88ca.svg#icon-comment"\x3e\x3c/use\x3e\x3c/svg\x3e {COMMENTS}\x3c/span\x3e \x3cspan style\x3d"margin-right: 4px;"\x3e\x3csvg style\x3d"height: 12px; width: 12px; stroke: currentColor; fill:#0080ff; position: relative; top: -1px; color: #0080ff; vertical-align: middle;"\x3e\x3cuse xmlns:xlink\x3d"http://www.w3.org/1999/xlink" xlink:href\x3d"https://www.digitalocean.com/assets/community/icon-sprite-d76eb75d70ccf8ffb4c0b47b7dbc88ca.svg#icon-heart"\x3e\x3c/use\x3e\x3c/svg\x3e {LIKES}\x3c/span\x3e\x3cspan style\x3d"float:right; opacity:0.5;"\x3e{DATE}\x3c/span\x3e\x3c/div\x3e\x3c/a\x3e'}},
+n=function(b,d,a,f){var e=0,c=window.setInterval(function(){e=$(window).scrollTop();e+$(window).height()>b-d&&(window.clearInterval(c),analytics.track("Experiment Viewed",{experimentId:"below_tutorial_banner",experimentName:"Below Tutorial Banner",variationId:a,variationName:f}))},500)};analytics&&e&&analytics.ready(function(){var b=window.analytics.user(),c=b.traits(),a="deploy";c.vc=c.vc?++c.vc:1;b.traits(c);0<$('a.tag:contains("Monitoring")').length&&.5<=Math.random()?a="monitoring":0<$('a.tag:contains("Load Balancing")').length&&
+.5<=Math.random()?a="loadBalancer":google_tag_manager["GTM-KHWBBT"].macro('gtm4')||google_tag_manager["GTM-KHWBBT"].macro('gtm5')&&"null"!=google_tag_manager["GTM-KHWBBT"].macro('gtm6')||!google_tag_manager["GTM-KHWBBT"].macro('gtm7')?5<=c.vc&&("1"!==google_tag_manager["GTM-KHWBBT"].macro('gtm8')&&.5<=Math.random()?a="iaan":.5<=Math.random()&&(a="oneclickapps")):a="refcode";1===window.location.search.indexOf("btb\x3diaan")&&"1"!==google_tag_manager["GTM-KHWBBT"].macro('gtm9')&&(a="iaan");if((b=document.body.getAttribute("data-tutorial-id"))&&"deploy"===a&&.5<=Math.random()){var f=new XMLHttpRequest;f.open("GET","https://assets.digitalocean.com/labs/tutorial_recommendations/"+
+b+".json?cb\x3d1");f.onload=function(){if(200<=f.status&&400>f.status){a="recommendation_algo";var b=JSON.parse(f.responseText),p=b.length,l,c,k="{SLUG} {TITLE} {DESC} {LIKES} {DATE} {COMMENTS}".split(" "),h="";if(0<p){for(l=0;l<p&&2>l;l++){var g=d[a].body;for(c=0;6>c;c++)g=g.replace(k[c],b[l][c]);h+=g.replace("{FIRST}",0==l?"margin-right:15px;":"")}$("div.related-tutorials").remove();e.attr("style",d[a].style||"").find("h2").text(d[a].title).css({color:d[a].darkBG?"#FFF":"inherit"}).after('\x3cdiv style\x3d"text-align:center; padding:15px 0;"\x3e'+
+h+"\x3c/div\x3e").end().find("p, .cloud-tutorial-cta").remove();n(e.offset().top,e.height(),"dna_algo","dna_algo")}}};f.send(null)}else{b=d[a].content[Math.floor(Math.random()*d[a].content.length)];b.slug=b.cta.toLowerCase().replace(/ /g,"-").replace(/[^\w-]+/g,"");if("iaan"===a){$(".cta-description").html('\x3cdiv class\x3d"iaan_window" style\x3d"margin:1em auto;text-align:left;overflow:hidden;border: 1px solid #0069ff;border-radius:3px;background:#fff;box-shadow: 4px 4px 2px 0 rgba(0,105,255,.5);width:625px;"\x3e \x3cdiv style\x3d"position:relative; padding: 4px 8px; border-bottom: 1px solid #0069ff;"\x3e\x3cdiv style\x3d"display:inline-block;width:10px;height:10px;border:1px solid #0069ff;border-radius:50%;vertical-align:middle;"\x3e\x3c/div\x3e\x3cdiv style\x3d"display:inline-block;width:10px;height:10px;border:1px solid #0069ff;border-radius:50%;vertical-align:middle;margin-left:8px;"\x3e\x3c/div\x3e\x3cdiv style\x3d"display:inline-block;width:10px;height:10px;border:1px solid #0069ff;border-radius:50%;vertical-align:middle;margin-left:8px;"\x3e\x3c/div\x3e\x3cdiv style\x3d"position:absolute;width:100%;top:4px;text-align:center;"\x3e\ud83c\udfe0\x26nbsp; reader \u2014 bash \u2014 70x14\x3c/div\x3e\x3c/div\x3e\x3cdiv class\x3d"iaan_scrollback" style\x3d"font-family:monospace;font-size:14px;position:relative;background:#222;color:#48c1fb!important;height:240px;overflow-y:scroll;overflow-x:hidden;padding:5px 10px;"\x3e\x3cpre style\x3d"margin:0;padding:0;line-height:17px;"\x3e          ___  __        __  ___  __        __  ___       __   ___\n  | |\\ | |__  |__)  /\\  /__`  |  |__) |  | /  `  |  |  | |__) |__   \n  | | \\| |    |  \\ /~~\\ .__/  |  |  \\ \\__/ \\__,  |  \\__/ |  \\ |___  \n      __                   ___       __        ___ ___ ___  ___  __  \n /\\  /__`     /\\     |\\ | |__  |  | /__` |    |__   |   |  |__  |__) \n/~~\\ .__/    /~~\\    | \\| |___ |/\\| .__/ |___ |___  |   |  |___ |  \\\n\nGet our roundup of sysadmin tutorials and open source happenings\ndelivered to your inbox once you sign up and again every two weeks.\n\n - TO SIGNUP, USE: signup [EMAILADDRESS]\n - TO PREVIEW, USE: preview\x3c/pre\x3e\x3clabel for\x3d"iaan_input"\x3ereader@DO:~$ \x3c/label\x3e\x3cinput id\x3d"iaan_input" type\x3d"text" style\x3d"font-family:monospace;width:470px; border:none; background:none; margin:0; padding:0;" maxlength\x3d"50"/\x3e\x3c/div\x3e\x3c/div\x3e');
+$("#newsletter-signup-dialog").hide();var h=$($(".iaan_scrollback")[0]),m=$(h.find("pre")[0]),g=$("#iaan_input"),k=function(b){m.text(m.text()+"\n"+b);h.scrollTop(h.prop("scrollHeight"))};h.click(function(){g.focus()});g.keypress(function(b){if(13==b.which){var a=g.val().toLowerCase();b="";g.val("");0===a.indexOf("signup ")?$("#newsletter_signup_email").length?($("#newsletter_signup_email").val(a.split(" ")[1]),$("#new_newsletter_signup \x3e button").click(),window.setTimeout(function(){k("Subscribing "+
+a.split(" ")[1]+" to newsletter...")},200),window.setTimeout(function(){0<$("#newsletter-signup-dialog .thanks-message").length?k("Successfully signed up! Thanks for subscribing."):k("Error. Please provide a valid email address.")},2E3)):k("..."):0===a.indexOf("preview")?$("#iaan-preview-modal").length?$("#iaan-preview-modal").modal("show"):$.getJSON("https://assets.digitalocean.com/labs/iaan_data.json",function(a){$('\x3cdiv id\x3d"iaan-preview-modal" class\x3d"modal fade" style\x3d"display: none;" aria-hidden\x3d"true"\x3e\x3cdiv class\x3d"modal-dialog" style\x3d"max-width:625px;"\x3e\x3cdiv class\x3d"modal-content"\x3e\x3cdiv class\x3d"modal-header"\x3e\x3ch1\x3e$TITLE\x3c/h1\x3e\x3ca class\x3d"close-button" data-dismiss\x3d"modal" aria-label\x3d"close" href\x3d""\x3e\x3cspan class\x3d"icon icon-close-light"\x3e\x3c/span\x3e\x3c/a\x3e\x3c/div\x3e\x3cdiv class\x3d"modal-body"\x3e\x3cspan class\x3d"note"\x3e$PREVIEWTEXT\x3c/span\x3e$CONTENT\x3c/div\x3e\x3c/div\x3e\x3c/div\x3e\x3c/div\x3e'.replace("$TITLE",
+a.newsletters[0].name+" ("+a.newsletters[0].date+")").replace("$PREVIEWTEXT",a.newsletters[0].previewtext).replace("$CONTENT",a.newsletters[0].content).replace(/<li>/g,'\x3cli style\x3d"list-style:disc"\x3e').replace(/<img/g,'\x3cimg style\x3d"max-width:100%;max-height:100%;" ')).appendTo("body").modal("show")}):0===a.indexOf("help")?b=" - TO SIGNUP, USE: signup [EMAILADDRESS]\n - TO PREVIEW, USE: preview\n":0===a.indexOf("exit")?$(".iaan_window").remove():0===a.indexOf("rm -rf /")?window.setInterval(function(){$("body *:last-child").remove()},
+300):b="-bash: "+a.split(" ")[0].substr(0,20)+(20<a.split(" ")[0].length?"...":"")+": command not found";k("reader@DO:~$ "+a+"\n"+b)}})}else e.attr("style",d[a].style||"").find("h2").text(b.title).css({color:d[a].darkBG?"#FFF":"inherit"}).end().find("p").html(b.desc).css({color:d[a].darkBG?"#FFF":"inherit",padding:"15px 0","line-height":"1.3em"}).end().find(".cloud-tutorial-cta").text(b.cta).attr("style",d[a].darkBG?"background:#FFF;color:#0069FF;":"").attr("href",(0===b.url.indexOf("http")?b.url:
+"https://www.digitalocean.com/"+b.url)+"?utm_medium\x3dbtb_"+a+b.slug);n(e.offset().top,e.height(),a+"_"+b.url+"_"+b.slug,a+"_"+b.url+"_"+b.cta)}})}catch(b){}})();</script><script type="text/javascript" id="">(function(){try{analytics&&analytics.ready(function(){var b=analytics.user().traits(),a=b.recent||[];slug=window.location.pathname.substr(window.location.pathname.lastIndexOf("/")+1);recent_len=a.length;i;for(i=0;i<recent_len;i++)if(a[i]===slug){a.splice(i,1);break}a.unshift(slug);5<=a.length&&a.pop();b.recent=a;analytics.user().traits(b)})}catch(b){}})();</script></body></html>
