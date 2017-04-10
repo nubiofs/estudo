@@ -52,6 +52,18 @@ $ sudo gnome-desktop-item-edit /usr/share/applications/ --create-new
 
     -- create-new : cria novo lançador / atalho
 
+**  Descobrindo a data de criação de um Arquivo
+
+$ ls -i sample_pg_inserts.json 
+
+> 1573084 sample_pg_inserts.json
+
+$ debugfs -R 'stat <1573084>' /dev/sda6
+
+ctime: 0x58ebaf90:8e382544 -- Mon Apr 10 13:15:12 2017
+ atime: 0x58ebaa1c:7ea592d8 -- Mon Apr 10 12:51:56 2017
+ mtime: 0x58ebaf90:8e382544 -- Mon Apr 10 13:15:12 2017
+--> crtime: 0x58ebaa1c:7ea592d8 -- Mon Apr 10 12:51:56 2017
 
 ** remove old kernel
 
