@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+<!-- BEGIN html -->
+<html lang="en-US">
+<!-- Design by AJ Clarke (http://www.wpexplorer.com) - Powered by WordPress (http://wordpress.org) -->
+
+<!-- BEGIN head -->
+<head>
+
+<!-- Meta Tags -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+    
+<!-- Stylesheet & Favicon -->
+<link rel="stylesheet" type="text/css" href="https://blog.2ndquadrant.com/wp-content/themes/gopress/style.css" />
+
+<!-- WP Head -->
+<!--?php if ( is_single() || is_page() ) f_comment_reply(); 
+function f_comment_reply() {
+    wp_enqueue_script( 'comment-reply' );
+}
+add_action('wp_enqueue_scripts','f_comment_reply');
+
+?-->
+
+<!-- This site is optimized with the Yoast SEO plugin v4.3 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>JSONB type performance in PostgreSQL 9.4 |</title>
+<meta name="description" content="The 9.4 version of PostgreSQL introduces the JSONB data type, a specialised representation of the JSON data"/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title=" &raquo; JSONB type performance in PostgreSQL 9.4 Comments Feed" href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/blog.2ndquadrant.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.3"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='dashicons-css'  href='https://blog.2ndquadrant.com/wp-includes/css/dashicons.min.css?ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='menu-icons-extra-css'  href='https://blog.2ndquadrant.com/wp-content/plugins/menu-icons/css/extra.min.css?ver=0.10.2' type='text/css' media='all' />
+<link rel='stylesheet' id='digg-digg-css'  href='https://blog.2ndquadrant.com/wp-content/plugins/digg-digg/css/diggdigg-style.css?ver=5.3.6' type='text/css' media='screen' />
+<!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.4 - Universal disabled - https://www.monsterinsights.com/ -->
+<script type="text/javascript">
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-2500175-4']);
+	_gaq.push(['_gat._forceSSL']);
+	_gaq.push(['_trackPageview']);
+
+	(function () {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type='text/javascript' src='https://blog.2ndquadrant.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://blog.2ndquadrant.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='https://blog.2ndquadrant.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blog.2ndquadrant.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://blog.2ndquadrant.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.7.3" />
+<link rel='shortlink' href='https://blog.2ndquadrant.com/?p=1255' />
+<link rel="alternate" type="application/json+oembed" href="https://blog.2ndquadrant.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.2ndquadrant.com%2Fjsonb-type-performance-postgresql-9-4%2F" />
+	<script type="text/javascript">
+		MPSLCore = {
+			'path': "https://blog.2ndquadrant.com/wp-content/plugins/motopress-slider-lite/motoslider_core/",
+			'version': "2.0.0"
+		};
+	</script>
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<style type="text/css" id="syntaxhighlighteranchor"></style>
+			<link rel="stylesheet" id="custom-css-css" type="text/css" href="https://blog.2ndquadrant.com/?custom-css=1&#038;csblog=1&#038;cscache=6&#038;csrev=15" />
+			
+</head>
+<body class="post-template-default single single-post postid-1255 single-format-standard">
+
+<div id="wrap" class="clearfix">
+
+<div id="header" class="clearfix">
+
+	<div id="header-top" class="clearfix">
+	        <div id="logo" style="margin-top: 0px;">
+        						<a href="https://2ndquadrant.com" title=""><img src="https://blog.2ndquadrant.com/wp-content/uploads/2016/10/2ndQ_logo_color_re.png" alt="" /></a>
+			 	          
+        </div>
+        <!-- END logo -->
+        
+         
+        
+	</div>
+       
+	<div id="site-description">Global experts in PostgreSQL support, training, development, migration and consultancy</div>        
+</div><!-- END header -->
+
+        <div id="navigation" class="clearfix">
+            <div class="menu-head-container"><ul id="menu-head" class="sf-menu"><li id="menu-item-1944" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1944"><a href="https://blog.2ndquadrant.com/">Home</a></li>
+<li id="menu-item-1869" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1869"><a href="https://2ndquadrant.com/services/">Services</a>
+<ul class="sub-menu">
+	<li id="menu-item-1877" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1877"><a href="https://2ndquadrant.com/services/rdba/">Remote DBA</a></li>
+	<li id="menu-item-4291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4291"><a href="https://2ndquadrant.com/en/support/postgresql-healthcheck/">PostgreSQL Health Check</a></li>
+	<li id="menu-item-4289" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4289"><a href="https://2ndquadrant.com/en/services/postgresql-performance-tuning/">PostgreSQL Performance Tuning</a></li>
+	<li id="menu-item-4290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4290"><a href="https://2ndquadrant.com/en/services/postgresql-security-audit/">PostgreSQL Security Audit</a></li>
+	<li id="menu-item-4288" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4288"><a href="https://2ndquadrant.com/en/services/upgrade-postgresql/">Upgrade PostgreSQL</a></li>
+	<li id="menu-item-4292" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4292"><a href="https://2ndquadrant.com/en/services/postgresql-deployment/migrate-oracle/">Migrate from Oracle</a></li>
+</ul>
+</li>
+<li id="menu-item-1874" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1874"><a href="https://2ndquadrant.com/support/">Support</a>
+<ul class="sub-menu">
+	<li id="menu-item-1875" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1875"><a href="https://2ndquadrant.com/support/support-postgresql/">24/7 PostgreSQL Support</a></li>
+	<li id="menu-item-1876" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1876"><a href="https://2ndquadrant.com/support/support-ibm-z-systems/">IBM Z Systems</a></li>
+	<li id="menu-item-1878" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1878"><a href="https://2ndquadrant.com/support/support-developer/">Developer Support</a></li>
+</ul>
+</li>
+<li id="menu-item-1879" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1879"><a href="https://2ndquadrant.com/training/">Training</a>
+<ul class="sub-menu">
+	<li id="menu-item-1880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1880"><a href="https://2ndquadrant.com/training/course-catalog/">Training Catalogue &#038; Dates</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1908" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1908"><a href="https://2ndquadrant.com/training/courses/advanced-development-performance/">Advanced Development &#038; Performance</a></li>
+		<li id="menu-item-1909" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1909"><a href="https://2ndquadrant.com/training/courses/linux-for-postgresql-dbas/">Linux for PostgreSQL DBAs</a></li>
+		<li id="menu-item-1910" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1910"><a href="https://2ndquadrant.com/training/courses/postgresql-database-administration/">PostgreSQL Database Administration</a></li>
+		<li id="menu-item-1911" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1911"><a href="https://2ndquadrant.com/training/courses/postgresql-data-warehousing-partitioning/">PostgreSQL Data Warehousing &#038; Partitioning</a></li>
+		<li id="menu-item-1912" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1912"><a href="https://2ndquadrant.com/training/courses/postgresql-development/">PostgreSQL Development</a></li>
+		<li id="menu-item-1913" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1913"><a href="https://2ndquadrant.com/training/courses/postgresql-immersion/">PostgreSQL Immersion</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-1945" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1945"><a href="https://2ndquadrant.com/books/">Books</a>
+<ul class="sub-menu">
+	<li id="menu-item-1946" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1946"><a href="https://2ndquadrant.com/books/postgresql-9-administration-cookbook/">PostgreSQL 9 Administration Cookbook &#8211; 2nd Edition</a></li>
+	<li id="menu-item-1947" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1947"><a href="https://2ndquadrant.com/books/postgresql-server-programming/">PostgreSQL Server Programming &#8211; 2nd Edition</a></li>
+	<li id="menu-item-1948" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1948"><a href="https://2ndquadrant.com/books/postgresql-9-cookbook-chinese-edition">PostgreSQL 9 Cookbook: Chinese Edition</a></li>
+</ul>
+</li>
+<li id="menu-item-1949" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1949"><a href="https://2ndquadrant.com/resources/">Resources</a>
+<ul class="sub-menu">
+	<li id="menu-item-1950" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1950"><a href="https://2ndquadrant.com/resources/pglogical/">pglogical</a></li>
+	<li id="menu-item-1951" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1951"><a href="https://2ndquadrant.com/resources/bdr/">BDR</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1952" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1952"><a href="https://2ndquadrant.com/resources/bdr/bdr-performance/">BDR Performance</a></li>
+	</ul>
+</li>
+	<li id="menu-item-2187" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2187"><a href="https://2ndquadrant.com/resources/postgres-xl/">Postgres-XL</a></li>
+	<li id="menu-item-1955" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1955"><a href="https://2ndquadrant.com/resources/barman-backup-and-recovery-manager-postgresql/">Barman</a></li>
+	<li id="menu-item-1956" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1956"><a href="https://2ndquadrant.com/resources/repmgr2/">repmgr</a></li>
+	<li id="menu-item-1959" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1959"><a href="https://2ndquadrant.com/resources/2uda/">2UDA</a></li>
+	<li id="menu-item-1958" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1958"><a href="https://2ndquadrant.com/resources/axle/">AXLE</a></li>
+	<li id="menu-item-1957" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1957"><a href="https://2ndquadrant.com/en/about/case-studies/">Case Studies</a></li>
+	<li id="menu-item-1954" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1954"><a href="https://2ndquadrant.com/resources/certified_apps/">Certified Applications</a></li>
+</ul>
+</li>
+<li id="menu-item-1960" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1960"><a href="https://2ndquadrant.com/postgresql/">PostgreSQL</a>
+<ul class="sub-menu">
+	<li id="menu-item-1961" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1961"><a href="https://2ndquadrant.com/postgresql/postgresql-story/">PostgreSQL &#8211; History</a></li>
+</ul>
+</li>
+</ul></div>        </div>
+        <!-- END navigation -->  
+
+
+<div class="post clearfix">
+    <div class="entry clearfix">
+    
+		<div id="post-nextprev" class="clearfix">
+			<div id="post-next" class="one-half">&larr; <a href="https://blog.2ndquadrant.com/whats-new-barman-1-4-0/" rel="next">What’s new about Barman 1.4.0?</a></div>
+        	<div id="post-prev" class="one-half remove-margin"><a href="https://blog.2ndquadrant.com/nosql-postgresql-9-4-jsonb/" rel="prev">NoSQL with PostgreSQL 9.4 and JSONB</a> &rarr;</div>
+        </div>
+        <!-- /post-next-prev -->
+        
+		<h1 class="single-title">JSONB type performance in PostgreSQL 9.4</h1>
+        <div class="post-meta single-meta">
+            Posted On 3 Mar, 2015 - By <a href="https://blog.2ndquadrant.com/author/marco-nenciarini/" title="Posts by Marco Nenciarini" rel="author">Marco Nenciarini</a> - With <a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comments">14 Comments</a>        </div>
+    
+		<p><a name="preamble"></a><br />
+<a href="https://blog.2ndquadrant.com/nosql-postgresql-9-4-jsonb/">The 9.4 version of PostgreSQL introduces the <code>JSONB</code> data type</a>, a specialised representation of the <code>JSON</code> data, allowing PostgreSQL to be competitive in managing the “lingua franca” of the moment for the exchange of data via web services. It is useful to perform a number of tests to verify its actual performance.<br />
+<span id="more-1255"></span></p>
+<h2><a name="_test_data"></a>Test data<img class=" wp-image-1264 alignleft" src="https://blog.2ndquadrant.com/wp-content/uploads/2015/02/articolo-json-marco.jpg" alt="articolo-json-marco" width="220" height="265" /></h2>
+<p>We will run our tests using the customer reviews data from Amazon for the year 1998 in <code>JSON</code> format. The file <a href="http://examples.citusdata.com/customer_reviews_nested_1998.json.gz" onclick="_gaq.push(['_trackEvent', 'outbound-article', 'http://examples.citusdata.com/customer_reviews_nested_1998.json.gz', 'customer_reviews_nested_1998.json.gz']);" >customer_reviews_nested_1998.json.gz</a> can be downloaded from the website of Citus Data.</p>
+<p>The file, once unzipped, takes up 209MB and contains approximately 600k of records in <code>JSON</code> format with a structure similar to the following:</p>
+<table border="0" width="100%" cellpadding="10" bgcolor="#e8e8e8">
+<tbody>
+<tr>
+<td><!-- Generator: GNU source-highlight 3.1.7 by Lorenzo Bettini http://www.lorenzobettini.it http://www.gnu.org/software/src-highlite --></p>
+<pre><tt><span style="color: #ff0000;">{
+</span>
+    <span style="color: #ff0000;">"customer_id"</span><span style="color: #990000;">:</span> <span style="color: #ff0000;">"ATVPDKIKX0DER"</span><span style="color: #990000;">,</span>
+    <span style="color: #ff0000;">"product"</span><span style="color: #990000;">:</span> <span style="color: #ff0000;">{</span>
+        <span style="color: #ff0000;">"category"</span><span style="color: #990000;">:</span> <span style="color: #ff0000;">"Arts &amp; Photography"</span><span style="color: #990000;">,</span>
+        <span style="color: #ff0000;">"group"</span><span style="color: #990000;">:</span> <span style="color: #ff0000;">"Book"</span><span style="color: #990000;">,</span>
+        <span style="color: #ff0000;">"id"</span><span style="color: #990000;">:</span> <span style="color: #ff0000;">"1854103040"</span><span style="color: #990000;">,</span>
+        <span style="color: #ff0000;">"sales_rank"</span><span style="color: #990000;">:</span> <span style="color: #993399;">72019</span><span style="color: #990000;">,</span>
+        <span style="color: #ff0000;">"similar_ids"</span><span style="color: #990000;">:</span> <span style="color: #990000;">[</span>
+            <span style="color: #ff0000;">"1854102664"</span><span style="color: #990000;">,</span>
+            <span style="color: #ff0000;">"0893815381"</span><span style="color: #990000;">,</span>
+            <span style="color: #ff0000;">"0893816493"</span><span style="color: #990000;">,</span>
+            <span style="color: #ff0000;">"3037664959"</span><span style="color: #990000;">,</span>
+            <span style="color: #ff0000;">"089381296X"</span>
+        <span style="color: #990000;">],</span>
+        <span style="color: #ff0000;">"subcategory"</span><span style="color: #990000;">:</span> <span style="color: #ff0000;">"Art"</span><span style="color: #990000;">,</span>
+        <span style="color: #ff0000;">"title"</span><span style="color: #990000;">:</span> <span style="color: #ff0000;">"The Age of Innocence"</span>
+    <span style="color: #ff0000;">}</span><span style="color: #990000;">,</span>
+    <span style="color: #ff0000;">"review"</span><span style="color: #990000;">:</span> <span style="color: #ff0000;">{</span>
+        <span style="color: #ff0000;">"date"</span><span style="color: #990000;">:</span> <span style="color: #ff0000;">"1995-08-10"</span><span style="color: #990000;">,</span>
+        <span style="color: #ff0000;">"helpful_votes"</span><span style="color: #990000;">:</span> <span style="color: #993399;">5</span><span style="color: #990000;">,</span>
+        <span style="color: #ff0000;">"rating"</span><span style="color: #990000;">:</span> <span style="color: #993399;">5</span><span style="color: #990000;">,</span>
+        <span style="color: #ff0000;">"votes"</span><span style="color: #990000;">:</span> <span style="color: #993399;">12</span>
+    <span style="color: #ff0000;">}</span>
+<span style="color: #ff0000;">}</span></tt></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<h2><a name="_dimensions"></a>Dimensions</h2>
+<p>The data can be loaded into a PostgreSQL database using the <code>JSONB</code> data type with the following commands:</p>
+<table border="0" width="100%" cellpadding="10" bgcolor="#e8e8e8">
+<tbody>
+<tr>
+<td><!-- Generator: GNU source-highlight 3.1.7 by Lorenzo Bettini http://www.lorenzobettini.it http://www.gnu.org/software/src-highlite --></p>
+<pre><tt><b><span style="color: #0000ff;">CREATE</span></b> <b><span style="color: #0000ff;">TABLE</span></b> reviews<span style="color: #990000;">(</span>review jsonb<span style="color: #990000;">);</span>
+<span style="color: #990000;">\</span>copy reviews <b><span style="color: #0000ff;">FROM</span></b> <span style="color: #ff0000;">'customer_reviews_nested_1998.json'</span>
+<strong><span style="color: #0000ff;">VACUUM ANALYZE</span></strong> reviews<span style="color: #990000;">;</span></tt></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The resulting table will take up approximately 268MB, with an additional cost of disk storage of around 28%. If we try to load the same data using the <code>JSON</code> type, which stores it as text, the result will be a table of 233MB, with an increase in space of roughly 11%. The reason for this difference is that the internal structures of <code>JSONB</code>, which are used to access the data without analysing the entire document each time, have a cost in terms of space.</p>
+<h2><a name="_data_access"></a>Data access</h2>
+<p>Once the data is stored in the database, it is necessary to create an index in order to access it efficiently. Before the 9.4 version of PostgreSQL, the only method of indexing the contents of a <code>JSON</code> field was to use a <code>B-tree</code> index on a specific search expression. For example, if we want to perform a search by product category we will use:</p>
+<table border="0" width="100%" cellpadding="10" bgcolor="#e8e8e8">
+<tbody>
+<tr>
+<td><!-- Generator: GNU source-highlight 3.1.7 by Lorenzo Bettini http://www.lorenzobettini.it http://www.gnu.org/software/src-highlite --></p>
+<pre><tt><b><span style="color: #0000ff;">CREATE</span></b> <b><span style="color: #0000ff;">INDEX</span></b> <b><span style="color: #0000ff;">on</span></b> reviews <span style="color: #990000;">((</span>review <span style="color: #9a1900;">#&gt;&gt;</span> <span style="color: #ff0000;">'{product,category}'</span><span style="color: #9a1900;">));</span></tt></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The newly created index takes up 21MB, or approximately 10% of the original data, and will be used for queries that contain within the WHERE clause the exact search term “<code>review #&gt;&gt; <em>{product,category}</em></code>”, such as:</p>
+<table border="0" width="100%" cellpadding="10" bgcolor="#e8e8e8">
+<tbody>
+<tr>
+<td><!-- Generator: GNU source-highlight 3.1.7 by Lorenzo Bettini http://www.lorenzobettini.it http://www.gnu.org/software/src-highlite --></p>
+<pre><tt><b><span style="color: #0000ff;">SELECT</span></b>
+    review <span style="color: #9a1900;">#&gt;&gt; <span style="color: #ff0000;">'{product,title}'</span> <strong><span style="color: #0000ff;">AS</span></strong> title,</span>
+    avg<span style="color: #990000;">((</span>review <span style="color: #9a1900;">#&gt;&gt; <span style="color: #ff0000;">'{review,rating}'</span>)<span style="color: #000000;">::int</span>)</span>
+<b><span style="color: #0000ff;">FROM</span></b> reviews
+<b><span style="color: #0000ff;">WHERE</span></b> review <span style="color: #9a1900;">#&gt;&gt; <span style="color: #ff0000;">'{product,category}'</span> = <span style="color: #ff0000;">'Fitness &amp; Yoga'</span></span>
+<b><span style="color: #0000ff;">GROUP</span></b> <b><span style="color: #0000ff;">BY</span></b> <span style="color: #993399;">1</span> <b><span style="color: #0000ff;">ORDER</span></b> <b><span style="color: #0000ff;">BY</span></b> <span style="color: #993399;">2</span><span style="color: #990000;">;</span>
+<span style="color: #333333;">                       title                       |        avg
+<i>---------------------------------------------------+--------------------</i>
+ Kathy Smith - New Yoga Challenge                  | 1.6666666666666667
+ Pumping Iron 2                                    | 2.0000000000000000
+ Kathy Smith - New Yoga Basics                     | 3.0000000000000000
+ Men Are from Mars, Women Are from Venus           | 4.0000000000000000</span></tt><tt><span style="color: #333333;">
+ Kathy Smith - Functionally Fit - Peak Fat Burning | 4.5000000000000000
+ Kathy Smith - Pregnancy Workout                   | 5.0000000000000000
+(6 rows)</span></tt></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The query takes approximately <strong>0.180ms</strong> to be performed on the test machine, but the index that has been created is highly specific and cannot be used for different searches.</p>
+<p>Starting with version 9.4, the <code>JSONB</code> data type supports the use of inverted indexes (GIN, or General inverted Indexes), which allow indexing of the components of a complex object.</p>
+<p>Let’s create a <code>GIN</code> index on our table <code>reviews</code> with the following command:</p>
+<table border="0" width="100%" cellpadding="10" bgcolor="#e8e8e8">
+<tbody>
+<tr>
+<td><!-- Generator: GNU source-highlight 3.1.7 by Lorenzo Bettini http://www.lorenzobettini.it http://www.gnu.org/software/src-highlite --></p>
+<pre><tt><b><span style="color: #0000ff;">CREATE</span></b> <b><span style="color: #0000ff;">INDEX</span></b> <b><span style="color: #0000ff;">on</span></b> reviews <b><span style="color: #0000ff;">USING</span></b> GIN <span style="color: #990000;">(</span>review<span style="color: #990000;">);</span></tt></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The resulting index takes up 64MB of disk, which is approximately 30% of the size of the original table. This index can be used to speed up searches using the following operators:</p>
+<ul>
+<li><code>JSON</code> <code>@&gt;</code> <code>JSON</code> is a subset</li>
+<li><code>JSON</code> <code>?</code> <code>TEXT</code> contains a value</li>
+<li><code>JSON</code> <code>?&amp;</code> <code>TEXT[]</code> contains all the values</li>
+<li><code>JSON</code> <code>?|</code> <code>TEXT[]</code> contains at least one value</li>
+</ul>
+<p>The above query shall thus be rewritten using the operator <code>@&gt;</code> to search for rows that contain <code>'{"product": {"category": "Fitness &amp; Yoga"}}'</code>:</p>
+<table border="0" width="100%" cellpadding="10" bgcolor="#e8e8e8">
+<tbody>
+<tr>
+<td><!-- Generator: GNU source-highlight 3.1.7 by Lorenzo Bettini http://www.lorenzobettini.it http://www.gnu.org/software/src-highlite --></p>
+<pre><tt><b><span style="color: #0000ff;">SELECT</span></b>
+    review <span style="color: #9a1900;">#&gt;&gt; <span style="color: #ff0000;">'{product,title}'</span> <span style="color: #0000ff;"><strong>AS</strong></span> <span style="color: #000000;">title</span>,</span>
+    avg<span style="color: #990000;">((</span>review <span style="color: #9a1900;">#&gt;&gt; <span style="color: #ff0000;">'{review,rating}'</span>)<span style="color: #000000;">::int</span>)</span>
+<b><span style="color: #0000ff;">FROM</span></b> reviews
+<b><span style="color: #0000ff;">WHERE</span></b> <i><span style="color: #9a1900;"><span style="color: #000000;">review</span> </span></i><span style="color: #9a1900;">@&gt; <span style="color: #ff0000;">'{"product": {"category": "Fitness &amp; Yoga"}}'</span></span></tt><tt>
+<b><span style="color: #0000ff;">GROUP</span></b> <b><span style="color: #0000ff;">BY</span></b> <span style="color: #993399;">1</span> <b><span style="color: #0000ff;">ORDER</span></b> <b><span style="color: #0000ff;">BY</span></b> <span style="color: #993399;">2</span><span style="color: #990000;">;</span></tt></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The query takes approximately <strong>1.100ms</strong> to be performed on the test machine, and the index that has been created is flexible and can be used for any search within the <code>JSON</code> data.</p>
+<p>In fact, it is often the case that the only operation used in the applications is the search for a subset. In this case it is possible to use a different <code>GIN</code> index which only supports the <code>@&gt;</code> operator and is therefore considerably smaller. The syntax for creating this type of “optimised” index is as follows:</p>
+<p>&nbsp;</p>
+<table border="0" width="100%" cellpadding="10" bgcolor="#e8e8e8">
+<tbody>
+<tr>
+<td><!-- Generator: GNU source-highlight 3.1.7 by Lorenzo Bettini http://www.lorenzobettini.it http://www.gnu.org/software/src-highlite --></p>
+<pre><tt><b><span style="color: #0000ff;">CREATE</span></b> <b><span style="color: #0000ff;">INDEX</span></b> <b><span style="color: #0000ff;">on</span></b> reviews <b><span style="color: #0000ff;">USING</span></b> GIN <span style="color: #990000;">(</span>review jsonb_path_ops<span style="color: #990000;">);</span></tt></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The resulting index occupies 46MB &#8211; only 22% of the size of the original data &#8211; and, thanks to its smaller size, it is used more efficiently by PostgreSQL.</p>
+<p>This allows the above query to be run in just <strong>0.167ms</strong>, with a performance increase of 650% compared to the original <code>GIN</code> index and 8% compared to the specific <code>B-tree</code> index initially used: all this without loss of generality with regards to the possible search operation.</p>
+<h2><a name="_conclusions"></a>Conclusions</h2>
+<p>With the introduction of the <code>JSONB</code> type and the <code>GIN</code> indexes<br />
+using <code>jsonb_path_ops</code> operator class, PostgreSQL combines the elasticity of the <code>JSON</code> format at an amazing data access speed.</p>
+<p>Today it is thus possible to store and process data in <code>JSON</code> format with high performance while enjoying the robustness and flexibility that PostgreSQL has habitually provided us with over the years.</p>
+<div class='dd_post_share'>
+<div class='dd_buttons'>
+<div class='dd_button'><a href="http://twitter.com/share" onclick="_gaq.push(['_trackEvent', 'outbound-article', 'http://twitter.com/share', '']);" class="twitter-share-button" data-url="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/" data-count="vertical" data-text="JSONB type performance in PostgreSQL 9.4" data-via="2ndQuad"></a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script></div>
+<div class='dd_button'><script src="//connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/" send="false" show_faces="true"  layout="button_count" width="92"  ></fb:like></div>
+<div class='dd_button'><script type='text/javascript' src='https://apis.google.com/js/plusone.js'></script><g:plusone size='tall' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/'></g:plusone></div>
+<div class='dd_button'><script src='//platform.linkedin.com/in.js' type='text/javascript'></script><script type='IN/Share' data-url='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/' data-counter='top'></script></div>
+</div>
+<div style='clear:both'></div>
+</div>
+<p><!-- Social Buttons Generated by Digg Digg plugin v5.3.6,
+    Author : Buffer, Inc
+    Website : http://bufferapp.com/diggdigg --></p>
+        <div class="clear"></div>
+        
+                 
+        <div class="post-bottom">
+        	<div class="post-tags"><a href="https://blog.2ndquadrant.com/tag/9-4/" rel="tag">9.4</a> , <a href="https://blog.2ndquadrant.com/tag/b-tree/" rel="tag">b-tree</a> , <a href="https://blog.2ndquadrant.com/tag/database/" rel="tag">database</a> , <a href="https://blog.2ndquadrant.com/tag/dbms/" rel="tag">dbms</a> , <a href="https://blog.2ndquadrant.com/tag/gin/" rel="tag">GIN</a> , <a href="https://blog.2ndquadrant.com/tag/javascript/" rel="tag">javascript</a> , <a href="https://blog.2ndquadrant.com/tag/json/" rel="tag">JSON</a> , <a href="https://blog.2ndquadrant.com/tag/jsonb/" rel="tag">JSONB</a> , <a href="https://blog.2ndquadrant.com/tag/jsonb_path_ops/" rel="tag">jsonb_path_ops</a> , <a href="https://blog.2ndquadrant.com/tag/key-value/" rel="tag">key-value</a> , <a href="https://blog.2ndquadrant.com/tag/mongodb/" rel="tag">mongodb</a> , <a href="https://blog.2ndquadrant.com/tag/nosql/" rel="tag">NOSQL</a> , <a href="https://blog.2ndquadrant.com/tag/object/" rel="tag">object</a> , <a href="https://blog.2ndquadrant.com/tag/postgres-9-4/" rel="tag">postgres 9.4</a> , <a href="https://blog.2ndquadrant.com/tag/postgresql/" rel="tag">PostgreSQL</a> , <a href="https://blog.2ndquadrant.com/tag/postgresql-9-4/" rel="tag">PostgreSQL 9.4</a></div>        </div>
+        <!-- END post-bottom -->
+        
+        
+        </div>
+        <!-- END entry -->
+	
+	
+<!-- You can start editing here. -->
+<div id="commentsbox">
+    <h3 id="comments">
+        This Post Has 14 Comments    </h3>
+
+<ol class="commentlist">
+		<li class="pingback even thread-even depth-1" id="comment-203504">
+				<div id="div-comment-203504" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='https://marcusgros.wordpress.com/2014/10/26/postgres-und-jsonb/' rel='external nofollow' class='url'>Postgres und JsonB | Marcus Gros</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-203504">
+			March 3, 2015 at 11:32 am</a>		</div>
+
+		<p>[&#8230;] findet Ihr auch noch eine Erläuterung dazu. [&#8230;]</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=203504#respond' onclick='return addComment.moveForm( "div-comment-203504", "203504", "respond", "1255" )' aria-label='Reply to Postgres und JsonB | Marcus Gros'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="pingback odd alt thread-odd thread-alt depth-1" id="comment-204432">
+				<div id="div-comment-204432" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='https://blog.anayrat.info/2015/03/06/lds-s10-2015/' rel='external nofollow' class='url'>LdS S10-2015 | Anayrat.info</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-204432">
+			March 6, 2015 at 7:42 am</a>		</div>
+
+		<p>[&#8230;] JSONB type performance in PostgreSQL 9.4 [&#8230;]</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=204432#respond' onclick='return addComment.moveForm( "div-comment-204432", "204432", "respond", "1255" )' aria-label='Reply to LdS S10-2015 | Anayrat.info'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-206046">
+				<div id="div-comment-206046" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/7602f2751868682b296171f58589c851?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/7602f2751868682b296171f58589c851?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">greg</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-206046">
+			March 10, 2015 at 3:54 pm</a>		</div>
+
+		<p>Thanks a lot for this article ;)</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=206046#respond' onclick='return addComment.moveForm( "div-comment-206046", "206046", "respond", "1255" )' aria-label='Reply to greg'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-214564">
+				<div id="div-comment-214564" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/376e4eb9dc6c2e33d1330262edc4f109?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/376e4eb9dc6c2e33d1330262edc4f109?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">janko</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-214564">
+			March 30, 2015 at 7:23 pm</a>		</div>
+
+		<p>This was a very interesting article. I have a couple of questions:</p>
+<p>1. What does &#8220;\copy&#8221; exactly do? How did it know that you want to store the data in the &#8220;review&#8221; column? Was Postgres able to detect that it was the only column in the table?</p>
+<p>2. What does &#8220;VACUUM ANALYZE&#8221; do in your case? I read the Postgres documentation, and I understood from there that it cleans the deleted rows, but you didn&#8217;t delete anything. Does the &#8220;ANALYZE&#8221; part make future queries faster?</p>
+<p>3. If the &#8220;json_path_ops&#8221; index is focused on the @&gt; operator only, does it mean that your SELECT statement is slower, since it still uses the #&gt;&gt; operator? Or it&#8217;s that fast because it&#8217;s actually doing the SELECT only after the WHERE filtering?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=214564#respond' onclick='return addComment.moveForm( "div-comment-214564", "214564", "respond", "1255" )' aria-label='Reply to janko'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment byuser comment-author-marco-nenciarini bypostauthor even depth-2 parent" id="comment-214596">
+				<div id="div-comment-214596" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/d58d3f818ed2e077506a46bb8e9a297a?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/d58d3f818ed2e077506a46bb8e9a297a?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Marco Nenciarini</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-214596">
+			March 30, 2015 at 8:36 pm</a>		</div>
+
+		<p>1) <a href="http://www.postgresql.org/docs/9.4/static/app-psql.html#APP-PSQL-META-COMMANDS-COPY" onclick="_gaq.push(['_trackEvent', 'outbound-comment', 'http://www.postgresql.org/docs/9.4/static/app-psql.html#APP-PSQL-META-COMMANDS-COPY', 'copy']);" rel="nofollow">\copy</a> is a psql meta command which invokes the SQL commands &#8220;COPY &#8230; FROM STDIN&#8221; or &#8220;COPY .. TO STDOUT&#8221;, and then fetches/stores the data in a file accessible to the psql client.</p>
+<p>If you don&#8217;t specify any column list, PostgreSQL will load/dump all the columns of the table.</p>
+<p>2) It&#8217;s always a good idea to &#8220;VACUUM ANALYZE&#8221; a table after a bulk load of data. It ensures that all the internal structures used by PostgreSQL are up to date (hint bits, visibility map, etc&#8230;) and collects statistics about the content of the table, so the query planner can use these statistics to help determine the most efficient execution plans for queries.</p>
+<p>3) The &#8220;json_path_ops&#8221; GIN index is used to quickly find the data during the WHERE filtering, then the #>> operator is applied in the output phase to display only the required portion of data. It makes the access very fast.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=214596#respond' onclick='return addComment.moveForm( "div-comment-214596", "214596", "respond", "1255" )' aria-label='Reply to Marco Nenciarini'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-3" id="comment-247014">
+				<div id="div-comment-247014" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/88492f62f36fa31aad6ceacc4529acc5?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/88492f62f36fa31aad6ceacc4529acc5?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">kustodian</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-247014">
+			December 27, 2016 at 4:40 pm</a>		</div>
+
+		<p>Just a small correction. After bulk inserting of data, VACUUM is not needed, only ANALYZE, so that it updates the query planner for that table/database. Running VACUUM ANALYZE won&#8217;t hurt, but it will just take longer, which makes a big difference on big tables/databases. </p>
+<p>Thanks for the article. I didn&#8217;t know that you can make a specialized GIN index which will only work for some operators.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=247014#respond' onclick='return addComment.moveForm( "div-comment-247014", "247014", "respond", "1255" )' aria-label='Reply to kustodian'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 parent" id="comment-216880">
+				<div id="div-comment-216880" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/1137844d852e86fb0cb36f571a0fc2f7?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1137844d852e86fb0cb36f571a0fc2f7?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='http://conecuh.com' rel='external nofollow' class='url'>dwilkins</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-216880">
+			April 6, 2015 at 6:48 pm</a>		</div>
+
+		<p>Marco,<br />
+Thanks for putting this information together.  I&#8217;ve used the json/jsonb functionality a bit and it&#8217;s really nice.   Accessing the `similar_ids` array is a little more challenging.   I started out doing this:</p>
+<p>SELECT review #&gt;&gt; &#8216;{product,title}&#8217; AS title<br />
+FROM reviews<br />
+WHERE exists(select 1 from jsonb_array_elements(&#8220;reviews&#8221;.review#&gt;'{product,similar_ids}&#8217;) where value = &#8216;&#8221;0910627312&#8243;&#8216;);</p>
+<p>which works for both json / jsonb by changing the name of the function to `json_array_elements`</p>
+<p>I&#8217;m going to adopt your syntax (and better use of the index) with this as soon as I can get my production db upgraded to 9.4.x:</p>
+<p>SELECT review #&gt;&gt; &#8216;{product,title}&#8217; AS title<br />
+FROM reviews<br />
+WHERE &#8220;reviews&#8221;.review#&gt;'{product,similar_ids}&#8217; @&gt; &#8216;&#8221;0910627312&#8243;&#8216;;</p>
+<p>Thanks again!<br />
+dwilkins</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=216880#respond' onclick='return addComment.moveForm( "div-comment-216880", "216880", "respond", "1255" )' aria-label='Reply to dwilkins'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment byuser comment-author-marco-nenciarini bypostauthor odd alt depth-2 parent" id="comment-217128">
+				<div id="div-comment-217128" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/d58d3f818ed2e077506a46bb8e9a297a?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/d58d3f818ed2e077506a46bb8e9a297a?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Marco Nenciarini</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-217128">
+			April 7, 2015 at 12:48 pm</a>		</div>
+
+		<p>Hi Dwilkins,</p>
+<p>the query you pasted will not use the jsonb_path_ops index. To take advantage of it you need to write the query as follows:</p>
+<p>SELECT review #>> &#8216;{product,title}&#8217; AS title<br />
+FROM reviews<br />
+WHERE review @> &#8216;{&#8220;product&#8221;: {&#8220;similar_ids&#8221;: [&#8220;0910627312&#8221;]}}&#8217;;</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=217128#respond' onclick='return addComment.moveForm( "div-comment-217128", "217128", "respond", "1255" )' aria-label='Reply to Marco Nenciarini'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment even depth-3" id="comment-217133">
+				<div id="div-comment-217133" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/1137844d852e86fb0cb36f571a0fc2f7?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1137844d852e86fb0cb36f571a0fc2f7?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='http://conecuh.com' rel='external nofollow' class='url'>dwilkins</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-217133">
+			April 7, 2015 at 1:28 pm</a>		</div>
+
+		<p>Thanks Marco &#8211; I&#8217;m gradually getting more familiar with Postgres &#8211; It&#8217;s obvious now that I explain each query that mine wasn&#8217;t using the index.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=217133#respond' onclick='return addComment.moveForm( "div-comment-217133", "217133", "respond", "1255" )' aria-label='Reply to dwilkins'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-218716">
+				<div id="div-comment-218716" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/33375ad5e1c18740bfa3bb882d96f856?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/33375ad5e1c18740bfa3bb882d96f856?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">alexcabezas1</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-218716">
+			April 14, 2015 at 6:39 pm</a>		</div>
+
+		<p>What is the size limit of JSONB data type?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=218716#respond' onclick='return addComment.moveForm( "div-comment-218716", "218716", "respond", "1255" )' aria-label='Reply to alexcabezas1'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment byuser comment-author-marco-nenciarini bypostauthor even depth-2 parent" id="comment-218989">
+				<div id="div-comment-218989" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/d58d3f818ed2e077506a46bb8e9a297a?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/d58d3f818ed2e077506a46bb8e9a297a?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Marco Nenciarini</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-218989">
+			April 15, 2015 at 4:37 pm</a>		</div>
+
+		<p>It has the same limitations of other TOASTable fields, so it should work with maximum one GB of data. However, in my experience, it&#8217;s better to not exceed few hundred megabytes of data.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=218989#respond' onclick='return addComment.moveForm( "div-comment-218989", "218989", "respond", "1255" )' aria-label='Reply to Marco Nenciarini'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-3" id="comment-220762">
+				<div id="div-comment-220762" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/33375ad5e1c18740bfa3bb882d96f856?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/33375ad5e1c18740bfa3bb882d96f856?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">alexcabezas1</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-220762">
+			April 21, 2015 at 3:47 pm</a>		</div>
+
+		<p>Thanks Marco. Very helpful this data.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=220762#respond' onclick='return addComment.moveForm( "div-comment-220762", "220762", "respond", "1255" )' aria-label='Reply to alexcabezas1'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-234492">
+				<div id="div-comment-234492" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/8c25a4728bcdb9eebca66230d0e2d2cc?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8c25a4728bcdb9eebca66230d0e2d2cc?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">sriram</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-234492">
+			August 18, 2015 at 6:29 am</a>		</div>
+
+		<p>really useful article. Thanks a ton marco.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=234492#respond' onclick='return addComment.moveForm( "div-comment-234492", "234492", "respond", "1255" )' aria-label='Reply to sriram'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-239817">
+				<div id="div-comment-239817" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://secure.gravatar.com/avatar/8c45fb752af24606c57c1b34f33c104d?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8c45fb752af24606c57c1b34f33c104d?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">vincvan</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/#comment-239817">
+			December 16, 2015 at 11:09 am</a>		</div>
+
+		<p>Great Article thanks! Have you any suggestions how I could speed up a jsonb query, when I would like to compare floats which are saved as values in a jsonb column?<br />
+Such as:</p>
+<p>SELECT &#8220;products&#8221;.* FROM &#8220;products&#8221;<br />
+    WHERE (COALESCE(CAST( nullif(technical_details#&gt;&gt;’{weight,value}&#8217;,&#8221;) AS FLOAT),0) BETWEEN 500 AND 1500)</p>
+<p>This query takes 30ms in my db. I added a GIN index on the column technical_details, but this did not really help.</p>
+<p>Thanks for your help!</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://blog.2ndquadrant.com/jsonb-type-performance-postgresql-9-4/?replytocom=239817#respond' onclick='return addComment.moveForm( "div-comment-239817", "239817", "respond", "1255" )' aria-label='Reply to vincvan'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ol>
+
+<div class="comment-nav">
+<div class="alignleft"></div>
+<div class="alignright"></div>
+</div>
+
+
+
+
+<div id="comment-form">
+
+<div id="respond" >
+
+<h3 id="comments-respond">Leave A Reply</h3>
+
+<div class="cancel-comment-reply">
+<a rel="nofollow" id="cancel-comment-reply-link" href="/jsonb-type-performance-postgresql-9-4/#respond" style="display:none;">Click here to cancel reply.</a></div>
+
+
+<form action="https://blog.2ndquadrant.com/wp-comments-post.php" method="post" id="commentform">
+
+<input type="text" name="author" id="author" value="Username*" onfocus="if(this.value=='Username*')this.value='';" onblur="if(this.value=='')this.value='Username*';" size="22" tabindex="1" />
+<br />
+<input type="text" name="email" id="email" value="Email*" onfocus="if(this.value=='Email*')this.value='';" onblur="if(this.value=='')this.value='Email*';" size="2" tabindex="2" />
+<br />
+<input type="text" name="url" id="url" value="Website" onfocus="if(this.value=='Website')this.value='';" onblur="if(this.value=='')this.value='Website';" size="2" tabindex="3" />
+<br />
+
+
+<textarea name="comment" id="comment" rows="10" tabindex="4"></textarea><br />
+
+<button type="submit" id="commentSubmit" class="button light-gray"><span>Add Comment</span></button>
+
+<input type='hidden' name='comment_post_ID' value='1255' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="0c0c37bc96" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="91"/></p>
+</form>
+
+
+</div>
+</div>
+</div>
+   
+        
+</div>
+<!-- END post -->
+
+             
+<div id="sidebar" class="clearfix">
+	<div class="sidebar-box clearfix"><h4><span>Featured Services</span></h4>			<div class="textwidget"><ul class="right-list">
+<li><a href="https://2ndquadrant.com/support/">24/7 Support</a></li>
+<li><a href="https://2ndquadrant.com/support/rdba/">Remote DBA</a></li>
+<li><a href="https://2ndquadrant.com/support/postgresql-healthcheck/">PostgreSQL Health Check</a></li>
+<li><a href="https://2ndquadrant.com/en/services/postgresql-performance-tuning/">PostgreSQL Performance Tuning</a></li>
+<li><a href="https://2ndquadrant.com/en/services/postgresql-security-audit/">PostgreSQL Security Audit </a></li>
+<li><a href="https://2ndquadrant.com/en/services/upgrade-postgresql/">Upgrade PostgreSQL</a></li>
+<li><a href="https://2ndquadrant.com/en/services/postgresql-deployment/migrate-oracle/">Migrate to PostgreSQL </a></li>
+</ul></div>
+		</div><div class="sidebar-box clearfix"><h4><span>Our Bloggers</span></h4>			<div class="textwidget"><ul class="right-list">
+<li><a href="/author/simon-riggs/">Simon Riggs</a></li>
+<li><a href="/author/alvherre/">Alvaro Herrera</a></li>
+<li><a href="/author/andrew-dunstan/">Andrew Dunstan</a></li>
+<li><a href="/author/craig-ringer/">Craig Ringer</a></li>
+<li><a href="/author/francesco-canovai/">Francesco Canovai</a></li>
+<li><a href="/author/gabriele-bartolini/">Gabriele Bartolini</a></li>
+<li><a href="/author/giulio-calacoci/">Giulio Calacoci</a></li>
+<li><a href="/author/giuseppe-broccolo/">Giuseppe Broccolo</a></li>
+<li><a href="/author/gulcin-yildirim/">Gulcin Yildirim</a></li>
+<li><a href="/author/ian-barwick//">Ian Barwick</a></li>
+<li><a href="/author/lanzagar/">Lan Zagar</a></li>
+<li><a href="/author/marco-nenciarini/">Marco Nenciarini</a></li>
+<li><a href="/author/mark-wong/">Mark Wong</a></li>
+<li><a href="/author/pavan-deolasee/">Pavan Deolasee</a></li>
+<li><a href="/author/petr-jelinek/">Petr Jelinek</a></li>
+<li><a href="/author/tomas-vondra/">Tomas Vondra</a></li>
+<li><a href="/author/umair/">Umair Shahid</a></li>
+</ul></div>
+		</div><div class="sidebar-box clearfix"><h4><span>Featured External Blogs</span></h4>			<div class="textwidget"><ul class="right-list">
+<li><a href="https://blog.pgaddict.com" onclick="_gaq.push(['_trackEvent', 'outbound-widget', 'https://blog.pgaddict.com', 'Tomas Vondra\'s Blog']);" >Tomas Vondra's Blog</a></li>
+</ul></div>
+		</div><div class="sidebar-box clearfix"><form method="get" id="searchbar" action="https://blog.2ndquadrant.com/">
+<input type="text" size="16" name="s" value="Search" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;" id="search" />
+<input type="submit" id="searchsubmit" value="" />
+</form></div><div class="sidebar-box clearfix"><h4><span>Recent Comments</span></h4><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='http://www.2ndQuadrant.com/' rel='external nofollow' class='url'>craig.ringer</a></span> on <a href="https://blog.2ndquadrant.com/postgresql-anti-patterns-unnecessary-jsonhstore-dynamic-columns/#comment-248112">PostgreSQL anti-patterns: Unnecessary json/hstore dynamic columns</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://Website' rel='external nofollow' class='url'>Ladislav Jech</a></span> on <a href="https://blog.2ndquadrant.com/postgresql-anti-patterns-unnecessary-jsonhstore-dynamic-columns/#comment-248104">PostgreSQL anti-patterns: Unnecessary json/hstore dynamic columns</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://www.2ndQuadrant.com/' rel='external nofollow' class='url'>craig.ringer</a></span> on <a href="https://blog.2ndquadrant.com/postgresql-anti-patterns-unnecessary-jsonhstore-dynamic-columns/#comment-248036">PostgreSQL anti-patterns: Unnecessary json/hstore dynamic columns</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://www.2ndQuadrant.com/' rel='external nofollow' class='url'>craig.ringer</a></span> on <a href="https://blog.2ndquadrant.com/re-import-repository-keys-bdr-pglogical-apt-repositories/#comment-248035">Re-import repository keys for BDR and pglogical apt repositories</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://Website' rel='external nofollow' class='url'>Jaroslav Skala</a></span> on <a href="https://blog.2ndquadrant.com/postgresql-anti-patterns-unnecessary-jsonhstore-dynamic-columns/#comment-248034">PostgreSQL anti-patterns: Unnecessary json/hstore dynamic columns</a></li></ul></div><div class="sidebar-box clearfix"><h4><span>PostgreSQL Cloud</span></h4><div class="tagcloud"><a href='https://blog.2ndquadrant.com/tag/9-6/' class='tag-link-633 tag-link-position-1' title='9 topics' style='font-size: 9.6030534351145pt;'>9.6</a>
+<a href='https://blog.2ndquadrant.com/tag/automation/' class='tag-link-230 tag-link-position-2' title='7 topics' style='font-size: 8.5343511450382pt;'>automation</a>
+<a href='https://blog.2ndquadrant.com/tag/backup/' class='tag-link-140 tag-link-position-3' title='25 topics' style='font-size: 13.984732824427pt;'>backup</a>
+<a href='https://blog.2ndquadrant.com/tag/barman/' class='tag-link-852 tag-link-position-4' title='37 topics' style='font-size: 15.801526717557pt;'>Barman</a>
+<a href='https://blog.2ndquadrant.com/tag/bdr/' class='tag-link-248 tag-link-position-5' title='9 topics' style='font-size: 9.6030534351145pt;'>bdr</a>
+<a href='https://blog.2ndquadrant.com/tag/business-continuity/' class='tag-link-146 tag-link-position-6' title='23 topics' style='font-size: 13.664122137405pt;'>Business Continuity</a>
+<a href='https://blog.2ndquadrant.com/tag/community/' class='tag-link-321 tag-link-position-7' title='9 topics' style='font-size: 9.6030534351145pt;'>community</a>
+<a href='https://blog.2ndquadrant.com/tag/conference/' class='tag-link-198 tag-link-position-8' title='13 topics' style='font-size: 11.206106870229pt;'>conference</a>
+<a href='https://blog.2ndquadrant.com/tag/database/' class='tag-link-42 tag-link-position-9' title='21 topics' style='font-size: 13.236641221374pt;'>database</a>
+<a href='https://blog.2ndquadrant.com/tag/dba/' class='tag-link-570 tag-link-position-10' title='9 topics' style='font-size: 9.6030534351145pt;'>DBA</a>
+<a href='https://blog.2ndquadrant.com/tag/development/' class='tag-link-160 tag-link-position-11' title='9 topics' style='font-size: 9.6030534351145pt;'>development</a>
+<a href='https://blog.2ndquadrant.com/tag/devops/' class='tag-link-220 tag-link-position-12' title='12 topics' style='font-size: 10.778625954198pt;'>devops</a>
+<a href='https://blog.2ndquadrant.com/tag/disaster-recovery/' class='tag-link-139 tag-link-position-13' title='29 topics' style='font-size: 14.732824427481pt;'>disaster recovery</a>
+<a href='https://blog.2ndquadrant.com/tag/etl-2/' class='tag-link-104 tag-link-position-14' title='7 topics' style='font-size: 8.5343511450382pt;'>etl</a>
+<a href='https://blog.2ndquadrant.com/tag/greenplum-2/' class='tag-link-82 tag-link-position-15' title='21 topics' style='font-size: 13.236641221374pt;'>greenplum</a>
+<a href='https://blog.2ndquadrant.com/tag/hot-standby/' class='tag-link-8 tag-link-position-16' title='8 topics' style='font-size: 9.0687022900763pt;'>Hot Standby</a>
+<a href='https://blog.2ndquadrant.com/tag/json/' class='tag-link-355 tag-link-position-17' title='7 topics' style='font-size: 8.5343511450382pt;'>JSON</a>
+<a href='https://blog.2ndquadrant.com/tag/jsonb/' class='tag-link-356 tag-link-position-18' title='6 topics' style='font-size: 8pt;'>JSONB</a>
+<a href='https://blog.2ndquadrant.com/tag/linux/' class='tag-link-24 tag-link-position-19' title='7 topics' style='font-size: 8.5343511450382pt;'>Linux</a>
+<a href='https://blog.2ndquadrant.com/tag/logical-replication/' class='tag-link-250 tag-link-position-20' title='16 topics' style='font-size: 12.06106870229pt;'>logical replication</a>
+<a href='https://blog.2ndquadrant.com/tag/monitoring/' class='tag-link-279 tag-link-position-21' title='7 topics' style='font-size: 8.5343511450382pt;'>monitoring</a>
+<a href='https://blog.2ndquadrant.com/tag/open-source/' class='tag-link-34 tag-link-position-22' title='32 topics' style='font-size: 15.160305343511pt;'>open source</a>
+<a href='https://blog.2ndquadrant.com/tag/performance/' class='tag-link-227 tag-link-position-23' title='22 topics' style='font-size: 13.450381679389pt;'>performance</a>
+<a href='https://blog.2ndquadrant.com/tag/pgbarman/' class='tag-link-169 tag-link-position-24' title='24 topics' style='font-size: 13.87786259542pt;'>pgbarman</a>
+<a href='https://blog.2ndquadrant.com/tag/pgday/' class='tag-link-109 tag-link-position-25' title='7 topics' style='font-size: 8.5343511450382pt;'>pgday</a>
+<a href='https://blog.2ndquadrant.com/tag/pglogical/' class='tag-link-517 tag-link-position-26' title='11 topics' style='font-size: 10.458015267176pt;'>pglogical</a>
+<a href='https://blog.2ndquadrant.com/tag/pitr/' class='tag-link-147 tag-link-position-27' title='6 topics' style='font-size: 8pt;'>pitr</a>
+<a href='https://blog.2ndquadrant.com/tag/postgres/' class='tag-link-35 tag-link-position-28' title='75 topics' style='font-size: 19.007633587786pt;'>postgres</a>
+<a href='https://blog.2ndquadrant.com/tag/postgres-xl/' class='tag-link-449 tag-link-position-29' title='13 topics' style='font-size: 11.206106870229pt;'>postgres-xl</a>
+<a href='https://blog.2ndquadrant.com/tag/postgresql/' class='tag-link-851 tag-link-position-30' title='144 topics' style='font-size: 22pt;'>PostgreSQL</a>
+<a href='https://blog.2ndquadrant.com/tag/postgresql-9-4/' class='tag-link-303 tag-link-position-31' title='6 topics' style='font-size: 8pt;'>PostgreSQL 9.4</a>
+<a href='https://blog.2ndquadrant.com/tag/postgresql-9-6/' class='tag-link-584 tag-link-position-32' title='14 topics' style='font-size: 11.526717557252pt;'>PostgreSQL 9.6</a>
+<a href='https://blog.2ndquadrant.com/tag/postgresql-repmgr/' class='tag-link-67 tag-link-position-33' title='10 topics' style='font-size: 10.030534351145pt;'>postgresql repmgr</a>
+<a href='https://blog.2ndquadrant.com/tag/puppet/' class='tag-link-190 tag-link-position-34' title='7 topics' style='font-size: 8.5343511450382pt;'>puppet</a>
+<a href='https://blog.2ndquadrant.com/tag/recovery/' class='tag-link-141 tag-link-position-35' title='7 topics' style='font-size: 8.5343511450382pt;'>Recovery</a>
+<a href='https://blog.2ndquadrant.com/tag/release/' class='tag-link-172 tag-link-position-36' title='9 topics' style='font-size: 9.6030534351145pt;'>release</a>
+<a href='https://blog.2ndquadrant.com/tag/replication/' class='tag-link-33 tag-link-position-37' title='24 topics' style='font-size: 13.87786259542pt;'>replication</a>
+<a href='https://blog.2ndquadrant.com/tag/security/' class='tag-link-235 tag-link-position-38' title='6 topics' style='font-size: 8pt;'>security</a>
+<a href='https://blog.2ndquadrant.com/tag/slony/' class='tag-link-312 tag-link-position-39' title='6 topics' style='font-size: 8pt;'>Slony</a>
+<a href='https://blog.2ndquadrant.com/tag/sql/' class='tag-link-270 tag-link-position-40' title='8 topics' style='font-size: 9.0687022900763pt;'>sql</a>
+<a href='https://blog.2ndquadrant.com/tag/standby/' class='tag-link-479 tag-link-position-41' title='8 topics' style='font-size: 9.0687022900763pt;'>standby</a>
+<a href='https://blog.2ndquadrant.com/tag/streaming-replication/' class='tag-link-251 tag-link-position-42' title='6 topics' style='font-size: 8pt;'>streaming replication</a>
+<a href='https://blog.2ndquadrant.com/tag/ubuntu/' class='tag-link-49 tag-link-position-43' title='6 topics' style='font-size: 8pt;'>Ubuntu</a>
+<a href='https://blog.2ndquadrant.com/tag/vagrant/' class='tag-link-226 tag-link-position-44' title='6 topics' style='font-size: 8pt;'>vagrant</a>
+<a href='https://blog.2ndquadrant.com/tag/wal/' class='tag-link-335 tag-link-position-45' title='11 topics' style='font-size: 10.458015267176pt;'>wal</a></div>
+</div></div>
+<!-- END sidebar --><div class="clear"></div>
+
+	<div id="footer-wrap">
+        <div id="footer">
+        
+            <div id="footer-widget-wrap" class="clearfix">
+        
+                <div id="footer-left">
+                <div class="footer-widget clearfix"><h4>Recent Comments</h4><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='http://www.2ndQuadrant.com/' rel='external nofollow' class='url'>craig.ringer</a></span> on <a href="https://blog.2ndquadrant.com/postgresql-anti-patterns-unnecessary-jsonhstore-dynamic-columns/#comment-248112">PostgreSQL anti-patterns: Unnecessary json/hstore dynamic columns</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://Website' rel='external nofollow' class='url'>Ladislav Jech</a></span> on <a href="https://blog.2ndquadrant.com/postgresql-anti-patterns-unnecessary-jsonhstore-dynamic-columns/#comment-248104">PostgreSQL anti-patterns: Unnecessary json/hstore dynamic columns</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://www.2ndQuadrant.com/' rel='external nofollow' class='url'>craig.ringer</a></span> on <a href="https://blog.2ndquadrant.com/postgresql-anti-patterns-unnecessary-jsonhstore-dynamic-columns/#comment-248036">PostgreSQL anti-patterns: Unnecessary json/hstore dynamic columns</a></li></ul></div>                </div>
+                
+                <div id="footer-middle">
+                 		<div class="footer-widget clearfix">		<h4>Recent Posts</h4>		<ul>
+					<li>
+				<a href="https://blog.2ndquadrant.com/using-postgresql-tap-framework-extensions/">Using the PostgreSQL TAP framework in extensions</a>
+						</li>
+					<li>
+				<a href="https://blog.2ndquadrant.com/traceable-commit-postgresql-10/">Traceable commit for PostgreSQL 10</a>
+						</li>
+					<li>
+				<a href="https://blog.2ndquadrant.com/2ndquadrant-not-gartner-magic-quadrant/">2ndQuadrant &#8211; Not the Gartner Magic Quadrant</a>
+						</li>
+					<li>
+				<a href="https://blog.2ndquadrant.com/pgday-paris-2017/">PgDay Paris 2017</a>
+						</li>
+				</ul>
+		</div>		                </div>
+                
+                <div id="footer-right">
+                 <div class="footer-widget clearfix"><h4>Intranet</h4>			<ul>
+			<li><a rel="nofollow" href="https://blog.2ndquadrant.com/wp-login.php?action=register">Register</a></li>			<li><a rel="nofollow" href="https://blog.2ndquadrant.com/wp-login.php">Log in</a></li>
+			<li><a href="https://blog.2ndquadrant.com/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://blog.2ndquadrant.com/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</div>                </div>
+            
+            </div>
+		</div>
+    </div>
+
+	<div id="copyright" class="clearfix">
+        
+            <div class="one-half">
+                &copy; Copyright2017 <a href="https://blog.2ndquadrant.com/" title=""></a>
+            </div>
+            
+            <div id="designby" class="one-half column-last">
+            	design by <a href="http://www.wpexplorer.com/" title="Premium WordPress Themes" target="_blank">WPExplorer</a>
+            </div>
+    
+    </div>
+
+</div>
+<!-- END wrap --> 
+
+<!-- WP Footer -->
+<script type='text/javascript' src='https://blog.2ndquadrant.com/wp-content/plugins/akismet/_inc/form.js?ver=3.2'></script>
+<script type='text/javascript' src='https://blog.2ndquadrant.com/wp-includes/js/wp-embed.min.js?ver=4.7.3'></script>
+</body>
+</html>

@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Faster Operations with the JSONB Data Type in PostgreSQL - Compose Articles</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <meta name="referrer" content="origin">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://d11f55tj5eo9e5.cloudfront.net/assets/megatron/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="32x32">
+
+  <script>
+
+  // Dependencies - https://github.com/filamentgroup/woff2-feature-test
+  var supportsWoff2 = ( function( win ) {
+    if ( !( "FontFace" in win ) ) return false;
+    var f = new FontFace( 't', 'url( "data:application/font-woff2;base64,d09GMgABAAAAAAIkAAoAAAAABVwAAAHcAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABlYAgloKLEoBNgIkAxgLDgAEIAWDcgc1G7IEyB6SJAFID5YA3nAHC6h4+H7s27nP1kTyOoQkGuJWtNGIJKYznRI3VEL7IaHq985ZUuKryZKcAtJsi5eULwUybm9KzajBBhywZ5ZwoJNuwDX5C/xBjvz5DbsoNsvG1NGQiqp0NMLZ7JlnW+5MaM3HwcHheUQeiVokekHkn/FRdefvJaTp2PczN+I1Sc3k9VuX51Tb0Tqqf1deVXGdJsDOhz0/EffMOPOzHNH06pYkDDjs+P8fb/z/8n9Iq8ITzWywkP6PBMMN9L/O7vY2FNoTAkp5PpD6g1nV9WmyQnM5uPpAMHR2fe06jbfvzPriekVTQxC6lpKr43oDtRZfCATl5OVAUKykqwm9o8R/kg37cxa6eZikS7cjK4aIwoyh6jOFplhFrz2b833G3Jii9AjDUiAZ9AxZtxdEYV6imvRF0+0Nej3wu6nPZrTLh81AVcV3kmMVdQj6Qbe9qetzbuDZ7vXOlRrqooFSxCv6SfrDICA6rnHZXQPVcUHJYGcoqa3jVH7ATrjWBNYYkEqF3RFpVIl0q2JvMOJd7/TyjXHw2NyAuJpNaEbz8RTEVtCbSH7JrwQQOqwGl7sTUOtdBZIY2DKqKlvOmPvUxJaURAZZcviTT0SKHCXqzwc=" ) format( "woff2" )', {} );
+    f.load()[ 'catch' ]( function() {} );
+    return f.status == 'loading' || f.status == 'loaded';
+  })( window );
+  
+  // Catch-all LocalStorage availability check
+  var localStorageAvailable = function() {
+    var testKey = 'test', storage = window.localStorage;
+    try {
+      storage.setItem( testKey, '1' );
+      storage.removeItem( testKey );
+      return true;
+    } catch ( error ) {
+      return false;
+    }
+  };
+
+  // Public API function
+  var loadFont = function( fontName, woffUrl, woff2Url, onlyLoadFontOnSecondPageload ){
+
+    // Many unsupported browsers should stop here
+    var nua  = navigator.userAgent,
+        pass = localStorageAvailable(),
+        nope = !window.addEventListener || !pass || ( nua.match( /(Android (2|3|4.0|4.1|4.2|4.3))|(Opera (Mini|Mobi))/ ) && !nua.match( /Chrome/ ) );
+    
+    if ( nope ) return;
+
+    // Set up LocalStorage
+    var loSto = {};
+
+    // Set up a proxy variable to help with LocalStorage
+    try { loSto = localStorage || {}; }
+    catch( ex ) {}
+
+    var loStoPrefix   = 'x-font-' + fontName,
+        loStoUrlKey   = loStoPrefix + 'url',
+        loStoCssKey   = loStoPrefix + 'css',
+        storedFontUrl = loSto[ loStoUrlKey ],
+        storedFontCss = loSto[ loStoCssKey ],
+        styleElement  = document.createElement( 'style' );
+
+    // Make <style> element & apply base64 encoded font data
+    styleElement.rel  = 'stylesheet';
+    document.head.appendChild( styleElement );
+
+    // CSS in LocalStorage & loaded from one of the current URLs
+    if ( storedFontCss && ( storedFontUrl === woffUrl || storedFontUrl === woff2Url ) ) {
+
+      styleElement.textContent = storedFontCss;
+
+    // Data not present or loaded from an obsolete URL
+    } else {
+
+      // Check for WOFF2 support
+      var cssUrl  = ( woff2Url && supportsWoff2 ) ? woff2Url : woffUrl,
+          request = new XMLHttpRequest();
+
+      // Fetch font data from the server
+      request.open( 'GET', cssUrl );
+      request.onload = function() {
+        if ( request.status >= 200 && request.status < 400 ) {
+
+          // Update LocalStorage with fresh data & apply
+          loSto[ loStoUrlKey ] = cssUrl;
+          loSto[ loStoCssKey ] = request.responseText;
+          if ( !onlyLoadFontOnSecondPageload ) styleElement.textContent = request.responseText;
+        }
+      };
+      request.send();
+    }
+  };
+
+  // Instantiation
+  loadFont( 'proxima-nova-', '/articles/assets/css/fonts-woff.css?v=1a6be216cf', '/articles/assets/css/fonts-woff2.css?v=1a6be216cf' )
+
+</script>
+
+  <link rel="stylesheet" type="text/css" href="/articles/assets/css/site.css?v=1a6be216cf">
+
+  <link rel="canonical" href="https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/amp/" />
+    
+    <meta property="og:site_name" content="Compose Articles" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Faster Operations with the JSONB Data Type in PostgreSQL" />
+    <meta property="og:description" content="Lucero Del Alba takes a look at how to get better performance out of jsonb data types in PostgreSQL in this Compose&#x27;s Write Stuff article. Since version 9.4, PostgreSQL offers a significant speedup when using the binary representation of JSON data, jsonb, which can give you that extra edge" />
+    <meta property="og:url" content="https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/" />
+    <meta property="og:image" content="https://res.cloudinary.com/dyyck73ly/image/upload/v1490034485/apmxcgalvdlzp8gb5ryy.jpg" />
+    <meta property="article:published_time" content="2017-03-20T19:12:57.000Z" />
+    <meta property="article:modified_time" content="2017-03-23T18:05:30.000Z" />
+    <meta property="article:tag" content="postgresql" />
+    <meta property="article:tag" content="json" />
+    <meta property="article:tag" content="jsonb" />
+    <meta property="article:tag" content="guest" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Faster Operations with the JSONB Data Type in PostgreSQL" />
+    <meta name="twitter:description" content="Lucero Del Alba takes a look at how to get better performance out of jsonb data types in PostgreSQL in this Compose&#x27;s Write Stuff article. Since version 9.4, PostgreSQL offers a significant speedup when using the binary representation of JSON data, jsonb, which can give you that extra edge" />
+    <meta name="twitter:url" content="https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dyyck73ly/image/upload/v1490034485/apmxcgalvdlzp8gb5ryy.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="The Compose Team" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="postgresql, json, jsonb, guest" />
+    <meta name="twitter:creator" content="@composeio" />
+    <meta property="og:image:width" content="2880" />
+    <meta property="og:image:height" content="900" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Compose Articles",
+        "logo": "https://www.compose.com/articles/ghost/img/ghosticon.jpg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "The Compose Team",
+        "url": "https://www.compose.com/articles/author/thecomposeteam/",
+        "sameAs": [
+            "http://compose.com",
+            "https://twitter.com/composeio"
+        ],
+        "description": "The fine team of people at Compose have brought this article to you through teamwork. Remember, teamwork makes the dreamwork."
+    },
+    "headline": "Faster Operations with the JSONB Data Type in PostgreSQL",
+    "url": "https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/",
+    "datePublished": "2017-03-20T19:12:57.000Z",
+    "dateModified": "2017-03-23T18:05:30.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dyyck73ly/image/upload/v1490034485/apmxcgalvdlzp8gb5ryy.jpg",
+        "width": 2880,
+        "height": 900
+    },
+    "keywords": "postgresql, json, jsonb, guest",
+    "description": "Lucero Del Alba takes a look at how to get better performance out of jsonb data types in PostgreSQL in this Compose&#x27;s Write Stuff article. Since version 9.4, PostgreSQL offers a significant speedup when using the binary representation of JSON data, jsonb, which can give you that extra edge",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.compose.com/articles"
+    }
+}
+    </script>
+
+    <script type="text/javascript" src="/articles/shared/ghost-url.min.js?v=1a6be216cf"></script>
+<script type="text/javascript">
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "6307c4527f13"
+});
+</script>
+    <meta name="generator" content="Ghost 0.11" />
+    <link rel="alternate" type="application/rss+xml" title="Compose Articles" href="https://www.compose.com/articles/rss/" />
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104796-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <script>
+  // Check for cookie by name
+  ! function() {
+    var analytics = window.analytics = window.analytics || [];
+    if (!analytics.initialize)
+      if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice.");
+      else {
+        analytics.invoked = !0;
+        analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on"];
+        analytics.factory = function(t) {
+          return function() {
+            var e = Array.prototype.slice.call(arguments);
+            e.unshift(t);
+            analytics.push(e);
+            return analytics;
+          };
+        };
+        for (var t = 0; t < analytics.methods.length; t++) {
+          var e = analytics.methods[t];
+          analytics[e] = analytics.factory(e);
+        }
+        analytics.load = function(t) {
+          var e = document.createElement("script");
+          e.type = "text/javascript";
+          e.async = !0;
+          e.src = ("https:" === document.location.protocol ? "https://" : "http://") + "cdn.segment.com/analytics.js/v1/" + t + "/analytics.min.js";
+          var n = document.getElementsByTagName("script")[0];
+          n.parentNode.insertBefore(e, n);
+        };
+        var properties = {},
+          opts = {},
+          versionedUserId = getCookie('compose-identifier'),
+          userIdVersionPrefix = '2.',
+          userIdVersionMatches = versionedUserId && versionedUserId.indexOf(userIdVersionPrefix) === 0,
+          userId;
+
+        analytics.SNIPPET_VERSION = "4.0.0";
+
+        function getCookie(name) {
+          var value = '; ' + document.cookie;
+          var parts = value.split('; ' + name + '=');
+          if (parts.length == 2) return parts.pop().split(';').shift();
+        }
+
+        if (userIdVersionMatches) {
+          userId = versionedUserId.slice(userIdVersionPrefix.length);
+
+          opts = {
+            context: {
+              traits: {
+                userId: userId
+              }
+            }
+          };
+
+          properties.userId = userId;
+        }
+
+        analytics.load("mWH8jvyCIh");
+        analytics.page(properties, opts);
+      }
+  }();
+</script>
+
+</head>
+
+<body class="post-template tag-postgresql tag-json tag-jsonb tag-guest article">
+
+  <svg id="icons" style="display: none;" xmlns="http://www.w3.org/2000/svg">
+
+  <symbol id="compose-logo" fill="currentColor">
+    <path d="M325.4 28.6c-16.7 0-28.7 12.2-28.7 29s12.1 29 28.7 29c16.7 0 28.7-12.2 28.7-29 .1-16.8-12-29-28.7-29zm0 46.7c-9.5 0-16.1-7.3-16.1-17.7 0-10.6 6.5-17.7 16.1-17.7 9.5 0 16.1 7.3 16.1 17.7.1 10.4-6.6 17.7-16.1 17.7z" />
+    <polygon points="394.1,50.2 380.7,28.8 365,28.8 365,84.8 378,84.8 378,48.3 394.5,71.4 411,48.3 411,84.8 423,84.8 423,28.8 407.6,28.8" />
+    <path d="M461.3 28.8h-25.3v56h12v-18h13.3c11.1 0 18.9-8.3 18.9-19 .1-10.7-7.7-19-18.9-19zm-1.2 27h-12.1v-15h12.1c4.5 0 7.6 3.4 7.6 7.5s-3.1 7.5-7.6 7.5zM516.1 28.6c-16.7 0-28.7 12.2-28.7 29s12.1 29 28.7 29c16.7 0 28.7-12.2 28.7-29 .1-16.8-12-29-28.7-29zm0 46.7c-9.5 0-16.1-7.3-16.1-17.7 0-10.6 6.5-17.7 16.1-17.7 9.5 0 16.1 7.3 16.1 17.7 0 10.4-6.6 17.7-16.1 17.7zM576.9 50.7c-6.5-1.6-10.4-2.8-10.4-5.5 0-3.1 2.9-5.1 7.5-5.1 5.6 0 10.7 2 14.3 5.6l1.2 1.2 7.2-9.4-1-.9c-5.4-5.2-12.5-7.8-21-7.8-12.1 0-20.9 7.2-20.9 17 0 12.3 11 15.1 19.9 17.4 6.9 1.8 11.1 3.1 11.1 6.4 0 2.6-2.4 5.7-9.2 5.7-8.1 0-13.3-4.3-15.7-6.8l-1.3-1.3-7 9.7.9.9c5.5 5.8 13.3 8.9 22.7 8.9 16.3 0 22.1-9.3 22.1-17.9.2-12.9-11.7-15.9-20.4-18.1z" />
+    <polygon points="650,40.8 650,28.8 608,28.8 608,84.8 650,84.8 650,73.8 620,73.8 620,61.8 646,61.8 646,50.8 620,50.8 620,40.8" />
+    <path d="M238 57.9c0 16.8 11.9 29 29 29 8.9 0 16.4-3.6 21.7-10.7l-8-8c-2.4 4-8.3 7.4-13.2 7.4-9.8 0-16.8-7.6-16.8-17.8 0-10.2 7.1-17.8 16.9-17.8 4.9 0 10.9 3.4 13.3 7.4l8.1-8c-5.3-7.1-13-10.7-21.9-10.7-17.2.2-29.1 12.4-29.1 29.2zM379.2 114.3h-7.5l3.7-9.9 3.8 9.9zm6.7 7.2l-8.2-20.8h-4.6l-8.2 20.8h4.1l1.5-4h9.5l1.5 4h4.4z" />
+    <polygon points="407.7,121.5 407.7,100.7 404.1,100.7 404.1,115.1 393.5,100.7 389.7,100.7 389.7,121.5 393.4,121.5 393.4,106.6 404.2,121.5" />
+    <rect height="20.8" width="3.6" x="423.3" y="100.7" />
+    <path d="M442.6 118.2h-6v-5.8h6c2.1 0 3.2 1.3 3.2 2.9 0 1.9-1.2 2.9-3.2 2.9zm-.2-8.9h-5.8v-5.4h5.8c1.9 0 2.9 1.2 2.9 2.7 0 1.5-1 2.7-2.9 2.7zm1 12.2c3.9 0 6-2.4 6-5.6 0-2.6-1.8-4.8-4-5.1 1.9-.4 3.6-2.2 3.6-4.8 0-2.9-2.1-5.3-5.9-5.3h-10.2v20.8h10.5z" />
+    <polygon points="476.3,121.5 476.3,100.7 471.2,100.7 465.5,114.3 459.8,100.7 454.7,100.7 454.7,121.5 458.3,121.5 458.3,106 464.7,121.5 466.3,121.5 472.7,106 472.7,121.5" />
+    <path d="M501.8 121.8c4.2 0 6.8-2.2 8.4-4.7l-3.1-1.6c-1 1.7-3 3-5.2 3-4.1 0-7.2-3.1-7.2-7.5s3.1-7.5 7.2-7.5c2.2 0 4.2 1.3 5.2 3l3.1-1.6c-1.6-2.5-4.1-4.7-8.4-4.7-6.1 0-10.9 4.4-10.9 10.8 0 6.5 4.8 10.8 10.9 10.8zM524.4 118.6c-4.2 0-6.9-3.2-6.9-7.5s2.7-7.5 6.9-7.5 6.9 3.2 6.9 7.5c0 4.2-2.7 7.5-6.9 7.5zm0 3.2c6.2 0 10.6-4.6 10.6-10.8s-4.4-10.8-10.6-10.8-10.6 4.6-10.6 10.8 4.3 10.8 10.6 10.8z" />
+    <polygon points="561.7,121.5 561.7,100.7 556.6,100.7 550.9,114.3 545.2,100.7 540.1,100.7 540.1,121.5 543.7,121.5 543.7,106 550.1,121.5 551.7,121.5 558.1,106 558.1,121.5" />
+    <path d="M576.3 110.5h-5v-6.6h5c2.1 0 3.6 1.3 3.6 3.3s-1.5 3.3-3.6 3.3zm-5 11v-7.8h5.5c4.3 0 6.8-3 6.8-6.5s-2.4-6.5-6.8-6.5h-9.1v20.8h3.6zM597.9 114.3h-7.5l3.7-9.9 3.8 9.9zm6.7 7.2l-8.2-20.8h-4.6l-8.2 20.8h4.1l1.5-4h9.5l1.5 4h4.4z" />
+    <polygon points="626.4,121.5 626.4,100.7 622.8,100.7 622.8,115.1 612.1,100.7 608.4,100.7 608.4,121.5 612.1,121.5 612.1,106.6 622.9,121.5" />
+    <polygon points="642,121.5 642,112.8 650,100.7 645.8,100.7 640.1,109.6 634.4,100.7 630.2,100.7 638.3,112.8 638.3,121.5" />
+    <path d="M158.1 23.1h-.1l-38.8-22.6-38.3 22.3-39.3-22.8-41.6 24.2v44l80.3 46.8 38.4-22.2 39.4 22.8 41.9-24.2v-44l-41.9-24.3zm-.2 45.1l-32.9-19.1 33.2-19.4 32.9 19.3-33.2 19.2zm-77.9-38.8l33.2 19.2-32.8 19.1-33.1-19.3 32.7-19zm72.2-3l-32.5 18.9-33.1-19.2 32.6-19 33 19.3zm-77.5-.6l-6.7 3.9-27.1 15.3-32.3-19.2 33.1-19.2 33 19.2zm-68.9 4.8l32.5 19.6v34.6l-32.5-19.8v-34.4zm39 23l32.5 19.3v34.5l-32.5-19.3v-34.5zm77.3.4l33.1 19.5v34.2l-33.1-19.7v-34z" />
+    <g opacity=".5">
+      <polygon points="44.8,88.2 77.3,107.3 77.3,72.9 44.8,53.6" />
+      <polygon points="5.8,64.9 38.3,84.7 38.3,50.2 5.8,30.6" />
+      <polygon points="122.1,88.1 155.2,107.8 155.2,73.5 122.1,54" />
+    </g>
+  </symbol>
+
+  <symbol id="logomark" fill="currentColor" fill-rule="evenodd">
+    <path d="M67.187 54.127l-21.874 12.629-23.438-13.531-21.875-12.631v-27.063l23.437-13.531 21.875 12.629 21.874-12.629 23.438 13.532 21.876 12.63v27.063l-23.438 13.531-21.875-12.629zm1.562-2.706l.001-21.652 18.75 10.826.001 21.652-18.752-10.826zm-43.749 0v-21.652l18.75 10.826.001 21.652-18.751-10.826zm-21.876-12.63v-21.652l18.751 10.826.001 21.652-18.752-10.826zm42.189-22.553l18.75 10.826-18.75 10.825-18.752-10.825 18.752-10.826zm43.749 0l18.751 10.826-18.751 10.825-18.751-10.825 18.751-10.826zm-65.625-12.63l18.751 10.826-18.751 10.825-18.751-10.825 18.751-10.826zm43.749 0l18.751 10.826-18.751 10.825-18.751-10.825 18.751-10.826z" />
+    <path d="M3.125 38.791v-21.652l18.75 10.826.001 21.652-18.752-10.826zM25 51.421v-21.652l18.751 10.826v21.652l-18.751-10.826zM68.75 51.421l-.001-21.652 18.751 10.826.001 21.652-18.751-10.826h-.001z" fill-opacity=".5" />
+  </symbol>
+
+  <symbol id="search" stroke="currentColor" fill="none" stroke-linecap="round" stroke-width="1.5">
+    <circle cx="5.75" cy="5.75" r="5" />
+    <path d="M9.406 9.406l6.094 6.094" />
+  </symbol>
+
+  <symbol id="index" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 3.284c0-1.255 3.393-2.271 7.25-2.271v11.703c-3.857 0-7.25 1.016-7.25 2.271 0-1.255-3.394-2.271-7.25-2.271v-11.703c3.856 0 7.25 1.016 7.25 2.271zM8 3.284v11.622-11.622z" />
+  </symbol>
+
+  <symbol id="twitter" fill="currentColor">
+    <path d="M27 12.4c-.7.4-1.4.6-2.2.8-.6-.7-1.5-1.1-2.5-1.1-2.3 0-3.9 2.1-3.4 4.3-2.9-.1-5.5-1.5-7.2-3.6-.9 1.5-.4 3.6 1.1 4.6-.6 0-1.1-.1-1.6-.4 0 1.7 1.1 3.2 2.8 3.5-.5.2-1.1.2-1.6.1.4 1.4 1.7 2.4 3.2 2.4-1.5 1.1-3.4 1.6-5.2 1.4 1.5 1 3.3 1.6 5.3 1.6 6.5 0 10.1-5.4 9.9-10.3.7-.5 1.3-1.1 1.9-1.9-.6.2-1.3.4-2 .5.7-.4 1.3-1.2 1.5-1.9z" />
+  </symbol>
+
+  <symbol id="facebook" fill="currentColor">
+    <path d="M21.4 12.8h2.1v-3.4h-2.7c-2.9 0-4.2 1.3-4.2 3.7v2.6h-2v3.3h2v9.6h3.9v-9.7h2.7l.3-3.2h-3v-1.8c0-.8.2-1.1.9-1.1z" />
+  </symbol>
+
+  <symbol id="google-plus" fill="currentColor">
+    <path d="M14 18v2.4h3.97c-.16 1.029-1.2 3.02-3.97 3.02-2.39 0-4.34-1.979-4.34-4.42 0-2.44 1.95-4.42 4.34-4.42 1.36 0 2.27.58 2.79 1.08l1.9-1.83c-1.22-1.14-2.8-1.83-4.69-1.83-3.87 0-7 3.13-7 7s3.13 7 7 7c4.04 0 6.721-2.84 6.721-6.84 0-.46-.051-.81-.111-1.16h-6.61zm0 0l17 2h-3v3h-2v-3h-3v-2h3v-3h2v3h3v2l-17-2z" />
+  </symbol>
+
+  <symbol id="y-combinator" fill="currentColor">
+    <path d="M22.4 10.9h3.8l-5.3 10v6h-3.3v-6l-5.5-10h3.9l3.3 7 3.1-7z" />
+  </symbol>
+
+  <symbol id="linkedin" fill="currentColor">
+    <rect height="10.8" width="3.4" x="11.6" y="15.5">
+    </rect>
+    <ellipse cx="13.3" cy="12.1" rx="2" ry="2">
+    </ellipse>
+    <path d="M27.5 26.4v-6.9c0-2.9-1.6-4.3-3.9-4.3s-3.3 1.8-3.3 1.8v-1.5h-3.2v10.8h3.2v-5.7c0-1.5.7-2.4 2-2.4 1.2 0 1.8.9 1.8 2.4v5.7h3.4z">
+    </path>
+  </symbol>
+
+  <symbol id="youtube" fill="currentColor">
+    <path d="M29.3,14.8c0,0-0.2-1.4-0.8-2.1c-0.8-0.8-1.7-0.8-2.1-0.9c-2.9-0.2-7.3-0.2-7.3-0.2h0 c0,0-4.4,0-7.3,0.2c-0.4,0-1.3,0.1-2.1,0.9c-0.6,0.6-0.8,2.1-0.8,2.1s-0.2,1.7-0.2,3.4v1.6c0,1.7,0.2,3.4,0.2,3.4 s0.2,1.4,0.8,2.1c0.8,0.8,1.8,0.8,2.3,0.9c1.7,0.2,7.1,0.2,7.1,0.2s4.4,0,7.3-0.2c0.4,0,1.3-0.1,2.1-0.9c0.6-0.6,0.8-2.1,0.8-2.1 s0.2-1.7,0.2-3.4v-1.6C29.5,16.5,29.3,14.8,29.3,14.8z M16.8,21.7l0-5.9l5.7,3L16.8,21.7z"></path>
+  </symbol>
+
+  <symbol id="subscribe" fill="currentColor">
+    <path d="M21.6 26.9c0-5.8-4.7-10.5-10.5-10.5v3.2c4 0 7.3 3.3 7.3 7.3h3.2zm-6.2-2.2c0-1.2-1-2.2-2.2-2.2-1.2 0-2.2 1-2.2 2.2s1 2.2 2.2 2.2c1.2 0 2.2-.9 2.2-2.2zm11.6 2.3c0-8.8-7.1-16-15.9-16v3.2c3.4 0 6.6 1.3 9 3.7s3.7 5.6 3.7 9l3.2.1z" />
+  </symbol>
+
+  <symbol id="default-avatar">
+    <path fill="#EDF5F7" d="M-2.048-4.768h109.698v113.763h-109.698z" />
+    <path fill="#C3D4E4" d="M50 29.275c8.688 0 15.758 7.069 15.758 15.758 0 8.688-7.07 15.757-15.758 15.757-8.688 0-15.758-7.069-15.758-15.757 0-8.689 7.07-15.758 15.758-15.758m-40 70.725h7.273c0-17.579 14.681-31.881 32.727-31.881s32.727 14.302 32.727 31.881h7.273c0-16.777-10.84-31.12-26.022-36.681 5.498-4.214 9.052-10.841 9.052-18.286 0-12.699-10.331-23.031-23.03-23.031-12.699 0-23.03 10.332-23.03 23.031 0 7.445 3.554 14.072 9.052 18.286-15.182 5.561-26.022 19.904-26.022 36.681" />
+  </symbol>
+
+  <symbol id="crossing">
+    <path d="M2 2l26 26M2 28l26-26" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none" />
+  </symbol>
+
+  <symbol id="arrow">
+    <path d="M16.774 5.498h-15.774M11.662 9.997l5.112-4.499-5.112-4.498" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+  </symbol>
+
+  <symbol id="glasses" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width=".75">
+    <path d="M6.348 10.14c0-.844.684-1.53 1.527-1.53.843 0 1.527.686 1.527 1.53" />
+    <circle cx="3.361" cy="10.139" r="2.986" />
+    <path d="M.375 10.14V3.36C.375 1.714 1.713.376 3.36.376M15.375 10.14V3.36c0-1.647-1.338-2.985-2.986-2.985" />
+    <circle cx="12.389" cy="10.139" r="2.986" />
+  </symbol>
+
+  <symbol id="ellipses" fill="currentColor">
+    <circle cx="5" cy="5" r="5" />
+    <circle cx="20" cy="5" r="5" />
+    <circle cx="35" cy="5" r="5" />
+  </symbol>
+
+  <symbol id="link-out" stroke="currentColor" stroke-width="1.12" stroke-linecap="round" fill="none">
+    <path d="M5.459 2.443h-4.259c-.359 0-.65.292-.65.65v8.485c0 .359.291.65.65.65h8.485c.359 0 .65-.291.65-.65v-4.259" />
+    <path d="M12.216.563v3.763M8.454.563l3.762-.001" />
+    <path d="M12.216.563l-6.75 6.75" />
+  </symbol>
+
+  <symbol id="star">
+    <path fill="#EDF5F7" d="M0 0h33.75v33.75h-33.75z" />
+    <path fill="#C3D4E4" d="M16.937 5.157l.118.034c.075.034.14.088.186.157l.054.11 2.453 7.549h7.937l.061.004.06.013.162.086c.162.136.205.376.099.559l-.123.136-6.421 4.666 2.453 7.548.015.06-.007.183c-.051.205-.248.349-.459.334l-.177-.051-.052-.032-6.421-4.666-6.421 4.666-.052.032-.056.025-.182.026c-.211-.015-.386-.184-.409-.395l.02-.182 2.452-7.548-6.421-4.666-.047-.039-.103-.152c-.079-.197-.004-.428.176-.54l.172-.063.062-.004h7.937l2.452-7.549.023-.057.069-.102c.055-.061.127-.106.206-.129l.122-.017.062.004z" />
+  </symbol>
+
+</svg>
+
+  <header role="banner">
+
+  <a class="logo" href="/">
+    <svg role="img" aria-label="The Compose logo" viewBox="0 0 650 122" width="160">
+      <title>Compose</title>
+      <desc>The Compose logo</desc>
+      <use xlink:href="#compose-logo"></use>
+    </svg>
+  </a>
+
+  <nav role="navigation">
+    <a href="/articles/">Articles</a>
+    <a href="https://app.compose.io">Sign in</a>
+    <a rel="canonical" href="https://compose.com/signup">Free 30-day trial</a>
+  </nav>
+
+  <a class="mobile-menu-button"><svg viewBox="0 0 40 10" width="20"><use xlink:href="#ellipses"></use></svg></a>
+
+  <a href="#search">
+    <svg width="16" viewBox="0 0 16 16"><use xlink:href="#search"></use></svg>
+  </a>
+
+</header>
+
+  <main role="main">
+
+    
+
+
+<article class="post tag-postgresql tag-json tag-jsonb tag-guest">
+
+  <header data-cover="https://res.cloudinary.com/dyyck73ly/image/upload/v1490034485/apmxcgalvdlzp8gb5ryy.jpg">
+
+  <h2>Faster Operations with the JSONB Data Type in PostgreSQL</h2>
+
+  <nav class="share-icons">
+
+  <a class="twitter" href="https://twitter.com/share?text=Faster%20Operations%20with%20the%20JSONB%20Data%20Type%20in%20PostgreSQL&amp;url=https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/&via=composeio" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#twitter"></use>
+
+    </svg>
+
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#facebook"></use>
+
+    </svg>
+
+  </a>
+
+  <a href="https://plus.google.com/share?url=https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#google-plus"></use>
+
+    </svg>
+
+  </a>
+
+  <a href="http://news.ycombinator.com/submitlink?u=https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/&t=Faster Operations with the JSONB Data Type in PostgreSQL" onclick="window.open(this.href, 'hacker-news-share','width=580,height=296');return false;">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#y-combinator"></use>
+
+    </svg>
+
+  </a>
+
+  <a class="subscribe-btn" href="https://www.compose.com/articles/rss/">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#subscribe"></use>
+
+    </svg>
+
+  </a>
+
+</nav>
+  <span class="publish-date">Published <time datetime="2017-03-20">Mar 20, 2017</time></span>
+
+</header>
+
+<nav class="cool-bar">
+
+  <a href="https://www.compose.com/articles"><svg width="18" viewBox="0 0 16 16"><use xlink:href="#index"></use></svg></a>
+
+  <a href="/articles/tag/postgresql/">postgresql</a><a href="/articles/tag/json/">json</a><a href="/articles/tag/jsonb/">jsonb</a>
+
+  <span>Faster Operations with the JSONB Data Type in PostgreSQL</span>
+
+  <a href="#search"><svg width="16" viewBox="0 0 16 16"><use xlink:href="#search"></use></svg></a>
+
+</nav>
+  <p><strong><em>Lucero Del Alba takes a look at how to get better performance out of jsonb data types in PostgreSQL in this <a href="https://compose.com/write-stuff">Compose's Write Stuff</a> article.</em></strong></p>
+
+<p>Since version 9.4, PostgreSQL offers a significant speedup when using the binary representation of JSON data, <code>jsonb</code>, which can give you that extra edge you need to increase your performance.</p>
+
+<h2 id="whatsjsonb">What's <code>jsonb</code></h2>
+
+<p>The data types <code>json</code> and <code>jsonb</code>, <a href="https://www.postgresql.org/docs/current/static/datatype-json.html">as defined by the PostgreSQL documentation</a>,are  <em><strong>almost</strong> identical</em>; the key difference is that  <code>json</code> data is stored as an exact copy of the JSON input text, whereas <code>jsonb</code> stores data in a decomposed binary form; that is, not as an ASCII/UTF-8 string, but as binary code.</p>
+
+<p>And this has some immediate <strong>benefits</strong>:</p>
+
+<ul>
+<li>more efficiency,</li>
+<li>significantly faster to process,</li>
+<li>supports indexing (which can be a significant advantage, as we'll see later),</li>
+<li>simpler schema designs (replacing <a href="https://en.wikipedia.org/wiki/Entity–attribute–value_model">entity-attribute-value</a> (EAV) tables with <code>jsonb</code> columns, which can be queried, indexed and joined, allowing for performance improvements <a href="http://coussej.github.io/2016/01/14/Replacing-EAV-with-JSONB-in-PostgreSQL/">up until 1000X</a>!)</li>
+</ul>
+
+<p>And some <strong>drawbacks</strong>:</p>
+
+<ul>
+<li>slightly slower input (due to added conversion overhead),</li>
+<li>it may take more disk space than plain <code>json</code> due to a larger table footprint, though not always,</li>
+<li>certain queries (especially aggregate ones) may be slower due to the lack of statistics.</li>
+</ul>
+
+<p>The reason behind this last issue is that, for any given column, PostgreSQL saves descriptive statistics such as the number of distinct and most common values, the fraction of <code>NULL</code> entries, and --for ordered types-- a histogram of the data distribution.   All of this will be unavailable when the info is entered as JSON fields, and you will suffer a heavy performance penalty especially when aggregating data (<code>COUNT</code>, <code>AVG</code>, <code>SUM</code>, etc) among tons of JSON fields.</p>
+
+<p>To avoid this, you may consider storing data that you may aggregate later on regular fields.</p>
+
+<p>For further commentary about this issue, you can read Heap's blog post <a href="https://blog.heapanalytics.com/when-to-avoid-jsonb-in-a-postgresql-schema/">When To Avoid JSONB In A PostgreSQL Schema</a>.</p>
+
+<h2 id="usecasebookentries">Use Case: Book Entries</h2>
+
+<p>Let's use a toy model with book entries to illustrate some basic operations when working with JSON data in PostgreSQL.</p>
+
+<p>The operations in this section will be essentially the same either if you use <code>json</code> or <code>jsonb</code>, but let's review them to refresh what we can do with JSON and to set our use case before we see the <code>jsonb</code> goodies right after.</p>
+
+<h3 id="defineacolumninatable">Define a Column in a Table</h3>
+
+<p>Simply enough, we specify the <code>data</code> column with the <code>jsonb</code> data type:</p>
+
+<pre><code class="language-sql">CREATE TABLE books (  
+  book_id serial NOT NULL,
+  data jsonb
+);
+</code></pre>
+
+<h3 id="insertjsondata">Insert JSON Data</h3>
+
+<p>To enter data to the <code>books</code> table we just pass the whole JSON string as a field value:</p>
+
+<pre><code class="language-sql">INSERT INTO books VALUES (1, '{"title": "Sleeping Beauties", "genres": ["Fiction", "Thriller", "Horror"], "published": false}');  
+INSERT INTO books VALUES (2, '{"title": "Influence", "genres": ["Marketing &amp; Sales", "Self-Help ", "Psychology"], "published": true}');  
+INSERT INTO books VALUES (3, '{"title": "The Dictator''s Handbook", "genres": ["Law", "Politics"], "authors": ["Bruce Bueno de Mesquita", "Alastair Smith"], "published": true}');  
+INSERT INTO books VALUES (4, '{"title": "Deep Work", "genres": ["Productivity", "Reference"], "published": true}');  
+INSERT INTO books VALUES (5, '{"title": "Siddhartha", "genres": ["Fiction", "Spirituality"], "published": true}');  
+</code></pre>
+
+<h3 id="querydata">Query Data</h3>
+
+<p>We can now query specific keys within the JSON data:</p>
+
+<pre><code class="language-sql">SELECT data-&gt;'title' AS title FROM books;  
+</code></pre>
+
+<p>This returns the title, extracted from the JSONB data, as a column:</p>
+
+<pre><code>           title
+---------------------------
+ "Sleeping Beauties"
+ "Influence"
+ "The Dictator's Handbook"
+ "Deep Work"
+ "Siddhartha"
+(5 rows)
+</code></pre>
+
+<h3 id="filterresults">Filter Results</h3>
+
+<p>You may also filter a result set no differently as you normally would, using the <code>WHERE</code> clause but through JSON keys:</p>
+
+<pre><code class="language-sql">SELECT * FROM books WHERE data-&gt;'published' = 'false';  
+</code></pre>
+
+<p>Which in this case returns the raw JSON data:</p>
+
+<pre><code> book_id |                                              data
+---------+-------------------------------------------------------------------------------------------------
+       1 | {"title": "Sleeping Beauties", "genres": ["Fiction", "Thriller", "Horror"], "published": false}
+(1 row)
+</code></pre>
+
+<h3 id="expanddata">Expand Data</h3>
+
+<p>This is an important one, as it will enable us to use the aggregate functions that we are familiar when dealing with relational databases, but in the otherwise counter-intuitive environment of JSON data.</p>
+
+<pre><code class="language-sql">SELECT jsonb_array_elements_text(data-&gt;'genres') AS genre  
+FROM books  
+WHERE book_id = 1;  
+</code></pre>
+
+<p>That will expand the JSON array into a column:</p>
+
+<pre><code>  genre
+----------
+ Fiction
+ Thriller
+ Horror
+(3 rows)
+</code></pre>
+
+<h2 id="specialjsonbfeatures">Special <code>jsonb</code> Features</h2>
+
+<p>Besides efficiency, there are extra ways in which you can benefit from storing JSON in binary form.</p>
+
+<p>One such enhancement is the GIN (Generalized Inverted Index) indexes and a new brand of operators that come with them.</p>
+
+<h3 id="checkingcontainment">Checking Containment</h3>
+
+<p>Containment tests whether one document (a set or an array) is contained within another.  This can be done in <code>jsonb</code> data using the <code>@&gt;</code> operator.</p>
+
+<p>For example, the array <code>["Fiction", "Horror"]</code> is contained in the array <code>["Fiction", "Thriller", "Horror"]</code> (where <code>t</code> stands for <code>true</code>):</p>
+
+<pre><code class="language-sql">SELECT '["Fiction", "Thriller", "Horror"]'::jsonb @&gt; '["Fiction", "Horror"]'::jsonb;  
+</code></pre>
+
+<pre><code>t
+</code></pre>
+
+<p>The opposite however, <code>["Fiction", "Thriller", "Horror"]</code> being contained in <code>["Fiction", "Horror"]</code>, is <code>false</code>:</p>
+
+<pre><code class="language-sql">SELECT '["Fiction", "Horror"]'::jsonb @&gt; '["Fiction", "Thriller", "Horror"]'::jsonb;  
+</code></pre>
+
+<pre><code>f
+</code></pre>
+
+<p>Using this principle we can easily check for a single book genre:</p>
+
+<pre><code class="language-sql">SELECT data-&gt;'title' FROM books WHERE data-&gt;'genres' @&gt; '["Fiction"]'::jsonb;  
+</code></pre>
+
+<pre><code>"Sleeping Beauties"
+"Siddhartha"
+</code></pre>
+
+<p>Or multiple genres at once, by passing an array (notice that they key order won't matter at all):</p>
+
+<pre><code class="language-sql">SELECT data-&gt;'title' FROM books WHERE data-&gt;'genres' @&gt; '["Fiction", "Horror"]'::jsonb;  
+</code></pre>
+
+<pre><code>"Sleeping Beauties"
+</code></pre>
+
+<p>Also, since version 9.5, PostgreSQL introduces the ability to check for top-level keys and containment of empty objects:</p>
+
+<pre><code class="language-sql">SELECT '{"book": {"title": "War and Peace"}}'::jsonb @&gt; '{"book": {}}'::jsonb;  
+</code></pre>
+
+<pre><code>t
+</code></pre>
+
+<h3 id="checkingexistence">Checking Existence</h3>
+
+<p>As a variation on containment, <code>jsonb</code> also has an existence operator (<code>?</code>) which can be used to find whether an object key or array element is present.</p>
+
+<p>Here, let's count the books with the <code>authors</code> field entered:</p>
+
+<pre><code class="language-sql">SELECT COUNT(*) FROM books WHERE data ? 'authors';  
+</code></pre>
+
+<p>Only one in this case ("The Dictator's Handbook"):</p>
+
+<pre><code>count
+-------
+    1
+(1 row)
+</code></pre>
+
+<h3 id="creatingindices">Creating Indices</h3>
+
+<p>Let’s take a moment to remind ourselves that indexes are a key component of relational databases. Without them, whenever we need to retrieve a piece of information, the database would do a scan the entire table which is, of course, very inefficient.</p>
+
+<p><strong>A dramatic improvement of <code>jsonb</code> over the <code>json</code> data type, is the ability to index JSON data.</strong></p>
+
+<p>Our toy example only has 5 entries, but if they were thousands --or millions-- of entries, we could cut seek times in more than half by building indices.</p>
+
+<p>We could, for example, index published books:</p>
+
+<pre><code class="language-sql">CREATE INDEX idx_published ON books (data-&gt;'published');  
+</code></pre>
+
+<p>This simple index will automatically speed up all the aggregate functions that we run on published books (<code>WHERE data-&gt;'published' = 'true'</code>) because of the <code>idx_published</code> index.</p>
+
+<p>And in fact, we could --and probably should, as the DB size increases-- index anything that's subject to be used on a <code>WHERE</code> clause when filtering results.</p>
+
+<h2 id="caveats">Caveats</h2>
+
+<p>There are just a few technicalities you need to consider when switching over to <code>jsonb</code> data type.</p>
+
+<p><strong><code>jsonb</code> is stricter</strong>, and as such, it disallows Unicode escapes for non-ASCII characters (those above U+007F) unless the database encoding is UTF8.  It also rejects the <code>NULL</code> character (<code>\u0000</code>), which cannot be represented in PostgreSQL's <code>text</code> type.</p>
+
+<p>It <strong>does not preserve white space</strong>, and it will strip your JSON strings of leading/lagging white space as well as white space within the JSON string, all of which will just untidy your code (which <a href="http://stackoverflow.com/questions/23961671/how-to-trim-whitespaces-in-json-datatype-of-postgres">might not be a bad thing for you</a> after all.)</p>
+
+<p>It <strong>does not preserve the order of object keys</strong>, treating keys in pretty much the same way as they are treated in Python dictionaries -- unsorted.  You'll need to find a way around this if you rely on the order of your JSON keys.</p>
+
+<p>Finally, <code>jsonb</code> does not keep duplicate object keys (which, again, <a href="http://stackoverflow.com/questions/21832701/does-json-syntax-allow-duplicate-keys-in-an-object">might not be a bad thing</a>, especially if you want to avoid ambiguity in your data), storing only last entry.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>The PostgreSQL documentation recommends that most applications should prefer to store JSON data as <code>jsonb</code>, since as we've seen there are significant performance enhancements and only minor caveats.</p>
+
+<p>The features <code>jsonb</code> brings are so powerful that you may very well handle relation data in pretty much the same manner as you would do in regular <a href="https://en.wikipedia.org/wiki/Relational_database_management_system">RDBMS</a>, but all in JSON and which a <a href="http://coussej.github.io/2016/01/14/Replacing-EAV-with-JSONB-in-PostgreSQL/"><em>very significant</em> gain in performance</a>, combining the practicality of a <a href="https://en.wikipedia.org/wiki/NoSQL">NoSQL</a> solution with the power features of a RDBMS.</p>
+
+<p>The main drawback when switching to <code>jsonb</code> is legacy code that may, for example, be relying on the ordering of object keys;  which is code that will need to be updated to work as expected.  And to state the obvious, as a feature introduced in version 9.4, <code>jsonb</code> isn't backward-compatible and the very <code>jsonb</code> keyword you need to use set the JSON tables will break your SQL code on legacy platforms.</p>
+
+<p>Finally, notice that I covered some typical uses of the indices and their operators; for more details and examples have a look at the <a href="https://www.postgresql.org/docs/current/static/datatype-json.html#JSON-INDEXING"><code>jsonb</code> indexing</a> and the <a href="https://www.postgresql.org/docs/current/static/functions-json.html">JSON functions and operators</a> in the official PostgreSQL documentation.</p>
+
+<hr />
+
+<p><strong><em>Do you want to shed light on a favorite feature in your preferred database? Why not write about it for <a href="https://compose.com/write-stuff">Write Stuff</a>?</em></strong></p>
+
+<p><img src="https://res.cloudinary.com/dyyck73ly/image/upload/v1473336039/rajataqro3vaz3ryp9qm.png#guest-bio" alt="Lucero dances, [plays music](http://luzdealba.bandcamp.com/), writes about random topics, leads projects to varying and doubtful degrees of success, and keeps trying to be real and he keeps failing." title="" /></p>
+
+<p><del>attribution</del> <a href="https://unsplash.com/photos/Dv65oNf9UI4">Lionello DelPiccolo</a></p>
+
+  
+  <figure class="creative-commons">
+  <svg role="img" viewBox="0 0 120 42" width="120" fill-rule="evenodd">
+    <path d="M3.41.453l113.352.199c1.586 0 3-.234 3 3.164l-.141 37.328h-119.074v-37.469c0-1.676.164-3.223 2.863-3.223v.001z" fill="#aab2ab" />
+    <path d="M34.523 19.551c.004 7.531-6.098 13.637-13.629 13.641-7.527.008-13.637-6.094-13.641-13.625v-.016c-.008-7.527 6.094-13.637 13.625-13.641 7.531-.004 13.641 6.094 13.645 13.625v.016zM62.504 15.223c0 5.93-4.809 10.738-10.742 10.738-5.93 0-10.738-4.809-10.738-10.738 0-5.93 4.809-10.738 10.738-10.738 5.934 0 10.742 4.809 10.742 10.738zM88.582 15.223c0 5.93-4.809 10.738-10.742 10.738-5.93 0-10.738-4.809-10.738-10.738 0-5.93 4.809-10.738 10.738-10.738 5.934 0 10.742 4.809 10.742 10.738zM114.578 14.98c.008 5.844-4.73 10.586-10.574 10.594-5.848 0-10.59-4.73-10.594-10.578v-.016c-.004-5.844 4.73-10.586 10.578-10.59 5.844-.008 10.586 4.73 10.59 10.574v.016z" fill="#fff" />
+    <path d="M117.754 0c1.238 0 2.246 1.008 2.246 2.246v39.246c0 .281-.227.508-.508.508h-118.984c-.281 0-.508-.227-.508-.508v-39.246c0-1.238 1.008-2.246 2.246-2.246h115.508zm1.23 29.469v-27.223c0-.679-.55-1.23-1.23-1.23h-115.509c-.679 0-1.23.55-1.23 1.23v27.223h4.32c3.024 5.473 8.852 9.184 15.547 9.184 6.688 0 12.52-3.715 15.547-9.184h82.555zm-87.011-21.024c3.023 3.023 4.535 6.727 4.535 11.105 0 4.379-1.488 8.043-4.457 10.988-3.156 3.102-6.883 4.652-11.184 4.652-4.25 0-7.91-1.539-10.984-4.613-3.078-3.074-4.613-6.75-4.613-11.027 0-4.273 1.535-7.977 4.613-11.105 2.996-3.023 6.656-4.535 10.984-4.535 4.379 0 8.082 1.512 11.105 4.535h.001zm-20.055 2.035c-2.559 2.582-3.836 5.605-3.836 9.074 0 3.469 1.266 6.469 3.793 8.996 2.531 2.531 5.543 3.793 9.039 3.793 3.496 0 6.531-1.277 9.113-3.832 2.453-2.371 3.68-5.359 3.68-8.957 0-3.57-1.246-6.602-3.738-9.094-2.492-2.488-5.508-3.734-9.055-3.734-3.547 0-6.547 1.25-8.996 3.754zm74.152-3.726c-2.246-2.242-4.992-3.363-8.242-3.363-3.215 0-5.934 1.121-8.156 3.363-2.285 2.32-3.426 5.066-3.426 8.234 0 3.172 1.141 5.895 3.426 8.176 2.281 2.281 5 3.422 8.156 3.422 3.191 0 5.961-1.152 8.301-3.449 2.207-2.184 3.309-4.902 3.309-8.148 0-3.246-1.121-5.992-3.367-8.234l-.001-.001zm-34.336-3.363c-3.211 0-5.93 1.121-8.156 3.363-2.281 2.32-3.422 5.063-3.422 8.234 0 3.168 1.141 5.895 3.422 8.172 2.285 2.281 5.004 3.422 8.156 3.422 3.195 0 5.961-1.148 8.305-3.449 2.207-2.184 3.309-4.898 3.309-8.145 0-3.25-1.121-5.992-3.367-8.234s-4.992-3.363-8.246-3.363h-.001zm52.184-.004c-3.211 0-5.93 1.121-8.156 3.359-2.281 2.32-3.426 5.066-3.426 8.234s1.145 5.895 3.426 8.176c2.285 2.281 5.004 3.418 8.156 3.418 3.195 0 5.961-1.148 8.301-3.449 2.207-2.184 3.313-4.898 3.313-8.145 0-3.246-1.125-5.992-3.367-8.234-2.246-2.238-4.992-3.359-8.246-3.359h-.001zm-32 9.878l-3.07-1.359c-.34.969-.512 1.996-.512 3.082 0 2.57.937 4.793 2.816 6.668 1.875 1.875 4.109 2.813 6.703 2.813 2.594 0 4.848-.945 6.766-2.84h-.001c.641-.625 1.168-1.305 1.586-2.039l-6-2.656h-4.219c.137.582.348 1.031.641 1.359.621.699 1.531.992 2.504.992.895 0 1.805-.293 2.211-.508l.469 2.156c-.66.371-1.785.738-3.027.738-1.906 0-3.652-.777-4.738-2.215-.523-.66-.914-1.492-1.086-2.523h-1.262v-1.379h1.066v-.328l.02-.582h-1.086v-1.379h.219zm-20.153-7.784c2.633 0 4.867.926 6.703 2.781 1.859 1.836 2.789 4.078 2.789 6.727 0 2.664-.91 4.879-2.73 6.637-1.914 1.895-4.168 2.84-6.762 2.84-2.594 0-4.828-.938-6.707-2.813-1.875-1.871-2.813-4.094-2.813-6.664 0-2.57.945-4.813 2.844-6.727 1.82-1.855 4.043-2.781 6.676-2.781zm52.184-.008c2.629 0 4.863.926 6.703 2.785 1.859 1.832 2.785 4.074 2.785 6.723 0 2.668-.906 4.879-2.727 6.641-1.914 1.891-4.172 2.84-6.762 2.84-2.594 0-4.828-.938-6.707-2.813-1.875-1.875-2.816-4.098-2.816-6.668 0-2.57.949-4.813 2.848-6.723 1.816-1.859 4.043-2.785 6.676-2.785zm-85.304 12.558c-.391-.852-.977-1.277-1.758-1.277-1.375 0-2.066.926-2.066 2.781s.691 2.785 2.066 2.785c.91 0 1.563-.453 1.953-1.359l1.91 1.02c-.91 1.617-2.277 2.426-4.098 2.426-1.406 0-2.531-.43-3.379-1.293-.844-.859-1.27-2.047-1.27-3.563 0-1.488.438-2.668 1.309-3.543s1.961-1.312 3.262-1.312c1.926 0 3.305.758 4.137 2.277l-2.066 1.058zm8.988 0c-.391-.852-.965-1.277-1.719-1.277-1.406 0-2.109.926-2.109 2.781s.703 2.785 2.109 2.785c.914 0 1.551-.453 1.914-1.359l1.953 1.02c-.91 1.617-2.273 2.426-4.09 2.426-1.406 0-2.527-.43-3.375-1.293-.84-.859-1.266-2.047-1.266-3.563 0-1.488.43-2.668 1.289-3.543.855-.875 1.945-1.312 3.273-1.312 1.922 0 3.297.758 4.129 2.277l-2.108 1.058zm26.488-6.664c.414 0 .75.336.75.75v4.742h-1.324v5.617h-3.594v-5.617h-1.324v-4.742c0-.414.336-.75.75-.75h4.742zm44.656 1.977c.465-2.918 2.516-4.477 5.094-4.477 3.699 0 5.957 2.688 5.957 6.27 0 3.492-2.402 6.207-6.016 6.207-2.488 0-4.715-1.527-5.121-4.535h2.922c.086 1.563 1.098 2.109 2.547 2.109 1.645 0 2.715-1.531 2.715-3.871 0-2.453-.922-3.754-2.66-3.754-1.27 0-2.371.465-2.602 2.051l.848-.004-2.297 2.297-2.301-2.297.914.004zm-18.09 1.301h.172v-1.379h-3.285l-1.336-.59c.117-.262.25-.492.41-.672.602-.738 1.457-1.051 2.387-1.051.855 0 1.652.254 2.156.469l.543-2.215c-.699-.309-1.727-.582-2.91-.582-1.828 0-3.379.738-4.488 1.98-.242.285-.457.602-.648.938l-3.816-1.688c.371-.555.805-1.086 1.309-1.594 1.82-1.855 4.043-2.781 6.676-2.781s4.867.926 6.707 2.781c1.855 1.836 2.785 4.078 2.785 6.727 0 .875-.098 1.695-.293 2.473l-6.369-2.816zm-3.593.91l-.043-.02.027.02h.016zm-23.723-6.434c0 .895-.723 1.621-1.621 1.621-.895 0-1.621-.727-1.621-1.621 0-.895.727-1.621 1.621-1.621.898 0 1.621.727 1.621 1.621z" />
+    <path d="M83.773 34.972h-1.41c-.027-.164-.082-.32-.168-.457v-.003c-.086-.141-.195-.262-.324-.367-.129-.105-.277-.188-.441-.246-.164-.059-.336-.086-.516-.086-.328 0-.605.063-.836.188-.227.129-.414.297-.555.512-.141.211-.246.453-.313.727-.063.273-.098.555-.098.844 0 .277.035.551.098.813.066.262.172.5.313.707.141.211.328.379.555.508.23.125.508.188.836.188.445 0 .793-.133 1.043-.406.254-.273.406-.633.461-1.078h1.41c-.035.414-.133.789-.289 1.125-.152.332-.359.617-.609.852-.254.238-.551.418-.891.543-.34.121-.715.184-1.125.184-.508 0-.961-.086-1.367-.266-.406-.172-.746-.418-1.027-.727-.277-.309-.492-.672-.641-1.09-.148-.418-.223-.867-.223-1.352 0-.496.074-.953.223-1.379.148-.422.363-.793.641-1.109.281-.313.621-.563 1.027-.742.406-.18.859-.266 1.367-.266.367 0 .711.051 1.035.156.324.105.617.258.871.461.258.199.469.449.637.746.168.297.273.637.316 1.02zm18.485-.254h-1.414c-.012-.199-.055-.363-.125-.492s-.164-.23-.281-.305c-.117-.074-.25-.129-.402-.156-.148-.031-.316-.047-.492-.047-.117 0-.234.012-.352.035-.117.027-.223.07-.316.129-.098.063-.176.141-.238.234-.059.094-.09.211-.09.352 0 .129.023.234.07.316.051.078.148.156.293.223.148.066.348.137.602.203l1.008.262.512.133c.219.066.438.168.652.313.219.141.402.332.563.57.156.238.234.543.234.914 0 .301-.059.582-.176.844-.117.258-.293.484-.523.672-.23.188-.52.336-.863.441-.344.105-.738.156-1.191.156-.363 0-.719-.043-1.063-.133-.344-.09-.645-.23-.906-.426-.266-.191-.473-.438-.629-.734-.152-.297-.227-.648-.223-1.055h1.414c0 .223.039.41.121.563h-.002c.078.156.184.281.32.379.133.094.285.164.465.211.18.047.363.07.555.07l.418-.031c.148-.023.285-.063.418-.125.129-.063.234-.148.324-.258.082-.105.129-.246.129-.41 0-.18-.059-.324-.172-.438-.113-.109-.266-.203-.449-.277-.188-.074-.398-.141-.629-.195-.238-.055-.473-.117-.715-.184-.246-.063-.488-.141-.723-.23-.234-.086-.445-.203-.629-.348-.188-.141-.336-.32-.449-.531-.113-.215-.172-.473-.172-.773 0-.344.074-.637.219-.887.145-.25.332-.461.566-.629.234-.164.504-.289.801-.371.293-.078.59-.117.887-.117.348 0 .68.039.996.113.32.078.602.203.848.379.25.172.445.395.59.66.145.273.219.598.219.98zm-47.273 4.653h-1.461v-2.582l-2.43-4.043h1.633l1.551 2.617 1.543-2.617h1.625l-2.461 4.082v2.543zm54.137 0h-1.512l-.5-1.477h-2.477l-.52 1.477h-1.465l2.504-6.625h1.493l2.477 6.625zm-36.688 0h-1.363v-6.625h1.449l2.766 4.445h.016v-4.445h1.367v6.625h-1.457l-2.758-4.434h-.02v4.434zm-23.938 0h-3.219v-6.625h3.125c.313 0 .602.031.863.086.258.055.484.145.668.273.188.125.328.293.434.504.102.211.152.469.152.777 0 .336-.074.613-.227.836-.152.223-.379.402-.676.547.41.117.715.324.918.617.203.293.305.648.305 1.063 0 .332-.066.621-.195.867-.133.242-.309.445-.527.598-.219.156-.473.27-.754.344-.281.074-.57.113-.867.113zm-.169-2.954c.317 0 .571.074.762.219.191.145.289.387.289.727 0 .176-.031.317-.09.426-.058.114-.136.203-.234.266-.102.067-.215.114-.348.141-.129.027-.265.039-.406.039l-1.563-.002v-1.816h1.59zm57.568-2.038h-.02l-.859 2.43h1.715l-.836-2.43zm-57.794-.5c.133 0 .258.012.379.035.121.019.226.058.32.113.094.058.168.132.223.234.055.098.082.223.082.379 0 .278-.082.477-.25.602-.168.121-.379.184-.641.184h-1.476v-1.547h1.363z" fill="#fff" />
+  </svg>
+  <figcaption>This article is licensed with <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="nofollow noopener" target="_blank">CC-BY-NC-SA 4.0</a> by Compose.</figcaption>
+</figure>
+
+<footer class="article-footer">
+
+  <nav class="share-icons">
+
+  <a class="twitter" href="https://twitter.com/share?text=Faster%20Operations%20with%20the%20JSONB%20Data%20Type%20in%20PostgreSQL&amp;url=https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/&via=composeio" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#twitter"></use>
+
+    </svg>
+
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#facebook"></use>
+
+    </svg>
+
+  </a>
+
+  <a href="https://plus.google.com/share?url=https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#google-plus"></use>
+
+    </svg>
+
+  </a>
+
+  <a href="http://news.ycombinator.com/submitlink?u=https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/&t=Faster Operations with the JSONB Data Type in PostgreSQL" onclick="window.open(this.href, 'hacker-news-share','width=580,height=296');return false;">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#y-combinator"></use>
+
+    </svg>
+
+  </a>
+
+  <a class="subscribe-btn" href="https://www.compose.com/articles/rss/">
+
+    <svg viewBox="0 0 38 38" width="30">
+
+      <use xlink:href="#subscribe"></use>
+
+    </svg>
+
+  </a>
+
+</nav>
+  <figure class="author-bio">
+
+
+
+  </figure>
+
+</footer>
+</article>
+
+
+  <aside class="related-articles">
+
+    <h4>Related Articles</h4>
+
+
+      <figure class="post tag-json tag-jsonb tag-postgresql featured">
+
+
+          <a href="/articles/is-postgresql-your-next-json-database/" data-cover="https://res.cloudinary.com/dyyck73ly/image/upload/s3/Mar/elephant.jpg">
+
+            <img src="" alt="Is PostgreSQL Your Next JSON Database?">
+
+            <span class="publish-date"><time datetime="2015-03-03">Mar 3, 2015</time></span>
+
+          </a>
+
+
+        <figcaption>
+
+          <h2><a href="/articles/is-postgresql-your-next-json-database/">Is PostgreSQL Your Next JSON Database?</a></h2>
+
+          <p>TL;DR: Betteridge's law applies unless your JSON is fairly unchanging and needs to be queried a lot. With the most recent ver&hellip;</p>
+
+          <figure class="author-avatar">
+
+
+
+                  <img src="//www.gravatar.com/avatar/7319685b101428eab1f18146a2742e19?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Dj Walker-Morgan">
+
+                <figcaption>
+                  <a href="/articles/author/dj/">Dj Walker-Morgan</a>
+                </figcaption>
+
+
+
+          </figure>
+
+        </figcaption>
+
+      </figure>
+
+
+      <figure class="post tag-graphql tag-developing tag-writestuff tag-postgresql tag-elasticsearch tag-mongodb tag-redis tag-rest tag-guest">
+
+
+          <a href="/articles/use-all-the-databases-part-1/" data-cover="https://res.cloudinary.com/dyyck73ly/image/upload/v1487949640/fu06ddzllruffdp9ocn1.jpg">
+
+            <img src="" alt="Use all the Databases - Part 1">
+
+            <span class="publish-date"><time datetime="2017-03-02">Mar 2, 2017</time></span>
+
+          </a>
+
+
+        <figcaption>
+
+          <h2><a href="/articles/use-all-the-databases-part-1/">Use all the Databases - Part 1</a></h2>
+
+          <p>Loren Sands-Ramshaw, author of GraphQL: The New REST, shows how to combine data from multiple sources using GraphQL in this W&hellip;</p>
+
+          <figure class="author-avatar">
+
+
+              <svg role="img" viewBox="0 0 34 34" width="45">
+                <use xlink:href="#star"></use>
+              </svg>
+
+              <figcaption>Guest Author</figcaption>
+
+
+          </figure>
+
+        </figcaption>
+
+      </figure>
+
+
+      <figure class="post tag-writestuff tag-postgresql tag-guest tag-materialized-views">
+
+
+          <a href="/articles/store-result-sets-with-materialized-views-in-postgresql/" data-cover="https://res.cloudinary.com/dyyck73ly/image/upload/v1483199665/mogyhaxsx29vwardeko1.jpg">
+
+            <img src="" alt="Store Result Sets with Materialized Views in PostgreSQL">
+
+            <span class="publish-date"><time datetime="2017-01-04">Jan 4, 2017</time></span>
+
+          </a>
+
+
+        <figcaption>
+
+          <h2><a href="/articles/store-result-sets-with-materialized-views-in-postgresql/">Store Result Sets with Materialized Views in PostgreSQL</a></h2>
+
+          <p>Lucero Del Alba talks about using PostgreSQL's materialized views to process large amounts of data without slowing down your&hellip;</p>
+
+          <figure class="author-avatar">
+
+
+              <svg role="img" viewBox="0 0 34 34" width="45">
+                <use xlink:href="#star"></use>
+              </svg>
+
+              <figcaption>Guest Author</figcaption>
+
+
+          </figure>
+
+        </figcaption>
+
+      </figure>
+
+
+  </aside>
+
+
+
+
+  </main>
+
+  <footer role="contentinfo">
+  <dl>
+    <dt>Company</dt>
+    <dd>
+      <a href="/about-us/">About Us</a>
+      <a href="/jobs/">We’re Hiring</a>
+      <a href="/articles/">Articles</a>
+      <a href="/write-stuff/">Write Stuff</a>
+      <a href="/pricing/">Plans &amp; Pricing</a>
+      <a href="/stories/">Customer Stories</a>
+      <a href="/webinars/">Compose Webinars</a>
+    </dd>
+  </dl>
+  <dl>
+    <dt>Support</dt>
+    <dd>
+      <a href="https://status.compose.com/">System Status</a>
+      <a href="https://help.compose.com/docs/compose-email-support">Support &amp; Docs</a>
+      <a href="/security/">Security</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+    </dd>
+  </dl>
+  <dl>
+    <dt>Products</dt>
+    <dd>
+      <a href="/mongodb/">MongoDB</a>
+      <a href="/elasticsearch/">Elasticsearch</a>
+      <a href="/rethinkdb/">RethinkDB</a>
+      <a href="/redis/">Redis</a>
+      <a href="/postgresql/">PostgreSQL</a>
+      <a href="/etcd/">etcd</a>
+      <a href="/rabbitmq/">RabbitMQ</a>
+      <a href="/scylladb/">ScyllaDB</a>
+      <a href="/mysql/">MySQL</a>
+    </dd>
+  </dl>
+  <dl>
+    <dt>Deployments</dt>
+    <dd>
+      <a href="/aws/">AWS</a>
+      <a href="/softlayer/">SoftLayer</a>
+      <a href="/gcp">Google Cloud</a>
+    </dd>
+
+    <dt>Services</dt>
+    <dd>
+      <a href="https://enterprise.compose.com/">Enterprise</a>
+      <a href="/addons/">Add-ons</a>
+    </dd>
+  </dl>
+
+  <nav class="social-nav">
+    <a href="">
+      <svg role="img" viewBox="0 0 113 67" width="50">
+        <use xlink:href="#logomark"></use>
+      </svg>
+    </a>
+    <span>&copy; 2017 Compose, an IBM Company</span>
+    <a href="https://twitter.com/composeio/">
+      <svg role="img" viewBox="0 0 38 38" width="30">
+        <use xlink:href="#twitter"></use>
+      </svg>
+    </a>
+    <a href="https://www.facebook.com/composeio/">
+      <svg role="img" viewBox="0 0 38 38" width="30">
+        <use xlink:href="#facebook"></use>
+      </svg>
+    </a>
+    <a href="https://plus.google.com/+ComposeIo/">
+      <svg role="img" viewBox="0 0 38 38" width="30">
+        <use xlink:href="#google-plus"></use>
+      </svg>
+    </a>
+    <a href="https://www.linkedin.com/company/composeio/">
+      <svg role="img" viewBox="0 0 38 38" width="30">
+        <use xlink:href="#linkedin"></use>
+      </svg>
+    </a>
+    <a href="https://www.youtube.com/channel/UCDr6t6kLkJWkVjkup_AcazA">
+      <svg role="img" viewBox="0 0 38 38" width="30">
+        <use xlink:href="#youtube"></use>
+      </svg>
+    </a>
+  </nav>
+</footer>
+
+  <script src="/articles/assets/js/site.js?v=1a6be216cf"></script>
+
+  
+
+</body>
+</html>
