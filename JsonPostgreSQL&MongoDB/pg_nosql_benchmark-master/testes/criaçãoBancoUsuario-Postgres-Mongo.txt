@@ -1,0 +1,150 @@
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxx Configuração postgresql 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+** Instalação do PostgreSQL:
+
+$ apt-get install postgresql-9.4
+
+"instalando em /usr/share/postgresql/ e /usr/lib/postgresql/9.5/bin"
+
+senha do superuser (postgres): post
+
+>> Alterando a senha do usuario postgres (no postgres):
+
+$ sudo -u postgres psql
+
+# alter user postgres with encrypted password 'nova senha';
+
+>> Alterando a senha do usuario postgres (no Ubuntu):
+
+sudo passwd postgres
+
+su - postgres
+
+>> Alterando a senha do usuário admin do SGBD:
+
+(Em $ psql):
+
+ALTER ROLE postgres WITH PASSWORD 'postgres';
+
+---
+Obs.: Na versão "(9.5.6) do postgres" em osgeo-live-10.5 temos:
+
+usuário=user
+senha=user
+host=localhost
+port=5432
+MaintenanceDB=postgres
+
+ou "nos scripts bash"
+
+PGHOME="/usr/lib/postgresql/9.5"
+PGHOST="127.0.0.1"
+PGPORT="5432"
+PGUSER="postgres"
+PGPASSWORD="post"
+PGDATABASE="benchmark"
+PGBIN="/usr/lib/postgresql/9.5/bin"
+
+
+>> Instalação do pgAdmin3: Via "Ubuntu Software Center"
+
+>> Instalação do postgis: Via "Ubuntu Software Center"
+
+Obs.: (Não tentei assim: ) $ sudo apt-get install postgresql-9.4 postgresql-9.4-postgis-2.0 pgadmin3
+
+>> Criar banco "benchmark" via pgadmin3
+
+ou:
+
+CREATE DATABASE benchmark
+  WITH ENCODING='UTF8'
+       OWNER="user"
+       CONNECTION LIMIT=-1;
+
+>> Por fim, ver versão do Postgres:
+
+pgVSmongo/testes/temps# ./bash_pg_version.sh 
+
+PID: 4999 [RUNTIME: 04-10-17 13:44:44] bash_pg_version.sh: PostgreSQL Version 9.5.6
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxx Configuração MongoDB 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+*** Configuração inicial ***
+
+Como Instalar o MongoDB no Ubuntu 16.04
+(fonte: https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt)
+
+$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+
+$ echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+$ sudo apt-get update
+
+$ sudo apt-get install -y mongodb-org
+
+$ sudo nano /etc/systemd/system/mongodb.service
+
+Obs.: Colocar em "/etc/systemd/system/mongodb.service":
+
+[Unit]
+Description=High-performance, schema-free document-oriented database
+After=network.target
+
+[Service]
+User=mongodb
+ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
+
+[Install]
+WantedBy=multi-user.target
+
+$ sudo systemctl start mongodb
+
+$ sudo systemctl status mongodb
+
+$ sudo systemctl enable mongodb
+
+$ sudo ufw allow 27017
+
+
+*** conexão ***
+
+$ mongo 127.0.0.1:27017
+
+> use benchmark
+
+> db.createUser({ user: "mongo",
+...                      pwd: "mongo",
+...                      roles:[{ role: "userAdmin",
+...                               db: "benchmark"
+...                             }]
+...                     })
+
+> db
+
+> show users
+
+> exit
+
+$ mongo 127.0.0.1:27017/benchmark --username mongo --password mongo --quiet
+
+Obs.:
+
+1)Aproveitar uma interface gráfica
+
+(o Mongo Management Studio: http://www.litixsoft.de/english/mms/)
+
+http://packages.litixsoft.de/mms/1.9.4/mms-v1.9.4-community-linux.tar.gz
+
+$ lx-mms
+
+http://127.0.0.1:3333/
+
+2) Json formatter:
+
+https://jsonformatter.curiousconcept.com/

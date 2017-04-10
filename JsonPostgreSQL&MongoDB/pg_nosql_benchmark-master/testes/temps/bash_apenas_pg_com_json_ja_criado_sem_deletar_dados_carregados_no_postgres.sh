@@ -1,41 +1,5 @@
 #/bin/bash
 
-#################################################################################
-# Copyright (c) 2013-2014, EnterpriseDB Corporation
-# 
-# Redistribution and use in source and binary forms, with or without modification,
-# are permitted provided that the following conditions are met:
-#
-# 1. Redistributions of source code must retain the above copyright notice, this
-# list of conditions and the following disclaimer.
-#
-# 2. Redistributions in binary form must reproduce the above copyright notice,
-# this list of conditions and the following disclaimer in the documentation and/or
-# other materials provided with the distribution.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
-# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-# ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-#===============================================================================
-#title           : pg_nosql_benchmark.
-#description     : This script will help in benchmarking PostgreSQL (JSONB) and
-#                : MongoDB (BSON).
-#author          : Vibhor Kumar (vibhor.aim@gmail.com).
-#date            : July 17, 2014
-#version         : 2.0.1
-#usage           : bash pg_nosql_benchmark
-#notes           : Install Vim and Emacs to use this script.
-#bash_version    : GNU bash, version 4.1.2(1)-release (x86_64-redhat-linux-gnu)
-#===============================================================================
-
 ################################################################################
 # set require variables.
 ################################################################################
@@ -55,25 +19,11 @@ export PATH=$PGBIN:$PATH
 
 COLLECTION_NAME="json_tables"
 SAMPLEJSON="sample.json"
-#Comandos Inserts SQL para o Postgresql
-PG_INSERTS="sample_pg_inserts.json"
-
-################################################################################
-# set mongo variables.
-################################################################################
-MONGO="/usr/bin/mongo"
-MONGOIMPORT="/usr/bin/mongoimport"
-MONGOHOST="127.0.0.1"
-MONGOPORT="27017"
-MONGOUSER="mongo"
-MONGOPASSWORD="mongo"
-MONGODBNAME="benchmark"
 
 ################################################################################
 # source library files
 ################################################################################
 source ${DIRECTORY}/lib/pg_func_lib.sh
-source ${DIRECTORY}/lib/mongo_func_lib.sh
 
 ################################################################################
 # declare require arrays
@@ -86,19 +36,11 @@ source ${DIRECTORY}/lib/mongo_func_lib.sh
 # "levou mais de 2 minutos para contar 2182796 linhas"
 #
 declare -a json_rows=(10000000)
-#declare -a json_rows=(15000)
-#declare -a json_rows=(5)
 
 declare -a pg_size_time
 declare -a pg_copy_time
 declare -a pg_inserts_time
 declare -a pg_select_time
-
-# mongo specific arrays
-declare -a mongo_size_time
-declare -a mongo_copy_time
-declare -a mongo_inserts_time
-declare -a mongo_select_time
 
 ################################################################################
 # main function
@@ -113,22 +55,9 @@ pg_version=$(pg_version "${PGHOST}"          \
 
 process_log "PostgreSQL Version $pg_version"
 
-mongodb_version=$(mongo_version "${MONGOHOST}"     \
-                                "${MONGOPORT}"     \
-                                "${MONGODBNAME}"   \
-                                "${MONGOUSER}"     \
-                                "${MONGOPASSWORD}"
-                  )
-                  
-process_log "MongoDB Version $mongodb_version"                  
-
 for (( indx=0 ; indx < ${#json_rows[@]} ; indx++ ))
 do
 
-	#creating json data.
-	generate_json_rows "${json_rows[${indx}]}" \
-                      "${SAMPLEJSON}"
-   
 	#droping database benchmark if exists.
 	remove_pg_db "${PGHOST}"     \
                 "${PGPORT}"     \
