@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/ dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ og: http://ogp.me/ns# rdfs: http://www.w3.org/2000/01/rdf-schema# sioc: http://rdfs.org/sioc/ns# sioct: http://rdfs.org/sioc/types# skos: http://www.w3.org/2004/02/skos/core# xsd: http://www.w3.org/2001/XMLSchema#">
+<head>
+  <link rel="profile" href="http://www.w3.org/1999/xhtml/vocab" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="https://www.enterprisedb.com/sites/default/files/favicon_0.ico" type="image/vnd.microsoft.icon" />
+<meta name="description" content="Postgres introduced JSON and JSONB in versions 9.3 and 9.4, respectively, with JSONB (Binary Javascript Object Notation) being the canonical form of JSON, stored as binary ob" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="https://www.enterprisedb.com/blog/illustration-jsonb-capabilities-postgres-95" />
+<link rel="shortlink" href="https://www.enterprisedb.com/node/206251" />
+  <title>An Illustration of JSONB Capabilities in Postgres 9.5 | EnterpriseDB</title>
+  <!--[if gte IE 8]><!-->
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_lQaZfjVpwP_oGNqdtWCSpJT1EMqXdMiU84ekLLxQnc4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_lQaZfjVpwP_oGNqdtWCSpJT1EMqXdMiU84ekLLxQnc4.emimage.css" media="all" />
+<!--<![endif]-->
+<!--[if lt IE 8]>
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_lQaZfjVpwP_oGNqdtWCSpJT1EMqXdMiU84ekLLxQnc4.orig.css" media="all" />
+<![endif]-->
+<!--[if gte IE 8]><!-->
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_1R87CLFGKpEgCnM5VuRmwNychmWWscGyzH_ZLhH5qoE.emimage.css" media="all" />
+<!--<![endif]-->
+<!--[if lt IE 8]>
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_1R87CLFGKpEgCnM5VuRmwNychmWWscGyzH_ZLhH5qoE.orig.css" media="all" />
+<![endif]-->
+<!--[if gte IE 8]><!-->
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_aDaNmAw6PJTL_I4y3tsQinrltUnn5SgT94WwtyRD5Jg.emimage.css" media="all" />
+<!--<![endif]-->
+<!--[if lt IE 8]>
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_aDaNmAw6PJTL_I4y3tsQinrltUnn5SgT94WwtyRD5Jg.orig.css" media="all" />
+<![endif]-->
+<style>#sliding-popup.sliding-popup-top{background:#0779BF;}#sliding-popup .popup-content #popup-text h2,#sliding-popup .popup-content #popup-text p{color:#ffffff !important;}
+</style>
+<!--[if gte IE 8]><!-->
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_-hItoF0GNdM1rgvKJ29G9HmWmInez2P6owReBVzkKNY.emimage.css" media="all" />
+<!--<![endif]-->
+<!--[if lt IE 8]>
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_-hItoF0GNdM1rgvKJ29G9HmWmInez2P6owReBVzkKNY.orig.css" media="all" />
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_aA-nf6-qrstL2OdKILmW5JcW1j66m2jnT91TOvI7Vu0.css" media="all" />
+<style>.pagebanner{background-color:#FFFFFF;background-image:url('https://www.enterprisedb.com/sites/default/files/styles/page_banner_/public/banner_images/rs_use-cases-heroimage.jpg?itok=IVFYkCWY');background-repeat:no-repeat;background-attachment:scroll;background-position:50%;}
+</style>
+<link type="text/css" rel="stylesheet" href="https://www.enterprisedb.com/sites/default/files/css/css_0vsztc7AIMmujQY-KnU_xkkk-V19wlmtUFEUtR9V1Tg.css" media="all" />
+  <!-- HTML5 element support for IE6-8 -->
+  <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script src="https://www.enterprisedb.com/sites/default/files/js/google_tag.data_layer.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/default/files/js/google_tag.script.js?oo8t4d"></script>
+<script src="//code.jquery.com/jquery-1.8.3.min.js"></script>
+<script>window.jQuery || document.write("<script src='/sites/all/modules/contrib/jquery_update/replace/jquery/1.8/jquery.min.js'>\x3C/script>")</script>
+<script src="https://www.enterprisedb.com/misc/jquery.once.js?v=1.2"></script>
+<script src="https://www.enterprisedb.com/misc/drupal.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js?v=67fb34f6a866c40d0570"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/contrib/admin_menu/admin_devel/admin_devel.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/contrib/collapsiblock/collapsiblock.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/custom/edb_marketo/js/edb_marketo.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/custom/edb_software_downloads/js/determinedlpage.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/custom/edb_software_downloads/js/start_download.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/contrib/google_cse/google_cse.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/contrib/marketo_ma/js/marketo_ma.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/contrib/scroll_to_destination_anchors/scroll_to_destination_anchors.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/contrib/lazyloader/jquery.lazyloader.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/contrib/compact_forms/compact_forms.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/modules/contrib/google_analytics/googleanalytics.js?oo8t4d"></script>
+<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create", "UA-4413916-2", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");</script>
+<script src="//use.typekit.net/yvw1gfi.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+<script>var _eiq = _eiq || [];var _engagio_settings = {accountId: '14164db6c186eea71bbcdede4cd1916c9893080a'};(function() {var ei = document.createElement('script'); ei.type = 'text/javascript'; ei.async = true;ei.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'web-analytics.engagio.com/js/ei.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ei, s);})();</script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/affix.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/alert.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/button.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/carousel.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/collapse.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/dropdown.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/modal.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/tooltip.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/popover.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/scrollspy.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/tab.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/bootstrap/js/transition.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/js/scripts.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/js/jquery.smartmenus.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/addons/bootstrap/jquery.smartmenus.bootstrap.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/edb_theme/js/bootstrap-hover-dropdown.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/default/files/js_injector/js_injector_6.js?oo8t4d"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"edb_theme","theme_token":"4ybqB-i5t4tbxl4LwhJAOaHWxzhMIU14tBshDSdZxao","js":{"sites\/all\/modules\/contrib\/eu_cookie_compliance\/js\/eu_cookie_compliance.js":1,"sites\/all\/themes\/bootstrap\/js\/bootstrap.js":1,"sites\/default\/files\/js_injector\/js_injector_1.js":1,"sites\/default\/files\/js\/google_tag.data_layer.js":1,"sites\/default\/files\/js\/google_tag.script.js":1,"\/\/code.jquery.com\/jquery-1.8.3.min.js":1,"0":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/external\/jquery.cookie.js":1,"sites\/all\/modules\/contrib\/admin_menu\/admin_devel\/admin_devel.js":1,"sites\/all\/modules\/contrib\/collapsiblock\/collapsiblock.js":1,"sites\/all\/modules\/custom\/edb_marketo\/js\/edb_marketo.js":1,"sites\/all\/modules\/custom\/edb_software_downloads\/js\/determinedlpage.js":1,"sites\/all\/modules\/custom\/edb_software_downloads\/js\/start_download.js":1,"sites\/all\/modules\/contrib\/google_cse\/google_cse.js":1,"sites\/all\/modules\/contrib\/marketo_ma\/js\/marketo_ma.js":1,"sites\/all\/modules\/contrib\/scroll_to_destination_anchors\/scroll_to_destination_anchors.js":1,"sites\/all\/modules\/contrib\/lazyloader\/jquery.lazyloader.js":1,"sites\/all\/modules\/contrib\/compact_forms\/compact_forms.js":1,"sites\/all\/modules\/contrib\/google_analytics\/googleanalytics.js":1,"1":1,"\/\/use.typekit.net\/yvw1gfi.js":1,"2":1,"3":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/affix.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/alert.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/button.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/carousel.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/collapse.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/dropdown.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/modal.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/tooltip.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/popover.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/scrollspy.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/tab.js":1,"sites\/all\/themes\/edb_theme\/bootstrap\/js\/transition.js":1,"sites\/all\/themes\/edb_theme\/js\/scripts.js":1,"sites\/all\/themes\/edb_theme\/js\/jquery.smartmenus.js":1,"sites\/all\/themes\/edb_theme\/addons\/bootstrap\/jquery.smartmenus.bootstrap.js":1,"sites\/all\/themes\/edb_theme\/js\/bootstrap-hover-dropdown.js":1,"sites\/default\/files\/js_injector\/js_injector_6.js":1},"css":{"modules\/system\/system.base.css":1,"sites\/all\/modules\/blue_coda\/bc_list_pages\/bc_list_pages.css":1,"sites\/all\/modules\/contrib\/collapsiblock\/collapsiblock.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"sites\/all\/modules\/contrib\/google_cse\/google_cse.css":1,"sites\/all\/modules\/contrib\/logintoboggan\/logintoboggan.css":1,"modules\/node\/node.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/lazyloader\/lazyloader.css":1,"sites\/all\/modules\/contrib\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/panels\/css\/panels.css":1,"sites\/all\/modules\/contrib\/panels\/plugins\/layouts\/flexible\/flexible.css":1,"public:\/\/ctools\/css\/359de74f9d3333514b5998d52c31ef49.css":1,"sites\/all\/modules\/contrib\/compact_forms\/compact_forms.css":1,"1":1,"sites\/all\/modules\/contrib\/eu_cookie_compliance\/css\/eu_cookie_compliance.css":1,"\/\/maxcdn.bootstrapcdn.com\/font-awesome\/4.6.3\/css\/font-awesome.min.css":1,"sites\/all\/themes\/edb_theme\/less\/style.less":1,"sites\/all\/themes\/edb_theme\/addons\/bootstrap\/jquery.smartmenus.bootstrap.css":1,"0":1,"public:\/\/css_injector\/css_injector_1.css":1,"public:\/\/css_injector\/css_injector_2.css":1,"public:\/\/css_injector\/css_injector_3.css":1,"public:\/\/css_injector\/css_injector_4.css":1,"public:\/\/css_injector\/css_injector_5.css":1,"public:\/\/css_injector\/css_injector_7.css":1,"public:\/\/css_injector\/css_injector_8.css":1,"public:\/\/css_injector\/css_injector_9.css":1,"public:\/\/css_injector\/css_injector_10.css":1,"public:\/\/css_injector\/css_injector_11.css":1}},"collapsiblock":{"blocks":{"block-search-form":"3","block-webform-client-block-167":"4","block-views-contact-us-button-block":"1","block-views-list-teasers-block-1":"1","block-block-6":"1","block-block-1":"4","block-webform-client-block-6506":"1","block-menu-block-6":"1","block-edb-downloads-edb-downloads-map":"1","block-block-4":"1","block-node-recent":"3","block-user-online":"2","block-views-career-related-views-block":"1","block-block-7":"1","block-menu-block-11":"1","block-block-2":"1","block-block-12":"1","block-block-11":"1","block-webform-client-block-73004":"1","block-menu-block-12":"1","block-menu-block-14":"1","block-menu-block-16":"1","block-menu-block-19":"1","block-menu-block-20":"1","block-menu-block-15":"1","block-menu-block-23":"1","block-menu-block-17":"1","block-menu-block-18":"1","block-menu-block-25":"1","block-menu-block-21":"1","block-menu-block-24":"1","block-menu-block-22":"1","block-menu-block-26":"1","block-menu-block-2":"1","block-menu-block-27":"1","block-menu-block-28":"1","block-edb-infographic-infographic-block":"1","block-menu-menu-utility-menu":"3","block-views-list-teasers-block-2":"1","block-views-list-teasers-block-3":"1","block-views-list-teasers-block-4":"1","block-views-list-teasers-block-5":"1","block-views-list-teasers-block-6":"1","block-views-list-teasers-block-7":"1","block-views-list-teasers-block-8":"1","block-views-list-teasers-block-9":"1","block-views-list-teasers-block-10":"1","block-views-list-teasers-block-11":"1","block-views-list-teasers-block-12":"1","block-views-list-teasers-block-13":"1","block-menu-block-29":"1","block-menu-block-30":"1","block-menu-block-31":"1","block-menu-block-32":"1","block-user-login":"1","block-formblock-user-register":"1","block-menu-block-33":"1","block-menu-block-34":"1","block-menu-block-35":"1","block-menu-block-36":"1","block-menu-block-38":"1","block-menu-block-40":"1","block-menu-block-41":"1","block-md-megamenu-1":"1","block-system-main-menu":"1","block-md-megamenu-4":"1","block-menu-block-37":"1","block-menu-block-43":"1","block-devel-execute-php":"1","block-block-14":"1","block-block-15":"1","block-block-16":"1","block-block-17":"1","block-views-page-banner-block":"1","block-views-page-banner-block-1":"1","block-menu-devel":"1","block-views-page-banner-block-2":"1","block-views-page-banner-block-3":"1","block-block-13":"1","block-devel-switch-user":"1"},"default_state":1,"slide_type":1,"slide_speed":200,"block_title":"h2.block-title","block":".block","block_content":"form"},"googleCSE":{"cx":"010553974735857325694:ummitkxjzns","language":"","resultsWidth":600,"domain":"www.google.com"},"better_exposed_filters":{"views":{"authors":{"displays":{"block_2":{"filters":[]},"block_1":{"filters":[]}}},"blue_coda_related_content":{"displays":{"block_2":{"filters":[]}}},"page_banner":{"displays":{"block_1":{"filters":[]}}}}},"compactForms":{"forms":["user-login","comment-form","imce-upload-form","webform-client-form-167","edit-field-author-target-id-wrapper","edit-title","edit-field-author-target-id","edit-changed-wrapper","edb-landing-page-user-form","views-exposed-form-authors-page-1"],"stars":1},"eu_cookie_compliance":{"popup_enabled":1,"popup_agreed_enabled":0,"popup_hide_agreed":0,"popup_clicking_confirmation":1,"popup_html_info":"\u003Cdiv\u003E\n  \u003Cdiv class =\u0022popup-content info\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022\u003E\n      \u003Ch2\u003EWe use cookies on this site to enhance your user experience\u003C\/h2\u003E\n\u003Cp\u003EBy clicking any link on this page you are giving your consent for us to set cookies.\u003C\/p\u003E\n    \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022agree-button\u0022\u003EOK, I agree\u003C\/button\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022find-more-button\u0022\u003ENo, give me more info\u003C\/button\u003E\n    \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E\n","popup_html_agreed":"\u003Cdiv\u003E\n  \u003Cdiv class =\u0022popup-content agreed\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022\u003E\n      \u003Ch2\u003EThank you for accepting cookies\u003C\/h2\u003E\n\u003Cp\u003EYou can now hide this message or find out more about cookies.\u003C\/p\u003E\n    \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022hide-popup-button\u0022\u003EHide\u003C\/button\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022find-more-button\u0022 \u003EMore info\u003C\/button\u003E\n    \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","popup_height":"auto","popup_width":"100%","popup_delay":1000,"popup_link":"\/privacy-policy","popup_link_new_window":1,"popup_position":1,"popup_language":"en","domain":""},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"marketo_ma":{"track":true,"key":"069-ALB-339","library":"\/\/munchkin.marketo.net\/munchkin.js","initParams":[]},"urlIsAjaxTrusted":{"\/blog\/illustration-jsonb-capabilities-postgres-95":true},"bootstrap":{"anchorsFix":"0","anchorsSmoothScrolling":"0","formHasError":1,"popoverEnabled":1,"popoverOptions":{"animation":1,"html":0,"placement":"right","selector":"","trigger":"click","triggerAutoclose":1,"title":"","content":"","delay":0,"container":"body"},"tooltipEnabled":1,"tooltipOptions":{"animation":1,"html":0,"placement":"auto left","selector":"","trigger":"hover focus","delay":0,"container":"body"}}});</script>
+</head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-206251 node-type-blog-post i18n-en navbar-is-fixed-top">
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+      <header id="navbar" role="banner" class="navbar navbar-fixed-top navbar-default region-page-top  desktop-header">
+    <div class="container">
+      <div class="navbar-header">
+                  <a class="logo navbar-btn" href="/" title="Home">
+            <img src="https://www.enterprisedb.com/sites/default/files/logo_3.png" alt="Home" />
+          </a>
+        
+              </div>
+
+              <div class="navbar-collapse collapse">
+          <nav role="navigation">
+                          <a class="logo navbar-btn" href="/" title="Home">
+                <img src="https://www.enterprisedb.com/sites/default/files/logo_3.png" alt="Home" />
+              </a>
+                                                  <ul class="menu nav navbar-nav secondary"><li class="first leaf"><a href="/software-downloads-postgres" class="download">Downloads</a></li>
+<li class="leaf"><a href="/blog">Blog</a></li>
+<li class="leaf"><a href="/general-inquiry-form">Contact Us</a></li>
+<li class="leaf"><a href="/user/login">Login</a></li>
+<li class="leaf"><a href="/user">My Account</a></li>
+<li class="last expanded dropdown"><a href="/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">English <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="http://fr.enterprisedb.com/">Français</a></li>
+<li class="leaf"><a href="http://de.enterprisedb.com/">Deutsch</a></li>
+<li class="leaf"><a href="http://www.enterprisedb.co.jp/">Japanese</a></li>
+<li class="leaf"><a href="http://kr.enterprisedb.com/">Korean</a></li>
+<li class="last leaf"><a href="http://es.enterprisedb.com/">Spanish</a></li>
+</ul></li>
+</ul>                                        <div class="region region-navigation">
+    <section id="block-search-form" class="block block-search clearfix">
+
+      
+  <form class="google-cse form-search content-search" action="/blog/illustration-jsonb-capabilities-postgres-95" method="post" id="search-block-form" accept-charset="UTF-8"><div><div>
+      <h2 class="element-invisible">Search form</h2>
+    <div class="input-group"><input title="Enter the terms you wish to search for." placeholder="Search" class="form-control form-text" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" /><span class="input-group-btn"><button type="submit" class="btn btn-primary"><span class="icon glyphicon glyphicon-search" aria-hidden="true"></span></button></span></div><div class="form-actions form-wrapper form-group" id="edit-actions--2"><button class="element-invisible btn btn-primary form-submit" type="submit" id="edit-submit--2" name="op" value="Search">Search</button>
+</div><input type="hidden" name="form_build_id" value="form-JmW4-8eKiC0_gbcxdPduM9KX5bptw4eYzVJX1bl_LEo" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>
+</section>
+<section id="block-system-main-menu" class="block block-system desktop-main-menu block-menu clearfix">
+
+      
+  <ul class="nav navbar-nav"><li class="first expanded dropdown"><a href="/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">PRODUCTS <span class="caret"></span></a><ul class="dropdown-menu"><li class="first expanded"><a href="/products/edb-postgres-platform">EDB Postgres Platform</a></li>
+<li class="expanded"><a href="/products/edb-dbaas-framework-for-hybrid-clouds">DBaaS Framework for Hybrid Clouds</a></li>
+<li class="expanded"><a href="/products/edb-support-for-paas-environments">EDB Support for PaaS Environments</a></li>
+<li class="expanded"><a href="/products/edb-public-cloud-dbaas">EDB Public Cloud DBaaS</a></li>
+<li class="last leaf"><a href="/products/subscriptions">EDB Postgres Subscriptions</a></li>
+</ul></li>
+<li class="expanded dropdown"><a href="/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">USE CASES <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="/use-cases/new-application-development1">New Application Development</a></li>
+<li class="leaf"><a href="/use-cases/migration-to-the-cloud">Migration to the Cloud</a></li>
+<li class="leaf"><a href="/use-cases/application-modernization-0">Application Modernization</a></li>
+<li class="last leaf"><a href="/use_cases/legacy-migration">Legacy Migration</a></li>
+</ul></li>
+<li class="leaf"><a href="/customers">CUSTOMERS</a></li>
+<li class="leaf"><a href="/find-a-partner">PARTNERS</a></li>
+<li class="expanded dropdown"><a href="/services" data-target="#" class="dropdown-toggle" data-toggle="dropdown">SERVICES AND SUPPORT <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="/services">Services</a></li>
+<li class="leaf"><a href="/services/architectural-services">Architecture Services</a></li>
+<li class="leaf"><a href="/services/digital-transformation-services">Digital Transformation Services</a></li>
+<li class="leaf"><a href="/services/remotedba-services">RemoteDBA Services</a></li>
+<li class="leaf"><a href="/services/technical-account-management">Technical Account Management</a></li>
+<li class="leaf"><a href="/services/support">Support</a></li>
+<li class="leaf"><a href="/services/edb-supported-products-and-platforms">Supported Products and Platforms</a></li>
+<li class="last leaf"><a href="https://www.enterprisedb.com/simplesaml/saml2/idp/SSOService.php?spentityid=https://enterprisedbpartners.force.com">Support Portal</a></li>
+</ul></li>
+<li class="expanded dropdown"><a href="/training/training-and-certification" data-target="#" class="dropdown-toggle" data-toggle="dropdown">TRAINING <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="/training/training-and-certification">Training and Certification</a></li>
+<li class="leaf"><a href="/training/learning-paths">Learning Paths</a></li>
+<li class="leaf"><a href="http://inter.viewcentral.com/events/cust/calendar.aspx?cid=enterprisedb">Calendar</a></li>
+<li class="leaf"><a href="http://inter.viewcentral.com/reg/enterprisedb/EDBPostgresTraining">Catalog</a></li>
+<li class="last leaf"><a href="/find-a-partner">Training Partners</a></li>
+</ul></li>
+<li class="last expanded dropdown"><a href="/resources/product-documentation" data-target="#" class="dropdown-toggle" data-toggle="dropdown">RESOURCES <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="/resources/product-documentation">EDB Product Documentation</a></li>
+<li class="leaf"><a href="/resources/data-sheets">Data Sheets</a></li>
+<li class="leaf"><a href="/resources/white-papers">White Papers</a></li>
+<li class="leaf"><a href="/resources/webinars-webcasts">Webinars</a></li>
+<li class="leaf"><a href="/resources/videos">Videos</a></li>
+<li class="last leaf"><a href="/resources/tutorials">Tutorials</a></li>
+</ul></li>
+</ul>
+</section>
+  </div>
+                      </nav>
+        </div>
+            
+          </div>
+  </header>
+  <header id="navbar" class="navbar navbar-fixed-top navbar-default region-page-top mobile-header">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="slide-nav">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+                      <a class="logo navbar-brand" href="/" title="Home">
+              <img src="https://www.enterprisedb.com/sites/default/files/logo_3.png" alt="Home" />
+            </a>
+                  </div>
+        <div id="slidemenu">
+          <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="search" placeholder="search" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+          <ul class="nav navbar-nav"><li class="first expanded dropdown"><a href="/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">PRODUCTS <span class="caret"></span></a><ul class="dropdown-menu"><li class="first expanded"><a href="/products/edb-postgres-platform">EDB Postgres Platform</a></li>
+<li class="expanded"><a href="/products/edb-dbaas-framework-for-hybrid-clouds">DBaaS Framework for Hybrid Clouds</a></li>
+<li class="expanded"><a href="/products/edb-support-for-paas-environments">EDB Support for PaaS Environments</a></li>
+<li class="expanded"><a href="/products/edb-public-cloud-dbaas">EDB Public Cloud DBaaS</a></li>
+<li class="last leaf"><a href="/products/subscriptions">EDB Postgres Subscriptions</a></li>
+</ul></li>
+<li class="expanded dropdown"><a href="/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">USE CASES <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="/use-cases/new-application-development1">New Application Development</a></li>
+<li class="leaf"><a href="/use-cases/migration-to-the-cloud">Migration to the Cloud</a></li>
+<li class="leaf"><a href="/use-cases/application-modernization-0">Application Modernization</a></li>
+<li class="last leaf"><a href="/use_cases/legacy-migration">Legacy Migration</a></li>
+</ul></li>
+<li class="leaf"><a href="/customers">CUSTOMERS</a></li>
+<li class="leaf"><a href="/find-a-partner">PARTNERS</a></li>
+<li class="expanded dropdown"><a href="/services" data-target="#" class="dropdown-toggle" data-toggle="dropdown">SERVICES AND SUPPORT <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="/services">Services</a></li>
+<li class="leaf"><a href="/services/architectural-services">Architecture Services</a></li>
+<li class="leaf"><a href="/services/digital-transformation-services">Digital Transformation Services</a></li>
+<li class="leaf"><a href="/services/remotedba-services">RemoteDBA Services</a></li>
+<li class="leaf"><a href="/services/technical-account-management">Technical Account Management</a></li>
+<li class="leaf"><a href="/services/support">Support</a></li>
+<li class="leaf"><a href="/services/edb-supported-products-and-platforms">Supported Products and Platforms</a></li>
+<li class="last leaf"><a href="https://www.enterprisedb.com/simplesaml/saml2/idp/SSOService.php?spentityid=https://enterprisedbpartners.force.com">Support Portal</a></li>
+</ul></li>
+<li class="expanded dropdown"><a href="/training/training-and-certification" data-target="#" class="dropdown-toggle" data-toggle="dropdown">TRAINING <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="/training/training-and-certification">Training and Certification</a></li>
+<li class="leaf"><a href="/training/learning-paths">Learning Paths</a></li>
+<li class="leaf"><a href="http://inter.viewcentral.com/events/cust/calendar.aspx?cid=enterprisedb">Calendar</a></li>
+<li class="leaf"><a href="http://inter.viewcentral.com/reg/enterprisedb/EDBPostgresTraining">Catalog</a></li>
+<li class="last leaf"><a href="/find-a-partner">Training Partners</a></li>
+</ul></li>
+<li class="last expanded dropdown"><a href="/resources/product-documentation" data-target="#" class="dropdown-toggle" data-toggle="dropdown">RESOURCES <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="/resources/product-documentation">EDB Product Documentation</a></li>
+<li class="leaf"><a href="/resources/data-sheets">Data Sheets</a></li>
+<li class="leaf"><a href="/resources/white-papers">White Papers</a></li>
+<li class="leaf"><a href="/resources/webinars-webcasts">Webinars</a></li>
+<li class="leaf"><a href="/resources/videos">Videos</a></li>
+<li class="last leaf"><a href="/resources/tutorials">Tutorials</a></li>
+</ul></li>
+</ul><ul class="nav navbar-nav"><li class="first leaf"><a href="/software-downloads-postgres" class="download">Downloads</a></li>
+<li class="leaf"><a href="/blog">Blog</a></li>
+<li class="leaf"><a href="/general-inquiry-form">Contact Us</a></li>
+<li class="leaf"><a href="/user/login">Login</a></li>
+<li class="leaf"><a href="/user">My Account</a></li>
+<li class="last expanded dropdown"><a href="/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">English <span class="caret"></span></a><ul class="dropdown-menu"><li class="first leaf"><a href="http://fr.enterprisedb.com/">Français</a></li>
+<li class="leaf"><a href="http://de.enterprisedb.com/">Deutsch</a></li>
+<li class="leaf"><a href="http://www.enterprisedb.co.jp/">Japanese</a></li>
+<li class="leaf"><a href="http://kr.enterprisedb.com/">Korean</a></li>
+<li class="last leaf"><a href="http://es.enterprisedb.com/">Spanish</a></li>
+</ul></li>
+</ul>        </div>
+      </div>
+
+    </div>
+  </header>
+<div class="main-container container-fluid">
+
+  
+  <div class="row">
+
+    
+    <section  class="col-sm-12">
+
+      
+                <div class="content-top">  <div class="region region-content-top">
+    <section id="block-views-page-banner-block-1" class="block block-views clearfix">
+
+      
+  <div class="view view-page-banner view-id-page_banner view-display-id-block_1 view-dom-id-5235c7c5e65db017c697733c1223bd0c">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <div class="views-field views-field-field-banner-image">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-nothing">        <span class="field-content"><div class="pagebanner"><div><h1>EDB Blog</h1></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>
+</section>
+  </div>
+</div>
+                        <div class="container"><ol class="breadcrumb"><li><a href="/">Home</a></li>
+<li><a href="/listing/blog">Blog</a></li>
+<li class="active">An Illustration of JSONB Capabilities in Postgres 9.5</li>
+</ol></div>
+                        <a id="main-content"></a>
+        <div class="container">
+
+                <h1 class="page-header">An Illustration of JSONB Capabilities in Postgres 9.5</h1>                </div>
+        <div class="container"></div>
+                        <div class="side-tabs">
+                <div id="tabs">
+                  </div>
+                </div>
+                
+                          <div class="region region-content">
+    <section id="block-system-main" class="block block-system clearfix">
+
+      
+  <div class="panel-flexible container clearfix" >
+<div class="panel-flexible-inside container-inside">
+<div class="panels-flexible-row panels-flexible-row-container-2 panels-flexible-row-first clearfix ">
+  <div class="inside panels-flexible-row-inside panels-flexible-row-container-2-inside panels-flexible-row-inside-first clearfix">
+<div class="panels-flexible-region panels-flexible-region-container-title_area panels-flexible-region-first panels-flexible-region-last ">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-container-title_area-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+  </div>
+</div>
+  </div>
+</div>
+<div class="panels-flexible-row panels-flexible-row-container-1 clearfix container">
+  <div class="inside panels-flexible-row-inside panels-flexible-row-container-1-inside clearfix">
+<div class="panels-flexible-region panels-flexible-region-container-header panels-flexible-region-first ">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-container-header-inside panels-flexible-region-inside-first">
+<div class="panel-pane pane-entity-field pane-node-field-date-tax"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-field-date-tax field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even">06/22/2016</div></div></div>  </div>
+
+  
+  </div>
+  </div>
+</div>
+<div class="panels-flexible-region panels-flexible-region-container-author ">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-container-author-inside">
+  </div>
+</div>
+<div class="panels-flexible-region panels-flexible-region-container-topics ">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-container-topics-inside">
+  </div>
+</div>
+<div class="panels-flexible-region panels-flexible-region-container-blank panels-flexible-region-last ">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-container-blank-inside panels-flexible-region-inside-last">
+  </div>
+</div>
+  </div>
+</div>
+<div class="panels-flexible-row panels-flexible-row-container-main-row panels-flexible-row-last clearfix container">
+  <div class="inside panels-flexible-row-inside panels-flexible-row-container-main-row-inside panels-flexible-row-inside-last clearfix">
+<div class="panels-flexible-region panels-flexible-region-container-center panels-flexible-region-first panel-center">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-container-center-inside panels-flexible-region-inside-first">
+<div class="panel-pane pane-views pane-authors"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="view view-authors view-id-authors view-display-id-block_2 view-dom-id-2b5e1c3db47027c4200e084ac0ba0f57">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <div class="views-field views-field-nothing">        <span class="field-content"><a href="/user/292845/published_articles"><div>Author: Marc Linster</div>
+<div>Read More by Marc Linster</div></a></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-entity-field pane-node-body"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p><img alt="" src="/sites/default/files/Data-towers_0.jpeg" style="width: 390px; height: 260px; margin: 7px; float: left;" />Postgres introduced JSON and JSONB in versions 9.3 and 9.4, respectively, with JSONB (Binary Javascript Object Notation) being the canonical form of JSON, stored as binary objects with improved compression and more capabilities. Early releases of JSONB had a limited set of operators, but 9.5 introduced a complete set of JSONB capabilities, including operators for updating and deleting, and very good indexing capabilities.</p>
+<p>In this blog, I will review some of those capabilities and show that in Postgres, JSONB is a first order data type that can be used easily and efficiently in standard SQL queries, indexes, and constraints.</p>
+<p>To illustrate these capabilities, I have created a simple data model of customers, products, orders and order lines. This example primarily addresses the customer table.</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><font face="courier new">jsonb=# \d customer</font></p>
+<p><font face="courier new">                 Table "example.customer"</font></p>
+<p><font face="courier new">     Column     |            Type             | Modifiers</font></p>
+<p><font face="courier new">----------------+-----------------------------+-----------</font></p>
+<p><font face="courier new"> id             | character varying(40)       | not null</font></p>
+<p><font face="courier new"> name           | jsonb                       |</font></p>
+<p><font face="courier new"> customer_since | timestamp without time zone |</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">Indexes:</font></p>
+<p><font face="courier new">    "customer_pkey" PRIMARY KEY, btree (id)</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">Check constraints:</font></p>
+<p><font face="courier new">    "validate_customer_name" CHECK ((name -&gt;&gt; 'first name'::text) IS NOT NULL AND (name -&gt;&gt; 'last name'::text) IS NOT NULL)</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">Referenced by:</font></p>
+<p><font face="courier new">    TABLE "customer_order" CONSTRAINT "customer_order_customer_id_fkey" FOREIGN KEY (customer_id) REFERENCES customer(id)</font></p>
+<p> </p>
+<p>The customer table has 4 columns, and most of our example will deal with the ‘name’ column, which is of type JSONB.</p>
+<p>A typical customer record looks like this:</p>
+<p> </p>
+<p><font face="courier new">jsonb=# \x</font></p>
+<p><font face="courier new">Expanded display is on.</font></p>
+<p><font face="courier new">jsonb=# select * from customer where id = 'cust000190943';</font></p>
+<p><font face="courier new">-[ RECORD 1 ]--+----------------------------------------------------------------------------------</font></p>
+<p><font face="courier new">id             | cust000190943</font></p>
+<p><font face="courier new">name           | {"id": "cust000190943", "initial": "R", "last name": "Smith", "first name": "Hans"}</font></p>
+<p><font face="courier new">customer_since | 17-JUN-16 11:25:53.44615</font></p>
+<p> </p>
+<p>Alternatively, I can also use the jsonb_pretty function to make the output more readable:</p>
+<p> </p>
+<p><font face="courier new">jsonb=# SELECT id, customer_since, jsonb_pretty(name)</font></p>
+<p><font face="courier new">from customer where id = 'cust000190943';</font></p>
+<p><font face="courier new">-[ RECORD 1 ]--+---------------------------</font></p>
+<p><font face="courier new">id             | cust000190943</font></p>
+<p><font face="courier new">customer_since | 17-JUN-16 11:25:53.44615</font></p>
+<p><font face="courier new">jsonb_pretty   | {                         +</font></p>
+<p><font face="courier new">               |     "id": "cust000190943",+</font></p>
+<p><font face="courier new">               |     "initial": "R",       +</font></p>
+<p><font face="courier new">               |     "last name": "Smith", +</font></p>
+<p><font face="courier new">               |     "first name": "Hans"  +</font></p>
+<p><font face="courier new">               | }</font></p>
+<p> </p>
+<p>My sample data set has 1,000,000 records. For illustration purposes, I have replicated the primary key ‘id’ in the JSONB column ‘name’. Please note: all query performance is measured on a VM on OSX running Windows 10.</p>
+<h3><strong>Query performance for JSONB columns</strong></h3>
+<p>When I run a query based on the primary key ‘id’, then response time is shorter than  0.6 milliseconds, as the primary key is supported by a btree index.</p>
+<p> </p>
+<p><font face="courier new">jsonb=# \timing</font></p>
+<p><font face="courier new">Timing is on.</font></p>
+<p><font face="courier new">jsonb=# select * from customer where id = 'cust000000001';</font></p>
+<p><font face="courier new">-[ RECORD 1 ]--+----------------------------------------------------------------------------------------------------</font></p>
+<p><font face="courier new">id             | cust000000001</font></p>
+<p><font face="courier new">name           | {"id": "cust000000001", "title": "Dr.", "initial": "Q", "last name": "Kordon", "first name": "Bob"}</font></p>
+<p><font face="courier new">customer_since |</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">Time: 0.569 ms</font></p>
+<p> </p>
+<p>When I run the same query against the value of the key ‘id’ in the JSONB column ‘name’, I get an average performance of approximately 430 milliseconds, as that column is not indexed.</p>
+<p> </p>
+<p><font face="courier new">jsonb=# select * from customer where name-&gt;&gt;'id' = 'cust000000001';</font></p>
+<p><font face="courier new">-[ RECORD 1 ]--+----------------------------------------------------------------------------------------------------</font></p>
+<p><font face="courier new">id             | cust000000001</font></p>
+<p><font face="courier new">name           | {"id": "cust000000001", "title": "Dr.", "initial": "Q", "last name": "Kordon", "first name": "Bob"}</font></p>
+<p><font face="courier new">customer_since |</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">Time: 430.838 ms</font></p>
+<p> </p>
+<p>Once I index that column with a btree index, I get similar performance on the JSONB data element as I get in the primary key defined as character varying(40).</p>
+<p> </p>
+<p><font face="courier new">jsonb=# CREATE INDEX customer_jsonbid_idx ON customer ((name-&gt;&gt;'id'));</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">jsonb=# select * from customer where name-&gt;&gt;'id' = 'cust000000001';</font></p>
+<p><font face="courier new">-[ RECORD 1 ]--+----------------------------------------------------------------------------------------------------</font></p>
+<p><font face="courier new">id             | cust000000001</font></p>
+<p><font face="courier new">name           | {"id": "cust000000001", "title": "Dr.", "initial": "Q", "last name": "Kordon", "first name": "Bob"}</font></p>
+<p><font face="courier new">customer_since |</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">Time: 0.640 ms</font></p>
+<p> </p>
+<p>This allows me to use JSONB data in complex queries efficiently and effectively, just as if it were a conventional SQL data type. In the sample query below, I am joining on a JSONB field (c.name-&gt;&gt;id) and a conventional SQL data type (co.customer_id) to find all the customers who have bought products made in New Zealand.</p>
+<p> </p>
+<p><font face="courier new">SELECT</font></p>
+<p><font face="courier new">       c.name-&gt;&gt;'title' "Title",</font></p>
+<p><font face="courier new">       c.name-&gt;&gt;'first name' "First Name",</font></p>
+<p><font face="courier new">       c.name-&gt;&gt;'last name' "Last Name",</font></p>
+<p><font face="courier new">       to_char(co.order_date, 'Day - DD, Mon, YYYY') "Purchase Date",</font></p>
+<p><font face="courier new">       col.quantity "Quantity",</font></p>
+<p><font face="courier new">       p.name "Product Name"</font></p>
+<p><font face="courier new">FROM customer c</font></p>
+<p><font face="courier new">JOIN customer_order co ON c.name-&gt;&gt;'id' = co.customer_id</font></p>
+<p><font face="courier new">JOIN customer_order_line col ON co.id = col.customer_order_id</font></p>
+<p><font face="courier new">JOIN product p ON p.id = col.product_id</font></p>
+<p><font face="courier new">WHERE p.country_iso3 = 'NZL';</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new"> Title | First Name | Last Name |       Purchase Date       | Quantity | Product Name</font></p>
+<p><font face="courier new">-------+------------+-----------+---------------------------+----------+--------------</font></p>
+<p><font face="courier new"> Mr.   | Haley      | Horn      | Friday    - 24, Jun, 2016 |       24 | Green</font></p>
+<p><font face="courier new"> Dr.   | Joe        | Kordon    | Tuesday   - 31, May, 2016 |       52 | Green</font></p>
+<p><font face="courier new"> Dr.   | Sue        | Smith     | Sunday    - 05, Jun, 2016 |       74 | Yellow</font></p>
+<p><font face="courier new"> Hon.  | Breanna    | Brown     | Sunday    - 15, May, 2016 |       62 | Green</font></p>
+<p><font face="courier new"> Dr.   | Marc       | Wagner    | Wednesday - 18, May, 2016 |       84 | White</font></p>
+<p><font face="courier new"> Mr.   | Haley      | Tinker    | Sunday    - 26, Jun, 2016 |        9 | White</font></p>
+<p><font face="courier new"> Mr.   | Sue        | Tinker    | Saturday  - 18, Jun, 2016 |       31 | Green</font></p>
+<p><font face="courier new"> Mr.   | Sue        | Tinker    | Saturday  - 18, Jun, 2016 |       50 | White</font></p>
+<p><font face="courier new">       | Kahleesi   | Horn      | Thursday  - 26, May, 2016 |       16 | Green</font></p>
+<p><font face="courier new"> Dr.   | Kahleesi   | Wagner    | Thursday  - 28, Apr, 2016 |       42 | Yellow</font></p>
+<p><font face="courier new"> Ms.   | Marc       | Kordon    | Tuesday   - 31, May, 2016 |       58 | White</font></p>
+<p><font face="courier new"> Hon.  | Joe        | Wagner    | Saturday  - 16, Apr, 2016 |       63 | Yellow</font></p>
+<p><font face="courier new">…</font></p>
+<h3><strong>Integrity Constraints on JSONB columns</strong></h3>
+<p>JSONB in Postgres 9.5 also supports integrity constraints. In the customer table defined above, we have a check constraint ‘validate_customer_name’ to make sure that customers cannot have first names or last names that are undefined, i.e., the JSONB keys ‘first name’ and ‘last name’ cannot be null.</p>
+<p> </p>
+<p><font face="courier new">Check constraints:</font></p>
+<p><font face="courier new">    "validate_customer_name" CHECK ((name -&gt;&gt; 'first name'::text) IS NOT NULL AND (name -&gt;&gt; 'last name'::text) IS NOT NULL)</font></p>
+<p> </p>
+<p>If I run the following query:</p>
+<p> </p>
+<p><font face="courier new">INSERT INTO customer VALUES (</font></p>
+<p><font face="courier new">       'test2',</font></p>
+<p><font face="courier new">       '{"id": "test2","first name": "Hans"}')</font></p>
+<p> </p>
+<p>I get an error as that constraint is violated</p>
+<p> </p>
+<p><font face="courier new">ERROR:  new row for relation "customer" violates check constraint "validate_customer_name"</font></p>
+<p><font face="courier new">DETAIL:  Failing row contains (test2, {"id": "test2", "first name": "Hans"}, null, null).</font></p>
+<p> </p>
+<p>This query, which adds a first name and a last name, succeeds, as it meets the check constraint</p>
+<p> </p>
+<p><font face="courier new">INSERT INTO customer VALUES (</font></p>
+<p><font face="courier new">       'test2',</font></p>
+<p><font face="courier new">       '{"id": "test2","first name": "Hans", "last name": "Prince"}')</font></p>
+<h3><strong>JSONB data manipulation</strong></h3>
+<p>Postgres 9.5 also provides numerous capabilities to manipulate JSONB data elements. The previous queries created a record with the following data:</p>
+<p> </p>
+<p><font face="courier new">jsonb=# SELECT id, jsonb_pretty(name)from customer where id = 'test2';</font></p>
+<p><font face="courier new">  id   |        jsonb_pretty</font></p>
+<p><font face="courier new">-------+----------------------------</font></p>
+<p><font face="courier new"> test2 | {                         +</font></p>
+<p><font face="courier new">       |     "id": "test2",        +</font></p>
+<p><font face="courier new">       |     "last name": "Prince",+</font></p>
+<p><font face="courier new">       |     "first name": "Hans"  +</font></p>
+<p><font face="courier new">       | }</font></p>
+<p> </p>
+<p>I now add a new key ‘title’ with value ‘Hon’ using ‘||’ operator to concatenate two JSONB values.</p>
+<p> </p>
+<p><font face="courier new">UPDATE customer</font></p>
+<p><font face="courier new">       SET name = name || '{"title": "Hon"}'</font></p>
+<p><font face="courier new">       WHERE id = 'test2';</font></p>
+<p> </p>
+<p>This  results in:</p>
+<p> </p>
+<p><font face="courier new">jsonb=# SELECT id, jsonb_pretty(name)from customer where id = 'test2';</font></p>
+<p><font face="courier new">  id   |        jsonb_pretty</font></p>
+<p><font face="courier new">-------+----------------------------</font></p>
+<p><font face="courier new"> test2 | {                         +</font></p>
+<p><font face="courier new">       |     "id": "test2",        +</font></p>
+<p><font face="courier new">       |     "title": "Hon",       +</font></p>
+<p><font face="courier new">       |     "last name": "Prince",+</font></p>
+<p><font face="courier new">       |     "first name": "Hans"  +</font></p>
+<p><font face="courier new">       | }</font></p>
+<p> </p>
+<p>If I want to change the value of the key ‘title’, I run a simple update query that replaces the value for the key ‘title’:</p>
+<p> </p>
+<p><font face="courier new">UPDATE customer</font></p>
+<p><font face="courier new">       SET name = name || '{"title": "His Excellence"}'</font></p>
+<p><font face="courier new">       WHERE id = 'test2';</font></p>
+<p> </p>
+<p>Resulting in</p>
+<p> </p>
+<p><font face="courier new">jsonb=# SELECT id, jsonb_pretty(name)from customer where id = 'test2';</font></p>
+<p><font face="courier new">  id   |          jsonb_pretty</font></p>
+<p><font face="courier new">-------+--------------------------------</font></p>
+<p><font face="courier new"> test2 | {                             +</font></p>
+<p><font face="courier new">       |     "id": "test2",            +</font></p>
+<p><font face="courier new">       |     "title": "His Excellence",+</font></p>
+<p><font face="courier new">       |     "last name": "Prince",    +</font></p>
+<p><font face="courier new">       |     "first name": "Hans"      +</font></p>
+<p><font face="courier new">       | }</font></p>
+<p><font face="courier new">(1 row)</font></p>
+<p> </p>
+<p>The same operator can be used to add nested documents</p>
+<p> </p>
+<p><font face="courier new">UPDATE customer</font></p>
+<p><font face="courier new">       SET name = name ||</font></p>
+<p style="margin-left:1.0in;"><font face="courier new">'{"contact": {"fax": "617-123-5678", "cell": "617-123-4567"}}'</font></p>
+<p><font face="courier new">       WHERE id = 'test2';</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">jsonb=# SELECT id, jsonb_pretty(name)from customer where id = 'test2';</font></p>
+<p><font face="courier new">  id   |          jsonb_pretty</font></p>
+<p><font face="courier new">-------+--------------------------------</font></p>
+<p><font face="courier new"> test2 | {                             +</font></p>
+<p><font face="courier new">       |     "id": "test2",            +</font></p>
+<p><font face="courier new">       |     "title": "His Excellence",+</font></p>
+<p><font face="courier new">       |     "contact": {              +</font></p>
+<p><font face="courier new">       |         "fax": "617-123-5678",+</font></p>
+<p><font face="courier new">       |         "cell": "617-123-4567"+</font></p>
+<p><font face="courier new">       |     },                        +</font></p>
+<p><font face="courier new">       |     "last name": "Prince",    +</font></p>
+<p><font face="courier new">       |     "first name": "Hans"      +</font></p>
+<p><font face="courier new">       | }</font></p>
+<p><font face="courier new">(1 row)</font></p>
+<p> </p>
+<p>The operator jsonb_set allows me to update values inside the nested documents</p>
+<p> </p>
+<p><font face="courier new">UPDATE customer</font></p>
+<p><font face="courier new">       SET name = jsonb_set (name, '{contact, cell}', '"617-123-0101"')</font></p>
+<p><font face="courier new">              WHERE id = 'test2';</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">jsonb=# SELECT id, jsonb_pretty(name)from customer where id = 'test2';</font></p>
+<p><font face="courier new">  id   |          jsonb_pretty</font></p>
+<p><font face="courier new">-------+--------------------------------</font></p>
+<p><font face="courier new"> test2 | {                             +</font></p>
+<p><font face="courier new">       |     "id": "test2",            +</font></p>
+<p><font face="courier new">       |     "title": "His Excellence",+</font></p>
+<p><font face="courier new">       |     "contact": {              +</font></p>
+<p><font face="courier new">       |         "fax": "617-123-5678",+</font></p>
+<p><font face="courier new">       |         "cell": "617-123-0101"+</font></p>
+<p><font face="courier new">       |     },                        +</font></p>
+<p><font face="courier new">       |     "last name": "Prince",    +</font></p>
+<p><font face="courier new">       |     "first name": "Hans"      +</font></p>
+<p><font face="courier new">       | }</font></p>
+<p><font face="courier new">(1 row)</font></p>
+<p> </p>
+<p>The ‘#-’ operator allows me to delete keys and their values inside a nested JSONB document.</p>
+<p> </p>
+<p><font face="courier new">UPDATE customer</font></p>
+<p><font face="courier new">       SET name = name #- '{contact, fax}'</font></p>
+<p><font face="courier new">              WHERE id = 'test2';</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">jsonb=# SELECT id, jsonb_pretty(name)from customer where id = 'test2';</font></p>
+<p><font face="courier new">  id   |          jsonb_pretty</font></p>
+<p><font face="courier new">-------+--------------------------------</font></p>
+<p><font face="courier new"> test2 | {                             +</font></p>
+<p><font face="courier new">       |     "id": "test2",            +</font></p>
+<p><font face="courier new">       |     "title": "His Excellence",+</font></p>
+<p><font face="courier new">       |     "contact": {              +</font></p>
+<p><font face="courier new">       |         "cell": "617-123-0101"+</font></p>
+<p><font face="courier new">       |     },                        +</font></p>
+<p><font face="courier new">       |     "last name": "Prince",    +</font></p>
+<p><font face="courier new">       |     "first name": "Hans"      +</font></p>
+<p><font face="courier new">       | }</font></p>
+<p><font face="courier new">(1 row)</font></p>
+<p> </p>
+<h3><strong>Make JSONB data look like a standard SQL table</strong></h3>
+<p>The following query uses the LATERAL command (see <a href="https://www.postgresql.org/docs/9.5/static/sql-select.html">https://www.postgresql.org/docs/9.5/static/sql-select.html</a>), which allows columns in the FROM clause in a JOIN or a sub-select to refer to columns in the SELECT clause, combined with jsonb_to_record, which builds a record from a JSONB object.</p>
+<p> </p>
+<p><font face="courier new">SELECT </font></p>
+<p><font face="courier new">      c.id "Customer Id",</font></p>
+<p><font face="courier new">      l.title "Title",</font></p>
+<p><font face="courier new">      l."first name" "First Name",</font></p>
+<p><font face="courier new">      l.initial "Initials",</font></p>
+<p><font face="courier new">      l."last name" "Last Name",</font></p>
+<p><font face="courier new">      l."postfix" "Postfix"</font></p>
+<p><font face="courier new">FROM  customer c</font></p>
+<p><font face="courier new">JOIN  LATERAL</font></p>
+<p><font face="courier new">      ( SELECT *</font></p>
+<p><font face="courier new">             FROM jsonb_to_record(name)</font></p>
+<p><font face="courier new">                      AS detail(</font></p>
+<p><font face="courier new">                             id text,</font></p>
+<p><font face="courier new">                             title text,</font></p>
+<p><font face="courier new">                             initial text,</font></p>
+<p><font face="courier new">                             postfix text,</font></p>
+<p><font face="courier new">                             "last name" text,</font></p>
+<p><font face="courier new">                             "first name" text</font></p>
+<p><font face="courier new">                             )) l</font></p>
+<p><font face="courier new">ON (l.id = c.id)</font></p>
+<p><font face="courier new">ORDER BY c.id ASC</font></p>
+<p><font face="courier new">LIMIT 20;</font></p>
+<p><font face="courier new"> </font></p>
+<p><font face="courier new">  Customer Id  | Title | First Name | Initials | Last Name | Postfix</font></p>
+<p><font face="courier new">---------------+-------+------------+----------+-----------+---------</font></p>
+<p><font face="courier new"> cust000000001 | Dr.   | Bob        | Q        | Kordon    |</font></p>
+<p><font face="courier new"> cust000000002 | Mr.   | James      | F        | Schiller  |</font></p>
+<p><font face="courier new"> cust000000003 | Dr.   | Haley      | V        | Buchholz  | III</font></p>
+<p><font face="courier new"> cust000000004 | Hon.  | Marc       | V        | Goethe    | Sr</font></p>
+<p><font face="courier new"> cust000000005 |       | James      | W        | Schiller  | II</font></p>
+<p><font face="courier new"> cust000000006 | Ms.   | Breanna    | J        | Horn      | II</font></p>
+<p><font face="courier new"> cust000000007 | Ms.   | Haley      | H        | Cleland   | Jr.</font></p>
+<p><font face="courier new"> cust000000008 | Mr.   | James      | E        | Tinker    | Jr.</font></p>
+<p><font face="courier new"> cust000000009 |       | Hans       | V        | Kordon    | Jr.</font></p>
+<h3><strong>Conclusions</strong></h3>
+<p>JSONB in Postgres 9.5 provides a rich array of capabilities that makes it easy to implement solutions that need the flexibility of NoSQL, without giving up on the strengths of the relational model. The fact that standard SQL and JSONB can be used in the same transactional context, with a tight integration that allows converting JSONB to records (and vice-versa), creates a perfect NoSQL (Not only SQL) solution.</p>
+<p>For a complete definition of the JSONB capabilities in Postgres 9.5, please review the <a href="http://bit.ly/2afMCF9">JSON and JSONB Functions and Operators page</a> in the Postgres documentation. </p>
+<p>To learn more about NoSQL and JSON, please also view the video <em><a href="http://bit.ly/2ameYyD">Greater Developer Flexibility with NoSQL in EDB Postgres</a> </em>or contact us directly at <a href="mailto:sales@enterprisedb.com">sales@enterprisedb.com</a>.</p>
+<p><em>Marc Linster, Ph.D., is Senior Vice President, Products and Services, at EnterpriseDB.</em></p>
+</div></div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-block-4 pane-block"  >
+  
+      
+  
+  <div class="pane-content">
+    <p>SHARE   <a href="https://www.facebook.com/EnterpriseDB" target="_blank"><img alt="" src="/sites/default/files/icons/facebook.png" /></a>  <a href="https://twitter.com/EDBPostgres" target="_blank"><img alt="" src="/sites/default/files/icons/twitter.png" /></a>  <a href="https://www.linkedin.com/company/enterprisedb" target="_blank"><img alt="" src="/sites/default/files/icons/linkedin.png" /></a>  <a href="https://plus.google.com/108046988421677398468/" target="_blank"><img alt="" src="/sites/default/files/icons/google.png" /></a></p>
+  </div>
+
+  
+  </div>
+  </div>
+</div>
+<div class="panels-flexible-region panels-flexible-region-container-right_sidebar panels-flexible-region-last panel-right">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-container-right_sidebar-inside panels-flexible-region-inside-last">
+<div class="panel-pane pane-views pane-authors"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="view view-authors view-id-authors view-display-id-block_1 view-dom-id-0a81d9470cc14661a93f7cb2fc4b7ffb">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <div class="views-field views-field-picture">        <div class="field-content"><a href="/user/292845/published_articles">  <div class="user-picture">
+    <img typeof="foaf:Image" class="img-responsive" src="https://www.enterprisedb.com/sites/default/files/styles/thumbnail/public/pictures/picture-292845-1487693948.jpg?itok=K1hz-4nL" alt="marc.linster_enterprisedb.com&#039;s picture" title="marc.linster_enterprisedb.com&#039;s picture" />  </div>
+</a></div>  </div>  
+  <div class="views-field views-field-nothing">        <span class="field-content"><a href="/user/292845/published_articles">Read More by Marc Linster</a></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>  </div>
+</div>
+  </div>
+</div>
+</div>
+</div>
+
+</section>
+  </div>
+
+      
+    </section>
+
+    
+  </div>
+
+  
+</div>
+  <footer>
+    <div class="container">
+      <div class="footer-left col-md-4 col-md-push-4">   <div class="region region-footer-left">
+    <section id="block-menu-block-6" class="block block-menu-block clearfix">
+
+      
+  <div class="menu-block-wrapper menu-block-6 menu-name-menu-footer-menu parent-mlid-0 menu-level-1">
+  <ul class="menu nav"><li class="first leaf menu-mlid-7157"><a href="/about-us">About Us</a></li>
+<li class="leaf menu-mlid-7134"><a href="http://enterprisedb.mytribehr.com/careers">Careers</a></li>
+<li class="leaf menu-mlid-7510"><a href="/about-us/press-releases">News</a></li>
+<li class="leaf menu-mlid-7511"><a href="/about-us/events">Events</a></li>
+<li class="leaf menu-mlid-7132"><a href="/about-us/media-coverage">Media Center</a></li>
+<li class="last leaf menu-mlid-7133"><a href="/terms-use">Legal</a></li>
+</ul></div>
+
+</section>
+  </div>
+</div>
+      <div class="footer-center col-md-4 col-md-pull-4">  <div class="region region-footer-center">
+    <section id="block-block-1" class="block block-block clearfix">
+
+      
+  <p><strong>EnterpriseDB</strong><br /><strong>Corporate Headquarters</strong><br />
+34 Crosby Drive<br />
+Suite 201<br />
+Bedford, MA 01730, USA</p>
+<p>+1 781-357-3390 (tel)<br />
++1 978-467-1307 (fax)</p>
+<p><a href="https://blogs.enterprisedb.com/"><img alt="" src="/sites/default/files/icons/rss.png" /></a>  <a href="https://www.facebook.com/EnterpriseDB" target="_blank"><img alt="" src="/sites/default/files/icons/facebook.png" /></a>  <a href="https://twitter.com/EDBPostgres" target="_blank"><img alt="" src="/sites/default/files/icons/twitter.png" /></a>  <a href="https://www.linkedin.com/company/enterprisedb" target="_blank"><img alt="" src="/sites/default/files/icons/linkedin.png" /></a>  <a href="https://plus.google.com/108046988421677398468/" target="_blank"><img alt="" src="/sites/default/files/icons/google.png" /></a></p>
+
+</section>
+  </div>
+</div>
+      <div class="footer-right col-md-4">  <div class="region region-footer-right">
+    <section id="block-block-13" class="block block-block clearfix">
+
+      
+  <p>2017 EnterpriseDB Corporation<br />
+All rights reserved.</p>
+<p><a href="/privacy-policy">Privacy Policy</a><br /><a href="/terms-use">Terms of Use</a><br /><a href="/trademarks">Trademarks</a></p>
+
+</section>
+  </div>
+</div>
+    </div>
+    <div class="footer-bottom">   <div class="region region-footer">
+    <section id="block-block-2" class="block block-block clearfix">
+
+      
+  <p>Copyright © 2016 EnterpriseDB® (EDB™)          <a href="/privacy-policy-0">Privacy Policy</a>   |    <a href="/terms-use">Terms of Use</a> |    <a href="/trademarks">Trademarks</a></p>
+
+</section>
+  </div>
+</div>
+  </footer>
+<iframe sandbox="allow-scripts" style="display: none;" class="hidden-iframe" id="hidden-iframe" name="hidden-iframe"></iframe>
+  <script src="https://www.enterprisedb.com/sites/all/modules/contrib/eu_cookie_compliance/js/eu_cookie_compliance.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/all/themes/bootstrap/js/bootstrap.js?oo8t4d"></script>
+<script src="https://www.enterprisedb.com/sites/default/files/js_injector/js_injector_1.js?oo8t4d"></script>
+</body>
+</html>

@@ -70,6 +70,29 @@ pgVSmongo/testes/temps# ./bash_pg_version.sh
 
 PID: 4999 [RUNTIME: 04-10-17 13:44:44] bash_pg_version.sh: PostgreSQL Version 9.5.6
 
+---
+~$ psql -h 127.0.0.1 -p 5432 -d benchmark -U postgres post
+
+benchmark=# \d json_tables
+ Table "public.json_tables"
+ Column | Type  | Modifiers 
+--------+-------+-----------
+ data   | jsonb | 
+Indexes:
+    "json_tables_idx" gin (data)
+    "json_tables_idx_name" btree ((data ->> 'name'::text))
+
+benchmark=# \x
+Expanded display is on.
+
+benchmark=# \timing
+Timing is on.
+
+benchmark=#select data from json_tables where (data->>'name') = 'AC3 Case Red';
+
+benchmark=# select data from json_tables where (data->>'brand') = 'ACME' limit 3000;
+Time: 617.953 ms
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxx Configuração MongoDB 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -148,3 +171,30 @@ http://127.0.0.1:3333/
 2) Json formatter:
 
 https://jsonformatter.curiousconcept.com/
+
+==========================================
+=== Melhorando Consulta Postgres Jsonb ===
+==========================================
+
+* Exemplo Web:
+CREATE INDEX github_handle ON users USING GIN ((settings->>'github'));
+
+* Para o projeto benchmark:
+
+(inicial):
+CREATE INDEX json_tables_idx
+  ON public.json_tables
+  USING gin
+  (data);
+
+(outros criados):
+CREATE INDEX json_tables_idx_name ON public.json_tables USING gin ((data->'name'));
+ou
+CREATE INDEX json_tables_idx_name ON public.json_tables ((data->>'name'));
+
+--
+
+CREATE INDEX json_tables_idx_type ON public.json_tables USING gin ((data->'type'));
+
+
+
