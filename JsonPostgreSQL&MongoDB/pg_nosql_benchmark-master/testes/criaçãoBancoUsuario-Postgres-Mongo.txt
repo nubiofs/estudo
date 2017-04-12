@@ -168,6 +168,9 @@ $ lx-mms
 
 http://127.0.0.1:3333/
 
+
+Obs.: VER "Robomongo 0.8.4"
+
 2) Json formatter:
 
 https://jsonformatter.curiousconcept.com/

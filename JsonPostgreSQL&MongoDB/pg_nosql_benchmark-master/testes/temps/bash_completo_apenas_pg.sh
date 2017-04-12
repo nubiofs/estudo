@@ -18,7 +18,7 @@ PGBIN="/usr/lib/postgresql/9.5/bin"
 export PATH=$PGBIN:$PATH
 
 COLLECTION_NAME="json_tables"
-SAMPLEJSON="sample.json"
+SAMPLEJSON="sample_json_rows=(10000000).json"
 #Comandos Inserts SQL para o Postgresql
 PG_INSERTS="sample_pg_inserts.json"
 

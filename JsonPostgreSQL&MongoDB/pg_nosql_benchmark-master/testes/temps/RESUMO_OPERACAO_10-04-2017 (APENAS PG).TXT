@@ -1,0 +1,20 @@
+root@osgeo-VirtualBox:/media/sf_compartilhamento/pgVSmongo/testes/temps# ./bash_apenas_pg_com_json_ja_criado.sh 
+PID: 2546 [RUNTIME: 04-10-17 11:55:51] bash_apenas_pg_com_json_ja_criado.sh: PostgreSQL Version 9.5.6
+PID: 2546 [RUNTIME: 04-10-17 11:55:51] bash_apenas_pg_com_json_ja_criado.sh: droping database benchmark if exists.
+PID: 2546 [RUNTIME: 04-10-17 11:55:51] bash_apenas_pg_com_json_ja_criado.sh: creating database benchmark.
+PID: 2546 [RUNTIME: 04-10-17 11:55:51] bash_apenas_pg_com_json_ja_criado.sh: creating json_tables collection in postgreSQL.
+PID: 2546 [RUNTIME: 04-10-17 11:55:51] bash_apenas_pg_com_json_ja_criado.sh: loading data in postgresql using sample_json_rows=(10000000).json.
+PID: 2546 [RUNTIME: 04-10-17 12:27:34] bash_apenas_pg_com_json_ja_criado.sh: creating index on postgreSQL collections.
+PID: 2546 [RUNTIME: 04-10-17 12:37:36] bash_apenas_pg_com_json_ja_criado.sh: testing FIRST SELECT in postgresql.
+PID: 2546 [RUNTIME: 04-10-17 12:43:48] bash_apenas_pg_com_json_ja_criado.sh: testing SECOND SELECT in postgresql.
+PID: 2546 [RUNTIME: 04-10-17 12:46:32] bash_apenas_pg_com_json_ja_criado.sh: testing THIRD SELECT in postgresql.
+PID: 2546 [RUNTIME: 04-10-17 12:49:13] bash_apenas_pg_com_json_ja_criado.sh: testing FOURTH SELECT in postgresql.
+PID: 2546 [RUNTIME: 04-10-17 12:51:56] bash_apenas_pg_com_json_ja_criado.sh: calculating PostgreSQL collection size.
+PID: 2546 [RUNTIME: 04-10-17 12:51:56] bash_apenas_pg_com_json_ja_criado.sh: preparing postgresql INSERTs.
+PID: 2546 [RUNTIME: 04-10-17 15:10:56] bash_apenas_pg_com_json_ja_criado.sh: droping json object in postgresql.
+PID: 2546 [RUNTIME: 04-10-17 15:10:57] bash_apenas_pg_com_json_ja_criado.sh: inserting data in postgresql using sample_pg_inserts.json.
+      number of rows       10000000 
+        PG COPY (ns)  1902567432144 
+      PG SELECT (ns)   214945429874 
+      PG INSERT (ns)  4062799153974 
+     PG SIZE (bytes)    14894546944

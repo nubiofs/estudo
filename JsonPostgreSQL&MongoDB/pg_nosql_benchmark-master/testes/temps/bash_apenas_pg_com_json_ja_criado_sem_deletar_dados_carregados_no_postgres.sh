@@ -18,7 +18,7 @@ PGBIN="/usr/lib/postgresql/9.5/bin"
 export PATH=$PGBIN:$PATH
 
 COLLECTION_NAME="json_tables"
-SAMPLEJSON="sample.json"
+SAMPLEJSON="sample_json_rows=(10000000).json"
 
 ################################################################################
 # source library files
@@ -56,14 +56,6 @@ process_log "PostgreSQL Version $pg_version"
 for (( indx=0 ; indx < ${#json_rows[@]} ; indx++ ))
 do
 
-	#creating index on postgreSQL collections.
-	pg_create_index_collection "${PGHOST}"     \
-                              "${PGPORT}"     \
-                              "${PGDATABASE}" \
-                              "${PGUSER}"     \
-                              "${PGPASSWORD}" \
-                              "${COLLECTION_NAME}"
-                              
 	pg_select_time[${indx}]=$(pg_select_benchmark "${PGHOST}"     \
                                                  "${PGPORT}"     \
                                                  "${PGDATABASE}" \

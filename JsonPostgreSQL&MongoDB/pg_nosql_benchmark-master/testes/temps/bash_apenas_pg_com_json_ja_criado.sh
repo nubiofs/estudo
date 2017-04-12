@@ -18,7 +18,7 @@ PGBIN="/usr/lib/postgresql/9.5/bin"
 export PATH=$PGBIN:$PATH
 
 COLLECTION_NAME="json_tables"
-SAMPLEJSON="sample.json"
+SAMPLEJSON="sample_json_rows=(10000000).json"
 #Comandos Inserts SQL para o Postgresql
 PG_INSERTS="sample_pg_inserts.json"
 
@@ -37,8 +37,7 @@ source ${DIRECTORY}/lib/pg_func_lib.sh
 # $ wc -l sample.json
 # "levou mais de 2 minutos para contar 2182796 linhas"
 #
-#declare -a json_rows=(10000000)
-declare -a json_rows=(15000)
+declare -a json_rows=(10000000)
 
 declare -a pg_size_time
 declare -a pg_copy_time

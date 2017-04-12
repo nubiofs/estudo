@@ -1,0 +1,14 @@
+root@osgeo-VirtualBox:/media/sf_compartilhamento/pgVSmongo/testes/temps# ./bash_completo_apenas_mongo.sh 
+PID: 2183 [RUNTIME: 04-12-17 10:02:51] bash_completo_apenas_mongo.sh: MongoDB Version 3.2.12
+PID: 2183 [RUNTIME: 04-12-17 10:02:51] bash_completo_apenas_mongo.sh: dropping mongo collection json_tables
+PID: 2183 [RUNTIME: 04-12-17 10:02:51] bash_completo_apenas_mongo.sh: testing mongoimport.
+PID: 2183 [RUNTIME: 04-12-17 10:36:29] bash_completo_apenas_mongo.sh: creating index in mongodb.
+PID: 2183 [RUNTIME: 04-12-17 10:43:02] bash_completo_apenas_mongo.sh: testing mongo FIRST SELECT.
+PID: 2183 [RUNTIME: 04-12-17 11:07:01] bash_completo_apenas_mongo.sh: testing mongo SECOND SELECT.
+PID: 2183 [RUNTIME: 04-12-17 11:07:01] bash_completo_apenas_mongo.sh: testing mongo THIRD SELECT.
+PID: 2183 [RUNTIME: 04-12-17 11:11:02] bash_completo_apenas_mongo.sh: testing mongo FOURTH SELECT.
+PID: 2183 [RUNTIME: 04-12-17 11:16:58] bash_completo_apenas_mongo.sh: calculating the size of mongo collection.
+      number of rows       10000000 
+   MONGO IMPORT (ns)  2018318491023 
+   MONGO SELECT (ns)   509107983674 
+  MONGO SIZE (bytes)     4300931072 

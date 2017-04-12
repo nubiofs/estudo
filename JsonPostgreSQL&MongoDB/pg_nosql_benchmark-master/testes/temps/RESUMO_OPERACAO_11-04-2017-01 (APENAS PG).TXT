@@ -1,0 +1,36 @@
+rooot@osgeo-VirtualBox:/media/sf_compartilhamento/pgVSmongo/testes/temps# ./bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh 
+PID: 1825 [RUNTIME: 04-11-17 09:11:57] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: PostgreSQL Version 9.5.6
+PID: 1825 [RUNTIME: 04-11-17 09:11:57] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing FIRST SELECT in postgresql.
+PID: 1825 [RUNTIME: 04-11-17 09:14:58] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing SECOND SELECT in postgresql.
+PID: 1825 [RUNTIME: 04-11-17 09:17:53] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing THIRD SELECT in postgresql.
+PID: 1825 [RUNTIME: 04-11-17 09:20:50] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing FOURTH SELECT in postgresql.
+PID: 1825 [RUNTIME: 04-11-17 09:23:49] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: calculating PostgreSQL collection size.
+      number of rows       10000000 
+      PG SELECT (ns)   177939903198 
+     PG SIZE (bytes)    14894546944 
+
+     
+root@osgeo-VirtualBox:/media/sf_compartilhamento/pgVSmongo/testes/temps# ./bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh 
+PID: 2070 [RUNTIME: 04-11-17 09:37:40] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: PostgreSQL Version 9.5.6
+PID: 2070 [RUNTIME: 04-11-17 09:37:40] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing FIRST SELECT in postgresql.
+PID: 2070 [RUNTIME: 04-11-17 09:40:51] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing SECOND SELECT in postgresql.
+PID: 2070 [RUNTIME: 04-11-17 09:43:48] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing THIRD SELECT in postgresql.
+PID: 2070 [RUNTIME: 04-11-17 09:46:43] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing FOURTH SELECT in postgresql.
+PID: 2070 [RUNTIME: 04-11-17 09:49:40] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: calculating PostgreSQL collection size.
+      number of rows       10000000 
+      PG SELECT (ns)   179963434882 
+     PG SIZE (bytes)    14894546944     
+
+========
+=== APÓS CRIAÇÃO DOS INDICES:
+
+root@osgeo-VirtualBox:/media/sf_compartilhamento/pgVSmongo/testes/temps# ./bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh 
+PID: 5110 [RUNTIME: 04-11-17 10:22:40] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: PostgreSQL Version 9.5.6
+PID: 5110 [RUNTIME: 04-11-17 10:22:40] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing FIRST SELECT in postgresql.
+PID: 5110 [RUNTIME: 04-11-17 10:25:49] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing SECOND SELECT in postgresql.
+PID: 5110 [RUNTIME: 04-11-17 10:28:54] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing THIRD SELECT in postgresql.
+PID: 5110 [RUNTIME: 04-11-17 10:32:06] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: testing FOURTH SELECT in postgresql.
+PID: 5110 [RUNTIME: 04-11-17 10:35:15] bash_apenas_pg_com_json_ja_criado_sem_deletar_dados_carregados_no_postgres.sh: calculating PostgreSQL collection size.
+      number of rows       10000000 
+      PG SELECT (ns)   188669032789 
+     PG SIZE (bytes)    14894546944 
