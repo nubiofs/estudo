@@ -10,6 +10,10 @@ https://github.com/nubiofs/elasticsearch/blob/master/TESTING.asciidoc
 https://github.com/elastic/docs
 https://www.elastic.co/guide/index.html
 
+http://www.thedevlog.com/wp/2015/09/elasticsearch-elk-stack-ajudando-qualidade-software/
+
+http://exploringelasticsearch.com/
+
 *******************************************
 * Intalação/Configuração (Elasticsearch): *
 *******************************************
@@ -83,6 +87,34 @@ $ curl -XGET 'localhost:9200/_cat/master?help&pretty'
 
 $ curl -XGET 'localhost:9200/_cat/allocation?v&pretty'
 
+** Importando arquivos json no elastic:
+
+http://stackoverflow.com/questions/15936616/import-index-a-json-file-into-elasticsearch
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+https://github.com/javanna/elasticshell
+https://github.com/andrewvc/ee-datasets/
+https://github.com/taskrabbit/elasticsearch-dump
+https://github.com/andrewvc/elastic-hammer
+http://elastichammer.exploringelasticsearch.com/
+http://stackoverflow.com/questions/20646836/is-there-any-way-to-import-a-json-filecontains-100-documents-in-elasticsearch
+
+- The right command if you want to use a file with curl is this:
+
+$ curl -XPOST 'http://jfblouvmlxecs01:9200/test/test/1' -d @lane.json
+
+- Per the current docs, http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html:
+
+    If you’re providing text file input to curl, you must use the --data-binary flag instead of plain -d. The latter doesn’t preserve newlines.
+
+Example:
+
+$ curl -s -XPOST localhost:9200/_bulk --data-binary @requests
+
+You can replace @requests with @complete_path_to_json_file
+
+Note: @is important before the file path
+
+
 ************************************
 * Intalação/Configuração (Kibana): *
 ************************************
@@ -106,4 +138,15 @@ $ curl -L -O https://artifacts.elastic.co/downloads/kibana/kibana-5.3.0-linux-x8
 4) browser at http://localhost:5601 
 
 Username: elastic Password: changeme
+
+
+** Obs.:
+
+Ver plugin Sense para kibana / elasticsearch para visualização de mapas em GEOJson:
+(Visualização de Mapa com Kibana e Elasticsearch)
+
+https://geobrainstorms.wordpress.com/
+https://geobrainstorms.wordpress.com/2016/02/13/visualizacao-de-mapa-com-kibana-e-elasticsearch/
+https://geobrainstorms.wordpress.com/2016/02/20/consulta-e-mapas-no-kibana-e-elasticsearch/
+https://geobrainstorms.wordpress.com/2016/02/20/shapefile-no-elasticsearch/
 
