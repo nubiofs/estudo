@@ -95,6 +95,7 @@ https://github.com/javanna/elasticshell
 https://github.com/andrewvc/ee-datasets/
 https://github.com/taskrabbit/elasticsearch-dump
 https://github.com/andrewvc/elastic-hammer
+https://github.com/andrewvc/elastic-loader
 http://elastichammer.exploringelasticsearch.com/
 http://stackoverflow.com/questions/20646836/is-there-any-way-to-import-a-json-filecontains-100-documents-in-elasticsearch
 
@@ -114,6 +115,9 @@ You can replace @requests with @complete_path_to_json_file
 
 Note: @is important before the file path
 
+$ curl -XPOST 'http://localhost:9200/tests/test/1' --data-binary @/home/02963357460/Documentos/SINTER/Elasticsearch/sample.json
+
+Sendo "sample.json" apenas um documento json!!!
 
 ************************************
 * Intalação/Configuração (Kibana): *
