@@ -1,0 +1,78 @@
+* No eclipse:
+
+- New Maven Project -> Archetype "demoiselle-minimal 2.5.1":
+
+'groupId': org.tutorial
+'artifactId': QuickStart
+'Version': 0.0.1-SNAPSHOT
+
+- Colocar no pom.xml:
+
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+
+		<!-- spring batch -->
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-core</artifactId>
+			<version>3.0.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+			<version>1.5.2.RELEASE</version>
+		</dependency>
+
+
+	<build>
+		<!-- Para gerar a build na pasta target sem o número da versão (XXXXX-0.0.1-SNAPSHOT.war) -->
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>org.tutorial.QuickStart.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+- Create a configuration class to configure your job:
+
+ public class BatchConfiguration {
+
+- Create a main class to run your batch job from:
+
+ public class Main {
+
+- mvn clean install
+
+- $ java -jar ./target/QuickStart.jar
+
+Obs.: 
+
+1) /workspace/QuickStart$ ~/mvn exec:java -Dexec.mainClass=org.tutorial.QuickStart.Main
+
+2) Para o Erro "Error: A JNI error has occurred, please check your installation and try again
+Exception in thread "main" java.lang.NoClassDefFoundError: org/springframework/context/ApplicationContext"
+
+"$ java -cp .;jar_path_spring -jar jar-name"
+
+FAZER:
+
+Right click on project -> Export -> select "Runnable Jar File" -> click Next in wizard -> 
+Select "Copy Required Library into a sub folder next to the generated JAR" -> 
+Launch Configuration: "Main-QuickStart" ->
+Export destination: "QuickStart/target/QuickStart.jar ->
+click Finish.
+
+3) Para o Erro "java.lang.IllegalArgumentException: Cannot instantiate interface org.springframework.context.ApplicationListener : org.springframework.boot.logging.ClasspathLoggingApplicationListener"

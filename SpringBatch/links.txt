@@ -1,0 +1,9 @@
+http://projects.spring.io/spring-batch/
+
+https://spring.io/guides/gs/batch-processing/
+
+https://github.com/spring-guides/gs-batch-processing
+
+http://www.mkyong.com/tutorials/spring-batch-tutorial/
+
+
