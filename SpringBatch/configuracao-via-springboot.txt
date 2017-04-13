@@ -1,0 +1,92 @@
+
+==============
+=== EXTRAS ===
+==============
+
+* Fonte (https://domineospring.wordpress.com/2015/06/26/comecando-com-a-magia-do-spring-boot/):
+
+A única coisa que você precisa entregar a ele é o DataSource com os  dados de acesso ao banco. 
+Podemos criar um método com essa configuração na própria classe que contém nosso main. 
+	
+@SpringBootApplication
+    public class CasadocodigoSpringbootApplication {
+        @Bean
+        public DataSource dataSource(Environment environment) {
+            DriverManagerDataSource dataSource = new DriverManagerDataSource();
+            dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+            dataSource.setUrl("jdbc:mysql://localhost:3306/casadocodigo");
+            dataSource.setUsername("root");
+            dataSource.setPassword("");
+            return dataSource;
+        }
+ 
+        public static void main(String[] args) {
+            SpringApplication.run(CasadocodigoSpringbootApplication.class, args);
+        }
+    }
+
+--
+
+Você pode criar um arquivo chamado application.properties na raiz do seu classpath, geralmente em src/main/resources. 
+Lá você pode colocar configurações específicas das tecnologias utilizadas no projeto, abaixo segue o meu exemplo.
+	
+#hibernate
+spring.jpa.hibernate.ddl-auto=update
+
+* Fontes 
+(https://cezbatistao.wordpress.com/2016/04/29/comecando-com-o-spring-boot-parte-1/)
+(https://cezbatistao.wordpress.com/2016/05/05/comecando-com-o-spring-boot-parte-2/)
+(https://cezbatistao.wordpress.com/2016/05/05/post-rapido-configurando-ambiente-de-desenvolvimento-num-piscar-de-olhos/)
+:
+
+O módulo Spring DAO provê uma camada de abstração para JDBC, eliminando grande parte da codificação 
+necessária para interagir com um banco de dados. 
+
+$ cd ~/$WORKSPACE_HOME/springbootexample
+$ mvn spring-boot:run
+
+Existe também o site Spring Boot Initializr aonde é possível gerar toda a estrutura de um projeto Spring Boot, basta definir o gerenciador de projetos Maven ou Gradle, a versão do parent do Spring Boot, os nomes do Group e Artifact e as dependências que irá utilizar, nesse caso selecione apenas o Web e pronto, basta clicar no botão Generate Project e pronto!
+
+A classe DatabaseApplication.java, aonde toda a mágica do Spring Boot acontece, pois é nessa classe que deixaremos as configurações da nossa aplicação.
+
+Devemos incluir um arquivo "config.yml" de configuração do Spring Boot que conterá todas as configurações do JPA/Hibernate e conexão com o Banco de Dados:
+
+degub: true
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+  datasource:
+    url: jdbc:h2:mem:exemploparte2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+
+No Spring Boot podemos definir 2 tipos de arquivo de configuração um arquivo properties (application.properties) ou um arquivo YAML (application.yml), optei por utilizar o application.yml e configurei todas as propriedades necessárias do datasource para a nossa aplicação conectar no H2:
+
+url: jdbc:h2:mem:exemploparte2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+username: sa
+password:
+driverClassName: org.h2.Driver
+
+Apenas foi preciso definir algumas informações no arquivo application.yml, não foi necessário configurar persistence.xml, EntityManagerFactory, EntityManager, PlatformTransactionManager nem nada, tudo isso já foi feito pelo próprio Spring Boot através das anotações na classe DatabaseApplication.java! 
+
+Cade os códigos JDBC para conectar no banco, cada o PreparedStatement e os ResultSet!? Então pessoal graças ao Spring Data não precisamos nada disso.
+
+***
+VER:
+
+https://pt.stackoverflow.com/questions/180368/como-integrar-spring-batchspring-bootquartz
+
+http://projects.spring.io/spring-roo/
+https://spring.io/guides/gs/accessing-data-mongodb/
+https://spring.io/guides/gs/accessing-data-jpa/
+https://spring.io/guides/gs/maven/
+https://spring.io/guides/gs/accessing-data-mysql/
