@@ -11,6 +11,8 @@ https://spring.io/guides/gs/spring-boot/
 http://start.spring.io/
 -> projeto "demo.zip"
 
-http://www.mkyong.com/tutorials/spring-batch-tutorial/
+http://www.mkyong.com/tutorials/spring-batch-tutorial
 
+(www.guj.com.br/t/como-integrar-spring-batch-spring-boot-quartz/342354)
+https://www.google.com.br/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=0ahUKEwjr-ZqpoKLTAhUDH5AKHYMSCIsQFggxMAI&url=http%3A%2F%2Fwww.guj.com.br%2Ft%2Fcomo-integrar-spring-batch-spring-boot-quartz%2F342354&usg=AFQjCNHYhL2jsZWOzSZW2H6EQcDpkNd2tg&sig2=CTNwpBpj8EKTPRZWv8QNmQ
 
