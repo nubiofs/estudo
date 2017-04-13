@@ -1,8 +1,15 @@
+https://spring.io/guides
+
 http://projects.spring.io/spring-batch/
-
 https://spring.io/guides/gs/batch-processing/
-
 https://github.com/spring-guides/gs-batch-processing
+
+https://github.com/spring-projects/spring-boot
+https://spring.io/guides/gs/spring-boot/
+
+
+http://start.spring.io/
+-> projeto "demo.zip"
 
 http://www.mkyong.com/tutorials/spring-batch-tutorial/
 
