@@ -1,3 +1,36 @@
+** Configuração "Getting Started" -> Creating a Batch Service (https://spring.io/guides/gs/batch-processing/#initial):
+
+$ cd estudo.git/SpringBatch/workspace/gs-batch-processing-master/initial
+
+$ mvn eclipse:eclipse
+
+- No Eclipse: "Import Existing Maven Project"
+
+- Mudar para Java 1.8
+
+- Create a business class (Person.java)
+
+- Create an intermediate processor (PersonItemProcessor.java)
+
+- Put together a batch job (BatchConfiguration.java)
+
+- JobCompletionNotificationListener.java
+
+- Make the application executable (Application.java)
+
+- Build an executable JAR:
+
+1) build the JAR file with:
+	$ ./mvnw clean package
+
+2) Then you can run the JAR file: 
+	$ java -jar target/gs-batch-processing-0.1.0.jar
+
+Obs.: 
+i) build a single executable JAR file that contains all the necessary dependencies, classes, and resources, and run that.
+ii) If you are using Maven, you can run the application using $ ./mvnw spring-boot:run
+
+
 
 ==============
 === EXTRAS ===
