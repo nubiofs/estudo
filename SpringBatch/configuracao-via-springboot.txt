@@ -1,4 +1,6 @@
-** Configuração "Getting Started" -> Creating a Batch Service (https://spring.io/guides/gs/batch-processing/#initial):
+*************************************************************************************************************************
+** Configuração "Getting Started" -> Creating a Batch Service (https://spring.io/guides/gs/batch-processing/#initial): **
+*************************************************************************************************************************
 
 Obs.: Utilizando o banco padrão "No database type set, using meta data indicating: HSQL"
 
@@ -40,9 +42,82 @@ $ ./run.sh
 
 (Criando tag GIT no projeto "ANTES DA MUDANÇA DE DATASOURCE"!!!)
 
-** Configuração para acesso ao PostgreSQL:
+*****************************************************************************************************
+** Configuração para acesso ao PostgreSQL (Exemplo 01): 					   **
+** http://javasampleapproach.com/spring-framework/spring-boot/start-spring-batch-using-spring-boot **
+*****************************************************************************************************
+
+$ cd estudo.git/SpringBatch/workspace/SpringBatch
+
+$ mvn eclipse:eclipse
+
+- No Eclipse: "Import Existing Maven Project"
+
+Obs.: Para criar um projeto do zero:
+
+"Create Spring Boot project: Open Spring Tool Suite, on main menu, choose File->New->Spring Starter Project"
+
+- Mudar para Java 1.8
+
+- Config datasource for Batch Job repository:
+
+Em "/src/main/resources/application.properties", add datasource info:
+	
+spring.datasource.url=jdbc:postgresql://127.0.0.1/testdb
+spring.datasource.username=postgres
+spring.datasource.password=post
+spring.batch.job.enabled=false
+
+Obs.: Para utilizar outro banco "HSQL", comentar essas linhas 
+acima em "application.properties" e colocar no pom.xml:
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>postgresql</groupId> -->
+<!-- 			<artifactId>postgresql</artifactId> -->
+<!-- 			<version>9.4.1208-jdbc42-atlassian-hosted</version> -->
+<!-- 		</dependency> -->
+	<dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+        </dependency>
 
 
+Obs.: Para a dependência do driver do postgresql:
+
+O mvn install instala o seu jar no seu repositório local, para que ele possa ser encontrado quando adicionado ao seu projeto. Por exemplo:
+
+mvn install:install-file
+-Dfile=c:\meujar\meujar.jar
+-DgroupId=org.meujar
+-DartifactId=meujar
+-Dversion=1.0.0
+-Dpackaging=jar
+-DgeneratePom=true
+
+Depois é só adicionar sua dependência no seu pom.xml, conforme os parametros que você usou no mvn install:
+
+<dependency>
+    <groupId>org.meujar</groupId>
+    <artifactId>meujar</artifactId>
+    <version>1.0.0</version>
+</dependency>
+
+$ ~/mvn install:install-file -Dfile=/home/02963357460/estudo.git/SpringBatch/workspace/SpringBatch/lib/postgresql-9.4.1208-jdbc42-atlassian-hosted.jar -DgroupId=postgresql -DartifactId=postgresql -Dversion=9.4.1208-jdbc42-atlassian-hosted -Dpackaging=jar -DgeneratePom=true
+
+$ 
+
+– Maven build: 
+
+$ rm -rf target/
+$ ~/mvn clean install -Dmaven.test.skip=true
+
+- Execultar a aplicação:
+
+$ java -jar target/springbatch-0.0.1.jar
+
+- Make a request:
+
+No navegador "http://localhost:8080/launchjob" 
 
 ==============
 === EXTRAS ===
@@ -135,3 +210,13 @@ https://spring.io/guides/gs/accessing-data-mongodb/
 https://spring.io/guides/gs/accessing-data-jpa/
 https://spring.io/guides/gs/maven/
 https://spring.io/guides/gs/accessing-data-mysql/
+
+
+*** Projeto exemplo (Spring batch com PostgreSQL):
+
+http://javasampleapproach.com/spring-framework/spring-boot/how-to-import-csv-data-to-postgresql-database-using-spring-batch-job
+http://javasampleapproach.com/spring-framework/spring-boot/start-spring-batch-using-spring-boot
+
+http://javasampleapproach.com/spring-framework/spring-boot/how-to-use-jdbc-template-with-spring-boot-for-postgres-database
+http://javasampleapproach.com/spring-framework/create-paging-sorting-result-spring-jpa-postgresql-spring-boot
+
