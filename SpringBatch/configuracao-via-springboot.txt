@@ -1,5 +1,7 @@
 ** Configuração "Getting Started" -> Creating a Batch Service (https://spring.io/guides/gs/batch-processing/#initial):
 
+Obs.: Utilizando o banco padrão "No database type set, using meta data indicating: HSQL"
+
 $ cd estudo.git/SpringBatch/workspace/gs-batch-processing-master/initial
 
 $ mvn eclipse:eclipse
@@ -14,7 +16,7 @@ $ mvn eclipse:eclipse
 
 - Put together a batch job (BatchConfiguration.java)
 
-- JobCompletionNotificationListener.java
+- Criar JobCompletionNotificationListener.java
 
 - Make the application executable (Application.java)
 
@@ -35,6 +37,11 @@ iii) Execultando testes:
 $ cd  /estudo.git/SpringBatch/workspace/gs-batch-processing-master/test
 $ chmod +x run.sh
 $ ./run.sh
+
+(Criando tag GIT no projeto "ANTES DA MUDANÇA DE DATASOURCE"!!!)
+
+** Configuração para acesso ao PostgreSQL:
+
 
 
 ==============
