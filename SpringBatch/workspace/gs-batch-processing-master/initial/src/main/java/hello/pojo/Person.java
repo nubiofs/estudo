@@ -1,4 +1,4 @@
-package hello;
+package hello.pojo;
 
 //format of data inputs and outputs, you write code to represent a row of data.
 public class Person {

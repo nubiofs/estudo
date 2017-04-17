@@ -1,4 +1,6 @@
-package hello;
+package hello.batch;
+
+import hello.pojo.Person;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
