@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.gov.serpro.supde.infra</groupId>
+		<artifactId>infra-batch-pom-parent</artifactId>
+		<version>3.0.1</version>		
+	</parent>
+	<artifactId>infra-batch-sample</artifactId>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- Dependência de uma implementação para acessar fila JMS (necessária 
+		para Jobs com processamento distribuído)  -->
+				
+	<dependencies>
+	
+		<!-- Apache-ActiveMQ -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<version>${activemq.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.activemq</groupId>
+					<artifactId>activeio-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- JBoss-HornetQ -->
+		<dependency>
+			<groupId>org.hornetq</groupId>
+			<artifactId>hornetq-core-client</artifactId>
+			<version>${hornetq.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hornetq</groupId>
+			<artifactId>hornetq-jms-client</artifactId>
+			<version>${hornetq.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<properties>
+		<activemq.version>5.7.0</activemq.version>
+		<hornetq.version>2.3.22.Final</hornetq.version>
+	</properties>
+
+</project>

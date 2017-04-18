@@ -1,0 +1,11 @@
+Run Configuration 
+
+main Class  
+br.gov.serpro.supde.infra.batch.core.launch.InfraJobRunner
+
+Program Arguments 
+jobs/cnirCSV-job.xml cnirJob
+
+VM Arguments 
+-Dinfra.config.dir=/home/03627749430/teste -Dinfra.verbose=false
+

@@ -1,0 +1,1786 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt"
+      lang="pt">
+
+  
+    
+    
+    
+    
+    
+
+  
+
+  <head>
+    <meta http-equiv="Content-Type"
+          content="text/html;charset=utf-8" />
+
+    <title>
+
+        
+            Guia do Desenvolvedor
+            &mdash;
+        
+        wiki
+    </title>
+
+    
+      
+        <base href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor" />
+      
+    
+
+    <meta name="generator" content="Plone - http://plone.org" />
+
+    <meta content="Guia de implementação para aplicativos Batch do FIBRA."
+          name="description" />
+
+    <!-- Plone ECMAScripts -->
+    
+      
+        
+            
+                <script type="text/javascript"
+                        src="https://wiki.serpro/portal_javascripts/WikiSkin/ploneScripts1850.js">
+                </script>
+                
+            
+            
+                <script type="text/javascript"
+                        src="https://wiki.serpro/portal_javascripts/WikiSkin/ploneScripts0417.js">
+                </script>
+                
+            
+            
+                <script type="text/javascript"
+                        src="https://wiki.serpro/portal_javascripts/WikiSkin/ploneScripts5332.js">
+                </script>
+                
+            
+        
+    
+    
+
+    
+	
+          
+        
+            
+                
+                    
+                    
+                        <style type="text/css"><!-- @import url(https://wiki.serpro/portal_css/WikiSkin/ploneStyles2720.css); --></style>
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="https://wiki.serpro/portal_css/WikiSkin/ploneStyles2460.css"
+                          title="Small Text" />
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="https://wiki.serpro/portal_css/WikiSkin/ploneStyles4531.css"
+                          title="Large Text" />
+                    
+                    
+                
+            
+            
+                
+                    
+                    
+                        <style type="text/css" media="all"><!-- @import url(https://wiki.serpro/portal_css/WikiSkin/ploneStyles6138.css); --></style>
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="https://wiki.serpro/portal_css/WikiSkin/ploneStyles9961.css"
+                          title="Fundo Pastel" />
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="https://wiki.serpro/portal_css/WikiSkin/ploneStyles9343.css"
+                          title="Fundo Preto" />
+                    
+                    
+                
+            
+            
+                
+                    
+                    
+                        <style type="text/css"><!-- @import url(https://wiki.serpro/portal_css/WikiSkin/ploneStyles4130.css); --></style>
+                    
+                    
+                
+            
+        
+    
+        
+        
+    
+
+    <!-- Internet Explorer CSS Fixes -->
+    <!--[if IE]>
+        <style type="text/css" media="all">@import url(https://wiki.serpro/IEFixes.css);</style>
+    <![endif]-->
+
+    <link rel="shortcut icon" type="image/x-icon"
+          href="https://wiki.serpro/favicon.ico" />
+
+    <link rel="home" href="https://wiki.serpro"
+          title="Página inicial" />
+    <link rel="search"
+          href="https://wiki.serpro/search_form"
+          title="Buscar neste site" />
+    <link rel="author"
+          href="https://wiki.serpro/author/05601970475"
+          title="Informações do Autor" />
+    <link rel="contents" href="https://wiki.serpro/sitemap"
+          title="Mapa do Site" />
+
+    
+
+    
+
+    <link rel="up"
+          href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch"
+          title="Up one level" />
+
+    
+
+    <!-- Disable IE6 image toolbar -->
+    <meta http-equiv="imagetoolbar" content="no" />
+    
+    
+      
+      
+    
+
+    
+      
+      
+    
+
+    
+      
+      
+    
+
+    
+      
+      
+    
+
+  </head>
+
+  <body class="section-unidades" dir="ltr">
+    <div id="visual-portal-wrapper">
+
+      <div id="portal-top">
+             
+                <div id="barra-acessibilidade"
+                     class="visualNoPrint">
+  <div id="barra-acessibilidade-wrapper">
+  <ul class="menuHorizontal" id="opcoes-atalhos">
+    <li class="menuHorizontalBorda">
+      <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor/#documentContent"
+         accesskey="2">Ir para conteúdo</a>
+    </li>
+    <li class="menuHorizontalBorda">
+      
+      <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor/?searchterm=spring%20batch#menu"
+         accesskey="6">Ir para menu</a>
+    </li>
+    <li>
+      <a href="accessibility-info">Outras opções de acessibilidade</a>
+    </li>
+  </ul>
+  <ul class="menuHorizontal" id="opcoes-alternativas">
+    
+    
+    <li class="acessibilidadeFontes">
+      <a href="javascript:zoom('0');" title="Normal Text">
+        <img title="Texto Normal" alt="Texto Normal"
+             src="https://wiki.serpro/ACWIconeFontes02.gif" /></a>
+  <noscript><div class="portalMessage">A utiliza&ccedil;&atilde;o dos recursos de contraste e tamanho de texto requer javascript habilitado.</div></noscript>
+    </li>
+    <li class="acessibilidadeFontesUltimo">
+      <a href="javascript:zoom('+');" title="Large Text">
+        <img title="Texto Grande" alt="Texto Grande"
+             src="https://wiki.serpro/ACWIconeFontes03.gif" /></a>
+  <noscript><div class="portalMessage">A utiliza&ccedil;&atilde;o dos recursos de contraste e tamanho de texto requer javascript habilitado.</div></noscript>
+    </li>
+    <li class="acessibilidadeCores">
+      <a href="javascript:setActiveStyleSheet('Fundo Preto', 1);" title="Fundo Preto">
+        <img title="Fundo Preto" alt="Fundo Preto"
+             src="https://wiki.serpro/ACWIconeCores03.gif" /></a>
+  <noscript><div class="portalMessage">A utiliza&ccedil;&atilde;o dos recursos de contraste e tamanho de texto requer javascript habilitado.</div></noscript>
+    </li>
+    <li class="acessibilidadeCores">
+      <a href="javascript:setActiveStyleSheet('Fundo Pastel', 1);" title="Fundo Pastel">
+        <img title="Fundo Pastel" alt="Fundo Pastel"
+             src="https://wiki.serpro/ACWIconeCores01.gif" /></a>
+  <noscript><div class="portalMessage">A utiliza&ccedil;&atilde;o dos recursos de contraste e tamanho de texto requer javascript habilitado.</div></noscript>
+    </li>
+    <li class="acessibilidadeCoresUltimo">
+      <a href="javascript:setActiveStyleSheet('',1);"
+         title="Normal Text">
+        <img title="Fundo Padr&atilde;o"
+             alt="Fundo Padr&atilde;o"
+             src="https://wiki.serpro/ACWIconeCores02.gif" /></a>
+  <noscript><div class="portalMessage">A utiliza&ccedil;&atilde;o dos recursos de contraste e tamanho de texto requer javascript habilitado.</div></noscript>
+    </li>
+  </ul>
+  </div>
+</div>
+             
+
+        <div id="portal-header">
+          <p class="hiddenStructure">
+            <a accesskey="2"
+               href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor/?searchterm=spring%20batch#documentContent">Ir para o conteúdo.</a> |
+
+            <a accesskey="6"
+               href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor/?searchterm=spring%20batch#portlet-navigation-tree">Ir para a navegação</a>
+          </p>
+
+             
+             <ul id="portal-siteactions">
+
+    <li id="siteaction-sitemap"><a
+    href="https://wiki.serpro/sitemap" accesskey=""
+    title="Mapa do Site">Mapa do Site</a></li>
+    <li id="siteaction-contact"><a
+    href="https://wiki.serpro/contact-info" accesskey="4"
+    title="Contato">Contato</a></li>
+
+</ul>
+
+             <!--<div metal:use-macro="here/global_searchbox/macros/quick_search">
+               The quicksearch box, normally placed at the top right
+             </div>-->
+
+             <h1 id="portal-logo">
+    <a href="https://wiki.serpro" accesskey="1">wiki</a>
+</h1>
+
+             <div id="portal-skinswitcher">
+  
+</div>
+
+             <!--<div metal:use-macro="here/global_sections/macros/portal_tabs">
+               The global sections tabs. (Welcome, News etc)
+             </div>-->
+          </div>
+
+          
+
+           <div id="portal-breadcrumbs">
+
+    <span id="breadcrumbs-you-are-here">Você está aqui:</span>
+    <a href="https://wiki.serpro">Página Inicial</a>
+    <span class="breadcrumbSeparator">
+        &rarr;
+        
+    </span>
+    <span dir="ltr">
+        
+            <a href="https://wiki.serpro/unidades">Unidades</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            <a href="https://wiki.serpro/unidades/supde">SUPDE</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            <a href="https://wiki.serpro/unidades/supde/derce">DERCE</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            <a href="https://wiki.serpro/unidades/supde/derce/sistemas">Sistemas</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra">FIBRA</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch">Batch</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            
+            
+            <span>Guia do Desenvolvedor</span>
+         
+    </span>
+
+</div>
+      </div>
+
+      <div class="visualClear" id="clear-space-before-wrapper-table"><!-- --></div>
+
+      
+
+      <table id="portal-columns">
+        <tbody>
+          <tr>
+            
+            <td id="portal-column-one">
+              <div class="visualPadding">
+                
+                  
+
+    
+        
+
+        
+            <div class="portlet" id="portlet-busca">
+
+    <div id="portal-searchbox">
+    <form name="searchform"
+          action="https://wiki.serpro/search"
+          style="white-space:nowrap"
+          onsubmit="return liveSearchSubmit()">
+
+        <div class="LSBox">
+        <label for="searchGadget">Busca</label>
+
+        <input id="searchGadget" name="SearchableText"
+               type="text" size="15" value=""
+               title="Search Site"
+               onblur="if(this.value=='')this.value=this.defaultValue;"
+               onfocus="if(this.value==this.defaultValue)this.value='';"
+               class="visibility:visible" />
+
+        <input class="botaoOk" type="submit" value="ok" />
+
+        <div class="LSResult" id="LSResult" style=""><div class="LSShadow" id="LSShadow"></div></div>
+
+        </div>
+    </form>
+
+    <div id="portal-advanced-search" class="hiddenStructure">
+        <a href="https://wiki.serpro/search_form"
+           accesskey="5">Busca Avançada…</a>
+    </div>
+
+</div>
+
+
+</div>
+        
+
+        
+
+        
+    
+    
+        
+
+        
+            
+
+<dl class="portlet" id="portlet-login">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a href="https://wiki.serpro/login_form"
+           class="tile">Acesse</a>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem odd">
+        <form action="https://wiki.serpro/login_form"
+              name="loginform" method="post">
+
+            <input type="hidden" name="form.submitted" value="1" />
+            <input type="hidden" name="came_from"
+                   value="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor/?searchterm=spring%20batch" />
+            <input type="hidden" name="js_enabled" id="js_enabled" value="0" />
+            <input type="hidden" name="cookies_enabled" id="cookies_enabled" value="" />
+            <input type="hidden" name="login_name" id="login_name" value="" />
+            <input type="hidden" name="pwd_empty" id="pwd_empty" value="0" />
+
+            <div class="field">
+                <label for="__ac_name">Nome do Usuário</label>
+                <br />
+                <input type="text" size="10"
+                       alt="Nome do Usuário"
+                       onclick="showCookieMessage('cookies_message')"
+                       name="__ac_name" value=""
+                       id="__ac_name" />
+            </div>
+            
+            <div class="field">
+                <label for="__ac_password">Senha</label>
+                <br />
+                <input type="password" size="10" alt="Senha"
+                       onclick="showCookieMessage('cookies_message')"
+                       name="__ac_password"
+                       id="__ac_password" />
+            </div>
+
+            <div id="cookies_message" class="portalMessage"
+                 style="display:none">Os cookies não estão habilitados. Você precisa <a href="enabling_cookies">habilitar cookies</a> antes de poder acessar.</div>
+            
+            <div class="formControls">
+            
+                <input class="context" type="submit"
+                       name="submit" value="Avançar"
+                       alt="Log in"
+                       onclick="javascript:return setLoginVars('__ac_name','login_name','__ac_password','pwd_empty','js_enabled','cookies_enabled')" />
+            </div>
+        </form>
+    </dd>
+</dl>
+
+
+
+
+
+
+
+
+
+        
+
+        
+
+        
+    
+    
+        
+
+        
+            
+
+<dl class="portlet" id="portlet-navigation-tree">
+    <!--<dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a href="#" 
+           class="tile"
+           tal:condition="not:view/title"
+           tal:attributes="href string:${root/absolute_url}/sitemap" 
+           i18n:translate="box_navigation">Navigation</a>
+       <a href="#" 
+           class="tile"
+           tal:condition="view/title"
+           tal:attributes="href string:${root/absolute_url}/sitemap"
+           tal:content="view/title">Navigation</a>
+        <span class="portletTopRight"></span>
+    </dt>-->
+
+    <dd class="portletItem lastItem">
+        <ul class="portletNavigationTree navTreeLevel0">
+
+            <li class="navTreeItem">
+                
+                   <div class="visualIcon contenttype-plone-site">
+                       <a class=" visualIconPadding"
+                          href="https://wiki.serpro"
+                          title="">
+                       Página Inicial
+                       
+                       </a>
+                   </div>
+                
+            </li>
+            
+
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-large-plone-folder">
+        
+        <a href="https://wiki.serpro/unidades"
+           class="state-published visualIconPadding"
+           title="">Unidades</a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel2">
+        
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-large-plone-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde"
+           class="state-published visualIconPadding"
+           title="Superintendência de Desenvolvimento">SUPDE</a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel3">
+        
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce"
+           class="state-published visualIconPadding"
+           title="Pólo de Desenvolvimento Recife">DERCE</a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel4">
+        
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/treinamentos"
+           class="state-published visualIconPadding"
+           title="Material de Treinamentos">Treinamentos</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-wiki-page">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/Pr_c3_a1ticasLocaisDERCE"
+           class="state-missing-value visualIconPadding"
+           title="&amp;amp;nbsp;
+            ">Práticas Locais DERCE</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/grupos-de-trabalho"
+           class="state-visible visualIconPadding"
+           title="Arquivos relacionados às atividades desenvolvidas pelos Grupos de Trabalho e GPES local do DERCE. ">Grupos de Trabalho</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas"
+           class="state-visible visualIconPadding"
+           title="Sistemas desenvolvidos no Departamento DERCE">Sistemas</a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel5">
+        
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-projeto">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/scc-nucleo"
+           class="state-visible visualIconPadding"
+           title="Projeto de SCC - Sistema de Controle de Crédito (NÚCLEO) ">SCC Núcleo</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/scc-pis-pasep-cofins"
+           class="state-visible visualIconPadding"
+           title="Contribuições do projeto SCC PIS/PASEP COFINS
+Responsável: Suedy Leuthier
+Equipe:
+- Alexandre Gonçalves
+- Alexandre Polesi
+- Carlos Leonardo Soares
+- Fernando Raposo
+- João Paulo Lima
+- Leonardo Sá
+- Marcelo Padilha">SCC PIS/PASEP COFINS</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/sinpa"
+           class="state-visible visualIconPadding"
+           title="Wiki do projeto SINPA">SINPA</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-projeto">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/gesp"
+           class="state-visible visualIconPadding"
+           title="Sistema de Gestão Eletrônica de Segurança Privada.">GESP</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/scc-ipi-ressarcimento"
+           class="state-visible visualIconPadding"
+           title="Pasta do módulo do SCC IPI Ressarcimento que conterá informações a respeito de projetos/demandas, erros reportados pelos clientes, dicas úteis do módulo, boas práticas utilizadas no módulo, além de particularidades que devem estar publicadas.">SCC IPI RESSARCIMENTO</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-projeto">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra"
+           class="state-visible visualIconPadding"
+           title="Wiki dos Projetos do FIBRA.">FIBRA</a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel6">
+        
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/guia-de-desenvolvimento-para-o-padrao-de-interacao-com-o-usuario"
+           class="state-visible visualIconPadding"
+           title="Práticas a serem realizadas no desenvolvimento do sistema. Estas são práticas utilizadas neste momento, que são passíveis de mudanças e sugestões.">Guia de Desenvolvimento</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/desenvolvimento-do-fibra-infra"
+           class="state-visible visualIconPadding" title="">Desenvolvimento do Fibra Infra</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/analise-e-projeto"
+           class="state-visible visualIconPadding" title="">Análise e Projeto</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/requisitos"
+           class="state-visible visualIconPadding" title="">Requisitos</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/integracao-continua"
+           class="state-visible visualIconPadding"
+           title="Informações sobre a implantação e utilização da integração Contínua no projeto FIBRA">Integração Contínua</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/componentes"
+           class="state-visible visualIconPadding"
+           title="Componentes desenvolvidos para o FIBRA que podem ser utilizados em outros projetos">Componentes</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/loc"
+           class="state-visible visualIconPadding"
+           title="Arquivos do FIBRA-LOC">LOC</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/nuc"
+           class="state-published visualIconPadding"
+           title="Arquivos do projeto FIBRA-NUC">NUC</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/implantacao"
+           class="state-visible visualIconPadding"
+           title="Contém a arquitetura de sistema proposta para os ambientes de testes, homologação e produção">Implantação</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/procedimento-de-configuracao-para-homologacao"
+           class="state-visible visualIconPadding" title="">Procedimento de Configuração para Homologação</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/ambiente"
+           class="state-visible visualIconPadding" title="">Ambiente</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/gerencia-de-configuracao"
+           class="state-visible visualIconPadding" title="">Gerência de Configuração</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/servicos-de-gravacao"
+           class="state-visible visualIconPadding" title="">Serviços de Gravação</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch"
+           class="state-visible visualIconPadding"
+           title="Guia de implementação de aplicativos com processamento Batch no FIBRA">Batch</a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel7">
+        
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-document">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor"
+           class="state-visible visualIconPadding navTreeCurrentItem"
+           title="Guia de implementação para aplicativos Batch do FIBRA.">Guia do Desenvolvedor</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-file">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/fibra-batch.properties/view"
+           class="state-visible visualIconPadding"
+           title="Arquivo de configuração padrão para os Jobs do FIBRA">fibra-batch.properties</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-file">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/log4j.properties/view"
+           class="state-visible visualIconPadding" title="">log4j.properties</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-image">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/Captura_de_tela-Run%20Configurations_2.png/view"
+           class="state-visible visualIconPadding" title="">configurar eclipse para executar Jobs do Fibra 2</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-image">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/Captura_de_tela-Run%20Configurations_3.png/view"
+           class="state-visible visualIconPadding" title="">configurar eclipse para executar Jobs do Fibra 1</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-image">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/Job%20Execution%20-%20Mozilla%20Firefox3.png/view"
+           class="state-visible visualIconPadding" title="">Screenshot FIBRA Batch Admin</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-file">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/apresentacao-spring-batch.pdf/view"
+           class="state-visible visualIconPadding" title="">Introdução ao Spring Batch</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-file">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/fibra-batch.sh/view"
+           class="state-visible visualIconPadding"
+           title="Script que será acionado pelo Control-M para execução dos jobs do fibra.">fibra-batch.sh</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/suj"
+           class="state-visible visualIconPadding"
+           title="Repositório para conhecimentos que podem ser aplicados no sistema SUJ.">SUJ</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-projeto">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/testando"
+           class="state-visible visualIconPadding"
+           title="Estou fazendo um teste para criar artefatos.">TESTANDO</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/sistemas/scc-pginde"
+           class="state-visible visualIconPadding"
+           title="WIKI do sistema SCC Pagamento Indevido ou a Maior. Onde se encontrará, relatórios de erros em produção, incidentes reportados pelos clientes, dicas e scripts uteis para testes, consultas e outras particularidades do sistema.">SCC-PGINDE</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/lotacoes"
+           class="state-visible visualIconPadding"
+           title="Informações relacionadas aos setores existentes no DERCE">Lotações</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-wiki-page">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/wiki_page.2010-07-22.0466115369"
+           class="state-missing-value visualIconPadding"
+           title="">wiki_page.2010-07-22.0466115369</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-freemindfile">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/freemindfile.2011-10-25.3232687114/view"
+           class="state-visible visualIconPadding" title=""></a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/indicadores-gdes-2013"
+           class="state-visible visualIconPadding"
+           title="Acompanhamento dos indicadores estabelecidos para o ciclo GDES 2013">Indicadores GDES 2013</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/automacao-de-testes-fibra-e-sic"
+           class="state-visible visualIconPadding"
+           title="Automação de Testes - FIBRA e SIC
+- Pasta para compartilhamento de informações sobre a automação dos testes do FIBRA e demais sistemas que compõem o SIC (Pré-Cadin, Cobrança Integrada, Trata Decisões, Aviso de Cobrança).">Automação de Testes - FIBRA e SIC</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/de4d5"
+           class="state-visible visualIconPadding"
+           title="Pasta para publicação das informações referentes aos projetos desenvolvidos pelo DE4D5.">DE4D5</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/ciclo-de-palestras-sief-2015"
+           class="state-published visualIconPadding"
+           title="Material apresentado no ciclo de palestras SIEF - 2015 (Agosto/Setembro)">Ciclo de Palestras SIEF - 2015</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/de4d3"
+           class="state-visible visualIconPadding"
+           title="Sistemas DE4D3">DE4D3</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/de4as"
+           class="state-visible visualIconPadding"
+           title="Wiki da Equipe de Apoio ao Desenvolvimento - DERCE
+">DE4AS</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/de4d1"
+           class="state-visible visualIconPadding" title="">DE4D1</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/unidades/supde/derce/comunidades"
+           class="state-visible visualIconPadding" title="">Comunidades</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+    </ul>
+    
+</li>
+
+
+    </ul>
+    
+</li>
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-large-plone-folder">
+        
+        <a href="https://wiki.serpro/projetos"
+           class="state-published visualIconPadding"
+           title="Esta é a área destinada aos wikis dos projetos do Serpro.
+Para adicionar um novo projeto primeiramente clique em &quot;Adicionar Projeto&quot;. 
+Depois edite os campos Título e Descrição e clique em Salvar.
+Se você quiser que uma página Wiki seja a página inicial do projeto altere o nome da página FrontPage.">Projetos</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-zwikifolder">
+        
+        <a href="https://wiki.serpro/CiclosGestaoRecuperado"
+           class="state-published visualIconPadding"
+           title="">CiclosGestao</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="https://wiki.serpro/desdr"
+           class="state-published visualIconPadding"
+           title="Pólo de Desenvolvimento de Salvador">DESDR</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+        </ul>
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
+
+
+        
+
+        
+
+        
+    
+    
+        
+
+        
+            
+        
+
+        
+
+        
+    
+    
+        
+
+        
+            
+        
+
+        
+
+        
+    
+
+                
+                &nbsp;
+              </div>
+            </td>
+            
+
+            
+            <td id="portal-column-content">
+
+              
+                <div id="content" class="">
+
+                  
+
+                  <div class="documentContent" id="region-content">
+
+                    <a name="documentContent"></a>
+
+                    
+
+    
+
+
+
+                    
+
+                    
+    
+
+        <div class="documentActions">
+    
+
+    <div class="hiddenStructure">Ações do documento</div>
+
+    <ul>
+    
+        <li>
+            <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor/sendto_form">
+
+                <img src="https://wiki.serpro/mail_icon.gif"
+                     alt="Send this page to somebody"
+                     title="Enviar esta página a alguém"
+                     id="icon-sendto" />
+            </a>
+        </li>
+    
+    
+        <li>
+            <a href="javascript:this.print();">
+
+                <img src="https://wiki.serpro/print_icon.gif"
+                     alt="Print this page"
+                     title="Imprimir essa página"
+                     id="icon-print" />
+            </a>
+        </li>
+    
+
+    </ul>
+    
+
+    <noscript><div class="portalMessage">O javascript n&atilde;o est&aacute; habilitado no seu navegador. Para imprimir esta p&aacute;gina utilize a op&ccedil;&atilde;o Imprimir do seu navegador.</div></noscript>
+
+    
+
+</div>
+
+        <h1 class="documentFirstHeading">Guia do Desenvolvedor</h1>
+    
+        
+
+        <p class="documentDescription">Guia de implementação para aplicativos Batch do FIBRA.</p>
+        
+    
+        <div class="plain">
+            <div class="odd">As aplicações Batch do FIBRA utilizam como base o framework <strong>Spring-Batch</strong>, dessa forma, é fundamental o domínio de sua arquitetura e seus componentes (introdução básica <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/apresentacao-spring-batch.pdf">aqui</a>). A documentação de referência da versão 2.2.7 do Spring-Batch:&nbsp;<a target="_blank" href="http://docs.spring.io/spring-batch/2.2.x/reference/html/index.html">http://docs.spring.io/spring-batch/2.2.x/reference/html/index.html</a>.</div> <p>&nbsp;</p><p>Link para apresentação do Workshop sobre Spring-Batch realizado no DERCE:</p><p><a href="apresentacao-spring-batch.pdf">wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/apresentacao-spring-batch.pdf</a></p><hr /><h3 style="color: red;">Criação do Projeto</h3><p>&nbsp;</p> <p>Para iniciar um projeto Batch fibra existem 2 archetypes do maven (disponíveis no catálogo do Nexus&nbsp;<a target="_blank" href="http://nexus.aic.serpro/service/local/repo_groups/public/content/archetype-catalog.xml">nexus.aic.serpro/service/local/repo_groups/public/content/archetype-catalog.xml</a>) fibra-batch-sample-archetype e fibra-batch-sample-hibernate-archetype.</p> <div class="even"><ul>     <li style="line-height: 18px;">O fibra-batch-sample-archetype&nbsp;cria um projeto básico com todas as dependências necessárias e alguns Jobs de exemplo.</li>     <li style="line-height: 18px;">O fibra-batch-sample-hibernate-archetype&nbsp;cria um projeto básico com as dependências necessárias para a utilização de Hibernate e do componente fibraInfra. A utilização do Hibernate neste tipo de aplicação é bastante controverso.</li> </ul></div> <p>&nbsp;</p><p>&nbsp;</p> <hr /> <h3 style="color: red;">Ambiente de Execução</h3><p>&nbsp;</p>  <p>O empacotamento dos projetos, criados a partir dos archetypes citados anteriormente, cria um arquivo JAR que poderá ser executado a partir da linha de comando, por exemplo:</p> <div class="even">java -Dfibra.config.dir=/opt/approtinas/tes_37099_fibrabatch -jar fibra-xxx-batch-1.0.0-executable.jar&nbsp;xxx-jobs/meuJob.xml xxxJob ator=&quot;...&quot; ecu=&quot;...&quot; paramX=&quot;...&quot;</div> <p>&nbsp;</p> <p>O &quot;VM argument&quot; <strong><span style="line-height: normal;">-Dfibra.config.dir</span></strong><span style="line-height: normal;"> define o caminho do diretório onde estão os arquivos&nbsp;</span><strong style="line-height: normal;">log4j.propertie</strong><strong style="line-height: normal;">s</strong><strong style="line-height: normal;">&nbsp;</strong><strong style="line-height: normal;">e</strong><span style="line-height: normal;">&nbsp;</span><strong style="line-height: 1.5em;"><span style="line-height: normal;">fibra-batch.properties</span></strong><span style="line-height: normal;"><strong>.</strong>&nbsp;</span></p> <ul>     <li>O log4j.properties define as configurações de log do processamento do Job. Exemplo:&nbsp;<a target="_blank" href="http://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/log4j.properties">wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/log4j.properties</a></li>     <li>O fibra-batch.properties<span style="line-height: normal;">&nbsp;define as configurações de execução do Job (propriedades de conexão com o banco de dados, diretório de entrada e saída de recursos utilizados pelo Job, configuração de threads para processamento paralelo, configurações de fila JMS para processamento distribuído e etc). Exemplo de um arquivo fibra-batch.properties:&nbsp;<a target="_blank" href="fibra-batch.properties">wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/fibra-batch.properties</a>.</span></li> </ul> <p>Após o nome do jar, é necessário informar os seguintes parâmetros (exatamente na ordem indicada abaixo):</p> <ol>     <li>Caminho para o arquivo xml com a definição do Job</li>     <li>Nome do Job a ser executado</li>     <li>Demais parâmetros do Job no formato chave=valor (o FibraJobRunner utiliza o&nbsp;<a target="_blank" href="http://docs.spring.io/spring-batch/apidocs/org/springframework/batch/core/launch/support/CommandLineJobRunner.html">docs.spring.io/spring-batch/apidocs/org/springframework/batch/core/launch/support/CommandLineJobRunner.html</a>, verifique a documentação do mesmo para ver todos os parâmetros permitidos)</li> </ol> <p>&nbsp;</p> <p><u>Executando a partir do Eclipse</u></p> <p>Para executar a partir do eclipse, basta configurar a main class br.gov.serpro.supde.fibra.batch.core.launch.FibraJobRunner para o seu projeto em Run Configurations.</p> <p><img width="862" height="497" alt="configurar eclipse para executar jobs do fibra 2" src="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/Captura_de_tela-Run%20Configurations_2.png" /></p> <p>&nbsp;</p> <p>Na aba <em>Arguments</em>, na caixa de texto &quot;<em>Program Arguments</em>&quot; deverão ser informados os parâmetros do Job como definido anteriormente e no&nbsp;&quot;<em>VM Arguments&quot;</em> deverá ser informada a <em>system property</em>&nbsp;<strong>-Dfibra.config.dir</strong>. Exemplo:</p> <p><img width="840" height="474" alt="configurar eclipse para executar jobs do fibra 1" src="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/Captura_de_tela-Run%20Configurations_3.png" /></p> <p><u>Obs1:</u> Para evitar erros <strong>&quot;Job Terminated in error: A job execution for this job is already running&quot;</strong> no ambiente de <strong>desenvolvimento</strong>, adicione o parâmetro&nbsp;<strong>-next</strong>, em Program arguments, para que o incrementer seja acionado e gerada uma nova JobInstance.</p><p><u>Obs2:</u> Também é possível adicionar, em <em>VM arguments</em>, o parâmetro&nbsp;<strong>-Dfibra.log.dir</strong> para definir uma pasta específica para os arquivos de log (se essa propriedade não for definida os logs serão armazenados em uma pasta &quot;log&quot; dentro do diretório configurado em -Dfibra.config.dir). Para direcionar o log também para o console (stdout), adicione a System Property <strong>-Dfibra.verbose=true</strong>.</p><p><u>Obs3:</u> As <em>System properties&nbsp;</em>sobreescrevem as propriedades configuradas no arquivo fibra-batch.properties.</p> <p><u>Testes Unitários:</u>&nbsp;As aplicações geradas a partir dos archetypes citados anteriormente possuem exemplos de uso do jUnit para testar os Jobs.</p> <p><u>Execução de testes unitários a partir do maven:</u>&nbsp;Para executar a fase de testes no maven é necessário passar o seguinte VM Argument para a execução do mesmo:&nbsp;<strong>-DargLine=&quot;-Dfibra.config.dir=</strong>&lt;&lt;diretório do arquivo fibra-batch.properties&gt;&gt;&quot;</p><p>&nbsp;</p><p><strong>Shell Script e Control-M</strong></p><div class="odd">Os jobs serão executados a partir do seguinte shell script:&nbsp;<a target="_blank" href="fibra-batch.sh/view">wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/fibra-batch.sh/view</a>&nbsp;acionado pelo Control-M. Execute o script com a opção -h para &nbsp;uma ajuda.</div><div class="odd">&nbsp;</div><div class="odd">&nbsp;</div><div class="odd"><strong>Ambiente de Testes</strong></div><div class="odd">&nbsp;</div><div class="odd">A máquina utilizada para testes dos Jobs do fibra é a 10.200.220.158.</div><div class="odd">As builds dos projetos devem ser transferidas para a pasta&nbsp;<strong>/opt/approtinas/tes_37099_fibrabatch</strong></div> <p>&nbsp;</p><p>O script fibra-batch.sh já está configurado na máquina, assim como o fibra-batch.properties. Para o testador executar o job, deverá acessar via ssh a máquina 10.200.220.158 e então executar o fibra-batch. Exemplo:</p><div class="even">&nbsp;$ ssh root@10.200.220.158</div><div class="even">#&nbsp;fibra-batch --config /opt/approtinas/tes_37099_fibrabatch -jar fibra-batch-sample-2.0.0-executable.jar -x sample-jobs/sampleJDBC-job.xml -i sampleJDBCJob --params -next</div><p>&nbsp;</p> <hr /> <h3 style="color: red;">FIBRA-BATCH-CORE</h3> <p>&nbsp;</p> <p>O fibra-batch-core é o componente responsável por implementar o comportamento comum entre os projetos do Fibra e fornecer algumas facilidades para o desenvolvimento dos Jobs.</p> <p>Para utilizar as funcionalidades do fibra-batch-core é necessário importar as definições do contexto do spring no Job, exemplo:&nbsp;</p> <div class="even">&lt;beans:import&nbsp;resource=&quot;classpath:/spring/context/fibra/batch/fibra-batch-context.xml&quot; /&gt;</div> <p>Este contexto possui as configurações do jobRepository, jobLauncher, configuração de conexão com o banco de dados e etc. A aplicação só precisa se preocupar em implementar os Jobs. A infraestrutura necessária já está definida no <strong>fibra-batch-context.xml</strong> e os parâmetros de configuração são definidos no arquivo <strong>fibra-batch.properties</strong>.</p><p><u><strong>ParentJob</strong></u></p> <p>Todos os Jobs do fibra possuem alguns passos em comum (verificar se as triggers de Banco de Dados estão ativadas &quot;auditaTriggers&quot;, verificar agendamento e baixar os arquivos de entrada do Job no &quot;fibra-nuc&quot;, enviar relatório de execução para o &quot;fibra-ted&quot;), o Job <strong>fibraParentJob</strong> define esse comportamento. Portanto, todos os Jobs do fibra devem herdar do <strong>fibraParentJob,</strong>&nbsp;exemplo:&nbsp;</p> <div class="even">&lt;batch:job id=&quot;sampleCSVJob&quot; parent=&quot;<strong>fibraParentJob</strong>&quot;&gt;</div> <div class="even">...</div> <div class="even">&lt;/batch:job&gt;</div> <p>&nbsp;</p><p><u><strong>ParentStep</strong></u></p> <p>Também existem algumas definições padrões para os steps, dessa forma, todo step deve herdar de&nbsp;<strong>fibraParentStep&nbsp;</strong>(em steps que executem tasklets) ou&nbsp;<strong>fibraParentChunkedStep</strong>&nbsp;(para steps que executem chunks). Definem a transação, o commit-interval (para os chunks), NoRollbackException (se for lançada esse tipo de exception, o rollback não é efetuado) e SkippableException (para os chunks).</p> <div class="even"><div class="even">&lt;batch:step id=&quot;step1&quot; parent=&quot;<strong>fibraParentStep</strong>&quot; next=&quot;step2&quot;&gt;</div> <div class="even">&nbsp; &nbsp; &lt;batch:tasklet ref=&quot;sampleTasklet&quot; /&gt;</div> <div class="even">&lt;/batch:step&gt;</div> <div class="even">&lt;batch:step id=&quot;step2&quot; parent=&quot;<strong>fibraParentChunkedStep</strong>&quot;&gt;</div> <div class="even">&nbsp; &nbsp; &lt;batch:tasklet task-executor=&quot;syncTaskExecutor&quot;&gt;</div> <div class="even">&nbsp; &nbsp; &nbsp; &nbsp; &lt;batch:chunk reader=&quot;sampleJDBCReader&quot; writer=&quot;cvsFileItemWriter&quot;/&gt;</div> <div class="even">&nbsp; &nbsp; &lt;/batch:tasklet&gt;</div> <div class="even">&lt;/batch:step&gt;</div></div> <p>&nbsp;</p><p><u><strong>Listeners</strong></u></p> <p>Tanto o fibraParentJob, quanto os fibraParentStep e fibraParentChunkedStep definem listeners. Dessa forma, caso precise definir algum listener específico, é necessário utilizar o atributo merge=&quot;true&quot;, para preservar o comportamento comum. Exemplo:</p> <div class="even">&lt;batch:job id=&quot;sampleCSVJob&quot;<strong> parent=&quot;fibraParentJob&quot;</strong>&gt;</div> <div class="even">...</div> <div class="even">&nbsp; &nbsp;&nbsp;<span style="line-height: 18px;">&lt;batch:listeners <strong>merge=&quot;true&quot;</strong>&gt;</span></div> <div class="even">&nbsp; &nbsp; &lt;!-- meus listeners específicos --&gt;</div> <div class="even">&nbsp; &nbsp; &lt;/batch:listeners&gt;</div> <div class="even">&lt;/batch:job&gt;</div>  <h3 style="color: red;">&nbsp;</h3><hr /><h3 style="color: red;"><strong>FibraJobContext</strong></h3> <p>&nbsp;</p> <p>O FibraJobContext é configurado, a partir do arquivo <strong>fibra-batch.properties</strong>, no início do processamento e contém informações sobre o contexto de execução do Job, por exemplo:</p> <ul>     <li>Diretório onde estão os arquivos de entrada do Job (<strong>i</strong><strong>nputPath</strong>).</li>     <li>Diretório onde deverão ser gerados os arquivos de saída do Job (<strong>outputPath</strong>).</li>     <li>Modo de simulação. Se ativado, nenhum commit é executado no banco de dados (<strong>simulationMode</strong>).</li>     <li>Ignorar verificação de agendamento e download de arquivos de entrada do Job (<strong>ignoreSchedule</strong>).</li><li>Ignorar gravação do relatório de execução no fibra-ted (<strong>ignoreReport</strong>).</li>     <li>Remover arquivos de entrada e/ou saída após a execução do Job (<strong>removeInputFiles</strong> e&nbsp;<strong>removeOutputFiles</strong>).</li> </ul> <p>As informações do FibraJobContext podem ser acessadas através de expression language na definição dos Jobs. Exemplo:</p> <div class="even"><div class="even">&lt;beans:bean name=&quot;sampleCSVReader&quot;&nbsp;<span style="white-space: pre;" class="Apple-tab-span">	</span>class=&quot;br.gov.serpro.supde.fibra.batch.core.support.CSVFileItemReader&quot;&gt;</div> <div class="even">&nbsp; &nbsp; &lt;beans:property name=&quot;lineMapper&quot; ref=&quot;XXXLineMapper&quot; /&gt;</div> <div class="even">&nbsp; &nbsp; &lt;beans:property name=&quot;resource&quot; value=&quot;file:<strong>#{fibraJobContext.inputPath}</strong>/XXX.csv&quot;/&gt;<span style="white-space: pre;" class="Apple-tab-span">		</span></div> <div class="even">&lt;/beans:bean&gt;</div></div><p>&nbsp;</p><p><u><strong>Sobreescrevendo Configurações do fibra-batch.properties</strong></u></p><p>O arquivo fibra-batch.properties é único para todo o Fibra e define configurações gerais para todos os módulos. Entretanto, algumas configurações podem ser customizadas para um Módulo ou Job específico. O carregamento das propriedades segue a seguinte ordem de prioridade:</p><ol><li><strong>Linha de Comando (opcional)</strong>: Os parâmetros passados como System Property na linha de comando tem prioridade sobre todos os demais arquivos de configuração.</li><li><strong>jobId.properties (opcional)</strong>: Um arquivo .properties na pasta /resources do projeto com o mesmo nome do jobId (ou seja, o arquivo vai embarcado no jar). Carrega suas propriedades quando o job específico executar.</li><li><strong>fibra-context.properties (obrigatório)</strong>: Todos os módulos devem possuir um arquivo fibra-context.properties na pasta /resources do projeto&nbsp;(ou seja, o arquivo vai embarcado no jar). Nesse arquivo a propriedade fibra.system deve ser definida com a sigla do módulo.</li><li><strong>fibra-batch.properties</strong>: Depois de carregar todas as configurações dos passos anteriores, o componente finalmente carrega as configurações gerais do fibra-batch.properties, mantendo as carregadas anteriormente.</li></ol><p>&nbsp;</p><hr /><h3 style="color: red;">&nbsp;Integração com o FIBRA-TED / FIBRA-NUC</h3><p>&nbsp;</p><p>Alguns Jobs possuem integração com o FIBRA-TED para o agendamento de sua execução (cblist), o armazenamento do relatório e possíveis arquivos de saída.</p><p>&nbsp;</p><p><u><strong>Verificação de Agendamento</strong></u></p><p>No início do processamento do Job, o componente chama o serviço <strong>cblist&nbsp;</strong>do FIBRA-NUC para verificar se existe uma execução agendada para o Job e se for o caso, baixar possíveis arquivos de entrada cadastrados. Para que o componente chame a rotina, é necessário que o Job seja executado com 2 parâmetros obrigatórios: <strong>ecu</strong> e <strong>ator</strong>. Exemplo:</p><p><span style="background-color: rgb(238, 243, 245);"><span style="line-height: normal;">java -Dfibra.config.dir=/opt/approtinas/tes_37099_fibrabatch&nbsp;-jar fibra-acr-batch-1.0.0-executable.jar&nbsp;acr-jobs/meuJob.xml xxxJob ator=&quot;ACR&quot; ecu=&quot;Caso de Uso X&quot; paramZ=&quot;...&quot;</span></span></p><p>É possível obter o retorno da chamada ao serviço cblist através do método getRetornoCblistDTO() do FibraJobContext.</p><p>&nbsp;</p><p><u><strong>Relatório de Execução do Job</strong></u></p><p>Cada Job é responsável por gerar o arquivo do relatório de execução como especificado no caso de uso, entretanto, o envio do arquivo para o FIBRA-TED é feito através do componente. Para evitar problemas de permissão no sistema de arquivos, é recomendado que o arquivo seja gerado na pasta configurada no <strong>fibra-batch.properties</strong> como <strong>fibra.outputPath</strong>&nbsp;(pode ser obtido através do objeto FibraJobContext.getInstance().<span style="line-height: 1.5em;">getOutputPath()</span><span style="line-height: 1.5em;">). O Job deve indicar, através do fibraJobContext o arquivo do relatório que ele gerou da seguinte forma:</span></p><div class="even">File relatorio = new File(...);</div><div class="even">FibraJobContext.getInstance().setReport(relatorio);</div><p>&nbsp;</p><p>Para os Jobs que geram outros arquivos de saída que precisam ser armazenados no FIBRA-TED, deve registrar da seguinte forma:</p><div class="even">File arquivoSaida = new File(...);</div><div class="even">FibraJobContext.getInstance().getOutputFiles().add(arquivoSaida);</div><p>&nbsp;</p><p>O tempo de execução e o status da execução são atualizadas através do componente.</p><p>&nbsp;</p><p><u><strong>ATIVAR/DESATIVAR a Integração</strong></u></p><p>A Ativação/Desativação dessa integração com o FIBRA-TED pode ser feita através do arquivo de configuração fibra-batch.properties (ou através de alguma das formas discutidas na seção anterior, para habilitar e/ou desabilitar para um módulo ou job específico):</p><div class="even">#Desabilitar a verificação do agendamento (cblist)</div><div class="even">fibra.ignoreSchedule=true</div><div class="even">#Habilitar a criação do relatório no fibra-ted</div><div class="even">fibra.ignoreReport=false</div><p>&nbsp;</p><p><u><strong>Permissão de usuário do Banco de Dados</strong></u></p><p>Para essa integração com o FIBRA-TED funcionar, o usuário do banco de dados precisa ter as seguintes permissões:</p><p>SELECT nas tabelas: ARQUIVO_DADOS, AGEND_PROCESS_LOTES, CASO_USOS e ATORS</p><p>INSERT e UPDATE nas tabelas: ARQUIVO_DADOS e AGEND_PROCESS_LOTES</p> <hr /> <h3 style="color: red;">Audita Triggers</h3><p>&nbsp;</p><div class="odd">Antes da execução de cada JOB a função <strong>fc_audita_triggers_c</strong> é chamada para verificar se as Triggers do Banco de Dados estão válidas e habilitadas. O fibraJobListener executa essa chamada no método beforeJob. Para definir os parâmetros da função audita triggers, deve-se utilizar 2 propriedades:</div><div class="odd">&nbsp;</div><div class="odd">- fibra.auditaTriggers.modules (lista de módulos, separados por vírgula, a serem verificados. Exemplo: FIBR-NEG,FIBR-DOM)</div><div class="odd">- fibra.auditaTriggers.owners (lista de owners, separados por vírgula, a serem verificados (seguindo a ordem dos módulos acima). Exemplo: FIBR_MAN,TABF_MAN)</div><div class="odd">&nbsp;</div><div class="odd">Para desabilitar a chamada ao auditaTriggers a propriedade fibra.auditaTriggers.ignore=true compre esse papel. Esta configuração deve ser utilizada apenas para ambientes de desenvolvimento e NUNCA em ambientes de homologação/produção.</div><div class="odd">&nbsp;</div><hr /><h3 style="color: red;">Performance e Escalabilidade</h3> <h3 style="color: red;">&nbsp;</h3> <div class="odd">No Spring-Batch, é possivel definir um task-executor para a execução dos steps de um Job. O fibra-core-batch define beans para cada tipo de task-executor (que pode ser configurado no arquivo&nbsp;<strong><span style="line-height: 18px;">fibra-batch.properties</span></strong><span style="line-height: 18px;">)</span>:</div> <div class="odd">&nbsp;</div> <ul>     <li><strong>syncTaskExecutor</strong> - Uma única Thread executa todo o step</li>     <li><strong>simpleAsyncTaskExecutor</strong> - Múltiplas threads disponíveis para a execução do step (as threads são criadas sempre que necessário e a quantidade máxima de threads concorrentes é definido na propriedade&nbsp;<strong>fibra.executor.maxThreads</strong>&nbsp;do arquivo fibra-batch.properties)</li>     <li><strong>threadPoolTaskExecutor</strong> - Pool de threads disponível para execução do step (as propriedades&nbsp;<em>fibra.executor.threads</em>,&nbsp;<em>fibra.executor.maxThread</em>,&nbsp;<em>fibra.executor.queueCapacity</em> e&nbsp;<em>fibra.executor.keepAliveSeconds</em> definem as configurações do pool)</li>     <li><strong>concurrentTaskExecutor</strong> - Cria um task-executor baseado nos tipos de Executor do pacote java.util.concurrent (a propriedade&nbsp;<strong>fibra.executor.type </strong>define o tipo do executor: SINGLE, FIXED ou CACHED)</li> </ul> <p>Obs: Ao utilizar algum task-executor multithread, certifique-se de que a execução do step em questão é thread-safe. Na aplicação gerada a partir do archetype&nbsp;<span style="background-color: rgb(238, 243, 245);">fibra-batch-sample-archetype</span>&nbsp;existem alguns exemplos de utilização de task-executor multithread (sampleJDBCPartitionStep-job.xml,&nbsp;sampleQueueParallelStep-job.xml e&nbsp;sampleCSVPartitionStep-job.xml).</p> <p>Também é possível melhorar a performance do Job tornando apenas a execução da fase &quot;process&quot; assíncrona (nos casos onde não é possível, ou viável, paralelizar a execução da fase &quot;read&quot;) utilizando as classes&nbsp;<strong><span style="line-height: normal;">AsyncItemProcessor </span></strong><span style="line-height: normal;">e <strong>AsyncItemWriter</strong></span><span style="line-height: 1.5em;">. Exemplo:</span></p><div class="even"><div class="even">&lt;beans:bean id=&quot;asyncProcessor&quot;</div><div class="even"><span style="white-space:pre" class="Apple-tab-span">	</span>class=&quot;org.springframework.batch.integration.async.AsyncItemProcessor&quot;&gt;</div><div class="even"><span style="white-space:pre" class="Apple-tab-span">	</span>&lt;beans:property name=&quot;delegate&quot;&gt;</div><div class="even"><span style="white-space:pre" class="Apple-tab-span">		</span>&lt;beans:bean class=&quot;br.gov.serpro.supde.fibra.batch.sample.SampleProcessor&quot; /&gt;</div><div class="even"><span style="white-space:pre" class="Apple-tab-span">	</span>&lt;/beans:property&gt;</div><div class="even"><span style="white-space:pre" class="Apple-tab-span">	</span>&lt;beans:property name=&quot;taskExecutor&quot; ref=&quot;threadPoolTaskExecutor&quot;/&gt;</div><div class="even">&lt;/beans:bean&gt;</div><div class="even">&nbsp;</div><div class="even">&lt;beans:bean id=&quot;asyncWriter&quot;</div><div class="even"><span style="white-space:pre" class="Apple-tab-span">	</span>class=&quot;org.springframework.batch.integration.async.AsyncItemWriter&quot;&gt;</div><div class="even"><span style="white-space:pre" class="Apple-tab-span">	</span>&lt;beans:property name=&quot;delegate&quot;&gt;</div><div class="even"><span style="white-space:pre" class="Apple-tab-span">		</span>&lt;beans:bean class=&quot;br.gov.serpro.supde.fibra.batch.sample.SampleWriter&quot; /&gt;</div><div class="even"><span style="white-space:pre" class="Apple-tab-span">	</span>&lt;/beans:property&gt;</div><div class="even">&lt;/beans:bean&gt;</div></div><p>&nbsp;</p> <div class="odd"><strong><u>Processamento Distribuído</u></strong></div> <div class="odd">&nbsp;</div> <div class="odd">&nbsp;Os principais métodos, definidos no spring-batch, para processamento distribuído são o Remote Chunking e o Remote Partitioning.</div> <div class="odd">&nbsp;</div> <ul>     <li><strong>Remote Chunking </strong>- O processamento do step é distribuído entre os vários nós slave, entretanto, a leitura e a escrita do step é sempre executada em um nó master. A utilização deste método é recomendada apenas nos casos onde as fases de escrita e leitura não são o gargalo e sim a execução do processamento. Na aplicação gerada a partir do archetype&nbsp;<span style="background-color: rgb(238, 243, 245);">fibra-batch-sample-archetype</span>&nbsp;veja um exemplo de implementação em sampleRemoteChunk-job.xml.</li>     <li><strong><span style="line-height: normal;">Remote Partitioning</span></strong><span style="line-height: normal;"> - Toda a execução do step (leitura, processamento e escrita) é executada de forma distribuída entre o master e os nós slave.&nbsp;</span>Na aplicação gerada a partir do archetype&nbsp;<span style="background-color: rgb(238, 243, 245);">fibra-batch-sample-archetype</span>&nbsp;veja um exemplo de implementação em sampleRemotePartitionedStep-job.xml.</li> </ul> <p>Obs1: Para iniciar nós escravos para processamento distribuído de um Job, é necessário adicionar o seguinte VM Argument:&nbsp;<strong>-Dfibra.slave=true</strong></p> <p>Obs2: A comunicação entre o nó master e os nós escravos é feita através de JMS, a configuração relativa a conexão entre os nós está nas propriedades com prefixo fibra.jms no arquivo fibra-batch.properties.</p> <p>Obs3: Para processamento MUITO pesado, é interessante avaliar o uso de Hadoop com o projeto Spring-XD&nbsp;<a target="_blank" href="http://projects.spring.io/spring-xd/">projects.spring.io/spring-xd/</a></p><p>&nbsp;</p><hr /><h3 style="color: red; font-size: 15px;">Monitorando a Execução dos Jobs</h3><p>&nbsp;</p><p>A execução dos Jobs pode ser monitorada através da linha de comando, gerando saída no console ou em PDF, ou através de uma interface WEB.</p><p>&nbsp;</p><p><strong><u>Monitorando a Execução a partir da linha de comando</u></strong></p><p>É possível gerar relatórios de monitoração a partir da linha de comando passando o parâmetro <strong>-report</strong> para o job, exemplo:</p><div class="even">java -Dfibra.config.dir=/opt/approtinas/tes_37099_fibrabatch -jar fibra-xxx-batch-1.0.0-executable.jar&nbsp;xxx-jobs/meuJob.xml xxxJob -report</div><p>&nbsp;</p><p><strong><u>Utilizando a Interface WEB</u></strong></p><p>A execução dos Jobs do Fibra pode ser acompanhada a partir da&nbsp;<strong>FIBRA Batch Admin</strong>&nbsp;(que nada mais é do que o&nbsp;<a target="_blank" href="http://docs.spring.io/spring-batch-admin/">spring-batch-admin</a>&nbsp;com algumas customizações no visual e na forma de referenciar o jobRepository para o Fibra). Uma versão do FIBRA-Batch-Admin pode ser obtida no nexus em <a target="_blank" href="http://nexus.aic.serpro/#nexus-search;quick~fibra-batch-admin">nexus.aic.serpro/#nexus-search;quick~fibra-batch-admin</a>. Baixe o .war mais recente e o mesmo poderá ser implantado em um servidor de aplicação Java (JBoss, Tomcat e etc).</p><p>A única configuração necessária para executar o FIBRA Batch Admin é a&nbsp;<em>System Property</em>&nbsp;<strong>fibra.config.dir</strong>&nbsp;definindo o diretório do arquivo fibra-batch.properties com as configurações de acesso ao&nbsp;<em>jobRepository</em>. Exemplo de configuração da System Property no servidor de aplicação JBoss EAP 6+:</p><div class="even"><div class="even">No arquivo&nbsp;<strong>standalone.xml</strong>, definir a system-property FIBRA_CONFIG_DIR com o valor do caminho do diretório onde está o arquivo fibra-batch.properties:</div><div class="even">&nbsp;</div><div class="even">&lt;system-properties&gt;</div><div class="even">&nbsp; &nbsp; &nbsp; &nbsp; &lt;property name=&quot;<strong>fibra.config.dir</strong>&quot; value=&quot;/opt/approtinas/tes_37099_fibrabatch&quot;/&gt;</div><div class="even"><span style="white-space: pre;" class="Apple-tab-span">	</span>&lt;!-- Outras propriedades de sistema... &nbsp;--&gt;</div><div class="even">&lt;/system-properties&gt;</div></div><p>&nbsp;</p><p>A aplicação será iniciada no contexto <strong>/fibra-batch-admin</strong> e todos os Jobs executados no jobRepository configurado no fibra-batch.properties poderão ser monitorados.</p><p><img width="950" height="736" alt="screenshot fibra batch admin" src="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/Job%20Execution%20-%20Mozilla%20Firefox3.png/image" /></p><p>&nbsp;</p><p>&nbsp;</p>
+        </div>
+
+        <div id="relatedItems">
+    
+        
+            
+        
+    
+</div>
+    
+    
+
+
+                    
+                      
+                 
+    
+        
+    
+
+                    
+
+                  </div>
+
+                </div>
+
+              
+            </td>
+            
+
+            
+            <td id="portal-column-two">
+              <div class="visualPadding">
+                
+                  
+
+    
+        
+
+        
+            
+        
+
+        
+
+        
+    
+    
+        
+
+        
+            
+        
+
+        
+
+        
+    
+    
+        
+
+        
+            
+        
+
+        
+
+        
+    
+    
+        
+
+        
+            
+
+    <!-- The calendar, rendered as a table -->
+
+    <table class="ploneCalendar" id="thePloneCalendar"
+           summary="Calendário">
+        <thead>
+            <tr>
+                <th id="calendar-previous">
+                    <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor/document_view?searchterm=spring%20batch&amp;month:int=3&amp;year:int=2017&amp;orig_query=searchterm%3Dspring%2520batch"
+                       rel="nofollow" title="Mês anterior">&laquo;</a>
+                </th>
+                <th colspan="5">
+                    Abril 2017
+                </th>
+                  <th id="calendar-next">
+                    <a href="https://wiki.serpro/unidades/supde/derce/sistemas/fibra/batch/guia-do-desenvolvedor/document_view?searchterm=spring%20batch&amp;month:int=5&amp;year:int=2017&amp;orig_query=searchterm%3Dspring%2520batch"
+                       rel="nofollow" title="Próximo mês">&raquo;</a>
+                </th>
+            </tr>
+            <tr class="weekdays">
+                
+                    <td>Do</td>
+                
+                
+                    <td>Se</td>
+                
+                
+                    <td>Te</td>
+                
+                
+                    <td>Qu</td>
+                
+                
+                    <td>Qu</td>
+                
+                
+                    <td>Se</td>
+                
+                
+                    <td>Sa</td>
+                
+            </tr>
+        </thead>
+
+        
+        <tbody>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td>1</td>
+            </tr>
+            <tr><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+            </tr>
+            <tr><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+            </tr>
+            <tr><td>16</td><td>17</td><td
+    class="todaynoevent">18</td><td>19</td><td>20</td><td>21</td><td>22</td>
+            </tr>
+            <tr><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td>
+            </tr>
+            <tr><td>30</td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+        
+
+        
+
+        
+    
+
+                
+                &nbsp;
+              </div>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
+      
+
+      <div class="visualClear" id="clear-space-before-footer"><!-- --></div>
+
+
+      <hr class="netscape4" />
+
+      
+
+        <div id="portal-footer">
+
+<ul class="menuHorizontal">
+  <li>
+    <a href="https://wiki.serpro" target="_blank">
+      <img src="https://wiki.serpro/chancela_solucaoSerpro.gif" alt="" title="" height="15" width="72" />
+    </a>
+  </li>
+  <li>
+    <img src="https://wiki.serpro/chancela_softwareLivre.gif" alt="" title="" height="15" width="76" />
+  </li>
+  <li>
+    <a href="http://www.zope.org" target="_blank">
+      <img src="https://wiki.serpro/chancela_zope.gif" alt="" title="" height="15" width="41" />
+    </a>
+  </li>
+  <li>
+    <a href="http://plone.org" target="_blank">
+      <img src="https://wiki.serpro/chancela_plone.gif" alt="" title="" height="15" width="83" />
+    </a>
+  </li>
+  <li>
+    <a href=" http://www.serpro.gov.br/acessibilidade/"
+       target="_blank">
+      <img src="https://wiki.serpro/chancela_acessibSerpro.gif" alt="" title="" height="15" width="80" />
+    </a>
+  </li>
+</ul>
+
+</div>
+
+        <!--<metal:colophon use-macro="here/colophon/macros/colophon">
+          The colophon area - contains details about the production of
+          the site. Typically "powered by" buttons, standards, tools used.
+        </metal:colophon>-->
+      
+
+    </div>
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+
+  (function() {
+    var u="http://homnephila.serpro/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "4"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Piwik Code -->
+
+</body>
+</html>
+
+

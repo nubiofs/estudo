@@ -1,0 +1,38 @@
+
+/* - background2.css - */
+@media screen {
+/* https://wiki.serpro/portal_css/background2.css?original=1 */
+body,
+#portal-columns a,
+#portal-breadcrumbs a,
+#bloco-noticia h2 a,
+#bloco-noticia-midia h2 a,
+#portlet-navigation-tree * ,
+.documentContent,
+h1,
+h2,
+h3,
+h4,
+h5 {
+background: #000000;
+color: #FFFF00 !important;
+}
+body {
+font-size: 95% !important;
+}
+#portal-breadcrumbs a {
+text-decoration: underline;
+}
+.portlet {
+background: transparent !important;
+}
+/* */
+#menu_adm {
+background: #000000 !important;
+}
+#menu_adm_titulo {
+background: #000000 !important;
+}
+
+}
+
