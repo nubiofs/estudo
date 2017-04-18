@@ -20,6 +20,12 @@ https://www.google.com.br/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=
 
 xxxxxxxx NEWS
 
+https://www.petrikainulainen.net/tag/spring-batch/
+
+http://shop.oreilly.com/product/0636920044673.do
+https://dzone.com/articles/spring-batch-flatfileitemwriter-hacking
+https://github.com/upenderc/flatfile-hack
+
 http://www.baeldung.com/introduction-to-spring-batch
 
 https://www.petrikainulainen.net/programming/spring-framework/spring-batch-tutorial-reading-information-from-a-rest-api/
