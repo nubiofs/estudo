@@ -49,3 +49,7 @@ http://docs.spring.io/spring-batch/trunk/apidocs/org/springframework/batch/item/
 
 
 http://stackoverflow.com/questions/31486360/springbatch-how-to-set-up-via-java-config-the-jsonlinemapper-for-reading-a-sim
+
+
+http://benas.github.io/2014/03/03/spring-batch-vs-easy-batch-a-hello-world-comparison.html
+http://benas.github.io/2015/02/15/spring-batch-vs-easy-batch-a-performance-comparison.html
