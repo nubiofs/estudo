@@ -17,3 +17,29 @@ http://www.mkyong.com/tutorials/spring-batch-tutorial
 (www.guj.com.br/t/como-integrar-spring-batch-spring-boot-quartz/342354)
 https://www.google.com.br/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=0ahUKEwjr-ZqpoKLTAhUDH5AKHYMSCIsQFggxMAI&url=http%3A%2F%2Fwww.guj.com.br%2Ft%2Fcomo-integrar-spring-batch-spring-boot-quartz%2F342354&usg=AFQjCNHYhL2jsZWOzSZW2H6EQcDpkNd2tg&sig2=CTNwpBpj8EKTPRZWv8QNmQ
 
+
+xxxxxxxx NEWS
+
+http://www.baeldung.com/introduction-to-spring-batch
+
+https://www.petrikainulainen.net/programming/spring-framework/spring-batch-tutorial-reading-information-from-a-rest-api/
+https://github.com/pkainulainen/spring-batch-examples/tree/master/spring
+
+http://stackoverflow.com/questions/25576974/json-array-reader-file-with-spring-batch
+http://stackoverflow.com/questions/28563513/read-complex-json-file-with-spring-batch
+https://jira.spring.io/browse/BATCH-2399
+
+--json num projeto clonado
+https://github.com/mouyang/spring-batch/blob/json/spring-batch-infrastructure/src/test/java/org/springframework/ojm/jackson/JacksonProcessorTests.java
+https://github.com/mouyang/spring-batch/tree/json/spring-batch-infrastructure/src/main/java/org/springframework/ojm
+https://github.com/mouyang/spring-batch/blob/json/spring-batch-infrastructure/src/main/java/org/springframework/ojm/jackson/JacksonProcessor.java
+
+--json no proprio framework
+https://github.com/spring-projects/spring-batch/blob/c824ccf7aa37a25522f74ecf0c6ec353b7ffaa64/spring-batch-infrastructure/src/test/java/org/springframework/batch/item/file/mapping/JsonLineMapperTests.java
+
+https://github.com/spring-projects/spring-batch/blob/c824ccf7aa37a25522f74ecf0c6ec353b7ffaa64/spring-batch-infrastructure/src/main/java/org/springframework/batch/item/file/mapping/JsonLineMapper.java
+
+http://docs.spring.io/spring-batch/trunk/apidocs/org/springframework/batch/item/file/mapping/JsonLineMapper.html
+
+
+http://stackoverflow.com/questions/31486360/springbatch-how-to-set-up-via-java-config-the-jsonlinemapper-for-reading-a-sim
