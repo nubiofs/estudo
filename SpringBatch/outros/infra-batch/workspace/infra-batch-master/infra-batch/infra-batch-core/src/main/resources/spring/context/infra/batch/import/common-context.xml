@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd		
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd">
+
+	<!-- Habilita uso de configurações por annotation (por exemplo, @Autowired) -->
+	<context:annotation-config />
+	
+	<bean id="placeholderProperties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">				
+		<property name="location"
+			value="file:#{infraJobContext.configPath}/infra-batch.properties" />
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="1" />
+	</bean>		
+	
+	<bean id="infraJobContext"
+		class="br.gov.serpro.supde.infra.batch.core.context.InfraJobContext"
+		factory-method="getInstance" />
+
+	<!-- Propriedades utilizadas no jdbcdslog (log dos comandos sql) -->
+	<bean id="infra_jdbcdslog_showTime"
+		class="org.springframework.batch.support.SystemPropertyInitializer"
+		depends-on="infraJobContext">
+		<property name="defaultValue" value="${infra.jdbcdslog.showTime}" />
+		<property name="keyName" value="jdbcdslog.showTime" />
+	</bean>
+
+	<bean id="infra_jdbcdslog_slowQueryThreshold"
+		class="org.springframework.batch.support.SystemPropertyInitializer"
+		depends-on="infraJobContext">
+		<property name="defaultValue" value="${infra.jdbcdslog.slowQueryThreshold}" />
+		<property name="keyName" value="jdbcdslog.slowQueryThreshold" />
+	</bean>
+	
+	<bean id="infra_jdbcdslog_logExecuteBatchDetail"
+		class="org.springframework.batch.support.SystemPropertyInitializer"
+		depends-on="infraJobContext">
+		<property name="defaultValue" value="${infra.jdbcdslog.logExecuteBatchDetail}" />
+		<property name="keyName" value="jdbcdslog.logExecuteBatchDetail" />
+	</bean>
+	
+	<bean id="infra_jdbcdslog_logAddBatchDetail"
+		class="org.springframework.batch.support.SystemPropertyInitializer"
+		depends-on="infraJobContext">
+		<property name="defaultValue" value="${infra.jdbcdslog.logAddBatchDetail}" />
+		<property name="keyName" value="jdbcdslog.logAddBatchDetail" />
+	</bean>
+	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames"
+			value="/messages/core-messages,messages/application-messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="useCodeAsDefaultMessage" value="true" />
+		<property name="cacheSeconds" value="-1" />
+	</bean>
+	
+	<bean id="springContextFactory" class="br.gov.serpro.supde.infra.batch.core.context.SpringContextFactory" 
+		scope="singleton"/>
+		
+	<bean id="jobReportController" class="br.gov.serpro.supde.infra.batch.core.report.JobReportController" 
+		scope="singleton">
+		<property name="jobExplorer" ref="jobExplorer" />
+	</bean>
+
+	<bean id="infraJobListener"
+		class="br.gov.serpro.supde.infra.batch.core.listener.InfraJobListener">		
+	</bean>
+	
+	<bean id="monitoracaoListener"
+		class="br.gov.serpro.supde.infra.batch.core.listener.MonitoracaoListener">
+	</bean>
+
+	<batch:job id="infraParentJob" job-repository="jobRepository"
+		abstract="true" incrementer="defaultIncrementer">		
+		<batch:listeners>
+			<batch:listener ref="monitoracaoListener" />
+			<batch:listener ref="infraJobListener" />			
+		</batch:listeners>
+	</batch:job>
+
+	<batch:step id="infraParentStep" abstract="true">
+		<batch:tasklet transaction-manager="transactionManager"
+			task-executor="syncTaskExecutor">
+		</batch:tasklet>
+	</batch:step>
+
+	<batch:step id="infraParentChunkedStep" abstract="true"
+		parent="infraParentStep">
+		<batch:tasklet throttle-limit="${infra.tasklet.throttle-limit}">
+			<batch:chunk commit-interval="${infra.chunk.commit-interval}">
+			</batch:chunk>
+			<batch:listeners>
+				<batch:listener>
+					<bean
+						class="br.gov.serpro.supde.infra.batch.core.listener.ItemFailureLoggerListener" />
+				</batch:listener>
+				<batch:listener>
+					<bean
+						class="br.gov.serpro.supde.infra.batch.core.listener.ItemSkipLoggerListener" />
+				</batch:listener>
+			</batch:listeners>
+		</batch:tasklet>
+	</batch:step>
+	
+	<batch:step id="infraParentCompletionPolicyStep" abstract="true"
+		parent="infraParentStep">
+		<batch:tasklet throttle-limit="${infra.tasklet.throttle-limit}">
+			<batch:chunk>				
+			</batch:chunk>
+			<batch:listeners>
+				<batch:listener>
+					<bean
+						class="br.gov.serpro.supde.infra.batch.core.listener.ItemFailureLoggerListener" />
+				</batch:listener>
+				<batch:listener>
+					<bean
+						class="br.gov.serpro.supde.infra.batch.core.listener.ItemSkipLoggerListener" />
+				</batch:listener>
+			</batch:listeners>
+		</batch:tasklet>
+	</batch:step>
+
+	<bean id="defaultIncrementer"
+		class="br.gov.serpro.supde.infra.batch.core.support.DefaultJobParametersIncrementer" />
+
+	<bean id="defaultRecordSeparatorPolicy"
+		class="br.gov.serpro.supde.infra.batch.core.support.DefaultRecordSeparatorPolicy" />
+	
+	<bean id="syncTaskExecutor" class="org.springframework.core.task.SyncTaskExecutor" />
+
+	<bean id="simpleAsyncTaskExecutor" depends-on="infraJobContext"
+		class="org.springframework.core.task.SimpleAsyncTaskExecutor">
+		<property name="concurrencyLimit">
+			<bean class="java.lang.Integer">
+				<constructor-arg index="0"
+					value="${infra.executor.maxThreads}" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="threadPoolTaskExecutor" depends-on="infraJobContext"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize">
+			<bean class="java.lang.Integer">
+				<constructor-arg index="0" value="${infra.executor.threads}" />
+			</bean>
+		</property>
+		<property name="maxPoolSize">
+			<bean class="java.lang.Integer">
+				<constructor-arg index="0"
+					value="${infra.executor.maxThreads}" />
+			</bean>
+		</property>
+		<property name="queueCapacity">
+			<bean class="java.lang.Integer">
+				<constructor-arg index="0"
+					value="${infra.executor.queueCapacity}" />
+			</bean>
+		</property>
+		<property name="keepAliveSeconds">
+			<bean class="java.lang.Integer">
+				<constructor-arg index="0"
+					value="${infra.executor.keepAliveSeconds}" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="concurrentTaskExecutor" depends-on="infraJobContext"
+		class="br.gov.serpro.supde.infra.batch.core.concurrent.ConcurrentTaskExecutorDelegate" />
+
+</beans>

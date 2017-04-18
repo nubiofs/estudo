@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<!-- Exemplo de Job que particiona o step para que o mesmo seja executado 
+		de forma paralela utilizando o CustomPartitionStep -->
+
+	<beans:import
+		resource="classpath:/spring/context/infra/batch/infra-batch-context.xml" />
+
+	<batch:job id="sampleJDBCCustomPartitionStepJob" parent="infraParentJob">
+		<batch:step id="step1" parent="partitionerStep">
+			<batch:listeners>
+				<batch:listener ref="sampleStepListener" />
+			</batch:listeners>
+		</batch:step>
+	</batch:job>
+
+	<beans:bean id="partitionerStep"
+		class="br.gov.serpro.supde.infra.batch.core.concurrent.CustomPartitionStep">
+		<beans:property name="step" ref="readWriteStep" />
+		<beans:property name="partitioner" ref="sampleJDBCItemReaderPartitioner" />
+	</beans:bean>
+
+	<beans:bean id="sampleStepListener"
+		class="br.gov.serpro.supde.infra.batch.sample.SampleStepExecutionListener" />
+
+	<batch:step id="readWriteStep" parent="infraParentChunkedStep">
+		<batch:tasklet>
+			<batch:chunk reader="sampleJDBCItemReaderPartitioner"
+				processor="sampleProcessor" writer="sampleWriter" commit-interval="10">
+			</batch:chunk>
+		</batch:tasklet>
+		<batch:listeners>
+			<batch:listener ref="sampleStepListener" />
+		</batch:listeners>
+	</batch:step>
+
+	<beans:bean id="sampleJDBCItemReaderPartitioner"
+		class="br.gov.serpro.supde.infra.batch.core.concurrent.JdbcItemReaderPartitioner"
+		scope="step">
+		<beans:property name="baseSql">
+			<beans:value>
+			<![CDATA[
+				SELECT id, name, country, birthdate, company, depto, extra 
+				FROM experience
+				WHERE id <= ?
+			]]>
+			</beans:value>
+		</beans:property>
+		<beans:property name="parameters">
+			<beans:list>
+				<beans:value>10000</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="saveState" value="false" />
+		<beans:property name="rowMapper">
+			<beans:bean
+				class="br.gov.serpro.supde.infra.batch.sample.domain.ExperienceRowMapper" />
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="sampleProcessor"
+		class="br.gov.serpro.supde.infra.batch.sample.SampleProcessor" />
+
+	<beans:bean id="sampleWriter"
+		class="br.gov.serpro.supde.infra.batch.sample.SampleWriter" />
+
+</beans:beans>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jobInstanceReport" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5aa9042a-f81c-4ee4-8283-f09ef11fcd86">
+	<property name="ireport.zoom" value="1.331000000000003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<field name="jobName" class="java.lang.String"/>
+	<field name="jobInstanceId" class="java.lang.Long"/>
+	<field name="jobExecutions" class="java.util.List"/>
+	<field name="jobParameters" class="java.util.List"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="72" backcolor="#006699" uuid="152a4bfb-ae31-4d57-ad37-8c3bc2042a19"/>
+				<staticText>
+					<reportElement x="20" y="15" width="515" height="43" forecolor="#FFFFFF" uuid="fdc950a8-3cd4-4863-803e-7d45542f9104"/>
+					<textElement textAlignment="Center">
+						<font size="34" isBold="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[Relatório de Execução]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="21" width="555" height="20" backcolor="#E9E9E9" uuid="f025cbc5-8bc5-4fff-82db-d2f24c26dcea"/>
+				<textElement textAlignment="Center">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jobName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="20" backcolor="#E9E9E9" uuid="6755d668-1e35-419c-b741-41088f896461"/>
+				<textElement textAlignment="Center">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Relatório de Execução]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="81">
+			<staticText>
+				<reportElement x="0" y="41" width="128" height="20" uuid="839787b3-aa4d-46c1-ba92-5a6327d6da7f"/>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Job Instance ID:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="128" y="41" width="427" height="20" uuid="fa4737db-55ae-4b49-ae95-493df0d9c4f7"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jobInstanceId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="21" width="128" height="20" uuid="f67dd0ff-ce6c-4f58-a246-a46ac4f54bfd"/>
+				<textElement>
+					<font isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nome do Job:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="128" y="21" width="427" height="20" uuid="447704ed-c380-4a14-aab5-62bb6a4f13cd"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jobName}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="61" width="555" height="20" uuid="b47ae30a-5b15-42ad-8520-8d4d4fc0e498"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{jobParameters})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "jobParametersReport.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="20" forecolor="#FFFFFF" backcolor="#70A9C6" uuid="b6c701a8-0e75-40f3-b0e5-4ccc83102b50"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1. Dados do Job]]></text>
+			</staticText>
+		</band>
+		<band height="21">
+			<subreport>
+				<reportElement x="0" y="1" width="555" height="20" uuid="8339c554-53c2-473c-a3e4-9d80fd9c6662"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{jobExecutions})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "jobExecutionSummaryReport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="21">
+			<subreport>
+				<reportElement x="0" y="1" width="555" height="20" uuid="e61fe411-9ef5-462b-a798-658829c4ccfb"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{jobExecutions})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "jobExecutionReport.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="0" width="555" height="1" uuid="fbac7a51-ee46-4c36-8a76-cd476c78c30e"/>
+			</break>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="0" y="1" width="128" height="20" backcolor="#E9E9E9" uuid="12c52e08-e1af-4d7c-b8d1-27d5c3af0161"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="128" y="1" width="407" height="20" backcolor="#E9E9E9" uuid="88bc2194-d71d-4111-ac0e-eedd35d26b5b"/>
+				<textElement textAlignment="Right">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="535" y="0" width="20" height="20" backcolor="#E9E9E9" uuid="f80b3224-0eaa-4ed1-b066-5d3832bd3e93"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

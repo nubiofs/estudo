@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html class="" lang="en"><head prefix="og: http://ogp.me/ns#">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="object" property="og:type">
+<meta content="GitLab" property="og:site_name">
+<meta content="Walter Alves Wanderley / infra-batch" property="og:title">
+<meta content="Infraestrutura para processamento batch baseado no framework Spring-Batch" property="og:description">
+<meta content="https://git.serpro/assets/gitlab_logo-7ae504fe4f68fdebb3c2034e36621930cd36ea87924c11ff65dbcb8ed50dca58.png" property="og:image">
+<meta content="https://git.serpro/05601970475/infra-batch" property="og:url">
+<meta content="summary" property="twitter:card">
+<meta content="Walter Alves Wanderley / infra-batch" property="twitter:title">
+<meta content="Infraestrutura para processamento batch baseado no framework Spring-Batch" property="twitter:description">
+<meta content="https://git.serpro/assets/gitlab_logo-7ae504fe4f68fdebb3c2034e36621930cd36ea87924c11ff65dbcb8ed50dca58.png" property="twitter:image">
+
+<title>Walter Alves Wanderley / infra-batch · GitLab</title>
+<meta content="Infraestrutura para processamento batch baseado no framework Spring-Batch" name="description">
+<link rel="shortcut icon" type="image/x-icon" href="https://git.serpro/assets/favicon-075eba76312e8421991a0c1f89a89ee81678bcde72319dd3e8047e2a47cd3a42.ico">
+<link rel="stylesheet" media="all" href="Walter%20Alves%20Wanderley%20_%20infra-batch%20%C2%B7%20GitLab_arquivos/application-8df89077fb902e2e1f2678ea5d55e51b2c02cb27cd22d372.css">
+<link rel="stylesheet" media="print" href="Walter%20Alves%20Wanderley%20_%20infra-batch%20%C2%B7%20GitLab_arquivos/print-87bb95ae825e1039facb71c62197dad696049012bb8cfeb76bb57c.css">
+<script src="Walter%20Alves%20Wanderley%20_%20infra-batch%20%C2%B7%20GitLab_arquivos/runtime.js"></script>
+<script src="Walter%20Alves%20Wanderley%20_%20infra-batch%20%C2%B7%20GitLab_arquivos/common.js"></script>
+<script src="Walter%20Alves%20Wanderley%20_%20infra-batch%20%C2%B7%20GitLab_arquivos/main.js"></script>
+<script>
+  window.project_uploads_path = "/05601970475/infra-batch/uploads";
+  window.preview_markdown_path = "/05601970475/infra-batch/preview_markdown";
+</script>
+
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="YY1HwEiuJqINAMSAT2BfQ7T/rgtvenVjG4qK4qEPcFCFQZ5rQ0dZ0xzt+nsjdUaUZcuKfRFg87VdakHMw2fenA==">
+<meta content="origin-when-cross-origin" name="referrer">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+<meta content="#474D57" name="theme-color">
+<link rel="apple-touch-icon" type="image/x-icon" href="https://git.serpro/assets/touch-icon-iphone-5a9cee0e8a51212e70b90c87c12f382c428870c0ff67d1eb034d884b78d2dae7.png">
+<link rel="apple-touch-icon" type="image/x-icon" href="https://git.serpro/assets/touch-icon-ipad-a6eec6aeb9da138e507593b464fdac213047e49d3093fc30e90d9a995df83ba3.png" sizes="76x76">
+<link rel="apple-touch-icon" type="image/x-icon" href="https://git.serpro/assets/touch-icon-iphone-retina-72e2aadf86513a56e050e7f0f2355deaa19cc17ed97bbe5147847f2748e5a3e3.png" sizes="120x120">
+<link rel="apple-touch-icon" type="image/x-icon" href="https://git.serpro/assets/touch-icon-ipad-retina-8ebe416f5313483d9c1bc772b5bbe03ecad52a54eba443e5215a22caed2a16a2.png" sizes="152x152">
+<link color="rgb(226, 67, 41)" href="https://git.serpro/assets/logo-d36b5212042cebc89b96df4bf6ac24e43db316143e89926c0db839ff694d2de4.svg" rel="mask-icon">
+<meta content="/assets/msapplication-tile-1196ec67452f618d39cdd85e2e3a542f76574c071051ae7effbfde01710eb17d.png" name="msapplication-TileImage">
+<meta content="#30353E" name="msapplication-TileColor">
+<link rel="alternate" type="application/atom+xml" title="infra-batch activity" href="https://git.serpro/05601970475/infra-batch.atom?private_token=V2MhyDjXj4Qqq2BVjkay">
+
+
+
+
+</head>
+
+<body class="" data-group="" data-page="projects:show" data-project="infra-batch">
+<script>
+//<![CDATA[
+window.gon={};gon.api_version="v3";gon.default_avatar_url="https:\/\/git.serpro\/assets\/no_avatar-849f9c04a3a0d0cea2424ae97b27447dc64a7dbfae83c036c45b403392f0e8ba.png";gon.max_file_size=3;gon.asset_host=null;gon.relative_url_root="";gon.shortcuts_path="\/help\/shortcuts";gon.user_color_scheme="dark";gon.katex_css_url="\/assets\/katex-e46cafe9c3fa73920a7c2c063ee8bb0613e0cf85fd96a3aea25f8419c4bfcfba.css";gon.katex_js_url="\/assets\/katex-04bcf56379fcda0ee7c7a63f71d0fc15ffd2e014d017cd9d51fd6554dfccf40a.js";gon.current_user_id=313;gon.current_username="02963357460";gon.current_user_fullname="Clenubio Feitosa de Souza";
+//]]>
+</script>
+<header class="navbar navbar-gitlab with-horizontal-nav">
+<a class="sr-only gl-accessibility" href="#content-body" tabindex="1">Skip to content</a>
+<div class="container-fluid">
+<div class="header-content">
+<div class="dropdown global-dropdown">
+<button class="global-dropdown-toggle" data-toggle="dropdown" type="button">
+<span class="sr-only">Toggle navigation</span>
+<i class="fa fa-bars"></i>
+</button>
+<div class="dropdown-menu-nav global-dropdown-menu">
+<ul>
+<li class="active home"><a title="Projects" class="dashboard-shortcuts-projects" href="https://git.serpro/dashboard/projects"><span>
+Projects
+</span>
+</a></li><li class=""><a class="dashboard-shortcuts-activity" title="Activity" href="https://git.serpro/dashboard/activity"><span>
+Activity
+</span>
+</a></li><li class=""><a title="Groups" href="https://git.serpro/dashboard/groups"><span>
+Groups
+</span>
+</a></li><li class=""><a title="Milestones" href="https://git.serpro/dashboard/milestones"><span>
+Milestones
+</span>
+</a></li><li class=""><a title="Issues" class="dashboard-shortcuts-issues" href="https://git.serpro/dashboard/issues?assignee_id=313"><span>
+Issues
+</span>
+<div class="badge">0</div>
+</a></li><li class=""><a title="Merge Requests" class="dashboard-shortcuts-merge_requests" href="https://git.serpro/dashboard/merge_requests?assignee_id=313"><span>
+Merge Requests
+</span>
+<div class="badge">0</div>
+</a></li><li class=""><a title="Snippets" href="https://git.serpro/dashboard/snippets"><span>
+Snippets
+</span>
+</a></li><li class="divider"></li>
+<li>
+<a title="About GitLab CE" class="about-gitlab" href="https://git.serpro/help">Help</a>
+</li>
+</ul>
+
+</div>
+</div>
+<div class="header-logo">
+<a class="home" title="Dashboard" id="logo" href="https://git.serpro/"><svg width="28" height="28" class="tanuki-logo" viewBox="0 0 36 36">
+  <path class="tanuki-shape tanuki-left-ear" fill="#e24329" d="M2 14l9.38 9v-9l-4-12.28c-.205-.632-1.176-.632-1.38 0z"></path>
+  <path class="tanuki-shape tanuki-right-ear" fill="#e24329" d="M34 14l-9.38 9v-9l4-12.28c.205-.632 1.176-.632 1.38 0z"></path>
+  <path class="tanuki-shape tanuki-nose" fill="#e24329" d="M18,34.38 3,14 33,14 Z"></path>
+  <path class="tanuki-shape tanuki-left-eye" fill="#fc6d26" d="M18,34.38 11.38,14 2,14 6,25Z"></path>
+  <path class="tanuki-shape tanuki-right-eye" fill="#fc6d26" d="M18,34.38 24.62,14 34,14 30,25Z"></path>
+  <path class="tanuki-shape tanuki-left-cheek" fill="#fca326" d="M2 14L.1 20.16c-.18.565 0 1.2.5 1.56l17.42 12.66z"></path>
+  <path class="tanuki-shape tanuki-right-cheek" fill="#fca326" d="M34 14l1.9 6.16c.18.565 0 1.2-.5 1.56L18 34.38z"></path>
+</svg>
+
+</a></div>
+<div class="title-container">
+<h1 class="title"><a href="https://git.serpro/05601970475">Walter Alves Wanderley</a> / <a class="project-item-select-holder" href="https://git.serpro/05601970475/infra-batch">infra-batch</a><button name="button" type="button" class="dropdown-toggle-caret js-projects-dropdown-toggle" aria-label="Toggle switch project dropdown" data-target=".js-dropdown-menu-projects" data-toggle="dropdown" data-order-by="last_activity_at"><i class="fa fa-chevron-down"></i></button></h1>
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li class="hidden-sm hidden-xs">
+<div class="has-location-badge search search-form">
+<form class="navbar-form" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" value="✓" type="hidden"><div class="search-input-container">
+<div class="location-badge">This project</div>
+<div class="search-input-wrap">
+<div class="dropdown" data-url="/search/autocomplete">
+<input name="search" id="search" placeholder="Search" class="search-input dropdown-menu-toggle no-outline js-search-dashboard-options disabled" spellcheck="false" tabindex="1" autocomplete="off" data-toggle="dropdown" data-issues-path="https://git.serpro/dashboard/issues" data-mr-path="https://git.serpro/dashboard/merge_requests" type="search">
+<div class="dropdown-menu dropdown-select">
+<div class="dropdown-content"><ul>
+<li>
+<a class="is-focused dropdown-menu-empty-link">
+Loading...
+</a>
+</li>
+</ul>
+</div><div class="dropdown-loading"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<i class="search-icon"></i>
+<i class="clear-icon js-clear-input"></i>
+</div>
+</div>
+</div>
+<input name="group_id" id="group_id" class="js-search-group-options" type="hidden">
+<input name="project_id" id="search_project_id" value="1166" class="js-search-project-options" data-project-path="infra-batch" data-name="infra-batch" data-issues-path="/05601970475/infra-batch/issues" data-mr-path="/05601970475/infra-batch/merge_requests" type="hidden">
+<input name="search_code" id="search_code" value="true" type="hidden">
+<input name="repository_ref" id="repository_ref" value="master" type="hidden">
+
+<div class="search-autocomplete-opts hide" data-autocomplete-path="/search/autocomplete" data-autocomplete-project-id="1166" data-autocomplete-project-ref="master"></div>
+</form></div>
+
+</li>
+<li class="visible-sm-inline-block visible-xs-inline-block">
+<a title="Search" aria-label="Search" data-toggle="tooltip" data-placement="bottom" data-container="body" href="https://git.serpro/search"><i class="fa fa-search"></i>
+</a></li>
+<li>
+<a data-original-title="New project" title="" aria-label="New project" data-toggle="tooltip" data-placement="bottom" data-container="body" href="https://git.serpro/projects/new"><i class="fa fa-plus fa-fw"></i>
+</a></li>
+<li>
+<a title="Issues" aria-label="Issues" data-toggle="tooltip" data-placement="bottom" data-container="body" href="https://git.serpro/dashboard/issues?assignee_id=313"><i class="fa fa-hashtag fa-fw"></i>
+<span class="badge issues-count">
+0
+</span>
+</a></li>
+<li>
+<a title="Merge requests" aria-label="Merge requests" data-toggle="tooltip" data-placement="bottom" data-container="body" href="https://git.serpro/dashboard/merge_requests?assignee_id=313"><svg width="15" height="20" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.967a2.15 2.15 0 1 1 2.3 0v5.066a2.15 2.15 0 1 1-2.3 0V4.967zm7.85 5.17V5.496c0-.745-.603-1.346-1.35-1.346V6l-3-3 3-3v1.85c2.016 0 3.65 1.63 3.65 3.646v4.45a2.15 2.15 0 1 1-2.3.191z" fill-rule="nonzero"></path></svg>
+
+<span class="badge merge-requests-count">
+0
+</span>
+</a></li>
+<li>
+<a title="Todos" aria-label="Todos" class="shortcuts-todos" data-toggle="tooltip" data-placement="bottom" data-container="body" href="https://git.serpro/dashboard/todos"><i class="fa fa-check-circle fa-fw"></i>
+<span class="badge todos-count">
+0
+</span>
+</a></li>
+<li class="header-user dropdown">
+<a class="header-user-dropdown-toggle" data-toggle="dropdown" href="https://git.serpro/02963357460"><img class="header-user-avatar" src="Walter%20Alves%20Wanderley%20_%20infra-batch%20%C2%B7%20GitLab_arquivos/avatar.png" alt="Avatar" height="26" width="26">
+<i class="fa fa-caret-down"></i>
+</a><div class="dropdown-menu-nav dropdown-menu-align-right">
+<ul>
+<li>
+<a class="profile-link" aria-label="Profile" data-user="02963357460" href="https://git.serpro/02963357460">Profile</a>
+</li>
+<li>
+<a aria-label="Settings" href="https://git.serpro/profile">Settings</a>
+</li>
+<li class="divider"></li>
+<li>
+<a class="sign-out-link" aria-label="Sign out" rel="nofollow" data-method="delete" href="https://git.serpro/users/sign_out">Sign out</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<button class="navbar-toggle" type="button">
+<span class="sr-only">Toggle navigation</span>
+<i class="fa fa-ellipsis-v"></i>
+</button>
+<div class="js-dropdown-menu-projects">
+<div class="dropdown-menu dropdown-select dropdown-menu-projects">
+<div class="dropdown-title"><span>Go to a project</span><button class="dropdown-title-button dropdown-menu-close" aria-label="Close" type="button"><i class="fa fa-times dropdown-menu-close-icon"></i></button></div>
+<div class="dropdown-input"><input id="" class="dropdown-input-field" placeholder="Search your projects" autocomplete="off" type="search"><i class="fa fa-search dropdown-input-search"></i><i role="button" class="fa fa-times dropdown-input-clear js-dropdown-input-clear"></i></div>
+<div class="dropdown-content"></div>
+<div class="dropdown-loading"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+</div>
+
+</div>
+</div>
+</header>
+
+<script>
+  var findFileURL = "/05601970475/infra-batch/find_file/master";
+</script>
+
+<div class="page-with-sidebar">
+<div class="layout-nav">
+<div class="container-fluid">
+<div class="nav-control scrolling-tabs-container">
+<div class="fade-left">
+<i class="fa fa-angle-left"></i>
+</div>
+<div class="fade-right">
+<i class="fa fa-angle-right"></i>
+</div>
+<ul class="nav-links scrolling-tabs">
+<li class="home active"><a title="Project" class="shortcuts-project" href="https://git.serpro/05601970475/infra-batch"><span>
+Project
+</span>
+</a></li><li class=""><a title="Repository" class="shortcuts-tree" href="https://git.serpro/05601970475/infra-batch/tree/master"><span>
+Repository
+</span>
+</a></li><li class=""><a title="Issues" class="shortcuts-issues" href="https://git.serpro/05601970475/infra-batch/issues"><span>
+Issues
+<span class="badge count issue_counter">0</span>
+</span>
+</a></li><li class=""><a title="Merge Requests" class="shortcuts-merge_requests" href="https://git.serpro/05601970475/infra-batch/merge_requests"><span>
+Merge Requests
+<span class="badge count merge_counter">0</span>
+</span>
+</a></li><li class=""><a title="Pipelines" class="shortcuts-pipelines" href="https://git.serpro/05601970475/infra-batch/pipelines"><span>
+Pipelines
+</span>
+</a></li><li class=""><a title="Wiki" class="shortcuts-wiki" href="https://git.serpro/05601970475/infra-batch/wikis/home"><span>
+Wiki
+</span>
+</a></li><li class=""><a title="Settings" class="shortcuts-tree" href="https://git.serpro/05601970475/infra-batch/settings/members"><span>
+Settings
+</span>
+</a></li><li class="hidden">
+<a title="Activity" class="shortcuts-project-activity" href="https://git.serpro/05601970475/infra-batch/activity"><span>
+Activity
+</span>
+</a></li>
+<li class="hidden">
+<a title="Network" class="shortcuts-network" href="https://git.serpro/05601970475/infra-batch/network/master">Graph
+</a></li>
+<li class="hidden">
+<a title="Charts" class="shortcuts-repository-charts" href="https://git.serpro/05601970475/infra-batch/graphs/master/charts">Charts
+</a></li>
+<li class="hidden">
+<a class="shortcuts-new-issue" href="https://git.serpro/05601970475/infra-batch/issues/new">Create a new issue
+</a></li>
+<li class="hidden">
+<a title="Jobs" class="shortcuts-builds" href="https://git.serpro/05601970475/infra-batch/builds">Jobs
+</a></li>
+<li class="hidden">
+<a title="Commits" class="shortcuts-commits" href="https://git.serpro/05601970475/infra-batch/commits/master">Commits
+</a></li>
+<li class="hidden">
+<a title="Issue Boards" class="shortcuts-issue-boards" href="https://git.serpro/05601970475/infra-batch/boards">Issue Boards</a>
+</li>
+</ul>
+</div>
+
+</div>
+</div>
+<div class="content-wrapper page-with-layout-nav">
+<div class="scrolling-tabs-container sub-nav-scroll">
+<div class="fade-left">
+<i class="fa fa-angle-left"></i>
+</div>
+<div class="fade-right">
+<i class="fa fa-angle-right"></i>
+</div>
+
+<div class="nav-links sub-nav scrolling-tabs">
+<ul class="container-fluid container-limited">
+<li class="active"><a title="Project home" class="shortcuts-project" href="https://git.serpro/05601970475/infra-batch"><span>
+Home
+</span>
+</a></li><li class=""><a title="Activity" class="shortcuts-project-activity" href="https://git.serpro/05601970475/infra-batch/activity"><span>
+Activity
+</span>
+</a></li><li class=""><a title="Cycle Analytics" class="shortcuts-project-cycle-analytics" href="https://git.serpro/05601970475/infra-batch/cycle_analytics"><span>
+Cycle Analytics
+</span>
+</a></li></ul>
+</div>
+</div>
+
+<div class="alert-wrapper">
+
+
+<div class="flash-container flash-container-page">
+</div>
+
+<div class="no-ssh-key-message alert alert-warning">
+You won't be able to pull or push project code via SSH until you <a class="alert-link" href="https://git.serpro/profile/keys">add an SSH key</a> to your profile
+<div class="alert-link-group">
+<a class="alert-link" rel="nofollow" data-method="put" href="https://git.serpro/profile?user%5Bhide_no_ssh_key%5D=true">Don't show again</a>
+|
+<a class="hide-no-ssh-message alert-link" href="#">Remind later</a>
+</div>
+</div>
+
+
+
+</div>
+<div class=" ">
+<div class="content" id="content-body">
+
+
+<div class="project-home-panel text-center">
+<div class="container-fluid container-limited">
+<div class="avatar-container s70 project-avatar">
+<div class="avatar s70 avatar-tile identicon" style="background-color: #E0F2F1; color: #555">I</div>
+</div>
+<h1 class="project-title">
+infra-batch
+<span class="visibility-icon has-tooltip" data-container="body" title="Public - The project can be cloned without any authentication.">
+<i class="fa fa-globe"></i>
+</span>
+</h1>
+<div class="project-home-desc">
+<p dir="auto">Infraestrutura para processamento batch baseado no framework Spring-Batch</p>
+</div>
+<div class="project-repo-buttons">
+<div class="count-buttons">
+<a class="btn star-btn toggle-star" data-remote="true" rel="nofollow" data-method="post" href="https://git.serpro/05601970475/infra-batch/toggle_star"><i class="fa fa-star-o"></i>
+<span>Star</span>
+</a><div class="count-with-arrow">
+<span class="arrow"></span>
+<span class="count star-count">
+1
+</span>
+</div>
+
+<a title="Fork project" class="btn" href="https://git.serpro/05601970475/infra-batch/forks/new"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" viewBox="5 0 30 40"><path fill="#7E7E7E" fill-rule="evenodd" d="M22 29.535V22.72c4.19-1.21 7.4-5.917 7.4-5.917.34-.446.6-1.247.6-1.795v-4.543C31.196 9.773 32 8.48 32 7c0-2.21-1.79-4-4-4s-4 1.79-4 4c0 1.48.804 2.773 2 3.465v4.243c0 .17-.094.39-.21.502 0 0-1.253 1.203-1.84 1.742C22.5 18.277 21.12 19 20.09 19c-1.042 0-2.473-.74-3.977-2.086-.61-.546-1.746-1.574-1.746-1.574-.2-.182-.367-.555-.367-.83v-4.045C15.196 9.773 16 8.48 16 7c0-2.21-1.79-4-4-4S8 4.79 8 7c0 1.48.804 2.773 2 3.465v4.543c0 .537.274 1.345.61 1.78 0 0 3.25 4.59 7.39 5.88v6.867c-1.196.692-2 1.984-2 3.465 0 2.21 1.79 4 4 4s4-1.79 4-4c0-1.48-.804-2.773-2-3.465zM14 7c0-1.105-.895-2-2-2s-2 .895-2 2 .895 2 2 2 2-.895 2-2zm16 0c0-1.105-.895-2-2-2s-2 .895-2 2 .895 2 2 2 2-.895 2-2zm-8 26c0-1.105-.895-2-2-2s-2 .895-2 2 .895 2 2 2 2-.895 2-2z"></path></svg>
+
+<span>Fork</span>
+</a><div class="count-with-arrow">
+<span class="arrow"></span>
+<a title="Forks" class="count" href="https://git.serpro/05601970475/infra-batch/forks">0
+</a></div>
+
+</div>
+<span class="hidden-xs">
+<div class="project-clone-holder">
+<div class="git-clone-holder input-group">
+<div class="input-group-btn">
+<a class="clone-dropdown-btn btn" data-toggle="dropdown" href="#" id="clone-dropdown">
+<span>
+HTTPS
+</span>
+<i class="fa fa-caret-down"></i>
+</a>
+<ul class="dropdown-menu dropdown-menu-right clone-options-dropdown">
+<li>
+<a class="ssh-selector has-tooltip" href="https://git.serpro/05601970475/git@git.serpro:05601970475/infra-batch.git" data-html="true" data-placement="right" data-container="body" data-title="Add an SSH key to your profile&lt;br&gt;to pull or push via SSH.">SSH</a>
+</li>
+<li>
+<a class="http-selector" href="https://git.serpro/05601970475/infra-batch.git" data-html="true" data-placement="right" data-container="body" data-title="Set a password on your account&lt;br&gt;to pull or push via HTTPS">HTTPS</a>
+</li>
+</ul>
+</div>
+<input name="project_clone" id="project_clone" value="https://02963357460@git.serpro/05601970475/infra-batch.git" class="js-select-on-focus form-control" readonly="readonly" type="text">
+<div class="input-group-btn">
+<button class="btn btn-clipboard btn-transparent" data-toggle="tooltip" data-placement="bottom" data-container="body" data-clipboard-target="#project_clone" data-title="Copy URL to clipboard" type="button" title="Copy URL to clipboard"><i aria-hidden="true" class="fa fa-clipboard"></i></button>
+</div>
+</div>
+<script>
+  $('ul.clone-options-dropdown a').on('click',function(e){
+    e.preventDefault();
+    var $this = $(this);
+    $('a.clone-dropdown-btn span').text($this.text());
+    $('#project_clone').val($this.attr('href'));
+  });
+</script>
+
+</div>
+<div class="project-action-button dropdown inline">
+<button class="btn" data-toggle="dropdown">
+<i class="fa fa-download"></i>
+<i class="fa fa-caret-down"></i>
+<span class="sr-only">
+Select Archive Format
+</span>
+</button>
+<ul class="dropdown-menu dropdown-menu-align-right" role="menu">
+<li class="dropdown-header">Source code</li>
+<li>
+<a rel="nofollow" download="" href="https://git.serpro/05601970475/infra-batch/repository/archive.zip?ref=master"><i class="fa fa-download"></i>
+<span>Download zip</span>
+</a></li>
+<li>
+<a rel="nofollow" download="" href="https://git.serpro/05601970475/infra-batch/repository/archive.tar.gz?ref=master"><i class="fa fa-download"></i>
+<span>Download tar.gz</span>
+</a></li>
+<li>
+<a rel="nofollow" download="" href="https://git.serpro/05601970475/infra-batch/repository/archive.tar.bz2?ref=master"><i class="fa fa-download"></i>
+<span>Download tar.bz2</span>
+</a></li>
+<li>
+<a rel="nofollow" download="" href="https://git.serpro/05601970475/infra-batch/repository/archive.tar?ref=master"><i class="fa fa-download"></i>
+<span>Download tar</span>
+</a></li>
+</ul>
+</div>
+<div class="project-action-button dropdown inline">
+<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+<i class="fa fa-plus"></i>
+<i class="fa fa-caret-down"></i>
+</a>
+<ul class="dropdown-menu dropdown-menu-align-right project-home-dropdown">
+<li>
+<a href="https://git.serpro/05601970475/infra-batch/issues/new"><i class="fa fa-exclamation-circle fa-fw"></i>
+New issue
+</a></li>
+<li class="divider"></li>
+<li>
+<a rel="nofollow" data-method="post" href="https://git.serpro/05601970475/infra-batch/forks?continue%5Bnotice%5D=You%27re+not+allowed+to+make+changes+to+this+project+directly.+A+fork+of+this+project+has+been+created+that+you+can+make+changes+in%2C+so+you+can+submit+a+merge+request.&amp;continue%5Bnotice_now%5D=You%27re+not+allowed+to+make+changes+to+this+project+directly.+A+fork+of+this+project+is+being+created+that+you+can+make+changes+in%2C+so+you+can+submit+a+merge+request.&amp;continue%5Bto%5D=%2F05601970475%2Finfra-batch%2Fnew%2Fmaster&amp;namespace_key=380"><i class="fa fa-file fa-fw"></i>
+New file
+</a></li>
+</ul>
+</div>
+
+
+<div class="js-notification-dropdown notification-dropdown project-action-button dropdown inline">
+<form class="inline notification-form" id="new_notification_setting" action="/notification_settings" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" value="✓" type="hidden"><input name="project_id" id="project_id" value="1166" type="hidden">
+<input class="notification_setting_level" value="global" name="notification_setting[level]" id="notification_setting_level" type="hidden">
+<div class="js-notification-toggle-btns">
+<div class="">
+<button class="dropdown-new btn btn-default notifications-btn" data-target="dropdown-313-1166-Project" data-toggle="dropdown" id="notifications-button" type="button">
+<i class="fa fa-bell js-notification-loading"></i>
+Global
+<i class="fa fa-caret-down"></i>
+</button>
+<ul class="dropdown-313-1166-Project dropdown-menu dropdown-menu-large dropdown-menu-no-wrap dropdown-menu-selectable" role="menu">
+<li role="menuitem"><a class="update-notification is-active" data-notification-level="global" data-notification-title="Global" href="#"><strong class="dropdown-menu-inner-title">Global</strong><span class="dropdown-menu-inner-content">Use your global notification setting</span></a></li>
+<li role="menuitem"><a class="update-notification " data-notification-level="watch" data-notification-title="Watch" href="#"><strong class="dropdown-menu-inner-title">Watch</strong><span class="dropdown-menu-inner-content">You will receive notifications for any activity</span></a></li>
+<li role="menuitem"><a class="update-notification " data-notification-level="mention" data-notification-title="On mention" href="#"><strong class="dropdown-menu-inner-title">On mention</strong><span class="dropdown-menu-inner-content">You will receive notifications only for comments in which you were @mentioned</span></a></li>
+<li role="menuitem"><a class="update-notification " data-notification-level="participating" data-notification-title="Participate" href="#"><strong class="dropdown-menu-inner-title">Participate</strong><span class="dropdown-menu-inner-content">You will only receive notifications for threads you have participated in</span></a></li>
+<li role="menuitem"><a class="update-notification " data-notification-level="disabled" data-notification-title="Disabled" href="#"><strong class="dropdown-menu-inner-title">Disabled</strong><span class="dropdown-menu-inner-content">You will not get any notifications via email</span></a></li>
+<li class="divider"></li>
+<li>
+<a class="update-notification" data-notification-level="custom" data-notification-title="Custom" data-target="#modal-313-1166-Project" data-toggle="modal" href="#" role="button">
+<strong class="dropdown-menu-inner-title">Custom</strong>
+<span class="dropdown-menu-inner-content">You will only receive notifications for the events you choose</span>
+</a>
+</li>
+</ul>
+
+</div>
+</div>
+</form></div>
+
+<div class="project-action-button inline">
+<a class="btn" rel="nofollow" data-method="post" href="https://git.serpro/05601970475/infra-batch/project_members/request_access">Request Access</a>
+</div>
+
+</span>
+</div>
+</div>
+</div>
+
+<nav class="container-fluid container-limited project-stats">
+<ul class="nav">
+<li>
+<a href="https://git.serpro/05601970475/infra-batch/tree/master">Files (7.6 MB)
+</a></li>
+<li>
+<a href="https://git.serpro/05601970475/infra-batch/commits/master">Commits (22)
+</a></li>
+<li>
+<a href="https://git.serpro/05601970475/infra-batch/branches">Branches (2)
+</a></li>
+<li>
+<a href="https://git.serpro/05601970475/infra-batch/tags">Tags (2)
+</a></li>
+</ul>
+</nav>
+<div class="container-fluid container-limited">
+<div class="project-last-commit">
+<a class="commit_short_id" href="https://git.serpro/05601970475/infra-batch/commit/10863e50f5b81e65582249e1526e3de76803dd76">10863e50</a>
+<a class="commit-row-message" href="https://git.serpro/05601970475/infra-batch/commit/10863e50f5b81e65582249e1526e3de76803dd76">Update README.md</a>
+·
+<time data-original-title="Dec 14, 2016 4:50pm GMT-0300" class="js-timeago js-timeago-render" title="" datetime="2016-12-14T19:50:59Z" data-toggle="tooltip" data-placement="top" data-container="body">4 months ago</time> by
+<a class="commit-author-link has-tooltip" title="walter.wanderley@serpro.gov.br" href="https://git.serpro/05601970475"><span class="commit-author-name">Walter Alves Wanderley</span></a>
+
+</div>
+</div>
+<div class="container-fluid container-limited">
+<div class="project-show-readme">
+<article class="readme-holder">
+<div class="pull-right">
+</div>
+<div class="file-content wiki">
+<h2 dir="auto">
+<a id="user-content-infraestrutura-de-apoio-para-processamento-batch-com-spring-batch" class="anchor" href="#infraestrutura-de-apoio-para-processamento-batch-com-spring-batch" aria-hidden="true"></a>Infraestrutura de apoio para processamento BATCH com Spring-Batch</h2>
+
+<ul dir="auto">
+<li>Fornece uma infraestrutura básica para criação dos Jobs</li>
+<li>Define um archetype maven para facilitar a criação de novos projetos</li>
+<li>Cria um esquema de configuração dos Jobs através de arquivo de configuração separado da aplicação (infra-batch.properties)</li>
+<li>Facilita a criação de Jobs para processamento distribuído</li>
+<li>Cria relatórios de execução e monitoramento da execução dos Jobs</li>
+<li>Fornece alguns exemplos com diferentes técnicas para otimização do processamento</li>
+</ul>
+
+<p dir="auto">Acesse a documentação de referência do <a href="http://docs.spring.io/spring-batch/reference/html/" rel="nofollow noreferrer" target="_blank">Spring-Batch</a></p>
+
+<h3 dir="auto">
+<a id="user-content-criação-do-projeto" class="anchor" href="#cria%C3%A7%C3%A3o-do-projeto" aria-hidden="true"></a>Criação do Projeto</h3>
+
+<p dir="auto">Para criar um projeto utilizando o infra-batch existe um archetype do maven 
+no catálogo do Nexus (<a href="http://nexus.aic.serpro/service/local/repo_groups/public/content/archetype-catalog.xml" rel="nofollow noreferrer" target="_blank">http://nexus.aic.serpro/service/local/repo_groups/public/content/archetype-catalog.xml</a>)
+infra-batch-sample-archetype</p>
+
+<pre class="code highlight js-syntax-highlight plaintext dark" v-pre="true" lang="plaintext"><code>$ mvn archetype:generate -DarchetypeCatalog=http://nexus.aic.serpro/service/local/repo_groups/public/content/ -DarchetypeArtifactId=infra-batch-sample-archetype -DarchetypeGroupId=br.gov.serpro.supde.infra -DarchetypeVersion=3.0.0 -DarchetypeRepository=http://nexus.aic.serpro/content/groups/public
+</code></pre>
+<h3 dir="auto">
+<a id="user-content-ambiente-de-execução" class="anchor" href="#ambiente-de-execu%C3%A7%C3%A3o" aria-hidden="true"></a>Ambiente de Execução</h3>
+
+<p dir="auto">O empacotamento dos projetos, criados a partir do 
+archetype citados anteriormente, cria um arquivo JAR que poderá ser 
+executado a partir da linha de comando, por exemplo:</p>
+
+<pre class="code highlight js-syntax-highlight plaintext dark" v-pre="true" lang="plaintext"><code>java -Dinfra.config.dir=/opt/infra-batch -jar meu-batch-1.0.0-executable.jar jobs/meuJob.xml jobId paramX="..."
+</code></pre>
+<p dir="auto">O "VM argument" -Dinfra.config.dir define o caminho do diretório onde estão os arquivos <strong>log4j.properties</strong> e <strong>infra-batch.properties</strong>. </p>
+
+<ul dir="auto">
+<li><p>O log4j.properties define as configurações de log do processamento do Job. Exemplo de um arquivo <a href="https://git.serpro/05601970475/infra-batch/blob/master/sample_resources/log4j.properties">log4j.properties</a></p></li>
+<li><p>O infra-batch.properties define as configurações de execução do 
+Job (propriedades de conexão com o banco de dados, diretório de entrada e
+ saída de recursos utilizados pelo Job, configuração de threads para 
+processamento paralelo, configurações de fila JMS para processamento 
+distribuído e etc). Exemplo de um arquivo <a href="https://git.serpro/05601970475/infra-batch/blob/master/sample_resources/infra-batch.properties">infra-batch.properties</a>.</p></li>
+</ul>
+
+<p dir="auto">Após o nome do jar, é necessário informar os seguintes parâmetros (exatamente na ordem indicada abaixo):</p>
+
+<ol dir="auto">
+<li>Caminho para o arquivo xml com a definição do Job</li>
+<li>Nome do Job a ser executado</li>
+<li>Demais parâmetros do Job no formato chave=valor. O InfraJobRunner 
+utiliza o 
+(docs.spring.io/spring-batch/apidocs/org/springframework/batch/core/launch/support/CommandLineJobRunner.html),
+ verifique a documentação do mesmo para ver todos os parâmetros 
+permitidos.</li>
+</ol>
+
+<h4 dir="auto">
+<a id="user-content-algumas-considerações" class="anchor" href="#algumas-considera%C3%A7%C3%B5es" aria-hidden="true"></a>Algumas considerações</h4>
+
+<ul dir="auto">
+<li><p>Para evitar erros "Job Terminated in error: A job execution for 
+this job is already running" no ambiente de desenvolvimento, adicione o 
+parâmetro -next, em Program arguments, para que o incrementer seja 
+acionado e gerada uma nova JobInstance.</p></li>
+<li><p>Também é possível adicionar, em VM arguments, o parâmetro 
+-Dinfra.log.dir para definir uma pasta específica para os arquivos de 
+log (se essa propriedade não for definida os logs serão armazenados em 
+uma pasta "log" dentro do diretório configurado em -Dinfra.config.dir). 
+Para direcionar o log também para o console (stdout), adicione a System 
+Property -Dinfra.verbose=true.</p></li>
+<li><p>As System properties sobreescrevem as propriedades configuradas no arquivo * <em>infra-batch.properties</em> *.</p></li>
+<li><p>Testes Unitários: As aplicações geradas a partir dos archetypes 
+citados anteriormente possuem exemplos de uso do jUnit para testar os 
+Jobs.</p></li>
+<li><p>Execução de testes unitários a partir do maven: Para executar a 
+fase de testes no maven é necessário passar o seguinte VM Argument para a
+ execução do mesmo: -DargLine="-Dinfra.config.dir=&lt;&gt;"</p></li>
+</ul>
+
+<h4 dir="auto">
+<a id="user-content-shellscript" class="anchor" href="#shellscript" aria-hidden="true"></a>ShellScript</h4>
+
+<p dir="auto">O seguinte shell script (<a href="https://git.serpro/05601970475/infra-batch/blob/master/sample_resources/infra-batch.sh">https://git.serpro/05601970475/infra-batch/blob/master/sample_resources/infra-batch.sh</a>) pode ser utilizado para iniciar e monitorar a execução dos Jobs. 
+Execute o script com a opção -h para  uma ajuda.</p>
+
+<h3 dir="auto">
+<a id="user-content-infra-batch-core" class="anchor" href="#infra-batch-core" aria-hidden="true"></a>Infra-Batch-Core</h3>
+
+<p dir="auto">O infra-batch-core é o componente responsável por 
+implementar o comportamento comum e fornecer algumas facilidades para o 
+desenvolvimento dos Jobs.</p>
+
+<p dir="auto">Para utilizar as funcionalidades do infra-batch-core é necessário importar as definições do contexto do spring no Job, exemplo: </p>
+
+<pre class="code highlight js-syntax-highlight xml dark" v-pre="true" lang="xml"><code><span class="nt">&lt;beans:import</span> <span class="na">resource=</span><span class="s">"classpath:/spring/context/infra/batch/infra-batch-context.xml"</span> <span class="nt">/&gt;</span>
+</code></pre>
+<p dir="auto">Este contexto possui as configurações do jobRepository, 
+jobLauncher, configuração de conexão com o banco de dados e etc. 
+A aplicação só precisa se preocupar em implementar os Jobs. 
+A infraestrutura necessária já está definida no infra-batch-context.xml e
+ os parâmetros de configuração são definidos no arquivo 
+infra-batch.properties.</p>
+
+<h4 dir="auto">
+<a id="user-content-parentjob" class="anchor" href="#parentjob" aria-hidden="true"></a>ParentJob</h4>
+
+<p dir="auto">Existem algumas definições padrões para os Jobs. Para utilizar essas definições, defina o parent da seguinte forma:</p>
+
+<pre class="code highlight js-syntax-highlight xml dark" v-pre="true" lang="xml"><code><span class="nt">&lt;batch:job</span> <span class="na">id=</span><span class="s">"sampleCSVJob"</span> <span class="na">parent=</span><span class="s">"infraParentJob"</span><span class="nt">&gt;</span>
+...
+<span class="nt">&lt;/batch:job&gt;</span>
+</code></pre>
+<h4 dir="auto">
+<a id="user-content-parentstep" class="anchor" href="#parentstep" aria-hidden="true"></a>ParentStep</h4>
+
+<p dir="auto">Também existem algumas definições padrões para os steps, 
+dessa forma, todo step deve herdar de infraParentStep (em steps que 
+executem tasklets) ou infraParentChunkedStep (para steps que executem 
+chunks). Definem a transação, o commit-interval (para os chunks), 
+NoRollbackException (se for lançada esse tipo de exception, o rollback 
+não é efetuado) e SkippableException (para os chunks).</p>
+
+<pre class="code highlight js-syntax-highlight xml dark" v-pre="true" lang="xml"><code><span class="nt">&lt;batch:step</span> <span class="na">id=</span><span class="s">"step1"</span> <span class="na">parent=</span><span class="s">"infraParentStep"</span> <span class="na">next=</span><span class="s">"step2"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;batch:tasklet</span> <span class="na">ref=</span><span class="s">"sampleTasklet"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/batch:step&gt;</span>
+<span class="nt">&lt;batch:step</span> <span class="na">id=</span><span class="s">"step2"</span> <span class="na">parent=</span><span class="s">"infraParentChunkedStep"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;batch:tasklet</span> <span class="na">task-executor=</span><span class="s">"syncTaskExecutor"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;batch:chunk</span> <span class="na">reader=</span><span class="s">"sampleJDBCReader"</span> <span class="na">writer=</span><span class="s">"cvsFileItemWriter"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/batch:tasklet&gt;</span>
+<span class="nt">&lt;/batch:step&gt;</span>
+</code></pre>
+<h4 dir="auto">
+<a id="user-content-listeners" class="anchor" href="#listeners" aria-hidden="true"></a>Listeners</h4>
+
+<p dir="auto">Tanto o infraParentJob, quanto os infraParentStep e 
+infraParentChunkedStep definem listeners. Dessa forma, caso precise 
+definir algum listener específico, é necessário utilizar o atributo 
+merge="true", para preservar o comportamento comum. Exemplo:</p>
+
+<pre class="code highlight js-syntax-highlight xml dark" v-pre="true" lang="xml"><code><span class="nt">&lt;batch:job</span> <span class="na">id=</span><span class="s">"sampleCSVJob"</span> <span class="na">parent=</span><span class="s">"infraParentJob"</span><span class="nt">&gt;</span>
+...
+    <span class="nt">&lt;batch:listeners</span> <span class="na">merge=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- meus listeners específicos --&gt;</span>
+    <span class="nt">&lt;/batch:listeners&gt;</span>
+<span class="nt">&lt;/batch:job&gt;</span>
+</code></pre>
+<h4 dir="auto">
+<a id="user-content-infrajobcontext" class="anchor" href="#infrajobcontext" aria-hidden="true"></a>InfraJobContext</h4>
+
+<p dir="auto">O InfraJobContext é configurado, a partir do arquivo 
+infra-batch.properties, no início do processamento e contém informações 
+sobre o contexto de execução do Job, por exemplo:</p>
+
+<ul dir="auto">
+<li>Diretório onde estão os arquivos de entrada do Job (inputPath).</li>
+<li>Diretório onde deverão ser gerados os arquivos de saída do Job (outputPath).</li>
+<li>Modo de simulação. Se ativado, nenhum commit é executado no banco de dados (simulationMode).</li>
+</ul>
+
+<p dir="auto">As informações do InfraJobContext podem ser acessadas através de expression language na definição dos Jobs. Exemplo:</p>
+
+<pre class="code highlight js-syntax-highlight xml dark" v-pre="true" lang="xml"><code><span class="nt">&lt;beans:bean</span> <span class="na">name=</span><span class="s">"sampleCSVReader"</span>  <span class="na">class=</span><span class="s">"br.gov.serpro.supde.infra.batch.core.support.CSVFileItemReader"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"lineMapper"</span> <span class="na">ref=</span><span class="s">"XXXLineMapper"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"resource"</span> <span class="na">value=</span><span class="s">"file:#{infraJobContext.inputPath}/XXX.csv"</span><span class="nt">/&gt;</span>     
+<span class="nt">&lt;/beans:bean&gt;</span>
+</code></pre>
+<h5 dir="auto">
+<a id="user-content-sobreescrevendo-configurações-do-infra-batchproperties" class="anchor" href="#sobreescrevendo-configura%C3%A7%C3%B5es-do-infra-batchproperties" aria-hidden="true"></a>Sobreescrevendo Configurações do infra-batch.properties</h5>
+
+<p dir="auto">Algumas configurações podem ser customizadas para um 
+sistema ou Job específico. O carregamento das propriedades segue a 
+seguinte ordem de prioridade:</p>
+
+<ol dir="auto">
+<li>Linha de Comando (opcional): Os parâmetros passados como System 
+Property na linha de comando tem prioridade sobre todos os demais 
+arquivos de configuração.</li>
+<li>jobId.properties (opcional): Um arquivo .properties na pasta 
+/resources do projeto com o mesmo nome do jobId (ou seja, o arquivo vai 
+embarcado no jar). Carrega suas propriedades quando o job específico 
+executar.</li>
+<li>app-context.properties (obrigatório): Todos os módulos devem possuir
+ um arquivo app-context.properties na pasta /resources do projeto (ou 
+seja, o arquivo vai embarcado no jar).</li>
+<li>infra-batch.properties: Depois de carregar todas as configurações 
+dos passos anteriores, o componente finalmente carrega as configurações 
+gerais do infra-batch.properties, mantendo as carregadas anteriormente.</li>
+</ol>
+
+<h3 dir="auto">
+<a id="user-content-performance-e-escalabilidade" class="anchor" href="#performance-e-escalabilidade" aria-hidden="true"></a>Performance e Escalabilidade</h3>
+
+<p dir="auto">No Spring-Batch, é possivel definir um task-executor para a
+ execução dos steps de um Job. O infra-core-batch define beans para cada
+ tipo de task-executor (que pode ser configurado no arquivo 
+infra-batch.properties):</p>
+
+<ul dir="auto">
+<li><p>syncTaskExecutor - Uma única Thread executa todo o step</p></li>
+<li><p>simpleAsyncTaskExecutor - Múltiplas threads disponíveis para a 
+execução do step (as threads são criadas sempre que necessário e a 
+quantidade máxima de threads concorrentes é definido na propriedade 
+infra.executor.maxThreads do arquivo infra-batch.properties)</p></li>
+<li><p>threadPoolTaskExecutor - Pool de threads disponível para execução
+ do step (as propriedades infra.executor.threads, 
+infra.executor.maxThread, infra.executor.queueCapacity e 
+infra.executor.keepAliveSeconds definem as configurações do pool)</p></li>
+<li><p>concurrentTaskExecutor - Cria um task-executor baseado nos tipos 
+de Executor do pacote java.util.concurrent (a propriedade 
+infra.executor.type define o tipo do executor: SINGLE, FIXED ou CACHED)</p></li>
+</ul>
+
+<p dir="auto">Obs: Ao utilizar algum task-executor multithread, 
+certifique-se de que a execução do step em questão é thread-safe. Na 
+aplicação gerada a partir do archetype infra-batch-sample-archetype 
+existem alguns exemplos de utilização de task-executor multithread 
+(sampleJDBCPartitionStep-job.xml, sampleQueueParallelStep-job.xml e 
+sampleCSVPartitionStep-job.xml).</p>
+
+<p dir="auto">Também é possível melhorar a performance do Job tornando 
+apenas a execução da fase "process" assíncrona (nos casos onde não é 
+possível, ou viável, paralelizar a execução da fase "read") utilizando 
+as classes AsyncItemProcessor e AsyncItemWriter. Exemplo:</p>
+
+<pre class="code highlight js-syntax-highlight xml dark" v-pre="true" lang="xml"><code><span class="nt">&lt;beans:bean</span> <span class="na">id=</span><span class="s">"asyncProcessor"</span>
+    <span class="na">class=</span><span class="s">"org.springframework.batch.integration.async.AsyncItemProcessor"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"delegate"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;beans:bean</span> <span class="na">class=</span><span class="s">"br.gov.serpro.supde.infra.batch.sample.SampleProcessor"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/beans:property&gt;</span>
+    <span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"taskExecutor"</span> <span class="na">ref=</span><span class="s">"threadPoolTaskExecutor"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/beans:bean&gt;</span>
+
+<span class="nt">&lt;beans:bean</span> <span class="na">id=</span><span class="s">"asyncWriter"</span>
+    <span class="na">class=</span><span class="s">"org.springframework.batch.integration.async.AsyncItemWriter"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"delegate"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;beans:bean</span> <span class="na">class=</span><span class="s">"br.gov.serpro.supde.infra.batch.sample.SampleWriter"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/beans:property&gt;</span>
+<span class="nt">&lt;/beans:bean&gt;</span>
+</code></pre>
+<h4 dir="auto">
+<a id="user-content-processamento-distribuído" class="anchor" href="#processamento-distribu%C3%ADdo" aria-hidden="true"></a>Processamento Distribuído</h4>
+
+<p dir="auto">Os principais métodos, definidos no spring-batch, para processamento distribuído são o Remote Chunking e o Remote Partitioning.</p>
+
+<ul dir="auto">
+<li>
+<strong>Remote Chunking</strong> - O processamento do step é distribuído
+ entre os vários nós slave, entretanto, a leitura e a escrita do step é 
+sempre executada em um nó master. A utilização deste método é 
+recomendada apenas nos casos onde as fases de escrita e leitura não são o
+ gargalo e sim a execução do processamento. Na aplicação gerada a partir
+ do archetype infra-batch-sample-archetype veja um exemplo de 
+implementação em <strong>sampleRemoteChunk-job.xml</strong>.</li>
+<li>
+<strong>Remote Partitioning</strong> - Toda a execução do step (leitura,
+ processamento e escrita) é executada de forma distribuída entre o 
+master e os nós slave. Na aplicação gerada a partir do archetype 
+infra-batch-sample-archetype veja um exemplo de implementação em <strong>sampleRemotePartitionedStep-job.xml</strong>.</li>
+</ul>
+
+<p dir="auto">Obs1: Para iniciar nós escravos para processamento distribuído de um Job, é necessário adicionar o seguinte VM Argument: <strong>-Dinfra.slave=true</strong></p>
+
+<p dir="auto">Obs2: A comunicação entre o nó master e os nós escravos é 
+feita através de JMS, a configuração relativa a conexão entre os nós 
+está nas propriedades com prefixo <strong>infra.jms</strong> no arquivo infra-batch.properties.</p>
+
+<h3 dir="auto">
+<a id="user-content-monitorando-a-execução-dos-jobs" class="anchor" href="#monitorando-a-execu%C3%A7%C3%A3o-dos-jobs" aria-hidden="true"></a>Monitorando a Execução dos Jobs</h3>
+
+<p dir="auto">A execução dos Jobs pode ser monitorada através da linha 
+de comando, gerando saída no console ou em PDF, ou através de uma 
+interface WEB.</p>
+
+<h4 dir="auto">
+<a id="user-content-monitorando-a-execução-a-partir-da-linha-de-comando" class="anchor" href="#monitorando-a-execu%C3%A7%C3%A3o-a-partir-da-linha-de-comando" aria-hidden="true"></a>Monitorando a Execução a partir da linha de comando</h4>
+
+<p dir="auto">É possível gerar relatórios de monitoração a partir da linha de comando passando o parâmetro -report para o job, exemplo:</p>
+
+<pre class="code highlight js-syntax-highlight plaintext dark" v-pre="true" lang="plaintext"><code>java -Dinfra.config.dir=/opt/infra-batch -jar meu-batch-1.0.0-executable.jar jobs/meuJob.xml meuJobId -report
+</code></pre>
+<h4 dir="auto">
+<a id="user-content-ignorando-geração-em-pdf-ao-final-do-processamento" class="anchor" href="#ignorando-gera%C3%A7%C3%A3o-em-pdf-ao-final-do-processamento" aria-hidden="true"></a>Ignorando geração em PDF ao final do processamento</h4>
+
+<p dir="auto">Por padrão sempre é gerado um PDF no final do 
+processamento com algumas informações sobre o status de execução e sobre
+ o tempo de processamento de cada step. Para ignorar a geração 
+automática desse relatório utilize a seguinte propriedade:</p>
+
+<pre class="code highlight js-syntax-highlight plaintext dark" v-pre="true" lang="plaintext"><code>infra.ignorePDFReport=true
+</code></pre>
+<h4 dir="auto">
+<a id="user-content-utilizando-a-interface-web" class="anchor" href="#utilizando-a-interface-web" aria-hidden="true"></a>Utilizando a Interface WEB</h4>
+
+<p dir="auto">A execução dos Jobs pode ser acompanhada a partir do <em>INFRA Batch Admin</em> 
+(que nada mais é do que o spring-batch-admin com algumas customizações no visual e na forma de referenciar o jobRepository). 
+Uma versão do INFRA-Batch-Admin pode ser obtida no nexus em (<a href="http://nexus.aic.serpro/#nexus-search;quick%7Einfra-batch-admin" rel="nofollow noreferrer" target="_blank">http://nexus.aic.serpro/#nexus-search;quick~infra-batch-admin</a>). 
+Baixe o .war mais recente e o mesmo poderá ser implantado em um servidor de aplicação Java (JBoss, Tomcat e etc).</p>
+
+<p dir="auto">A única configuração necessária para executar o Infra Batch Admin é a System Property <strong>infra.config.dir</strong> definindo o diretório do arquivo <strong>infra-batch.properties</strong> com as configurações de acesso ao jobRepository. 
+Exemplo de configuração da System Property no servidor de aplicação JBoss EAP 6+:</p>
+
+<p dir="auto">No arquivo standalone.xml, definir a system-property 
+infra.config.dir com o valor do caminho do diretório onde está o arquivo
+ infra-batch.properties:</p>
+
+<pre class="code highlight js-syntax-highlight xml dark" v-pre="true" lang="xml"><code><span class="nt">&lt;system-properties&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"infra.config.dir"</span> <span class="na">value=</span><span class="s">"/opt/infra-batch"</span><span class="nt">/&gt;</span>
+    <span class="c">&lt;!-- Outras propriedades de sistema...  --&gt;</span>
+<span class="nt">&lt;/system-properties&gt;</span>
+</code></pre>
+<p dir="auto">A aplicação será iniciada no contexto <strong>/infra-batch-admin</strong> e todos os Jobs executados no jobRepository configurado no infra-batch.properties poderão ser monitorados.</p>
+</div>
+</article>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div aria="{:labelledby=&gt;&quot;custom-notifications-title&quot;}" class="modal fade" id="modal-313-1166-Project" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button aria="{:label=&gt;&quot;close&quot;}" class="close" data-dismiss="modal" type="button">
+<span aria="{:hidden=&gt;&quot;true&quot;}">×</span>
+</button>
+<h4 class="modal-title" id="custom-notifications-title">
+Custom notification events
+</h4>
+</div>
+<div class="modal-body">
+<div class="container-fluid">
+<form class="custom-notifications-form" id="new_notification_setting" action="/notification_settings" accept-charset="UTF-8" method="post"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="YY1HwEiuJqINAMSAT2BfQ7T/rgtvenVjG4qK4qEPcFCFQZ5rQ0dZ0xzt+nsjdUaUZcuKfRFg87VdakHMw2fenA==" type="hidden"><input name="project_id" id="project_id" value="1166" type="hidden">
+<div class="row">
+<div class="col-lg-4">
+<h4 class="prepend-top-0">
+Notification events
+</h4>
+<p>
+Custom notification levels are the same as participating levels. With 
+custom notification levels you will also receive notifications for 
+select events. To find out more, check out
+<a href="https://git.serpro/help/workflow/notifications" target="_blank">notification emails</a>.
+</p>
+</div>
+<div class="col-lg-8">
+<div class="form-group">
+<div class="checkbox prepend-top-0">
+<label for="modal-313-1166-Project_notification_setting[new_note]">
+<input name="notification_setting[new_note]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[new_note]" class="js-custom-notification-event" value="1" name="notification_setting[new_note]" type="checkbox">
+<strong>
+New note
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[new_issue]">
+<input name="notification_setting[new_issue]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[new_issue]" class="js-custom-notification-event" value="1" name="notification_setting[new_issue]" type="checkbox">
+<strong>
+New issue
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[reopen_issue]">
+<input name="notification_setting[reopen_issue]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[reopen_issue]" class="js-custom-notification-event" value="1" name="notification_setting[reopen_issue]" type="checkbox">
+<strong>
+Reopen issue
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[close_issue]">
+<input name="notification_setting[close_issue]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[close_issue]" class="js-custom-notification-event" value="1" name="notification_setting[close_issue]" type="checkbox">
+<strong>
+Close issue
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[reassign_issue]">
+<input name="notification_setting[reassign_issue]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[reassign_issue]" class="js-custom-notification-event" value="1" name="notification_setting[reassign_issue]" type="checkbox">
+<strong>
+Reassign issue
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[new_merge_request]">
+<input name="notification_setting[new_merge_request]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[new_merge_request]" class="js-custom-notification-event" value="1" name="notification_setting[new_merge_request]" type="checkbox">
+<strong>
+New merge request
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[reopen_merge_request]">
+<input name="notification_setting[reopen_merge_request]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[reopen_merge_request]" class="js-custom-notification-event" value="1" name="notification_setting[reopen_merge_request]" type="checkbox">
+<strong>
+Reopen merge request
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[close_merge_request]">
+<input name="notification_setting[close_merge_request]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[close_merge_request]" class="js-custom-notification-event" value="1" name="notification_setting[close_merge_request]" type="checkbox">
+<strong>
+Close merge request
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[reassign_merge_request]">
+<input name="notification_setting[reassign_merge_request]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[reassign_merge_request]" class="js-custom-notification-event" value="1" name="notification_setting[reassign_merge_request]" type="checkbox">
+<strong>
+Reassign merge request
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[merge_merge_request]">
+<input name="notification_setting[merge_merge_request]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[merge_merge_request]" class="js-custom-notification-event" value="1" name="notification_setting[merge_merge_request]" type="checkbox">
+<strong>
+Merge merge request
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[failed_pipeline]">
+<input name="notification_setting[failed_pipeline]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[failed_pipeline]" class="js-custom-notification-event" value="1" name="notification_setting[failed_pipeline]" type="checkbox">
+<strong>
+Failed pipeline
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+<div class="form-group">
+<div class="checkbox">
+<label for="modal-313-1166-Project_notification_setting[success_pipeline]">
+<input name="notification_setting[success_pipeline]" value="0" type="hidden"><input id="modal-313-1166-Project_notification_setting[success_pipeline]" class="js-custom-notification-event" value="1" name="notification_setting[success_pipeline]" type="checkbox">
+<strong>
+Successful pipeline
+<i class="fa fa-spinner fa-spin custom-notification-event-loading"></i>
+</strong>
+</label>
+</div>
+</div>
+</div>
+</div>
+</form></div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="device-xs visible-xs"></div><div class="device-sm visible-sm"></div><div class="device-md visible-md"></div><div class="device-lg visible-lg"></div></body></html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd">
+
+	<!-- Exemplo de um Job que lê do banco de dados e escreve em um arquivo CSV -->
+
+	<beans:import
+		resource="classpath:/spring/context/infra/batch/infra-batch-context.xml" />
+
+	<batch:job id="sampleJDBCJob" parent="infraParentJob">
+		<batch:step id="step1" parent="infraParentStep" next="step2">
+			<batch:tasklet ref="sampleTasklet" />
+		</batch:step>
+		<batch:step id="step2" parent="infraParentChunkedStep">
+			<batch:tasklet task-executor="syncTaskExecutor">
+				<batch:chunk reader="sampleJDBCReader" processor="sampleProcessor" writer="cvsFileItemWriter">				
+				</batch:chunk>
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+
+	<beans:bean name="sampleTasklet"
+		class="br.gov.serpro.supde.infra.batch.sample.SampleTasklet" />
+
+	<beans:bean id="sampleJDBCReader"
+		class="org.springframework.batch.item.database.JdbcCursorItemReader">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="sql">
+			<beans:value>
+			<![CDATA[
+				SELECT id, name, country, birthdate, company, depto, extra 
+				FROM experience				
+				ORDER BY ID
+			]]>
+			</beans:value>
+		</beans:property>
+		<beans:property name="rowMapper">
+			<beans:bean
+				class="br.gov.serpro.supde.infra.batch.sample.domain.ExperienceRowMapper" />
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="sampleProcessor"
+		class="br.gov.serpro.supde.infra.batch.sample.SampleProcessor"></beans:bean>
+
+	<beans:bean id="cvsFileItemWriter"
+		class="org.springframework.batch.item.file.FlatFileItemWriter">
+		<beans:property name="resource" value="file:#{infraJobContext.outputPath}/experience.csv" />
+		<beans:property name="shouldDeleteIfExists" value="true" />
+
+		<beans:property name="lineAggregator">
+			<beans:bean
+				class="org.springframework.batch.item.file.transform.DelimitedLineAggregator">
+				<beans:property name="delimiter" value="," />
+				<beans:property name="fieldExtractor">
+					<beans:bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<beans:property name="names"
+							value="id, nome, pais, dataNascimentoFormatted, empresa, departamento" />
+					</beans:bean>
+				</beans:property>
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+</beans:beans>

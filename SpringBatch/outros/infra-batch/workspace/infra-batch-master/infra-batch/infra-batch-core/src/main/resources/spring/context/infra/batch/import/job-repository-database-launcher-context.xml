@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd">
+
+	<!-- DataSource do jobRepository -->
+
+	<bean id="dataSourceInfra" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${batch.jdbc.driver}" />
+		<property name="url" value="${batch.jdbc.url}" />
+		<property name="username" value="${batch.jdbc.user}" />
+		<property name="password" value="${batch.jdbc.password}" />
+		<property name="maxActive" value="${batch.jdbc.maxActive}" />
+		<property name="initialSize" value="${batch.jdbc.initialSize}" />
+		<property name="validationQuery" value="${batch.jdbc.validationQuery}" />
+	</bean>
+
+	<!-- TransactionManager do jobRepository -->
+
+	<bean id="transactionManagerInfra"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSourceInfra" />
+	</bean>
+
+	<bean id="sequenceIncrementerParent" class="org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer"
+		abstract="true">
+		<property name="dataSource" ref="dataSourceInfra" />
+	</bean>
+
+	<bean id="columnIncrementerParent" class="org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer"
+		abstract="true" parent="sequenceIncrementerParent">
+		<property name="columnName" value="ID" />
+	</bean>
+
+	<bean id="incrementerParent" parent="sequenceIncrementerParent">
+		<property name="incrementerName" value="DUMMY" />
+	</bean>
+
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
+
+	<!-- JobRepository Armazenado no BD -->
+	<bean id="jobRepository"
+		class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean"
+		p:isolationLevelForCreate="${batch.isolationlevel}" p:dataSource-ref="dataSourceInfra"
+		p:transactionManager-ref="transactionManagerInfra" p:lobHandler-ref="lobHandler"
+		p:tablePrefix="${batch.table_prefix}" />
+		
+	<bean id="launcherExecutor"
+		class="org.springframework.core.task.SyncTaskExecutor" />
+
+	<bean id="jobLauncher"
+		class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+		<property name="taskExecutor" ref="launcherExecutor" />
+	</bean>
+
+	<bean id="jobExplorer"
+		class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean"
+		p:dataSource-ref="dataSourceInfra" p:tablePrefix="${batch.table_prefix}" />
+
+	<bean id="jobRegistry"
+		class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
+
+	<bean
+		class="org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor">
+		<property name="jobRegistry" ref="jobRegistry" />
+	</bean>
+
+	<bean id="jobOperator"
+		class="org.springframework.batch.core.launch.support.SimpleJobOperator"
+		p:jobLauncher-ref="jobLauncher" p:jobExplorer-ref="jobExplorer"
+		p:jobRepository-ref="jobRepository" p:jobRegistry-ref="jobRegistry" />
+
+</beans>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:jms="http://www.springframework.org/schema/jms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-4.2.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.2.xsd
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.2.xsd">
+
+	<beans:bean id="chunkHandler"
+		class="org.springframework.batch.integration.chunk.RemoteChunkHandlerFactoryBean">
+		<beans:property name="chunkWriter" ref="chunkWriter" />
+		<beans:property name="step" ref="remoteChunkingStep" />
+	</beans:bean>
+
+	<beans:bean id="chunkWriter"
+		class="org.springframework.batch.integration.chunk.ChunkMessageChannelItemWriter"
+		scope="step">
+		<beans:property name="messagingOperations" ref="messagingGateway" />
+		<beans:property name="replyChannel" ref="replies" />
+		<beans:property name="maxWaitTimeouts">
+			<beans:bean class="java.lang.Integer">
+				<beans:constructor-arg index="0"
+					value="${infra.jms.maxWaitTimeouts}" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="messagingGateway"
+		class="org.springframework.integration.core.MessagingTemplate">
+		<beans:property name="defaultChannel" ref="requests" />
+		<beans:property name="receiveTimeout">
+			<beans:bean class="java.lang.Long">
+				<beans:constructor-arg index="0"
+					value="${infra.jms.receiveTimeout}" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<int:channel id="requests" />
+	<int:channel id="incoming" />
+
+	<int-jms:outbound-channel-adapter
+		connection-factory="jmsConnectionFactory" channel="requests"
+		destination-name="requests" />
+
+	<int:transformer input-channel="incoming"
+		output-channel="replies" ref="headerExtractor" method="extract" />
+
+	<beans:bean id="headerExtractor"
+		class="org.springframework.batch.integration.chunk.JmsRedeliveredExtractor" />
+
+	<int:channel id="replies">
+		<int:queue />
+		<int:interceptors>
+			<beans:bean id="pollerInterceptor"
+				class="org.springframework.batch.integration.chunk.MessageSourcePollerInterceptor">
+				<beans:property name="messageSource">
+					<beans:bean
+						class="org.springframework.integration.jms.JmsDestinationPollingSource">
+						<beans:constructor-arg>
+							<beans:bean class="org.springframework.jms.core.JmsTemplate">
+								<beans:property name="connectionFactory" ref="jmsConnectionFactory" />
+								<beans:property name="defaultDestinationName"
+									value="replies" />
+								<beans:property name="receiveTimeout">
+									<beans:bean class="java.lang.Long">
+										<beans:constructor-arg index="0"
+											value="${infra.jms.receiveTimeout}" />
+									</beans:bean>
+								</beans:property>
+							</beans:bean>
+						</beans:constructor-arg>
+					</beans:bean>
+				</beans:property>
+				<beans:property name="channel" ref="incoming" />
+			</beans:bean>
+		</int:interceptors>
+	</int:channel>
+
+	<jms:listener-container connection-factory="jmsConnectionFactory"
+		transaction-manager="transactionManager" acknowledge="transacted" >
+		<jms:listener destination="requests" ref="chunkHandler"
+			response-destination="replies" method="handleChunk" />
+	</jms:listener-container>
+
+</beans:beans>

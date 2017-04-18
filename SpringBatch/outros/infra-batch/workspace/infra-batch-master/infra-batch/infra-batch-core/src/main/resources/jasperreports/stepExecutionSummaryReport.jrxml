@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="stepExecutionReport" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.7715610000000022"/>
+	<property name="ireport.x" value="11"/>
+	<property name="ireport.y" value="0"/>
+	<style name="zebra" mode="Transparent" lineSpacing="Single">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{COLUMN_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#E9E9E9" lineSpacing="Single"/>
+		</conditionalStyle>
+	</style>
+	<style name="status" lineSpacing="Single">
+		<conditionalStyle>
+			<conditionExpression><![CDATA["FAILED".equals($F{status}) && $V{COLUMN_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" forecolor="#FF0000" backcolor="#E9E9E9" lineSpacing="Single"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["FAILED".equals($F{status}) && $V{COLUMN_COUNT}%2 == 1]]></conditionExpression>
+			<style forecolor="#FF0000" lineSpacing="Single"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["COMPLETED".equals($F{status}) && $V{COLUMN_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" forecolor="#00C800" backcolor="#E9E9E9" lineSpacing="Single"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["COMPLETED".equals($F{status}) && $V{COLUMN_COUNT}%2 == 1]]></conditionExpression>
+			<style mode="Transparent" forecolor="#00C800" lineSpacing="Single"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="executionNumber" class="java.lang.Integer" isForPrompting="false"/>
+	<field name="stepExecutionId" class="java.lang.Long"/>
+	<field name="stepName" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="exitCode" class="java.lang.String"/>
+	<field name="readCount" class="java.lang.Integer"/>
+	<field name="writeCount" class="java.lang.Integer"/>
+	<field name="commitCount" class="java.lang.Integer"/>
+	<field name="rollbackCount" class="java.lang.Integer"/>
+	<field name="skipCount" class="java.lang.Integer"/>
+	<field name="filterCount" class="java.lang.Integer"/>
+	<field name="startTime" class="java.util.Date"/>
+	<field name="endTime" class="java.util.Date"/>
+	<field name="duration" class="java.lang.String"/>
+	<variable name="stepNumber" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[Boolean.TRUE]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="20" forecolor="#FFFFFF" backcolor="#A8C0FF"/>
+				<textElement lineSpacing="Single">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Resumo dos Passos da Execução #" + $P{executionNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22">
+			<staticText>
+				<reportElement mode="Transparent" x="20" y="1" width="235" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Passo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="255" y="1" width="100" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Início]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="355" y="1" width="100" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fim]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="455" y="1" width="50" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duração]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="505" y="1" width="50" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="1" width="20" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="status" stretchType="RelativeToTallestObject" x="505" y="1" width="50" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement style="zebra" stretchType="RelativeToTallestObject" x="355" y="1" width="100" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{endTime}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="zebra" stretchType="RelativeToTallestObject" x="455" y="1" width="50" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{duration}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="zebra" stretchType="RelativeToTallestObject" x="20" y="1" width="235" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stepName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement style="zebra" stretchType="RelativeToTallestObject" x="255" y="1" width="100" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{startTime}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="zebra" stretchType="RelativeToTallestObject" x="0" y="1" width="20" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{stepNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22">
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="0" y="2" width="555" height="20" backcolor="#C0C0C0"/>
+				<textElement textAlignment="Right" lineSpacing="Single">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Quantidade de passos executados: " + $V{stepNumber}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="1" width="555" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+</jasperReport>

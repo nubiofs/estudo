@@ -1,0 +1,111 @@
+$ cd estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample
+
+$ ~/mvn eclipse:eclipse
+
+- No Eclipse, workspace "estudo.git/SpringBatch/outros/infra-batch/workspace":
+ 
+-> "Import Existing Maven Project"
+
+- Mudar para Java 1.8
+
+- Colocar no pom.xml:
+
+<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<version>9.4.1212.jre7</version>
+	</dependency>
+	<dependency>
+        	<groupId>com.oracle</groupId>
+        	<artifactId>ojdbc6</artifactId>
+        	<scope>provided</scope>
+      	</dependency>
+
+$ ~/mvn clean package
+
+* (Execução no Eclipse) Run As -> Run Configuration -> New "Java Aplication", com:
+
+- Aba 'Main'
+
+Project = infra-batch-sample
+Main Class = br.gov.serpro.supde.infra.batch.core.launch.InfraJobRunner
+
+- Aba 'Arguments'
+
+Program Arguments = sample-jobs/sampleCSV-job.xml sampleCSVJob
+VM Arguments = -Dinfra.config.dir=/home/02963357460/estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample/src/main/resources/configs -Dinfra.verbose=true
+
+* (Execução no prompt)
+
+Obs.: 
+
+1) No pgAdmin -> new Database "batch"
+2) Rodar no pgAdmin (projeto "spring-batch-core"):
+
+/org/springframework/batch/core/schema-postgresql.sql
+
+3) No pgAdmin (criar tabela de negócio):
+
+-- Table: public.experience
+
+-- DROP TABLE public.experience;
+
+CREATE TABLE public.experience
+(
+  id bigint NOT NULL,
+  name character varying(255) DEFAULT NULL::character varying,
+  country character varying(100) DEFAULT NULL::character varying,
+  birthdate character varying(255),
+  company character varying(255),
+  depto character varying(255) DEFAULT NULL::character varying,
+  CONSTRAINT experience_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.experience
+  OWNER TO "user";
+
+
+$ cd estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample
+
+Obs.:
+
+$ mkdir -p /opt/infra-batch/output/monitoring
+
+ou colocar em "infra-batch.proterties":
+
+#Ignorar a criacao do relatorio no infra
+infra.ignoreReport=true
+infra.ignorePDFReport=true
+
+$ java -Dinfra.config.dir=/home/02963357460/estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample/src/main/resources/configs -jar target/infra-batch-sample-3.0.1-executable.jar sample-jobs/sampleCSV-job.xml sampleCSVJob  -report
+
+ou 
+
+Obs.: ou
+
+$ java -Dinfra.config.dir=/media/sf_compartilhamento/infra-batch-sample/src/main/resources/configs -jar target/infra-batch-sample-3.0.1-executable.jar sample-jobs/sampleCSV-job.xml sampleCSVJob  -report
+
+xxxxxxxxxxxxxxxxxx
+xxxxxxxxx temps
+
+	<!-- teste mais -->
+ 	<!-- database -->
+    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/batch" />
+        <property name="username" value="postgres" />
+        <property name="password" value="post" />
+    </beans:bean>
+    <!-- transaction manager -->
+    <beans:bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+    <!-- create job-meta tables automatically -->
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="org/springframework/batch/core/schema-drop-postgresql.sql" />
+        <jdbc:script location="org/springframework/batch/core/schema-postgresql.sql" />
+    </jdbc:initialize-database>
+	<!-- teste menos -->
+
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:jms="http://www.springframework.org/schema/jms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-4.2.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.2.xsd
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.2.xsd">
+
+
+	<beans:beans profile="slave">
+
+		<beans:bean id="stepExecutionRequestHandler"
+			class="org.springframework.batch.integration.partition.StepExecutionRequestHandler">
+			<beans:property name="jobExplorer" ref="jobExplorer" />
+			<beans:property name="stepLocator">
+				<beans:bean
+					class="org.springframework.batch.integration.partition.BeanFactoryStepLocator" />
+			</beans:property>
+		</beans:bean>
+
+		<int-jms:message-driven-channel-adapter
+			connection-factory="jmsConnectionFactory" destination-name="queue-requests-partitioning"
+			channel="handler.in.partitioning" concurrent-consumers="${infra.jms.concurrent-consumers}" />
+		<int:channel id="handler.in.partitioning" />
+		<int:service-activator input-channel="handler.in.partitioning"
+			output-channel="handler.out.partitioning" ref="stepExecutionRequestHandler"
+			method="handle" />
+
+		<int:channel id="handler.out.partitioning" />
+		<int-jms:outbound-channel-adapter
+			connection-factory="jmsConnectionFactory" destination-name="queue-replies-partitioning"
+			channel="handler.out.partitioning" />
+	</beans:beans>
+
+	<beans:beans profile="master">
+
+		<beans:bean id="JMSPartitionHandler"
+			class="org.springframework.batch.integration.partition.MessageChannelPartitionHandler">
+			<beans:property name="stepName" value="remotePartitionStep" />
+			<beans:property name="gridSize"
+				value="${infra.partitionHandler.gridSize}" />
+			<beans:property name="messagingOperations">
+				<beans:bean class="org.springframework.integration.core.MessagingTemplate">
+					<beans:property name="defaultChannel" ref="requests.partitioning" />
+				</beans:bean>
+			</beans:property>
+			<beans:property name="replyChannel" ref="replies.partitioning" />
+		</beans:bean>
+
+		<int:channel id="requests.partitioning" />
+		<int-jms:outbound-channel-adapter
+			connection-factory="jmsConnectionFactory" channel="requests.partitioning"
+			destination-name="queue-requests-partitioning" />
+
+		<int-jms:message-driven-channel-adapter
+			connection-factory="jmsConnectionFactory" channel="staging.partitioning"
+			destination-name="queue-replies-partitioning" />
+
+		<int:channel id="staging.partitioning" />
+
+		<int:aggregator ref="JMSPartitionHandler" method="aggregate"
+			input-channel="staging.partitioning" output-channel="replies.partitioning"
+			send-timeout="${infra.jms.aggregator.send-timeout}" />
+
+		<int:channel id="replies.partitioning">
+			<int:queue />
+		</int:channel>
+
+	</beans:beans>
+
+</beans:beans>
