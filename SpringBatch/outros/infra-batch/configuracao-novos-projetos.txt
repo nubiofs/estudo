@@ -140,4 +140,101 @@ xxxxxxxxx temps
     </jdbc:initialize-database>
 	<!-- teste menos -->
 
+xxxxxxxxxxXXXXXXXXXXXX
+xxxxxxxxx EXTRAS 
+
+FONTE (http://stackoverflow.com/questions/10174898/how-to-check-whether-a-given-string-is-valid-json-in-java):
+
+Google GSON option
+
+Another option is to use Google Gson. Import the dependency:
+
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.5</version>
+</dependency>
+
+Again, you can implement the proposed solution as:
+
+import com.google.gson.Gson;
+
+public final class JSONUtils {
+  private static final Gson gson = new Gson();
+
+  private JSONUtils(){}
+
+  public static boolean isJSONValid(String jsonInString) {
+      try {
+          gson.fromJson(jsonInString, Object.class);
+          return true;
+      } catch(com.google.gson.JsonSyntaxException ex) { 
+          return false;
+      }
+  }
+}
+
+A simple test follows here:
+
+//A valid JSON String to parse.
+String validJsonString = "{ \"developers\": [{ \"firstName\":\"Linus\" , \"lastName\":\"Torvalds\" }, " +
+        "{ \"firstName\":\"John\" , \"lastName\":\"von Neumann\" } ]}";
+
+// Invalid String with a missing parenthesis at the beginning.
+String invalidJsonString = "\"developers\": [ \"firstName\":\"Linus\" , \"lastName\":\"Torvalds\" }, " +
+        "{ \"firstName\":\"John\" , \"lastName\":\"von Neumann\" } ]}";
+
+boolean firstStringValid = JSONUtils.isJSONValid(VALID_JSON_STRING); //true
+boolean secondStringValid = JSONUtils.isJSONValid(NOT_VALID_JSON_STRING); //false
+
+Please, observe that there could be a "minor" issue due to trailing commas that will be fixed in release 3.0.0.
+
+
+--
+----
+
+
+
+With Google Gson you can use JsonParser:
+
+import com.google.gson.JsonParser;
+
+JsonParser parser = new JsonParser();
+parser.parse(json_string); // throws JsonSyntaxException
+
+
+---
+
+ 34
+down vote
+	
+
+JACKSON Library
+
+One option would be to use Jackson library. First import the latest version (now is):
+
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.7.0</version>
+</dependency>
+
+Then, you can implement the correct answer as follows:
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public final class JSONUtils {
+  private JSONUtils(){}
+
+  public static boolean isJSONValid(String jsonInString ) {
+    try {
+       final ObjectMapper mapper = new ObjectMapper();
+       mapper.readTree(jsonInString);
+       return true;
+    } catch (IOException e) {
+       return false;
+    }
+  }
+}
+
 
