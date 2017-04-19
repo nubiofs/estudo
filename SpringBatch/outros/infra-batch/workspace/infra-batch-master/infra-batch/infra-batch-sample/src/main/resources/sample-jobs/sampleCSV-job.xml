@@ -63,8 +63,7 @@
 	<beans:bean name="sampleCSVReader"
 		class="br.gov.serpro.supde.infra.batch.core.support.CSVFileItemReader">
 		<beans:property name="lineMapper" ref="experienceLineMapper" />
-		<beans:property name="resource" value="file:#{infraJobContext.inputPath}/experience.csv"/>
-<!-- 		<beans:property name="resource" value="classpath:/sampleJob_input/experience.csv" /> -->
+		<beans:property name="resource" value="classpath:/sampleJob_input/experience.csv" />
 	</beans:bean>
 
 	<beans:bean id="sampleDatabaseWriter"

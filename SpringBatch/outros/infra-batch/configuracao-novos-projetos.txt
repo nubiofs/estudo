@@ -67,6 +67,10 @@ Main Class = br.gov.serpro.supde.infra.batch.core.launch.InfraJobRunner
 Program Arguments = sample-jobs/sampleCSV-job.xml sampleCSVJob
 VM Arguments = -Dinfra.config.dir=/home/02963357460/estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample/src/main/resources/configs -Dinfra.verbose=true
 
+ou
+
+-Dinfra.config.dir=/media/sf_compartilhamento/workspace/infra-batch-sample/src/main/resources/configs -Dinfra.verbose=true
+
 * (Execução no prompt)
 
 Obs.: 
