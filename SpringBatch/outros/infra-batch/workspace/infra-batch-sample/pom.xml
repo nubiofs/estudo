@@ -27,36 +27,7 @@
 		</plugins>
 	</build>
 
-	<!-- Dependência de uma implementação para acessar fila JMS (necessária 
-		para Jobs com processamento distribuído) -->
-
 	<dependencies>
-
-		<!-- Apache-ActiveMQ -->
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-core</artifactId>
-			<version>${activemq.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.activemq</groupId>
-					<artifactId>activeio-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- JBoss-HornetQ -->
-		<dependency>
-			<groupId>org.hornetq</groupId>
-			<artifactId>hornetq-core-client</artifactId>
-			<version>${hornetq.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hornetq</groupId>
-			<artifactId>hornetq-jms-client</artifactId>
-			<version>${hornetq.version}</version>
-		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
