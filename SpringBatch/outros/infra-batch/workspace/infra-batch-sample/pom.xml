@@ -43,9 +43,4 @@
 
 	</dependencies>
 
-	<properties>
-		<activemq.version>5.7.0</activemq.version>
-		<hornetq.version>2.3.22.Final</hornetq.version>
-	</properties>
-
 </project>
