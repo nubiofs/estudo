@@ -24,6 +24,9 @@
 					</batch:skippable-exception-classes>
 				</batch:chunk>
 			</batch:tasklet>
+			<batch:listeners>
+				<batch:listener ref="monitoracaoExperience" />
+			</batch:listeners>
 		</batch:step>
 	</batch:job>
 
@@ -60,6 +63,9 @@
 	<beans:bean id="experience"
 		class="br.gov.serpro.supde.infra.batch.sample.domain.Experience"
 		scope="prototype" />
+
+	<beans:bean id="monitoracaoExperience"
+		class="br.gov.serpro.supde.infra.batch.support.MonitoracaoExperience"/>
 
 	<beans:bean id="dateEditor"
 		class="org.springframework.beans.propertyeditors.CustomDateEditor">
