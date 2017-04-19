@@ -1,3 +1,6 @@
+http://supsd.cta.serpro/videos/arquivos/serpro-eclipse-luna-amd64.deb
+
+
 * No eclipse:
 
 - New Maven Project -> Archetype "demoiselle-minimal 2.5.1":

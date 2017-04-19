@@ -1,3 +1,6 @@
+http://supsd.cta.serpro/videos/arquivos/serpro-eclipse-luna-amd64.deb
+
+
 *************************************************************************************************************************
 ** Configuração "Getting Started" -> Creating a Batch Service (https://spring.io/guides/gs/batch-processing/#initial): **
 *************************************************************************************************************************

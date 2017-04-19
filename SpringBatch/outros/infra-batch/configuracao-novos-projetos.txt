@@ -22,6 +22,37 @@ $ ~/mvn eclipse:eclipse
         	<scope>provided</scope>
       	</dependency>
 
+- Criar/colocar arquivo "settings.xml" no diretorio ~/.m2 :
+
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<settings>
+	
+   <offline>false</offline>  
+
+    <profiles>
+	    <profile>
+		    <id>repositorio-nexus</id>
+		    <repositories>
+		        <repository>
+		            <id>nexus.aic.serpro</id>
+		            <name>Nexus AIC Serpro</name>
+		            <url>http://nexus.aic.serpro/content/groups/public</url>
+		        </repository>
+			<repository>
+			    <id>demoiselle.release</id>
+			    <url>http://demoiselle.c3sl.ufpr.br/maven/repository/release</url>
+			</repository>
+
+		    </repositories>
+	    </profile>
+    </profiles>
+    
+    <activeProfiles>
+        <activeProfile>repositorio-nexus</activeProfile>
+    </activeProfiles>
+    
+</settings>
+
 $ ~/mvn clean package
 
 * (Execução no Eclipse) Run As -> Run Configuration -> New "Java Aplication", com:
@@ -67,7 +98,6 @@ WITH (
 ALTER TABLE public.experience
   OWNER TO "user";
 
-
 $ cd estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample
 
 Obs.:
@@ -81,8 +111,6 @@ infra.ignoreReport=true
 infra.ignorePDFReport=true
 
 $ java -Dinfra.config.dir=/home/02963357460/estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample/src/main/resources/configs -jar target/infra-batch-sample-3.0.1-executable.jar sample-jobs/sampleCSV-job.xml sampleCSVJob  -report
-
-ou 
 
 Obs.: ou
 
