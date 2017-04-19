@@ -17,8 +17,8 @@
 	<!-- job possui arquivo opcional "sampleJDBCJob.properties" -->
 	<batch:job id="sampleCSVJob" parent="infraParentJob">
 		<batch:step id="csv2DatabaseStep" parent="infraParentChunkedStep">
-			<batch:tasklet>
-				<batch:chunk reader="sampleCSVReader" writer="sampleDatabaseWriter" />
+			<batch:tasklet task-executor="syncTaskExecutor">
+				<batch:chunk reader="sampleCSVReader" processor="sampleProcessor" writer="sampleDatabaseWriter" />
 			</batch:tasklet>
 		</batch:step>
 	</batch:job>
@@ -66,6 +66,9 @@
 		</beans:constructor-arg>
 		<beans:constructor-arg value="true" />
 	</beans:bean>
+	
+	<beans:bean id="sampleProcessor"
+		class="br.gov.serpro.supde.infra.batch.sample.SampleProcessor"></beans:bean>
 
 	<beans:bean id="sampleDatabaseWriter"
 		class="org.springframework.batch.item.database.JdbcBatchItemWriter">

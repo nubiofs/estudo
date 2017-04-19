@@ -27,7 +27,7 @@ public class SampleProcessor implements ItemProcessor<Experience, Experience> {
 		logger.info("Thread #" + Thread.currentThread().getId() + " -> Executando SampleProcessor..." + experience);
 		experience.setName(sanitizeCsv(experience.getName()));
 		experience.setCountry(sanitizeCsv(experience.getCountry()));
-		experience.setCompany(sanitizeCsv(experience.getCompany()));
+		experience.setCompany(sanitizeCsv(experience.getCompany()).concat(" LTDA"));
 		experience.setDepto(sanitizeCsv(experience.getDepto()));
 		return experience;
 		
