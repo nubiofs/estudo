@@ -1,7 +1,5 @@
 package br.gov.serpro.supde.infra.batch.sample;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
 import br.gov.serpro.supde.infra.batch.sample.domain.Product;
@@ -19,30 +17,24 @@ import br.gov.serpro.supde.infra.batch.sample.domain.Product;
  *
  */
 public class ProductProcessor implements ItemProcessor<Product, Product> {
-	
-	private static Logger logger = LoggerFactory.getLogger(ProductProcessor.class);
+
+//	import org.slf4j.Logger;
+//	import org.slf4j.LoggerFactory;
+	//private static Logger logger = LoggerFactory.getLogger(ProductProcessor.class);
 
 	public Product process(Product product) throws Exception {	
 		
-		logger.info("Thread #" + Thread.currentThread().getId() + " -> Executando ProductProcessor..." + product);
-		product.setName(sanitizeJSON(product.getName()));
-		
-		
-		product.setBrand(sanitizeJSON(product.getBrand()));
-		product.setType(sanitizeJSON(product.getType()));
-		product.setPrice(Double.valueOf(sanitizeJSON(String.valueOf(product.getPrice()))));
-		product.setWarrantyyears(Double.valueOf(sanitizeJSON(String.valueOf(product.getWarrantyyears()))));
-		product.setAvailable(Boolean.valueOf(sanitizeJSON(String.valueOf(product.getAvailable()))));
-		product.setDescription(sanitizeJSON(product.getDescription()));
+		//logger.info("Thread #" + Thread.currentThread().getId() + " -> Executando ProductProcessor..." + product);
+		product.setId(product.getId());
+		product.setName(product.getName());
+		product.setBrand(product.getBrand());
+		product.setType(product.getType());
+		product.setPrice(product.getPrice());
+		product.setWarranty_years(product.getWarranty_years());
+		product.setAvailable(product.getAvailable());
+		product.setDescription(product.getDescription());
 		return product;
 		
-	}
-	
-	private String sanitizeJSON(String value) {		
-		if(value != null && value.contains(",")) {
-			return  "\"" + value + "\"";
-		}
-		return value;
 	}
 	
 }

@@ -2,6 +2,9 @@ package br.gov.serpro.supde.infra.batch.sample.domain;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 public class Product implements Serializable {
 	
 	/**
@@ -13,8 +16,8 @@ public class Product implements Serializable {
 	private String name;
 	private String brand;
 	private String type;
-	private Double price;
-	private Double warrantyyears;
+	private Integer price;
+	private Integer warranty_years;
 	private Boolean available;
 	private String description;
 
@@ -50,20 +53,20 @@ public class Product implements Serializable {
 		this.type = type;
 	}
 
-	public Double getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
-	public Double getWarrantyyears() {
-		return warrantyyears;
+	public Integer getWarranty_years() {
+		return warranty_years;
 	}
 
-	public void setWarrantyyears(Double warrantyyears) {
-		this.warrantyyears = warrantyyears;
+	public void setWarranty_years(Integer warrantyyears) {
+		this.warranty_years = warrantyyears;
 	}
 
 	public Boolean getAvailable() {
@@ -80,6 +83,24 @@ public class Product implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@Override
+	public String toString(){
+
+		final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE);
+		
+		builder.append("id", id)
+		.append("name", name)
+		.append("brand", brand)
+		.append("type", type)
+		.append("price", price)
+		.append("warranty_years", warranty_years)
+		.append("available", available)
+		.append("description", description);
+		
+		return builder.toString();
+
 	}
 	
 }

@@ -18,7 +18,7 @@
 	<batch:job id="sampleJSONJob" parent="infraParentJob">
 		<batch:step id="json2DatabaseStep" parent="infraParentChunkedStep">
 			<batch:tasklet task-executor="syncTaskExecutor">
-				<batch:chunk reader="sampleJSONReader" processor="productProcessor" writer="sampleDatabaseWriter" skip-limit="2">
+				<batch:chunk reader="sampleJSONReader" processor="productProcessor" writer="sampleDatabaseWriter" skip-limit="200">
 					<batch:skippable-exception-classes merge="true">
 						<batch:include class="org.springframework.batch.item.file.FlatFileParseException"/>
 					</batch:skippable-exception-classes>
@@ -31,54 +31,26 @@
 	</batch:job>
 
 	<beans:bean name="sampleJSONReader"
-		class="br.gov.serpro.supde.infra.batch.core.support.CSVFileItemReader">
+		class="br.gov.serpro.supde.infra.batch.support.JSONFileItemReader">
 		<beans:property name="lineMapper" ref="productLineMapper" />
-		<beans:property name="resource" value="classpath:/sampleJob_input/product.csv" />
+		<beans:property name="resource" value="classpath:/sampleJob_input/product.json" />
 	</beans:bean>
 
 	<beans:bean name="productLineMapper"
-		class="br.gov.serpro.supde.infra.batch.core.support.CSVLineMapper">
-		<beans:property name="lineTokenizer">
-			<beans:bean
-				class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
-				<beans:property name="names"
-					value="id, name, country, birthdate, company, depto" />
-			</beans:bean>
-		</beans:property>
-		<beans:property name="fieldSetMapper">
-			<beans:bean
-				class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
-				<beans:property name="prototypeBeanName" value="product" />
-				<beans:property name="customEditors">
-					<beans:map>
-						<beans:entry key="java.util.Date">							
-							<beans:ref bean="dateEditor"/>							
-						</beans:entry>
-					</beans:map>
-				</beans:property>
-			</beans:bean>
-		</beans:property>
-	</beans:bean>
+		class="br.gov.serpro.supde.infra.batch.support.JSLineMapper"/>
 
+<!-- 	<beans:bean id="lineMapperType" -->
+<!--     	class="org.springframework.batch.item.file.mapping.JsonLineMapper"/> -->
+    	
 	<beans:bean id="product"
 		class="br.gov.serpro.supde.infra.batch.sample.domain.Product"
 		scope="prototype" />
 
 	<beans:bean id="monitoracaoProduct"
 		class="br.gov.serpro.supde.infra.batch.support.MonitoracaoProduct"/>
-
-	<beans:bean id="dateEditor"
-		class="org.springframework.beans.propertyeditors.CustomDateEditor">
-		<beans:constructor-arg>
-			<beans:bean class="java.text.SimpleDateFormat">
-				<beans:constructor-arg value="dd/MM/yyyy" />
-			</beans:bean>
-		</beans:constructor-arg>
-		<beans:constructor-arg value="true" />
-	</beans:bean>
 	
 	<beans:bean id="productProcessor"
-		class="br.gov.serpro.supde.infra.batch.sample.ProductProcessor"></beans:bean>
+		class="br.gov.serpro.supde.infra.batch.sample.ProductProcessor"/>
 
 	<beans:bean id="sampleDatabaseWriter"
 		class="org.springframework.batch.item.database.JdbcBatchItemWriter">
@@ -86,8 +58,8 @@
 		<beans:property name="sql">
 			<beans:value>
             <![CDATA[            
-            	INSERT INTO product(id, name, country, birthdate, company, depto) 
-				VALUES (:id, :name, :country, :birthdate, :company, :depto)
+            	INSERT INTO product(id, name, brand, type, price, warranty_years, available, description) 
+				VALUES (:id, :name, :brand, :type, :price, :warranty_years, :available, :description)
             ]]>
 			</beans:value>
 		</beans:property>

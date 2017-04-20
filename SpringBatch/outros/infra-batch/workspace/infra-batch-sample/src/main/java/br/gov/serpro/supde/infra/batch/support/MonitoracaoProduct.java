@@ -16,22 +16,23 @@ public class MonitoracaoProduct implements SkipListener<Product, Product>, StepE
 
 	private static Logger logger = LoggerFactory.getLogger(MonitoracaoProduct.class);
 	
-	public static List<LogRecord> productNaoLidos = new ArrayList<LogRecord>();
-	public static List<LogRecord> productNaoGravados = new ArrayList<LogRecord>();
+	public static List<LogRecord> onSkipsInRead = new ArrayList<LogRecord>();
+	public static List<LogRecord> onSkipsInProcess = new ArrayList<LogRecord>();
+	public static List<LogRecord> onSkipsInWrite = new ArrayList<LogRecord>();
 	
 	@Override
 	public void onSkipInRead(Throwable t) {
-		productNaoLidos.add(new LogRecord(null, t));
+		onSkipsInRead.add(new LogRecord(null, t));
 	}
 	
 	@Override
-	public void onSkipInProcess(Product arg0, Throwable arg1) {
-		// TODO Auto-generated method stub
+	public void onSkipInProcess(Product item, Throwable t) {
+		onSkipsInProcess.add(new LogRecord(item, t));
 	}
 
 	@Override
 	public void onSkipInWrite(Product item, Throwable t) {
-		productNaoGravados.add(new LogRecord(item, t));
+		onSkipsInWrite.add(new LogRecord(item, t));
 	}
 	
 	@Override
@@ -51,27 +52,27 @@ public class MonitoracaoProduct implements SkipListener<Product, Product>, StepE
 		logger.info("##################### RELATORIO DA CARGA #############################");
 		logger.info("Product lidos com sucesso: " + stepExecution.getReadCount());
 		logger.info("Product nao lidas (falha na leitura): " + stepExecution.getReadSkipCount());
-		//logger.info("Product ignoradas durante processamento: " + stepExecution.getProcessSkipCount());
+		logger.info("Product ignorados durante processamento: " + stepExecution.getProcessSkipCount());
 		logger.info("Product gravadas com sucesso: " + stepExecution.getWriteCount());
 		logger.info("Product nao gravadas: " + stepExecution.getWriteSkipCount());
 
-		if(productNaoLidos.size() > 0) {
+		if(onSkipsInRead.size() > 0) {
 			logger.info("@@@@@@@@@@@@@@@@@@@@@ LISTA DE Product NAO LIDOS @@@@@@@@@@@@@@@@@@@@@");
-			for (LogRecord log : productNaoLidos) {
+			for (LogRecord log : onSkipsInRead) {
 				logger.info(log.t.toString());
 			}
 		}
 		
-//		if(imoveisIgnorados.size() > 0) {
-//			logger.info("@@@@@@@@@@ LISTA DE IMOVEIS IGNORADOS DURANTE PROCESSAMENTO @@@@@@@@@@");
-//			for (LogRecord log : imoveisIgnorados) {
-//				logger.info("Imovel=[" + log.item + "], causa=[" + log.t.toString() + "]");
-//			}
-//		}
+		if(onSkipsInProcess.size() > 0) {
+			logger.info("@@@@@@@@@@ LISTA DE Product IGNORADOS DURANTE PROCESSAMENTO @@@@@@@@@@");
+			for (LogRecord log : onSkipsInProcess) {
+				logger.info("Imovel=[" + log.item + "], causa=[" + log.t.toString() + "]");
+			}
+		}
 
-		if(productNaoGravados.size() > 0) {
+		if(onSkipsInWrite.size() > 0) {
 			logger.info("@@@@@@@@@@ LISTA DE Product NAO GRAVADOS @@@@@@@@@@");
-			for (LogRecord log : productNaoGravados) {
+			for (LogRecord log : onSkipsInWrite) {
 				logger.info("Imovel=[" + log.item + "], causa=[" + log.t.toString() + "]");
 			}
 		}
@@ -84,6 +85,7 @@ public class MonitoracaoProduct implements SkipListener<Product, Product>, StepE
 	}
 
 	private class LogRecord {
+		
 		public Product item;
 		public Throwable t;
 
@@ -91,6 +93,7 @@ public class MonitoracaoProduct implements SkipListener<Product, Product>, StepE
 			this.item = item;
 			this.t = t;
 		}
+		
 	}
 	
 }
