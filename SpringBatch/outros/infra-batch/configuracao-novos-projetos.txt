@@ -67,6 +67,11 @@ Main Class = br.gov.serpro.supde.infra.batch.core.launch.InfraJobRunner
 - Aba 'Arguments'
 
 Program Arguments = sample-jobs/sampleCSV-job.xml sampleCSVJob
+
+ou
+
+Program Arguments = sample-jobs/sampleJSON-job.xml sampleJSONJob
+
 VM Arguments = -Dinfra.config.dir=/home/02963357460/estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample/src/main/resources/configs -Dinfra.verbose=true
 
 ou
@@ -82,7 +87,7 @@ Obs.:
 
 /org/springframework/batch/core/schema-postgresql.sql
 
-3) No pgAdmin (criar tabela de negócio):
+3) No pgAdmin (criar tabelas de negócio):
 
 -- Table: public.experience
 
@@ -102,6 +107,28 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.experience
+  OWNER TO "user";
+
+-- Table: public.product
+
+-- DROP TABLE public.product;
+
+CREATE TABLE public.product
+(
+  id bigint NOT NULL,
+  name character varying(100) DEFAULT NULL::character varying,
+  brand character varying(100) DEFAULT NULL::character varying,
+  type character varying(50),
+  price integer,
+  warranty_years integer,
+  available boolean,
+  description character varying(4000) DEFAULT NULL::character varying,
+  CONSTRAINT product_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.product
   OWNER TO "user";
 
 $ cd estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample
@@ -238,5 +265,20 @@ public final class JSONUtils {
     }
   }
 }
+
+==
+==
+Processando Json:
+
+http://stackoverflow.com/questions/18421674/using-gson-to-parse-a-json-array
+http://stackoverflow.com/questions/18544133/parsing-json-array-into-java-util-list-with-gson
+http://stackoverflow.com/questions/18993414/using-gson-to-parse-json-object-vs-json-array
+http://stackoverflow.com/questions/5490789/json-parsing-using-gson-for-java
+
+http://www.javacreed.com/simple-gson-example/
+https://www.mkyong.com/java/how-do-convert-java-object-to-from-json-format-gson-api/
+
+http://www.jsonschema2pojo.org/
+https://github.com/joelittlejohn/jsonschema2pojo
 
 
