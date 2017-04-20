@@ -18,13 +18,13 @@ import br.gov.serpro.supde.infra.batch.sample.domain.Experience;
  * @author 05601970475
  *
  */
-public class SampleProcessor implements ItemProcessor<Experience, Experience> {
+public class ExperienceProcessor implements ItemProcessor<Experience, Experience> {
 	
-	private static Logger logger = LoggerFactory.getLogger(SampleProcessor.class);
+	private static Logger logger = LoggerFactory.getLogger(ExperienceProcessor.class);
 
 	public Experience process(Experience experience) throws Exception {	
 		
-		logger.info("Thread #" + Thread.currentThread().getId() + " -> Executando SampleProcessor..." + experience);
+		logger.info("Thread #" + Thread.currentThread().getId() + " -> Executando ExperienceProcessor..." + experience);
 		experience.setName(sanitizeCsv(experience.getName()));
 		experience.setCountry(sanitizeCsv(experience.getCountry()));
 		experience.setCompany(sanitizeCsv(experience.getCompany()).concat(" LTDA"));
