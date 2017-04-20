@@ -1,33 +1,20 @@
 package br.gov.serpro.supde.infra.batch.support;
 
-import br.gov.serpro.supde.infra.batch.sample.domain.Product;
-
 import com.google.gson.Gson;
 
 public class JSONUtils {
 
-	private static final Gson gson = new Gson();
-	private static Product product;
-	
-	private JSONUtils() {
-	}
+	public static final Gson GSON = new Gson();
 
 	public static boolean isJSONValid(String jsonInString) {
+
 		try {
-			setProduct(gson.fromJson(jsonInString, Product.class));
+			GSON.fromJson(jsonInString, Object.class);
 			return true;
-		} catch (com.google.gson.JsonSyntaxException ex) {
-			setProduct(null);
+		} catch(com.google.gson.JsonSyntaxException ex) { 
 			return false;
 		}
-	}
 
-	public static Product getProduct() {
-		return product;
-	}
-
-	public static void setProduct(Product product) {
-		JSONUtils.product = product;
 	}
 
 }

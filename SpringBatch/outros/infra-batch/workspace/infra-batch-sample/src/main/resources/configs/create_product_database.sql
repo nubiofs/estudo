@@ -1,3 +1,28 @@
+--CREATE TABLE PRODUCT 
+--   (	
+--   	ID BIGINT NOT NULL PRIMARY KEY, 
+--	NAME VARCHAR(100) DEFAULT NULL, 
+--	BRAND VARCHAR(100) DEFAULT NULL, 
+--	TYPE VARCHAR(50) DEFAULT NULL, 
+--	PRICE INT DEFAULT NULL,
+--	WARRANTYYEARS INT DEFAULT NULL,
+--	AVAILABLE BOOLEAN DEFAULT NULL,
+--	DESCRIPTION VARCHAR(4000) DEFAULT NULL);
+
+--CREATE TABLE PRODUCT 
+--   (	
+--   	ID BIGINT NOT NULL PRIMARY KEY, 
+--	NAME VARCHAR(100) DEFAULT NULL, 
+--	BRAND VARCHAR(100) DEFAULT NULL, 
+--	TYPE VARCHAR(50)[] DEFAULT NULL, 
+--	PRICE INT DEFAULT NULL,
+--	WARRANTYYEARS INT DEFAULT NULL,
+--	AVAILABLE BOOLEAN DEFAULT NULL,
+--	DESCRIPTION VARCHAR(4000) DEFAULT NULL);
+
+
+\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
 -- Table: public.product
 
 -- DROP TABLE public.product;
@@ -7,9 +32,9 @@ CREATE TABLE public.product
   id bigint NOT NULL,
   name character varying(100) DEFAULT NULL::character varying,
   brand character varying(100) DEFAULT NULL::character varying,
-  type character varying(50),
+  type character varying(50) DEFAULT NULL::character varying,
   price integer,
-  warranty_years integer,
+  warrantyyears integer,
   available boolean,
   description character varying(4000) DEFAULT NULL::character varying,
   CONSTRAINT product_pkey PRIMARY KEY (id)

@@ -12,20 +12,20 @@ public class Product implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private Double id;
 	private String name;
 	private String brand;
 	private String type;
-	private Integer price;
-	private Integer warranty_years;
+	private Double price;
+	private Double warranty_years;
 	private Boolean available;
 	private String description;
 
-	public Long getId() {
+	public Double getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Double id) {
 		this.id = id;
 	}
 
@@ -53,22 +53,22 @@ public class Product implements Serializable {
 		this.type = type;
 	}
 
-	public Integer getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public Integer getWarranty_years() {
+	public Double getWarranty_years() {
 		return warranty_years;
 	}
-
-	public void setWarranty_years(Integer warrantyyears) {
-		this.warranty_years = warrantyyears;
+	
+	public void setWarranty_years(Double warranty_years) {
+		this.warranty_years = warranty_years;
 	}
-
+	
 	public Boolean getAvailable() {
 		return available;
 	}

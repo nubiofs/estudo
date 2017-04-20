@@ -1,3 +1,14 @@
+--CREATE TABLE EXPERIENCE 
+--   (	
+--   	ID BIGINT NOT NULL PRIMARY KEY, 
+--	NAME VARCHAR(255) DEFAULT NULL, 
+--	COUNTRY VARCHAR(100) DEFAULT NULL, 
+--	BIRTHDATE VARCHAR(255), 
+--	COMPANY VARCHAR(255), 
+--	DEPTO VARCHAR(255) DEFAULT NULL);
+
+\/\/\/\//\/\/\/\/\//\/\/\/\/\//\/\/\/\/\/\/\/
+
 -- Table: public.experience
 
 -- DROP TABLE public.experience;
