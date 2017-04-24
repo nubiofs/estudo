@@ -1,5 +1,7 @@
 package br.gov.serpro.supde.infra.batch.sample;
 
+import java.util.Arrays;
+
 import org.springframework.batch.item.ItemProcessor;
 
 import br.gov.serpro.supde.infra.batch.sample.domain.Product;
@@ -19,7 +21,7 @@ import br.gov.serpro.supde.infra.batch.sample.domain.Product;
 public class ProductProcessor implements ItemProcessor<Product, Product> {
 
 	public Product process(Product product) throws Exception {	
-		
+
 		product.setId(product.getId());
 		product.setName(product.getName());
 		product.setBrand(product.getBrand());
@@ -28,9 +30,9 @@ public class ProductProcessor implements ItemProcessor<Product, Product> {
 		product.setWarranty_years(product.getWarranty_years());
 		product.setAvailable(product.getAvailable());
 		product.setDescription(product.getDescription());
-		
+
 		return product;
-		
+
 	}
-	
+
 }

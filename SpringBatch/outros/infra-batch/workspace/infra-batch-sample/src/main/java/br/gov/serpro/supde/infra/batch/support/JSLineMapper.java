@@ -47,7 +47,16 @@ public class JSLineMapper implements LineMapper<Product>   {
 				JSONArray arrayType = jsObject.optJSONArray("type");
 				List<String> list = new ArrayList<String>();
 				for(int i=0; i < arrayType.length(); i++){
-					list.add(arrayType.optString(i));
+					String type = arrayType.optString(i);
+					for(TYPE tp: TYPE.values()){
+						if(type.equals(tp.value)){
+							list.add(type);
+							break;
+						}
+					}
+					if(!list.contains(type)){
+						throw new Exception("(" + type + ") Nao é um TYPE!");
+					}
 				}
 				product.setType(list.isEmpty() ? "" : StringUtils.join(list, ", "));
 			}
