@@ -21,7 +21,10 @@
 				<batch:chunk reader="sampleJSONReader" processor="productProcessor" writer="sampleDatabaseWriter" skip-limit="200">
 					<batch:skippable-exception-classes merge="true">
 						<batch:include class="org.springframework.batch.item.file.FlatFileParseException"/>
-<!-- 						<batch:include class="com.google.gson.JsonSyntaxException"/> -->
+						<batch:include class="com.google.gson.JsonSyntaxException"/>
+						<batch:include class="org.codehaus.jettison.json.JSONException"/>
+						<batch:include class="org.springframework.dao.DataAccessException"/>
+						<batch:include class="java.sql.SQLException"/>
 					</batch:skippable-exception-classes>
 				</batch:chunk>
 			</batch:tasklet>

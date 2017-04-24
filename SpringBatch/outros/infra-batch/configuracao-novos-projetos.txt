@@ -281,4 +281,9 @@ https://www.mkyong.com/java/how-do-convert-java-object-to-from-json-format-gson-
 http://www.jsonschema2pojo.org/
 https://github.com/joelittlejohn/jsonschema2pojo
 
+-- TUTORIAL
+
+https://futurestud.io/tutorials/gson-getting-started-with-java-json-serialization-deserialization
+https://futurestud.io/tutorials/gson-advanced-generics
+
 

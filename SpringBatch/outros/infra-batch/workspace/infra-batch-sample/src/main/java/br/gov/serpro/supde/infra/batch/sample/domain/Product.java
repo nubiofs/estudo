@@ -12,7 +12,7 @@ public class Product implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Double id;
+	private Integer id;
 	private String name;
 	private String brand;
 	private String type;
@@ -21,11 +21,11 @@ public class Product implements Serializable {
 	private Boolean available;
 	private String description;
 
-	public Double getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Double id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

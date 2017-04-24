@@ -2,6 +2,8 @@ package br.gov.serpro.supde.infra.batch.sample.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.google.gson.reflect.TypeToken;
+
 import br.gov.serpro.supde.infra.batch.core.context.InfraJobContext;
+import br.gov.serpro.supde.infra.batch.support.JSONUtils;
 
 //Executar com o VM argument -Dinfra.config.dir=<diretorio dos arquivos de configuracao do infra-batch>
 
@@ -60,4 +65,5 @@ public class SampleTest {
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
 	}
 */
+
 }
