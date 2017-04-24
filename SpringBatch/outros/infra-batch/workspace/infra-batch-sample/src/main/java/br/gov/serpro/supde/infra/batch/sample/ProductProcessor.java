@@ -18,13 +18,7 @@ import br.gov.serpro.supde.infra.batch.sample.domain.Product;
  */
 public class ProductProcessor implements ItemProcessor<Product, Product> {
 
-	//import org.slf4j.Logger;
-	//import org.slf4j.LoggerFactory;
-	//private static Logger logger = LoggerFactory.getLogger(ProductProcessor.class);
-
 	public Product process(Product product) throws Exception {	
-		
-		//logger.info("Thread #" + Thread.currentThread().getId() + " -> Executando ProductProcessor..." + product);
 		
 		product.setId(product.getId());
 		product.setName(product.getName());

@@ -25,6 +25,7 @@
 						<batch:include class="org.codehaus.jettison.json.JSONException"/>
 						<batch:include class="org.springframework.dao.DataAccessException"/>
 						<batch:include class="java.sql.SQLException"/>
+						<batch:include class="java.lang.Exception"/>
 					</batch:skippable-exception-classes>
 				</batch:chunk>
 			</batch:tasklet>
