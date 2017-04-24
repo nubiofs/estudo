@@ -286,4 +286,134 @@ https://github.com/joelittlejohn/jsonschema2pojo
 https://futurestud.io/tutorials/gson-getting-started-with-java-json-serialization-deserialization
 https://futurestud.io/tutorials/gson-advanced-generics
 
+----------------
+--- OUTROS VARIOS
+
+Map<String, String> map = new HashMap<String, String>();
+map.put("1", "Jan");
+map.put("2", "Feb");
+map.put("3", "Mar");
+
+//loop a Map
+for (Map.Entry<String, String> entry : map.entrySet()) {
+	System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+}
+
+
+
+// JSON to JsonElement, convert to String later.
+JsonElement json = gson.fromJson(new FileReader("D:\\file.json"), JsonElement.class);
+    String result = gson.toJson(json);
+    
+xxxxxxx
+
+Convert a JSON to a Map
+
+String json = "{\"name\":\"mkyong\", \"age\":33}";
+Map<String, Object> map = gson.fromJson(json, new TypeToken<Map<String, Object>>(){}.getType());
+map.forEach((x,y)-> System.out.println("key : " + x + " , value : " + y));    
+
+xxxxxxxxxx
+(https://futurestud.io/tutorials/gson-mapping-of-arrays-and-lists-of-objects)
+
+public class Founder {  
+    String name;
+    int flowerCount;
+}
+
+
+- [Arrays]
+
+String founderJson = "[{'name': 'Christian','flowerCount': 1}, {'name': 'Marcus', 'flowerCount': 3}, {'name': 'Norman', 'flowerCount': 2}]";
+
+Gson gson = new Gson();  
+Founder[] founderArray = gson.fromJson(founderJson, Founder[].class); 
+
+- [Lists]
+
+String founderJson = "[{'name': 'Christian','flowerCount': 1}, {'name': 'Marcus', 'flowerCount': 3}, {'name': 'Norman', 'flowerCount': 2}]";
+
+Gson gson = new Gson();
+
+Type founderListType = new TypeToken<ArrayList<Founder>>(){}.getType();
+
+List<Founder> founderList = gson.fromJson(founderJson, founderListType);   
+
+- [Lists as Part of an Object]
+
+public class GeneralInfo {  
+    String name;
+    String website;
+    List<Founder> founders;
+}
+
+String generalInfoJson = "{'name': 'Future Studio Dev Team', 'website': 'https://futurestud.io', 'founders': [{'name': 'Christian', 'flowerCount': 1 }, {'name': 'Marcus','flowerCount': 3 }, {'name': 'Norman','flowerCount': 2 }]}";
+
+Gson gson = new Gson();
+
+GeneralInfo generalInfoObject = gson.fromJson(generalInfoJson, GeneralInfo.class);  
+
+- [Lists Nested in Lists]
+
+public class GeneralInfo {  
+    String name;
+    String website;
+    List<FounderWithPets> founders;
+}
+
+public class FounderWithPets {  
+    String name;
+    int flowerCount;
+    List<Pet> pets;
+}
+
+public class Pet {  
+    String name;
+    List<Toy> toys;
+}
+
+--
+
+String founderJson = "[{'name': 'Christian','flowerCount': 1}, {'name': 'Marcus', 'flowerCount': 3}, {'name': 'Norman', 'flowerCount': 2}]";
+
+Gson gson = new Gson();
+
+Type founderSetType = new TypeToken<HashSet<Founder>>(){}.getType();
+
+HashSet<Founder> founderSet = gson.fromJson(founderJson, founderSetType);  
+
+
+====
+
+
+public class Box<T> {  
+    private T boxContent;
+
+    public Box(T t) {
+        this.boxContent = t;
+    }
+}
+
+
+Gson gson = new Gson();
+
+Box<String> stringBox = new Box<>("String Type");  
+Box<Integer> integerBox = new Box<>(42);  
+// the class UserDate is from previous guides (https://futurestud.io/blog/gson-builder-formatting-of-dates-custom-date-time-mapping/)
+Box<UserDate> complexBox = new Box<>(new UserDate("Norman", "norman@fs.io", 26, true));
+
+Type stringType = new TypeToken<Box<String>>() {}.getType();  
+Type integerType = new TypeToken<Box<Integer>>() {}.getType();  
+Type complexType = new TypeToken<Box<UserDate>>() {}.getType();
+
+E
+
+String complexGenericJson = "{\"boxContent\":{\"_name\":\"Norman\",\"age\":26,\"email\":\"norman@fs.io\",\"isDeveloper\":true,\"registerDate\":\"Jun 7, 2016 7:15:29 AM\"}}";
+
+Type complexType = new TypeToken<Box<UserDate>>() {}.getType();
+
+Gson gson = new Gson();  
+Box boxWithData = gson.fromJson(complexGenericJson, complexType);  
+Box<UserDate> boxWithoutData = gson.fromJson(complexGenericJson, Box.class);  
+
 
