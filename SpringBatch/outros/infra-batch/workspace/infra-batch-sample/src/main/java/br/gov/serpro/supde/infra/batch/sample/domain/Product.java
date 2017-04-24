@@ -5,6 +5,9 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+//http://springbatchbyexample.blogspot.com.br/2014/09/validation-input-data.html
+//http://javabeat.net/introduction-to-spring-validation/
+//http://springbatchbyexample.blogspot.com.br/2014/09/configure-spring-batch-admin-to-use.html
 public class Product implements Serializable {
 	
 	/**
