@@ -1,7 +1,7 @@
 package br.gov.serpro.supde.infra.batch.support;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jettison.json.JSONArray;
@@ -33,48 +33,39 @@ public class JSLineMapper implements LineMapper<Product>   {
 			JSONObject jsObject = new JSONObject(line);
 
 			//Valores obrigatorios
-			product.setId(jsObject.getInt("id"));
-			product.setName(jsObject.getString("name"));
+			product.setId((Integer) jsObject.get("id"));
+			product.setName((String) jsObject.get("name"));
 
 			//
 			//Valores opcionais
 			//
 			if(jsObject.has("brand")){
-				product.setBrand(jsObject.optString("brand"));
+				product.setBrand((String) jsObject.optString("brand"));
 			}
 
 			if(jsObject.has("type")){
 				JSONArray arrayType = jsObject.optJSONArray("type");
-				List<String> list = new ArrayList<String>();
+				Set<String> list = new HashSet<String>();
 				for(int i=0; i < arrayType.length(); i++){
-					String type = arrayType.optString(i);
-					for(TYPE tp: TYPE.values()){
-						if(type.equals(tp.value)){
-							list.add(type);
-							break;
-						}
-					}
-					if(!list.contains(type)){
-						throw new Exception("(" + type + ") Nao é um TYPE!");
-					}
+					list.add((String) arrayType.optString(i));
 				}
 				product.setType(list.isEmpty() ? "" : StringUtils.join(list, ", "));
 			}
 
 			if(jsObject.has("price")){
-				product.setPrice(jsObject.optDouble("price"));
+				product.setPrice((Double) jsObject.optDouble("price"));
 			}
 
 			if(jsObject.has("warranty_years")){
-				product.setWarranty_years(jsObject.optDouble("warranty_years"));
+				product.setWarranty_years((Double) jsObject.optDouble("warranty_years"));
 			}
 
 			if(jsObject.has("available")){
-				product.setAvailable(jsObject.optBoolean("available"));
+				product.setAvailable((Boolean) jsObject.optBoolean("available"));
 			}
 
 			if(jsObject.has("description")){
-				product.setDescription(jsObject.optString("description"));
+				product.setDescription((String) jsObject.optString("description"));
 			}
 
 			System.out.println("lineNumber: " + lineNumber + "; Product = " + product.toString());
@@ -88,7 +79,15 @@ public class JSLineMapper implements LineMapper<Product>   {
 			loggerPrint(lineNumber, e.getMessage());
 			throw e;
 		}
-
+		catch(NumberFormatException e){
+			loggerPrint(lineNumber, e.getMessage());
+			throw e;
+		}
+		catch(Exception e){
+			loggerPrint(lineNumber, e.getMessage());
+			throw e;
+		}
+		
 		return product;
 
 	}
