@@ -8,6 +8,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
 //http://springbatchbyexample.blogspot.com.br/2014/09/validation-input-data.html
 //http://javabeat.net/introduction-to-spring-validation/
 //http://springbatchbyexample.blogspot.com.br/2014/09/configure-spring-batch-admin-to-use.html
+
+//https://numberformat.wordpress.com/2011/10/17/spring-batch-validation/
 public class Product implements Serializable {
 	
 	/**
