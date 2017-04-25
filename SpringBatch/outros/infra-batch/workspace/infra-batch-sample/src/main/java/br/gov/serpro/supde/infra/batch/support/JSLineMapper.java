@@ -29,50 +29,6 @@ public class JSLineMapper implements LineMapper<Product>   {
 
 			JSONUtils.GSON.fromJson(line, Object.class);
 
-//			product = new Product();
-//
-//			JSONObject jsObject = new JSONObject(line);
-//
-//			//Valores obrigatorios
-//			product.setId((Integer) jsObject.get("id"));
-//			product.setName((String) jsObject.get("name"));
-//
-//			//
-//			//Valores opcionais
-//			//
-//			if(jsObject.has("brand")){
-//				product.setBrand((String) jsObject.optString("brand"));
-//			}
-//
-//			if(jsObject.has("type")){
-//				JSONArray arrayType = jsObject.optJSONArray("type");
-//				Set<String> list = new HashSet<String>();
-//				for(int i=0; i < arrayType.length(); i++){
-//					list.add((String) arrayType.optString(i));
-//				}
-//				product.setType(list.isEmpty() ? "" : StringUtils.join(list, ", "));
-//			}
-//
-//			if(jsObject.has("color")){
-//				product.setColor((String) jsObject.optString("color"));
-//			}
-//
-//			if(jsObject.has("price")){
-//				product.setPrice((Double) jsObject.optDouble("price"));
-//			}
-//
-//			if(jsObject.has("warranty_years")){
-//				product.setWarranty_years((Double) jsObject.optDouble("warranty_years"));
-//			}
-//
-//			if(jsObject.has("available")){
-//				product.setAvailable((Boolean) jsObject.optBoolean("available"));
-//			}
-//
-//			if(jsObject.has("description")){
-//				product.setDescription((String) jsObject.optString("description"));
-//			}
-
 			JSONObject jsObject = new JSONObject(line);
 
 			Set<String> list = new HashSet<String>();
@@ -97,8 +53,6 @@ public class JSLineMapper implements LineMapper<Product>   {
 					.description(jsObject.has("description") == true ? (String) jsObject.optString("description") : null)
 					.build();
 			
-			//System.out.println("lineNumber: " + lineNumber + "; Product = " + product.toString());
-
 		}
 		catch(JsonSyntaxException e){
 			loggerPrint(lineNumber, e.getMessage());

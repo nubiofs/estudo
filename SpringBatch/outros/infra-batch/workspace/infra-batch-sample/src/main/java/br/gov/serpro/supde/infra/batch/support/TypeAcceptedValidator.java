@@ -8,20 +8,19 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.validation.BeanPropertyBindingResult;
 
-import br.gov.serpro.supde.infra.batch.util.ColorEnum;
 import br.gov.serpro.supde.infra.batch.util.InvalidDataException;
+import br.gov.serpro.supde.infra.batch.util.TypeEnum;
 
-public class ColorAcceptedValidator  implements ConstraintValidator<ColorAccepted, String>{
+public class TypeAcceptedValidator  implements ConstraintValidator<TypeAccepted, String>{
 
 	private Set<String> valueList;
 
 	@Override
-	public void initialize(ColorAccepted constraint) {
+	public void initialize(TypeAccepted constraint) {
 		valueList = new HashSet<String>();  
-		for (String val : constraint.acceptValues()) {  
-			valueList.add(val.toLowerCase());  
+		for (TypeEnum val : TypeEnum.values()) {  
+			valueList.add(val.value.toLowerCase());  
 		}
-		//valueList = new HashSet( Arrays.asList( constraint.acceptValues() ) );
 	}
 
 	/**
@@ -35,11 +34,15 @@ public class ColorAcceptedValidator  implements ConstraintValidator<ColorAccepte
 			return true;
 		}
 
-		if (!valueList.contains(value.toLowerCase())) {
-			//throw new IllegalStateException( "Unexpected value: " + value);
-			throw new InvalidDataException(
-					"Unexpected value for Color: " + value, 
-					new BeanPropertyBindingResult(value, ColorEnum.class.getName()));
+		//Devido Array de Strings para "type":
+		//Validação possiveis valores de dominio para "type"
+		for(String type : value.split(",")){
+			type = type.trim();
+			if (!valueList.contains(type.toLowerCase())) {
+				throw new InvalidDataException(
+						"Unexpected value for Type: " + type, 
+						new BeanPropertyBindingResult(type, TypeEnum.class.getName()));
+			}
 		}
 		
 		return true;

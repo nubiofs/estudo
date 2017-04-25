@@ -28,8 +28,7 @@
 						<batch:include class="java.sql.SQLException"/>
 						<batch:include class="br.gov.serpro.supde.infra.batch.util.InvalidDataException"/>
 						<batch:include class="javax.validation.ValidationException"/>
-<!-- 						<batch:include class="java.lang.NumberFormatException"/> -->
-						<batch:include class="java.lang.Exception"/>
+<!-- 						<batch:include class="java.lang.Exception"/> -->
 					</batch:skippable-exception-classes>
 				</batch:chunk>
 			</batch:tasklet>

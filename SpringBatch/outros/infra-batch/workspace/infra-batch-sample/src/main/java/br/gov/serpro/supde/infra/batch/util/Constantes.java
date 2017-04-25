@@ -7,4 +7,20 @@ public class Constantes {
 	public static final String BLACK = "black";
 	public static final String RED = "red";
 	
+//	public enum ColorEnum {
+//
+//		GREEN(1, "green"), 
+//		BLACK(2, "black"), 
+//		RED(3, "red");
+//
+//		public int key;
+//		public String value;
+//
+//		private ColorEnum(int key, String value) {
+//			this.key = key;
+//			this.value = value;
+//		}
+//
+//	}
+	
 }

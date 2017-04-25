@@ -9,14 +9,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = ColorAcceptedValidator.class)
+@Constraint(validatedBy = TypeAcceptedValidator.class)
 @Documented
 @Target(ElementType.FIELD )
 @Retention(RetentionPolicy.RUNTIME)  
-public @interface ColorAccepted {
+public @interface TypeAccepted {
 	
-	String[] acceptValues();  
-	   
     String message() default "Not allowded value";  
   
     Class<?>[] groups() default {};  
