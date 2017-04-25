@@ -1,6 +1,6 @@
-package br.gov.serpro.supde.infra.batch.support;
+package br.gov.serpro.supde.infra.batch.util;
 
-public enum TYPE {
+public enum TypeEnum {
 
 	PHONE(1, "phone"), 
 	ACCESSORY(2, "accessory"), 
@@ -14,7 +14,7 @@ public enum TYPE {
 	public int key;
 	public String value;
 
-	private TYPE(int key, String value) {
+	private TypeEnum(int key, String value) {
 		this.key = key;
 		this.value = value;
 	}

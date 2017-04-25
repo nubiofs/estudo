@@ -24,7 +24,11 @@
 						<batch:include class="com.google.gson.JsonSyntaxException"/>
 						<batch:include class="org.codehaus.jettison.json.JSONException"/>
 						<batch:include class="org.springframework.dao.DataAccessException"/>
+						<batch:include class="java.lang.IllegalStateException"/>
 						<batch:include class="java.sql.SQLException"/>
+						<batch:include class="br.gov.serpro.supde.infra.batch.util.InvalidDataException"/>
+						<batch:include class="javax.validation.ValidationException"/>
+<!-- 						<batch:include class="java.lang.NumberFormatException"/> -->
 						<batch:include class="java.lang.Exception"/>
 					</batch:skippable-exception-classes>
 				</batch:chunk>
@@ -42,8 +46,8 @@
 	</beans:bean>
 
 	<beans:bean name="productLineMapper"
-		class="br.gov.serpro.supde.infra.batch.support.JSLineMapper"/>
-
+		class="br.gov.serpro.supde.infra.batch.support.JSLineMapper" />
+		
 	<beans:bean id="product"
 		class="br.gov.serpro.supde.infra.batch.sample.domain.Product"
 		scope="prototype" />
@@ -53,15 +57,15 @@
 	
 	<beans:bean id="productProcessor"
 		class="br.gov.serpro.supde.infra.batch.sample.ProductProcessor"/>
-
+	
 	<beans:bean id="sampleDatabaseWriter"
 		class="org.springframework.batch.item.database.JdbcBatchItemWriter">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="sql">
 			<beans:value>
             <![CDATA[            
-            	INSERT INTO product(id, name, brand, type, price, warranty_years, available, description) 
-				VALUES (:id, :name, :brand, :type, :price, :warranty_years, :available, :description)
+            	INSERT INTO product(id, name, brand, type, color, price, warranty_years, available, description) 
+				VALUES (:id, :name, :brand, :type, :color, :price, :warranty_years, :available, :description)
             ]]>
 			</beans:value>
 		</beans:property>

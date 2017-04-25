@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.google.gson.reflect.TypeToken;
 
 import br.gov.serpro.supde.infra.batch.core.context.InfraJobContext;
-import br.gov.serpro.supde.infra.batch.support.JSONUtils;
+import br.gov.serpro.supde.infra.batch.util.JSONUtils;
 
 //Executar com o VM argument -Dinfra.config.dir=<diretorio dos arquivos de configuracao do infra-batch>
 

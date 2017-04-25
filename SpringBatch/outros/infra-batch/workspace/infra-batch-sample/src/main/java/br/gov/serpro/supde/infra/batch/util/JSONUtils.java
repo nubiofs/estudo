@@ -1,4 +1,4 @@
-package br.gov.serpro.supde.infra.batch.support;
+package br.gov.serpro.supde.infra.batch.util;
 
 import com.google.gson.Gson;
 

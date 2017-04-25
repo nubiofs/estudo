@@ -7,7 +7,9 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import br.gov.serpro.supde.infra.batch.support.JSONUtils;
+
+import br.gov.serpro.supde.infra.batch.util.JSONUtils;
+
 import com.google.gson.reflect.TypeToken;
 
 public class TestesJSON {
