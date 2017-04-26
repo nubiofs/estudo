@@ -50,6 +50,9 @@ public final class Product implements Serializable {
 	@Length(min = 0, max = 16000)
 	private String description;
 	
+	@NotEmpty
+	private String json;
+	
 	public Product(){
 		
 	}
@@ -64,6 +67,7 @@ public final class Product implements Serializable {
 		this.warranty_years = builder.warranty_years;
 		this.available = builder.available;
 		this.description = builder.description;
+		this.json = builder.json;
 	}
 
 	public static Builder getBuilder() {
@@ -142,6 +146,14 @@ public final class Product implements Serializable {
 		this.description = description;
 	}
 	
+	public String getJson() {
+		return json;
+	}
+	
+	public void setJson(String json) {
+		this.json = json;
+	}
+	
 	@Override
 	public String toString(){
 
@@ -155,7 +167,8 @@ public final class Product implements Serializable {
 		.append("price", price)
 		.append("warranty_years", warranty_years)
 		.append("available", available)
-		.append("description", description);
+		.append("description", description)
+		.append("json", json);
 		
 		return builder.toString();
 
@@ -175,6 +188,7 @@ public final class Product implements Serializable {
     	private Double warranty_years;
     	private Boolean available;
     	private String description;
+    	private String json;
 
         private Builder() {}
 
@@ -220,6 +234,11 @@ public final class Product implements Serializable {
 
         public Builder description(String description) {
             this.description = description;
+            return this;
+        }
+
+        public Builder json(String json) {
+            this.json = json;
             return this;
         }
 

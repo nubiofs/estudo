@@ -63,8 +63,8 @@
 		<beans:property name="sql">
 			<beans:value>
             <![CDATA[            
-            	INSERT INTO product(id, name, brand, type, color, price, warranty_years, available, description) 
-				VALUES (:id, :name, :brand, :type, :color, :price, :warranty_years, :available, :description)
+            	INSERT INTO product(id, name, brand, type, color, price, warranty_years, available, description, json) 
+				VALUES (:id, :name, :brand, :type, :color, :price, :warranty_years, :available, :description, CAST(:json AS JSONB))
             ]]>
 			</beans:value>
 		</beans:property>

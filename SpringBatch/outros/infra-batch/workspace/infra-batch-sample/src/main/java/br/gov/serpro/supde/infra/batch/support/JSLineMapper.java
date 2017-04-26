@@ -40,10 +40,16 @@ public class JSLineMapper implements LineMapper<Product>   {
 			}
 
 			product = Product.getBuilder()
+					//
 					//Valores obrigatorios
+					//
 					.id((Integer) jsObject.get("id"))
 					.name((String) jsObject.get("name"))
+					//Nesse caso, o json é a propria linha
+					.json((String) line)
+					//
 					//Valores opcionais
+					//
 					.brand(jsObject.has("brand") == true ? (String) jsObject.optString("brand") : null)
 					.type(!list.isEmpty() ? StringUtils.join(list, ", ") : null)
 					.color(jsObject.has("color") == true ? (String) jsObject.optString("color") : null)
