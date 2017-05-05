@@ -1,5 +1,8 @@
 http://supsd.cta.serpro/videos/arquivos/serpro-eclipse-luna-amd64.deb
 
+http://ftp.devops.dev.serpro/ftp/
+http://ftp.devops.dev.serpro/ftp/jdbc/postgresql/9.4/
+
 
 * No eclipse:
 
