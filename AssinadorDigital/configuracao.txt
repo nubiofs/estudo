@@ -1,17 +1,19 @@
-Obs.: Documentação "http://demoiselle.sourceforge.net/docs/components/certificate/reference/1.2.0/html_single/"
+Obs.: 
+
+- Documentação "http://demoiselle.sourceforge.net/docs/components/certificate/reference/1.2.0/html_single/"
+
+- download fonte "https://github.com/demoiselle/certificate/releases/tag/1.2.0"
 
 =====================================
 
 (Criando a Aplicação Desktop)
 
-1) download fonte "https://github.com/demoiselle/certificate/releases/tag/1.2.0"
-
-2) importar projeto "assinadorweb-desktop" para eclipse:
+1) importar projeto "assinadorweb-desktop" para eclipse:
 
 $ cd assinadorweb-desktop
 $ mvn eclipse:eclipse
 
---> Import Existing Maven project
+2) No eclipse --> Import Existing Maven project
 
 =====================================
 
