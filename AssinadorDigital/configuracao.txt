@@ -4,6 +4,20 @@ Obs.:
 
 - download fonte "https://github.com/demoiselle/certificate/releases/tag/1.2.0"
 
+- Criando par de chaves assimétricas (via KeyStore Explorer):
+
+-> Sobre *.ambiente.cliente.gov.br" (Sign New Key Pair) -> (RSA 4.096) -> (CN=mycert) -> Add Certificate Extensions -> Key Usage (Certificate Signing, Decipher Only, Encipher Only e Digital Signature) "Critical Extension" -> Alias "mycert" -> senha "changeit"
+
+-> Exportar "Key Pair from" para "/home/02963357460/estudo.git/AssinadorDigital/workspace/assinadorweb-desktop/src/main/jnlp/mycert.p12" (PKCS#12 Password: "changeit")
+
+- Para execução (assinadorweb-desktop/target/jnlp/launch.jnlp) com click (bloqueio de aplicação autoassinada):
+
+$ javaws -viewer
+
+==> "(Painel de Controle -> Avançado) Habilitar execução de 
+	
+$ ControlPanel
+
 =====================================
 
 (Criando a Aplicação Desktop)
@@ -14,6 +28,17 @@ $ cd assinadorweb-desktop
 $ mvn eclipse:eclipse
 
 2) No eclipse --> Import Existing Maven project
+
+3) Maven install
+
+4) 
+
+$ javaws launch.jnlp
+
+$ jarsigner -verify assinadorweb-desktop-1.1.0.jar -verbose
+
+$ jarsigner -verify assinadorweb-desktop-1.1.0.jar -verbose -certs
+
 
 =====================================
 
