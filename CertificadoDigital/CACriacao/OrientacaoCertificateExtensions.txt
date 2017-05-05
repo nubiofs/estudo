@@ -1,0 +1,23 @@
+* Certificate Extensions (para "CA"):
+
+Basic Constraints "com Critial Extension"
+
+	Subject is a CA Path 
+	Length Constraint: None
+
+Key Usage "com Critial Extension"
+
+	Certificate Signing 
+	CRL Signing
+
+* Certificate Extensions (para "localhost"):
+
+Basic Constraints "não Critial Extension"
+
+	Subject is not a CA
+	Length Constraint: None
+
+Key Usage "com Critial Extension"
+
+	Certificate Signing 
+	CRL Signing

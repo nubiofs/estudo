@@ -1,0 +1,26 @@
+openssl s_client -connect tstcnirnucleobe-tes08191.apps.dev.serpro:443
+
+//chrome://net-internals
+//about:networking
+
+about:config
+security.fileuri.strict_origin_policy;true
+
+
+google-chrome --disable-web-security
+
+chrome://appcache-internals/
+
+google-chrome --disable-web-security --ignore-certicate-errors
+
+chrome://chrome-urls/
+==========
+
+[27992:28011:1205/150940:ERROR:cert_verify_proc_nss.cc(868)] CERT_PKIXVerifyCert for teste.cnirnucleo.serpro failed err=-8172
+[27992:27992:1205/150941:ERROR:browser_window_gtk.cc(1082)] Not implemented reached in virtual void BrowserWindowGtk::WebContentsFocused(content::WebContents*)
+
+
+https://www.google.com/chrome/cleanup-tool/
+
+
+$JBOSS_CONFIG_DIR
