@@ -1,6 +1,5 @@
 package br.gov.frameworkdemoiselle.certificate.example;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -32,8 +31,9 @@ public class App extends AbstractFrameExecute {
 	
 	private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
-    String jnlpIdentifier = "";
-    String jnlpService = "";
+    String jnlpIdentifier = "";//define o token
+    String jnlpService = "";//define o serviço
+    
     byte[] zipDownload = null;
     InputStream certificateForHTTPS = null;
     
@@ -62,7 +62,6 @@ public class App extends AbstractFrameExecute {
             JOptionPane.showMessageDialog(null, "A variavel \"jnlp.service\" não está configurada.", "Erro", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-
         
         try{
 
@@ -88,9 +87,13 @@ public class App extends AbstractFrameExecute {
         
         //Lista os arquivos na tela
         List<String> fileNames = new ArrayList<String>(files.keySet());
+        //preencher a lista com o nome dos arquivos
         MainFrame.setListFileName(fileNames);
     }
     
+    /**
+     * No método execute fazemos a assinatura dos arquivos e devolvemos para o serviço as assinaturas. 
+     */
     @Override
     public void execute(KeyStore ks, String alias, MainFrame principal) {
         try {
@@ -153,13 +156,19 @@ public class App extends AbstractFrameExecute {
         
     }
 
+    /**
+     * No método cancel e close avisamos ao serviço que a aplicação foi interrompida.
+     */
     @Override
     public void cancel(KeyStore ks, String alias, MainFrame principal) {
     	sendCancelToken(principal);
         principal.setVisible(false); //you can't see me!
         principal.dispose(); //Destroy the JFrame object
     }
-    
+
+    /**
+     * No método cancel e close avisamos ao serviço que a aplicação foi interrompida.
+     */
     @Override
     public void close(MainFrame principal) {
     	sendCancelToken(principal);
@@ -174,6 +183,6 @@ public class App extends AbstractFrameExecute {
         Utils.cancel("Usuário cancelou a aplicação", jnlpService.concat("/cancelar/"), jnlpIdentifier);
 
     }
-    
+   
 
 }
