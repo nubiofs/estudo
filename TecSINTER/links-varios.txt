@@ -125,6 +125,8 @@ https://medium.com/netflix-techblog/evolution-of-the-netflix-data-pipeline-da246
 https://www.progress.com/blogs/build-an-etl-pipeline-with-kafka-connect-via-jdbc-connectors
 https://robertovitillo.com/2017/01/23/an-overview-of-mozillas-data-pipeline/
 
+https://www.confluent.io/protecting-your-data-at-rest-with-apache-kafka-on-demand/
+
 https://www.enterprisedb.com/blog/powering-big-data-processing-postgres-apache-spark
 http://spark.apache.org/docs/latest/sql-programming-guide.html#jdbc-to-other-databases
 
