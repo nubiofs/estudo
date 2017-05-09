@@ -1,0 +1,149 @@
+* postgre JSONB:
+
+https://www.postgresql.org/docs/9.5/static/datatype-json.html
+https://www.postgresql.org/docs/9.5/static/functions-json.html
+
+* varios:
+
+http://charlesnagy.info/it/postgresql/postgresql-full-text-search-vs-solr
+http://stackoverflow.com/questions/30660298/postgresql-9-4-elements-of-jsonb-array-to-ts-vector-in
+https://db-engines.com/en/system/Elasticsearch%3bPostgreSQL%3bSolr
+http://stackoverflow.com/questions/10053050/why-is-solr-so-much-faster-than-postgres
+https://blog.lateral.io/2015/05/full-text-search-in-milliseconds-with-postgresql/
+
+* Big data (hadoop):
+
+http://ver.serpro.gov.br/solr/compras/browse?&q=&annotateBrowse=true
+https://br.hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/
+
+http://govdata.gov.br/
+http://govdata.gov.br/plataforma.html#hue
+http://www.planejamento.gov.br/govdata/perguntas-frequentes
+http://gethue.com/getting-started-with-hue-in-2-minutes-with-docker/
+http://gethue.com/
+
+* Elastic:
+
+http://exploringelasticsearch.com/
+https://www.elastic.co/start
+https://www.elastic.co/products
+https://github.com/elastic/elasticsearch
+https://www.elastic.co/downloads/elasticsearch
+https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
+https://www.elastic.co/guide/en/kibana/current/index.html
+http://elastichammer.exploringelasticsearch.com/
+
+http://blog.bti.digital/instalando-o-elasticsearch-no-linux/
+
+https://geobrainstorms.wordpress.com/2016/02/20/shapefile-no-elasticsearch/
+https://geobrainstorms.wordpress.com/2016/02/13/visualizacao-de-mapa-com-kibana-e-elasticsearch/
+https://geobrainstorms.wordpress.com/2016/02/20/consulta-e-mapas-no-kibana-e-elasticsearch/
+http://www.thedevlog.com/wp/2015/09/elasticsearch-elk-stack-ajudando-qualidade-software/
+http://stackoverflow.com/questions/15936616/import-index-a-json-file-into-elasticsearch
+https://github.com/andrewvc/ee-datasets
+https://github.com/andrewvc/elastic-loader
+https://github.com/javanna/elasticshell
+https://github.com/andrewvc/elastic-hammer
+https://github.com/taskrabbit/elasticsearch-dump
+https://github.com/jprante/elasticsearch-knapsack
+https://github.com/crate/elasticsearch-inout-plugin
+http://stackoverflow.com/questions/20646836/is-there-any-way-to-import-a-json-filecontains-100-documents-in-elasticsearch
+
+* kibana dashboard:
+
+https://www.elastic.co/guide/en/kibana/current/dashboard.html
+https://www.elastic.co/guide/en/kibana/current/dashboard-getting-started.html
+
+* Graylog:
+
+http://devopslab.com.br/centralizacao-e-analise-de-logs-com-graylog-mongodb-e-elasticsearch/
+
+* Palestra Técnica do CISL: Ciência de Dados com Software Livre:
+https://www.youtube.com/user/CISLGov.
+
+
+*QWare:
+
+http://www.serpro.gov.br/menu/suporte1/servicos/downloads-e-softwares/sta
+http://download.qware.com.br/SERPRO/
+http://download.qware.com.br/SERPRO/DOCUMENTACAO_QWARE/
+https://sta.tesouro.fazenda.gov.br/ajuda/ajuda_upload_servidor_proprio.htm
+https://sta.tesouro.fazenda.gov.br/pcasp/AJUDA/ajuda_upload_servidor_proprio_primeira_instalacao.htm
+http://manualsiafi.tesouro.gov.br/importacao-e-exportacao-de-dados/extracao-de-dados/solicitar-extracao-de-dados/solicitar-acesso-ao-servidor-de-arquivos-do-serpro
+http://manualsiafi.tesouro.gov.br/importacao-e-exportacao-de-dados/extracao-de-dados/solicitar-extracao-de-dados/solicitar-acesso-ao-servidor-de-arquivos-do-serpro/modulo-transferencia-automatica-noturna
+
+"Parte automática: Composta de extrações cadastradas no STA (Sistema de
+Transferência de Arquivos do SERPRO); serviço automático de transferência de
+arquivos (Q-Ware) dos servidores do SERPRO para os servidores do tribunal; rotinas
+automáticas de cargas desses arquivos na base de dados do sistema. Esta parte
+automática não consta nos menus do sistema. Ela é executada de forma batch,
+antes do início do expediente."
+
+"CLÁUSULA QUINTA - DOS OPERADORES DO SISTEMA
+5.1. O envio das informações previstas na cláusula segunda e terceira se dará por
+meio da ferramenta "Qware" que permite agilidade na transmissão segura de arquivos do grande
+porte para a plataforma baixa. O "Q-ware" é um aplicativo robusto e homologado pelo Serpro, que
+requer um Servidor com sistema operacional Windows com a versão a partir do 2000 ou Linux
+(red hat, Suse, Ubuntu).
+5.1.1. O acesso das informações dar-se-á mediante a habilitação de Servidores de
+Banco de Dados, mediante este sistema "Qware" observadas as normas pertinentes a Segurança da
+Informação."
+
+* WEBEDI "WEB-BASED ELECTRONIC DATA INTERCHANGE":
+
+
+EDI NA WEB - "WEB-EDI"
+O EDI Web É a transferência eletrônica de documentos entre computadores, utilizando-se a WEB (Internet). Destina-se a empresas sem sistema de gestão, onde o acesso aos documentos é feito diretamente na internet, via Browser (Mozila Firefox, por exemplo), não necessitando nenhum software específico para implementação. Ele permite o envio das informações de negócios, tanto na forma de arquivos como através de formulários virtuais. Estes formulários permitem a digitação das informações diretamente na tela e são visualizados como se fossem o documento em papel, facilitando assim seu preenchimento.
+É um conceito mais abrangente que Correio Eletrônico. Com a diferença que o WEB-EDI é a transferência de informação "de aplicação para aplicação" e o Correio Eletrônico é a transferência de informação "de pessoa para pessoa”. Ou seja, WEB-EDI trata de transferências de dados estruturados que podem ser processados de forma eficaz por outras aplicações, enquanto o Correio Eletrônico faz a transferência de dados não estruturados.
+
+http://www.webedi.com/
+http://integracao-edi.blogspot.com.br/
+http://www.edibasics.com.br/tipos-de-edi/web-edi/
+
+
+* talend etl:
+
+https://www.talend.com/products/talend-open-studio/
+http://copyrightdev.tumblr.com/post/109311096968/using-talend-big-data-to-move-data-from-mongodb-to
+https://www.talendforge.org/forum/viewtopic.php?id=34328
+
+** Varios:
+
+
+https://www.confluent.io/
+https://www.confluent.io/blog/bottled-water-real-time-integration-of-postgresql-and-kafka/
+http://www.3manuek.com/kafkacatandcopypg
+https://www.confluent.io/blog/stream-data-platform-1/
+https://github.com/xstevens/pg_kafka
+http://samza.apache.org/
+https://spark.apache.org/streaming/
+https://github.com/cgswong/confluent-platform
+http://docs.confluent.io/3.1.0/
+https://aws.amazon.com/pt/quickstart/architecture/confluent-platform/
+https://www.postgresql.org/docs/9.4/static/logicaldecoding.html
+https://medium.com/netflix-techblog/evolution-of-the-netflix-data-pipeline-da246ca36905
+https://www.progress.com/blogs/build-an-etl-pipeline-with-kafka-connect-via-jdbc-connectors
+https://robertovitillo.com/2017/01/23/an-overview-of-mozillas-data-pipeline/
+
+https://www.enterprisedb.com/blog/powering-big-data-processing-postgres-apache-spark
+http://spark.apache.org/docs/latest/sql-programming-guide.html#jdbc-to-other-databases
+
+https://dzone.com/articles/powering-big-data-processing-in-postgres-with-apac
+
+http://computerworld.com.br/cinco-coisas-que-voce-precisa-saber-sobre-hadoop-e-apache-spark
+
+http://computerworld.com.br/hadoop-ou-spark-veja-qual-se-aplica-melhor-para-sua-empresa
+
+https://eradiating.wordpress.com/2015/04/17/using-spark-data-sources-to-load-data-from-postgresql/
+
+https://esri.github.io/gis-tools-for-hadoop/
+https://github.com/Esri/gis-tools-for-hadoop
+https://github.com/Esri/geoprocessing-tools-for-hadoop
+https://github.com/Esri/spatial-framework-for-hadoop
+
+https://aws.amazon.com/pt/big-data/what-is-big-data/
+
+https://www.bigdatauniversity.com.br/courses
+clenubio@gmail.com
+ieshuaeu01
+
