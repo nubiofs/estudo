@@ -1,0 +1,117 @@
+1) Criar client_truststore.jks "tipo JKS" com senha "changeit"
+
+2) Obter Certificado do Servidor:
+
+$ echo -n | openssl s_client -connect hom.cnirnucleo.serpro.gov.br:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /home/02963357460/Documentos/CNIR/MVP2/interacao3-WSRESTpublico/SolicitacaoCertificadoEquipamento/validacaoHOM/chaves/hom.cnirnucleo.serpro.gov.br.crt
+
+3) Obter o chain do Certificado Digital do Servidor hom.cnirnucleo e setar na cadeia em ...
+
+- No chrome,  "Exportar" para "hom.cnirnucleo.serpro.gov.br-comCadeia.crt" via "ASCII base64, cadeia de certificados"...
+
+Obs.: Ou No chrome
+
+- Ir para "Detalhes do Certificado (hom.cnirnucleo.serpro.gov.br)" -> "Exportar" Certificado Digital, para "Autoridade Certificadora do SERPRORFB Homologacao - ICP-Brasil.crt" com tipo "ASCII Base64, Certificado ùnico"
+
+- Colocar sobre "-----BEGIN CERTIFICATE-----" de  hom.cnirnucleo.serpro.gov.br.crt as informações de "Autoridade Certificadora do SERPRORFB Homologacao - ICP-Brasil.crt"
+
+Obs.: Com "hom.cnirnucleo.serpro.gov.br.crt" fazer Export "public key" (PEM) para "hom.cnirnucleo.serpro.gov.br.openssl"
+
+No firefox:
+
+https://certificadoshom.serpro.gov.br/arserpro/pages/information/certificate_chain.jsf
+
+AutoridadeCertificadoraIntermediariaHOMv2.crt (PEM)
+AutoridadeCertificadoraRaizdeHomologacaoSERPRO.crt (PEM)
+
+4) Importar "hom.cnirnucleo.serpro.gov.br-comCadeia.crt" para "client_truststore.jks":
+
+-> Import "trusted certificate" com "KeyStore Explorer"
+com alias "hom.cnirnucleo.serpro.gov.br"
+
+5) Criar client_keystore.jks "tipo JKS" com senha "ambCliente01"
+
+6) Converter "AMBIENTECLIENTEGOVBR.p7b" para "AMBIENTECLIENTEGOVBR.pem":
+
+$ openssl  pkcs7 -in AMBIENTECLIENTEGOVBR.p7b -inform P7B -print_certs -out AMBIENTECLIENTEGOVBR.pem
+
+7) Converter "existing traditional PEM encoded encrypted private key to an unencrypted PEM format" para o arquivo "chave.key":
+
+$ openssl rsa -in chave.key -out chave_key.pem
+
+Obs.: informar a senha "ambCliente01"
+
+8) No "KeyStore Explorer":
+
+Import "key Pair" -> Type "OpenSSL" -> Desmarcar "Encrypted Private Key" -> Para "OpenSSL Private Key File" = chave_key.pem 
+-> Para "Certificate(s) File" = AMBIENTECLIENTEGOVBR.pem
+-> Alias "*.ambiente.cliente.gov.br" -> senha "ambCliente01"
+
+9) Recortar o "pem" do Certificado Digital do Cliente em "AMBIENTECLIENTEGOVBR.pem":
+
+subject=/C=BR/O=ICP-Brasil/OU=Equipamento A1/OU=Autoridade Certificadora ACSERPROACFSSL/CN=*.ambiente.cliente.gov.br
+issuer=/C=BR/O=ICP-Brasil/OU=CSPB-1/OU=Servico Federal de Processamento de Dados - SERPRO/CN=Autoridade Certificadora do SERPRO Final SSL - Hom
+-----BEGIN CERTIFICATE-----
+MIIG4jCCBMqgAwIBAgICeZQwDQYJKoZIhvcNAQELBQAwga0xCzAJBgNVBAYTAkJS
+MRMwEQYDVQQKDApJQ1AtQnJhc2lsMQ8wDQYDVQQLDAZDU1BCLTExOzA5BgNVBAsM
+MlNlcnZpY28gRmVkZXJhbCBkZSBQcm9jZXNzYW1lbnRvIGRlIERhZG9zIC0gU0VS
+UFJPMTswOQYDVQQDDDJBdXRvcmlkYWRlIENlcnRpZmljYWRvcmEgZG8gU0VSUFJP
+IEZpbmFsIFNTTCAtIEhvbTAeFw0xNzA0MjAxNzU3MTdaFw0xODA0MjAxNzU3MTda
+MIGRMQswCQYDVQQGEwJCUjETMBEGA1UECgwKSUNQLUJyYXNpbDEXMBUGA1UECwwO
+RXF1aXBhbWVudG8gQTExMDAuBgNVBAsMJ0F1dG9yaWRhZGUgQ2VydGlmaWNhZG9y
+YSBBQ1NFUlBST0FDRlNTTDEiMCAGA1UEAwwZKi5hbWJpZW50ZS5jbGllbnRlLmdv
+di5icjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMOEHn/xr8LEOP9c
+rsraAkwMSwpLtgNSDHdoL7+CgCs3UMoONo/Kv4268iyviZbosRd+twG/yYcMvmo3
+3pkinIWKiGSaPFJ+OwslNJAP7rAiZ118tDBffNZMi8e2Y3Fp8YMJieM9LMxHpWWE
+9Z6gqGuivfMWuvVjZtLhSNVQWg+deBlU817K4oBPv7Fta4X8eE4soTuB3WI3vRDO
+0bKtxaeK6RGYRk5IeyerUMTGWxXD3bn6UvxtbRYfFLtz6BPEr3+qG4cXdghg5q7M
+xgmUcd0iiYcnF7y7Njc1p2Zo5rva8hB5OeaBI5GbX87TmTzmxbZXeuviOEh49857
+CNFyZJsCAwEAAaOCAiQwggIgMB8GA1UdIwQYMBaAFIaL0xY74L2Z4oLbyQ8UouVF
+P8uGMGEGA1UdIARaMFgwVgYGYEwBAgFZMEwwSgYIKwYBBQUHAgEWPmh0dHA6Ly9y
+ZXBvc2l0b3Jpb2hvbS5zZXJwcm8uZ292LmJyL2RvY3MvZHBjYWNzZXJwcm9hY2Zz
+c2wucGRmMEsGA1UdHwREMEIwQKA+oDyGOmh0dHA6Ly9yZXBvc2l0b3Jpb2hvbS5z
+ZXJwcm8uZ292LmJyL2xjci9hY3NlcnByb2FjZnNzbC5jcmwwWgYIKwYBBQUHAQEE
+TjBMMEoGCCsGAQUFBzAChj5odHRwOi8vcmVwb3NpdG9yaW9ob20uc2VycHJvLmdv
+di5ici9jYWRlaWFzL2Fjc2VycHJvYWNmc3NsLnA3YjCBwQYDVR0RBIG5MIG2oBsG
+BWBMAQMIoBIEEEFNQklFTlRFIENMSUVOVEWgOwYFYEwBAwSgMgQwMjQwOTE5ODEw
+MDc4NDA5NDQ2MjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwU1NQoCIGBWBMAQMC
+oBkEF1JPTkFMRE8gQ0lTTkVJUk9TIFZFUkFToBkGBWBMAQMDoBAEDjMzNjgzMTEx
+MDAwMTA3gRtyb25hbGRvLnZlcmFzQHNlcnByby5nb3YuYnIwDgYDVR0PAQH/BAQD
+AgXgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjANBgkqhkiG9w0BAQsF
+AAOCAgEAT10LtwPj0WWtA3pyr1Lkc0gH6Jc7wZUONGS9aZZdGXz1X8Cnz6LL7kYD
+r57nuhUzJKn5RUZrWbA28gZ7RKtCPAiF3d3uq+mMcpG/uLkEo9UHR2EZ+GocnNlY
+5Q1w/bQGNM4RB5w0yHNiz2IvbHfiaigcq9RW4YtZ1wRgNoE+N1yallnR/CoiOC6y
+xYg00rZQD546ka9DW5VVz9t4JJpfbf+KAR9hiaHjHaMJZ3UzrbhSw2Y00Cxg9pik
+nFFad8H7TaH0NOejORwUlLFj6VJ0bdbt+91QSFRgUNJlid0PEZVChZNToJATljKc
+HMCg/cX/g4FEBpbUvwjOEl22bKqFAampRwou0WRDQBuryJZXzfzcmRrF8ESjfqJj
+JBHG9vpl9WJmc5kOMlMzLJCt+1WjNTeL6a6KbXyWUnEcC/ATfVszQSWPsRZ1Hjf7
+OuPi/tNTJgWsMSuk8rvpmHjmZDD6V0DxX8SP1X8NDr9aOaNUucA/2UOwAOq3sghm
+NTaw1aJZ98KI3K7eOTfAnsgwH5K8uzVYFzhRquLvmk/q29nG9K7h9Vot9ksxeuC6
+yFa9yxAqOHI4Ey75hmsSpHVL/vUtT9rIYeyiHg579qoDKZN6tjtb0NUr6G5bxmYU
+izYcW0NVll1/zaecgQSuRuVXd4cpU668GIrH9pXwWYFIW2x76fM=
+-----END CERTIFICATE-----
+
+
+para outro arquivo "pem" (AMBIENTECLIENTEGOVBR_PEM.pem)
+
+
+10) Execultar aplicação java standalone com o "client_truststore.jks" e "client_keystore.jks"
+
+11) Em "client_keystore.jks" Exportar "Key Pair from" para "_.ambiente.cliente.gov.br.p12"
+
+12) No Firefox importar "_.ambiente.cliente.gov.br.p12"
+
+===================
+
+https://wiki.openssl.org/index.php/Command_Line_Elliptic_Curve_Operations
+
+xxxxxxxxxxxxxxxxxxx
+
+//$ keytool -list -keystore Truststore.jks -alias mydomain -v
+
+//$ keytool -list -keystore Truststore.jks 
+
+
+
+$ openssl verify -CAfile certs/root-ca.crt certs/sub-ca.crt
+
+- certs/sub-ca.crt: OK ????
