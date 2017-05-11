@@ -1,0 +1,24 @@
+* https://br.hortonworks.com/downloads/#sandbox
+* https://br.hortonworks.com/hadoop-tutorial/sandbox-deployment-install-guide/#section_2
+
+* https://br.hortonworks.com/tutorials/
+* https://br.hortonworks.com/products/sandbox/
+* http://docs.hortonworks.com/index.html
+
+* https://br.hortonworks.com/blog/best-practices-for-selecting-apache-hadoop-hardware/
+* https://pt.linkedin.com/pulse/como-instalar-o-hortonworks-hfp-25-em-uma-m%C3%A1quina-elmar-metre-junior
+
+https://br.hortonworks.com/hadoop-tutorial/getting-started-hdf-sandbox/
+
+==> https://www.bigdatauniversity.com.br/courses/
+==> http://www.ambientelivre.com.br/treinamento/hadoop-bigdata-open-source.html
+==> https://www.datascienceacademy.com.br/public-course?courseid=big-data-analytics-engineer
+
+
+1) $ wget -b -c https://downloads-hortonworks.akamaized.net/sandbox-hdp-2.6/HDP_2.6_virtualbox_19_04_2017_20_02_55_hdp_ambari_2_5_0_5_1.ova
+
+MD5 : 9cb91797dc2a53bf3799007c5c80770e
+
+2) $ less +F wget-log
+
+3) $ du -ms HDP_2.6_virtualbox_19_04_2017_20_02_55_hdp_ambari_2_5_0_5_1.ova
