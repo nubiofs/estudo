@@ -143,7 +143,36 @@ https://github.com/Esri/gis-tools-for-hadoop
 https://github.com/Esri/geoprocessing-tools-for-hadoop
 https://github.com/Esri/spatial-framework-for-hadoop
 
+https://www.locationtech.org/projects/technology.geomesa
+http://www.eclipse.org/community/eclipse_newsletter/2014/march/article3.php
+
+http://www.geomesa.org/
+http://ngageoint.github.io/geowave/
+http://blog.mgm-tp.com/2016/03/geomesa-vs-geowave/
+
+https://gcn.com/blogs/emerging-tech/2016/03/geomesa-cloud-gis.aspx
+http://www.eclipse.org/community/eclipse_newsletter/2014/march/article3.php
+
+https://github.com/locationtech/geomesa
+https://github.com/locationtech/geomesa
+http://www.ccri.com/2016/04/04/geomesas-cassandra-support/
+https://www.youtube.com/watch?v=S7VTAoP0bu4
+https://2016.foss4g-na.org/session/geomesa-geobench-and-sfcurve-measuring-and-improving-biggeo-performance
+https://www.gislounge.com/open-source-big-spatial-data-with-geomesa/
+https://gcn.com/blogs/emerging-tech/2016/03/geomesa-cloud-gis.aspx
+http://www.ccri.com/2017/03/20/new-geomesa-spark-sql-zeppelin-notebooks-support/
+http://www.ccri.com/2016/06/28/geomesa-analytics-jupyter-notebook/
+https://www.locationtech.org/content/geodocker-development-workflow
+https://www.gislounge.com/open-source-big-spatial-data-with-geomesa/
+
+https://www.locationtech.org/content/geodocker-development-workflow
+
+https://databricks.com/blog/2015/02/17/introducing-dataframes-in-spark-for-large-scale-data-science.html
+
 https://aws.amazon.com/pt/big-data/what-is-big-data/
+
+https://nifi.apache.org/
+https://accumulo.apache.org/
 
 https://www.bigdatauniversity.com.br/courses
 clenubio@gmail.com
