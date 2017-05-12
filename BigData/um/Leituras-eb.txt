@@ -76,6 +76,42 @@ ship between the components.
 		operational data now has to encompass a broader set of data sources, including unstructured sources
 		such as customer and social media data in all its forms.
 
+		new emerging approaches to data management in the big data
+		world, including document, graph, columnar, and geospatial database
+		architectures (NoSQL)
+
+Performance matters
+
+using a distributed computing model, what took days
+might now take minutes
+
+With the evolution of computing technology, it is now possible to manage
+immense volumes of data that previously could have only been handled by
+supercomputers at great expense. Prices of systems have dropped, and as a
+result, new techniques for distributed computing are mainstream.
+
+the innovations MapReduce, Hadoop,
+and Big Table proved to be the sparks that led to a new generation of data
+management.
+
+MapReduce was designed by Google as a way of efficiently executing a set of
+functions against a large amount of data in batch mode.
+
+Big Table was developed by Google to be a distributed storage system
+intended to manage highly scalable structured data.
+
+Hadoop is an Apache-managed software framework derived from MapReduce
+and Big Table. Hadoop allows applications based on MapReduce to run on
+large clusters of commodity hardware.
+
+Hadoop is designed to
+parallelize data processing across computing nodes to speed computations
+and hide latency. Two major components of Hadoop exist: a massively scal-
+able distributed file system that can support petabytes of data and a mas-
+sively scalable MapReduce engine that computes results in batch.
+
+
+
 parei em 
 
 
