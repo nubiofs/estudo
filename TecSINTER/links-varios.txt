@@ -173,6 +173,9 @@ https://aws.amazon.com/pt/big-data/what-is-big-data/
 
 https://nifi.apache.org/
 https://accumulo.apache.org/
+https://prestodb.io/
+https://github.com/nubiofs/prestogres
+https://nationalsecurityagency.github.io/timely/
 
 https://www.bigdatauniversity.com.br/courses
 clenubio@gmail.com
