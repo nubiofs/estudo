@@ -176,6 +176,7 @@ https://accumulo.apache.org/
 https://prestodb.io/
 https://github.com/nubiofs/prestogres
 https://nationalsecurityagency.github.io/timely/
+http://www.spatialytics.org/projects/geokettle/
 
 https://www.bigdatauniversity.com.br/courses
 clenubio@gmail.com
