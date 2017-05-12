@@ -178,6 +178,14 @@ https://github.com/nubiofs/prestogres
 https://nationalsecurityagency.github.io/timely/
 http://www.spatialytics.org/projects/geokettle/
 
+http://community.pentaho.com/projects/data-integration/
+https://github.com/pentaho/pentaho-kettle
+http://www.pentaho.com/product/data-integration
+http://www.pentaho.com/product/big-data-analytics
+
+
+https://github.com/pentaho/pentaho-cassandra-plugin
+
 https://www.bigdatauniversity.com.br/courses
 clenubio@gmail.com
 ieshuaeu01
