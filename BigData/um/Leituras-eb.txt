@@ -112,7 +112,8 @@ sively scalable MapReduce engine that computes results in batch.
 
 
 
-parei em 
+-------------
+===> parei na página 25 
 
 
 ====================================
