@@ -1,0 +1,9 @@
+1) $ wget -b -c https://downloads-hortonworks.akamaized.net/sandbox-hdp-2.6/HDP_2.6_virtualbox_19_04_2017_20_02_55_hdp_ambari_2_5_0_5_1.ova
+
+MD5 : 9cb91797dc2a53bf3799007c5c80770e
+
+2) $ md5sum HDP_2.6_virtualbox_19_04_2017_20_02_55_hdp_ambari_2_5_0_5_1.ova
+
+--> 9cb91797dc2a53bf3799007c5c80770e  HDP_2.6_virtualbox_19_04_2017_20_02_55_hdp_ambari_2_5_0_5_1.ova
+
+--> 9cb91797dc2a53bf3799007c5c80770e

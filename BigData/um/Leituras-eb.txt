@@ -1,0 +1,82 @@
+====================================
+* Bdd.pdf:
+
+(Part I: Getting Started with Big Data)
+
+- The Evolution of Data Management
+
+Although data management is typically viewed through
+a software lens, it actually has to be viewed from a holistic perspective. Data
+management has to include technology advances in hardware, storage, net-
+working, and computing models such as virtualization and cloud computing.
+
+Big data is not a stand-alone technology; rather, it is a
+combination of the last 50 years of technology evolution.
+
+- Understanding the Waves of Managing Data
+
+Wave 1: Creating manageable
+data structures
+
+	RDBMS; BLOBs; ODBMS
+
+Wave 2: Web and content management
+
+	store and manage web content, images, audio, and video.
+
+Wave 3: Managing big data
+
+	Many of the technologies at the heart of big data, such as virtualization,
+	parallel processing, distributed file systems, and in-memory databases, have
+	been around for decades.
+
+	big data is not simply about
+	one tool or one technology. It is about how all these technologies come
+	together to give the right insights, at the right time, based on the right data
+
+Big data incorpo-
+rates all data, including structured data and unstructured data from e-mail,
+social media, text streams, and more. This kind of data management requires
+that companies leverage both their structured and unstructured data.
+
+A big data management architecture must include a variety of services
+that enable companies to make use of myriad data sources in a fast and effec-
+tive manner. To help you make sense of this, we put the components into a
+diagram (see Figure 1-2) that will help you see what’s there and the relation-
+ship between the components.
+
+(Figura pág 18):
+
+	- Interfaces and feeds
+
+		what makes big data big is the fact that it relies on picking up lots of data from lots of
+		sources. Therefore, open application programming interfaces (APIs) will be
+		core to any big data architecture. In addition, keep in mind that interfaces
+		exist at every level and between every layer of the stack. Without integration
+		services, big data can’t happen.
+
+	- Redundant physical infrastructure
+
+		The supporting physical infrastructure is fundamental to the operation and
+		scalability of a big data architecture.
+
+		The physical infrastructure is based on a distributed
+		computing model. This means that data may be physically stored in many
+		different locations and can be linked together through networks, the use of a
+		distributed file system, and various big data analytic tools and applications.
+
+		Redundancy is important because we are dealing with so much data from
+		so many different sources.
+
+		this redundancy may come in the form of a Software as a Service (SaaS) offering
+		that allows companies to do sophisticated data analysis as a service.
+
+	- Operational data sources
+
+		operational data now has to encompass a broader set of data sources, including unstructured sources
+		such as customer and social media data in all its forms.
+
+parei em 
+
+
+====================================
