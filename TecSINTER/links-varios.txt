@@ -194,6 +194,16 @@ https://academy.datastax.com/planet-cassandra/
 http://www.semantix.com.br/cursos-de-big-data-online-e-gratuitos/
 http://www.semantix.com.br/livros-de-big-data/
 
+http://www-01.ibm.com/software/data/bigdata/what-is-big-data.html
+https://www.ibm.com/analytics/us/en/technology/hadoop/
+https://developer.ibm.com/hadoop/docs/getting-started/skills-roadmap-new-hadoop/
+https://www.ibm.com/analytics/us/en/technology/stream-computing/
+http://public.dhe.ibm.com/software/data/sw-library/bda/zone/#home
+
+https://docs.tibco.com/products/tibco-enterprise-message-service-8-3-0#category=tibco-enterprise-message-service
+
+https://docs.tibco.com/products/tibco-ftl-5-2-0
+
 ----------------------
 
 https://bigdatauniversity.com/
