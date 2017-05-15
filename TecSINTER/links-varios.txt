@@ -178,15 +178,29 @@ https://github.com/nubiofs/prestogres
 https://nationalsecurityagency.github.io/timely/
 http://www.spatialytics.org/projects/geokettle/
 
+https://www.cloudera.com/documentation.html
+
 http://community.pentaho.com/projects/data-integration/
 https://github.com/pentaho/pentaho-kettle
 http://www.pentaho.com/product/data-integration
 http://www.pentaho.com/product/big-data-analytics
 
+http://www.spatialdataintegrator.com/
+http://www.spatialytics.org/projects/geokettle/
 
 https://github.com/pentaho/pentaho-cassandra-plugin
+https://academy.datastax.com/planet-cassandra/
 
-https://www.bigdatauniversity.com.br/courses
+http://www.semantix.com.br/cursos-de-big-data-online-e-gratuitos/
+http://www.semantix.com.br/livros-de-big-data/
+
+----------------------
+
+https://bigdatauniversity.com/
+https://www.udemy.com
+
+==> https://bigdatauniversity.com/learn/big-data/
+==> https://www.udemy.com/hadoopstarterkit/learn/v4/content
 clenubio@gmail.com
-ieshuaeu01
-
+==> https://www.bigdatauniversity.com.br/courses
+clenubio@gmail.com
