@@ -1,0 +1,86 @@
+Potencial do grande volume de dados gerados, nos diversos segmentos produtivos, no mundo dos negócios, no governo e meios acadêmicos: 
+
+* Aperfeiçoar processos; Aumentar produtividade; Proporcionar melhor tomada de decisão;
+Desenvolver novos produtos e serviços
+* Redução de fraudes; aumento de lucros; conquista de eleitores; redução de custos na produção;
+eficiência energética; aumento de segurança;
+
+"era dos dados" -> avanços em hardware (armazenamento); software e infraestrutura de redes;
+
+Revista Science -> em 1996 somenente 0,8% dos dados eram armazenados em formato digital, enquanto em 2007 a quantidade de dados digitais já era de 94%
+
+Lei de Moore "capacidade de processamento dobra a cada 18meses"
+
+Já quanto o custo de armazenamento de dados: em 1990 1MB custava U$ 12.000 já a média atual é de U$ 0,03. Ou seja, mesmo já identificando valor da crescente quantidade de dados na década de 90 (foram descartados devido o alto custo de armazenamento)
+
+Um estudo da EMC apontou que, em 2012 dos 643 exabytes de dados no mundo digital, apenas 3% foram utilizados.
+
+==> Diante disso, pesquisadores consideram que estamos vivendo o início de uma nova revolução industrial "sendo os dados os elementos chaves das mudanças"
+
+Estimativas apontam que de todos os dados existentes, 90% foram criados nos últimos 2 anos. 
+
+(VER a "cada segundo" na internet são gerados:
+
+==> Giga, Tera, Peta, Exa, Zettabytes
+
+Consultoria EMC estima que em 2020 haverá em todo o mundo 44 Zettabytes de dados.
+
+"Essa mudança de escala torna-se difícil de ser mensurável por nós humanos"
+
+Crescimento exorbitante => em termos técnicos exige mudanças em relação à escalabilidade, eficiência, custo e complexidade para análise dos dados"
+
+"O que define se o atributo volume requer uma tecnologia de Big Data é a limitação das ferramentas tradicionais para lidar com o vulume gerado"
+
+dados semiestruturados => dados que possuem uma estrutura pré-definida (porém não com o rigor dos dados relacionais "estruturados" - com esquema rígido), exemplos (estruturas para marcação dos dados): JSON e XML.
+
+Estima-se que dos dados disponíveis globalmente, apenas 20 % são dados estruturados.
+
+Velocidade com que os dados são coletados, tratados e analisados "em alguns contextos, os dados coletados perdem valor com o decorrer do tempo" (recomendações de produtos num ambiente e-commerce: recomendações após uma semana após a compra VS recomendações em tempo-real - no exato momento da compra)"
+
+A varejista Amazon.com, compreendendo o benefício da velociadade, adota um mecanismo de precificação dinâmica (atualiza os valores dos produtos a cada 10min de acordo com a análise da demanda em tempo real de seus suprimentos)
+
+Big Data não é importante só devido a mudança quantitativa dos dados, mas na mudança qualitativa (a partir do valor obtido pelo volume, variedade e velocidade dos dados)
+
+VER definição de Big data da Gartner "Big Data 
+
+Dados gerados por máquinas: Cisco projeta que no contexto de IoT teremos 50 bilhões de disponistivos até 2020. IDC "International Data Corporation" prevê em 2020 que dos dados gerados por máquinas representarão 42% de todos os dados existentes.
+
+Mitos:
+
+* Big Data engloba somente dados não estruturados "SGBDs Relacionais vem sendo complementados com outras estruturas (mais tipos de dados) "devido à escalabilidade e flexibilidade de armazenamento"
+
+* Big Data refere-se somente a soluções com petabytes de dados
+
+* Big Data é aplicado somente às empresas do Vale do Silício e somente para grandes empresas (serviços Web do FaceBook, Twitter e Netflix)
+
+* As tecnologias de Big Data já estão bem estabelecidas -> Não devido ao surgimento de novas oportunidades ainda não aproveitadas (dados gerados por máquinas -> O que os registros de logs pelos dispositivos de infraestrutura pode nos informar? O que fazer com os dados coletados de redes de sensores? Pois, diferente dos dados gerados por humanos, podem gerar diferentes percepções
+
+Famosa frase "Big Data é o novo petróleo" póis, como no caso dos hidrocarbonetos, o valor se obtem após um processo de refinamento "dados brutos para um determinado produto"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
