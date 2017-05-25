@@ -204,6 +204,32 @@ https://docs.tibco.com/products/tibco-enterprise-message-service-8-3-0#category=
 
 https://docs.tibco.com/products/tibco-ftl-5-2-0
 
+http://lambda-architecture.net/
+http://www.jamesserra.com/archive/2016/08/what-is-the-lambda-architecture/
+https://academy.datastax.com/resources/getting-started-apache-spark-and-cassandra?unit=getting-started-apache-spark-and-cassandra
+https://www.pluralsight.com/courses/spark-kafka-cassandra-applying-lambda-architecture
+
+http://www.bogotobogo.com/Hadoop/BigData_hadoop_Apache_Spark_Streaming_Kafka_Cassandra.php
+
+
+https://bitnami.com/stack/hadoop/virtual-machine
+
+
+Varios links:
+https://github.com/nubiofs/spark-kafka-cassandra-applying-lambda-architecture/blob/master/README.md
+
+http://www.bigdatabusiness.com.br/tudo-sobre-big-data/
+http://www.bigdatabusiness.com.br/6-bases-de-dados-gratuitas-para-mineracao-estudos-e-testes/
+http://planetbigdata.com/
+https://hbr.org
+http://datastori.es/dear-data-with-giorgia-lupi-and-stefanie-posavec-ds64/  
+https://datafloq.com/read/beginners-look-at-big-data-and-its-benefits/3143
+https://www.forbes.com/sites/bernardmarr/2017/05/24/what-really-happens-to-our-facebook-and-social-data-when-we-die/#5857992d5857
+http://planetbigdata.com/
+
+http://www.semantix.com.br/livros-de-big-data/
+http://www.plugar.com.br/5-livros-imperdiveis-sobre-analise-de-dados/
+
 ----------------------
 
 https://bigdatauniversity.com/

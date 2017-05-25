@@ -5,7 +5,12 @@ Desenvolver novos produtos e serviços
 * Redução de fraudes; aumento de lucros; conquista de eleitores; redução de custos na produção;
 eficiência energética; aumento de segurança;
 
+
+
 "era dos dados" -> avanços em hardware (armazenamento); software e infraestrutura de redes;
+
+
+nós vivemos em uma Era em que, a (apenas) cada um ano e meio, se gera a mesma quantidade de dados já criados pela humanidade em todos os tempos.
 
 Revista Science -> em 1996 somenente 0,8% dos dados eram armazenados em formato digital, enquanto em 2007 a quantidade de dados digitais já era de 94%
 
@@ -56,6 +61,13 @@ Mitos:
 * As tecnologias de Big Data já estão bem estabelecidas -> Não devido ao surgimento de novas oportunidades ainda não aproveitadas (dados gerados por máquinas -> O que os registros de logs pelos dispositivos de infraestrutura pode nos informar? O que fazer com os dados coletados de redes de sensores? Pois, diferente dos dados gerados por humanos, podem gerar diferentes percepções
 
 Famosa frase "Big Data é o novo petróleo" póis, como no caso dos hidrocarbonetos, o valor se obtem após um processo de refinamento "dados brutos para um determinado produto"
+
+NoSQL -> novos modelos de armazenamento de dados para atender as necessidades de flexibilidade, 
+disponibilidade, escalabilidade e desempenho no contexto de Big Data.
+
+O termo one-size-fits-all não se enquadra em NoSQL (não existe um modelo de armazenamento único que seja adequado para todos os cenários de aplicações)
+
+Esses modelos NoSQL são classificados de acordo com a estrutura que os dados são armazenados: modelo chave-valor "adequado para aplicações que realizam leituras frequentes"; orientado a documentos; orientado a coluna e orientado a grafos.
 
 
 
