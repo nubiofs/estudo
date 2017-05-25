@@ -69,6 +69,18 @@ O termo one-size-fits-all não se enquadra em NoSQL (não existe um modelo de ar
 
 Esses modelos NoSQL são classificados de acordo com a estrutura que os dados são armazenados: modelo chave-valor "adequado para aplicações que realizam leituras frequentes"; orientado a documentos; orientado a coluna e orientado a grafos.
 
+Jeff Bezos - Amazon "Nunca descartamos dados"
+
+Reid Hoffman - LinkedIn "a Web 3.0 tem a ver com dados"
+
+(google carro auto dirigido projeto big data):
+
+“Self-driving Car” ou “Driverless Car”. Existe hoje uma expectativa de mercado que o veículo autônomo esteja circulando nas ruas por volta de 2021 [3.1].
+
+O carro autônomo utiliza uma tecnologia de ponta do “pacote” da IA chamada “Deep Learning” [13] e [13.1] para implementar a “Visão por Computador” [14] do carro.
+
+O “dado” será a matéria principal na sociedade do futuro mas o “dado” sozinho não significa nada. “Ele” precisa ser manipulado! Para criar valor com os “dados” nós precisamos dos algoritmos que irão manipulá-los. É aqui que entra a Inteligência Artificial (IA) [1] trazendo os algoritmos para transformar o “dado” em valor e essa transformação terá um impacto brutal na sociedade nos próximos anos!
+
 
 
 
