@@ -84,7 +84,23 @@ O “dado” será a matéria principal na sociedade do futuro mas o “dado” 
 
 
 
+Melhor Definição BIG DATA:
 
+(McKinsey Global Institue) "A intensa utilização de redes sociais online, de dispositivos móveis para conexão à Internet, transações e conteúdos digitias e também o crescente uso de computação em nuvem tem gerado quantidades incalculáveis de dados. O termo Big Data refere-se a este conjunto de dados cujo crescimento é exponencial e cuja dimensão está além da habilidade das ferramentas típicas de capturar, gerenciar e analisar dados"
+
+"Big Data pode ser visto como a descoberta do microscópio, que abriu uma nova janela para vermos 
+coisas que já existiam, como bactérias e vírus, mas que não tínhamos conhecimento. O que o microscópio foi para a medicina e a sociedade, o Big Data também o será para as empresas e a própria sociedade" (Big Data - Cezar Taurion)
+
+"diversas fontes de dados: por exemplo, devido a relação simbiótica entre o mundo físico (Internet das Coisas) e o mundo digital (mídias sociais) aparentemente sem relação, podem derivar informações extremamente importantes e fazer análises preditivas mais eficientes." ==> Dados meteorológicos com padrões de compra dos clientes para planejar o tipo de produtos a serem vendidos
+
+Em agosto de 2012, o Facebook divulgou ao blog TechCrunch que processa 2,5 bilhões de conteúdo e mais de 500TB de dados por dia.
+
+Com a Internet das Coisas podemos adicionar inteligência à infraestrutura física que molda nossa sociedade. Uma turbina de um moderno avião comercial a jato gera cerca de 1TB de dados por dia, que devem ser analisados para mantê-la o maior tempo possível em operação. A diferença entre manutenção preventiva e preditiva pode ser vista neste caso. Uma manutenção preventiva diria que a cada x mil horas de vôo a turbina deve ser retirada e revisada. Uma manutenção preditiva analisa os dados de operação gerada pelos sensores da turbina e prevê quando a manutenção deverá ser efetuada.
+
+Dados já começam a ser parte tão importante da economia como trabalho e capital. Estamos passando da era onde capital e trabalho determinam os valores econômicos para outra era onde o valor será a conjunção do capital, trabalho e dados.
+
+Big Data está hoje onde a Internet estava em 1995 (quando começou a onda da 
+Web e as primeiras iniciativas de e-commerce). "Na época alguem poderia prever uma Amazon, um Google ou um Facebook?"
 
 
 
