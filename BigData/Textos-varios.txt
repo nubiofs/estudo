@@ -28,6 +28,10 @@ Estimativas apontam que de todos os dados existentes, 90% foram criados nos últ
 
 ==> bit, byte, kylo, mega, Giga, Tera, Peta, Exa, Zettabytes e yottabytes
 
+Em 2013, a quantidade de informações armazenadas no mundo é estimada em 1200 Exabytes ( = 1ZT) ==> 
+"Se todos os dados fossem impressos em páginas, as mesmas cobririam toda a superfície dos EUA em 52 camadas". "Se fosse armazenada em CD-ROMs empilhados, teriamos cinco pilhas até a lua"
+
+
 Consultoria EMC estima que em 2020 haverá em todo o mundo 44 Zettabytes de dados.
 
 "Essa mudança de escala torna-se difícil de ser mensurável por nós humanos"
@@ -45,6 +49,9 @@ Velocidade com que os dados são coletados, tratados e analisados "em alguns con
 A varejista Amazon.com, compreendendo o benefício da velociadade, adota um mecanismo de precificação dinâmica (atualiza os valores dos produtos a cada 10min de acordo com a análise da demanda em tempo real de seus suprimentos)
 
 Big Data não é importante só devido a mudança quantitativa dos dados, mas na mudança qualitativa (a partir do valor obtido pelo volume, variedade e velocidade dos dados)
+
+Nem sempre precisamos saber a causa de um fenômeno; em vez disso, podemos deixar que os dados
+falem por si.
 
 VER definição de Big data da Gartner "Big Data 
 
@@ -72,6 +79,11 @@ Esses modelos NoSQL são classificados de acordo com a estrutura que os dados s�
 Jeff Bezos - Amazon "Nunca descartamos dados"
 
 Reid Hoffman - LinkedIn "a Web 3.0 tem a ver com dados"
+
+A verdadeira revolução não está nas máquinas que calculam os dados, e sim nos dados em si e na 
+maneira como os usamos.
+
+A avalanche de dados no mundo supera não apenas nossas máquinas como nossa imaginação.
 
 (google carro auto dirigido projeto big data):
 
