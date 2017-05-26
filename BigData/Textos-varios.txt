@@ -26,7 +26,7 @@ Estimativas apontam que de todos os dados existentes, 90% foram criados nos últ
 
 (VER a "cada segundo" na internet são gerados:
 
-==> Giga, Tera, Peta, Exa, Zettabytes
+==> bit, byte, kylo, mega, Giga, Tera, Peta, Exa, Zettabytes e yottabytes
 
 Consultoria EMC estima que em 2020 haverá em todo o mundo 44 Zettabytes de dados.
 
@@ -102,7 +102,39 @@ Dados já começam a ser parte tão importante da economia como trabalho e capit
 Big Data está hoje onde a Internet estava em 1995 (quando começou a onda da 
 Web e as primeiras iniciativas de e-commerce). "Na época alguem poderia prever uma Amazon, um Google ou um Facebook?"
 
+=== O Sorvete de Baunilha e o Pontiac 99 - GM
 
+O gerente da divisão de carros da Pontiac, da GM dos Estados Unidos, recebeu uma curiosa carta de reclamação de um cliente.
+
+“Esta é, a segunda vez que mando uma carta para vocês e, não os culpo por não me responderem. Posso parecer louco, mas nossa família tem o hábito de comer sorvete depois do jantar”...
+
+“repetimos este hábito todas as noites, variando apenas de sabor, sou o encarregado de ir comprá-lo, recentemente comprei um novo Pontiac e desde então minhas idas a sorveteria transformaram-se num pesadelo”...
+
+“O FATO É QUE ESTOU MUITO IRRITADO COM MEU PONTIAC 99” (O Pontiac alérgico a baunilha).
+
+A carta gerou tantas piadas do pessoal da Pontiac e o Presidente da empresa acabou recebendo uma cópia da reclamação. Este resolveu levar o assunto a sério e mandou um engenheiro conversar com o autor da carta.
+
+Esta é a moral de uma história que está circulando de boca em boca entre os principais especialistas norte-americanos em atendimento ao cliente. 
+
+- Lendo sobre BI de Stanley Loh,  para aqueles que não conheciam, como eu, segue trecho:
+
+   " Conta a lenda que um consumidor comprou um carro da GM e depois mandou
+uma carta se queixando. A queixa era a seguinte: quando ele ia na sorveteira e pegava o sorvete de baunilha, ele voltava para o carro e este demorava a dar partida; se ele pegasse qualquer outro sabor de sorvete, ele voltava para o carro e este "pegava" de primeira.
+   Conta ainda a lenda que isto virou piada na GM, uma vez que ninguém imaginava o que o sabor de um sorvete teria a ver com o problema no carro. Acredita-se que um engenheiro foi investigar o caso. Apresentou-se ao cliente e juntos foram testar a teoria que o cliente alegava. Foram até a sorveteria e compraram o sorvete de baunilha.
+   Voltaram para o carro e realmente o carro não deu partida na primeira tentativa nem nas seguintes. Esperaram um pouco, e tentaram de novo. Aí sim o carro ligou. Voltaram para a casa e depois de comerem o sorvete fizeram o mesmo teste só que pegando um sorvete de sabor diferente. Quando voltaram para o carro, a surpresa: o carro "pegou" de primeira. Bom, mas poderia ser acaso ou coincidência. Então testaram diversas vezes, usando métodos estatísticos e o resultado ... sempre o mesmo.
+   O engenheiro sabia que o sabor do sorvete não poderia influenciar o problema,
+mas certamente ali havia algum fator que estaria associado ao problema. E este fator tinha a ver com o sabor. Então ele descobriu que o sorvete de baunilha ficava na entrada da sorveteria, enquanto que os demais ficavam nos fundos. Ao entrar e comprar o sorvete de baunilha, o dono do carro demorava menos que se pegasse outro sabor. Havia uma peça no carro que precisava resfriar para o carro poder ligar. Menos tempo na sorveteria, menos tempo para a peça resfriar e o carro não ligava. Desta forma, o engenheiro descobriu a causa para o problema."
+
+Examinando o carro, o engenheiro fez nova descoberta: o tempo de compra era muito reduzido no caso da baunilha em comparação com o tempo dos outros sabores, o motor não chegava a esfriar. Com isso os vapores de combustível não se dissipavam, impedindo que a nova partida fosse instantânea.
+
+A partir desse episódio, a GM mudou o sistema de alimentação de combustível e introduziu a alteração em todos os modelos a partir da linha 99. Mais do que isso, o cliente ganhou um carro novo, além da reforma do que não pegava com sorvete de baunilha.
+
+A GM distribuiu também um memorando interno, exigindo que seus funcionários levem a sério até as reclamações mais estapafúrdias, “porque pode ser que uma grande inovação esteja por trás de um sorvete de baunilha”, diz a carta da GM. Talvez os pequenos detalhes nos façam rever conceitos e repensar sobre fatos considerados “sem importância”.
+
+ como o tempo de compra era muito mais reduzido no caso da baunilha em comparação com o tempo dos outros sabores, o motor não chegava a esfriar.
+
+
+Com certeza esse consumidor americano comprará um outro Pontiac, porque qualidade não está dentro da empresa, está também no atendimento que despendemos aos nossos clientes
 
 
 
