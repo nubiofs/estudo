@@ -230,6 +230,25 @@ http://planetbigdata.com/
 http://www.semantix.com.br/livros-de-big-data/
 http://www.plugar.com.br/5-livros-imperdiveis-sobre-analise-de-dados/
 
+(Hadoop GIS):
+https://sites.google.com/site/hadoopgis/
+http://bmidb.cs.stonybrook.edu/hadoopgis/index
+http://bmidb.cs.stonybrook.edu/hadoopgis/examples
+https://github.com/EmoryUniversity/sato/wiki
+https://github.com/StonyBrookDB/hadoopgis
+https://github.com/EmoryUniversity/libhadoopgis
+http://esri.github.io/gis-tools-for-hadoop/
+
+http://spatialhadoop.cs.umn.edu/
+https://github.com/aseldawy/spatialhadoop2
+http://spatialhadoop.cs.umn.edu/downloads/spatialhadoop-f3745a.ova
+
+http://www.oracle.com/technetwork/database/database-technologies/bigdata-spatialandgraph/learnmore/index.html
+
+https://github.com/moradology/accumulo-gis-comparison
+
+http://accumulosummit.com/program/talks/geowave-geospatial-and-geotemporal-data-storage-and-retrieval-in-accumulo/
+
 ----------------------
 
 https://bigdatauniversity.com/
