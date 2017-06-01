@@ -249,6 +249,8 @@ https://github.com/moradology/accumulo-gis-comparison
 
 http://accumulosummit.com/program/talks/geowave-geospatial-and-geotemporal-data-storage-and-retrieval-in-accumulo/
 
+http://talend-spatial.github.io/
+
 ----------------------
 
 https://bigdatauniversity.com/
