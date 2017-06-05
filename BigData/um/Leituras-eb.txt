@@ -110,10 +110,14 @@ and hide latency. Two major components of Hadoop exist: a massively scal-
 able distributed file system that can support petabytes of data and a mas-
 sively scalable MapReduce engine that computes results in batch.
 
+---
 
+Variety is the spice of life, and variety is one of the principles of big data.
 
 -------------
-===> parei na página 25 
+===> parei na página 27	(Understanding the role of relational
+databases in big data)
+
 
 
 ====================================
