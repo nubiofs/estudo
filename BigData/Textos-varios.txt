@@ -150,6 +150,18 @@ Com certeza esse consumidor americano comprará um outro Pontiac, porque qualida
 
 
 
+1000 Kilobytes = 1 Megabyte
+1000 Megabytes = 1 Gigabyte
+1000 Gigabytes = 1 Terabyte 
+1000 Terabytes = 1 Petabyte  [where most SME corporations are?]
+1000 Petabytes = 1 Exabyte  [where most large corporations are?]
+1000 Exabytes = 1 Zettabyte [where leaders like Facebook and Google are]
+1000 Zettabytes = 1 Yottabyte
+1000 Yottabytes = 1 Brontobyte
+1000 Brontobytes = 1 Geopbyte
+(https://practicalanalytics.co/2011/11/06/explaining-hadoop-to-management-whats-the-big-data-deal/)
+
+https://www.linkedin.com/pulse/real-comparison-nosql-databases-hbase-cassandra-mongodb-sahu
 
 
 
