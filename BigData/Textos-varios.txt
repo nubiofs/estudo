@@ -166,7 +166,26 @@ https://www.linkedin.com/pulse/real-comparison-nosql-databases-hbase-cassandra-m
 
 
 
+Cloud Computing é o motor do Big Data
+Para processar grandes volumes de dados em tempo real, empresas deverão usar a infraestrutura de Cloud Computing para colocar projetos de Big Data em ação.
 
+As empresas estão sendo instigadas a investir em tecnologias de Big Data para saber como achar ouro em uma mina de dados, que cresce a cada segundo. É um fenômeno puxado pelas redes sociais, mobilidade e mais recentemente pelas aplicações de Internet das Coisas (IoT).
+
+O estudo Visual Networking Index (VNI), realizado pela Cisco, prevê que em 2020 o volume de dados gerados pela Internet em todo o mundo chegará 2,3 zettabytes, crescimento de 264% comparado aos 870 exabytes registrados em 2015.
+
+A infraestrutura em Cloud Computing, seja em Nuvem Pública, Privada ou Híbrida, pode viabilizar os projetos de Big Data, superando os obstáculos da montagem do ambiente tradicional, trazendo diversos benefícios. Alguns ganhos são escalabilidade, que possibilita crescimento da capacidade de processamento de forma instantânea, e baixo investimento inicial.
+
+---
+
+Cloud Computing
+
+De acordo com o NIST (National Institute of Standards and Technology), Cloud Computing é o modelo que disponibiliza um conjunto de recursos computacionais de maneira conveniente, com acesso sob demanda à rede e que pode ser rapidamente provisionado e liberado com pouco esforço de gerenciamento ou interação do provedor de serviços. 
+
+Com uma abordagem bastante simples, podemos entender Cloud como sendo a oferta da “computação como serviço”. Sim, um serviço como são os serviços de eletricidade ou telefonia. Da mesma forma que não é necessário ter uma usina de produção de energia em casa para ter acesso à eletricidade, não deveria ser necessário ter um computador para poder processar e armazenar dados. Esta é a base do conceito de Cloud Computing. E este conceito foi imaginado há muito tempo, na década de 1960.
+
+Matéria completa:
+https://canaltech.com.br/coluna/cloud-computing/Big-Data-e-Cloud-Computing/
+O conteúdo do Canaltech é protegido sob a licença Creative Commons (CC BY-NC-ND). Você pode reproduzi-lo, desde que insira créditos COM O LINK para o conteúdo original e não faça uso comercial de nossa produção.
 
 
 
