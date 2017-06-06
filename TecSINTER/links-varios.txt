@@ -251,6 +251,19 @@ http://accumulosummit.com/program/talks/geowave-geospatial-and-geotemporal-data-
 
 http://talend-spatial.github.io/
 
+* Query Language:
+
+https://github.com/facebook/graphql
+http://facebook.github.io/graphql/
+http://graphql.org/
+https://githubengineering.com/the-github-graphql-api/
+https://github.com/chentsulin/awesome-graphql
+
+
+* Autorização/Autenticação
+
+http://picketlink.org/
+http://www.keycloak.org/
 ----------------------
 
 https://bigdatauniversity.com/
