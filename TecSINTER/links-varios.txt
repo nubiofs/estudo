@@ -259,11 +259,18 @@ http://graphql.org/
 https://githubengineering.com/the-github-graphql-api/
 https://github.com/chentsulin/awesome-graphql
 
-
 * Autorização/Autenticação
 
 http://picketlink.org/
 http://www.keycloak.org/
+https://github.com/keycloak/keycloak
+https://sjhiggs.github.io/fuse/sso/x509/smartcard/2017/03/29/fuse-hawtio-keycloak.html
+https://girirajsharma.wordpress.com/2015/10/04/authentication-via-wildfly-mutual-ssl-two-way-configuration/
+
+--- Varios
+
+https://github.com/ckan/ckan
+
 ----------------------
 
 https://bigdatauniversity.com/
