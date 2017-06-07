@@ -273,6 +273,39 @@ https://github.com/ckan/ckan
 
 ----------------------
 
+http://esri.github.io/gis-tools-for-hadoop/
+https://github.com/Esri/spatial-framework-for-hadoop
+https://github.com/Esri/gis-tools-for-hadoop/tree/master/samples
+https://github.com/Esri/gis-tools-for-hadoop/tree/master/samples/trip-discovery/gp
+https://github.com/Esri/gis-tools-for-hadoop/wiki/GIS-Tools-for-Hadoop-for-Beginners
+https://github.com/Esri/geometry-api-java
+https://github.com/Esri/geoprocessing-tools-for-hadoop
+https://blogs.esri.com/esri/arcgis/2013/08/09/vehicle-trip-discovery-with-gis-tools-for-hadoop/
+https://github.com/Esri/gis-tools-for-hadoop/tree/master/samples/trip-discovery
+
+https://github.com/locationtech/geomesa/
+http://www.geomesa.org/documentation/tutorials/geodocker-geomesa-spark-on-aws.html
+http://www.geomesa.org/documentation/tutorials/geodocker-geomesa-spark-on-aws.html
+http://www.geomesa.org/documentation/developer/introduction.html
+https://www.gislounge.com/open-source-big-spatial-data-with-geomesa/
+https://www.youtube.com/results?search_query=geomesa
+https://github.com/geodocker/geodocker-geomesa
+
+https://www.gislounge.com/empowering-gis-big-data/
+
+https://br.hortonworks.com/products/cloud/aws/
+https://aws.amazon.com/marketplace/pp/B01LXOQBOU?ref=_ptnr_web
+http://docs.hortonworks.com/HDPDocuments/HDCloudAWS/HDCloudAWS-1.16.0/bk_hdcloud-aws/content/launch/index.html
+http://docs.hortonworks.com/HDPDocuments/HDCloudAWS/HDCloudAWS-1.16.0/bk_hdcloud-aws/content/index.html#architecture
+
+
+https://br.hortonworks.com/products/sandbox/
+https://br.hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/
+https://br.hortonworks.com/hadoop-tutorial/deploying-hortonworks-sandbox-on-microsoft-azure/
+https://azure.microsoft.com/en-us/pricing/free-trial/
+https://azure.microsoft.com/en-us/free/
+https://account.azure.com/Home/Index
+
 https://bigdatauniversity.com/
 https://www.udemy.com
 
