@@ -295,6 +295,9 @@ https://www.gislounge.com/empowering-gis-big-data/
 
 https://br.hortonworks.com/products/cloud/aws/
 https://aws.amazon.com/marketplace/pp/B01LXOQBOU?ref=_ptnr_web
+
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html
+
 http://docs.hortonworks.com/HDPDocuments/HDCloudAWS/HDCloudAWS-1.16.0/bk_hdcloud-aws/content/launch/index.html
 http://docs.hortonworks.com/HDPDocuments/HDCloudAWS/HDCloudAWS-1.16.0/bk_hdcloud-aws/content/index.html#architecture
 
