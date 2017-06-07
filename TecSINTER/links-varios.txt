@@ -309,6 +309,11 @@ https://azure.microsoft.com/en-us/pricing/free-trial/
 https://azure.microsoft.com/en-us/free/
 https://account.azure.com/Home/Index
 
+http://spark.apache.org/examples.html
+https://github.com/amplab/spark-ec2
+https://github.com/apache/spark/tree/master/examples/src/main/java/org/apache/spark/examples
+https://databricks.com/blog/2014/10/10/spark-petabyte-sort.html
+
 https://bigdatauniversity.com/
 https://www.udemy.com
 
