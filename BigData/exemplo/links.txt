@@ -43,3 +43,313 @@ Almeida Revisada Imprensa Bíblica (AA)
 
 http://www.umsocorpo.com.br/site/biblia-em-txt/
 https://verdadecrista.wordpress.com/2012/07/03/versoes-biblicas-textus-receptus-e-texto-critico/
+
+
+=======
+== Links programas para contagem:
+=======
+
+
+
+class InfoString{
+	public boolean isLetter(char ch){
+		if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
+			return true;
+		else
+			return false;
+	}
+	public boolean isSpace(char ch){
+		if(ch == ' ')
+			return true;
+		else
+			return false;
+	}
+	public static void main(String[] args){
+		InfoString strInfo = new InfoString();
+		String text = "To be or not to be. That is the question"
+		+ " Whether it's noble in the mind to suffer"
+		+ " slings and arrows of outrangeous fortune."
+		+ " or to take arms against a sea of troubles,"
+		+ " and by opposing end them?";
+		int spaces = 0,
+			others = 0,
+			letters = 0;
+		for(int i = 0; i < text.length(); i++){
+			if(strInfo.isLetter(text.charAt(i)))
+				letters++;
+			else if(strInfo.isSpace(text.charAt(i)))
+				spaces++;
+			else
+				others++;
+		}
+		System.out.println("Letters: " + letters + ", Spaces: " + spaces + ", Others: " + others);
+	}
+}
+
+
+--
+
+public class ContagemDeString {
+    public static void main (String[] args) {
+        String str = "O rato roeu a ropa do rei de roma";
+        String frs = str;
+        int vog = 0, cons = 0;
+        str= str.toLowerCase();
+        for(int i = 0; i < str.length(); i++){
+            char c = str.charAt(i);
+            if(c == 32) continue;
+            if(c == 97 | c == 101 | c == 105 | c == 111 | c == 117){
+                vog++;
+                continue;
+            }
+            if(c >= 98 && c <= 122) cons++;
+        }
+        System.out.println("Na frase \""+frs+"\" temos:\nVogais: "+vog+"\nConsoantes: "+cons);
+    }
+}
+
+--
+
+http://www.devmedia.com.br/contagem-de-frequencias-de-palavras-em-arquivos-texto-em-java/26979
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * classe ContaPalavras - recebe como entrada um arquivo texto, identifica as
+ * diferentes palavras e contabiliza as frequências.
+ * 
+ * uso: java ContaPalavras arquivo_texto
+ * 
+ * @author Eduardo Correa
+ * 
+ */
+public class ContaPalavras {
+
+	public static void main(String[] args) throws Exception {
+
+	//-------------------------------------------------------
+	// (0) declaração/inicialização de variáveis
+	//-------------------------------------------------------
+		
+	String curLine; //recebe cada linha lida do arquivo texto
+		
+	Map<String,Integer> mapPalavras; //mapa: Palavra -> Frequencia  
+						//usado para contabilizar as 
+						//frequencias das palavras
+		
+	mapPalavras = new HashMap<String,Integer>();
+		
+		
+	//-------------------------------------------------------
+	// (1) abre o arquivo texto
+	//-------------------------------------------------------
+		
+	//(1.1) testa se nome do arq. texto foi passado na chamada do programa
+        if (args.length != 1) {
+            System.err.println("ERRO: eh preciso especificar o nome do arquivo");
+            System.err.println("Uso: java ContaPalavras arquivo_texto");
+            System.exit(1);
+        }
+
+	//(1.2) abre o arquivo
+        FileReader txtFile = new FileReader(args[0]);
+        BufferedReader txtBuffer = new BufferedReader(txtFile);
+
+	//-------------------------------------------------------
+	// (2) loop que processa cada linha do arquivo texto
+	//-------------------------------------------------------
+
+        //(2.1) pega a primeira linha do arquivo
+        curLine = txtBuffer.readLine();
+      
+        
+        while (curLine != null) {
+        	
+    		//-------------------------------------------------------
+        	//(2.2) quebra a linha em tokens (palavras) utilizando 
+        	//      expressão regular. 
+        	//
+        	//      O programa usa uma forma simplificada p/ obter os tokens.
+        	//      São considerados tokens:
+        	//      - uma sequência de 1 a n números
+        	//      - uma sequência de 1 a n letras
+    		//-------------------------------------------------------
+
+        	//primeiro converte tudo para minúsculo
+        	String minusculo = curLine.toLowerCase();
+        	
+        	//depois aplica a expressão regular
+        	Pattern p = Pattern.compile("(\\d+)|([a-záéíóúçãõôê]+)");
+        	Matcher m = p.matcher(minusculo);
+
+        	
+    		//-------------------------------------------------------
+        	//(2.3) IMPORTANTE: neste loop pegamos cada palavra 
+        	//                  e atualizamos o mapa de frequências
+    		//-------------------------------------------------------
+        	
+        	while(m.find())
+        	{
+        	  String token = m.group(); //pega um token   
+        	  Integer freq = mapPalavras.get(token); //verifica se esse 
+        	  					     //token já está no mapa	
+				
+				if (freq != null) { //se palavra existe, atualiza a frequencia
+					mapPalavras.put(token, freq+1);
+				}
+				else { // se palavra não existe, insiro com um novo id e freq=1.
+					mapPalavras.put(token,1);
+				}
+        	}
+        	
+		//pega a próxima linha do arquivo
+        	curLine = txtBuffer.readLine();
+        }
+        
+        txtBuffer.close();
+
+	//-------------------------------------------------------
+	// (3) imprime o mapa de frequencias
+	//-------------------------------------------------------
+	 for (Map.Entry<String, Integer> entry : mapPalavras.entrySet()) {
+		System.out.println(entry.getKey() + "\tfreq=" + entry.getValue());
+	 }
+
+   }
+
+}
+
+--
+
+http://www.javaprogressivo.net/2014/01/Como-ler-caracteres-Strings-Bytes-de-arquivos.html
+
+--
+VER
+===> https://pt.stackoverflow.com/questions/42314/como-contar-a-frequ%C3%AAncia-de-cada-letra-em-uma-string
+
+public static void main(String[] args) {
+    Scanner ent = new Scanner(System.in);
+    String S;
+    int i, j, cont=0;
+    System.out.println("Digite a palavra/frase:");
+    // usuário digita string
+    S = ent.nextLine();
+    // a string é convertida para letras minúsculas
+    // para que não haja diferenciação entre 'A' e 'a'
+    String s = S.toLowerCase();
+    String v = "";
+    for (i=0; i<s.length(); i++) {
+        for (j=0; j<s.length(); j++) {
+            if (s.charAt(i)==s.charAt(j)) {
+                cont++;
+            } 
+        }
+        // ao imprimir as frequências, exclui a contagem dos espaços
+        char c = s.charAt(i);
+        if (c >= 'a' && c <= 'z' && !v.contains("" + c)) {
+            v = v + c;
+            System.out.println("A letra "+s.charAt(i)+" aparece "+cont+" vezes.");
+        }
+        cont=0;
+    }
+}
+
+--
+
+https://pt.stackoverflow.com/questions/13621/contar-linhas-scanner
+
+List<String> textos = new ArrayList<>();
+//le linha por linha enquanto alimenta seu ArrayList
+while(sc.hasNext()) {
+    textos.add(sc.next());
+}
+//mostra quantas linhas o Scanner leu
+System.out.println("Seu scanner possuia " + textos.size() + " linhas"); 
+//mostra o conteúdo da primeira linha
+System.out.println("A primeira linha contém: " + textos.get(0));
+sc.close();
+
+==========
+===========
+========== (apache spark java character counter)
+==========
+
+https://gist.github.com/amithn/344a648b7471988d2472
+
+package spark.poc;
+
+
+import org.apache.commons.io.FileUtils;
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFunction;
+import scala.Tuple2;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class CharacterCounterSparkJob {
+
+    public static void main(String[] args) throws IOException {
+        Date start = new Date();
+
+        SparkConf conf = new SparkConf().setAppName("Character Counter")
+                                         .setMaster("local[4]");
+
+        JavaSparkContext context = new JavaSparkContext(conf);
+
+        FileUtils.deleteDirectory(new File("output"));
+
+        JavaRDD<String> lines = context.textFile("./data1.txt");
+        // Transform with a flat map  "hello world" => h,e,l,l,o, ,w,o,r,l,d
+        List<Tuple2<Character, Integer>> collect = lines.flatMap(new FlatMapFunction<String, Character>() {
+            @Override
+            public Iterable<Character> call(String s) throws Exception {
+                List<Character> list = new ArrayList<Character>();
+                for (int len = 0; len < s.length(); len++) {
+                    list.add(s.charAt(len));
+                }
+                return list;
+            }
+        // Transform h,e,l,l,o => (h,1), (e,1), (l,1), (l,1),(o,1)
+        }).mapToPair(new PairFunction<Character, Character, Integer>() {
+            @Override
+            public Tuple2<Character, Integer> call(Character character) throws Exception {
+                return new Tuple2(character, 1);
+            }
+        // See how l has 2?
+        // (h,1), (e,1), (l,1), (l,1),(o,1) => (h,1), (e,1), (l,2), (o,1)
+        }).reduceByKey(new Function2<Integer, Integer, Integer>() {
+            @Override
+            public Integer call(Integer v1, Integer v2) throws Exception {
+                return v1 + v2;
+            }
+        // Return a list of K,V pairs
+        }).collect();
+
+        for(Tuple2<Character, Integer> tuple : collect) {
+            System.out.println(tuple._1() + " => " + tuple._2());
+        }
+
+        Date end = new Date();
+        System.out.println("Took " + (end.getTime() - start.getTime())/1000 + " seconds");
+
+    }
+}
+
+--
+
+http://www.hadooptpoint.org/apache-spark-examples-on-character-count/
+
+https://stackoverflow.com/questions/38732846/count-number-of-characters-for-each-line-pyspark
