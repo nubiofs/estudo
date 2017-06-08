@@ -1,0 +1,45 @@
+** Bíblia Livre (BLIVRE) - Uma tradução das Sagradas Escrituras sob uma licença de uso livre.
+
+A página principal do projeto é https://sites.google.com/site/biblialivre/ .
+
+Este repositório contem os arquivos-fonte da tradução.
+
+---
+
+https://sites.google.com/site/biblialivre/arquivos
+https://github.com/blivre/BibliaLivre
+https://github.com/blivre/BibliaLivre/releases
+--> https://github.com/blivre/BibliaLivre/releases/download/2017.3.0/bliv-tr_vpl.zip
+
+2017.3.0
+@blivre blivre released this on 22 Mar · 1 commit to master since this release
+
+Versão de março de 2017.
+
+Versões em Texto Crítico terminam em n4, Textus Receptus em TR
+
+usfm-s : formato USFM somente com marcadores básicos
+usfm: formato USFM com marcadores adicionais
+ont: formato para o aplicativo theWord. Instalar no diretório Bibles do aplicativo
+osis: formato OSIS, usado para gerar módulos Crosswire Sword
+vpl: formato verso por linha, formato simples de se converter para outras aplicações
+sword: módulo para a plataforma Crosswire Sword
+mybible: módulo para aplicativo MySword (para dispositivos Android)
+mobi: formato compatível com dispositivos Kindle
+epub: formato popular de livros eletrônicos.
+
+---
+
+XML, SQL e JSON:
+https://github.com/thiagobodruk/biblia
+
+Atualmente o projeto conta com três versões da Bíblia Sagrada em Português Brasileiro (pt-BR):
+
+Nova Versão Internacional (NVI)
+Almeida Corrigida e Fiel (ACF)
+Almeida Revisada Imprensa Bíblica (AA)
+
+====================================
+
+http://www.umsocorpo.com.br/site/biblia-em-txt/
+https://verdadecrista.wordpress.com/2012/07/03/versoes-biblicas-textus-receptus-e-texto-critico/
