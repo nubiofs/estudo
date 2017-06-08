@@ -1,0 +1,20 @@
+http://peekaboo-vision.blogspot.com.br/2012/11/a-wordcloud-in-python.html
+
+https://github.com/scikit-learn/scikit-learn/blob/master/doc/tutorial/machine_learning_map/ML_MAPS_README.txt
+http://scikit-learn.org/stable/auto_examples/applications/plot_stock_market.html#sphx-glr-auto-examples-applications-plot-stock-market-py
+https://github.com/gotibhai/StockMarket-Plot
+https://github.com/mustafacantekir/StockMarket
+
+http://mahout.apache.org/users/basics/creating-vectors-from-text.html
+https://spark.apache.org/docs/latest/ml-features.html#word2vec
+
+https://github.com/amueller/word_cloud
+https://github.com/defacto133/twitter-wordcloud-bot
+
+
+http://scikit-learn.org/stable/
+
+http://peekaboo-vision.blogspot.com.br/2010/11/machine-learning-toolkits.html
+http://seat.massey.ac.nz/personal/s.r.marsland/MLBook.html
+
+===> https://cryptoid.com.br/hardwares/ferramentas-abertas-para-machine-learning-que-podem-facilitar-sua-vida/
