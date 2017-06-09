@@ -498,3 +498,8 @@ https://www.edureka.co/blog/spark-tutorial/?utm_source=blog&utm_medium=left-menu
 
 https://docs.cloud.databricks.com/docs/latest/databricks_guide/07%20Spark%20Streaming/03%20Twitter%20Hashtag%20Count%20-%20Scala.html
 
+
+++++++++
+
+https://github.com/gomex/docker-para-desenvolvedores
+
