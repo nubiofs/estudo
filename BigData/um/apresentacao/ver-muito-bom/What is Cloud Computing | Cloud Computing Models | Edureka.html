@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.edureka.co/blog/xmlrpc.php" />
+        
+<!-- This site is optimized with the Yoast SEO plugin v4.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>What is Cloud Computing | Cloud Computing Models | Edureka</title>
+<meta name="description" content="In this blog, we will walk you through what is cloud computing, its architecture, its growth and its future, and how you can shift your career to Cloud."/>
+<meta name="robots" content="noodp"/>
+<meta name="keywords" content="cloud computing, cloud computing services, cloud, cloud server, cloud services, what is the cloud, what is cloud, what is cloud storage, cloudcomputing, cloud networking, aws certified solution architect"/>
+<link rel="canonical" href="https://www.edureka.co/blog/what-is-cloud-computing/" />
+<link rel="publisher" href="https://plus.google.com/+edurekaIN"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="What is Cloud Computing | Cloud Computing Models | Edureka" />
+<meta property="og:description" content="In this blog, we will walk you through what is cloud computing, its architecture, its growth and its future, and how you can shift your career to Cloud." />
+<meta property="og:url" content="https://www.edureka.co/blog/what-is-cloud-computing/" />
+<meta property="og:site_name" content="Edureka Blog" />
+<meta property="article:publisher" content="https://www.facebook.com/edurekaIN/" />
+<meta property="article:section" content="Cloud Computing" />
+<meta property="article:published_time" content="2013-03-25T10:55:01+00:00" />
+<meta property="article:modified_time" content="2017-03-23T13:18:43+00:00" />
+<meta property="og:updated_time" content="2017-03-23T13:18:43+00:00" />
+<meta property="fb:app_id" content="334689249900154" />
+<meta property="og:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-09-1.png" />
+<meta property="og:image:width" content="816" />
+<meta property="og:image:height" content="477" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="In this blog, we will walk you through what is cloud computing, its architecture, its growth and its future, and how you can shift your career to Cloud." />
+<meta name="twitter:title" content="What is Cloud Computing | Cloud Computing Models | Edureka" />
+<meta name="twitter:site" content="@edurekaIN" />
+<meta name="twitter:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-09-1.png" />
+<meta name="twitter:creator" content="@edurekaIN" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdn.edureka.co' />
+<link rel='dns-prefetch' href='//maxcdn.bootstrapcdn.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Edureka Blog &raquo; What Is Cloud Computing? Comments Feed" href="https://www.edureka.co/blog/what-is-cloud-computing/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.edureka.co\/blog\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='download-button-shortcode-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-button-shortcode/css/downloadbutton.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fancyquote-css-css'  href='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/css/fancyquote.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-fontAwesome-css-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-animate-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/animate.css' type='text/css' media='all' />
+<link rel='stylesheet' id='dg-grid-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/dg-grid.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fvp-frontend-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/styles/frontend.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mbpro-font-awesome-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/assets/libraries/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-font-awesome-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0121-font-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0121-font.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogmain-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogmain.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-nprogress-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/nprogress.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetail_newfont-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/Newfonts-ico.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-customscrollbar-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/CustomScrollbar.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-owl.carousel-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/owl.carousel.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetailnew-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogdetailnew.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0180-global-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0180-global.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-formhelpers-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap-formhelpers.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0181-formValidation-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0181-formValidation.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0139-common-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0139-common.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-dashboard-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/dashboard.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-header-2-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/header-2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-signin-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/new-signin-signup.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-mfb-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/mfb.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-main_css-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp_dlmp_styles-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/styles.css' type='text/css' media='all' />
+<link rel='https://api.w.org/' href='https://www.edureka.co/blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.edureka.co/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.edureka.co/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://www.edureka.co/blog/?p=3124' />
+<link rel="alternate" type="application/json+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fwhat-is-cloud-computing%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fwhat-is-cloud-computing%2F&#038;format=xml" />
+	<style type='text/css'>
+	.download-info .download-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+<style type="text/css">
+#author-bio-box {
+	float:left;
+	width: 99%;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	box-shadow: 5px 5px 2px #ddd;
+	padding: 5px;
+        margin-bottom: 10px;
+}
+#author-bio-box img {
+	float: left;
+	margin: 4px 10px 2px 4px;
+}
+#author-bio-box .author-name {
+	font-weight: bold;
+	margin-left: 2px;
+	font-size: 14px;
+}
+#author-bio-box p {
+	font-size: 13px;
+	line-height: 20px;
+        margin-left: 95px;
+        margin-top: 5px;
+}
+#author-bio-box thead th {
+	border: 0;
+}
+#author-bio-box tbody {
+	border: 0;
+}
+.bio-spacer { min-height:44px; padding: 1px; display: block; clear: both; border:1px;}
+.bio-socials {
+	border-top:1px solid #e8e8e8;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	width: 100%;
+	height: 32px;
+	clear: both;
+}
+</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://cdn.edureka.co/blog/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <script>
+            var webURL = 'https://www.edureka.co/';
+            var imgURL = 'https://cdn.edureka.co/imgver.1465813195/img/';
+            var kmkey = 'c685629a1766aa24ed42e4bc8476e8789cd97477';
+            var GaTID = 'UA-33865789-1';
+            var GaUATID = 'UA-33865789-2';
+            var iscustomerGA = 'false';
+            var repcustomerGA = 'false';
+            var baildown = true;
+            var homepageloadbanner = true;
+            var prev_offer_code = '';
+
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-33865789-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+        <!-- Google Code for Remarketing Tag -->
+        <!--------------------------------------------------
+        Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+        --------------------------------------------------->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 977137586;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+        <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+</head>
+<body class="post-template-default single single-post postid-3124 single-format-standard wpb-js-composer js-comp-ver-5.1.1 vc_responsive" id="margin-top-value">
+
+    <div id="fb-root"></div>
+    <script>
+
+            window.fbAsyncInit = function () {
+                FB.init({appId: '334689249900154', status: true, cookie: true,
+                    xfbml: true});
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+    </script>
+
+    <header id="header-II">
+        <section>
+            <nav style="" role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-homepage">
+                <div class="container menubar-visibility edureka-blog-header">
+                    <div class="navbar-header">
+                        <a href="/?utm_source=blog&utm_medium=blog-edureka-logo" class="navbar-brand" > <img alt="edureka!" src="/imgver.1496301546/img/logo.png"> </a> 			
+                    </div>
+                    <!-- ddl starts--><form action="/blog" class="main-search"><ul class="list-unstyled course-search-box-nav">
+                        <input  type="hidden" class="searchinputbox" id="categoryinputbox" value="">
+                        <input  type="hidden" class="searchinputbox" id="authorinputbox" value="">
+                        <li class="search-nav pull-left"><div class="dropdown  categories-filter-dropdown">
+    <a class="select_down dropdown-toggle search-drop menu-common catbtnblog catbtnblogmob btn" type="button" id="menu1" data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Select Category
+    </a>
+    <ul class="dropdown-menu list-inline search-header-navigation dropdown-menu-scrollbar" role="menu" aria-labelledby="menu1">
+        <li role="presentation"><a role="menuitem" tabindex="0" href="#" data-slug="" class="category-selector">Select Category</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="1" href="/blog/category/big-data-analytics" data-slug="big-data-analytics" class="category-selector">Big Data Analytics</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="2" href="/blog/category/big-data-nosql" data-slug="big-data-nosql" class="category-selector">Big Data NoSQL</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="3" href="/blog/category/business-intelligence" data-slug="business-intelligence" class="category-selector">Business Intelligence</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="4" href="/blog/category/cloud-computing" data-slug="cloud-computing" class="category-selector">Cloud Computing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="5" href="/blog/category/finance" data-slug="finance" class="category-selector">Finance</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="6" href="/blog/category/frameworks" data-slug="frameworks" class="category-selector">Frameworks</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="7" href="/blog/category/ibm-bluemix" data-slug="ibm-bluemix" class="category-selector">IBM Bluemix</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="8" href="/blog/category/marketing" data-slug="marketing" class="category-selector">Marketing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="9" href="/blog/category/mobile-development" data-slug="mobile-development" class="category-selector">Mobile Development</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="10" href="/blog/category/operations" data-slug="operations" class="category-selector">Operations</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="11" href="/blog/category/programming" data-slug="programming" class="category-selector">Programming</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="12" href="/blog/category/project-management" data-slug="project-management" class="category-selector">Project Management</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="13" href="/blog/category/success-story" data-slug="success-story" class="category-selector">Success Story</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="14" href="/blog/category/systems-architecture" data-slug="systems-architecture" class="category-selector">Systems &amp; Architecture</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="15" href="/blog/category/systems-engineering" data-slug="systems-engineering" class="category-selector">Systems Engineering</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="16" href="/blog/category/testing" data-slug="testing" class="category-selector">Testing</a>
+                </li>      
+    </ul>
+</div>
+<span id ="desktop-searchbox"><div id="remote" class="typeahead-container"><div class="typeahead-field">
+                        <span class="typeahead-query">
+                            <input type="text" maxlength="150" autocomplete="off" placeholder = "Search edureka blogs" value=""
+                          name="s" data-value="" class="search_inp collapse searchinputbox">
+                        </span><span class="typeahead-button"><i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></span></li></ul></form><form action="/blog" class="form-element-mobile">
+                    <div class="visible-sm visible-xs mobsearch" id="mobile-searchbox">
+                        <a data-toggle="collapse" id="mobile-search-icon" class="mobile-search-icon" href="#mobsearch" aria-expanded="false" aria-controls="mobsearch">
+                            <i class="fa fa-search search_ico visible-sm visible-xs"></i>
+                        </a><div class="collapse search-course" id="mobsearch" aria-expanded="false"><div>
+                    <div id="remote" class="typeahead-container result backdrop hint">
+                        <div class="typeahead-field"><span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" class="search_inp search_inp_mob" placeholder = "Search edureka blogs" name="s" type="text" value="" data-value="" ></span>
+                        <span class="typeahead-button">
+                        <i  class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></div></div></div></form><div class="loggedin-usernav-wrapper hide"><div aria-expanded="false" id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs">
+                <li >
+                    <div class="dropdown menu-dropdown dropdownafterlogin">
+                        <a href="javascript:void(0);" class="dropdown-toggle withripple" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false"> BROWSE COURSES <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                            <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=my-courses">My Courses</a></li>
+                            <li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="logged-in-customer hide"></li>
+                <li class="">
+                    <div class="dropdown user-dropdown">
+                        <a id="signin-logout" class="signin" href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292">Logout</a> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right profile pull-right">
+            <li class="dropdown userdrop hidden-lg hidden-md profile-pic-header">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+                    <img alt="" class="img30 user-image-icon" src="/imgver.1496301546/img//defaultpp2.png">     
+                </a>
+                <ul class="dropdown-menu user-menu profile-xs">
+                    <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=all-courses">My Courses</a></li>
+                    <li class="logged-in-customer hide"></li><li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                    <li> <a href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292" id="signin-logoutresp">Log Out</a> </li>
+                </ul>
+            </li>
+        </ul></div><div class="loggedout-usernav-wrapper hide"><a class="signin md-trigger" href="javascript:void(0)" data-modal="signin-modal" data-toggle="modal">Sign In</a><style>
+    .highlighterror input[type=text],
+    .highlighterror input[type=email],
+    .highlighterror input[type=password],
+    .highlighterror {
+        border-color: #ed1f24 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
+<!--googleon: all-->
+<div class="md-modal md-effect-1 newsigninsignup" id="signin-modal">
+    <div class="md-content">
+        <span id="signin_signup_cancel" class="md-close onclicktab pull-right">X</span>
+
+        <ul class="nav nav-tabs">
+            <li class="Signinspace active"><a class="onclicktab" data-toggle="tab" href="#LogIn"><span>Log In</span></a></li>
+            <li class="SignUpspace "><a class="onclicktab" data-toggle="tab" href="#SignUp"><span>Sign Up</span></a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="LogIn" class="tab-pane fade in active">
+                <div class="col-md-12 col-xs-12 signinformnew newsignclik">
+                    <form id="signinForm">
+                        <!--                        <form id="signinForm">-->
+                        <div class="alertnew" role="alert" >
+                            <span  id="signin_error_message" class="signin_formerror redalertnew" style="display: none;"><i class="fa fa-check-circle"></i>  Please enter a valid emailid</span>
+                        </div>
+                        <div class="form-group">
+                            <input id="inputName" type="email" class="form-control inputstyle emailnew inputNamesignup signinvalid" required autocomplete="off" placeholder="Email"  name="data[User][email]" value="" onkeyup="checkdisable();">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd" class="form-control inputstyle passwordnew masked" required autocomplete="off" placeholder="Password"  name="data[User][password]" value="">
+                            <div class="verficacheckeye" id="eye">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><a id="Forgotnew" href="javascript:void(0)" class="btn btn-link pull-left forgetpass">Forgot Password?</a>
+
+                            <button type="submit" class="bluebtn pull-right defdisablesignin ga-signin disabled"  id="signin-blog">Start Learning</button>
+                        </div>
+                    </form>
+                    <!--<div class="mobilealertnew green clearfix">
+                      <span class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i>  Verification Code sent to er.creator@gmail.com</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-12 col-xs-12 signinformnew forgetpassnew">
+                    <form id="resetcode">
+                        <div id="successmssg" class="alertnew" role="alert">
+                            <span id="messages"  class="greenalertnew hidden-xs"><i class="fa fa-check-circle"></i>  </span>
+                        </div>
+                        <div class="form-group">
+                            <input id="prefilledemail" type="email" disabled="disable" class="form-control inputstyle emailnew inputDisabled" required autocomplete="off" placeholder="Email">
+                            <input id="emailfield" type="hidden" class="form-control inputstyle"  name="data[User][email]">
+
+                            <!--<div class="verficacheck"><a href="" id="editemail">change ?</a></div>-->
+                        </div>
+                        <div class="form-group">
+                            <input id="otpfield" type="text" class="form-control inputstyle emailnew verifycheck" required autocomplete="off" placeholder="Verification code"  name="data[User][otpCode]">
+                            <input id="verificationfield" type="hidden" class="form-control inputstyle emailnew" required name="data[User][verification_code]">
+                            <div  class="verficacheck verifycheck"><div id="resendcode" href="javascript:void(0);" style="cursor: pointer;">resend ?</div></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd2" class="form-control inputstyle passwordnew masked" required autocomplete="off" min=8 placeholder="New Password"  name="data[User][password]">
+                            <div class="verficacheckeye" id="eye2">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><!--<a id="Backnew" href="#" class="btn btn-link pull-left forgetpass">Back</a>-->
+
+                            <button id="passresetbutton" type="submit" class="bluebtn pull-right">reset password</button>
+                        </div>
+                    </form>
+                    <div class="notestarreg verifycheck">
+                        * Can't find the email? Check your Spam folder or Promotions tab for an email from no-reply@edureka.co. Send us an email at <a href="mailto:support@edureka.co">support@edureka.co</a> or call us at +91 88808 62004
+                    </div>
+                </div>
+            </div>
+            <div id="SignUp" class="tab-pane fade  ">
+
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center signinformnew signupformnew">
+
+                    <form id="signupForm">
+                        <div class="alertnew" role="alert">
+                            <span id="signup_error_message" class="signup_formerror redalertnew hidden-xs " style="display: none;"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input value="/blog/" name="data[User][pageurl]" id="pageurl_signup" type="hidden">
+                            <div class="form-control-wrapper"><input id="signupname" class="form-control inputstyle empty" placeholder="Name*" required="" autocomplete="off" name="data[User][name]" type="text"></div>
+                            <i data-bv-icon-for="data[User][name]" class="form-control-feedback fv-icon-no-label fa fa-close" style="display: block;"></i>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input  id="signupemail" class="form-control inputstyle  empty" placeholder="Email*" required="" autocomplete="off" name="data[User][email]" type="email"></div><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        </div>
+                        <input style="display:none;" name="hiddenname" type="text">
+                        <input style="display:none;" name="hiddenpassword" type="password">
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][mobile]" id="mobnum" class="form-control inputstyle empty" placeholder="Mobile Number*" required="" name="data[User][mobile]" type="text"></div><i data-bv-icon-for="data[User][mobile]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+
+                        </div>
+                        <div class="form-group has-feedback">
+
+                            <div class="form-control-wrapper">
+                                <input id="pwd3" class="form-control inputstyle passwordnew masked empty" required="" autocomplete="off" placeholder="Password more than 8 characters*" name="data[User][password]" type="password"></div><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                            <div class="verficacheckeye" id="eye3">show</div>
+                        </div>
+                        <p class="signupinfotext">
+                            By Signing up you agree to our <span><a class=" withripple" href="/terms-and-conditions" target="_blank">T&amp;C</a></span> and <span>
+                                <a class=" withripple" href="/privacy-policy" target="_blank">Privacy Policy</a></span>
+                        </p>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding spaceafterbutton">
+                            <button type="submit" class="bluebtn pull-right defdisablesignup ga-signup disabled">Create an account</button>
+                        </div>
+
+                    </form>
+                    <!--<div class="mobilealertnew red clearfix">
+                      <span class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobileredclass" class="mobilealertnew red clearfix" style="display:none;">
+        <span id="mobileredmsg" class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input    </span>
+    </div>
+    <div id="mobilegreenclass"class="mobilealertnew green clearfix" style="display:none;">
+        <span id="mobilegreenmsg" class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i> </span>
+    </div>
+</div>
+<div class="md-overlay"></div>
+<section>
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="capturemobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header signup-header">
+                    <h4 class="modal-title color-white">
+                        <span class="pull-left">
+                            WELCOME <label id="capturemobile_user_name"></label>
+                        </span>
+                        <span class="pull-right">                           
+                        </span>
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 linkedin-content">
+                            <h5 class="line-height23">It seems we don't have your phone number. Please share as it helps us to provide better customer service. Thank you!</h5>
+                            <form id="captureMobileForm" action="" method="post">
+                                <input type="hidden" name="data[User][email]" id="email_capturemobile">
+                                <input type="hidden" name="data[User][password]" id="password_capturemobile">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Mobile Number" required name="data[User][mobile]">
+                                </div>
+                                <!--                                <button type="button"  class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn">Continue</button>-->
+                                <button type="button" id="btnCaptureMobile" class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn" style="">Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--googleon: all--><div class="navbar-collapse collapse navbar-right" id="navbar" aria-expanded="false">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs"><!--
+                <li><a href="/instructors/add">For Instructors</a></li> -->
+                <li><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Course</a></li>
+            </ul>
+        </div></div>                </div>
+            </nav>
+        </section>
+    </header>
+<section >
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding">
+                <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 left-menu"> 
+    <div class="row left-menu-row">
+<div class="side-menu"><nav class="navbar navbar-default" role="navigation">
+<div class="side-menu-container side-menu-blog"><button type="button" class="navbar-toggle navbar-tog-open-close side-body"><span class="fa fa-bars"></span></button><div class="side-nav-title"><h2>AWS Tutorial Series</h2></div><ul class="nav navbar-nav cus-nav-scroll dropdown-menu-scrollbar">
+<li class="first-level active"><a href="https://www.edureka.co/blog/what-is-cloud-computing/" class="active-link"  data-currpage="what-is-cloud-computing">What Is Cloud Computing?</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/cloud-security/"   data-currpage="what-is-cloud-computing">Cloud Security: A Guide for Cloud Users</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/what-is-aws/"   data-currpage="what-is-cloud-computing">What is AWS? – An Introduction to AWS</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/amazon-aws-tutorial/"   data-currpage="what-is-cloud-computing">AWS Tutorial: Introduction to Cloud Computing</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/ec2-aws-tutorial-elastic-compute-cloud/"   data-currpage="what-is-cloud-computing">AWS EC2 Tutorial : Amazon Elastic Compute Cloud</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/s3-aws-amazon-simple-storage-service/"   data-currpage="what-is-cloud-computing">AWS S3 Tutorial: Deep Dive into Amazon Simple Storage Service</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/aws-lambda-tutorial"   data-currpage="what-is-cloud-computing">AWS Lambda Tutorial: Your Guide To Amazon Serverless Computing</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/rds-aws-tutorial/"   data-currpage="what-is-cloud-computing">RDS AWS Tutorial: Getting Started With Relational Database Service</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/amazon-lightsail-tutorial/"   data-currpage="what-is-cloud-computing">Amazon Lightsail Tutorial – An Introduction</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/aws-pricing/"   data-currpage="what-is-cloud-computing">AWS Pricing – An Introduction to AWS Pricing</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/aws-certification-careers/"   data-currpage="what-is-cloud-computing">AWS Certification – All you need to know</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/interview-questions/top-aws-architect-interview-questions-2016/"   data-currpage="what-is-cloud-computing">Top AWS Architect Interview Questions For 2017!</a>
+</li>
+</ul></div></nav></div></div>
+</div>
+<!-- Right Panel ends -->
+                        <div class="col-lg-8 col-md-7 col-xs-12 col-sm-12 blogmobfull">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 bread-herohead">
+    <div class="herohead">
+        <div class="">
+            <div class="row">
+                                <div class="">
+                    <h6 class="breadcrumb-section hidden-xs ">
+                        <a class="text-bold text-normal underline-remove brdcrumclrinac" href="/blog">Home</a>
+                        <!--                        &nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog chevron-level-0"></i>&nbsp;&nbsp;
+                        <a class="text-bold text-normal underline-remove brdcrumclrac reset-filters post-type-level" href="/blog">Blogs&nbsp;&nbsp;</a>-->
+                        <i class="fa fa-chevron-right chevronblog chevron-level-1 ">&nbsp;&nbsp;</i>
+                        <a class="text-bold text-normal underline-remove brdcrumclrac post-type-breadcrum reset-filters " href="/blog">Blogs</a>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog hide cat-level-breadcrum"></i>&nbsp;&nbsp;
+                        <span class="text-bold text-normal underline-remove brdcrumclrac cat-level-breadcrum cat-level-breadcrum-title hide"></span>&nbsp;
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<!-- Top Navigation to be sent in blog phase 2 starts-->
+
+<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainnavigator">
+    <article class="navigatedetail col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <span class="blogall"><a href="https://www.edureka.co/blog//all"><i class="icon-Home_icon"></i></a></span>
+        <span class="bloghome"><a href="https://www.edureka.co/blog/">Blogs</a></span>
+        <span class="videohome"><a href="https://www.edureka.co/blog/videos">Videos</a></span>
+        <span class="interviewhome"><a href="https://www.edureka.co/blog/interview-questions">Interview Questions</a></span>
+    </article>
+</section>
+<!--Top Navigation to be sent in blog phase 2-->
+                            <section class="mainsecblog">
+                                <section class="blogmaincontainer">
+                                    <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding topsection">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogmainheading">
+        <h1 class="blogheading">
+            What Is Cloud Computing?        </h1>
+        <span class="recommendedsec clearfix"><p>
+                                                    <i class="fa fa-bookmark newbookmark"></i> Recommended by  27 users                            </p>
+        </span>
+        <div class="top-sec-infodetail">
+            <span class="authorblog"><a href="https://www.edureka.co/blog/author/hemantedureka-co/" title="Posts by Hemant Sharma" rel="author">Hemant Sharma</a></span>
+            <span class="dateblog">Mar 25, 2013</span> 
+             
+<div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>        </div>
+    </article>
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topimage">
+        <img class="blogimg" src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/Heroimage 1.jpg" alt="What Is Cloud Computing?" title="What Is Cloud Computing?">    </article>
+</section>                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 no-padding hidden-sm hidden-xs share-leftnav">
+                                            <div class="nav-stacked-social affix-top" data-spy="affix" data-offset-top="350" data-offset-bottom="400">
+                                                <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_1' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_1' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_1' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_1' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                            </div>
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 no-padding">
+                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogdetailsec">
+    <article class="col-md-9 col-lg-9 col-sm-9 col-xs-12 blogdescription"> 
+        <span class="AddtoBookmark"><a  href="https://www.edureka.co/blog/what-is-cloud-computing/" data-title="What Is Cloud Computing?">
+                <i class="icon-Add_to_bookmark"></i>
+                <span class="Bookmark-text"><span>Add to</span> Bookmark</span></a>
+        </span>
+
+            <div class="modal thispost-mail fade" id="emailpostpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content centered">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span></button>
+                    <div class="Mailpost">
+                        <span class="icon"><i class="icon-Mail_this_post"></i></span>
+                        <span class="Mailthispost">Email this post</span>
+                        <form class="email-me-the-post" method="post" novalidate="novalidate">
+                            <div class="input-name  ">
+                                <input type="hidden" name="contentId" value="3124">
+                                <input type="text" name="name" class="required" required placeholder="Enter Your Name" autocomplete="false">
+                                <div class="error-name">
+                                    Please enter a valid input.
+                                </div>
+                            </div>
+                            <div class="input-email ">
+                                <input type="text" class="email required" required name="emails" placeholder="Enter Email ID’s ( Separated by commas )"  autocomplete="false">
+                                <div class="error-email">
+                                    Please enter a valid email id or comma separated email id's.
+                                </div>
+                            </div>
+                            <button type="submit" class="Submit-mailpost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="Mailpost-thankyou">
+                        <i class="icon-success"></i>
+                        <span class="Mailthispost">The post has been successfully mailed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="EmailthisPost" data-toggle="modal" data-target="#emailpostpop">
+            <i class="icon-Mail_this_post"></i>
+            <span class="EmailthisPost-text">Email <Span>this Post</span></span>
+        </span> 
+        <span class="viewsblogsec">
+            <span class="viewscount details-page-views-count"><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 8.4K</span>
+        </span>
+        <span class="commentsblogsec">
+            <a href="https://www.edureka.co/blog/what-is-cloud-computing/#comments-wrapper" class="commentcount">
+                <span><i class="icon-comments"></i></span>
+            </a>&nbsp;&nbsp;
+            <a class="disqus-comment-count" data-disqus-url="https://www.edureka.co/blog/what-is-cloud-computing/" href="https://www.edureka.co/blog/what-is-cloud-computing/#disqus_thread" class="commentcount">
+                <span>7</span>
+            </a>
+        </span>
+    </article>
+            <article class="col-md-3 col-lg-3 col-sm-3 col-xs-12 related-blog hidden-sm hidden-xs">
+            <ul class="pager">
+                <li><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="show-next-in-series"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </article>
+            <!-- <article class = "col-md-3 col-lg-3 col-sm-3 col-xs-12 downloadpdfblog">
+         <span class = "downloadpdf"></span>
+ </article> -->
+</section>                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogcontentsec">
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <h2 style="text-align: justify;"></h2>
+<h2 style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong>What is Cloud Computing?</strong> </span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">What is Cloud Computing? Cloud Computing often referred to as “the cloud”, in simple terms means storing or accessing your data and programs over the internet rather than your own hard drive.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Everything nowadays is moved to the cloud, running in the cloud, accessed from the cloud or may be stored in the cloud.</span></p>
+<p style="text-align: justify;"><em><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Where exactly is this cloud?</span></em></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">So to answer this question in this what is cloud computing blog, it is somewhere at the other end of your internet connection where you store your files and can be accessed from anywhere in the world. </span><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">This could be a big deal for you, primarily because of three reasons:</span></p>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">You do not have to maintain or administer any infrastructure for the same.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">It will never run out of capacity, since it is virtually infinite.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">You can access your cloud based applications from anywhere, you just need a device which can connect to the internet.</span></li>
+</ul>
+<p style="text-align: center;"><a class="maxbutton-10 maxbutton maxbutton-enroll-blue-medium" target="_blank" href="http://www.edureka.co/cloudcomputing/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=what-is-cloud-computing"><span class='mb-text'>Become a Cloud Expert!</span></a></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>How it all began?</b></span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Though internet was born in 1960s, it was only in 1990s when the potential of internet to serve business was discovered, which then led to more innovation in this field. As the transfer speeds of the internet and connectivity got better it gave way to new type of companies called Application Service Providers (ASPs).</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">ASPs took the existing business applications and ran them for the business using their own machines. The customers would pay a monthly fee to run their business over the internet from ASP&#8217;s systems.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">But it was only in the late 1990s that the cloud computing as we know it today emerged and led to this blog on what is cloud computing.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">And since it has only grown, recently <em>businessinsider</em> reported,</span></p>
+<blockquote>
+<p style="text-align: justify;"><em><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">The cloud computing service has grown nearly 80% year-over-year in the last two quarters, and is on pace to hit $7.8 billion in revenue in 2015, four times the 2012 sales of $1.8 billion.</span></em></p>
+</blockquote>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Intriguing ain’t it?</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now that you have a fair idea, what cloud is, just think about all your daily activities online, and you will realize that a lot of your work that you do online is based on cloud. Like your social media interactions are all on the cloud, anything that you store online, is again cloud, you paying your electricity bills online, online shopping, everything! </span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="font-weight: 400;">Now </span><b>how does it all work, </b>let&#8217;s understand it<span style="font-weight: 400;"> through <em>an example</em>:</span></span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="color: #000000;">So, there is this application called</span> the Customer Relation Manager (CRM) which is based on the cloud. This software is highly used in all the Sales organisations for better agility, enhanced productivity and low costs.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">The way it is used is like this; a field sales representative would need an access to a mobile device which is connected to the internet and then he can retrieve the customer information irrespective of his location. </span><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Also, he can update the information on the go therefore no need of going back to the office to update the deal information.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">The sales managers can also monitor everything on their internet enabled devices, and will know which deals to close or not. It all happens on the go!</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">The best part? You don’t have to buy any machines or administer any kind of software, it all will be handled by the cloud company which is running this application. Cool right?</span></p>
+<p style="text-align: center;"><span style="font-size: 20px;"><strong><span style="font-family: verdana, geneva, sans-serif;">What is Cloud Computing? | AWS Training | Edureka</span></strong></span></p>
+<div>
+<div id="schema-videoobject" class="video-container">
+<p><iframe src="//www.youtube.com/embed/QK-liXfuJgw?rel=0&amp;showinfo=0" width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen" data-mce-fragment="1"></iframe></p>
+<p style="text-align: center;">
+</div>
+</div>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Let’s go ahead and take a deep dive into &#8220;<em>what is cloud computing</em>&#8221; and understand its architecture:</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Now when you ask what is Cloud Computing the answer would be in a very broad sense therefore, the services it offers has been divided into three different models, let’s discuss each one of them:</span></p>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">SaaS</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">PaaS</span></li>
+<li style="font-weight: 400;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="font-weight: 400;">IaaS</span></span></li>
+</ul>
+<h2 style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>SaaS(Software As a Service)</b></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="font-weight: 400;">In this service the Cloud Provider leases applications or softwares which are owned by them to its client. The client can access these softwares on any device which is connected to the Internet using tools such as a web browser, an app etc.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>For Example:</b><span style="font-weight: 400;"> salesforce.com provides the CRM(Customer Relation Manager) on a cloud infrastructure to its client and charges them for it, but the software is owned by the salesforce company only.</span></span></p>
+<h2 style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>PaaS(Platform as a Service)</b></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="font-weight: 400;">In this service the Cloud Provider gives the ability to the customer to deploy customer created application using programming languages, tools etc that are provided by the Cloud Provider. The customer cannot control the underlying architecture </span><span style="font-weight: 400;">including operating  systems, storage, servers etc.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>For Example: </b><span style="font-weight: 400;">This service would make sense to you only if you are a developer, since this service provides you a platform for developing applications, like Google App Engine.</span></span></p>
+<h2 style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>IaaS(Infrastructure as a Service)</b></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="font-weight: 400;">In this service the Cloud Provider provides the customer with virtual machines and other resources as a service, they abstract the user from the physical machine, location, data partitioning etc. If the user wants a Linux machine, he gets a linux machine, he will not worry about the physical machine or the networking of the system on which the OS is installed, simple.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>For Example </b><span style="font-weight: 400;">AWS(Amazon Web Services) is IaaS, like <a href="http://www.edureka.co/blog/ec2-aws-tutorial-elastic-compute-cloud/?utm_source=blog&amp;utm_medium=relevant-posts&amp;utm_campaign=what-is-cloud-computing" target="_blank">AWS EC2</a>.</span></span></p>
+<p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000; font-family: verdana, geneva, sans-serif; font-size: 14px;">The diagram below, summarizes the differences b/w IaaS, PaaS and SaaS</span><br />
+</span></p>
+<p style="text-align: justify;"><img class="size-full wp-image-38223 aligncenter" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/RC3-04.png" alt="rc3-04" width="816" height="524" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/RC3-04.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/RC3-04-300x193.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/RC3-04-768x493.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/RC3-04-467x300.png 467w" sizes="(max-width: 816px) 100vw, 816px" /></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">We now know about the service models, once you offer a service next comes deployment, let us now discuss the deployment models:</span></p>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Public Cloud</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Private Cloud</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Hybrid Cloud</span></li>
+</ul>
+<p style="text-align: center;"><a class="maxbutton-22 maxbutton maxbutton-certification-blue-big" target="_blank" href="http://www.edureka.co/cloudcomputing/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=what-is-cloud-computing"><span class='mb-text'>Get Trained from our Cloud Experts!</span></a></p>
+<h2 style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Public Cloud</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">In a public cloud deployment mode, the services which are deployed are open for public use and generally public cloud services are free. Technically there maybe no difference between a public cloud and a private cloud, but the security parameters are very different, since the public cloud is accessible by anyone there is a more risk factor involved with the same.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Private Cloud</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">A private cloud is operated solely for a single organization, it can be done by the same organization or a third-party organization. But usually the costs are high when you are using your own cloud since the hardware would be updated periodically, security also has to be kept in check since new threats come up every day.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Hybrid Cloud</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">A hybrid cloud consists the functionalities of both private and public cloud. How?</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Let’s understand it through an example:</b><span style="font-weight: 400;"> Suppose there is a research company, so they would have some published data and also, data which would still be in research phase. <span style="color: #000000;">Now </span>any thing which is still in research should be kept confidential right? Though your cloud provider may have state of the art security features but then it is still open to public, therefore prone to cyber attacks.</span></span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">So to address this risk, you can keep the data still being worked on, in your company’s servers whose access is controlled by the company, and your published data on the public platform, this type of arrangement would be a hybrid cloud.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">I think by now you must have a fair idea about what is cloud computing. Let’s go ahead and know the target audience of the cloud, that is YOU,  now you can either be looking at the cloud as an individual or a business, <span style="color: #000000;">let’s</span> take an insight into both the perspectives.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Consumers v/s Business</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Let’s talk about consumers here, those of us who work in small to medium offices, use internet on a regular basis, for us cloud would be say Google Drive or maybe DropBox.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">But, for organisations and businesses, it is an entirely different scene, for them cloud is SaaS where they might want to use a software on the cloud, or maybe PaaS where they might want to build an app on an environment which is provided by the cloud environment or maybe they want to avail the cloud service as an Infrastructure where in they will rent out entire VMs and configure it their own way, which will be IaaS.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="color: #000000;">Now</span> you maybe wondering, do companies really use Cloud Computing? Of Course they do, according to a popular blogging site PCMag cloud computing generated 127 billion dollars in 2016, and by 2020 it could be 500 billion dollars.</span></p>
+<p style="text-align: center;"><a class="maxbutton-22 maxbutton maxbutton-certification-blue-big" target="_blank" href="http://www.edureka.co/cloudcomputing/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=what-is-cloud-computing"><span class='mb-text'>Become <strong>the</strong> Cloud Expert!</span></a></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Pretty impressive ain’t it? Now why are people or businesses moving to cloud? There should be some advantages right?</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Let’s go ahead and see what advantages does Cloud Computing serve:</span></p>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Fast Implementation</b><span style="font-weight: 400;"><br />
+</span><span style="font-weight: 400;">If you’ve been there for a development or implementation of an application, it takes sometimes months or even years to make the application up and running, with cloud you can cut through the time and make things faster.</span></span></li>
+</ul>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Instant Scalability</b><span style="font-weight: 400;"><br />
+</span><span style="font-weight: 400;">With cloud resources you can always scale up or scale down the no. of resources and users according to your need, the cloud capacity never runs out!<br />
+</span></span></li>
+</ul>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Access Anywhere</b><span style="font-weight: 400;"><br />
+</span><span style="font-weight: 400;">Applications built on cloud are designed to be accessed from anywhere, you just need an internet connection on a mobile device.</span></span></li>
+</ul>
+<ul style="text-align: justify;">
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>No Upfront Costs<br />
+<span style="font-weight: 400;">Earlier to deploy an application you had to purchase the necessary hardware, build the architecture, purchase software licenses etc, but with cloud all those costs are dramatically reduced and in some cases eliminated.</span></b></span></li>
+</ul>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Maintenance Free</strong></span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">Traditionally you would have to patch your softwares with the latest releases, upgrade your hardware and also troubleshoot faults in your system at the hardware level, but with cloud you don’t have to worry about the maintenance of your hardware, it will all be managed by your cloud provider.</span></span></li>
+</ul>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Better Security</b><b><br />
+</b><span style="font-weight: 400;">An Independent study found that yearly a medium scale company loses around 260 laptops, this is a loss to the company not in monetary terms, but the data that was there on the laptop is valuable, with Cloud you don’t have to worry about that, all your data is stored in a centralized secure location.</span></span></li>
+</ul>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Now, how do you get started?</b></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="font-weight: 400;">There are tons of cloud providers out there to choose from. Let us take the most prominent ones.  </span><span style="font-weight: 400;"><br />
+</span></span></p>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong>Azure:</strong> It’s a cloud computing platform by Microsoft founded in 2010.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong>AWS:</strong> Amazon Web Services is a cloud computing platform by Amazon in 2006.</span></li>
+</ul>
+<p style="text-align: justify;"><strong><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Which one will you choose?</span></strong></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">A question which would have crossed your mind, the moment you saw the two names.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Well let’s try to address this question for you. </span></p>
+<p style="text-align: justify;"><img class="wp-image-38900 alignleft" src="https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-11.png" alt="aws-vs-azure - what is cloud - Edureka" width="303" height="303" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-11.png 401w, https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-11-150x150.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-11-300x300.png 300w" sizes="(max-width: 303px) 100vw, 303px" /></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">AWS and Microsoft Azure are two major players in the cloud computing industry, but still AWS is bigger than Azure. How much bigger? </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Well, the server capacity of AWS is 6 times the size than all of its competitors server size combined.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Also AWS started its cloud journey way back in 2006 compared to Microsoft Azure which was launched in 2010, thus in terms of service, AWS’s service model is more mature. </span><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Amazon owns the largest data centers in the world, which are strategically placed all around the globe.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">When we see Azure, it is nowhere near the capacity that Amazon has, but then Microsoft has been working hard to achieve the kind of services and flexibility that Amazon offers. For example in 2014, Microsoft launched redundant storage option called <em>Zone Redundant Storage</em> which is at par with the services that Amazon offers.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Let’s talk about a more important parameter like <strong>Pricing</strong>.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Amazon bills you for the hour, meaning the no. of hours you will be using your instances, the downside of this can be that if you stop your instance say after 2.5 hours, you will be billed for the whole 3 hours.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">For this, Azure has a different scheme which may appeal customers, they bill you on minutes, that is the number of minutes you use your instance, but when you compare AWS and Azure prices in hours AWS is cheaper.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;"><em>For example:</em> an AWS m3.large instance is 0.133$ for an hour, and the equivalent instance in Azure (a Medium VM) costs 0.45$ for an hour.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Concluding here, Amazon emerges as a winner!</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="color: #000000;">So</span> now look at it this way, if you want to make a <em>career shift</em> in the cloud computing industry, which service is more likely to be in demand, AWS right?</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Let’s see what Analytics has to say,</span></p>
+<p style="text-align: justify;"><img class="size-full wp-image-38200 aligncenter" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Capture-3.png" alt="aws-job - what is cloud computing - Edureka" width="604" height="392" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Capture-3.png 604w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Capture-3-300x195.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Capture-3-462x300.png 462w" sizes="(max-width: 604px) 100vw, 604px" /></p>
+<p style="text-align: center;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Fig. This graph shows job postings for a AWS Solution Architect from Indeed.com</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Want to be an AWS Solution Architect?</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">To become a Solution Architect you will need extensive knowledge and hands-on exposure with AWS services. <span style="color: #000000;">You can read about the AWS Services from this <a href="http://www.edureka.co/blog/amazon-aws-tutorial/?utm_source=blog&amp;utm_medium=relevant-posts&amp;utm_campaign=what-is-cloud-computing" target="_blank">Amazon AWS Tutorial</a>.</span></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">What next, after you know all of these services and of-course what is cloud computing? </span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">You get yourself certified! Here is a <a href="http://www.edureka.co/blog/aws-certification-careers/?utm_source=blog&amp;utm_medium=relevant-posts&amp;utm_campaign=what-is-cloud-computing" target="_blank">detailed guide</a> on various certifications that you can do in AWS.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="font-weight: 400;">Don’t worry </span><a href="http://www.edureka.co/cloudcomputing?utm_source=blog&amp;utm_medium=relevant-posts&amp;utm_campaign=what-is-cloud-computing-tutorial" target="_blank"><span style="font-weight: 400;">edureka!</span></a><span style="font-weight: 400;"> is here to help you with every step on your journey, for becoming a AWS Solution Architect you have to clear an exam, therefore besides this blog on what is cloud computing, we have come up with a curriculum which covers exactly what you would need to crack it! You can have a look here at the course details for <a href="http://www.edureka.co/cloudcomputing?utm_source=blog&amp;utm_medium=relevant-posts&amp;utm_campaign=what-is-cloud-computing-tutorial" target="_blank">AWS training</a>.</span></span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">So this was about your career, now let’s come back to what is Cloud Computing, we discussed almost everything about Cloud Computing, but then let’s be honest, and understand that nothing in this world is all good. A lot has been said about Cloud Computing, good and bad. We covered almost all the good parts.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Let’s hear some <strong>interesting arguments</strong> about Cloud Computing.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Some people say moving your business completely to cloud may not be a good idea. </span><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Well, it kind of makes sense, because what if your Cloud Provider experiences a downtime, in that case your business will also suffer a loss.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">This actually happened with our very own AWS in 2012 when there was a power outage due to an electrical storm in Northern Virginia due to which Amazon servers experienced a downtime, because of that big companies like Instagram, Pinterest and Instagram also experienced a downtime because they host their services on AWS.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Another argument which often comes up when we talk about Cloud Computing is this, <strong>who owns the data on cloud</strong>?</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Is it yours or the company who is hosting your data? </span><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Some may say that the data that you are putting on cloud is yours, but what about the data which is generated using their tools, who owns it?</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">So these things are a risk when you are moving to the cloud, but when we compare these cons to the pros, they kind of weigh more, so that’s why there is a major shift onto the cloud.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-size: 14px; font-family: verdana, geneva, sans-serif;">Is it right or wrong, only time will tell.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">I hope you enjoyed this What is Cloud Computing Tutorial.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Like we said, if you are planning for a move into the Cloud Computing industry, and specially into AWS, we provide training for the same, here’s a collection of <a href="http://www.edureka.co/blog/interview-questions/top-aws-architect-interview-questions-2016/?utm_source=blog&amp;utm_medium=relevant-posts&amp;utm_campaign=what-is-cloud-computing" target="_blank">AWS Architect interview questions</a> to help you prepare for your next AWS job interview.</span></p>
+<p style="text-align: center;"><a class="maxbutton-10 maxbutton maxbutton-enroll-blue-medium" target="_blank" href="http://www.edureka.co/cloudcomputing/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=what-is-cloud-computing"><span class='mb-text'>Enroll Now!</span></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em>Got a question for us? Please mention it in the comments section of this What is Cloud Computing Tutorial and we will get back to you.</em></span></p>
+                                                    </p>
+                                                </article>
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <div id="author-bio-box"><img alt='' src='https://secure.gravatar.com/avatar/4c774b6377fd08d8a31ad4c0fbdcad8c?s=80&d=mm&r=g' srcset="https://secure.gravatar.com/avatar/4c774b6377fd08d8a31ad4c0fbdcad8c?s=160&d=mm&r=g 2x" class='avatar avatar-80 photo' height='80' width='80' /><span class="author-name">About Hemant Sharma (<a href="https://www.edureka.co/blog/author/hemantedureka-co/">11 Posts</a>)</span><p></p><div class="bio-socials"></div></div><br/><div class="clear"></div>                                                    </p>
+                                                </article>
+                                                <div class="bot-shareoption">
+                                                    <span class="Shareon-bot">
+                                                        Share on
+                                                    </span>
+                                                    <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_2' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_2' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_2' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_2' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/what-is-cloud-computing/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                                </div>
+                                                                                                    <article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 related-blog next-blog-leftnav">
+                                                        <ul class="pager">
+                                                            <li class="pull-left"><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i> PREVIOUS</a></li>
+                                                            <li class="pull-right"><a href="#" class="show-next-in-series">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </article>
+                                                                                                    <section id="edu-related-blog-carousel-2" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Posts</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/amazon-aws-tutorial/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>AWS Tutorial: Introduction to Cloud Computing</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 11.4K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/ec2-aws-tutorial-elastic-compute-cloud/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>AWS EC2 Tutorial : Amazon Elastic Compute Cloud</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 9.3K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/s3-aws-amazon-simple-storage-service/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/09/28-Sep_Amazon-S3_with-watermark-01.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>AWS S3 Tutorial: Deep Dive into Amazon Simple Storage Service</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 7.7K</div>
+                            </div>
+                        </article></a>
+                    </div></div>
+                    </article></section>
+                                                <!--Comments Area Single post-->
+                                                <section class="padcomments" >
+    <span class="comments"> Comments <div class="arrow-down"></div></span>
+    <span class="pull-right comment"> 7 Comments </span>
+</section>
+<section class="commsec" id="comments-wrapper">
+    
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-21306">
+        <div id="dsq-comment-header-21306" class="dsq-comment-header">
+            <cite id="dsq-cite-21306">
+                <span id="dsq-author-user-21306">yajalderson</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21306" class="dsq-comment-body">
+            <div id="dsq-comment-message-21306" class="dsq-comment-message"><p>Cloud Computing is the delivery of computing services such as storage, servers, databases, software, networking, analytics and more over the cloud (the Internet). Nowadays Microsoft cloud computing is widely using by a maximum number of startups and small and medium-sized businesses as well as large organizations.<br />
+For More info : <a href="http://microsoftcloudcomputing.tumblr.com/" rel="nofollow">http://microsoftcloudcomputing.tumblr.com/</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-21293">
+        <div id="dsq-comment-header-21293" class="dsq-comment-header">
+            <cite id="dsq-cite-21293">
+                <a id="dsq-author-user-21293" href="http://www.thesagenext.com/cloud/quickbooks-hosting.html" target="_blank" rel="nofollow">Alice Wright</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21293" class="dsq-comment-body">
+            <div id="dsq-comment-message-21293" class="dsq-comment-message"><p>Cloud computing is buzzword with new and advanced technology that&#8217;s why many get confused about it. Actually, it&#8217;s a deep concept but yeah this post would be a mile stone to understood the cloud technology for all those who still not aware of it.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-21156">
+        <div id="dsq-comment-header-21156" class="dsq-comment-header">
+            <cite id="dsq-cite-21156">
+                <a id="dsq-author-user-21156" href="http://www.sage50hosting.com/" target="_blank" rel="nofollow">Katherine Smith</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21156" class="dsq-comment-body">
+            <div id="dsq-comment-message-21156" class="dsq-comment-message"><p>It&#8217;s really an informative post I must say. Cloud computing and all it&#8217;s aspects has been well-defined. Cloud has proven itself as a best solution for every businesses as it emphasizes on numerous benefits.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-20165">
+        <div id="dsq-comment-header-20165" class="dsq-comment-header">
+            <cite id="dsq-cite-20165">
+                <span id="dsq-author-user-20165">Ravi Pande</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20165" class="dsq-comment-body">
+            <div id="dsq-comment-message-20165" class="dsq-comment-message"><p>Do you guys teach REDHAT openstack?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-18752">
+        <div id="dsq-comment-header-18752" class="dsq-comment-header">
+            <cite id="dsq-cite-18752">
+                <span id="dsq-author-user-18752">Vishwanathan</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-18752" class="dsq-comment-body">
+            <div id="dsq-comment-message-18752" class="dsq-comment-message"><p>Hi I want to start my career in Cloud computing can anyone advise me on this?I am working as a Support Analyst with an Experience of 1 yrs.Kindly advise.Thanks</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-18756">
+        <div id="dsq-comment-header-18756" class="dsq-comment-header">
+            <cite id="dsq-cite-18756">
+                <span id="dsq-author-user-18756">EdurekaSupport</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-18756" class="dsq-comment-body">
+            <div id="dsq-comment-message-18756" class="dsq-comment-message"><p>Hi Vishwanathan, you can definitely go for a career in Cloud Computing. The pre-requisite for learning Cloud Computing with AWS is decent work experience in IT. To give you a much more clear picture, we would require some more information on your professional background. You can share your contact number with us or call us at US: 1800 275 9730 (Toll Free) or India: +91 88808 62004 to discuss about this in detail. You can also go through our website for further information <a href="http://www.edureka.in/cloudcomputing" rel="nofollow">http://www.edureka.in/cloudcomputing</a> </p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-4982">
+        <div id="dsq-comment-header-4982" class="dsq-comment-header">
+            <cite id="dsq-cite-4982">
+                <span id="dsq-author-user-4982">vexxhost surveys</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4982" class="dsq-comment-body">
+            <div id="dsq-comment-message-4982" class="dsq-comment-message"><p>This is really interesting, You are a very skilled blogger.<br />
+I have joined your rss feed and look forward to seeking more of<br />
+your fantastic post. Also, I have shared your website in my social networks!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+</section>	
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>	
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-12 col-sm-12 no-padding blog-sidepanel"> 
+    <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maincontainer detailpagesidebar" 
+             data-post_type="post" 
+             data-post_name="what-is-cloud-computing" >
+             <section id="edu-related-blogs-2" class="right-side-widget custom-edu-widgets widget_edu-related-blogs"><h3 class="widget-title"><span>Related Blogs</span></h3><ul class="edu-hiran custom-widget-listing related-blogs"><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/interview-questions/top-aws-architect-interview-questions-2016/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/01/AWS-interview-questions.jpg" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/01/AWS-interview-questions.jpg 600w, https://cdn.edureka.co/blog/wp-content/uploads/2017/01/AWS-interview-questions-300x175.jpg 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/01/AWS-interview-questions-514x300.jpg 514w, https://cdn.edureka.co/blog/wp-content/uploads/2017/01/AWS-interview-questions-309x180.jpg 309w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/interview-questions/top-aws-architect-interview-questions-2016/" class="custom-rel-article"><span>Top AWS Architect Interview Questions For 2017!<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/amazon-aws-tutorial/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02.png" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02-513x300.png 513w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/amazon-aws-tutorial/" class="custom-rel-article"><span>AWS Tutorial: Introduction to Cloud Computing<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/ec2-aws-tutorial-elastic-compute-cloud/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1.png" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1-768x448.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/ec2-aws-tutorial-elastic-compute-cloud/" class="custom-rel-article"><span>AWS EC2 Tutorial : Amazon Elastic Compute Cloud<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/s3-aws-amazon-simple-storage-service/" class="custom-rel-thumb"><img width="85" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/09/28-Sep_Amazon-S3_with-watermark-01.png" class="attachment-550x50 size-550x50 wp-post-image" alt="aws s3 - aws s3 tutorial - edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/09/28-Sep_Amazon-S3_with-watermark-01.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/09/28-Sep_Amazon-S3_with-watermark-01-300x176.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/09/28-Sep_Amazon-S3_with-watermark-01-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/09/28-Sep_Amazon-S3_with-watermark-01-513x300.png 513w" sizes="(max-width: 85px) 100vw, 85px" /></a><a href="https://www.edureka.co/blog/s3-aws-amazon-simple-storage-service/" class="custom-rel-article"><span>AWS S3 Tutorial: Deep Dive into Amazon Simple Storage Service<span></a></article></li></ul></section><section id="edu-custom-subscribe-2" class="right-side-widget custom-edu-widgets widget_edu-custom-subscribe">        <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding Newsletter-sub">
+            
+                        <form id="subscribe-form" novalidate class="custom-subscribe-form-wrapper hide">
+                <div class="subscribesec">
+                                    <!--<div class="close-thissub"><i class="icon-cross"></i></div>	-->
+                    <div class="subscribesec-box">										
+                        <h4 class="clearfix subscribeblogtitle"><p><i class="icon-Mail_this_post"></i></p><span>Subscribe to get free Newsletter</span></h4>
+                        <section class="sectrendcom">
+                            <article class="relatedcontmain">
+                                <div class="input-group Subscribeinput">                              
+                                    <input name="subscription-mail" type="email" autocomplete="off" class="form-control " required placeholder="Enter Email"> 
+                                    <!-- Add classes successform and errorform to toggle the input form -->
+
+                                </div>
+                                <input type="hidden"  id="is_user_loggedin" value="0"/>
+                                <label id="loader" style="margin-left:120px;display:none" ><img src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/loader.gif" /></label>
+
+                                <p class="errormessage"> Please provide a valid Email Id </p>
+                            </article>                         
+                        </section>  
+                    </div>
+                    <div class="subscribesec-success">
+                        <i class="icon-success"></i>
+                        <p class="successmessage" style="display: none;"> Thank you, your subscription is successful</p> 
+                        <p class="alreadysubscribed" style="display: none;"> You have already subscribed.</p> 
+                    </div>
+                </div>
+                <button type="submit" id="subscribe-button" class="btn subscribebtn successbutton">
+                    <div class="sub-news-letter">SUBSCRIBE</div></button>
+            </form>
+            <div class="sub-browse-letter show-after-success hide">
+                <a class="" href="/all-courses" target="_blank">BROWSE COURSES</a>
+            </div>
+        </section>
+        </section></section>
+</div>
+<!-- Right Panel ends -->
+</div></div></div>
+</section>
+
+<footer class="footer-new" id="footer_v2">
+        <div class="container">
+        <div class="row">
+            <div class="padding-xs-only clearfix">
+                <div class="panel-group no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="col-md-12 visible-xs accordion-head">
+
+                            <a data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" href="javascript:void(0)">
+                                <h3 class="no-margin footer-new-hd-lineht"><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></h3>
+                                <p class=" margin-vr5 grey-txt marg-btm-0-xs">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd.</p>
+                                <i class="fa fa-angle-up"></i>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+
+                        </div>
+                        <div id="collapse1" class="div-collapse collapse clearfix">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 item-padding">
+                                <h4>Edureka</h4>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/about-us">About us</a></li>
+                                    <li><a href="https://www.edureka.co/allmedia">News & Media</a></li>
+                                    <li><a href="https://www.edureka.co/contact-us">Contact us</a></li>
+                                    <li><a href="https://www.edureka.co/careers">Careers</a></li>
+                                </ul>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/blog/all">Blog</a></li>
+                                    <li><a href="https://www.edureka.co/reviews">Reviews</a></li>
+                                    <li><a href="https://www.edureka.co/terms-and-conditions">Terms & conditions</a></li>
+                                    <li><a href="https://www.edureka.co/privacy-policy">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Work with us </h4>
+                                <ul class="list-unstyled footer-menu">
+                                    <li><a href="https://www.edureka.co/instructors/add">Become  an Instructor</a></li>
+                                    <li><a href="https://www.edureka.co/hire-from-edureka">Hire from Edureka</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3  col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Follow us on </h4>
+                                <ul class="list-unstyled footer-social-icon">
+                                    <li><a class="fb" target="_blank" href="https://www.facebook.com/edurekaIN"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="tw" target="_blank" href="https://twitter.com/edurekaIN"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="in" target="_blank" href="https://www.linkedin.com/company/edureka"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="ut" target="_blank" href="https://www.youtube.com/user/edurekaIN"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 item-padding padding-lft-25 text-center-xs">
+                                <h4>Learn on the GO!</h4>
+                                <ul class="list-unstyled footer-menu-store">
+                                    <li><a target="_blank" href="https://itunes.apple.com/in/app/edureka/id1033145415?mt=8">
+                                            <img alt="appleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/applestorebtn.png"></a></li>
+                                    <li><a target="_blank" href="https://play.google.com/store/apps/details?id=co.edureka.app">
+                                            <img alt="googleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/googleplaybtn.png"></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding border-top-half">
+                                <div class="padding-vr20 clearfix">
+                                    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-12 no-padding">
+                                        <h3 class="no-margin footer-new-hd-lineht"><a href=https://www.edureka.co><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></a></h3>
+                                        <p class=" margin-vr5 grey-txt">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd. All rights Reserved.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-7 col-xs-12 no-padding txt-marg-top text-xs-left">
+                                        <p class="grey-txt">"PMP®","PMI®", "PMI-ACP®" and "PMBOK®" are registered marks of the Project Management Institute, Inc. <br>
+                                            MongoDB®, Mongo and the leaf logo are the registered trademarks of MongoDB, Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<div class="footerbar">
+    <div class="container clearfix">
+        <div class="row">
+            <a href="javascript:void(0);" class="call-us">
+                <span><img src="//cdn.edureka.co/imgver.1496301546/img/phone-icon.png" alt="phoneicon"></span>
+                Call us on 
+                <span>1-800-275-9730 <i>(Toll Free)</i></span>
+                <span>+91 88808 62004</span>
+            </a>
+            <div class="dropdown pull-left hidden-xs">
+                <div class="bfh-selectbox country-style-footer triangle country-pop-small bfh-countries" data-country="IN" data-flags="true" data-filter="true">
+                    <input type="hidden" value="">
+                    <a class="bfh-selectbox-toggle res-popup" role="button" data-toggle="bfh-selectbox" href="#">
+                        <span class="bfh-selectbox-option input-medium" data-option="">
+                        </span>
+
+
+                    </a>
+                    <div class="bfh-selectbox-options">
+                        <input type="text" class="bfh-selectbox-filter">
+                        <div role="listbox">
+                            <ul role="option" class="dropdown-menu-scrollbar">
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="call-us-xs">
+            <h3>24 X 7 Customer Support
+                <a class="close-call" href="javascript:void(0);">X</a>
+            </h3>
+            <ul class="list-unstyled">
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/us-flag.png" alt="us flag"> 1-800-275-9730   (Toll Free)     </li>
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/ind-flag.png" alt="india flag"> +91 88808 62004</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                jQuery(function($) {
+                    function equalHeight(group) {
+                        tallest = 0;
+                        group.each(function() {
+                            thisHeight = $(this).height();
+                            if(thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        group.height(tallest);
+                    }
+
+                    equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+
+                    $(window).resize(function() {
+                        equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+                    });
+                });
+            </script>
+            <script type="text/javascript"> 
+				var fonts_loaded =[];
+			</script><!--email_off--><style type='text/css'>.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook{border-color:#000;box-shadow-color:#333;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon{text-align:center;padding-top:8px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff;font-size:21px}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-text{color:#fff}
+.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter{border-color:#000;box-shadow-color:#333;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff;font-size:22px}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-text{color:#fff}
+.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin{border-color:#000;box-shadow-color:#333;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff;font-size:22px}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-text{color:#fff}
+.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus{border-color:#000;box-shadow-color:#333;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff;font-size:22px}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-text{color:#fff}
+.maxcollection.maxcollection-1{display:inline-block;z-index:9999;margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px}.maxcollection.maxcollection-1 .mb-collection-item.item-24{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-25{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-26{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-27{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}
+.maxbutton-10.maxbutton.maxbutton-enroll-blue-medium{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:210px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-10.maxbutton:hover.maxbutton-enroll-blue-medium{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-10.maxbutton.maxbutton-enroll-blue-medium .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-10.maxbutton:hover.maxbutton-enroll-blue-medium .mb-text{color:#fff}
+.maxbutton-22.maxbutton.maxbutton-certification-blue-big{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton.maxbutton-certification-blue-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big .mb-text{color:#fff}
+</style><!--/email_off-->
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var postasmail = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/fancyquote.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var videolib = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/video-library.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/jquery.fitvids.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var fvpdata = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","nonce":"79d293a9a4","fitvids":"1","dynamic":"","overlay":"","opacity":"0.75","color":"b","width":"640"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/frontend.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var mb_ajax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/js/min/front.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons_fonts.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons-pro-front.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/bootstrap.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/masonry.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/imagesloaded.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.bootpag.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/nprogress.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/CustomScrollbar.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/owl.carousel.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0187-formValidation.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0188-bootstrap.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/blog.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects-related.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/mfb.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/signup.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var php_array = {"admin_ajax":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var wnm_custom = {"template_url":"\/blog\/wp-content\/themes\/edu-hiran"};
+var myAjax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var afp_vars = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","postID":"3124","single":"1"};
+var post_vars = {"postID":"3124","postType":"post"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/ajax-pagination.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.7.5","language":""},"disqusIdentifier":"3124 http:\/\/www.edureka.in\/blog\/?p=3124","disqusShortname":"edurekablog","disqusTitle":"What Is Cloud Computing?","disqusUrl":"https:\/\/www.edureka.co\/blog\/what-is-cloud-computing\/","options":{"manualSync":"1"},"postId":"3124"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/disqus.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"edurekablog"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/count.js'></script>
+
+
+</body>
+</html>
+<!-- mfunc setPostViews(get_the_ID()); --><!-- /mfunc -->
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 1969/2160 objects using disk
+Page Caching using disk
+Content Delivery Network via Amazon Web Services: CloudFront: cdn.edureka.co
+Database Caching 25/114 queries in 0.037 seconds using disk
+
+ Served from: www.edureka.co @ 2017-06-09 16:57:20 by W3 Total Cache -->

@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.edureka.co/blog/xmlrpc.php" />
+        
+<!-- This site is optimized with the Yoast SEO plugin v4.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Hadoop 3 | What&#039;s New in Hadoop 3.0 | Hadoop 3 Enhancements | Edureka</title>
+<meta name="description" content="This blog focuses on the expected enhancements in Apache Hadoop 3. It will give you a brief idea about the incoming changes in Hadoop 3 and it&#039;s benefits."/>
+<meta name="robots" content="noodp"/>
+<meta name="keywords" content="hadoop 3.0, what&#039;s new in hadoop 3, hadoop 3, hadoop 3 features, changes in hadoop 3"/>
+<link rel="canonical" href="https://www.edureka.co/blog/hadoop-3/" />
+<link rel="publisher" href="https://plus.google.com/+edurekaIN"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hadoop 3 | What&#039;s New in Hadoop 3.0 | Hadoop 3 Enhancements | Edureka" />
+<meta property="og:description" content="This blog focuses on the expected enhancements in Apache Hadoop 3. It will give you a brief idea about the incoming changes in Hadoop 3 and it&#039;s benefits." />
+<meta property="og:url" content="https://www.edureka.co/blog/hadoop-3/" />
+<meta property="og:site_name" content="Edureka Blog" />
+<meta property="article:publisher" content="https://www.facebook.com/edurekaIN/" />
+<meta property="article:section" content="Big Data and Hadoop" />
+<meta property="article:published_time" content="2017-05-14T13:43:48+00:00" />
+<meta property="article:modified_time" content="2017-05-17T13:20:23+00:00" />
+<meta property="og:updated_time" content="2017-05-17T13:20:23+00:00" />
+<meta property="fb:app_id" content="334689249900154" />
+<meta property="og:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Hadoop-3.0.png" />
+<meta property="og:image:width" content="815" />
+<meta property="og:image:height" content="476" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="This blog focuses on the expected enhancements in Apache Hadoop 3. It will give you a brief idea about the incoming changes in Hadoop 3 and it&#039;s benefits." />
+<meta name="twitter:title" content="Hadoop 3 | What&#039;s New in Hadoop 3.0 | Hadoop 3 Enhancements | Edureka" />
+<meta name="twitter:site" content="@edurekaIN" />
+<meta name="twitter:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Hadoop-3.0.png" />
+<meta name="twitter:creator" content="@edurekaIN" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdn.edureka.co' />
+<link rel='dns-prefetch' href='//maxcdn.bootstrapcdn.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Edureka Blog &raquo; What&#8217;s New in Hadoop 3.0 &#8211; Enhancements in Apache Hadoop 3 Comments Feed" href="https://www.edureka.co/blog/hadoop-3/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.edureka.co\/blog\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='download-button-shortcode-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-button-shortcode/css/downloadbutton.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fancyquote-css-css'  href='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/css/fancyquote.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-fontAwesome-css-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-animate-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/animate.css' type='text/css' media='all' />
+<link rel='stylesheet' id='dg-grid-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/dg-grid.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fvp-frontend-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/styles/frontend.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mbpro-font-awesome-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/assets/libraries/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-font-awesome-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0121-font-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0121-font.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogmain-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogmain.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-nprogress-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/nprogress.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetail_newfont-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/Newfonts-ico.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-customscrollbar-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/CustomScrollbar.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-owl.carousel-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/owl.carousel.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetailnew-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogdetailnew.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0180-global-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0180-global.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-formhelpers-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap-formhelpers.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0181-formValidation-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0181-formValidation.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0139-common-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0139-common.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-dashboard-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/dashboard.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-header-2-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/header-2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-signin-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/new-signin-signup.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-mfb-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/mfb.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-main_css-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp_dlmp_styles-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/styles.css' type='text/css' media='all' />
+<link rel='https://api.w.org/' href='https://www.edureka.co/blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.edureka.co/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.edureka.co/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://www.edureka.co/blog/?p=43296' />
+<link rel="alternate" type="application/json+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fhadoop-3%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fhadoop-3%2F&#038;format=xml" />
+	<style type='text/css'>
+	.download-info .download-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+<style type="text/css">
+#author-bio-box {
+	float:left;
+	width: 99%;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	box-shadow: 5px 5px 2px #ddd;
+	padding: 5px;
+        margin-bottom: 10px;
+}
+#author-bio-box img {
+	float: left;
+	margin: 4px 10px 2px 4px;
+}
+#author-bio-box .author-name {
+	font-weight: bold;
+	margin-left: 2px;
+	font-size: 14px;
+}
+#author-bio-box p {
+	font-size: 13px;
+	line-height: 20px;
+        margin-left: 95px;
+        margin-top: 5px;
+}
+#author-bio-box thead th {
+	border: 0;
+}
+#author-bio-box tbody {
+	border: 0;
+}
+.bio-spacer { min-height:44px; padding: 1px; display: block; clear: both; border:1px;}
+.bio-socials {
+	border-top:1px solid #e8e8e8;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	width: 100%;
+	height: 32px;
+	clear: both;
+}
+</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://cdn.edureka.co/blog/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <script>
+            var webURL = 'https://www.edureka.co/';
+            var imgURL = 'https://cdn.edureka.co/imgver.1465813195/img/';
+            var kmkey = 'c685629a1766aa24ed42e4bc8476e8789cd97477';
+            var GaTID = 'UA-33865789-1';
+            var GaUATID = 'UA-33865789-2';
+            var iscustomerGA = 'false';
+            var repcustomerGA = 'false';
+            var baildown = true;
+            var homepageloadbanner = true;
+            var prev_offer_code = '';
+
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-33865789-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+        <!-- Google Code for Remarketing Tag -->
+        <!--------------------------------------------------
+        Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+        --------------------------------------------------->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 977137586;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+        <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+</head>
+<body class="post-template-default single single-post postid-43296 single-format-standard wpb-js-composer js-comp-ver-5.1.1 vc_responsive" id="margin-top-value">
+
+    <div id="fb-root"></div>
+    <script>
+
+            window.fbAsyncInit = function () {
+                FB.init({appId: '334689249900154', status: true, cookie: true,
+                    xfbml: true});
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+    </script>
+
+    <header id="header-II">
+        <section>
+            <nav style="" role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-homepage">
+                <div class="container menubar-visibility edureka-blog-header">
+                    <div class="navbar-header">
+                        <a href="/?utm_source=blog&utm_medium=blog-edureka-logo" class="navbar-brand" > <img alt="edureka!" src="/imgver.1496301546/img/logo.png"> </a> 			
+                    </div>
+                    <!-- ddl starts--><form action="/blog" class="main-search"><ul class="list-unstyled course-search-box-nav">
+                        <input  type="hidden" class="searchinputbox" id="categoryinputbox" value="">
+                        <input  type="hidden" class="searchinputbox" id="authorinputbox" value="">
+                        <li class="search-nav pull-left"><div class="dropdown  categories-filter-dropdown">
+    <a class="select_down dropdown-toggle search-drop menu-common catbtnblog catbtnblogmob btn" type="button" id="menu1" data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Select Category
+    </a>
+    <ul class="dropdown-menu list-inline search-header-navigation dropdown-menu-scrollbar" role="menu" aria-labelledby="menu1">
+        <li role="presentation"><a role="menuitem" tabindex="0" href="#" data-slug="" class="category-selector">Select Category</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="1" href="/blog/category/big-data-analytics" data-slug="big-data-analytics" class="category-selector">Big Data Analytics</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="2" href="/blog/category/big-data-nosql" data-slug="big-data-nosql" class="category-selector">Big Data NoSQL</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="3" href="/blog/category/business-intelligence" data-slug="business-intelligence" class="category-selector">Business Intelligence</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="4" href="/blog/category/cloud-computing" data-slug="cloud-computing" class="category-selector">Cloud Computing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="5" href="/blog/category/finance" data-slug="finance" class="category-selector">Finance</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="6" href="/blog/category/frameworks" data-slug="frameworks" class="category-selector">Frameworks</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="7" href="/blog/category/ibm-bluemix" data-slug="ibm-bluemix" class="category-selector">IBM Bluemix</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="8" href="/blog/category/marketing" data-slug="marketing" class="category-selector">Marketing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="9" href="/blog/category/mobile-development" data-slug="mobile-development" class="category-selector">Mobile Development</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="10" href="/blog/category/operations" data-slug="operations" class="category-selector">Operations</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="11" href="/blog/category/programming" data-slug="programming" class="category-selector">Programming</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="12" href="/blog/category/project-management" data-slug="project-management" class="category-selector">Project Management</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="13" href="/blog/category/success-story" data-slug="success-story" class="category-selector">Success Story</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="14" href="/blog/category/systems-architecture" data-slug="systems-architecture" class="category-selector">Systems &amp; Architecture</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="15" href="/blog/category/systems-engineering" data-slug="systems-engineering" class="category-selector">Systems Engineering</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="16" href="/blog/category/testing" data-slug="testing" class="category-selector">Testing</a>
+                </li>      
+    </ul>
+</div>
+<span id ="desktop-searchbox"><div id="remote" class="typeahead-container"><div class="typeahead-field">
+                        <span class="typeahead-query">
+                            <input type="text" maxlength="150" autocomplete="off" placeholder = "Search edureka blogs" value=""
+                          name="s" data-value="" class="search_inp collapse searchinputbox">
+                        </span><span class="typeahead-button"><i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></span></li></ul></form><form action="/blog" class="form-element-mobile">
+                    <div class="visible-sm visible-xs mobsearch" id="mobile-searchbox">
+                        <a data-toggle="collapse" id="mobile-search-icon" class="mobile-search-icon" href="#mobsearch" aria-expanded="false" aria-controls="mobsearch">
+                            <i class="fa fa-search search_ico visible-sm visible-xs"></i>
+                        </a><div class="collapse search-course" id="mobsearch" aria-expanded="false"><div>
+                    <div id="remote" class="typeahead-container result backdrop hint">
+                        <div class="typeahead-field"><span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" class="search_inp search_inp_mob" placeholder = "Search edureka blogs" name="s" type="text" value="" data-value="" ></span>
+                        <span class="typeahead-button">
+                        <i  class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></div></div></div></form><div class="loggedin-usernav-wrapper hide"><div aria-expanded="false" id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs">
+                <li >
+                    <div class="dropdown menu-dropdown dropdownafterlogin">
+                        <a href="javascript:void(0);" class="dropdown-toggle withripple" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false"> BROWSE COURSES <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                            <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=my-courses">My Courses</a></li>
+                            <li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="logged-in-customer hide"></li>
+                <li class="">
+                    <div class="dropdown user-dropdown">
+                        <a id="signin-logout" class="signin" href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292">Logout</a> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right profile pull-right">
+            <li class="dropdown userdrop hidden-lg hidden-md profile-pic-header">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+                    <img alt="" class="img30 user-image-icon" src="/imgver.1496301546/img//defaultpp2.png">     
+                </a>
+                <ul class="dropdown-menu user-menu profile-xs">
+                    <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=all-courses">My Courses</a></li>
+                    <li class="logged-in-customer hide"></li><li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                    <li> <a href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292" id="signin-logoutresp">Log Out</a> </li>
+                </ul>
+            </li>
+        </ul></div><div class="loggedout-usernav-wrapper hide"><a class="signin md-trigger" href="javascript:void(0)" data-modal="signin-modal" data-toggle="modal">Sign In</a><style>
+    .highlighterror input[type=text],
+    .highlighterror input[type=email],
+    .highlighterror input[type=password],
+    .highlighterror {
+        border-color: #ed1f24 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
+<!--googleon: all-->
+<div class="md-modal md-effect-1 newsigninsignup" id="signin-modal">
+    <div class="md-content">
+        <span id="signin_signup_cancel" class="md-close onclicktab pull-right">X</span>
+
+        <ul class="nav nav-tabs">
+            <li class="Signinspace active"><a class="onclicktab" data-toggle="tab" href="#LogIn"><span>Log In</span></a></li>
+            <li class="SignUpspace "><a class="onclicktab" data-toggle="tab" href="#SignUp"><span>Sign Up</span></a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="LogIn" class="tab-pane fade in active">
+                <div class="col-md-12 col-xs-12 signinformnew newsignclik">
+                    <form id="signinForm">
+                        <!--                        <form id="signinForm">-->
+                        <div class="alertnew" role="alert" >
+                            <span  id="signin_error_message" class="signin_formerror redalertnew" style="display: none;"><i class="fa fa-check-circle"></i>  Please enter a valid emailid</span>
+                        </div>
+                        <div class="form-group">
+                            <input id="inputName" type="email" class="form-control inputstyle emailnew inputNamesignup signinvalid" required autocomplete="off" placeholder="Email"  name="data[User][email]" value="" onkeyup="checkdisable();">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd" class="form-control inputstyle passwordnew masked" required autocomplete="off" placeholder="Password"  name="data[User][password]" value="">
+                            <div class="verficacheckeye" id="eye">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><a id="Forgotnew" href="javascript:void(0)" class="btn btn-link pull-left forgetpass">Forgot Password?</a>
+
+                            <button type="submit" class="bluebtn pull-right defdisablesignin ga-signin disabled"  id="signin-blog">Start Learning</button>
+                        </div>
+                    </form>
+                    <!--<div class="mobilealertnew green clearfix">
+                      <span class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i>  Verification Code sent to er.creator@gmail.com</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-12 col-xs-12 signinformnew forgetpassnew">
+                    <form id="resetcode">
+                        <div id="successmssg" class="alertnew" role="alert">
+                            <span id="messages"  class="greenalertnew hidden-xs"><i class="fa fa-check-circle"></i>  </span>
+                        </div>
+                        <div class="form-group">
+                            <input id="prefilledemail" type="email" disabled="disable" class="form-control inputstyle emailnew inputDisabled" required autocomplete="off" placeholder="Email">
+                            <input id="emailfield" type="hidden" class="form-control inputstyle"  name="data[User][email]">
+
+                            <!--<div class="verficacheck"><a href="" id="editemail">change ?</a></div>-->
+                        </div>
+                        <div class="form-group">
+                            <input id="otpfield" type="text" class="form-control inputstyle emailnew verifycheck" required autocomplete="off" placeholder="Verification code"  name="data[User][otpCode]">
+                            <input id="verificationfield" type="hidden" class="form-control inputstyle emailnew" required name="data[User][verification_code]">
+                            <div  class="verficacheck verifycheck"><div id="resendcode" href="javascript:void(0);" style="cursor: pointer;">resend ?</div></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd2" class="form-control inputstyle passwordnew masked" required autocomplete="off" min=8 placeholder="New Password"  name="data[User][password]">
+                            <div class="verficacheckeye" id="eye2">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><!--<a id="Backnew" href="#" class="btn btn-link pull-left forgetpass">Back</a>-->
+
+                            <button id="passresetbutton" type="submit" class="bluebtn pull-right">reset password</button>
+                        </div>
+                    </form>
+                    <div class="notestarreg verifycheck">
+                        * Can't find the email? Check your Spam folder or Promotions tab for an email from no-reply@edureka.co. Send us an email at <a href="mailto:support@edureka.co">support@edureka.co</a> or call us at +91 88808 62004
+                    </div>
+                </div>
+            </div>
+            <div id="SignUp" class="tab-pane fade  ">
+
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center signinformnew signupformnew">
+
+                    <form id="signupForm">
+                        <div class="alertnew" role="alert">
+                            <span id="signup_error_message" class="signup_formerror redalertnew hidden-xs " style="display: none;"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input value="/blog/" name="data[User][pageurl]" id="pageurl_signup" type="hidden">
+                            <div class="form-control-wrapper"><input id="signupname" class="form-control inputstyle empty" placeholder="Name*" required="" autocomplete="off" name="data[User][name]" type="text"></div>
+                            <i data-bv-icon-for="data[User][name]" class="form-control-feedback fv-icon-no-label fa fa-close" style="display: block;"></i>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input  id="signupemail" class="form-control inputstyle  empty" placeholder="Email*" required="" autocomplete="off" name="data[User][email]" type="email"></div><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        </div>
+                        <input style="display:none;" name="hiddenname" type="text">
+                        <input style="display:none;" name="hiddenpassword" type="password">
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][mobile]" id="mobnum" class="form-control inputstyle empty" placeholder="Mobile Number*" required="" name="data[User][mobile]" type="text"></div><i data-bv-icon-for="data[User][mobile]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+
+                        </div>
+                        <div class="form-group has-feedback">
+
+                            <div class="form-control-wrapper">
+                                <input id="pwd3" class="form-control inputstyle passwordnew masked empty" required="" autocomplete="off" placeholder="Password more than 8 characters*" name="data[User][password]" type="password"></div><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                            <div class="verficacheckeye" id="eye3">show</div>
+                        </div>
+                        <p class="signupinfotext">
+                            By Signing up you agree to our <span><a class=" withripple" href="/terms-and-conditions" target="_blank">T&amp;C</a></span> and <span>
+                                <a class=" withripple" href="/privacy-policy" target="_blank">Privacy Policy</a></span>
+                        </p>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding spaceafterbutton">
+                            <button type="submit" class="bluebtn pull-right defdisablesignup ga-signup disabled">Create an account</button>
+                        </div>
+
+                    </form>
+                    <!--<div class="mobilealertnew red clearfix">
+                      <span class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobileredclass" class="mobilealertnew red clearfix" style="display:none;">
+        <span id="mobileredmsg" class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input    </span>
+    </div>
+    <div id="mobilegreenclass"class="mobilealertnew green clearfix" style="display:none;">
+        <span id="mobilegreenmsg" class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i> </span>
+    </div>
+</div>
+<div class="md-overlay"></div>
+<section>
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="capturemobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header signup-header">
+                    <h4 class="modal-title color-white">
+                        <span class="pull-left">
+                            WELCOME <label id="capturemobile_user_name"></label>
+                        </span>
+                        <span class="pull-right">                           
+                        </span>
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 linkedin-content">
+                            <h5 class="line-height23">It seems we don't have your phone number. Please share as it helps us to provide better customer service. Thank you!</h5>
+                            <form id="captureMobileForm" action="" method="post">
+                                <input type="hidden" name="data[User][email]" id="email_capturemobile">
+                                <input type="hidden" name="data[User][password]" id="password_capturemobile">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Mobile Number" required name="data[User][mobile]">
+                                </div>
+                                <!--                                <button type="button"  class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn">Continue</button>-->
+                                <button type="button" id="btnCaptureMobile" class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn" style="">Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--googleon: all--><div class="navbar-collapse collapse navbar-right" id="navbar" aria-expanded="false">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs"><!--
+                <li><a href="/instructors/add">For Instructors</a></li> -->
+                <li><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Course</a></li>
+            </ul>
+        </div></div>                </div>
+            </nav>
+        </section>
+    </header>
+<section >
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding">
+                <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 left-menu"> 
+    <div class="row left-menu-row">
+<div class="side-menu"><nav class="navbar navbar-default" role="navigation">
+<div class="side-menu-container side-menu-blog"><button type="button" class="navbar-toggle navbar-tog-open-close side-body"><span class="fa fa-bars"></span></button><div class="side-nav-title"><h2>Hadoop Tutorial Series</h2></div><ul class="nav navbar-nav cus-nav-scroll dropdown-menu-scrollbar">
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/big-data-tutorial"  data-currpage="hadoop-3"> <span>Big Data Tutorial: All You Need To Know About Big Data!</span><span data-toggle="collapse" href="#dropdown-level-1-460937599593ad514ea607" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-460937599593ad514ea607" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/videos/big-data-tutorial"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Big Data Tutorial – Get Started With Big Data And Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/what-is-hadoop"   data-currpage="hadoop-3">What is Hadoop? Introduction to Big Data &#038; Hadoop</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hadoop-tutorial/"  data-currpage="hadoop-3"> <span>Hadoop Tutorial: All you need to know about Hadoop!</span><span data-toggle="collapse" href="#dropdown-level-1-2142864768593ad514ea6df" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-2142864768593ad514ea6df" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/videos/hadoop-tutorial"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Hadoop Tutorial – A Complete Tutorial For Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-ecosystem"   data-currpage="hadoop-3">Hadoop Ecosystem: Hadoop Tools for Crunching Big Data</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hdfs-tutorial"  data-currpage="hadoop-3"> <span>HDFS Tutorial: Introduction to HDFS &#038; its Features</span><span data-toggle="collapse" href="#dropdown-level-1-214667456593ad514ea7e2" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-214667456593ad514ea7e2" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Apache Hadoop HDFS Architecture</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>How to Set Up Hadoop Cluster with HDFS High Availability</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/overview-of-hadoop-2-0-cluster-architecture-federation/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Overview of Hadoop 2.0 Cluster Architecture Federation</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Install Hadoop: Setting up a Single Node Hadoop Cluster</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Setting Up A Multi Node Cluster In Hadoop 2.X</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>HDFS Commands: Hadoop Shell Commands to Manage HDFS</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/mapreduce-tutorial/"  data-currpage="hadoop-3"> <span>MapReduce Tutorial – Fundamentals of MapReduce with MapReduce Example</span><span data-toggle="collapse" href="#dropdown-level-1-1572057736593ad514ea8ca" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1572057736593ad514ea8ca" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/hadoop-streaming-mapreduce-program/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Hadoop Streaming: Writing A Hadoop MapReduce Program In Python</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/mapreduce-example-reduce-side-join/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>MapReduce Example: Reduce Side Join in Hadoop MapReduce</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/pig-tutorial/"  data-currpage="hadoop-3"> <span>Pig Tutorial: Apache Pig Architecture &#038; Twitter Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-1102735977593ad514ea9ae" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1102735977593ad514ea9ae" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/apache-pig-installation"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Apache Pig Installation on Linux</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/pig-programming-create-your-first-apache-pig-script/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Pig Programming: Create Your First Apache Pig Script</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/creating-udf-in-apache-pig/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Steps to Create UDF in Apache Pig</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hive-tutorial/"  data-currpage="hadoop-3"> <span>Hive Tutorial – Hive Architecture and NASA Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-1361925962593ad514eaa94" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1361925962593ad514eaa94" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/apache-hive-installation-on-ubuntu"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Apache Hive Installation on Ubuntu</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/hive-commands-with-examples"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Top Hive Commands with Examples in HQL</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/apache-hadoop-hive-script/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Apache Hadoop : Create your First HIVE Script</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hbase-tutorial"  data-currpage="hadoop-3"> <span>HBase Tutorial: HBase Introduction and Facebook Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-5446427593ad514eab49" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-5446427593ad514eab49" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/hbase-architecture/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>HBase Architecture: HBase Data Model & HBase Read/Write Mechanism</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/sample-hbase-poc/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Sample HBase POC</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/brief-introduction-to-oozie/"   data-currpage="hadoop-3">Brief Introduction to Oozie</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/"  data-currpage="hadoop-3"> <span>Top 50 Hadoop Interview Questions For 2017</span><span data-toggle="collapse" href="#dropdown-level-1-736057069593ad514eac1b" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-736057069593ad514eac1b" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hdfs-2/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HDFS</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hadoop-cluster/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Setting Up Hadoop Cluster</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-mapreduce/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – MapReduce</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-pig/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – PIG</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hive-interview-questions"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Apache Hive</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hbase-interview-questions/"  data-currpage="hadoop-3"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HBase</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-certification/"   data-currpage="hadoop-3">Hadoop Certification – Become a Certified Big Data Hadoop Professional</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-career/"   data-currpage="hadoop-3">Hadoop Career: Career in Big Data Analytics</a>
+</li>
+<li class="first-level active"><a href="https://www.edureka.co/blog/hadoop-3/" class="active-link"  data-currpage="hadoop-3">What's New in Hadoop 3.0 - Enhancements in Apache Hadoop 3</a>
+</li>
+</ul></div></nav></div></div>
+</div>
+<!-- Right Panel ends -->
+                        <div class="col-lg-8 col-md-7 col-xs-12 col-sm-12 blogmobfull">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 bread-herohead">
+    <div class="herohead">
+        <div class="">
+            <div class="row">
+                                <div class="">
+                    <h6 class="breadcrumb-section hidden-xs ">
+                        <a class="text-bold text-normal underline-remove brdcrumclrinac" href="/blog">Home</a>
+                        <!--                        &nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog chevron-level-0"></i>&nbsp;&nbsp;
+                        <a class="text-bold text-normal underline-remove brdcrumclrac reset-filters post-type-level" href="/blog">Blogs&nbsp;&nbsp;</a>-->
+                        <i class="fa fa-chevron-right chevronblog chevron-level-1 ">&nbsp;&nbsp;</i>
+                        <a class="text-bold text-normal underline-remove brdcrumclrac post-type-breadcrum reset-filters " href="/blog">Blogs</a>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog  cat-level-breadcrum"></i>&nbsp;&nbsp;
+                        <span class="text-bold text-normal underline-remove brdcrumclrac cat-level-breadcrum cat-level-breadcrum-title ">Big Data Analytics</span>&nbsp;
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<!-- Top Navigation to be sent in blog phase 2 starts-->
+
+<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainnavigator">
+    <article class="navigatedetail col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <span class="blogall"><a href="https://www.edureka.co/blog//all"><i class="icon-Home_icon"></i></a></span>
+        <span class="bloghome"><a href="https://www.edureka.co/blog/">Blogs</a></span>
+        <span class="videohome"><a href="https://www.edureka.co/blog/videos">Videos</a></span>
+        <span class="interviewhome"><a href="https://www.edureka.co/blog/interview-questions">Interview Questions</a></span>
+    </article>
+</section>
+<!--Top Navigation to be sent in blog phase 2-->
+                            <section class="mainsecblog">
+                                <section class="blogmaincontainer">
+                                    <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding topsection">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogmainheading">
+        <h1 class="blogheading">
+            What&#8217;s New in Hadoop 3.0 &#8211; Enhancements in Apache Hadoop 3        </h1>
+        <span class="recommendedsec clearfix"><p>
+                                                    <i class="fa fa-bookmark newbookmark"></i> Recommended by  199 users                            </p>
+        </span>
+        <div class="top-sec-infodetail">
+            <span class="authorblog"><a href="https://www.edureka.co/blog/author/shubham-sinha/" title="Posts by Shubham Sinha" rel="author">Shubham Sinha</a></span>
+            <span class="dateblog">May 14, 2017</span> 
+             
+<div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>        </div>
+    </article>
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topimage">
+        <img class="blogimg" src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/Heroimage 1.jpg" alt="What&#8217;s New in Hadoop 3.0 &#8211; Enhancements in Apache Hadoop 3" title="What&#8217;s New in Hadoop 3.0 &#8211; Enhancements in Apache Hadoop 3">    </article>
+</section>                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 no-padding hidden-sm hidden-xs share-leftnav">
+                                            <div class="nav-stacked-social affix-top" data-spy="affix" data-offset-top="350" data-offset-bottom="400">
+                                                <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_1' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_1' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_1' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_1' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                            </div>
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 no-padding">
+                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogdetailsec">
+    <article class="col-md-9 col-lg-9 col-sm-9 col-xs-12 blogdescription"> 
+        <span class="AddtoBookmark"><a  href="https://www.edureka.co/blog/hadoop-3/" data-title="What&#8217;s New in Hadoop 3.0 &#8211; Enhancements in Apache Hadoop 3">
+                <i class="icon-Add_to_bookmark"></i>
+                <span class="Bookmark-text"><span>Add to</span> Bookmark</span></a>
+        </span>
+
+            <div class="modal thispost-mail fade" id="emailpostpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content centered">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span></button>
+                    <div class="Mailpost">
+                        <span class="icon"><i class="icon-Mail_this_post"></i></span>
+                        <span class="Mailthispost">Email this post</span>
+                        <form class="email-me-the-post" method="post" novalidate="novalidate">
+                            <div class="input-name  ">
+                                <input type="hidden" name="contentId" value="43296">
+                                <input type="text" name="name" class="required" required placeholder="Enter Your Name" autocomplete="false">
+                                <div class="error-name">
+                                    Please enter a valid input.
+                                </div>
+                            </div>
+                            <div class="input-email ">
+                                <input type="text" class="email required" required name="emails" placeholder="Enter Email ID’s ( Separated by commas )"  autocomplete="false">
+                                <div class="error-email">
+                                    Please enter a valid email id or comma separated email id's.
+                                </div>
+                            </div>
+                            <button type="submit" class="Submit-mailpost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="Mailpost-thankyou">
+                        <i class="icon-success"></i>
+                        <span class="Mailthispost">The post has been successfully mailed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="EmailthisPost" data-toggle="modal" data-target="#emailpostpop">
+            <i class="icon-Mail_this_post"></i>
+            <span class="EmailthisPost-text">Email <Span>this Post</span></span>
+        </span> 
+        <span class="viewsblogsec">
+            <span class="viewscount details-page-views-count"><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 1.9K</span>
+        </span>
+        <span class="commentsblogsec">
+            <a href="https://www.edureka.co/blog/hadoop-3/#comments-wrapper" class="commentcount">
+                <span><i class="icon-comments"></i></span>
+            </a>&nbsp;&nbsp;
+            <a class="disqus-comment-count" data-disqus-url="https://www.edureka.co/blog/hadoop-3/" href="https://www.edureka.co/blog/hadoop-3/#disqus_thread" class="commentcount">
+                <span>0</span>
+            </a>
+        </span>
+    </article>
+            <article class="col-md-3 col-lg-3 col-sm-3 col-xs-12 related-blog hidden-sm hidden-xs">
+            <ul class="pager">
+                <li><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="show-next-in-series"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </article>
+            <!-- <article class = "col-md-3 col-lg-3 col-sm-3 col-xs-12 downloadpdfblog">
+         <span class = "downloadpdf"></span>
+ </article> -->
+</section>                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogcontentsec">
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">This &#8220;<em><strong>What&#8217;s New in Hadoop 3.0</strong></em>&#8221; blog focus on the changes that are expected in Hadoop 3, as it&#8217;s still in alpha phase. Apache community has incorporated many changes and is still working on some of them. So, we will be taking a broader look at the expected changes.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The major changes that we will be discussing are:</span></p>
+<ul>
+<li style="text-align: justify;"><a href="#RequiredJavaVersionInHadoop3"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Minimum Required Java Version in Hadoop 3 is 8 </span></a></li>
+<li><a href="#ErasureEncoding"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Support for Erasure Encoding in HDFS</span></a></li>
+<li><a href="#YARNv2"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">YARN Timeline Service v.2</span></a></li>
+<li><a href="#ShellScriptRewrite"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Shell Script Rewrite</span></a></li>
+<li><a href="#ShadedClientJars"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Shaded Client Jars</span></a></li>
+<li><a href="#OpportunisticContainers"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Support for Opportunistic Containers</span></a></li>
+<li><a href="#MapReduceNativeOptimization"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">MapReduce Task-Level Native Optimization</span></a></li>
+<li><a href="#MoreThan2NameNodes"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Support for More than 2 NameNodes</span></a></li>
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><a href="#ChangedDefaultPorts">Default Ports of Multiple Services have been Changed</a> </span></li>
+<li style="text-align: justify;"><a href="#Hadoop3FileSystemConnector"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Support for Filesystem Connector</span></a></li>
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><a href="#IntraDataNodeBalancer">Intra-DataNode Balancer</a></span></li>
+<li style="text-align: justify;"><a href="#Hadoop3ReworkedDaemon"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Reworked Daemon and Task Heap Management</span></a></li>
+</ul>
+<p><a name="RequiredJavaVersionInHadoop3"></a></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Apache Hadoop 3 is going to incorporate a number of enhancements over the Hadoop-2.x. So, let us move ahead and look at each of the enhancements.</span></p>
+<div>
+<h2 style="text-align: center;"><strong><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;">Changes Expected in Hadoop 3 | Getting to Know Hadoop 3 Alpha | Edureka</span></strong></h2>
+<div id="schema-videoobject" class="video-container"><iframe src="//www.youtube.com/embed/N4WzQ1H5h5I?rel=0&amp;showinfo=0" width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen" data-mce-fragment="1"></iframe></div>
+</div>
+<h2 style="text-align: justify;"></h2>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>1. Minimum Required Java Version in Hadoop 3 is Increased from 7 to 8</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">In Hadoop 3, all Hadoop JARs are compiled targeting a runtime version of Java 8. So, users who are still using Java 7 or below have to upgrade to Java 8 when they will start working with Hadoop 3.</span></p>
+<p><a name="ErasureEncoding"></a></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-46502 size-medium" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/java-version-Hadoop-Certification-Edureka-300x118.png" alt="Java Compatible Version - Hadoop 3 - Edureka" width="300" height="118" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/java-version-Hadoop-Certification-Edureka-300x118.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/java-version-Hadoop-Certification-Edureka-150x59.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/java-version-Hadoop-Certification-Edureka-768x301.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/java-version-Hadoop-Certification-Edureka-528x207.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/java-version-Hadoop-Certification-Edureka-459x180.png 459w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/java-version-Hadoop-Certification-Edureka.png 781w" sizes="(max-width: 300px) 100vw, 300px" />Now let us discuss one of the important enhancement of Hadoop 3, i.e. Erasure Encoding, which will reduce the storage overhead while providing the same level of fault tolerance as earlier.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>2. Support for Erasure Encoding in HDFS</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">So now let us first understand what is Erasure Encoding. </span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-46503" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Hadoop-Certification-Edureka.png" alt="Erasure Encoding - Hadoop 3 - Edureka" width="648" height="292" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Hadoop-Certification-Edureka.png 1135w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Hadoop-Certification-Edureka-150x67.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Hadoop-Certification-Edureka-300x135.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Hadoop-Certification-Edureka-768x345.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Hadoop-Certification-Edureka-528x237.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Hadoop-Certification-Edureka-401x180.png 401w" sizes="(max-width: 648px) 100vw, 648px" />Generally, in storage systems, Erasure Coding<span style="color: #ff0000;"> </span>is mostly used in <em><strong>Redundant Array of Inexpensive Disks (RAID)</strong></em>.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">As you can see in the above image, RAID implements EC through <em><strong>striping</strong></em>, in which the logically sequential data (such as a file) is divided into smaller units (such as bit, byte, or block) and stores consecutive units on different disks.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Then for each stripe of original data cells, a certain number of <em><strong>parity cells</strong></em> are calculated and stored. This process is called <em><strong>encoding</strong></em>. <em>The error on any striping cell can be recovered through decoding calculation based on surviving data cells and parity cells</em>.</span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">As we got an idea of Erasure coding, now let us first go through the earlier scenario of replication in Hadoop 2.x.  </span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-46504" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/HDFS-Replication-Overhead-Hadoop-Certification-Edureka.png" alt="HDFS Replication Overhead - Hadoop 3 - Edureka" width="579" height="200" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/HDFS-Replication-Overhead-Hadoop-Certification-Edureka.png 1135w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/HDFS-Replication-Overhead-Hadoop-Certification-Edureka-150x52.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/HDFS-Replication-Overhead-Hadoop-Certification-Edureka-300x104.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/HDFS-Replication-Overhead-Hadoop-Certification-Edureka-768x265.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/HDFS-Replication-Overhead-Hadoop-Certification-Edureka-528x182.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/HDFS-Replication-Overhead-Hadoop-Certification-Edureka-521x180.png 521w" sizes="(max-width: 579px) 100vw, 579px" /></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The default replication factor in <a href="https://www.edureka.co/blog/hdfs-tutorial?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=hadoop-3"><em><strong>HDFS</strong></em></a> is 3 in which one is the original data block and the other 2 are replicas which require 100% storage overhead each. So that makes <em><strong>200% storage overhead</strong></em> and it consumes other resources like network bandwidth.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">However, the replicas of cold datasets which have low I/O activities are rarely accessed during normal operations, but still, consume the same amount of resources as the original dataset.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif;"><span style="font-size: 14px;">Erasure coding stores the data and provide fault tolerance with less space overhead as compared to HDFS replication. Erasure Coding (EC) can be used in place of replication, which will provide </span><span style="font-size: 14px;">the same level of fault-tolerance with less storage overhead.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-46505 size-full" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Overhead-Hadoop-Certification-Edureka.png" alt="Erasure Encoding Overhead - Hadoop 3- Edureka" width="1135" height="299" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Overhead-Hadoop-Certification-Edureka.png 1135w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Overhead-Hadoop-Certification-Edureka-150x40.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Overhead-Hadoop-Certification-Edureka-300x79.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Overhead-Hadoop-Certification-Edureka-768x202.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Overhead-Hadoop-Certification-Edureka-528x139.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Erasure-Encoding-Overhead-Hadoop-Certification-Edureka-590x155.png 590w" sizes="(max-width: 1135px) 100vw, 1135px" />Integrating EC with HDFS can maintain the same fault-tolerance with improved storage efficiency. As an example, a 3x replicated file with 6 blocks will consume 6*3 = 18 blocks of disk space. But with EC (6 data, 3 parity) deployment, it will only consume 9 blocks (6 data blocks + 3 parity blocks) of disk space. This only requires the storage overhead up to 50%.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Since Erasure coding requires additional overhead in the reconstruction of the data due to performing remote reads, thus it is generally used for storing less frequently accessed data. Before deploying Erasure code, users should consider all the overheads like storage, network and CPU overheads of erasure coding.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now to support the Erasure Coding effectively in HDFS they made some changes in the architecture. Lets us take a look at the architectural changes.</span></p>
+<h3><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong>HDFS Erasure Encoding: Architecture</strong></span></h3>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>NameNode Extensions</b> &#8211; The HDFS files are striped into block groups, which have a certain number of internal blocks. Now to reduce NameNode memory consumption from these additional blocks, a new hierarchical <strong><em>block naming protocol</em></strong> was introduced. The ID of a block group can be deduced from the ID of any of its internal blocks. This allows management at the level of the block group rather than the block.</span></li>
+</ul>
+<ul style="text-align: justify;">
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>Client Extensions</b> &#8211; After implementing Erasure Encoding in HDFS, NameNode works on block group level &amp; the client read and write paths were enhanced to work on multiple internal blocks in a block group in <em>parallel</em>. </span>
+<ul style="list-style-type: square;">
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">On the output/write path, <em>DFSStripedOutputStream</em> manages a set of data streamers, one for each DataNode storing an internal block in the current block group. A coordinator takes charge of operations on the entire block group, including ending the current block group, allocating a new block group, etc. </span></li>
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">On the input/read path, <em>DFSStripedInputStream</em> translates a requested logical byte range of data as ranges into internal blocks stored on DataNodes. It then issues read requests in parallel. Upon failures, it issues additional read requests for decoding.</span></li>
+</ul>
+</li>
+</ul>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><b>DataNode Extensions</b> <strong>&#8211;</strong> The DataNode runs an additional ErasureCodingWorker (ECWorker) task for background recovery of failed erasure coded blocks. Failed EC blocks are detected by the NameNode, which then chooses a DataNode to do the recovery work. Reconstruction performs three key tasks:</span>
+<ol>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Read the data from source nodes and reads only the minimum number of input blocks &amp; parity blocks for reconstruction.</span></li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">New data and parity blocks are decoded from the input data. All missing data and parity blocks are decoded together.</span></li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Once decoding is finished, the recovered blocks are transferred to target DataNodes.</span></li>
+</ol>
+</li>
+</ul>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong>ErasureCoding policy </strong>&#8211; To accommodate heterogeneous workloads, we allow files and directories in an HDFS cluster to have different replication and EC policies. Information about encoding &amp; decoding files is encapsulated in an ErasureCodingPolicy class. It contains 2 pieces of information, i.e. the <em>ECSchema &amp; the size of a stripping cell.</em></span></li>
+</ul>
+<p><a name="YARNv2"></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The second most important enhancement in Hadoop 3 is YARN Timeline Service version 2 from YARN version 1 (in Hadoop 2.x). They are trying to make many upbeat changes in YARN Version 2.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>3. YARN Timeline Service v.2</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Hadoop is introducing a major revision of YARN Timeline Service i.e. v.2. YARN Timeline Service. It is developed to address two major challenges:</span></p>
+<ol style="text-align: justify;">
+<li style="padding-left: 60px;"><em><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Improving scalability and reliability of Timeline Service</span></em></li>
+<li style="padding-left: 60px;"><em><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Enhancing usability by introducing flows and aggregation</span></em></li>
+</ol>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif;"><span style="font-size: 14px;">YARN Timeline Service v.2 can be tested by the developers to provide feedback and suggestions. It should be exploited only in a test capacity. </span><span style="font-size: 14px;">The security is not enabled in YARN Timeline Service v.2.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">So, let us first discuss scalability and then we will discuss flows and aggregations. </span></p>
+<h3 style="background: white;"><strong><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">YARN Timeline Service v.2: Scalability</span></strong></h3>
+<p style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">YARN version 1 is limited to a single instance of writer/reader and does not scale well beyond small clusters. Version 2 uses a more scalable distributed writer architecture and a scalable backend storage. It separates the collection (writes) of data from serving (reads) of data. It uses distributed collectors, essentially one collector for each YARN application. The readers are separate instances that are dedicated to serving queries via REST API. </span></p>
+<p style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">YARN Timeline Service v.2 chooses Apache HBase as the primary backing storage, as Apache HBase scales well to a large size while maintaining good response times for reads and writes.</span></p>
+<h3 style="background: white;"><strong><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">YARN Timeline Service v.2: </span></strong><strong><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Usability Improvements</span></strong></h3>
+<p style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Now talking about usability improvements, in many cases, users are interested in the information at the level of “flows” or logical groups of YARN applications. It is much more common to launch a set or series of YARN applications to complete a logical application. Timeline Service v.2 supports the notion of flows explicitly. In addition, it supports aggregating metrics at the flow level as you can see in the below diagram.</span></p>
+<p style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><img class="aligncenter wp-image-46506" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Flows-YARN-Hadoop-Certification-Edureka.png" alt="Flows YARN v2 - Hadoop Certification - Edureka" width="612" height="349" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Flows-YARN-Hadoop-Certification-Edureka.png 1135w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Flows-YARN-Hadoop-Certification-Edureka-150x86.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Flows-YARN-Hadoop-Certification-Edureka-300x171.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Flows-YARN-Hadoop-Certification-Edureka-768x438.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Flows-YARN-Hadoop-Certification-Edureka-525x300.png 525w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Flows-YARN-Hadoop-Certification-Edureka-315x180.png 315w" sizes="(max-width: 612px) 100vw, 612px" />Now lets us look at the architectural level, how YARN version 2 works.</span></p>
+<h3 style="background: white;"><strong><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">YARN Timeline Service v.2: </span></strong><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong>Architecture</strong></span></h3>
+<p style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">YARN Timeline Service v.2 uses a set of collectors (writers) to write data to the backend storage. The collectors are distributed and co-located with the application masters to which they are dedicated, as you can see in the below image. All data that belong to that application are sent to the application level timeline collectors with the exception of the resource manager timeline collector.</span></p>
+<p style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-46562 " src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/YARN-v2-Architecture-Hadoop-3-Edureka.png" alt="YARN v2 Architecture - Hadoop 3 - Edureka" width="590" height="334" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/YARN-v2-Architecture-Hadoop-3-Edureka.png 1630w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/YARN-v2-Architecture-Hadoop-3-Edureka-150x85.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/YARN-v2-Architecture-Hadoop-3-Edureka-300x170.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/YARN-v2-Architecture-Hadoop-3-Edureka-768x435.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/YARN-v2-Architecture-Hadoop-3-Edureka-528x300.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/YARN-v2-Architecture-Hadoop-3-Edureka-318x180.png 318w" sizes="(max-width: 590px) 100vw, 590px" /></span></p>
+<p style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">For a given application, the application master can write data for the application to the co-located timeline collectors. In addition, node managers of other nodes that are running the containers for the application also write data to the timeline collector on the node that is running the application master.</span></p>
+<p style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The resource manager also maintains its own timeline collector. It emits only YARN-generic life cycle events to keep its volume of writes reasonable.</span></p>
+<p><a name="ShellScriptRewrite"></a></p>
+<p style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The timeline readers are separate daemons separate from the timeline collectors, and they are dedicated to serving queries via REST API.</span></p>
+<p style="line-height: 15.6pt; background: white; text-align: center;"><a class="maxbutton-11 maxbutton maxbutton-enroll-blue-big" target="_blank" href="https://www.edureka.co/big-data-and-hadoop?utm_source=blog&#038;utm_medium=cta-blog&#038;utm_campaign=hadoop-3"><span class='mb-text'>CHECK OUT OUR HADOOP COURSE </span></a></p>
+<h2 style="line-height: 15.6pt; background: white; text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><strong><br />
+4. Shell Script Rewrite</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The Hadoop shell scripts have been rewritten to fix many bugs, resolve compatibility issues and change in some existing installation. It also incorporates some new features. So I will list some of the important ones:</span></p>
+<ul>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">All Hadoop shell script subsystems now execute hadoop-env.sh, which allows for all of the environment variables to be in one location.</span></li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Daemonization has been moved from *-daemon.sh to the bin commands via the &#8211;daemon option. In Hadoop 3 we can simply use &#8211;daemon start to start a daemon, &#8211;daemon stop to stop a daemon, and &#8211;daemon status to set $? to the daemon&#8217;s status. For example, &#8216;hdfs &#8211;daemon start namenode&#8217;. </span></li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Operations which trigger ssh connections can now use pdsh if installed.</span></li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">${HADOOP\_CONF\_DIR} is now properly honored everywhere, without requiring symlinking and other such tricks.</span></li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Scripts now test and report better error messages for various states of the log and pid dirs on daemon startup. Before, unprotected shell errors would be displayed to the user.</span></li>
+</ul>
+<p><a name="ShadedClientJars"></a></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">There are many more features you will know when Hadoop 3 will be in the beta phase. Now let us discuss the shaded client jar and know their benefits. </span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>5. Shaded Client Jars</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The <em>hadoop-client</em> available in Hadoop 2.x releases pulls Hadoop’s transitive dependencies onto a Hadoop application’s classpath. This can create a problem if the versions of these transitive dependencies conflict with the versions used by the application.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">So in Hadoop 3, we have new hadoop-client-api and hadoop-client-runtime artifacts that shade Hadoop’s dependencies into a single jar. <em>hadoop-client-api</em> is compile scope &amp; <em>hadoop-client-runtime</em> is runtime scope, which contains relocated third party dependencies from <em>hadoop-client</em>. So, that you can bundle the dependencies into a jar and test the whole jar for version conflicts. This avoids leaking Hadoop’s dependencies onto the application’s classpath. For example, HBase can use to talk with a Hadoop cluster without seeing any of the implementation dependencies.</span></p>
+<p><a name="OpportunisticContainers"></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now let us move ahead and understand one more new feature, which has been introduced in Hadoop 3, i.e. opportunistic containers.</span></p>
+<h2><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>6. Support for Opportunistic Containers and Distributed Scheduling</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">A new ExecutionType has been introduced, i.e. <em><strong>Opportunistic containers</strong></em>, which can be dispatched for execution at a NodeManager even if there are no resources available at the moment of scheduling. In such a case, these containers will be queued at the NM, waiting for resources to be available for it to start. Opportunistic containers are of lower priority than the default Guaranteed containers and are therefore preempted, if needed, to make room for Guaranteed containers. This should improve cluster utilization.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong><img class="aligncenter size-full wp-image-46508" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Opportunistic-Container-Hadoop-Certification-Edureka.png" alt="Opportunistic Container - Hadoop Certification - Edureka" width="1135" height="524" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Opportunistic-Container-Hadoop-Certification-Edureka.png 1135w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Opportunistic-Container-Hadoop-Certification-Edureka-150x69.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Opportunistic-Container-Hadoop-Certification-Edureka-300x139.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Opportunistic-Container-Hadoop-Certification-Edureka-768x355.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Opportunistic-Container-Hadoop-Certification-Edureka-528x244.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Opportunistic-Container-Hadoop-Certification-Edureka-390x180.png 390w" sizes="(max-width: 1135px) 100vw, 1135px" />Guaranteed containers</strong> correspond to the existing YARN containers. They are allocated by the Capacity Scheduler, and once dispatched to a node, it is guaranteed that there are available resources for their execution to start immediately. Moreover, these containers run to completion as long as there are no failures.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Opportunistic containers are by default allocated by the central RM, but support has also been added to allow opportunistic containers to be allocated by a distributed scheduler which is implemented as an AMRMProtocol interceptor.</span><br />
+<a name="MapReduceNativeOptimization"></a></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Now moving ahead, let us take a look how MapReduce performance has been optimized.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>7. MapReduce Task-Level Native Optimization</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">In Hadoop 3, a native Java implementation has been added in MapReduce for the map output collector. For shuffle-intensive jobs, this improves the performance by 30% or more.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">They added a native implementation of the map output collector. For shuffle-intensive jobs, this may provide speed-ups of 30% or more. They are working on native optimization for MapTask based on JNI. The basic idea is to add a NativeMapOutputCollector to handle key value pairs emitted by the mapper, therefore sort, spill, IFile serialization can all be done in native code. They are still working on the Merge code.</span></p>
+<p><a name="MoreThan2NameNodes"></a><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Now let us take a look, how Apache community is trying to make Hadoop 3 more fault tolerant.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>8. Support for More than 2 NameNodes</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">In Hadoop 2.x, HDFS NameNode high-availability architecture has a single active NameNode and a single Standby NameNode. By replicating edits to a quorum of three JournalNodes, this architecture is able to tolerate the failure of any one NameNode.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">However, business critical deployments require higher degrees of fault-tolerance. So, in Hadoop 3 allows users to run multiple standby NameNodes. For instance, by configuring three NameNodes (1 active and 2 passive) and five JournalNodes, the cluster can tolerate the failure of two nodes.</span></p>
+<p><a name="ChangedDefaultPorts"></a></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-46513 size-full" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/2-Passive-Namenode-Hadoop-Certification-Edureka.png" alt="2 Passive Namenode - Hadoop Certification - Edureka" width="1135" height="404" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/2-Passive-Namenode-Hadoop-Certification-Edureka.png 1135w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/2-Passive-Namenode-Hadoop-Certification-Edureka-150x53.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/2-Passive-Namenode-Hadoop-Certification-Edureka-300x107.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/2-Passive-Namenode-Hadoop-Certification-Edureka-768x273.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/2-Passive-Namenode-Hadoop-Certification-Edureka-528x188.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/2-Passive-Namenode-Hadoop-Certification-Edureka-506x180.png 506w" sizes="(max-width: 1135px) 100vw, 1135px" />Next, we will look at default ports of Hadoop services that have been changed in Hadoop 3.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>9. Default Ports of Multiple Services have been Changed</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Earlier, the default ports of multiple Hadoop services were in the Linux <em>ephemeral port range</em> (32768-61000). Unless a client program explicitly requests a specific port number, the port number used is an <b><i>ephemeral</i></b> port number. So at startup, services would sometimes fail to bind to the port due to a conflict with another application.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Thus the conflicting ports with ephemeral range have been moved out of that range, affecting port numbers of multiple services, i.e. the NameNode, Secondary NameNode, DataNode, etc. Some of the important ones are:</span></p>
+<p><a name="Hadoop3FileSystemConnector"></a><img class="aligncenter wp-image-46674 " src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Changed-Default-Ports-for-Hadoop-3-Hadoop-3-Edureka.png" alt="Changed Default Ports for Hadoop 3 -Hadoop 3 - Edureka" width="616" height="348" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Changed-Default-Ports-for-Hadoop-3-Hadoop-3-Edureka.png 2048w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Changed-Default-Ports-for-Hadoop-3-Hadoop-3-Edureka-150x85.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Changed-Default-Ports-for-Hadoop-3-Hadoop-3-Edureka-300x170.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Changed-Default-Ports-for-Hadoop-3-Hadoop-3-Edureka-768x435.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Changed-Default-Ports-for-Hadoop-3-Hadoop-3-Edureka-318x180.png 318w" sizes="(max-width: 616px) 100vw, 616px" /><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">There are few more which are expected. Now moving on, let us know what are new Hadoop 3 file system connecters.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>10. Support for Filesystem Connector</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Hadoop now supports integration with Microsoft Azure Data Lake and Aliyun Object Storage System. It can be used as an alternative Hadoop-compatible filesystem. First Microsoft Azure Data Lake was added and then they added Aliyun Object Storage System as well. You might expect some more.</span></p>
+<p><a name="IntraDataNodeBalancer"></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Let us understand how <em><strong>Balancer</strong> </em>have been improved within multiple disks in a Data Node.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>11. Intra-DataNode Balancer</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-46509 " src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Inter-Node-Balancer-Hadoop-Certification-Edureka.png" alt="Inter Node Balancer - Hadoop Certification - Edureka" width="517" height="358" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Inter-Node-Balancer-Hadoop-Certification-Edureka.png 1135w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Inter-Node-Balancer-Hadoop-Certification-Edureka-150x104.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Inter-Node-Balancer-Hadoop-Certification-Edureka-300x208.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Inter-Node-Balancer-Hadoop-Certification-Edureka-768x533.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Inter-Node-Balancer-Hadoop-Certification-Edureka-432x300.png 432w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Inter-Node-Balancer-Hadoop-Certification-Edureka-259x180.png 259w" sizes="(max-width: 517px) 100vw, 517px" /></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">A single DataNode manages multiple disks. During a normal write operation, data is divided evenly and thus, disks are filled up evenly. But adding or replacing disks leads to skew within a DataNode. This situation was earlier not handled by the existing HDFS balancer. This concerns intra-DataNode skew.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-46510 " src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Intra-Node-Balancer-Hadoop-Certification-Edureka.png" alt="Intra Node Balancer - Hadoop Certification - Edureka" width="555" height="192" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Intra-Node-Balancer-Hadoop-Certification-Edureka.png 1135w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Intra-Node-Balancer-Hadoop-Certification-Edureka-150x52.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Intra-Node-Balancer-Hadoop-Certification-Edureka-300x104.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Intra-Node-Balancer-Hadoop-Certification-Edureka-768x265.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Intra-Node-Balancer-Hadoop-Certification-Edureka-528x182.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Intra-Node-Balancer-Hadoop-Certification-Edureka-521x180.png 521w" sizes="(max-width: 555px) 100vw, 555px" /></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Now Hadoop 3 handles this situation by the new intra-DataNode balancing functionality, which is invoked via the hdfs diskbalancer CLI.</span></p>
+<p><a name="Hadoop3ReworkedDaemon"></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now let us take a look how various memory managements have taken place.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>12. Reworked Daemon and Task Heap Management</strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">A series of changes have been made to heap management for Hadoop daemons as well as MapReduce tasks.</span></p>
+<ul>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="font-size: 14px;">New methods for configuring daemon heap sizes. Notably, auto-tuning is now possible based on the memory size of the host, and the HADOOP_HEAPSIZE variable has been deprecated.In its place, HADOOP\_HEAPSIZE\_MAX and HADOOP\_HEAPSIZE\_MIN have been introduced to set Xmx and Xms, respectively. </span>All global and daemon-specific heap size variables now support units. If the variable is only a number, the size is assumed to be in megabytes.</span></li>
+</ul>
+<ul>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Simplification of the configuration of map and reduce task heap sizes, so the desired heap size no longer needs to be specified in both the task configuration and as a Java option. Existing configs that already specify both are not affected by this change.</span></li>
+</ul>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">I hope this blog was informative and added value to you. Apache community is still working on multiple enhancements which might come up until beta phase. We will keep you updated and come up with more blogs and videos on Hadoop 3.</span></p>
+<p style="text-align: center;"><a class="maxbutton-11 maxbutton maxbutton-enroll-blue-big" target="_blank" href="https://www.edureka.co/big-data-and-hadoop?utm_source=blog&#038;utm_medium=blog-cta&#038;utm_campaign=hadoop-3"><span class='mb-text'>MASTER HADOOP WITH EDUREKA</span></a></p>
+<p style="text-align: justify;"><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now that you know the expected changes in Hadoop 3, check out the </span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong><a href="http://www.edureka.co/big-data-and-hadoop/?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=hadoop3" target="_blank">Hadoop training</a></strong></span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> by Edureka, a trusted online learning company with a network of more than 250,000 satisfied learners spread across the globe. The Edureka Big Data Hadoop Certification Training course helps learners become expert in HDFS, Yarn, MapReduce, Pig, Hive, HBase, Oozie, Flume and Sqoop using real-time use cases on Retail, Social Media, Aviation, Tourism, Finance domain.</span></em></p>
+<div dir="ltr">
+<p style="text-align: justify;"><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Got a question for us? Please mention it in the comments section and we will get back to you.</span></em></p>
+</div>
+<p>&nbsp;</p>
+                                                    </p>
+                                                </article>
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <div id="author-bio-box"><img alt='Shubham Sinha' src='https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Shubham-Sinha_avatar-80x80.jpg' class='avatar avatar-80 photo' height='80' width='80' /><span class="author-name">About Shubham Sinha (<a href="https://www.edureka.co/blog/author/shubham-sinha/">12 Posts</a>)</span><p>Shubham Sinha is a Big Data and Hadoop expert working as a Research Analyst at Edureka. He is keen to work with Big Data related technologies such as Hadoop, Spark, Flink and Storm and web development technologies including Angular, Node.js & PHP.</p><div class="bio-socials"></div></div><br/><div class="clear"></div>                                                    </p>
+                                                </article>
+                                                <div class="bot-shareoption">
+                                                    <span class="Shareon-bot">
+                                                        Share on
+                                                    </span>
+                                                    <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_2' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_2' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_2' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_2' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/hadoop-3/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                                </div>
+                                                                                                    <article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 related-blog next-blog-leftnav">
+                                                        <ul class="pager">
+                                                            <li class="pull-left"><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i> PREVIOUS</a></li>
+                                                            <li class="pull-right"><a href="#" class="show-next-in-series">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </article>
+                                                                                                    <section id="edu-related-blog-carousel-2" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Posts</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/big-data-tutorial"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Big Data Tutorial: All You Need To Know About Big Data!</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 4.9K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/hadoop-tutorial/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Hadoop Tutorial: All you need to know about Hadoop!</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 31.3K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/hadoop-ecosystem"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Hadoop Ecosystem: Hadoop Tools for Crunching Big Data</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 12.8K</div>
+                            </div>
+                        </article></a>
+                    </div></div>
+                    </article></section>
+                                                <!--Comments Area Single post-->
+                                                <section class="padcomments" >
+    <span class="comments"> Comments <div class="arrow-down"></div></span>
+    <span class="pull-right comment"> 0 Comments </span>
+</section>
+<section class="commsec" id="comments-wrapper">
+    
+<div id="disqus_thread">
+    </div>
+
+</section>	
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>	
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-12 col-sm-12 no-padding blog-sidepanel"> 
+    <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maincontainer detailpagesidebar" 
+             data-post_type="post" 
+             data-post_name="hadoop-3" >
+             <section id="edu-related-blogs-2" class="right-side-widget custom-edu-widgets widget_edu-related-blogs"><h3 class="widget-title"><span>Related Blogs</span></h3><ul class="edu-hiran custom-widget-listing related-blogs"><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Top 50 Hadoop Interview Question for 2017 - Hadoop Interview Questions - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka-513x300.png 513w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/" class="custom-rel-article"><span>Top 50 Hadoop Interview Questions For 2017<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/big-data-tutorial" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Big Data Tutorial - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/big-data-tutorial" class="custom-rel-article"><span>Big Data Tutorial: All You Need To Know About Big...<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/hadoop-tutorial/" class="custom-rel-thumb"><img width="85" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Hadoop Tutorial - Big Data and Hadoop - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka-300x176.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka-513x300.png 513w" sizes="(max-width: 85px) 100vw, 85px" /></a><a href="https://www.edureka.co/blog/hadoop-tutorial/" class="custom-rel-article"><span>Hadoop Tutorial: All you need to know about Hadoop!<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/hadoop-ecosystem" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Hadoop Ecosystem - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem-513x300.png 513w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/hadoop-ecosystem" class="custom-rel-article"><span>Hadoop Ecosystem: Hadoop Tools for Crunching Big Data<span></a></article></li></ul></section><section id="edu-custom-subscribe-2" class="right-side-widget custom-edu-widgets widget_edu-custom-subscribe">        <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding Newsletter-sub">
+            
+                        <form id="subscribe-form" novalidate class="custom-subscribe-form-wrapper hide">
+                <div class="subscribesec">
+                                    <!--<div class="close-thissub"><i class="icon-cross"></i></div>	-->
+                    <div class="subscribesec-box">										
+                        <h4 class="clearfix subscribeblogtitle"><p><i class="icon-Mail_this_post"></i></p><span>Subscribe to get free Newsletter</span></h4>
+                        <section class="sectrendcom">
+                            <article class="relatedcontmain">
+                                <div class="input-group Subscribeinput">                              
+                                    <input name="subscription-mail" type="email" autocomplete="off" class="form-control " required placeholder="Enter Email"> 
+                                    <!-- Add classes successform and errorform to toggle the input form -->
+
+                                </div>
+                                <input type="hidden"  id="is_user_loggedin" value="0"/>
+                                <label id="loader" style="margin-left:120px;display:none" ><img src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/loader.gif" /></label>
+
+                                <p class="errormessage"> Please provide a valid Email Id </p>
+                            </article>                         
+                        </section>  
+                    </div>
+                    <div class="subscribesec-success">
+                        <i class="icon-success"></i>
+                        <p class="successmessage" style="display: none;"> Thank you, your subscription is successful</p> 
+                        <p class="alreadysubscribed" style="display: none;"> You have already subscribed.</p> 
+                    </div>
+                </div>
+                <button type="submit" id="subscribe-button" class="btn subscribebtn successbutton">
+                    <div class="sub-news-letter">SUBSCRIBE</div></button>
+            </form>
+            <div class="sub-browse-letter show-after-success hide">
+                <a class="" href="/all-courses" target="_blank">BROWSE COURSES</a>
+            </div>
+        </section>
+        </section></section>
+</div>
+<!-- Right Panel ends -->
+</div></div></div>
+</section>
+
+<footer class="footer-new" id="footer_v2">
+        <div class="container">
+        <div class="row">
+            <div class="padding-xs-only clearfix">
+                <div class="panel-group no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="col-md-12 visible-xs accordion-head">
+
+                            <a data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" href="javascript:void(0)">
+                                <h3 class="no-margin footer-new-hd-lineht"><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></h3>
+                                <p class=" margin-vr5 grey-txt marg-btm-0-xs">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd.</p>
+                                <i class="fa fa-angle-up"></i>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+
+                        </div>
+                        <div id="collapse1" class="div-collapse collapse clearfix">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 item-padding">
+                                <h4>Edureka</h4>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/about-us">About us</a></li>
+                                    <li><a href="https://www.edureka.co/allmedia">News & Media</a></li>
+                                    <li><a href="https://www.edureka.co/contact-us">Contact us</a></li>
+                                    <li><a href="https://www.edureka.co/careers">Careers</a></li>
+                                </ul>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/blog/all">Blog</a></li>
+                                    <li><a href="https://www.edureka.co/reviews">Reviews</a></li>
+                                    <li><a href="https://www.edureka.co/terms-and-conditions">Terms & conditions</a></li>
+                                    <li><a href="https://www.edureka.co/privacy-policy">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Work with us </h4>
+                                <ul class="list-unstyled footer-menu">
+                                    <li><a href="https://www.edureka.co/instructors/add">Become  an Instructor</a></li>
+                                    <li><a href="https://www.edureka.co/hire-from-edureka">Hire from Edureka</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3  col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Follow us on </h4>
+                                <ul class="list-unstyled footer-social-icon">
+                                    <li><a class="fb" target="_blank" href="https://www.facebook.com/edurekaIN"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="tw" target="_blank" href="https://twitter.com/edurekaIN"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="in" target="_blank" href="https://www.linkedin.com/company/edureka"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="ut" target="_blank" href="https://www.youtube.com/user/edurekaIN"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 item-padding padding-lft-25 text-center-xs">
+                                <h4>Learn on the GO!</h4>
+                                <ul class="list-unstyled footer-menu-store">
+                                    <li><a target="_blank" href="https://itunes.apple.com/in/app/edureka/id1033145415?mt=8">
+                                            <img alt="appleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/applestorebtn.png"></a></li>
+                                    <li><a target="_blank" href="https://play.google.com/store/apps/details?id=co.edureka.app">
+                                            <img alt="googleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/googleplaybtn.png"></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding border-top-half">
+                                <div class="padding-vr20 clearfix">
+                                    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-12 no-padding">
+                                        <h3 class="no-margin footer-new-hd-lineht"><a href=https://www.edureka.co><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></a></h3>
+                                        <p class=" margin-vr5 grey-txt">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd. All rights Reserved.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-7 col-xs-12 no-padding txt-marg-top text-xs-left">
+                                        <p class="grey-txt">"PMP®","PMI®", "PMI-ACP®" and "PMBOK®" are registered marks of the Project Management Institute, Inc. <br>
+                                            MongoDB®, Mongo and the leaf logo are the registered trademarks of MongoDB, Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<div class="footerbar">
+    <div class="container clearfix">
+        <div class="row">
+            <a href="javascript:void(0);" class="call-us">
+                <span><img src="//cdn.edureka.co/imgver.1496301546/img/phone-icon.png" alt="phoneicon"></span>
+                Call us on 
+                <span>1-800-275-9730 <i>(Toll Free)</i></span>
+                <span>+91 88808 62004</span>
+            </a>
+            <div class="dropdown pull-left hidden-xs">
+                <div class="bfh-selectbox country-style-footer triangle country-pop-small bfh-countries" data-country="IN" data-flags="true" data-filter="true">
+                    <input type="hidden" value="">
+                    <a class="bfh-selectbox-toggle res-popup" role="button" data-toggle="bfh-selectbox" href="#">
+                        <span class="bfh-selectbox-option input-medium" data-option="">
+                        </span>
+
+
+                    </a>
+                    <div class="bfh-selectbox-options">
+                        <input type="text" class="bfh-selectbox-filter">
+                        <div role="listbox">
+                            <ul role="option" class="dropdown-menu-scrollbar">
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="call-us-xs">
+            <h3>24 X 7 Customer Support
+                <a class="close-call" href="javascript:void(0);">X</a>
+            </h3>
+            <ul class="list-unstyled">
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/us-flag.png" alt="us flag"> 1-800-275-9730   (Toll Free)     </li>
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/ind-flag.png" alt="india flag"> +91 88808 62004</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                jQuery(function($) {
+                    function equalHeight(group) {
+                        tallest = 0;
+                        group.each(function() {
+                            thisHeight = $(this).height();
+                            if(thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        group.height(tallest);
+                    }
+
+                    equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+
+                    $(window).resize(function() {
+                        equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+                    });
+                });
+            </script>
+            <script type="text/javascript"> 
+				var fonts_loaded =[];
+			</script><!--email_off--><style type='text/css'>.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook{border-color:#000;box-shadow-color:#333;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon{text-align:center;padding-top:8px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff;font-size:21px}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-text{color:#fff}
+.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter{border-color:#000;box-shadow-color:#333;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff;font-size:22px}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-text{color:#fff}
+.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin{border-color:#000;box-shadow-color:#333;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff;font-size:22px}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-text{color:#fff}
+.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus{border-color:#000;box-shadow-color:#333;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff;font-size:22px}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-text{color:#fff}
+.maxcollection.maxcollection-1{display:inline-block;z-index:9999;margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px}.maxcollection.maxcollection-1 .mb-collection-item.item-24{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-25{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-26{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-27{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}
+.maxbutton-11.maxbutton.maxbutton-enroll-blue-big{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-11.maxbutton:hover.maxbutton-enroll-blue-big{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-11.maxbutton.maxbutton-enroll-blue-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-11.maxbutton:hover.maxbutton-enroll-blue-big .mb-text{color:#fff}
+</style><!--/email_off-->
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var postasmail = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/fancyquote.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var videolib = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/video-library.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/jquery.fitvids.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var fvpdata = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","nonce":"79d293a9a4","fitvids":"1","dynamic":"","overlay":"","opacity":"0.75","color":"b","width":"640"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/frontend.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var mb_ajax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/js/min/front.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons_fonts.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons-pro-front.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/bootstrap.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/masonry.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/imagesloaded.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.bootpag.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/nprogress.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/CustomScrollbar.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/owl.carousel.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0187-formValidation.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0188-bootstrap.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/blog.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects-related.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/mfb.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/signup.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var php_array = {"admin_ajax":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var wnm_custom = {"template_url":"\/blog\/wp-content\/themes\/edu-hiran"};
+var myAjax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var afp_vars = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","postID":"43296","single":"1"};
+var post_vars = {"postID":"43296","postType":"post"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/ajax-pagination.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.7.5","language":""},"disqusIdentifier":"43296 https:\/\/www.edureka.co\/blog\/?p=43296","disqusShortname":"edurekablog","disqusTitle":"What\u2019s New in Hadoop 3.0 \u2013 Enhancements in Apache Hadoop 3","disqusUrl":"https:\/\/www.edureka.co\/blog\/hadoop-3\/","options":{"manualSync":"1"},"postId":"43296"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/disqus.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"edurekablog"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/count.js'></script>
+
+
+</body>
+</html>
+<!-- mfunc setPostViews(get_the_ID()); --><!-- /mfunc -->
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 2841/2899 objects using disk
+Page Caching using disk
+Content Delivery Network via Amazon Web Services: CloudFront: cdn.edureka.co
+Database Caching 25/57 queries in 0.018 seconds using disk
+
+ Served from: www.edureka.co @ 2017-06-09 17:04:22 by W3 Total Cache -->

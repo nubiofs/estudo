@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.edureka.co/blog/xmlrpc.php" />
+        
+<!-- This site is optimized with the Yoast SEO plugin v4.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Cloud Security | A Guide for Cloud Users | Edureka Blog</title>
+<meta name="description" content="This Cloud Security blog covers the myths around cloud, explains how to choose the right architecture, also covers the different stages in assessing a risk."/>
+<meta name="robots" content="noodp"/>
+<meta name="keywords" content="aws security, cloud computing security, aws cloud security, security aws"/>
+<link rel="canonical" href="https://www.edureka.co/blog/cloud-security/" />
+<link rel="publisher" href="https://plus.google.com/+edurekaIN"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Cloud Security | A Guide for Cloud Users | Edureka Blog" />
+<meta property="og:description" content="This Cloud Security blog covers the myths around cloud, explains how to choose the right architecture, also covers the different stages in assessing a risk." />
+<meta property="og:url" content="https://www.edureka.co/blog/cloud-security/" />
+<meta property="og:site_name" content="Edureka Blog" />
+<meta property="article:publisher" content="https://www.facebook.com/edurekaIN/" />
+<meta property="article:section" content="Cloud Computing" />
+<meta property="article:published_time" content="2016-12-08T12:03:04+00:00" />
+<meta property="article:modified_time" content="2016-12-29T05:36:09+00:00" />
+<meta property="og:updated_time" content="2016-12-29T05:36:09+00:00" />
+<meta property="fb:app_id" content="334689249900154" />
+<meta property="og:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-11.png" />
+<meta property="og:image:width" content="815" />
+<meta property="og:image:height" content="477" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="This Cloud Security blog covers the myths around cloud, explains how to choose the right architecture, also covers the different stages in assessing a risk." />
+<meta name="twitter:title" content="Cloud Security | A Guide for Cloud Users | Edureka Blog" />
+<meta name="twitter:site" content="@edurekaIN" />
+<meta name="twitter:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-11.png" />
+<meta name="twitter:creator" content="@edurekaIN" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdn.edureka.co' />
+<link rel='dns-prefetch' href='//maxcdn.bootstrapcdn.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Edureka Blog &raquo; Cloud Security: A Guide for Cloud Users Comments Feed" href="https://www.edureka.co/blog/cloud-security/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.edureka.co\/blog\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='download-button-shortcode-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-button-shortcode/css/downloadbutton.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fancyquote-css-css'  href='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/css/fancyquote.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-fontAwesome-css-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-animate-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/animate.css' type='text/css' media='all' />
+<link rel='stylesheet' id='dg-grid-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/dg-grid.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fvp-frontend-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/styles/frontend.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mbpro-font-awesome-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/assets/libraries/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-font-awesome-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0121-font-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0121-font.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogmain-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogmain.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-nprogress-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/nprogress.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetail_newfont-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/Newfonts-ico.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-customscrollbar-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/CustomScrollbar.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-owl.carousel-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/owl.carousel.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetailnew-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogdetailnew.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0180-global-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0180-global.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-formhelpers-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap-formhelpers.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0181-formValidation-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0181-formValidation.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0139-common-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0139-common.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-dashboard-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/dashboard.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-header-2-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/header-2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-signin-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/new-signin-signup.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-mfb-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/mfb.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-main_css-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp_dlmp_styles-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/styles.css' type='text/css' media='all' />
+<link rel='https://api.w.org/' href='https://www.edureka.co/blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.edureka.co/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.edureka.co/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://www.edureka.co/blog/?p=39399' />
+<link rel="alternate" type="application/json+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fcloud-security%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fcloud-security%2F&#038;format=xml" />
+	<style type='text/css'>
+	.download-info .download-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+<style type="text/css">
+#author-bio-box {
+	float:left;
+	width: 99%;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	box-shadow: 5px 5px 2px #ddd;
+	padding: 5px;
+        margin-bottom: 10px;
+}
+#author-bio-box img {
+	float: left;
+	margin: 4px 10px 2px 4px;
+}
+#author-bio-box .author-name {
+	font-weight: bold;
+	margin-left: 2px;
+	font-size: 14px;
+}
+#author-bio-box p {
+	font-size: 13px;
+	line-height: 20px;
+        margin-left: 95px;
+        margin-top: 5px;
+}
+#author-bio-box thead th {
+	border: 0;
+}
+#author-bio-box tbody {
+	border: 0;
+}
+.bio-spacer { min-height:44px; padding: 1px; display: block; clear: both; border:1px;}
+.bio-socials {
+	border-top:1px solid #e8e8e8;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	width: 100%;
+	height: 32px;
+	clear: both;
+}
+</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://cdn.edureka.co/blog/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <script>
+            var webURL = 'https://www.edureka.co/';
+            var imgURL = 'https://cdn.edureka.co/imgver.1465813195/img/';
+            var kmkey = 'c685629a1766aa24ed42e4bc8476e8789cd97477';
+            var GaTID = 'UA-33865789-1';
+            var GaUATID = 'UA-33865789-2';
+            var iscustomerGA = 'false';
+            var repcustomerGA = 'false';
+            var baildown = true;
+            var homepageloadbanner = true;
+            var prev_offer_code = '';
+
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-33865789-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+        <!-- Google Code for Remarketing Tag -->
+        <!--------------------------------------------------
+        Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+        --------------------------------------------------->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 977137586;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+        <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+</head>
+<body class="post-template-default single single-post postid-39399 single-format-standard wpb-js-composer js-comp-ver-5.1.1 vc_responsive" id="margin-top-value">
+
+    <div id="fb-root"></div>
+    <script>
+
+            window.fbAsyncInit = function () {
+                FB.init({appId: '334689249900154', status: true, cookie: true,
+                    xfbml: true});
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+    </script>
+
+    <header id="header-II">
+        <section>
+            <nav style="" role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-homepage">
+                <div class="container menubar-visibility edureka-blog-header">
+                    <div class="navbar-header">
+                        <a href="/?utm_source=blog&utm_medium=blog-edureka-logo" class="navbar-brand" > <img alt="edureka!" src="/imgver.1496301546/img/logo.png"> </a> 			
+                    </div>
+                    <!-- ddl starts--><form action="/blog" class="main-search"><ul class="list-unstyled course-search-box-nav">
+                        <input  type="hidden" class="searchinputbox" id="categoryinputbox" value="">
+                        <input  type="hidden" class="searchinputbox" id="authorinputbox" value="">
+                        <li class="search-nav pull-left"><div class="dropdown  categories-filter-dropdown">
+    <a class="select_down dropdown-toggle search-drop menu-common catbtnblog catbtnblogmob btn" type="button" id="menu1" data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Select Category
+    </a>
+    <ul class="dropdown-menu list-inline search-header-navigation dropdown-menu-scrollbar" role="menu" aria-labelledby="menu1">
+        <li role="presentation"><a role="menuitem" tabindex="0" href="#" data-slug="" class="category-selector">Select Category</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="1" href="/blog/category/big-data-analytics" data-slug="big-data-analytics" class="category-selector">Big Data Analytics</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="2" href="/blog/category/big-data-nosql" data-slug="big-data-nosql" class="category-selector">Big Data NoSQL</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="3" href="/blog/category/business-intelligence" data-slug="business-intelligence" class="category-selector">Business Intelligence</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="4" href="/blog/category/cloud-computing" data-slug="cloud-computing" class="category-selector">Cloud Computing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="5" href="/blog/category/finance" data-slug="finance" class="category-selector">Finance</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="6" href="/blog/category/frameworks" data-slug="frameworks" class="category-selector">Frameworks</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="7" href="/blog/category/ibm-bluemix" data-slug="ibm-bluemix" class="category-selector">IBM Bluemix</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="8" href="/blog/category/marketing" data-slug="marketing" class="category-selector">Marketing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="9" href="/blog/category/mobile-development" data-slug="mobile-development" class="category-selector">Mobile Development</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="10" href="/blog/category/operations" data-slug="operations" class="category-selector">Operations</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="11" href="/blog/category/programming" data-slug="programming" class="category-selector">Programming</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="12" href="/blog/category/project-management" data-slug="project-management" class="category-selector">Project Management</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="13" href="/blog/category/success-story" data-slug="success-story" class="category-selector">Success Story</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="14" href="/blog/category/systems-architecture" data-slug="systems-architecture" class="category-selector">Systems &amp; Architecture</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="15" href="/blog/category/systems-engineering" data-slug="systems-engineering" class="category-selector">Systems Engineering</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="16" href="/blog/category/testing" data-slug="testing" class="category-selector">Testing</a>
+                </li>      
+    </ul>
+</div>
+<span id ="desktop-searchbox"><div id="remote" class="typeahead-container"><div class="typeahead-field">
+                        <span class="typeahead-query">
+                            <input type="text" maxlength="150" autocomplete="off" placeholder = "Search edureka blogs" value=""
+                          name="s" data-value="" class="search_inp collapse searchinputbox">
+                        </span><span class="typeahead-button"><i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></span></li></ul></form><form action="/blog" class="form-element-mobile">
+                    <div class="visible-sm visible-xs mobsearch" id="mobile-searchbox">
+                        <a data-toggle="collapse" id="mobile-search-icon" class="mobile-search-icon" href="#mobsearch" aria-expanded="false" aria-controls="mobsearch">
+                            <i class="fa fa-search search_ico visible-sm visible-xs"></i>
+                        </a><div class="collapse search-course" id="mobsearch" aria-expanded="false"><div>
+                    <div id="remote" class="typeahead-container result backdrop hint">
+                        <div class="typeahead-field"><span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" class="search_inp search_inp_mob" placeholder = "Search edureka blogs" name="s" type="text" value="" data-value="" ></span>
+                        <span class="typeahead-button">
+                        <i  class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></div></div></div></form><div class="loggedin-usernav-wrapper hide"><div aria-expanded="false" id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs">
+                <li >
+                    <div class="dropdown menu-dropdown dropdownafterlogin">
+                        <a href="javascript:void(0);" class="dropdown-toggle withripple" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false"> BROWSE COURSES <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                            <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=my-courses">My Courses</a></li>
+                            <li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="logged-in-customer hide"></li>
+                <li class="">
+                    <div class="dropdown user-dropdown">
+                        <a id="signin-logout" class="signin" href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292">Logout</a> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right profile pull-right">
+            <li class="dropdown userdrop hidden-lg hidden-md profile-pic-header">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+                    <img alt="" class="img30 user-image-icon" src="/imgver.1496301546/img//defaultpp2.png">     
+                </a>
+                <ul class="dropdown-menu user-menu profile-xs">
+                    <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=all-courses">My Courses</a></li>
+                    <li class="logged-in-customer hide"></li><li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                    <li> <a href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292" id="signin-logoutresp">Log Out</a> </li>
+                </ul>
+            </li>
+        </ul></div><div class="loggedout-usernav-wrapper hide"><a class="signin md-trigger" href="javascript:void(0)" data-modal="signin-modal" data-toggle="modal">Sign In</a><style>
+    .highlighterror input[type=text],
+    .highlighterror input[type=email],
+    .highlighterror input[type=password],
+    .highlighterror {
+        border-color: #ed1f24 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
+<!--googleon: all-->
+<div class="md-modal md-effect-1 newsigninsignup" id="signin-modal">
+    <div class="md-content">
+        <span id="signin_signup_cancel" class="md-close onclicktab pull-right">X</span>
+
+        <ul class="nav nav-tabs">
+            <li class="Signinspace active"><a class="onclicktab" data-toggle="tab" href="#LogIn"><span>Log In</span></a></li>
+            <li class="SignUpspace "><a class="onclicktab" data-toggle="tab" href="#SignUp"><span>Sign Up</span></a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="LogIn" class="tab-pane fade in active">
+                <div class="col-md-12 col-xs-12 signinformnew newsignclik">
+                    <form id="signinForm">
+                        <!--                        <form id="signinForm">-->
+                        <div class="alertnew" role="alert" >
+                            <span  id="signin_error_message" class="signin_formerror redalertnew" style="display: none;"><i class="fa fa-check-circle"></i>  Please enter a valid emailid</span>
+                        </div>
+                        <div class="form-group">
+                            <input id="inputName" type="email" class="form-control inputstyle emailnew inputNamesignup signinvalid" required autocomplete="off" placeholder="Email"  name="data[User][email]" value="" onkeyup="checkdisable();">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd" class="form-control inputstyle passwordnew masked" required autocomplete="off" placeholder="Password"  name="data[User][password]" value="">
+                            <div class="verficacheckeye" id="eye">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><a id="Forgotnew" href="javascript:void(0)" class="btn btn-link pull-left forgetpass">Forgot Password?</a>
+
+                            <button type="submit" class="bluebtn pull-right defdisablesignin ga-signin disabled"  id="signin-blog">Start Learning</button>
+                        </div>
+                    </form>
+                    <!--<div class="mobilealertnew green clearfix">
+                      <span class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i>  Verification Code sent to er.creator@gmail.com</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-12 col-xs-12 signinformnew forgetpassnew">
+                    <form id="resetcode">
+                        <div id="successmssg" class="alertnew" role="alert">
+                            <span id="messages"  class="greenalertnew hidden-xs"><i class="fa fa-check-circle"></i>  </span>
+                        </div>
+                        <div class="form-group">
+                            <input id="prefilledemail" type="email" disabled="disable" class="form-control inputstyle emailnew inputDisabled" required autocomplete="off" placeholder="Email">
+                            <input id="emailfield" type="hidden" class="form-control inputstyle"  name="data[User][email]">
+
+                            <!--<div class="verficacheck"><a href="" id="editemail">change ?</a></div>-->
+                        </div>
+                        <div class="form-group">
+                            <input id="otpfield" type="text" class="form-control inputstyle emailnew verifycheck" required autocomplete="off" placeholder="Verification code"  name="data[User][otpCode]">
+                            <input id="verificationfield" type="hidden" class="form-control inputstyle emailnew" required name="data[User][verification_code]">
+                            <div  class="verficacheck verifycheck"><div id="resendcode" href="javascript:void(0);" style="cursor: pointer;">resend ?</div></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd2" class="form-control inputstyle passwordnew masked" required autocomplete="off" min=8 placeholder="New Password"  name="data[User][password]">
+                            <div class="verficacheckeye" id="eye2">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><!--<a id="Backnew" href="#" class="btn btn-link pull-left forgetpass">Back</a>-->
+
+                            <button id="passresetbutton" type="submit" class="bluebtn pull-right">reset password</button>
+                        </div>
+                    </form>
+                    <div class="notestarreg verifycheck">
+                        * Can't find the email? Check your Spam folder or Promotions tab for an email from no-reply@edureka.co. Send us an email at <a href="mailto:support@edureka.co">support@edureka.co</a> or call us at +91 88808 62004
+                    </div>
+                </div>
+            </div>
+            <div id="SignUp" class="tab-pane fade  ">
+
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center signinformnew signupformnew">
+
+                    <form id="signupForm">
+                        <div class="alertnew" role="alert">
+                            <span id="signup_error_message" class="signup_formerror redalertnew hidden-xs " style="display: none;"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input value="/blog/" name="data[User][pageurl]" id="pageurl_signup" type="hidden">
+                            <div class="form-control-wrapper"><input id="signupname" class="form-control inputstyle empty" placeholder="Name*" required="" autocomplete="off" name="data[User][name]" type="text"></div>
+                            <i data-bv-icon-for="data[User][name]" class="form-control-feedback fv-icon-no-label fa fa-close" style="display: block;"></i>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input  id="signupemail" class="form-control inputstyle  empty" placeholder="Email*" required="" autocomplete="off" name="data[User][email]" type="email"></div><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        </div>
+                        <input style="display:none;" name="hiddenname" type="text">
+                        <input style="display:none;" name="hiddenpassword" type="password">
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][mobile]" id="mobnum" class="form-control inputstyle empty" placeholder="Mobile Number*" required="" name="data[User][mobile]" type="text"></div><i data-bv-icon-for="data[User][mobile]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+
+                        </div>
+                        <div class="form-group has-feedback">
+
+                            <div class="form-control-wrapper">
+                                <input id="pwd3" class="form-control inputstyle passwordnew masked empty" required="" autocomplete="off" placeholder="Password more than 8 characters*" name="data[User][password]" type="password"></div><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                            <div class="verficacheckeye" id="eye3">show</div>
+                        </div>
+                        <p class="signupinfotext">
+                            By Signing up you agree to our <span><a class=" withripple" href="/terms-and-conditions" target="_blank">T&amp;C</a></span> and <span>
+                                <a class=" withripple" href="/privacy-policy" target="_blank">Privacy Policy</a></span>
+                        </p>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding spaceafterbutton">
+                            <button type="submit" class="bluebtn pull-right defdisablesignup ga-signup disabled">Create an account</button>
+                        </div>
+
+                    </form>
+                    <!--<div class="mobilealertnew red clearfix">
+                      <span class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobileredclass" class="mobilealertnew red clearfix" style="display:none;">
+        <span id="mobileredmsg" class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input    </span>
+    </div>
+    <div id="mobilegreenclass"class="mobilealertnew green clearfix" style="display:none;">
+        <span id="mobilegreenmsg" class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i> </span>
+    </div>
+</div>
+<div class="md-overlay"></div>
+<section>
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="capturemobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header signup-header">
+                    <h4 class="modal-title color-white">
+                        <span class="pull-left">
+                            WELCOME <label id="capturemobile_user_name"></label>
+                        </span>
+                        <span class="pull-right">                           
+                        </span>
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 linkedin-content">
+                            <h5 class="line-height23">It seems we don't have your phone number. Please share as it helps us to provide better customer service. Thank you!</h5>
+                            <form id="captureMobileForm" action="" method="post">
+                                <input type="hidden" name="data[User][email]" id="email_capturemobile">
+                                <input type="hidden" name="data[User][password]" id="password_capturemobile">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Mobile Number" required name="data[User][mobile]">
+                                </div>
+                                <!--                                <button type="button"  class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn">Continue</button>-->
+                                <button type="button" id="btnCaptureMobile" class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn" style="">Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--googleon: all--><div class="navbar-collapse collapse navbar-right" id="navbar" aria-expanded="false">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs"><!--
+                <li><a href="/instructors/add">For Instructors</a></li> -->
+                <li><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Course</a></li>
+            </ul>
+        </div></div>                </div>
+            </nav>
+        </section>
+    </header>
+<section >
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding">
+                <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 left-menu"> 
+    <div class="row left-menu-row">
+<div class="side-menu"><nav class="navbar navbar-default" role="navigation">
+<div class="side-menu-container side-menu-blog"><button type="button" class="navbar-toggle navbar-tog-open-close side-body"><span class="fa fa-bars"></span></button><div class="side-nav-title"><h2>AWS Tutorial Series</h2></div><ul class="nav navbar-nav cus-nav-scroll dropdown-menu-scrollbar">
+<li class="first-level "><a href="https://www.edureka.co/blog/what-is-cloud-computing/"   data-currpage="cloud-security">What Is Cloud Computing?</a>
+</li>
+<li class="first-level active"><a href="https://www.edureka.co/blog/cloud-security/" class="active-link"  data-currpage="cloud-security">Cloud Security: A Guide for Cloud Users</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/what-is-aws/"   data-currpage="cloud-security">What is AWS? – An Introduction to AWS</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/amazon-aws-tutorial/"   data-currpage="cloud-security">AWS Tutorial: Introduction to Cloud Computing</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/ec2-aws-tutorial-elastic-compute-cloud/"   data-currpage="cloud-security">AWS EC2 Tutorial : Amazon Elastic Compute Cloud</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/s3-aws-amazon-simple-storage-service/"   data-currpage="cloud-security">AWS S3 Tutorial: Deep Dive into Amazon Simple Storage Service</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/aws-lambda-tutorial"   data-currpage="cloud-security">AWS Lambda Tutorial: Your Guide To Amazon Serverless Computing</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/rds-aws-tutorial/"   data-currpage="cloud-security">RDS AWS Tutorial: Getting Started With Relational Database Service</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/amazon-lightsail-tutorial/"   data-currpage="cloud-security">Amazon Lightsail Tutorial – An Introduction</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/aws-pricing/"   data-currpage="cloud-security">AWS Pricing – An Introduction to AWS Pricing</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/aws-certification-careers/"   data-currpage="cloud-security">AWS Certification – All you need to know</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/interview-questions/top-aws-architect-interview-questions-2016/"   data-currpage="cloud-security">Top AWS Architect Interview Questions For 2017!</a>
+</li>
+</ul></div></nav></div></div>
+</div>
+<!-- Right Panel ends -->
+                        <div class="col-lg-8 col-md-7 col-xs-12 col-sm-12 blogmobfull">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 bread-herohead">
+    <div class="herohead">
+        <div class="">
+            <div class="row">
+                                <div class="">
+                    <h6 class="breadcrumb-section hidden-xs ">
+                        <a class="text-bold text-normal underline-remove brdcrumclrinac" href="/blog">Home</a>
+                        <!--                        &nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog chevron-level-0"></i>&nbsp;&nbsp;
+                        <a class="text-bold text-normal underline-remove brdcrumclrac reset-filters post-type-level" href="/blog">Blogs&nbsp;&nbsp;</a>-->
+                        <i class="fa fa-chevron-right chevronblog chevron-level-1 ">&nbsp;&nbsp;</i>
+                        <a class="text-bold text-normal underline-remove brdcrumclrac post-type-breadcrum reset-filters " href="/blog">Blogs</a>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog hide cat-level-breadcrum"></i>&nbsp;&nbsp;
+                        <span class="text-bold text-normal underline-remove brdcrumclrac cat-level-breadcrum cat-level-breadcrum-title hide"></span>&nbsp;
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<!-- Top Navigation to be sent in blog phase 2 starts-->
+
+<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainnavigator">
+    <article class="navigatedetail col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <span class="blogall"><a href="https://www.edureka.co/blog//all"><i class="icon-Home_icon"></i></a></span>
+        <span class="bloghome"><a href="https://www.edureka.co/blog/">Blogs</a></span>
+        <span class="videohome"><a href="https://www.edureka.co/blog/videos">Videos</a></span>
+        <span class="interviewhome"><a href="https://www.edureka.co/blog/interview-questions">Interview Questions</a></span>
+    </article>
+</section>
+<!--Top Navigation to be sent in blog phase 2-->
+                            <section class="mainsecblog">
+                                <section class="blogmaincontainer">
+                                    <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding topsection">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogmainheading">
+        <h1 class="blogheading">
+            Cloud Security: A Guide for Cloud Users        </h1>
+        <span class="recommendedsec clearfix"><p>
+                                                    <i class="fa fa-bookmark newbookmark"></i> Recommended by  83 users                            </p>
+        </span>
+        <div class="top-sec-infodetail">
+            <span class="authorblog"><a href="https://www.edureka.co/blog/author/hemantedureka-co/" title="Posts by Hemant Sharma" rel="author">Hemant Sharma</a></span>
+            <span class="dateblog">Dec 8, 2016</span> 
+             
+<div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>        </div>
+    </article>
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topimage">
+        <img class="blogimg" src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/Heroimage 1.jpg" alt="Cloud Security: A Guide for Cloud Users" title="Cloud Security: A Guide for Cloud Users">    </article>
+</section>                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 no-padding hidden-sm hidden-xs share-leftnav">
+                                            <div class="nav-stacked-social affix-top" data-spy="affix" data-offset-top="350" data-offset-bottom="400">
+                                                <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_1' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_1' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_1' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_1' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                            </div>
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 no-padding">
+                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogdetailsec">
+    <article class="col-md-9 col-lg-9 col-sm-9 col-xs-12 blogdescription"> 
+        <span class="AddtoBookmark"><a  href="https://www.edureka.co/blog/cloud-security/" data-title="Cloud Security: A Guide for Cloud Users">
+                <i class="icon-Add_to_bookmark"></i>
+                <span class="Bookmark-text"><span>Add to</span> Bookmark</span></a>
+        </span>
+
+            <div class="modal thispost-mail fade" id="emailpostpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content centered">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span></button>
+                    <div class="Mailpost">
+                        <span class="icon"><i class="icon-Mail_this_post"></i></span>
+                        <span class="Mailthispost">Email this post</span>
+                        <form class="email-me-the-post" method="post" novalidate="novalidate">
+                            <div class="input-name  ">
+                                <input type="hidden" name="contentId" value="39399">
+                                <input type="text" name="name" class="required" required placeholder="Enter Your Name" autocomplete="false">
+                                <div class="error-name">
+                                    Please enter a valid input.
+                                </div>
+                            </div>
+                            <div class="input-email ">
+                                <input type="text" class="email required" required name="emails" placeholder="Enter Email ID’s ( Separated by commas )"  autocomplete="false">
+                                <div class="error-email">
+                                    Please enter a valid email id or comma separated email id's.
+                                </div>
+                            </div>
+                            <button type="submit" class="Submit-mailpost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="Mailpost-thankyou">
+                        <i class="icon-success"></i>
+                        <span class="Mailthispost">The post has been successfully mailed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="EmailthisPost" data-toggle="modal" data-target="#emailpostpop">
+            <i class="icon-Mail_this_post"></i>
+            <span class="EmailthisPost-text">Email <Span>this Post</span></span>
+        </span> 
+        <span class="viewsblogsec">
+            <span class="viewscount details-page-views-count"><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 3.6K</span>
+        </span>
+        <span class="commentsblogsec">
+            <a href="https://www.edureka.co/blog/cloud-security/#comments-wrapper" class="commentcount">
+                <span><i class="icon-comments"></i></span>
+            </a>&nbsp;&nbsp;
+            <a class="disqus-comment-count" data-disqus-url="https://www.edureka.co/blog/cloud-security/" href="https://www.edureka.co/blog/cloud-security/#disqus_thread" class="commentcount">
+                <span>0</span>
+            </a>
+        </span>
+    </article>
+            <article class="col-md-3 col-lg-3 col-sm-3 col-xs-12 related-blog hidden-sm hidden-xs">
+            <ul class="pager">
+                <li><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="show-next-in-series"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </article>
+            <!-- <article class = "col-md-3 col-lg-3 col-sm-3 col-xs-12 downloadpdfblog">
+         <span class = "downloadpdf"></span>
+ </article> -->
+</section>                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogcontentsec">
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <h2></h2>
+<h2><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Cloud Security</span></strong></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Cloud was a hype in 2010-2011, but today it has become a necessity. With a lot of organisations moving to cloud, the need for cloud security has become the top most priority. </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">But before that, those of you who are new to cloud computing, let’s have a quick look at what cloud computing is,</span></p>
+<p><img class="wp-image-39630 aligncenter" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-13-1.png" alt="cloud - cloud security - Edureka" width="411" height="382" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-13-1.png 616w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-13-1-300x279.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-13-1-323x300.png 323w" sizes="(max-width: 411px) 100vw, 411px" /></p>
+<h2 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><b>What is Cloud Computing?</b></span></h2>
+<p><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;"><img class="wp-image-39538 alignleft" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-14.png" alt="cloud-comic2 - cloud security - Edureka" width="104" height="119" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-14.png 264w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-14-263x300.png 263w" sizes="(max-width: 104px) 100vw, 104px" /></span></p>
+<p>&nbsp;</p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Cloud Computing often referred to as “the cloud”, in simple terms means storing or accessing your data and programs over the internet rather than your own hard drive.</span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><a class="maxbutton-16 maxbutton maxbutton-enroll-yellow-big" target="_blank" href="http://www.edureka.co/blog/what-is-cloud-computing/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=cloud-security"><span class='mb-text'>What is Cloud Computing Blog</span></a></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Let’s discuss the types of clouds now:</span></p>
+<p><img class="wp-image-39539 aligncenter" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-03.png" alt="cloud-architecture - cloud security - Edureka" width="526" height="149" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-03.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-03-300x85.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-03-768x217.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-03-528x149.png 528w" sizes="(max-width: 526px) 100vw, 526px" /></p>
+<h2 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><b>Public Cloud</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">In a public cloud deployment mode, the services which are deployed are open for public use and generally public cloud services are free. Technically there maybe no difference between a public cloud and a private cloud, but the security parameters are very different, since the public cloud is accessible by anyone there is a more risk factor involved with the same.</span></p>
+<h2 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><b>Private Cloud</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">A private cloud is operated solely for a single organization, it can be done by the same organization or a third-party organization. But usually the costs are high when you are using your own cloud since the hardware would be updated periodically, security also has to be kept in check since new threats come up every day.</span></p>
+<h2 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><b>Hybrid Cloud</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">A hybrid cloud consists the functionalities of both private and public cloud</span></p>
+<p style="text-align: center;"><a class="maxbutton-22 maxbutton maxbutton-certification-blue-big" target="_blank" href="http://www.edureka.co/cloudcomputing/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=cloud-security"><span class='mb-text'>Become a Cloud Expert!</span></a></p>
+<h2 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><b>How do customers decide between public, private, and hybrid clouds?</b></span></h2>
+<p style="text-align: center;"><img class="wp-image-39540 alignright" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-12.png" alt="select-architecture - cloud security - Edureka" width="306" height="252" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-12.png 616w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-12-300x247.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-12-364x300.png 364w" sizes="(max-width: 306px) 100vw, 306px" /></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Well, it depends on the user requirement that is, if the user feels that his information is too sensitive to be on any system rather than their own, they would opt for a private cloud</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">The best example for this could be DropBox, in their early days they started by using AWS S3 as their backend for storing objects, but now they have created their own storage technology which they monitor themselves.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Why they did this? </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Well they got so big, that public cloud pricing didn’t make sense any longer. According to them their software and hardware optimizations are more economically viable than storing their stuff on Amazon S3.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">But then if you are not a biggie like DropBox, and you are still on private infrastructure, maybe its time you think, Why not public cloud?</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Now why will a customer use public cloud? </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">First of all the pricing is pretty less, compared to the investment that a company would need to setup their own servers.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Secondly, when you are linked with a reputed Cloud Provider, the Availability of your files on the Cloud becomes higher.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Still confused whether you want to store your files or data on private or public cloud.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Let me tell you about hybrid cloud, with hybrid cloud you can keep your more “precious” data on your private infrastructure and the rest on the public cloud, this would be a “hybrid cloud”</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">So concluding, it all depends on the user requirement based on which he shall choose between public, private and hybrid cloud.</span></p>
+<h2 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><b>Can cloud computing security accelerate customer movement to the cloud?</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Yes, let’s look at some research done by gartner. Please go through the below stats:</span></p>
+<p><img class="alignleft wp-image-40132 size-full" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/gartner-1.png" width="852" height="479" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/gartner-1.png 852w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/gartner-1-300x169.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/gartner-1-768x432.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/gartner-1-528x297.png 528w" sizes="(max-width: 852px) 100vw, 852px" /></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 12px;">Source: Gartner</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Now this research was conducted for companies who are a little reluctant to move to cloud, and as you can clearly see in the above image that the foremost reason is security.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Now this does not mean that the cloud is not secure, but people have this perception. So basically if you can assure people that cloud is safe,  some acceleration may take place in the movement towards the cloud.</span></p>
+<h2 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><b>How do CIOs reconcile the tension between risk, cost, and user experience?</b></span></h2>
+<p><img class="alignleft wp-image-39541" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Question.png" alt="why - cloud security - Edureka" width="154" height="281" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Question.png 420w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Question-164x300.png 164w" sizes="(max-width: 154px) 100vw, 154px" /></p>
+<p>&nbsp;</p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Well I read this somewhere, Cloud Security is a mixture of science and art. </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Confused? Well, its an art of knowing till what extent should you put security on a service so that the user experience does not diminish.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">For example: Say suppose you have an application, and to make it secure you are asking the username and password at every operation, which makes sense as far as security is concerned, but then it hinders user experience.</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">So it’s an art to know when to stop, but at the same time it’s science, because you need to create algorithms or tools that provide the maximum security to your customer’s data.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Now when any new thing comes into the picture, people get skeptical about it. </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">There are a lot of “risks” that people think cloud computing has, let’s address these risks one by one:</span></p>
+<p style="text-align: center;"><a class="maxbutton-22 maxbutton maxbutton-certification-blue-big" target="_blank" href="http://www.edureka.co/cloudcomputing/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=cloud-security"><span class='mb-text'>Become a Cloud Security Expert!</span></a></p>
+<h2 style="text-align: justify;"><strong><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;">1. Cloud is insecure</span></strong></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Most of the times whenever you would talk about cloud, there would be a lot of people saying, the data is more secure on their own infrastructure rather than say some AWS server with AWS security.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Well this might make sense if the company would just focus on their private cloud’s security which obviously is not the case. But if the company does that, when will they focus on their own goals?</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Let’s talk about Cloud Providers, say AWS (the largest of them all), don’t you think AWS’s sole purpose is to make your data the most secure? Why, because that is what they are being paid for.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Also a fun fact, Amazon has hosted their own e-commerce website on AWS, which clears the air on whether AWS is reliable.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Cloud providers live, eat and breathe cloud security.</span></p>
+<h2 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><b>2. There are more breaches in the cloud</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">A study from Spring Alert Logic Report of 2014 shows that the cyber attacks in 2012-2013 were both targeted at private clouds and public clouds, but the private clouds were more susceptible to the attacks. Why? Because companies which setup their own servers are not that equipped compared to AWS or Azure or any other Cloud Provider for that matter.</span></p>
+<h2 style="text-align: justify;"><span style="font-size: 16px;"><b style="font-family: verdana, geneva, sans-serif;">3. Single tenant systems are more secure than multi-tenant systems.</b></span></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Well if you think logically, don’t you think that with multi-tenant systems you have an additional layer of security attached to it. Why? Because your content will be logically isolated from the rest of the tenants or users on the system, which is not there if you are using single-tenant systems. Therefore, in case a hacker wants to go through your system, he has to go through one additional layer of security. </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Concluding, these are all myths and also considering the saving in investments that you will be doing when you move your data to cloud and also the other benefits, it far outweighs the risks involved in cloud security.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Having said that, let’s move on to the focus of today’s discussion, how do your Cloud providers handle security.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">So let’s take an example here and assume that you are using an app for social networking. You click on some random link and nothing happens. Later you come to know, that spam messages are being sent from your account to all your contacts that are connected with you on that application.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">But then before you could even drop a mail or complain to the app’s support, they would already know the problem and would be up and running to solve it. How? Let’s understand.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">So basically Cloud Security has three stages:</span></p>
+<ul>
+<li style="font-weight: 400; text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Monitoring Data</span></strong></li>
+<li style="font-weight: 400; text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Gaining Visibility</span></strong></li>
+<li style="font-weight: 400; text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Managing Access</span></strong></li>
+</ul>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">The <strong>Cloud Monitoring</strong> tool which constantly analyses the data flow on your cloud application would alert as soon as some “weird” stuff starts happening on your application. How do they assess the “weird” stuff?</span></p>
+<p><img class="alignnone wp-image-39552 size-full" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-04.png" alt="cloud-monitoring - cloud security - Edureka" width="816" height="411" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-04.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-04-300x151.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-04-768x387.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-04-528x266.png 528w" sizes="(max-width: 816px) 100vw, 816px" /></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Well the cloud monitoring tool would have advanced machine learning algorithms which logs normal system behavior. </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">So any deviation from the normal system behavior would be a red flag, also the known hacking techniques are listed in its databas. So taking all of this into one picture your monitoring tool raises an alert whenever something fishy happens.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">Now once you would come to know there is something “not normal” going on, you would want to know when and where, comes stage 2, </span><b>gaining visibility</b><span style="font-weight: 400;">.</span></span></p>
+<p><img class="wp-image-39553 alignright" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-07.png" alt="visibility - cloud security - Edureka" width="156" height="153" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-07.png 306w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-07-300x295.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Cloud-Security-07-305x300.png 305w" sizes="(max-width: 156px) 100vw, 156px" /></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">This can be done using tools which gives you the visibility to the data which is coming in and out of your cloud. Using these you can track not only where the fault has occurred, but also “who” is responsible for the same. How?</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Well these tools look for patterns, and will list all the activities which are suspicious and hence see which user is responsible for the same.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Now the individual responsible would first have to be removed from the system right?</span></p>
+<p>&nbsp;</p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">Comes Stage 3, </span><b>managing access.</b></span></p>
+<p><img class="size-full wp-image-39413 aligncenter" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic8.png" alt="comic8" width="306" height="265" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic8.png 306w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic8-300x260.png 300w" sizes="(max-width: 306px) 100vw, 306px" /></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">The tools that will be managing access, will list all the users who are there on the system. Hence you  can track this individual and wipe him out of the system.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Now how did this individual or hacker got an admin access of your system? </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Most probably the password to your management console was cracked by the hacker and created an admin role for himself from the Access Management tool, and the rest became history.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Now what would your Cloud provider do after this? They would learn from this and evolve so that it never happens again.</span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Now this example is just for the sake of understanding, usually no hacker can get access of your password just like that. </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">The thing to focus here is that the cloud company evolved from this break in, they took measures to improve their cloud security so that the same can never be repeated. </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Now all cloud providers follow these stages. Let’s talk about the largest cloud provider, AWS.</span></p>
+<p><img class="aligncenter wp-image-39414 size-full" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic9.png" alt="aws - cloud security - Edureka" width="365" height="158" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic9.png 365w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic9-300x130.png 300w" sizes="(max-width: 365px) 100vw, 365px" /></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Does AWS follow these stages for aws cloud security? Let’s have a look:</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">For Cloud monitoring, AWS has </span><b>CloudWatch</b></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">For data visibility, AWS has </span><b>CloudTrail</b></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">And for managing access, AWS has </span></span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b>IAM</b></span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">These are the tools that AWS uses, let’s have a closer look at how they function.</span></p>
+<h2><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b>CloudWatch</b></span></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It gives you the ability to analyze the data coming in and out of your AWS resources. It has the following features related to cloud security:</span></p>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Monitor EC2 and other AWS resources:</span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Without installing additional software you can monitor your EC2’s performance using AWS CloudWatch.<img class="alignright wp-image-39415 size-full" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic10.png" alt="cloudwatch - cloud security - Edureka" width="223" height="233" /></span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The ability to monitor custom metrics:</span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">You can create custom metrics, and monitor them through CloudWatch.</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Monitor and store logs:</span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">You can monitor and store logs related to the activities happening on your AWS resources.</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Set Alarms:</span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">You can set alarms to specific triggers, such as an activity that needs immediate attention etc.</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">View Graphs and Statistics:</span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">You can visualize this data in form of graphs and other visual representations.</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Monitor and React to Resource Changes:</span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It can be configured in a way to respond to changes in the availability of a resource or when a resource is not functioning properly.</span></li>
+</ul>
+</li>
+</ul>
+<h2><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b>CloudTrail</b></span></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><img class="alignleft wp-image-39416 size-full" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic11.png" alt="cloudtrail - cloud security - Edureka" width="165" height="181" /></span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">CloudTrail is a logging service which can be used to log the history of API calls. It can also be used to identify which user from AWS Management Console requested the particular service. Taking reference from our example, this is the tool from where you will identify the notorious “hacker”.</span></p>
+<h2><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> </span></h2>
+<p>&nbsp;</p>
+<h2><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b>IAM  </b></span></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Identity and Access Management(IAM) is used to grant shared access to your AWS account. It has the following functions:</span></p>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Granular permissions:<img class="alignright wp-image-39417 size-full" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic11-1.png" alt="iam - cloud security - Edureka" width="240" height="240" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic11-1.png 240w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/comic11-1-150x150.png 150w" sizes="(max-width: 240px) 100vw, 240px" /></span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It can be used to grant access rights to different kind of users at a very cellular level. For e.g: You can grant read access to a specific user, and a read-write access to a different user.</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Secure access to applications running on EC2 environment:</span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">IAM can be used to give secure access by making the user to enter the credentials, to access the respective EC2 resources.</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Free to use:</span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">AWS has made IAM services free to use with any aws service which it is compatible.</span></li>
+</ul>
+</li>
+</ul>
+<h2><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>AWS Shield</strong></span></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It is managed DDOS denial service. Let&#8217;s quickly look at, what DDoS is?</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">DDoS is basically overloading your website with irrelevant traffic with the intention of taking your website down. How does it work? Hackers create a bot-net by infecting numerous computers connected on the internet, how? Remember those weird emails that you get sometimes on your mail? Lottery, medical aid etc. Basically they make you click on something, which installs a malware on your computer, which is then triggered to make your computer, a plus one, in the irrelevant traffic.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Insecure about your web application? Don&#8217;t be AWS Shield is here.<img class="wp-image-41801 alignright" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/awsddosattacksshield-370x229.png" alt="AWS-Shield - Cloud Security - Edureka" width="318" height="197" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/awsddosattacksshield-370x229.png 370w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/awsddosattacksshield-370x229-300x186.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/awsddosattacksshield-370x229-291x180.png 291w" sizes="(max-width: 318px) 100vw, 318px" /><br />
+</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It offers two type of services:</span></p>
+<ol>
+<li><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Standard</span></strong></li>
+<li><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Advanced</span></strong></li>
+</ol>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The<strong> Standard</strong>  package is free for all the users, and your web application on AWS is automatically covered with this package by default. It includes the following features:</span></p>
+<ul style="list-style-type: disc;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Quick Detection</span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Detects malicious traffic on the go by using anomaly algorithms.</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> Inline Mitigation Attacks</span>
+<ul style="list-style-type: circle;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Automatic mitigation techniques are built into AWS Shield giving you protection against common attacks.</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Add Custom Rules to support your application.</span></li>
+</ul>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Not enough? There is an <strong>Advanced</strong> package too. With a little extra cost, you can cover your Elastic Load Balancers, Route 53 and CloudFront resources.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">What all is included? Let&#8217;s have a look:</span></p>
+<ul style="list-style-type: disc;">
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Enhanced Detection</span>
+<ul style="list-style-type: circle;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It includes additional techniques like  resource specific monitoring, and also provides granular detection of DDoS attacks.</span></li>
+</ul>
+</li>
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Advanced Attack Mitigation</span>
+<ul style="list-style-type: circle;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">More sophisticated  automatic mitigations.</span></li>
+</ul>
+</li>
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Visibility and Attack Notification</span>
+<ul style="list-style-type: circle;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Real time notifications by using CloudWatch.</span></li>
+</ul>
+</li>
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Specialized Support</span>
+<ul style="list-style-type: circle;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">24&#215;7 support from a special DDoS response team.</span></li>
+</ul>
+</li>
+<li><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">DDoS Cost Protection</span>
+<ul style="list-style-type: circle;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Prevents cost spikes from overloading by DDoS attacks.</span></li>
+</ul>
+</li>
+</ul>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In conclusion, any cloud provider for its success follows the highest standards in Cloud Security, and gradually if not immediately, people who still don’t have faith on Cloud will understand it is a necessity to move on it. </span></p>
+<div><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">So that’s it guys! I hope you enjoyed this blog on Cloud Security. The things that you learnt in this Cloud Security blog are the most sought-after skill sets that recruiters look for in an AWS Solution Architect Professional. Here’s a collection of <a href="http://www.edureka.co/blog/interview-questions/top-aws-architect-interview-questions-2016/?utm_source=blog&amp;utm_medium=relevant-posts&amp;utm_campaign=cloud-security" target="_blank">AWS Architect interview questions</a> to help you prepare for your next AWS job interview. To learn more about AWS you can refer our <a href="http://www.edureka.co/blog/amazon-aws-tutorial/?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_term=cloud-security" target="_blank">Amazon AWS Tutorial</a> blog. We have also come up with a curriculum which covers exactly what you would need to crack the Solution Architect Exam! You can have a look at the course details for <a href="http://www.edureka.co/cloudcomputing?utm_source=blog&amp;utm_medium=relevant-posts&amp;utm_campaign=cloud-security" target="_blank">AWS Solution Architect</a> training.</span></div>
+<div></div>
+<p style="text-align: center;"><a class="maxbutton-22 maxbutton maxbutton-certification-blue-big" target="_blank" href="http://www.edureka.co/cloudcomputing/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=cloud-security"><span class='mb-text'>Become AWS Certified Now!</span></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em>Got a question for us? Please mention it in the comments section of this Cloud Security blog and we will get back to you.</em></span></p>
+                                                    </p>
+                                                </article>
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <div id="author-bio-box"><img alt='' src='https://secure.gravatar.com/avatar/4c774b6377fd08d8a31ad4c0fbdcad8c?s=80&d=mm&r=g' srcset="https://secure.gravatar.com/avatar/4c774b6377fd08d8a31ad4c0fbdcad8c?s=160&d=mm&r=g 2x" class='avatar avatar-80 photo' height='80' width='80' /><span class="author-name">About Hemant Sharma (<a href="https://www.edureka.co/blog/author/hemantedureka-co/">11 Posts</a>)</span><p></p><div class="bio-socials"></div></div><br/><div class="clear"></div>                                                    </p>
+                                                </article>
+                                                <div class="bot-shareoption">
+                                                    <span class="Shareon-bot">
+                                                        Share on
+                                                    </span>
+                                                    <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_2' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_2' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_2' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_2' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/cloud-security/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                                </div>
+                                                                                                    <article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 related-blog next-blog-leftnav">
+                                                        <ul class="pager">
+                                                            <li class="pull-left"><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i> PREVIOUS</a></li>
+                                                            <li class="pull-right"><a href="#" class="show-next-in-series">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </article>
+                                                                                                    <section id="edu-related-blog-carousel-2" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Posts</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/amazon-aws-tutorial/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>AWS Tutorial: Introduction to Cloud Computing</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 11.4K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/ec2-aws-tutorial-elastic-compute-cloud/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>AWS EC2 Tutorial : Amazon Elastic Compute Cloud</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 9.3K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/what-is-cloud-computing/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-09-1.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>What Is Cloud Computing?</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 8.4K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/rds-aws-tutorial/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/AWS-Feature.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>RDS AWS Tutorial: Getting Started With Relational Database Service</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 3.4K</div>
+                            </div>
+                        </article></a>
+                    </div></div>
+                    </article></section>
+                                                <!--Comments Area Single post-->
+                                                <section class="padcomments" >
+    <span class="comments"> Comments <div class="arrow-down"></div></span>
+    <span class="pull-right comment"> 0 Comments </span>
+</section>
+<section class="commsec" id="comments-wrapper">
+    
+<div id="disqus_thread">
+    </div>
+
+</section>	
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>	
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-12 col-sm-12 no-padding blog-sidepanel"> 
+    <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maincontainer detailpagesidebar" 
+             data-post_type="post" 
+             data-post_name="cloud-security" >
+             <section id="edu-related-blogs-2" class="right-side-widget custom-edu-widgets widget_edu-related-blogs"><h3 class="widget-title"><span>Related Blogs</span></h3><ul class="edu-hiran custom-widget-listing related-blogs"><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/amazon-aws-tutorial/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02.png" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/aws-cloud-computing-02-513x300.png 513w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/amazon-aws-tutorial/" class="custom-rel-article"><span>AWS Tutorial: Introduction to Cloud Computing<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/ec2-aws-tutorial-elastic-compute-cloud/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1.png" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1-768x448.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Ec2-IMG-Final-1-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/ec2-aws-tutorial-elastic-compute-cloud/" class="custom-rel-article"><span>AWS EC2 Tutorial : Amazon Elastic Compute Cloud<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/what-is-cloud-computing/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-09-1.png" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-09-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-09-1-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-09-1-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2013/03/What-is-Cloud-computing-09-1-513x300.png 513w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/what-is-cloud-computing/" class="custom-rel-article"><span>What Is Cloud Computing?<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/rds-aws-tutorial/" class="custom-rel-thumb"><img width="85" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/AWS-Feature.png" class="attachment-550x50 size-550x50 wp-post-image" alt="aws-feature" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/AWS-Feature.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/AWS-Feature-300x176.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/AWS-Feature-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/AWS-Feature-513x300.png 513w" sizes="(max-width: 85px) 100vw, 85px" /></a><a href="https://www.edureka.co/blog/rds-aws-tutorial/" class="custom-rel-article"><span>RDS AWS Tutorial: Getting Started With Relational Database Service<span></a></article></li></ul></section><section id="edu-ads-2" class="right-side-widget custom-edu-widgets widget_edu-ads"><section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 courseimgadv">
+                    <a href="http://www.edureka.co/cloudcomputing/?utm_source=blog&utm_medium=relevant-posts&utm_campaign=cloud-security" target="_blank" class="thumbnail custom-promotion" >
+                        <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/AWS-3.png" /></a></section></section><section id="edu-custom-subscribe-2" class="right-side-widget custom-edu-widgets widget_edu-custom-subscribe">        <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding Newsletter-sub">
+            
+                        <form id="subscribe-form" novalidate class="custom-subscribe-form-wrapper hide">
+                <div class="subscribesec">
+                                    <!--<div class="close-thissub"><i class="icon-cross"></i></div>	-->
+                    <div class="subscribesec-box">										
+                        <h4 class="clearfix subscribeblogtitle"><p><i class="icon-Mail_this_post"></i></p><span>Subscribe to get free Newsletter</span></h4>
+                        <section class="sectrendcom">
+                            <article class="relatedcontmain">
+                                <div class="input-group Subscribeinput">                              
+                                    <input name="subscription-mail" type="email" autocomplete="off" class="form-control " required placeholder="Enter Email"> 
+                                    <!-- Add classes successform and errorform to toggle the input form -->
+
+                                </div>
+                                <input type="hidden"  id="is_user_loggedin" value="0"/>
+                                <label id="loader" style="margin-left:120px;display:none" ><img src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/loader.gif" /></label>
+
+                                <p class="errormessage"> Please provide a valid Email Id </p>
+                            </article>                         
+                        </section>  
+                    </div>
+                    <div class="subscribesec-success">
+                        <i class="icon-success"></i>
+                        <p class="successmessage" style="display: none;"> Thank you, your subscription is successful</p> 
+                        <p class="alreadysubscribed" style="display: none;"> You have already subscribed.</p> 
+                    </div>
+                </div>
+                <button type="submit" id="subscribe-button" class="btn subscribebtn successbutton">
+                    <div class="sub-news-letter">SUBSCRIBE</div></button>
+            </form>
+            <div class="sub-browse-letter show-after-success hide">
+                <a class="" href="/all-courses" target="_blank">BROWSE COURSES</a>
+            </div>
+        </section>
+        </section></section>
+</div>
+<!-- Right Panel ends -->
+</div></div></div>
+</section>
+
+<footer class="footer-new" id="footer_v2">
+        <div class="container">
+        <div class="row">
+            <div class="padding-xs-only clearfix">
+                <div class="panel-group no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="col-md-12 visible-xs accordion-head">
+
+                            <a data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" href="javascript:void(0)">
+                                <h3 class="no-margin footer-new-hd-lineht"><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></h3>
+                                <p class=" margin-vr5 grey-txt marg-btm-0-xs">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd.</p>
+                                <i class="fa fa-angle-up"></i>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+
+                        </div>
+                        <div id="collapse1" class="div-collapse collapse clearfix">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 item-padding">
+                                <h4>Edureka</h4>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/about-us">About us</a></li>
+                                    <li><a href="https://www.edureka.co/allmedia">News & Media</a></li>
+                                    <li><a href="https://www.edureka.co/contact-us">Contact us</a></li>
+                                    <li><a href="https://www.edureka.co/careers">Careers</a></li>
+                                </ul>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/blog/all">Blog</a></li>
+                                    <li><a href="https://www.edureka.co/reviews">Reviews</a></li>
+                                    <li><a href="https://www.edureka.co/terms-and-conditions">Terms & conditions</a></li>
+                                    <li><a href="https://www.edureka.co/privacy-policy">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Work with us </h4>
+                                <ul class="list-unstyled footer-menu">
+                                    <li><a href="https://www.edureka.co/instructors/add">Become  an Instructor</a></li>
+                                    <li><a href="https://www.edureka.co/hire-from-edureka">Hire from Edureka</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3  col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Follow us on </h4>
+                                <ul class="list-unstyled footer-social-icon">
+                                    <li><a class="fb" target="_blank" href="https://www.facebook.com/edurekaIN"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="tw" target="_blank" href="https://twitter.com/edurekaIN"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="in" target="_blank" href="https://www.linkedin.com/company/edureka"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="ut" target="_blank" href="https://www.youtube.com/user/edurekaIN"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 item-padding padding-lft-25 text-center-xs">
+                                <h4>Learn on the GO!</h4>
+                                <ul class="list-unstyled footer-menu-store">
+                                    <li><a target="_blank" href="https://itunes.apple.com/in/app/edureka/id1033145415?mt=8">
+                                            <img alt="appleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/applestorebtn.png"></a></li>
+                                    <li><a target="_blank" href="https://play.google.com/store/apps/details?id=co.edureka.app">
+                                            <img alt="googleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/googleplaybtn.png"></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding border-top-half">
+                                <div class="padding-vr20 clearfix">
+                                    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-12 no-padding">
+                                        <h3 class="no-margin footer-new-hd-lineht"><a href=https://www.edureka.co><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></a></h3>
+                                        <p class=" margin-vr5 grey-txt">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd. All rights Reserved.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-7 col-xs-12 no-padding txt-marg-top text-xs-left">
+                                        <p class="grey-txt">"PMP®","PMI®", "PMI-ACP®" and "PMBOK®" are registered marks of the Project Management Institute, Inc. <br>
+                                            MongoDB®, Mongo and the leaf logo are the registered trademarks of MongoDB, Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<div class="footerbar">
+    <div class="container clearfix">
+        <div class="row">
+            <a href="javascript:void(0);" class="call-us">
+                <span><img src="//cdn.edureka.co/imgver.1496301546/img/phone-icon.png" alt="phoneicon"></span>
+                Call us on 
+                <span>1-800-275-9730 <i>(Toll Free)</i></span>
+                <span>+91 88808 62004</span>
+            </a>
+            <div class="dropdown pull-left hidden-xs">
+                <div class="bfh-selectbox country-style-footer triangle country-pop-small bfh-countries" data-country="IN" data-flags="true" data-filter="true">
+                    <input type="hidden" value="">
+                    <a class="bfh-selectbox-toggle res-popup" role="button" data-toggle="bfh-selectbox" href="#">
+                        <span class="bfh-selectbox-option input-medium" data-option="">
+                        </span>
+
+
+                    </a>
+                    <div class="bfh-selectbox-options">
+                        <input type="text" class="bfh-selectbox-filter">
+                        <div role="listbox">
+                            <ul role="option" class="dropdown-menu-scrollbar">
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="call-us-xs">
+            <h3>24 X 7 Customer Support
+                <a class="close-call" href="javascript:void(0);">X</a>
+            </h3>
+            <ul class="list-unstyled">
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/us-flag.png" alt="us flag"> 1-800-275-9730   (Toll Free)     </li>
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/ind-flag.png" alt="india flag"> +91 88808 62004</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                jQuery(function($) {
+                    function equalHeight(group) {
+                        tallest = 0;
+                        group.each(function() {
+                            thisHeight = $(this).height();
+                            if(thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        group.height(tallest);
+                    }
+
+                    equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+
+                    $(window).resize(function() {
+                        equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+                    });
+                });
+            </script>
+            <script type="text/javascript"> 
+				var fonts_loaded =[];
+			</script><!--email_off--><style type='text/css'>.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook{border-color:#000;box-shadow-color:#333;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon{text-align:center;padding-top:8px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff;font-size:21px}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-text{color:#fff}
+.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter{border-color:#000;box-shadow-color:#333;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff;font-size:22px}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-text{color:#fff}
+.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin{border-color:#000;box-shadow-color:#333;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff;font-size:22px}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-text{color:#fff}
+.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus{border-color:#000;box-shadow-color:#333;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff;font-size:22px}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-text{color:#fff}
+.maxcollection.maxcollection-1{display:inline-block;z-index:9999;margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px}.maxcollection.maxcollection-1 .mb-collection-item.item-24{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-25{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-26{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-27{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}
+.maxbutton-16.maxbutton.maxbutton-enroll-yellow-big{position:relative;text-decoration:none;display:inline-block;border-color:#e7a207;box-shadow-color:#e7a207;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(231, 162, 7, 1);-pie-background:linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(231, 162, 7, 1)), color-stop(1, rgba(231, 162, 7, 1)));background:-moz-linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:-o-linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1))}.maxbutton-16.maxbutton:hover.maxbutton-enroll-yellow-big{border-color:#e7a207;box-shadow-color:#e7a207;background:rgba(231, 162, 7, 1);-pie-background:linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(231, 162, 7, 1)), color-stop(1, rgba(231, 162, 7, 1)));background:-moz-linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:-o-linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1))}.maxbutton-16.maxbutton.maxbutton-enroll-yellow-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-16.maxbutton:hover.maxbutton-enroll-yellow-big .mb-text{color:#fff}
+.maxbutton-22.maxbutton.maxbutton-certification-blue-big{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton.maxbutton-certification-blue-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big .mb-text{color:#fff}
+</style><!--/email_off-->
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var postasmail = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/fancyquote.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var videolib = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/video-library.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/jquery.fitvids.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var fvpdata = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","nonce":"79d293a9a4","fitvids":"1","dynamic":"","overlay":"","opacity":"0.75","color":"b","width":"640"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/frontend.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var mb_ajax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/js/min/front.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons_fonts.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons-pro-front.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/bootstrap.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/masonry.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/imagesloaded.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.bootpag.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/nprogress.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/CustomScrollbar.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/owl.carousel.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0187-formValidation.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0188-bootstrap.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/blog.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects-related.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/mfb.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/signup.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var php_array = {"admin_ajax":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var wnm_custom = {"template_url":"\/blog\/wp-content\/themes\/edu-hiran"};
+var myAjax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var afp_vars = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","postID":"39399","single":"1"};
+var post_vars = {"postID":"39399","postType":"post"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/ajax-pagination.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.7.5","language":""},"disqusIdentifier":"39399 http:\/\/www.edureka.co\/blog\/?p=39399","disqusShortname":"edurekablog","disqusTitle":"Cloud Security: A Guide for Cloud Users","disqusUrl":"https:\/\/www.edureka.co\/blog\/cloud-security\/","options":{"manualSync":"1"},"postId":"39399"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/disqus.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"edurekablog"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/count.js'></script>
+
+
+</body>
+</html>
+<!-- mfunc setPostViews(get_the_ID()); --><!-- /mfunc -->
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 2013/2118 objects using disk
+Page Caching using disk
+Content Delivery Network via Amazon Web Services: CloudFront: cdn.edureka.co
+Database Caching 26/79 queries in 0.025 seconds using disk
+
+ Served from: www.edureka.co @ 2017-06-09 16:58:31 by W3 Total Cache -->

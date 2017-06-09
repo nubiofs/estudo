@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.edureka.co/blog/xmlrpc.php" />
+        
+<!-- This site is optimized with the Yoast SEO plugin v4.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Spark SQL Tutorial | Understanding Spark SQL With Examples | Edureka</title>
+<meta name="description" content="This tutorial introduces you to Spark SQL, a new module in Spark computation with hands-on querying examples for complete &amp; easy understanding."/>
+<meta name="robots" content="noodp"/>
+<meta name="keywords" content="introduction to spark sql, what is spark sql, spark sql versus shark, apache spark, spark rdd, spark query"/>
+<link rel="canonical" href="https://www.edureka.co/blog/spark-sql-tutorial/" />
+<link rel="publisher" href="https://plus.google.com/+edurekaIN"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Spark SQL Tutorial | Understanding Spark SQL With Examples | Edureka" />
+<meta property="og:description" content="This tutorial introduces you to Spark SQL, a new module in Spark computation with hands-on querying examples for complete &amp; easy understanding." />
+<meta property="og:url" content="https://www.edureka.co/blog/spark-sql-tutorial/" />
+<meta property="og:site_name" content="Edureka Blog" />
+<meta property="article:publisher" content="https://www.facebook.com/edurekaIN/" />
+<meta property="article:author" content="www.facebook.com/sandeep.dayananda" />
+<meta property="article:section" content="Apache Spark &amp; Scala" />
+<meta property="article:published_time" content="2017-01-02T06:06:32+00:00" />
+<meta property="article:modified_time" content="2017-05-08T14:25:25+00:00" />
+<meta property="og:updated_time" content="2017-05-08T14:25:25+00:00" />
+<meta property="fb:app_id" content="334689249900154" />
+<meta property="og:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Spark-SQL-Edureka.png" />
+<meta property="og:image:width" content="816" />
+<meta property="og:image:height" content="477" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="This tutorial introduces you to Spark SQL, a new module in Spark computation with hands-on querying examples for complete &amp; easy understanding." />
+<meta name="twitter:title" content="Spark SQL Tutorial | Understanding Spark SQL With Examples | Edureka" />
+<meta name="twitter:site" content="@edurekaIN" />
+<meta name="twitter:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Spark-SQL-Edureka.png" />
+<meta name="twitter:creator" content="@edurekaIN" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdn.edureka.co' />
+<link rel='dns-prefetch' href='//maxcdn.bootstrapcdn.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Edureka Blog &raquo; Spark SQL Tutorial &#8211; Understanding Spark SQL With Examples Comments Feed" href="https://www.edureka.co/blog/spark-sql-tutorial/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.edureka.co\/blog\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='download-button-shortcode-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-button-shortcode/css/downloadbutton.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fancyquote-css-css'  href='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/css/fancyquote.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-fontAwesome-css-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-animate-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/animate.css' type='text/css' media='all' />
+<link rel='stylesheet' id='dg-grid-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/dg-grid.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fvp-frontend-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/styles/frontend.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mbpro-font-awesome-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/assets/libraries/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-font-awesome-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0121-font-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0121-font.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogmain-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogmain.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-nprogress-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/nprogress.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetail_newfont-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/Newfonts-ico.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-customscrollbar-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/CustomScrollbar.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-owl.carousel-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/owl.carousel.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetailnew-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogdetailnew.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0180-global-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0180-global.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-formhelpers-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap-formhelpers.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0181-formValidation-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0181-formValidation.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0139-common-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0139-common.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-dashboard-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/dashboard.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-header-2-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/header-2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-signin-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/new-signin-signup.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-mfb-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/mfb.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-main_css-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp_dlmp_styles-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/styles.css' type='text/css' media='all' />
+<link rel='https://api.w.org/' href='https://www.edureka.co/blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.edureka.co/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.edureka.co/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://www.edureka.co/blog/?p=41572' />
+<link rel="alternate" type="application/json+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fspark-sql-tutorial%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fspark-sql-tutorial%2F&#038;format=xml" />
+	<style type='text/css'>
+	.download-info .download-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+<style type="text/css">
+#author-bio-box {
+	float:left;
+	width: 99%;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	box-shadow: 5px 5px 2px #ddd;
+	padding: 5px;
+        margin-bottom: 10px;
+}
+#author-bio-box img {
+	float: left;
+	margin: 4px 10px 2px 4px;
+}
+#author-bio-box .author-name {
+	font-weight: bold;
+	margin-left: 2px;
+	font-size: 14px;
+}
+#author-bio-box p {
+	font-size: 13px;
+	line-height: 20px;
+        margin-left: 95px;
+        margin-top: 5px;
+}
+#author-bio-box thead th {
+	border: 0;
+}
+#author-bio-box tbody {
+	border: 0;
+}
+.bio-spacer { min-height:44px; padding: 1px; display: block; clear: both; border:1px;}
+.bio-socials {
+	border-top:1px solid #e8e8e8;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	width: 100%;
+	height: 32px;
+	clear: both;
+}
+</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://cdn.edureka.co/blog/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <script>
+            var webURL = 'https://www.edureka.co/';
+            var imgURL = 'https://cdn.edureka.co/imgver.1465813195/img/';
+            var kmkey = 'c685629a1766aa24ed42e4bc8476e8789cd97477';
+            var GaTID = 'UA-33865789-1';
+            var GaUATID = 'UA-33865789-2';
+            var iscustomerGA = 'false';
+            var repcustomerGA = 'false';
+            var baildown = true;
+            var homepageloadbanner = true;
+            var prev_offer_code = '';
+
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-33865789-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+        <!-- Google Code for Remarketing Tag -->
+        <!--------------------------------------------------
+        Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+        --------------------------------------------------->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 977137586;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+        <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+</head>
+<body class="post-template-default single single-post postid-41572 single-format-standard wpb-js-composer js-comp-ver-5.1.1 vc_responsive" id="margin-top-value">
+
+    <div id="fb-root"></div>
+    <script>
+
+            window.fbAsyncInit = function () {
+                FB.init({appId: '334689249900154', status: true, cookie: true,
+                    xfbml: true});
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+    </script>
+
+    <header id="header-II">
+        <section>
+            <nav style="" role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-homepage">
+                <div class="container menubar-visibility edureka-blog-header">
+                    <div class="navbar-header">
+                        <a href="/?utm_source=blog&utm_medium=blog-edureka-logo" class="navbar-brand" > <img alt="edureka!" src="/imgver.1496301546/img/logo.png"> </a> 			
+                    </div>
+                    <!-- ddl starts--><form action="/blog" class="main-search"><ul class="list-unstyled course-search-box-nav">
+                        <input  type="hidden" class="searchinputbox" id="categoryinputbox" value="">
+                        <input  type="hidden" class="searchinputbox" id="authorinputbox" value="">
+                        <li class="search-nav pull-left"><div class="dropdown  categories-filter-dropdown">
+    <a class="select_down dropdown-toggle search-drop menu-common catbtnblog catbtnblogmob btn" type="button" id="menu1" data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Select Category
+    </a>
+    <ul class="dropdown-menu list-inline search-header-navigation dropdown-menu-scrollbar" role="menu" aria-labelledby="menu1">
+        <li role="presentation"><a role="menuitem" tabindex="0" href="#" data-slug="" class="category-selector">Select Category</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="1" href="/blog/category/big-data-analytics" data-slug="big-data-analytics" class="category-selector">Big Data Analytics</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="2" href="/blog/category/big-data-nosql" data-slug="big-data-nosql" class="category-selector">Big Data NoSQL</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="3" href="/blog/category/business-intelligence" data-slug="business-intelligence" class="category-selector">Business Intelligence</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="4" href="/blog/category/cloud-computing" data-slug="cloud-computing" class="category-selector">Cloud Computing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="5" href="/blog/category/finance" data-slug="finance" class="category-selector">Finance</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="6" href="/blog/category/frameworks" data-slug="frameworks" class="category-selector">Frameworks</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="7" href="/blog/category/ibm-bluemix" data-slug="ibm-bluemix" class="category-selector">IBM Bluemix</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="8" href="/blog/category/marketing" data-slug="marketing" class="category-selector">Marketing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="9" href="/blog/category/mobile-development" data-slug="mobile-development" class="category-selector">Mobile Development</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="10" href="/blog/category/operations" data-slug="operations" class="category-selector">Operations</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="11" href="/blog/category/programming" data-slug="programming" class="category-selector">Programming</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="12" href="/blog/category/project-management" data-slug="project-management" class="category-selector">Project Management</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="13" href="/blog/category/success-story" data-slug="success-story" class="category-selector">Success Story</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="14" href="/blog/category/systems-architecture" data-slug="systems-architecture" class="category-selector">Systems &amp; Architecture</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="15" href="/blog/category/systems-engineering" data-slug="systems-engineering" class="category-selector">Systems Engineering</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="16" href="/blog/category/testing" data-slug="testing" class="category-selector">Testing</a>
+                </li>      
+    </ul>
+</div>
+<span id ="desktop-searchbox"><div id="remote" class="typeahead-container"><div class="typeahead-field">
+                        <span class="typeahead-query">
+                            <input type="text" maxlength="150" autocomplete="off" placeholder = "Search edureka blogs" value=""
+                          name="s" data-value="" class="search_inp collapse searchinputbox">
+                        </span><span class="typeahead-button"><i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></span></li></ul></form><form action="/blog" class="form-element-mobile">
+                    <div class="visible-sm visible-xs mobsearch" id="mobile-searchbox">
+                        <a data-toggle="collapse" id="mobile-search-icon" class="mobile-search-icon" href="#mobsearch" aria-expanded="false" aria-controls="mobsearch">
+                            <i class="fa fa-search search_ico visible-sm visible-xs"></i>
+                        </a><div class="collapse search-course" id="mobsearch" aria-expanded="false"><div>
+                    <div id="remote" class="typeahead-container result backdrop hint">
+                        <div class="typeahead-field"><span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" class="search_inp search_inp_mob" placeholder = "Search edureka blogs" name="s" type="text" value="" data-value="" ></span>
+                        <span class="typeahead-button">
+                        <i  class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></div></div></div></form><div class="loggedin-usernav-wrapper hide"><div aria-expanded="false" id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs">
+                <li >
+                    <div class="dropdown menu-dropdown dropdownafterlogin">
+                        <a href="javascript:void(0);" class="dropdown-toggle withripple" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false"> BROWSE COURSES <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                            <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=my-courses">My Courses</a></li>
+                            <li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="logged-in-customer hide"></li>
+                <li class="">
+                    <div class="dropdown user-dropdown">
+                        <a id="signin-logout" class="signin" href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292">Logout</a> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right profile pull-right">
+            <li class="dropdown userdrop hidden-lg hidden-md profile-pic-header">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+                    <img alt="" class="img30 user-image-icon" src="/imgver.1496301546/img//defaultpp2.png">     
+                </a>
+                <ul class="dropdown-menu user-menu profile-xs">
+                    <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=all-courses">My Courses</a></li>
+                    <li class="logged-in-customer hide"></li><li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                    <li> <a href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292" id="signin-logoutresp">Log Out</a> </li>
+                </ul>
+            </li>
+        </ul></div><div class="loggedout-usernav-wrapper hide"><a class="signin md-trigger" href="javascript:void(0)" data-modal="signin-modal" data-toggle="modal">Sign In</a><style>
+    .highlighterror input[type=text],
+    .highlighterror input[type=email],
+    .highlighterror input[type=password],
+    .highlighterror {
+        border-color: #ed1f24 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
+<!--googleon: all-->
+<div class="md-modal md-effect-1 newsigninsignup" id="signin-modal">
+    <div class="md-content">
+        <span id="signin_signup_cancel" class="md-close onclicktab pull-right">X</span>
+
+        <ul class="nav nav-tabs">
+            <li class="Signinspace active"><a class="onclicktab" data-toggle="tab" href="#LogIn"><span>Log In</span></a></li>
+            <li class="SignUpspace "><a class="onclicktab" data-toggle="tab" href="#SignUp"><span>Sign Up</span></a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="LogIn" class="tab-pane fade in active">
+                <div class="col-md-12 col-xs-12 signinformnew newsignclik">
+                    <form id="signinForm">
+                        <!--                        <form id="signinForm">-->
+                        <div class="alertnew" role="alert" >
+                            <span  id="signin_error_message" class="signin_formerror redalertnew" style="display: none;"><i class="fa fa-check-circle"></i>  Please enter a valid emailid</span>
+                        </div>
+                        <div class="form-group">
+                            <input id="inputName" type="email" class="form-control inputstyle emailnew inputNamesignup signinvalid" required autocomplete="off" placeholder="Email"  name="data[User][email]" value="" onkeyup="checkdisable();">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd" class="form-control inputstyle passwordnew masked" required autocomplete="off" placeholder="Password"  name="data[User][password]" value="">
+                            <div class="verficacheckeye" id="eye">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><a id="Forgotnew" href="javascript:void(0)" class="btn btn-link pull-left forgetpass">Forgot Password?</a>
+
+                            <button type="submit" class="bluebtn pull-right defdisablesignin ga-signin disabled"  id="signin-blog">Start Learning</button>
+                        </div>
+                    </form>
+                    <!--<div class="mobilealertnew green clearfix">
+                      <span class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i>  Verification Code sent to er.creator@gmail.com</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-12 col-xs-12 signinformnew forgetpassnew">
+                    <form id="resetcode">
+                        <div id="successmssg" class="alertnew" role="alert">
+                            <span id="messages"  class="greenalertnew hidden-xs"><i class="fa fa-check-circle"></i>  </span>
+                        </div>
+                        <div class="form-group">
+                            <input id="prefilledemail" type="email" disabled="disable" class="form-control inputstyle emailnew inputDisabled" required autocomplete="off" placeholder="Email">
+                            <input id="emailfield" type="hidden" class="form-control inputstyle"  name="data[User][email]">
+
+                            <!--<div class="verficacheck"><a href="" id="editemail">change ?</a></div>-->
+                        </div>
+                        <div class="form-group">
+                            <input id="otpfield" type="text" class="form-control inputstyle emailnew verifycheck" required autocomplete="off" placeholder="Verification code"  name="data[User][otpCode]">
+                            <input id="verificationfield" type="hidden" class="form-control inputstyle emailnew" required name="data[User][verification_code]">
+                            <div  class="verficacheck verifycheck"><div id="resendcode" href="javascript:void(0);" style="cursor: pointer;">resend ?</div></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd2" class="form-control inputstyle passwordnew masked" required autocomplete="off" min=8 placeholder="New Password"  name="data[User][password]">
+                            <div class="verficacheckeye" id="eye2">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><!--<a id="Backnew" href="#" class="btn btn-link pull-left forgetpass">Back</a>-->
+
+                            <button id="passresetbutton" type="submit" class="bluebtn pull-right">reset password</button>
+                        </div>
+                    </form>
+                    <div class="notestarreg verifycheck">
+                        * Can't find the email? Check your Spam folder or Promotions tab for an email from no-reply@edureka.co. Send us an email at <a href="mailto:support@edureka.co">support@edureka.co</a> or call us at +91 88808 62004
+                    </div>
+                </div>
+            </div>
+            <div id="SignUp" class="tab-pane fade  ">
+
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center signinformnew signupformnew">
+
+                    <form id="signupForm">
+                        <div class="alertnew" role="alert">
+                            <span id="signup_error_message" class="signup_formerror redalertnew hidden-xs " style="display: none;"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input value="/blog/" name="data[User][pageurl]" id="pageurl_signup" type="hidden">
+                            <div class="form-control-wrapper"><input id="signupname" class="form-control inputstyle empty" placeholder="Name*" required="" autocomplete="off" name="data[User][name]" type="text"></div>
+                            <i data-bv-icon-for="data[User][name]" class="form-control-feedback fv-icon-no-label fa fa-close" style="display: block;"></i>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input  id="signupemail" class="form-control inputstyle  empty" placeholder="Email*" required="" autocomplete="off" name="data[User][email]" type="email"></div><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        </div>
+                        <input style="display:none;" name="hiddenname" type="text">
+                        <input style="display:none;" name="hiddenpassword" type="password">
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][mobile]" id="mobnum" class="form-control inputstyle empty" placeholder="Mobile Number*" required="" name="data[User][mobile]" type="text"></div><i data-bv-icon-for="data[User][mobile]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+
+                        </div>
+                        <div class="form-group has-feedback">
+
+                            <div class="form-control-wrapper">
+                                <input id="pwd3" class="form-control inputstyle passwordnew masked empty" required="" autocomplete="off" placeholder="Password more than 8 characters*" name="data[User][password]" type="password"></div><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                            <div class="verficacheckeye" id="eye3">show</div>
+                        </div>
+                        <p class="signupinfotext">
+                            By Signing up you agree to our <span><a class=" withripple" href="/terms-and-conditions" target="_blank">T&amp;C</a></span> and <span>
+                                <a class=" withripple" href="/privacy-policy" target="_blank">Privacy Policy</a></span>
+                        </p>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding spaceafterbutton">
+                            <button type="submit" class="bluebtn pull-right defdisablesignup ga-signup disabled">Create an account</button>
+                        </div>
+
+                    </form>
+                    <!--<div class="mobilealertnew red clearfix">
+                      <span class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobileredclass" class="mobilealertnew red clearfix" style="display:none;">
+        <span id="mobileredmsg" class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input    </span>
+    </div>
+    <div id="mobilegreenclass"class="mobilealertnew green clearfix" style="display:none;">
+        <span id="mobilegreenmsg" class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i> </span>
+    </div>
+</div>
+<div class="md-overlay"></div>
+<section>
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="capturemobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header signup-header">
+                    <h4 class="modal-title color-white">
+                        <span class="pull-left">
+                            WELCOME <label id="capturemobile_user_name"></label>
+                        </span>
+                        <span class="pull-right">                           
+                        </span>
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 linkedin-content">
+                            <h5 class="line-height23">It seems we don't have your phone number. Please share as it helps us to provide better customer service. Thank you!</h5>
+                            <form id="captureMobileForm" action="" method="post">
+                                <input type="hidden" name="data[User][email]" id="email_capturemobile">
+                                <input type="hidden" name="data[User][password]" id="password_capturemobile">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Mobile Number" required name="data[User][mobile]">
+                                </div>
+                                <!--                                <button type="button"  class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn">Continue</button>-->
+                                <button type="button" id="btnCaptureMobile" class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn" style="">Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--googleon: all--><div class="navbar-collapse collapse navbar-right" id="navbar" aria-expanded="false">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs"><!--
+                <li><a href="/instructors/add">For Instructors</a></li> -->
+                <li><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Course</a></li>
+            </ul>
+        </div></div>                </div>
+            </nav>
+        </section>
+    </header>
+<section >
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding">
+                <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 left-menu"> 
+    <div class="row left-menu-row">
+<div class="side-menu"><nav class="navbar navbar-default" role="navigation">
+<div class="side-menu-container side-menu-blog"><button type="button" class="navbar-toggle navbar-tog-open-close side-body"><span class="fa fa-bars"></span></button><div class="side-nav-title"><h2>Spark Tutorial Series</h2></div><ul class="nav navbar-nav cus-nav-scroll dropdown-menu-scrollbar">
+<li class="first-level "><a href="https://www.edureka.co/blog/spark-tutorial/"   data-currpage="spark-sql-tutorial">Spark Tutorial: Real Time Cluster Computing Framework</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/spark-streaming/"   data-currpage="spark-sql-tutorial">Spark Streaming Tutorial – Sentiment Analysis Using Apache Spark</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/spark-mllib/"   data-currpage="spark-sql-tutorial">Spark MLlib – Machine Learning Library Of Apache Spark</a>
+</li>
+<li class="first-level active"><a href="https://www.edureka.co/blog/spark-sql-tutorial/" class="active-link"  data-currpage="spark-sql-tutorial">Spark SQL Tutorial – Understanding Spark SQL With Examples</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/spark-graphx/"   data-currpage="spark-sql-tutorial">Spark GraphX Tutorial – Graph Analytics In Apache Spark</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/interview-questions/top-apache-spark-interview-questions-2016/"   data-currpage="spark-sql-tutorial">Top Apache Spark Interview Questions You Should Prepare For In 2017</a>
+</li>
+</ul></div></nav></div></div>
+</div>
+<!-- Right Panel ends -->
+                        <div class="col-lg-8 col-md-7 col-xs-12 col-sm-12 blogmobfull">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 bread-herohead">
+    <div class="herohead">
+        <div class="">
+            <div class="row">
+                                <div class="">
+                    <h6 class="breadcrumb-section hidden-xs ">
+                        <a class="text-bold text-normal underline-remove brdcrumclrinac" href="/blog">Home</a>
+                        <!--                        &nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog chevron-level-0"></i>&nbsp;&nbsp;
+                        <a class="text-bold text-normal underline-remove brdcrumclrac reset-filters post-type-level" href="/blog">Blogs&nbsp;&nbsp;</a>-->
+                        <i class="fa fa-chevron-right chevronblog chevron-level-1 ">&nbsp;&nbsp;</i>
+                        <a class="text-bold text-normal underline-remove brdcrumclrac post-type-breadcrum reset-filters " href="/blog">Blogs</a>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog  cat-level-breadcrum"></i>&nbsp;&nbsp;
+                        <span class="text-bold text-normal underline-remove brdcrumclrac cat-level-breadcrum cat-level-breadcrum-title ">Big Data Analytics</span>&nbsp;
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<!-- Top Navigation to be sent in blog phase 2 starts-->
+
+<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainnavigator">
+    <article class="navigatedetail col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <span class="blogall"><a href="https://www.edureka.co/blog//all"><i class="icon-Home_icon"></i></a></span>
+        <span class="bloghome"><a href="https://www.edureka.co/blog/">Blogs</a></span>
+        <span class="videohome"><a href="https://www.edureka.co/blog/videos">Videos</a></span>
+        <span class="interviewhome"><a href="https://www.edureka.co/blog/interview-questions">Interview Questions</a></span>
+    </article>
+</section>
+<!--Top Navigation to be sent in blog phase 2-->
+                            <section class="mainsecblog">
+                                <section class="blogmaincontainer">
+                                    <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding topsection">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogmainheading">
+        <h1 class="blogheading">
+            Spark SQL Tutorial &#8211; Understanding Spark SQL With Examples        </h1>
+        <span class="recommendedsec clearfix"><p>
+                                                    <i class="fa fa-bookmark newbookmark"></i> Recommended by  48 users                            </p>
+        </span>
+        <div class="top-sec-infodetail">
+            <span class="authorblog"><a href="https://www.edureka.co/blog/author/sandeepdedureka-co/" title="Posts by Sandeep Dayananda" rel="author">Sandeep Dayananda</a></span>
+            <span class="dateblog">Jan 2, 2017</span> 
+             
+<div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>        </div>
+    </article>
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topimage">
+        <img class="blogimg" src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/Heroimage 1.jpg" alt="Spark SQL Tutorial &#8211; Understanding Spark SQL With Examples" title="Spark SQL Tutorial &#8211; Understanding Spark SQL With Examples">    </article>
+</section>                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 no-padding hidden-sm hidden-xs share-leftnav">
+                                            <div class="nav-stacked-social affix-top" data-spy="affix" data-offset-top="350" data-offset-bottom="400">
+                                                <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_1' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_1' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_1' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_1' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                            </div>
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 no-padding">
+                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogdetailsec">
+    <article class="col-md-9 col-lg-9 col-sm-9 col-xs-12 blogdescription"> 
+        <span class="AddtoBookmark"><a  href="https://www.edureka.co/blog/spark-sql-tutorial/" data-title="Spark SQL Tutorial &#8211; Understanding Spark SQL With Examples">
+                <i class="icon-Add_to_bookmark"></i>
+                <span class="Bookmark-text"><span>Add to</span> Bookmark</span></a>
+        </span>
+
+            <div class="modal thispost-mail fade" id="emailpostpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content centered">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span></button>
+                    <div class="Mailpost">
+                        <span class="icon"><i class="icon-Mail_this_post"></i></span>
+                        <span class="Mailthispost">Email this post</span>
+                        <form class="email-me-the-post" method="post" novalidate="novalidate">
+                            <div class="input-name  ">
+                                <input type="hidden" name="contentId" value="41572">
+                                <input type="text" name="name" class="required" required placeholder="Enter Your Name" autocomplete="false">
+                                <div class="error-name">
+                                    Please enter a valid input.
+                                </div>
+                            </div>
+                            <div class="input-email ">
+                                <input type="text" class="email required" required name="emails" placeholder="Enter Email ID’s ( Separated by commas )"  autocomplete="false">
+                                <div class="error-email">
+                                    Please enter a valid email id or comma separated email id's.
+                                </div>
+                            </div>
+                            <button type="submit" class="Submit-mailpost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="Mailpost-thankyou">
+                        <i class="icon-success"></i>
+                        <span class="Mailthispost">The post has been successfully mailed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="EmailthisPost" data-toggle="modal" data-target="#emailpostpop">
+            <i class="icon-Mail_this_post"></i>
+            <span class="EmailthisPost-text">Email <Span>this Post</span></span>
+        </span> 
+        <span class="viewsblogsec">
+            <span class="viewscount details-page-views-count"><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 3.8K</span>
+        </span>
+        <span class="commentsblogsec">
+            <a href="https://www.edureka.co/blog/spark-sql-tutorial/#comments-wrapper" class="commentcount">
+                <span><i class="icon-comments"></i></span>
+            </a>&nbsp;&nbsp;
+            <a class="disqus-comment-count" data-disqus-url="https://www.edureka.co/blog/spark-sql-tutorial/" href="https://www.edureka.co/blog/spark-sql-tutorial/#disqus_thread" class="commentcount">
+                <span>0</span>
+            </a>
+        </span>
+    </article>
+            <article class="col-md-3 col-lg-3 col-sm-3 col-xs-12 related-blog hidden-sm hidden-xs">
+            <ul class="pager">
+                <li><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="show-next-in-series"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </article>
+            <!-- <article class = "col-md-3 col-lg-3 col-sm-3 col-xs-12 downloadpdfblog">
+         <span class = "downloadpdf"></span>
+ </article> -->
+</section>                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogcontentsec">
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <h1 style="text-align: center;"></h1>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Apache Spark is a lightning-fast cluster computing framework designed for fast computation. It is of the most successful projects in the Apache Software Foundation. Spark SQL is a new module in Spark which integrates relational processing with Spark’s functional programming API. It supports querying data either via SQL or via the Hive Query Language. </span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">For those of you familiar with RDBMS, Spark SQL will be an easy transition from your earlier tools where you can extend the boundaries of traditional relational data processing. Through this blog, I will introduce you to this new exciting domain of Spark SQL and together we will equip ourselves to lead our organizaton to leverage the benefits of relational processing and call complex analytics libraries in Spark.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The following provides the storyline for the blog:</span></p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Why Spark SQL came into picture?</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Spark SQL Overview</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Spark SQL Libraries</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Features of Spark SQL</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Querying using Spark SQL</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Adding Schema to RDDs</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">RDDs as Relations</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Caching Tables In-Memory</span></li>
+</ol>
+<h2><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Why Spark SQL Came Into Picture?</span></strong></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Spark SQL originated as Apache Hive to run on top of Spark and is now integrated with the Spark stack. Apache Hive had certain limitations as mentioned below. Spark SQL was built to overcome these drawbacks and replace Apache Hive.</span></p>
+<h3 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Limitations With Hive: </span></h3>
+<ul>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Hive launches MapReduce jobs internally for executing the ad-hoc queries. </span><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">MapReduce lags in the performance when it comes to the analysis of medium sized datasets (10 to 200 GB).</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Hive has no resume capability. This means that if the processing dies in the middle of a workflow, you cannot resume from where it got stuck.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Hive cannot drop encrypted databases in cascade when trash is enabled and leads to an execution error. To overcome this, users have to use Purge option to skip trash instead of drop. </span></li>
+</ul>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">These drawbacks gave way to the birth of Spark SQL.</span></p>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><a class="maxbutton-16 maxbutton maxbutton-enroll-yellow-big" target="_blank" href="https://goo.gl/jtAuXW"><span class='mb-text'>LEARN SPARK NOW</span></a></span></p>
+<h2><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Spark SQL Overview</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">Spark SQL</span><span style="font-weight: 400;"> integrates relational processing with Spark&#8217;s functional programming. </span><span style="font-weight: 400;">It provides support for various data sources and makes it possible to weave SQL queries with code transformations thus resulting in a very powerful tool.</span></span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Let us explore, what Spark SQL has to offer. Spark SQL blurs the line between RDD and relational table. It offers much tighter integration between relational and procedural processing, through declarative DataFrame APIs which integrates with Spark code. It also provides higher optimization. DataFrame API and Datasets API are the ways to interact with Spark SQL. </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">With Spark SQL, Apache Spark is accessible to more users and improves optimization for the current ones. </span><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Spark SQL provides DataFrame APIs which perform relational operations on both external data sources and Spark’s built-in distributed collections. It introduces extensible optimizer called Catalyst as it helps in supporting a wide range of data sources and algorithms in Big-data.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">Spark runs on both Windows and UNIX-like systems (e.g. Linux, Microsoft, Mac OS). It is easy to run locally on one machine — all you need is to have </span><span style="font-weight: 400;">java</span><span style="font-weight: 400;"> installed on your system </span><span style="font-weight: 400;">PATH,</span><span style="font-weight: 400;"> or the </span><span style="font-weight: 400;">JAVA_HOME</span><span style="font-weight: 400;"> environment variable pointing to a Java installation.</span></span></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-42285" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Spark-SQL-Architecture-Spark-SQL-Edureka-1.png" alt="Spark SQL Architecture - Spark SQL - Edureka" width="1191" height="394" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Spark-SQL-Architecture-Spark-SQL-Edureka-1.png 1191w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Spark-SQL-Architecture-Spark-SQL-Edureka-1-300x99.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Spark-SQL-Architecture-Spark-SQL-Edureka-1-768x254.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Spark-SQL-Architecture-Spark-SQL-Edureka-1-528x175.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Spark-SQL-Architecture-Spark-SQL-Edureka-1-544x180.png 544w" sizes="(max-width: 1191px) 100vw, 1191px" /></p>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif; font-size: 12px;"><strong>Figure:</strong> Architecture of Spark SQL<em>.</em></span></p>
+<h2><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Spark SQL Libraries</span></strong></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Spark SQL has the following four libraries which are used to interact with relational and procedural processing:</span></p>
+<ol>
+<li>
+<h3><span style="font-weight: 400; font-family: verdana, geneva, sans-serif;"><span style="font-size: 16px;">Data Source API (Application Programming Interface):</span><strong><br />
+</strong> </span></h3>
+<p><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">This is a universal API for loading and storing structured data.</span></p>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">It has built in support for Hive, Avro, JSON, JDBC, Parquet, etc.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Supports third party integration through Spark packages</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Support for smart sources.</span></li>
+</ul>
+</li>
+<li>
+<h3><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">DataFrame API:</span></h3>
+<p><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">A DataFrame is a distributed collection of data organized into named column.</span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="color: #ff0000;"> </span>It <span style="font-weight: 400;">is equivalent to a relational table in SQL</span><span style="font-weight: 400;"> used for storing data into tables.</span></span></p>
+<ul>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">It is a Data Abstraction and Domain Specific Language (DSL) applicable on structure and semi structured data.</span></li>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">DataFrame API is distributed collection of data in the form of named column and row.</span></li>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">It is lazily evaluated like Apache Spark Transformations and can be accessed through SQL Context and Hive Context.</span></li>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">It processes the data in the size of Kilobytes to Petabytes on a single-node cluster to multi-node clusters.</span></li>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Supports different data formats (Avro, CSV, Elastic Search and Cassandra) and storage systems (HDFS, HIVE Tables, MySQL, etc.).</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Can be easily integrated with all Big Data tools and frameworks via Spark-Core.</span></li>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Provides API for Python, Java, Scala, and R Programming.</span></li>
+</ul>
+<h3></h3>
+</li>
+<li>
+<h3><span style="font-family: verdana, geneva, sans-serif;"><span style="font-size: 16px;">SQL Interpreter And Optimizer:</span><br />
+</span></h3>
+<p><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">SQL Interpreter and Optimizer is based on functional programming constructed in Scala.</span></p>
+<ul>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">It is the newest and most technically evolved component of SparkSQL. </span></li>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">It provides a general framework for transforming trees, which is used to perform analysis/evaluation, optimization, planning, and run time code spawning.</span></li>
+<li style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">This supports cost based optimization (run time and resource utilization is termed as cost) and rule based optimization, making queries run much faster than their RDD (Resilient Distributed Dataset) counterparts.</span></li>
+</ul>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">     e.g. Catalyst is a modular library which is made as a rule based system. </span>Each rule in framework focuses on the distinct optimization.</span></p>
+</li>
+<li>
+<h3><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">SQL Service</span></h3>
+<p><span style="font-family: verdana, geneva, sans-serif;"><span style="font-size: 14px;">SQL Service is the entry point for working along structured data in Spark. <span style="font-weight: 400;">It allows the creation of DataFrame objects as well as the execution of SQL queries.</span></span></span></li>
+</ol>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Features Of Spark SQL</span></strong></h2>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The following are the features of Spark SQL:</span></p>
+<ol style="text-align: justify;">
+<li style="font-weight: 400;">
+<h3><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 16px;">Integration With Spark</span><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;"><br />
+Spark SQL queries are integrated with Spark programs. Spark SQL allows us to query structured data inside Spark programs, using SQL or a DataFrame API which can be used in Java, Scala, Python and R. To run streaming computation, developers simply write a batch computation against the DataFrame / Dataset API, and Spark automatically increments the computation to run it in a streaming fashion. This powerful design means that developers don’t have to manually manage state, failures, or keeping the application in sync with batch jobs. Instead, the streaming job always gives the same answer as a batch job on the same data.<br />
+</span></h3>
+</li>
+<li style="font-weight: 400;">
+<h3 style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 16px;">Uniform Data Access</span><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;"><br />
+DataFrames and SQL support a common way to access a variety of data sources, like Hive, Avro, Parquet, ORC, JSON, and JDBC. This joins the data across these sources. This is very helpful to accommodate all the existing users into Spark SQL.<br />
+</span></h3>
+</li>
+<li style="font-weight: 400;">
+<h3><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 16px;">Hive Compatibility</span></h3>
+<p><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Spark SQL runs unmodified Hive queries on current data. It rewrites the Hive front-end and meta store, allowing full compatibility with current Hive data, queries, and UDFs.<br />
+</span></li>
+<li style="font-weight: 400;">
+<h3 style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 16px;">Standard Connectivity</span><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;"><br />
+Connection is through JDBC or ODBC. JDBC and ODBC are the industry norms for connectivity for business intelligence tools.<br />
+</span></h3>
+</li>
+<li style="font-weight: 400;">
+<h3 style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 16px;">Performance And Scalability</span><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;"><br />
+Spark SQL incorporates a cost-based optimizer, code generation and columnar storage to make queries agile alongside computing thousands of nodes using the Spark engine, which provides full mid-query fault tolerance. The interfaces provided by Spark SQL provide Spark with more information about the structure of both the data and the computation being performed. Internally, Spark SQL uses this extra information to perform extra optimization. Spark SQL can directly read from multiple sources (files, HDFS, JSON/Parquet files, existing RDDs, Hive, etc.). It ensures fast execution of existing Hive queries.</span></h3>
+<p>The image below depicts the performance of Spark SQL when compared to Hadoop. Spark SQL executes upto 100x times faster than Hadoop.</p>
+<p style="text-align: center;"><span style="font-size: 14px;"><img class="aligncenter size-full wp-image-42214" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Performance-Spark-SQL-Vs-Hadoop-Spark-SQL-Edureka.png" alt="Performance Spark SQL Vs Hadoop - Spark SQL - Edureka" width="830" height="444" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Performance-Spark-SQL-Vs-Hadoop-Spark-SQL-Edureka.png 830w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Performance-Spark-SQL-Vs-Hadoop-Spark-SQL-Edureka-300x160.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Performance-Spark-SQL-Vs-Hadoop-Spark-SQL-Edureka-768x411.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Performance-Spark-SQL-Vs-Hadoop-Spark-SQL-Edureka-528x282.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Performance-Spark-SQL-Vs-Hadoop-Spark-SQL-Edureka-336x180.png 336w" sizes="(max-width: 830px) 100vw, 830px" /><span style="font-size: 12px; font-family: verdana, geneva, sans-serif;"><strong>Figure:</strong> <em>Runtime of Spark SQL vs Hadoop. Spark SQL is faster<br />
+</em><strong>Source:</strong><em> <a href="http://blog.cloudera.com/blog/2014/03/apache-spark-a-delight-for-developers" target="_blank">Cloudera Apache Spark Blog</a></em></span></span></p>
+</li>
+<li style="font-weight: 400;">
+<h3 style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 16px;">User Defined Functions</span><span style="font-size: 14px;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif;"><br />
+</span></span><span style="font-size: 14px;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif;">Spark SQL has language integrated User-Defined Functions (UDFs). UDF is a feature of Spark SQL to define new Column-based functions that extend the vocabulary of Spark SQL’s DSL for transforming Datasets. UDFs are black boxes in their execution.</span></span></h3>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The example below defines a UDF to convert a given text to upper case.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Code explanation:</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> 1. Creating a dataset &#8220;hello world&#8221;</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> 2. Defining a function &#8216;upper&#8217; which converts a string into upper case.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> 3. We now import the &#8216;udf&#8217; package into Spark.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> 4. Defining our UDF, &#8216;upperUDF&#8217; and importing our function &#8216;upper&#8217;.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> 5. Displaying the results of our User Defined Function in a new column &#8216;upper&#8217;.</span></p>
+<p>&nbsp;</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+val dataset = Seq((0, &quot;hello&quot;),(1, &quot;world&quot;)).toDF(&quot;id&quot;,&quot;text&quot;)
+val upper: String =&gt; String =_.toUpperCase
+import org.apache.spark.sql.functions.udf
+val upperUDF = udf(upper)
+dataset.withColumn(&quot;upper&quot;, upperUDF('text)).show
+</pre>
+</li>
+</ol>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41792" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/UDF-Spark-SQL-Edureka-1.png" alt="UDF - Spark SQL - Edureka" width="650" height="352" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/UDF-Spark-SQL-Edureka-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/UDF-Spark-SQL-Edureka-1-300x163.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/UDF-Spark-SQL-Edureka-1-768x416.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/UDF-Spark-SQL-Edureka-1-528x286.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/UDF-Spark-SQL-Edureka-1-332x180.png 332w" sizes="(max-width: 650px) 100vw, 650px" /><span style="font-size: 12px;"><strong>Figure:</strong> <i>Demonstration of a User Defined Function, upperUDF</i></span></span></p>
+<p style="padding-left: 60px;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. We now register our function as &#8216;myUpper&#8217;<br />
+2. Cataloging our UDF among the other functions.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+spark.udf.register(&quot;myUpper&quot;, (input:String) =&gt; input.toUpperCase)
+spark.catalog.listFunctions.filter('name like &quot;%upper%&quot;).show(false)
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;">  <img class="aligncenter wp-image-41789" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Show-UDF-Spark-SQL-Edureka-1.png" alt="Show UDF- Spark SQL - Edureka" width="650" height="230" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Show-UDF-Spark-SQL-Edureka-1.png 814w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Show-UDF-Spark-SQL-Edureka-1-300x106.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Show-UDF-Spark-SQL-Edureka-1-768x272.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Show-UDF-Spark-SQL-Edureka-1-528x187.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Show-UDF-Spark-SQL-Edureka-1-509x180.png 509w" sizes="(max-width: 650px) 100vw, 650px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Results of the User Defined Function, upperUDF</em></span><br />
+</span></p>
+<h2><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Querying Using Spark SQL</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">We will now start querying using Spark SQL. Note that the actual SQL queries are similar to the ones used in popular SQL clients.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Starting the Spark Shell. Go to the Spark directory and execute ./bin/spark-shell in the terminal to being the Spark Shell.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">For the querying examples shown in the blog, we will be using two files, &#8217;employee.txt&#8217; and &#8217;employee.json&#8217;. The images below show the content of both the files. Both these files are stored at &#8216;examples/src/main/scala/org/apache/spark/examples/sql/SparkSQLExample.scala&#8217; inside the folder containing the Spark installation (~/Downloads/spark-2.0.2-bin-hadoop2.7). So, all of you who are executing the queries, place them in this directory or set the path to your files in the lines of code below.</span></p>
+<p><img class="aligncenter size-full wp-image-42034" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Employee-TXT-File-Spark-SQL-Edureka-1.png" alt="Employee TXT File - Spark SQL - Edureka" width="460" height="336" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Employee-TXT-File-Spark-SQL-Edureka-1.png 460w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Employee-TXT-File-Spark-SQL-Edureka-1-300x219.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Employee-TXT-File-Spark-SQL-Edureka-1-411x300.png 411w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Employee-TXT-File-Spark-SQL-Edureka-1-246x180.png 246w" sizes="(max-width: 460px) 100vw, 460px" /></p>
+<p style="text-align: center;"><span style="font-size: 12px; font-family: verdana, geneva, sans-serif;"><strong>Figure:</strong> <i>Contents of employee.txt</i></span></p>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-42033" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Employee-JSON-File-Spark-SQL-Edureka-1.png" alt="Employee JSON File - Spark SQL - Edureka" width="460" height="272" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Employee-JSON-File-Spark-SQL-Edureka-1.png 460w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Employee-JSON-File-Spark-SQL-Edureka-1-300x177.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Employee-JSON-File-Spark-SQL-Edureka-1-304x180.png 304w" sizes="(max-width: 460px) 100vw, 460px" /></p>
+<p style="text-align: center;"><span style="font-size: 12px; font-family: verdana, geneva, sans-serif;"><strong>Figure:</strong> <i>Contents of employee.json</i></span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Code explanation:<br />
+1. We first import a Spark Session into Apache Spark.<br />
+2. Creating a Spark Session &#8216;spark&#8217; using the &#8216;builder()&#8217; function.<br />
+3. Importing the Implicts class into our &#8216;spark&#8217; Session.<br />
+4. We now create a DataFrame &#8216;df&#8217; and import data from the &#8217;employee.json&#8217; file.<br />
+5. Displaying the DataFrame &#8216;df&#8217;. The result is a table of 5 rows of ages and names from our &#8217;employee.json&#8217; file. </span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+import org.apache.spark.sql.SparkSession
+val spark = SparkSession.builder().appName(&quot;Spark SQL basic example&quot;).config(&quot;spark.some.config.option&quot;, &quot;some-value&quot;).getOrCreate()
+import spark.implicits._
+val df = spark.read.json(&quot;examples/src/main/resources/employee.json&quot;)
+df.show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41791" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Start-Spark-SQL-Edureka-1.png" alt="Start - Spark SQL - Edureka" width="650" height="433" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Start-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Start-Spark-SQL-Edureka-1-300x200.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Start-Spark-SQL-Edureka-1-768x512.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Start-Spark-SQL-Edureka-1-450x300.png 450w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Start-Spark-SQL-Edureka-1-270x180.png 270w" sizes="(max-width: 650px) 100vw, 650px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Starting a Spark Session and displaying DataFrame of employee.json</em></span></span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Code explanation:<br />
+1. Importing the Implicts class into our &#8216;spark&#8217; Session.<br />
+2. Printing the schema of our &#8216;df&#8217; DataFrame.<br />
+3. Displaying the names of all our records from &#8216;df&#8217; DataFrame.<br />
+</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+import spark.implicits._
+df.printSchema()
+df.select(&quot;name&quot;).show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41777" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Operations-Spark-SQL-Edureka-1.png" alt="Dataset Operations - Spark SQL - Edureka" width="650" height="331" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Operations-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Operations-Spark-SQL-Edureka-1-300x153.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Operations-Spark-SQL-Edureka-1-768x391.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Operations-Spark-SQL-Edureka-1-528x269.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Operations-Spark-SQL-Edureka-1-353x180.png 353w" sizes="(max-width: 650px) 100vw, 650px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Schema of a DataFrame</em></span></span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. Displaying the DataFrame after incrementing everyone&#8217;s age by two years.<br />
+2. We filter all the employees above age 30 and display the result.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+df.select($&quot;name&quot;, $&quot;age&quot; + 2).show()
+df.filter($&quot;age&quot; &gt; 30).show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41775" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Filter-Operation-Spark-SQL-Edureka-1.png" alt="Dataset Filter Operation- Spark SQL - Edureka" width="651" height="341" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Filter-Operation-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Filter-Operation-Spark-SQL-Edureka-1-300x157.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Filter-Operation-Spark-SQL-Edureka-1-768x402.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Filter-Operation-Spark-SQL-Edureka-1-528x277.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Filter-Operation-Spark-SQL-Edureka-1-344x180.png 344w" sizes="(max-width: 651px) 100vw, 651px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Basic SQL operations on employee.json</em></span></span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. Counting the number of people with the same ages. We use the &#8216;groupBy&#8217; function for the same.<br />
+2. Creating a temporary view &#8217;employee&#8217; of our &#8216;df&#8217; DataFrame.<br />
+3. Perform a &#8216;select&#8217; operation on our &#8217;employee&#8217; view to display the table into &#8216;sqlDF&#8217;.<br />
+4. Displaying the results of &#8216;sqlDF&#8217;.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+df.groupBy(&quot;age&quot;).count().show()
+df.createOrReplaceTempView(&quot;employee&quot;)
+val sqlDF = spark.sql(&quot;SELECT * FROM employee&quot;)
+sqlDF.show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41776" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Grouping-Operation-Spark-SQL-Edureka-1.png" alt="Dataset Grouping Operation - Spark SQL - Edureka" width="651" height="432" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Grouping-Operation-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Grouping-Operation-Spark-SQL-Edureka-1-300x199.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Grouping-Operation-Spark-SQL-Edureka-1-768x510.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Grouping-Operation-Spark-SQL-Edureka-1-452x300.png 452w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Dataset-Grouping-Operation-Spark-SQL-Edureka-1-271x180.png 271w" sizes="(max-width: 651px) 100vw, 651px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>SQL operations on employee.json</em></span></span></p>
+<h3 style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 16px;">Creating Datasets</span></h3>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">After understanding DataFrames, let us now move on to Dataset API. The below code creates a Dataset class in SparkSQL.</span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 1. Creating a class &#8216;Employee&#8217; to store name and age of an employee.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 2. Assigning a Dataset &#8216;caseClassDS&#8217; to store the record of Andrew.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 3. Displaying the Dataset &#8216;caseClassDS&#8217;.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 4. Creating a primitive Dataset to demonstrate mapping of DataFrames into Datasets.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 5. Assigning the above sequence into an array.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+case class Employee(name: String, age: Long)
+val caseClassDS = Seq(Employee(&quot;Andrew&quot;, 55)).toDS()
+caseClassDS.show()
+val primitiveDS = Seq(1, 2, 3).toDS
+()primitiveDS.map(_ + 1).collect()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41773" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-Dataset-Spark-SQL-Edureka-1.png" alt="Creating Dataset - Spark SQL - Edureka" width="651" height="317" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-Dataset-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-Dataset-Spark-SQL-Edureka-1-300x146.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-Dataset-Spark-SQL-Edureka-1-768x374.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-Dataset-Spark-SQL-Edureka-1-528x257.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-Dataset-Spark-SQL-Edureka-1-370x180.png 370w" sizes="(max-width: 651px) 100vw, 651px" /><span style="font-size: 12px;"><strong>Figure:</strong> <i>Creating a Dataset</i></span></span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. Setting the path to our JSON file &#8217;employee.json&#8217;.<br />
+2. Creating a Dataset and from the file.<br />
+3. Displaying the contents of &#8217;employeeDS&#8217; Dataset.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+val path = &quot;examples/src/main/resources/employee.json&quot;
+val employeeDS = spark.read.json(path).as[Employee]
+employeeDS.show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41774" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-JSON-Dataset-Spark-SQL-Edureka-1.png" alt="Creating JSON Dataset - Spark SQL - Edureka" width="651" height="288" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-JSON-Dataset-Spark-SQL-Edureka-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-JSON-Dataset-Spark-SQL-Edureka-1-300x133.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-JSON-Dataset-Spark-SQL-Edureka-1-768x340.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-JSON-Dataset-Spark-SQL-Edureka-1-528x234.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Creating-JSON-Dataset-Spark-SQL-Edureka-1-407x180.png 407w" sizes="(max-width: 651px) 100vw, 651px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Creating a Dataset from a JSON file</em></span></span></p>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><a class="maxbutton-22 maxbutton maxbutton-certification-blue-big" target="_blank" href="https://goo.gl/jtAuXW"><span class='mb-text'>LEARN SPARK FROM EXPERTS</span></a> </span></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Adding Schema To RDDs</span></strong></h2>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Spark introduces the concept of an RDD (Resilient Distributed Dataset), an immutable fault-tolerant, distributed collection of objects that can be operated on in parallel. An RDD can contain any type of object and is created by loading an external dataset or distributing a collection from the driver program. </span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Schema RDD is a RDD where you can run SQL on. It is more than SQL. It is a unified interface for structured data.</span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 1. Importing Expression Encoder for RDDs. RDDs are similar to Datasets but use encoders for serialization.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 2. Importing Encoder library into the shell.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 3. Importing the Implicts class into our &#8216;spark&#8217; Session.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 4. Creating an &#8217;employeeDF&#8217; DataFrame from &#8217;employee.txt&#8217; and mapping the columns based on the delimiter comma &#8216;,&#8217; into a temporary view &#8217;employee&#8217;.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 5. Creating the temporary view &#8217;employee&#8217;.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 6. Defining a DataFrame &#8216;youngstersDF&#8217; which will contain all the employees between the ages of 18 and 30.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 7. Mapping the names from the RDD into &#8216;youngstersDF&#8217; to display the names of youngsters.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+import org.apache.spark.sql.catalyst.encoders.ExpressionEncoder
+import org.apache.spark.sql.Encoder
+import spark.implicits._
+val employeeDF = spark.sparkContext.textFile(&quot;examples/src/main/resources/employee.txt&quot;).map(_.split(&quot;,&quot;)).map(attributes =&gt; Employee(attributes(0), attributes(1).trim.toInt)).toDF()
+employeeDF.createOrReplaceTempView(&quot;employee&quot;)
+val youngstersDF = spark.sql(&quot;SELECT name, age FROM employee WHERE age BETWEEN 18 AND 30&quot;)
+youngstersDF.map(youngster =&gt; &quot;Name: &quot; + youngster(0)).show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41782" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Inferring-Schema-Spark-SQL-Edureka-1.png" alt="Inferring Schema - Spark SQL - Edureka" width="650" height="412" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Inferring-Schema-Spark-SQL-Edureka-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Inferring-Schema-Spark-SQL-Edureka-1-300x190.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Inferring-Schema-Spark-SQL-Edureka-1-768x487.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Inferring-Schema-Spark-SQL-Edureka-1-474x300.png 474w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Inferring-Schema-Spark-SQL-Edureka-1-284x180.png 284w" sizes="(max-width: 650px) 100vw, 650px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Creating a DataFrame for transformations</em></span></span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. Converting the mapped names into string for transformations.<br />
+2. Using the mapEncoder from Implicits class to map the names to the ages.<br />
+3. Mapping the names to the ages of our &#8216;youngstersDF&#8217; DataFrame. The result is an array with names mapped to their respective ages.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+youngstersDF.map(youngster =&gt; &quot;Name: &quot; + youngster.getAs[String](&quot;name&quot;)).show()
+implicit val mapEncoder = org.apache.spark.sql.Encoders.kryo[Map[String, Any]]
+youngstersDF.map(youngster =&gt; youngster.getValuesMap[Any](List(&quot;name&quot;, &quot;age&quot;))).collect()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41787" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Map-Encoder-Spark-SQL-Edureka-1.png" alt="Map Encoder - Spark SQL - Edureka" width="650" height="261" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Map-Encoder-Spark-SQL-Edureka-1.png 817w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Map-Encoder-Spark-SQL-Edureka-1-300x120.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Map-Encoder-Spark-SQL-Edureka-1-768x308.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Map-Encoder-Spark-SQL-Edureka-1-528x212.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Map-Encoder-Spark-SQL-Edureka-1-448x180.png 448w" sizes="(max-width: 650px) 100vw, 650px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Mapping using DataFrames</em></span></span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">RDDs support two types of operations:</span></p>
+<ul style="text-align: justify;">
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Transformations: These are the operations (such as map, filter, join, union, and so on) performed on an RDD which yield a new RDD containing the result.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Actions: These are operations (such as reduce, count, first, and so on) that return a value after running a computation on an RDD.</span></li>
+</ul>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Transformations in Spark are “lazy”, meaning that they do not compute their results right away. Instead, they just “remember” the operation to be performed and the dataset (e.g., file) to which the operation is to be performed. The transformations are computed only when an action is called and the result is returned to the driver program and stored as Directed Acyclic Graphs (DAG). This design enables Spark to run more efficiently. For example, if a big file was transformed in various ways and passed to first action, Spark would only process and return the result for the first line, rather than do the work for the entire file.</span></p>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter size-full wp-image-42217" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Schema-RDD-Spark-SQL-Edureka-1.png" alt="Schema RDD - Spark SQL - Edureka" width="680" height="365" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Schema-RDD-Spark-SQL-Edureka-1.png 680w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Schema-RDD-Spark-SQL-Edureka-1-300x161.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Schema-RDD-Spark-SQL-Edureka-1-528x283.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Schema-RDD-Spark-SQL-Edureka-1-335x180.png 335w" sizes="(max-width: 680px) 100vw, 680px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Ecosystem of Schema RDD in Spark SQL</em></span></span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">By default, each transformed RDD may be recomputed each time you run an action on it. However, you may also persist an RDD in memory using the persist or cache method, in which case Spark will keep the elements around on the cluster for much faster access the next time you query it.</span></p>
+<h2><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">RDDs As Relations</span></strong></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Resilient Distributed Datasets (RDDs) are distributed memory abstraction which lets programmers perform in-memory computations on large clusters in a fault tolerant manner. RDDs can be created from any data source. Eg: Scala collection, local file system, Hadoop, Amazon S3, HBase Table, etc.</span></p>
+<h3 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><span style="font-weight: 400;">Specifying Schema</span></span></h3>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. Importing the &#8216;types&#8217; class into the Spark Shell.<br />
+2. Importing &#8216;Row&#8217; class into the Spark Shell. Row is used in mapping RDD Schema.<br />
+3. Creating a RDD &#8217;employeeRDD&#8217; from the text file &#8217;employee.txt&#8217;.<br />
+4. Defining the schema as &#8220;name age&#8221;. This is used to map the columns of the RDD.<br />
+5. Defining &#8216;fields&#8217; RDD which will be the output after mapping the &#8217;employeeRDD&#8217; to the schema &#8216;schemaString&#8217;.<br />
+6. Obtaining the type of &#8216;fields&#8217; RDD into &#8216;schema&#8217;.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.Row
+val employeeRDD = spark.sparkContext.textFile(&quot;examples/src/main/resources/employee.txt&quot;)
+val schemaString = &quot;name age&quot;
+val fields = schemaString.split(&quot; &quot;).map(fieldName =&gt; StructField(fieldName, StringType, nullable = true))
+val schema = StructType(fields)
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41790" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Specifying-Schema-Spark-SQL-Edureka-1.png" alt="Specifying Schema - Spark SQL - Edureka" width="651" height="347" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Specifying-Schema-Spark-SQL-Edureka-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Specifying-Schema-Spark-SQL-Edureka-1-300x160.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Specifying-Schema-Spark-SQL-Edureka-1-768x409.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Specifying-Schema-Spark-SQL-Edureka-1-528x281.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Specifying-Schema-Spark-SQL-Edureka-1-338x180.png 338w" sizes="(max-width: 651px) 100vw, 651px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Specifying Schema for RDD transformation</em></span></span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. We now create a RDD called &#8216;rowRDD&#8217; and transform the &#8217;employeeRDD&#8217; using the &#8216;map&#8217; function into &#8216;rowRDD&#8217;.<br />
+2. We define a DataFrame &#8217;employeeDF&#8217; and store the RDD schema into it.<br />
+3. Creating a temporary view of &#8217;employeeDF&#8217; into &#8217;employee&#8217;.<br />
+4. Performing the SQL operation on &#8217;employee&#8217; to display the contents of employee.<br />
+5. Displaying the names of the previous operation from the &#8217;employee&#8217; view.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+val rowRDD = employeeRDD.map(_.split(&quot;,&quot;)).map(attributes =&gt; Row(attributes(0), attributes(1).trim))
+val employeeDF = spark.createDataFrame(rowRDD, schema)
+employeeDF.createOrReplaceTempView(&quot;employee&quot;)
+val results = spark.sql(&quot;SELECT name FROM employee&quot;)
+results.map(attributes =&gt; &quot;Name: &quot; + attributes(0)).show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41788" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/RDD-Schema-Spark-SQL-Edureka-1.png" alt="RDD Schema - Spark SQL - Edureka" width="650" height="383" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/RDD-Schema-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/RDD-Schema-Spark-SQL-Edureka-1-300x177.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/RDD-Schema-Spark-SQL-Edureka-1-768x452.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/RDD-Schema-Spark-SQL-Edureka-1-509x300.png 509w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/RDD-Schema-Spark-SQL-Edureka-1-306x180.png 306w" sizes="(max-width: 650px) 100vw, 650px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Result of RDD transformation</em></span></span></p>
+<p style="text-align: justify;"><span style="font-weight: 400; font-family: verdana, geneva, sans-serif; font-size: 14px;">Even though RDDs are defined, they don’t contain any data.</span> <span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The computation to create the data in a RDD is only done when the data is referenced. e.g. Caching results or writing out the RDD</span>.</p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Caching Tables In-Memory</span></strong></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Spark SQL caches tables using an in-memory columnar format:</span></p>
+<ol>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-weight: 400;">Scan only required columns</span></span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Fewer allocated objects</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Automatically selects best comparison</span></li>
+</ol>
+<h3><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Loading Data Programmatically</span></h3>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The below code will read employee.json file and create a DataFrame. We will then use it to create a Parquet file.</span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">1. Importing Implicits class into the shell.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">2. Creating an &#8217;employeeDF&#8217; DataFrame from our &#8217;employee.json&#8217; file.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+import spark.implicits._
+val employeeDF = spark.read.json(&quot;examples/src/main/resources/employee.json&quot;)
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41785" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Data-Spark-SQL-Edureka-1.png" alt="Loading Data - Spark SQL - Edureka" width="651" height="135" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Data-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Data-Spark-SQL-Edureka-1-300x62.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Data-Spark-SQL-Edureka-1-768x159.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Data-Spark-SQL-Edureka-1-528x109.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Data-Spark-SQL-Edureka-1-590x122.png 590w" sizes="(max-width: 651px) 100vw, 651px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Loading a JSON file into DataFrame</em></span></span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. Creating a &#8216;parquetFile&#8217; temporary view of our DataFrame.<br />
+2. Selecting the names of people between the ages of 18 and 30 from our Parquet file.<br />
+3. Displaying the result of the Spark SQL operation.<br />
+</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+employeeDF.write.parquet(&quot;employee.parquet&quot;)
+val parquetFileDF = spark.read.parquet(&quot;employee.parquet&quot;)
+parquetFileDF.createOrReplaceTempView(&quot;parquetFile&quot;)
+val namesDF = spark.sql(&quot;SELECT name FROM parquetFile WHERE age BETWEEN 18 AND 30&quot;)
+namesDF.map(attributes =&gt; &quot;Name: &quot; + attributes(0)).show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41786" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Parquet-Spark-SQL-Edureka-1.png" alt="Loading Parquet - Spark SQL - Edureka" width="651" height="234" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Parquet-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Parquet-Spark-SQL-Edureka-1-300x108.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Parquet-Spark-SQL-Edureka-1-768x276.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Parquet-Spark-SQL-Edureka-1-528x190.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Loading-Parquet-Spark-SQL-Edureka-1-501x180.png 501w" sizes="(max-width: 651px) 100vw, 651px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Displaying results from a Parquet DataFrame</em></span></span></p>
+<h3 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">JSON Datasets</span></h3>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">We will now work on JSON data. As Spark SQL supports JSON dataset, we create a DataFrame of employee.json. The schema of this DataFrame can be seen below. We then define a Youngster DataFrame and add all the employees between the ages of 18 and 30.</span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">1. Setting to path to our &#8217;employee.json&#8217; file.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">2. Creating a DataFrame &#8217;employeeDF&#8217; from our JSON file.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">3. Printing the schema of &#8217;employeeDF&#8217;.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">4. Creating a temporary view of the DataFrame into &#8217;employee&#8217;.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">5. Defining a DataFrame &#8216;youngsterNamesDF&#8217; which stores the names of all the employees between the ages of 18 and 30 present in &#8217;employee&#8217;.</span><br />
+<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">6. Displaying the contents of our DataFrame.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+val path = &quot;examples/src/main/resources/employee.json&quot;
+val employeeDF = spark.read.json(path)
+employeeDF.printSchema()
+employeeDF.createOrReplaceTempView(&quot;employee&quot;)
+val youngsterNamesDF = spark.sql(&quot;SELECT name FROM employee WHERE age BETWEEN 18 AND 30&quot;)
+youngsterNamesDF.show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41783" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-Dataset-Spark-SQL-Edureka-1.png" alt="JSON Dataset - Spark SQL - Edureka" width="651" height="397" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-Dataset-Spark-SQL-Edureka-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-Dataset-Spark-SQL-Edureka-1-300x183.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-Dataset-Spark-SQL-Edureka-1-768x469.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-Dataset-Spark-SQL-Edureka-1-492x300.png 492w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-Dataset-Spark-SQL-Edureka-1-295x180.png 295w" sizes="(max-width: 651px) 100vw, 651px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Operations on JSON Datasets</em></span></span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. Creating a RDD &#8216;otherEmployeeRDD&#8217; which will store the content of employee George from New Delhi, Delhi.<br />
+2. Assigning the contents of &#8216;otherEmployeeRDD&#8217; into &#8216;otherEmployee&#8217;.<br />
+3. Displaying the contents of &#8216;otherEmployee&#8217;.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+val otherEmployeeRDD = spark.sparkContext.makeRDD(&quot;&quot;&quot;{&quot;name&quot;:&quot;George&quot;,&quot;address&quot;:{&quot;city&quot;:&quot;New Delhi&quot;,&quot;state&quot;:&quot;Delhi&quot;}}&quot;&quot;&quot; :: Nil)
+val otherEmployee = spark.read.json(otherEmployeeRDD)
+otherEmployee.show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41784" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-RDD-Spark-SQL-Edureka-1.png" alt="JSON RDD - Spark SQL - Edureka" width="649" height="273" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-RDD-Spark-SQL-Edureka-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-RDD-Spark-SQL-Edureka-1-300x126.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-RDD-Spark-SQL-Edureka-1-768x323.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-RDD-Spark-SQL-Edureka-1-528x222.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/JSON-RDD-Spark-SQL-Edureka-1-428x180.png 428w" sizes="(max-width: 649px) 100vw, 649px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>RDD transformations on JSON Dataset</em></span></span></p>
+<h3 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Hive Tables</span></h3>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">We perform a Spark example using Hive tables.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Code explanation:</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">1. Importing &#8216;Row&#8217; class into the Spark Shell. Row is used in mapping RDD Schema.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">2. Importing Spark Session into the shell.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">3. Creating a class &#8216;Record&#8217; with attributes Int and String.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">4. Setting the location of &#8216;warehouseLocation&#8217; to Spark warehouse.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">5. We now build a Spark Session &#8216;spark&#8217; to demonstrate Hive example in Spark SQL.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">6. Importing Implicits class into the shell.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">7. Importing SQL library into the Spark Shell.</span><br />
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">8. Creating a table &#8216;src&#8217; with columns to store key and value.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.SparkSession
+case class Record(key: Int, value: String)
+val warehouseLocation = &quot;spark-warehouse&quot;
+val spark = SparkSession.builder().appName(&quot;Spark Hive Example&quot;).config(&quot;spark.sql.warehouse.dir&quot;, warehouseLocation).enableHiveSupport().getOrCreate()
+import spark.implicits._
+import spark.sql
+sql(&quot;CREATE TABLE IF NOT EXISTS src (key INT, value STRING)&quot;)
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41779" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Spark-SQL-Edureka-1.png" alt="Hive Tables - Spark SQL - Edureka" width="651" height="439" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Spark-SQL-Edureka-1-300x202.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Spark-SQL-Edureka-1-768x518.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Spark-SQL-Edureka-1-445x300.png 445w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Spark-SQL-Edureka-1-267x180.png 267w" sizes="(max-width: 651px) 100vw, 651px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Building a Session for Hive</em></span></span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Code explanation:<br />
+1. We now load the data from the examples present in Spark directory into our table &#8216;src&#8217;.<br />
+2. The contents of &#8216;src&#8217; is displayed below.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+sql(&quot;LOAD DATA LOCAL INPATH 'examples/src/main/resources/kv1.txt' INTO TABLE src&quot;)
+sql(&quot;SELECT * FROM src&quot;).show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41781" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Select-Spark-SQL-Edureka-1.png" alt="Hive Tables Select - Spark SQL - Edureka" width="650" height="447" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Select-Spark-SQL-Edureka-1.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Select-Spark-SQL-Edureka-1-300x206.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Select-Spark-SQL-Edureka-1-768x528.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Select-Spark-SQL-Edureka-1-436x300.png 436w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-Select-Spark-SQL-Edureka-1-262x180.png 262w" sizes="(max-width: 650px) 100vw, 650px" /><span style="font-size: 12px;"><strong>Figure:</strong> <i>Selection using Hive tables</i></span></span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Code explanation:<br />
+1. We perform the &#8216;count&#8217; operation to select the number of keys in &#8216;src&#8217; table.<br />
+2. We now select all the records with &#8216;key&#8217; value less than 10 and store it in the &#8216;sqlDF&#8217; DataFrame.<br />
+3. Creating a Dataset &#8216;stringDS&#8217; from &#8216;sqlDF&#8217;.<br />
+4. Displaying the contents of &#8216;stringDS&#8217; Dataset.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+sql(&quot;SELECT COUNT(*) FROM src&quot;).show()
+val sqlDF = sql(&quot;SELECT key, value FROM src WHERE key &lt; 10 ORDER BY key&quot;)
+val stringsDS = sqlDF.map {case Row(key: Int, value: String) =&gt; s&quot;Key: $key, Value: $value&quot;}
+stringsDS.show()
+</pre>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif;"><img class="aligncenter wp-image-41780" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-DF-Spark-SQL-Edureka-1.png" alt="Hive Tables DF - Spark SQL - Edureka" width="650" height="445" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-DF-Spark-SQL-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-DF-Spark-SQL-Edureka-1-300x205.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-DF-Spark-SQL-Edureka-1-768x526.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-DF-Spark-SQL-Edureka-1-438x300.png 438w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Tables-DF-Spark-SQL-Edureka-1-263x180.png 263w" sizes="(max-width: 650px) 100vw, 650px" /></span></p>
+<p style="text-align: center;"><em><span style="font-size: 12px; font-family: verdana, geneva, sans-serif;"><strong>Figure:</strong> Creating DataFrames from Hive tables</span></em></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Code explanation:<br />
+1. We create a DataFrame &#8216;recordsDF&#8217; and store all the records with key values 1 to 100.<br />
+2. Create a temporary view &#8216;records&#8217; of &#8216;recordsDF&#8217; DataFrame.<br />
+3. Displaying the contents of the join of tables &#8216;records&#8217; and &#8216;src&#8217; with &#8216;key&#8217; as the primary key.</span></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+val recordsDF = spark.createDataFrame((1 to 100).map(i =&gt; Record(i, s&quot;val_$i&quot;)))
+recordsDF.createOrReplaceTempView(&quot;records&quot;)
+sql(&quot;SELECT * FROM records r JOIN src s ON r.key = s.key&quot;).show()
+</pre>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><br />
+<img class="aligncenter wp-image-41778" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Create-Record-DF-Spark-SQL-Edureka-1.png" alt="Hive Create Record DF - Spark SQL - Edureka" width="650" height="445" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Create-Record-DF-Spark-SQL-Edureka-1.png 813w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Create-Record-DF-Spark-SQL-Edureka-1-300x206.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Create-Record-DF-Spark-SQL-Edureka-1-768x526.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Create-Record-DF-Spark-SQL-Edureka-1-438x300.png 438w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Hive-Create-Record-DF-Spark-SQL-Edureka-1-263x180.png 263w" sizes="(max-width: 650px) 100vw, 650px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Recording the results of Hive operations</em></span><br />
+</span></p>
+<p style="text-align: left;"><span style="font-size: 12px; font-family: verdana, geneva, sans-serif;"><span style="font-size: 14px;">So this concludes our blog. I hope you enjoyed reading this blog and found it informative. By now, you must have acquired a sound understanding of what Spark SQL is. The hands-on examples will give you the required confidence to work on any future projects you encounter in Spark SQL. Practice is the key to mastering any subject and I hope this blog has created enough interest in you to explore learning further on Spark SQL.</span></span></p>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif;"><a class="maxbutton-12 maxbutton maxbutton-enroll-green-big" target="_blank" href="https://goo.gl/jtAuXW"><span class='mb-text'>WATCH SPARK TUTORIAL</span></a> </span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><i>Got a question for us? Please mention it in the comments section and we will get back to you at the earliest.</i></span></p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><i>If you wish to learn Spark and build a career in domain of Spark and build expertise to perform large-scale Data Processing using RDD, Spark Streaming, SparkSQL, MLlib, GraphX and Scala with Real Life use-cases, check out our interactive, live-online </i></span><em><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><a href="https://goo.gl/yNdp8T" target="_blank">Apache Spark Certification Training</a> here, </span></em><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><i>that comes with 24*7 support to guide you throughout your learning period.</i></span></p>
+                                                    </p>
+                                                </article>
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <div id="author-bio-box"><img alt='' src='https://secure.gravatar.com/avatar/cdbfe9d2d198794e0996fab7d94e8758?s=80&d=mm&r=g' srcset="https://secure.gravatar.com/avatar/cdbfe9d2d198794e0996fab7d94e8758?s=160&d=mm&r=g 2x" class='avatar avatar-80 photo' height='80' width='80' /><span class="author-name">About Sandeep Dayananda (<a href="https://www.edureka.co/blog/author/sandeepdedureka-co/">5 Posts</a>)</span><p>Sandeep Dayananda is a Research Analyst at Edureka. He has expertise in Big Data technologies like Hadoop & Spark, DevOps and Business Intelligence tools. He is passionate in bringing out creative solutions to existing business problems.</p><div class="bio-socials"></div></div><br/><div class="clear"></div>                                                    </p>
+                                                </article>
+                                                <div class="bot-shareoption">
+                                                    <span class="Shareon-bot">
+                                                        Share on
+                                                    </span>
+                                                    <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_2' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_2' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_2' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_2' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/spark-sql-tutorial/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                                </div>
+                                                                                                    <article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 related-blog next-blog-leftnav">
+                                                        <ul class="pager">
+                                                            <li class="pull-left"><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i> PREVIOUS</a></li>
+                                                            <li class="pull-right"><a href="#" class="show-next-in-series">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </article>
+                                                                                                    <section id="edu-related-blog-carousel-2" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Posts</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/?p=33448"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/no-image-1.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Big Data Analytics: Shark and Spark SQL</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 24</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/demystifying-partitioning-in-spark"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/03/Demystifying-partitioning-in-spark.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Demystifying Partitioning in Spark</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 25.3K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/your-guide-to-career-opportunities-in-spark"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/01/Spark-career-opportunities.jpg" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Your Guide To Career Opportunities In Spark</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 3K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/apache-spark-vs-hadoop-mapreduce"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1.jpg" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Apache Spark vs Hadoop MapReduce</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 50.7K</div>
+                            </div>
+                        </article></a>
+                    </div></div>
+                    </article></section><section id="edu-related-blog-carousel-3" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Videos</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/videos/spark-will-replace-hadoop-know-why/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2015/07/apache-spark-will-replace-hadoop-know-why.jpg" alt="video image">
+                                <div class="video-play-time"><i class="icon-Video_icon"></i> 80:40</div>
+                            </div>
+                            <div class="video-info">
+                                <span>Apache Spark Will Replace Hadoop ! Know Why</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 445</div>
+                            </div>
+                        </article></a>
+                    </div></div>
+                    </article></section>
+                                                <!--Comments Area Single post-->
+                                                <section class="padcomments" >
+    <span class="comments"> Comments <div class="arrow-down"></div></span>
+    <span class="pull-right comment"> 0 Comments </span>
+</section>
+<section class="commsec" id="comments-wrapper">
+    
+<div id="disqus_thread">
+    </div>
+
+</section>	
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>	
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-12 col-sm-12 no-padding blog-sidepanel"> 
+    <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maincontainer detailpagesidebar" 
+             data-post_type="post" 
+             data-post_name="spark-sql-tutorial" >
+             <section id="edu-related-blogs-2" class="right-side-widget custom-edu-widgets widget_edu-related-blogs"><h3 class="widget-title"><span>Related Blogs</span></h3><ul class="edu-hiran custom-widget-listing related-blogs"><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/?p=33448" class="custom-rel-thumb"><img src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/no-image-1.png" class="attachment-550x50 size-550x50 wp-post-image wp-default-post-image"  sizes="(max-width: 86px) 100vw, 86px" width="86" height="50"></a><a href="https://www.edureka.co/blog/?p=33448" class="custom-rel-article"><span>Big Data Analytics: Shark and Spark SQL<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/demystifying-partitioning-in-spark" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/03/Demystifying-partitioning-in-spark.png" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/03/Demystifying-partitioning-in-spark.png 600w, https://cdn.edureka.co/blog/wp-content/uploads/2016/03/Demystifying-partitioning-in-spark-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/03/Demystifying-partitioning-in-spark-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/demystifying-partitioning-in-spark" class="custom-rel-article"><span>Demystifying Partitioning in Spark<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/your-guide-to-career-opportunities-in-spark" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/01/Spark-career-opportunities.jpg" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/01/Spark-career-opportunities.jpg 600w, https://cdn.edureka.co/blog/wp-content/uploads/2016/01/Spark-career-opportunities-300x175.jpg 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/01/Spark-career-opportunities-514x300.jpg 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/your-guide-to-career-opportunities-in-spark" class="custom-rel-article"><span>Your Guide To Career Opportunities In Spark<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/apache-spark-vs-hadoop-mapreduce" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1.jpg" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1.jpg 600w, https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1-300x175.jpg 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1-514x300.jpg 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/apache-spark-vs-hadoop-mapreduce" class="custom-rel-article"><span>Apache Spark vs Hadoop MapReduce<span></a></article></li></ul></section><section id="edu-custom-subscribe-2" class="right-side-widget custom-edu-widgets widget_edu-custom-subscribe">        <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding Newsletter-sub">
+            
+                        <form id="subscribe-form" novalidate class="custom-subscribe-form-wrapper hide">
+                <div class="subscribesec">
+                                    <!--<div class="close-thissub"><i class="icon-cross"></i></div>	-->
+                    <div class="subscribesec-box">										
+                        <h4 class="clearfix subscribeblogtitle"><p><i class="icon-Mail_this_post"></i></p><span>Subscribe to get free Newsletter</span></h4>
+                        <section class="sectrendcom">
+                            <article class="relatedcontmain">
+                                <div class="input-group Subscribeinput">                              
+                                    <input name="subscription-mail" type="email" autocomplete="off" class="form-control " required placeholder="Enter Email"> 
+                                    <!-- Add classes successform and errorform to toggle the input form -->
+
+                                </div>
+                                <input type="hidden"  id="is_user_loggedin" value="0"/>
+                                <label id="loader" style="margin-left:120px;display:none" ><img src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/loader.gif" /></label>
+
+                                <p class="errormessage"> Please provide a valid Email Id </p>
+                            </article>                         
+                        </section>  
+                    </div>
+                    <div class="subscribesec-success">
+                        <i class="icon-success"></i>
+                        <p class="successmessage" style="display: none;"> Thank you, your subscription is successful</p> 
+                        <p class="alreadysubscribed" style="display: none;"> You have already subscribed.</p> 
+                    </div>
+                </div>
+                <button type="submit" id="subscribe-button" class="btn subscribebtn successbutton">
+                    <div class="sub-news-letter">SUBSCRIBE</div></button>
+            </form>
+            <div class="sub-browse-letter show-after-success hide">
+                <a class="" href="/all-courses" target="_blank">BROWSE COURSES</a>
+            </div>
+        </section>
+        </section></section>
+</div>
+<!-- Right Panel ends -->
+</div></div></div>
+</section>
+
+<footer class="footer-new" id="footer_v2">
+        <div class="container">
+        <div class="row">
+            <div class="padding-xs-only clearfix">
+                <div class="panel-group no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="col-md-12 visible-xs accordion-head">
+
+                            <a data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" href="javascript:void(0)">
+                                <h3 class="no-margin footer-new-hd-lineht"><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></h3>
+                                <p class=" margin-vr5 grey-txt marg-btm-0-xs">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd.</p>
+                                <i class="fa fa-angle-up"></i>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+
+                        </div>
+                        <div id="collapse1" class="div-collapse collapse clearfix">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 item-padding">
+                                <h4>Edureka</h4>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/about-us">About us</a></li>
+                                    <li><a href="https://www.edureka.co/allmedia">News & Media</a></li>
+                                    <li><a href="https://www.edureka.co/contact-us">Contact us</a></li>
+                                    <li><a href="https://www.edureka.co/careers">Careers</a></li>
+                                </ul>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/blog/all">Blog</a></li>
+                                    <li><a href="https://www.edureka.co/reviews">Reviews</a></li>
+                                    <li><a href="https://www.edureka.co/terms-and-conditions">Terms & conditions</a></li>
+                                    <li><a href="https://www.edureka.co/privacy-policy">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Work with us </h4>
+                                <ul class="list-unstyled footer-menu">
+                                    <li><a href="https://www.edureka.co/instructors/add">Become  an Instructor</a></li>
+                                    <li><a href="https://www.edureka.co/hire-from-edureka">Hire from Edureka</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3  col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Follow us on </h4>
+                                <ul class="list-unstyled footer-social-icon">
+                                    <li><a class="fb" target="_blank" href="https://www.facebook.com/edurekaIN"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="tw" target="_blank" href="https://twitter.com/edurekaIN"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="in" target="_blank" href="https://www.linkedin.com/company/edureka"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="ut" target="_blank" href="https://www.youtube.com/user/edurekaIN"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 item-padding padding-lft-25 text-center-xs">
+                                <h4>Learn on the GO!</h4>
+                                <ul class="list-unstyled footer-menu-store">
+                                    <li><a target="_blank" href="https://itunes.apple.com/in/app/edureka/id1033145415?mt=8">
+                                            <img alt="appleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/applestorebtn.png"></a></li>
+                                    <li><a target="_blank" href="https://play.google.com/store/apps/details?id=co.edureka.app">
+                                            <img alt="googleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/googleplaybtn.png"></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding border-top-half">
+                                <div class="padding-vr20 clearfix">
+                                    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-12 no-padding">
+                                        <h3 class="no-margin footer-new-hd-lineht"><a href=https://www.edureka.co><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></a></h3>
+                                        <p class=" margin-vr5 grey-txt">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd. All rights Reserved.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-7 col-xs-12 no-padding txt-marg-top text-xs-left">
+                                        <p class="grey-txt">"PMP®","PMI®", "PMI-ACP®" and "PMBOK®" are registered marks of the Project Management Institute, Inc. <br>
+                                            MongoDB®, Mongo and the leaf logo are the registered trademarks of MongoDB, Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<div class="footerbar">
+    <div class="container clearfix">
+        <div class="row">
+            <a href="javascript:void(0);" class="call-us">
+                <span><img src="//cdn.edureka.co/imgver.1496301546/img/phone-icon.png" alt="phoneicon"></span>
+                Call us on 
+                <span>1-800-275-9730 <i>(Toll Free)</i></span>
+                <span>+91 88808 62004</span>
+            </a>
+            <div class="dropdown pull-left hidden-xs">
+                <div class="bfh-selectbox country-style-footer triangle country-pop-small bfh-countries" data-country="IN" data-flags="true" data-filter="true">
+                    <input type="hidden" value="">
+                    <a class="bfh-selectbox-toggle res-popup" role="button" data-toggle="bfh-selectbox" href="#">
+                        <span class="bfh-selectbox-option input-medium" data-option="">
+                        </span>
+
+
+                    </a>
+                    <div class="bfh-selectbox-options">
+                        <input type="text" class="bfh-selectbox-filter">
+                        <div role="listbox">
+                            <ul role="option" class="dropdown-menu-scrollbar">
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="call-us-xs">
+            <h3>24 X 7 Customer Support
+                <a class="close-call" href="javascript:void(0);">X</a>
+            </h3>
+            <ul class="list-unstyled">
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/us-flag.png" alt="us flag"> 1-800-275-9730   (Toll Free)     </li>
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/ind-flag.png" alt="india flag"> +91 88808 62004</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                jQuery(function($) {
+                    function equalHeight(group) {
+                        tallest = 0;
+                        group.each(function() {
+                            thisHeight = $(this).height();
+                            if(thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        group.height(tallest);
+                    }
+
+                    equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+
+                    $(window).resize(function() {
+                        equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+                    });
+                });
+            </script>
+            <script type="text/javascript"> 
+				var fonts_loaded =[];
+			</script><!--email_off--><style type='text/css'>.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook{border-color:#000;box-shadow-color:#333;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon{text-align:center;padding-top:8px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff;font-size:21px}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-text{color:#fff}
+.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter{border-color:#000;box-shadow-color:#333;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff;font-size:22px}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-text{color:#fff}
+.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin{border-color:#000;box-shadow-color:#333;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff;font-size:22px}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-text{color:#fff}
+.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus{border-color:#000;box-shadow-color:#333;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff;font-size:22px}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-text{color:#fff}
+.maxcollection.maxcollection-1{display:inline-block;z-index:9999;margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px}.maxcollection.maxcollection-1 .mb-collection-item.item-24{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-25{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-26{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-27{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}
+.maxbutton-16.maxbutton.maxbutton-enroll-yellow-big{position:relative;text-decoration:none;display:inline-block;border-color:#e7a207;box-shadow-color:#e7a207;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(231, 162, 7, 1);-pie-background:linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(231, 162, 7, 1)), color-stop(1, rgba(231, 162, 7, 1)));background:-moz-linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:-o-linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1))}.maxbutton-16.maxbutton:hover.maxbutton-enroll-yellow-big{border-color:#e7a207;box-shadow-color:#e7a207;background:rgba(231, 162, 7, 1);-pie-background:linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(231, 162, 7, 1)), color-stop(1, rgba(231, 162, 7, 1)));background:-moz-linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:-o-linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1));background:linear-gradient(rgba(231, 162, 7, 1) 45%, rgba(231, 162, 7, 1))}.maxbutton-16.maxbutton.maxbutton-enroll-yellow-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-16.maxbutton:hover.maxbutton-enroll-yellow-big .mb-text{color:#fff}
+.maxbutton-22.maxbutton.maxbutton-certification-blue-big{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton.maxbutton-certification-blue-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big .mb-text{color:#fff}
+.maxbutton-12.maxbutton.maxbutton-enroll-green-big{position:relative;text-decoration:none;display:inline-block;border-color:#438683;box-shadow-color:#438683;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(67, 134, 131, 1);-pie-background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(67, 134, 131, 1)), color-stop(1, rgba(67, 134, 131, 1)));background:-moz-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-o-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1))}.maxbutton-12.maxbutton:hover.maxbutton-enroll-green-big{border-color:#438683;box-shadow-color:#438683;background:rgba(67, 134, 131, 1);-pie-background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(67, 134, 131, 1)), color-stop(1, rgba(67, 134, 131, 1)));background:-moz-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-o-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1))}.maxbutton-12.maxbutton.maxbutton-enroll-green-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-12.maxbutton:hover.maxbutton-enroll-green-big .mb-text{color:#fff}
+</style><!--/email_off-->
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var postasmail = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/fancyquote.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var videolib = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/video-library.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/jquery.fitvids.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var fvpdata = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","nonce":"79d293a9a4","fitvids":"1","dynamic":"","overlay":"","opacity":"0.75","color":"b","width":"640"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/frontend.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var mb_ajax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/js/min/front.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons_fonts.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons-pro-front.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/bootstrap.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/masonry.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/imagesloaded.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.bootpag.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/nprogress.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/CustomScrollbar.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/owl.carousel.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0187-formValidation.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0188-bootstrap.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/blog.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects-related.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/mfb.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/signup.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var php_array = {"admin_ajax":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var wnm_custom = {"template_url":"\/blog\/wp-content\/themes\/edu-hiran"};
+var myAjax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var afp_vars = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","postID":"41572","single":"1"};
+var post_vars = {"postID":"41572","postType":"post"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/ajax-pagination.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.7.5","language":""},"disqusIdentifier":"41572 https:\/\/www.edureka.co\/blog\/?p=41572","disqusShortname":"edurekablog","disqusTitle":"Spark SQL Tutorial \u2013 Understanding Spark SQL With Examples","disqusUrl":"https:\/\/www.edureka.co\/blog\/spark-sql-tutorial\/","options":{"manualSync":"1"},"postId":"41572"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/disqus.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"edurekablog"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/count.js'></script>
+
+
+</body>
+</html>
+<!-- mfunc setPostViews(get_the_ID()); --><!-- /mfunc -->
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 1859/2074 objects using disk
+Page Caching using disk
+Content Delivery Network via Amazon Web Services: CloudFront: cdn.edureka.co
+Database Caching 23/117 queries in 0.043 seconds using disk
+
+ Served from: www.edureka.co @ 2017-06-09 16:38:58 by W3 Total Cache -->

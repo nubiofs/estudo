@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.edureka.co/blog/xmlrpc.php" />
+        
+<!-- This site is optimized with the Yoast SEO plugin v4.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Hadoop Distributed File System | Apache Hadoop HDFS Architecture | Edureka</title>
+<meta name="description" content="Hadoop Distributed File System. Do you know what is Apache Hadoop HDFS Architecture ? HDFS follows a Master/Slave Architecture, where a cluster comprises of a single NameNode and a number of DataNodes."/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/" />
+<link rel="publisher" href="https://plus.google.com/+edurekaIN"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hadoop Distributed File System | Apache Hadoop HDFS Architecture | Edureka" />
+<meta property="og:description" content="Hadoop Distributed File System. Do you know what is Apache Hadoop HDFS Architecture ? HDFS follows a Master/Slave Architecture, where a cluster comprises of a single NameNode and a number of DataNodes." />
+<meta property="og:url" content="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/" />
+<meta property="og:site_name" content="Edureka Blog" />
+<meta property="article:publisher" content="https://www.facebook.com/edurekaIN/" />
+<meta property="article:section" content="Big Data and Hadoop" />
+<meta property="article:published_time" content="2013-05-31T06:05:16+00:00" />
+<meta property="article:modified_time" content="2016-12-22T15:31:37+00:00" />
+<meta property="og:updated_time" content="2016-12-22T15:31:37+00:00" />
+<meta property="fb:app_id" content="334689249900154" />
+<meta property="og:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Feature-Image-Apache-Hadoop-HDFS-Architecture-Edureka-2.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Hadoop Distributed File System. Do you know what is Apache Hadoop HDFS Architecture ? HDFS follows a Master/Slave Architecture, where a cluster comprises of a single NameNode and a number of DataNodes." />
+<meta name="twitter:title" content="Hadoop Distributed File System | Apache Hadoop HDFS Architecture | Edureka" />
+<meta name="twitter:site" content="@edurekaIN" />
+<meta name="twitter:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Feature-Image-Apache-Hadoop-HDFS-Architecture-Edureka-2.png" />
+<meta name="twitter:creator" content="@edurekaIN" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdn.edureka.co' />
+<link rel='dns-prefetch' href='//maxcdn.bootstrapcdn.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Edureka Blog &raquo; Apache Hadoop HDFS Architecture Comments Feed" href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.edureka.co\/blog\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='download-button-shortcode-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-button-shortcode/css/downloadbutton.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fancyquote-css-css'  href='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/css/fancyquote.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-fontAwesome-css-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-animate-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/animate.css' type='text/css' media='all' />
+<link rel='stylesheet' id='dg-grid-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/dg-grid.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fvp-frontend-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/styles/frontend.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mbpro-font-awesome-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/assets/libraries/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-font-awesome-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0121-font-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0121-font.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogmain-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogmain.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-nprogress-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/nprogress.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetail_newfont-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/Newfonts-ico.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-customscrollbar-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/CustomScrollbar.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-owl.carousel-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/owl.carousel.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetailnew-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogdetailnew.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0180-global-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0180-global.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-formhelpers-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap-formhelpers.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0181-formValidation-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0181-formValidation.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0139-common-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0139-common.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-dashboard-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/dashboard.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-header-2-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/header-2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-signin-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/new-signin-signup.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-mfb-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/mfb.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-main_css-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp_dlmp_styles-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/styles.css' type='text/css' media='all' />
+<link rel='https://api.w.org/' href='https://www.edureka.co/blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.edureka.co/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.edureka.co/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://www.edureka.co/blog/?p=5152' />
+<link rel="alternate" type="application/json+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fapache-hadoop-hdfs-architecture%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fapache-hadoop-hdfs-architecture%2F&#038;format=xml" />
+	<style type='text/css'>
+	.download-info .download-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+<style type="text/css">
+#author-bio-box {
+	float:left;
+	width: 99%;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	box-shadow: 5px 5px 2px #ddd;
+	padding: 5px;
+        margin-bottom: 10px;
+}
+#author-bio-box img {
+	float: left;
+	margin: 4px 10px 2px 4px;
+}
+#author-bio-box .author-name {
+	font-weight: bold;
+	margin-left: 2px;
+	font-size: 14px;
+}
+#author-bio-box p {
+	font-size: 13px;
+	line-height: 20px;
+        margin-left: 95px;
+        margin-top: 5px;
+}
+#author-bio-box thead th {
+	border: 0;
+}
+#author-bio-box tbody {
+	border: 0;
+}
+.bio-spacer { min-height:44px; padding: 1px; display: block; clear: both; border:1px;}
+.bio-socials {
+	border-top:1px solid #e8e8e8;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	width: 100%;
+	height: 32px;
+	clear: both;
+}
+</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://cdn.edureka.co/blog/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <script>
+            var webURL = 'https://www.edureka.co/';
+            var imgURL = 'https://cdn.edureka.co/imgver.1465813195/img/';
+            var kmkey = 'c685629a1766aa24ed42e4bc8476e8789cd97477';
+            var GaTID = 'UA-33865789-1';
+            var GaUATID = 'UA-33865789-2';
+            var iscustomerGA = 'false';
+            var repcustomerGA = 'false';
+            var baildown = true;
+            var homepageloadbanner = true;
+            var prev_offer_code = '';
+
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-33865789-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+        <!-- Google Code for Remarketing Tag -->
+        <!--------------------------------------------------
+        Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+        --------------------------------------------------->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 977137586;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+        <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+</head>
+<body class="post-template-default single single-post postid-5152 single-format-standard wpb-js-composer js-comp-ver-5.1.1 vc_responsive" id="margin-top-value">
+
+    <div id="fb-root"></div>
+    <script>
+
+            window.fbAsyncInit = function () {
+                FB.init({appId: '334689249900154', status: true, cookie: true,
+                    xfbml: true});
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+    </script>
+
+    <header id="header-II">
+        <section>
+            <nav style="" role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-homepage">
+                <div class="container menubar-visibility edureka-blog-header">
+                    <div class="navbar-header">
+                        <a href="/?utm_source=blog&utm_medium=blog-edureka-logo" class="navbar-brand" > <img alt="edureka!" src="/imgver.1496301546/img/logo.png"> </a> 			
+                    </div>
+                    <!-- ddl starts--><form action="/blog" class="main-search"><ul class="list-unstyled course-search-box-nav">
+                        <input  type="hidden" class="searchinputbox" id="categoryinputbox" value="">
+                        <input  type="hidden" class="searchinputbox" id="authorinputbox" value="">
+                        <li class="search-nav pull-left"><div class="dropdown  categories-filter-dropdown">
+    <a class="select_down dropdown-toggle search-drop menu-common catbtnblog catbtnblogmob btn" type="button" id="menu1" data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Select Category
+    </a>
+    <ul class="dropdown-menu list-inline search-header-navigation dropdown-menu-scrollbar" role="menu" aria-labelledby="menu1">
+        <li role="presentation"><a role="menuitem" tabindex="0" href="#" data-slug="" class="category-selector">Select Category</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="1" href="/blog/category/big-data-analytics" data-slug="big-data-analytics" class="category-selector">Big Data Analytics</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="2" href="/blog/category/big-data-nosql" data-slug="big-data-nosql" class="category-selector">Big Data NoSQL</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="3" href="/blog/category/business-intelligence" data-slug="business-intelligence" class="category-selector">Business Intelligence</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="4" href="/blog/category/cloud-computing" data-slug="cloud-computing" class="category-selector">Cloud Computing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="5" href="/blog/category/finance" data-slug="finance" class="category-selector">Finance</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="6" href="/blog/category/frameworks" data-slug="frameworks" class="category-selector">Frameworks</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="7" href="/blog/category/ibm-bluemix" data-slug="ibm-bluemix" class="category-selector">IBM Bluemix</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="8" href="/blog/category/marketing" data-slug="marketing" class="category-selector">Marketing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="9" href="/blog/category/mobile-development" data-slug="mobile-development" class="category-selector">Mobile Development</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="10" href="/blog/category/operations" data-slug="operations" class="category-selector">Operations</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="11" href="/blog/category/programming" data-slug="programming" class="category-selector">Programming</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="12" href="/blog/category/project-management" data-slug="project-management" class="category-selector">Project Management</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="13" href="/blog/category/success-story" data-slug="success-story" class="category-selector">Success Story</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="14" href="/blog/category/systems-architecture" data-slug="systems-architecture" class="category-selector">Systems &amp; Architecture</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="15" href="/blog/category/systems-engineering" data-slug="systems-engineering" class="category-selector">Systems Engineering</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="16" href="/blog/category/testing" data-slug="testing" class="category-selector">Testing</a>
+                </li>      
+    </ul>
+</div>
+<span id ="desktop-searchbox"><div id="remote" class="typeahead-container"><div class="typeahead-field">
+                        <span class="typeahead-query">
+                            <input type="text" maxlength="150" autocomplete="off" placeholder = "Search edureka blogs" value=""
+                          name="s" data-value="" class="search_inp collapse searchinputbox">
+                        </span><span class="typeahead-button"><i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></span></li></ul></form><form action="/blog" class="form-element-mobile">
+                    <div class="visible-sm visible-xs mobsearch" id="mobile-searchbox">
+                        <a data-toggle="collapse" id="mobile-search-icon" class="mobile-search-icon" href="#mobsearch" aria-expanded="false" aria-controls="mobsearch">
+                            <i class="fa fa-search search_ico visible-sm visible-xs"></i>
+                        </a><div class="collapse search-course" id="mobsearch" aria-expanded="false"><div>
+                    <div id="remote" class="typeahead-container result backdrop hint">
+                        <div class="typeahead-field"><span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" class="search_inp search_inp_mob" placeholder = "Search edureka blogs" name="s" type="text" value="" data-value="" ></span>
+                        <span class="typeahead-button">
+                        <i  class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></div></div></div></form><div class="loggedin-usernav-wrapper hide"><div aria-expanded="false" id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs">
+                <li >
+                    <div class="dropdown menu-dropdown dropdownafterlogin">
+                        <a href="javascript:void(0);" class="dropdown-toggle withripple" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false"> BROWSE COURSES <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                            <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=my-courses">My Courses</a></li>
+                            <li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="logged-in-customer hide"></li>
+                <li class="">
+                    <div class="dropdown user-dropdown">
+                        <a id="signin-logout" class="signin" href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292">Logout</a> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right profile pull-right">
+            <li class="dropdown userdrop hidden-lg hidden-md profile-pic-header">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+                    <img alt="" class="img30 user-image-icon" src="/imgver.1496301546/img//defaultpp2.png">     
+                </a>
+                <ul class="dropdown-menu user-menu profile-xs">
+                    <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=all-courses">My Courses</a></li>
+                    <li class="logged-in-customer hide"></li><li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                    <li> <a href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292" id="signin-logoutresp">Log Out</a> </li>
+                </ul>
+            </li>
+        </ul></div><div class="loggedout-usernav-wrapper hide"><a class="signin md-trigger" href="javascript:void(0)" data-modal="signin-modal" data-toggle="modal">Sign In</a><style>
+    .highlighterror input[type=text],
+    .highlighterror input[type=email],
+    .highlighterror input[type=password],
+    .highlighterror {
+        border-color: #ed1f24 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
+<!--googleon: all-->
+<div class="md-modal md-effect-1 newsigninsignup" id="signin-modal">
+    <div class="md-content">
+        <span id="signin_signup_cancel" class="md-close onclicktab pull-right">X</span>
+
+        <ul class="nav nav-tabs">
+            <li class="Signinspace active"><a class="onclicktab" data-toggle="tab" href="#LogIn"><span>Log In</span></a></li>
+            <li class="SignUpspace "><a class="onclicktab" data-toggle="tab" href="#SignUp"><span>Sign Up</span></a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="LogIn" class="tab-pane fade in active">
+                <div class="col-md-12 col-xs-12 signinformnew newsignclik">
+                    <form id="signinForm">
+                        <!--                        <form id="signinForm">-->
+                        <div class="alertnew" role="alert" >
+                            <span  id="signin_error_message" class="signin_formerror redalertnew" style="display: none;"><i class="fa fa-check-circle"></i>  Please enter a valid emailid</span>
+                        </div>
+                        <div class="form-group">
+                            <input id="inputName" type="email" class="form-control inputstyle emailnew inputNamesignup signinvalid" required autocomplete="off" placeholder="Email"  name="data[User][email]" value="" onkeyup="checkdisable();">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd" class="form-control inputstyle passwordnew masked" required autocomplete="off" placeholder="Password"  name="data[User][password]" value="">
+                            <div class="verficacheckeye" id="eye">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><a id="Forgotnew" href="javascript:void(0)" class="btn btn-link pull-left forgetpass">Forgot Password?</a>
+
+                            <button type="submit" class="bluebtn pull-right defdisablesignin ga-signin disabled"  id="signin-blog">Start Learning</button>
+                        </div>
+                    </form>
+                    <!--<div class="mobilealertnew green clearfix">
+                      <span class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i>  Verification Code sent to er.creator@gmail.com</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-12 col-xs-12 signinformnew forgetpassnew">
+                    <form id="resetcode">
+                        <div id="successmssg" class="alertnew" role="alert">
+                            <span id="messages"  class="greenalertnew hidden-xs"><i class="fa fa-check-circle"></i>  </span>
+                        </div>
+                        <div class="form-group">
+                            <input id="prefilledemail" type="email" disabled="disable" class="form-control inputstyle emailnew inputDisabled" required autocomplete="off" placeholder="Email">
+                            <input id="emailfield" type="hidden" class="form-control inputstyle"  name="data[User][email]">
+
+                            <!--<div class="verficacheck"><a href="" id="editemail">change ?</a></div>-->
+                        </div>
+                        <div class="form-group">
+                            <input id="otpfield" type="text" class="form-control inputstyle emailnew verifycheck" required autocomplete="off" placeholder="Verification code"  name="data[User][otpCode]">
+                            <input id="verificationfield" type="hidden" class="form-control inputstyle emailnew" required name="data[User][verification_code]">
+                            <div  class="verficacheck verifycheck"><div id="resendcode" href="javascript:void(0);" style="cursor: pointer;">resend ?</div></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd2" class="form-control inputstyle passwordnew masked" required autocomplete="off" min=8 placeholder="New Password"  name="data[User][password]">
+                            <div class="verficacheckeye" id="eye2">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><!--<a id="Backnew" href="#" class="btn btn-link pull-left forgetpass">Back</a>-->
+
+                            <button id="passresetbutton" type="submit" class="bluebtn pull-right">reset password</button>
+                        </div>
+                    </form>
+                    <div class="notestarreg verifycheck">
+                        * Can't find the email? Check your Spam folder or Promotions tab for an email from no-reply@edureka.co. Send us an email at <a href="mailto:support@edureka.co">support@edureka.co</a> or call us at +91 88808 62004
+                    </div>
+                </div>
+            </div>
+            <div id="SignUp" class="tab-pane fade  ">
+
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center signinformnew signupformnew">
+
+                    <form id="signupForm">
+                        <div class="alertnew" role="alert">
+                            <span id="signup_error_message" class="signup_formerror redalertnew hidden-xs " style="display: none;"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input value="/blog/" name="data[User][pageurl]" id="pageurl_signup" type="hidden">
+                            <div class="form-control-wrapper"><input id="signupname" class="form-control inputstyle empty" placeholder="Name*" required="" autocomplete="off" name="data[User][name]" type="text"></div>
+                            <i data-bv-icon-for="data[User][name]" class="form-control-feedback fv-icon-no-label fa fa-close" style="display: block;"></i>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input  id="signupemail" class="form-control inputstyle  empty" placeholder="Email*" required="" autocomplete="off" name="data[User][email]" type="email"></div><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        </div>
+                        <input style="display:none;" name="hiddenname" type="text">
+                        <input style="display:none;" name="hiddenpassword" type="password">
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][mobile]" id="mobnum" class="form-control inputstyle empty" placeholder="Mobile Number*" required="" name="data[User][mobile]" type="text"></div><i data-bv-icon-for="data[User][mobile]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+
+                        </div>
+                        <div class="form-group has-feedback">
+
+                            <div class="form-control-wrapper">
+                                <input id="pwd3" class="form-control inputstyle passwordnew masked empty" required="" autocomplete="off" placeholder="Password more than 8 characters*" name="data[User][password]" type="password"></div><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                            <div class="verficacheckeye" id="eye3">show</div>
+                        </div>
+                        <p class="signupinfotext">
+                            By Signing up you agree to our <span><a class=" withripple" href="/terms-and-conditions" target="_blank">T&amp;C</a></span> and <span>
+                                <a class=" withripple" href="/privacy-policy" target="_blank">Privacy Policy</a></span>
+                        </p>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding spaceafterbutton">
+                            <button type="submit" class="bluebtn pull-right defdisablesignup ga-signup disabled">Create an account</button>
+                        </div>
+
+                    </form>
+                    <!--<div class="mobilealertnew red clearfix">
+                      <span class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobileredclass" class="mobilealertnew red clearfix" style="display:none;">
+        <span id="mobileredmsg" class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input    </span>
+    </div>
+    <div id="mobilegreenclass"class="mobilealertnew green clearfix" style="display:none;">
+        <span id="mobilegreenmsg" class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i> </span>
+    </div>
+</div>
+<div class="md-overlay"></div>
+<section>
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="capturemobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header signup-header">
+                    <h4 class="modal-title color-white">
+                        <span class="pull-left">
+                            WELCOME <label id="capturemobile_user_name"></label>
+                        </span>
+                        <span class="pull-right">                           
+                        </span>
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 linkedin-content">
+                            <h5 class="line-height23">It seems we don't have your phone number. Please share as it helps us to provide better customer service. Thank you!</h5>
+                            <form id="captureMobileForm" action="" method="post">
+                                <input type="hidden" name="data[User][email]" id="email_capturemobile">
+                                <input type="hidden" name="data[User][password]" id="password_capturemobile">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Mobile Number" required name="data[User][mobile]">
+                                </div>
+                                <!--                                <button type="button"  class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn">Continue</button>-->
+                                <button type="button" id="btnCaptureMobile" class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn" style="">Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--googleon: all--><div class="navbar-collapse collapse navbar-right" id="navbar" aria-expanded="false">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs"><!--
+                <li><a href="/instructors/add">For Instructors</a></li> -->
+                <li><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Course</a></li>
+            </ul>
+        </div></div>                </div>
+            </nav>
+        </section>
+    </header>
+<section >
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding">
+                <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 left-menu"> 
+    <div class="row left-menu-row">
+<div class="side-menu"><nav class="navbar navbar-default" role="navigation">
+<div class="side-menu-container side-menu-blog"><button type="button" class="navbar-toggle navbar-tog-open-close side-body"><span class="fa fa-bars"></span></button><div class="side-nav-title"><h2>Hadoop Tutorial Series</h2></div><ul class="nav navbar-nav cus-nav-scroll dropdown-menu-scrollbar">
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/big-data-tutorial"  data-currpage="apache-hadoop-hdfs-architecture"> <span>Big Data Tutorial: All You Need To Know About Big Data!</span><span data-toggle="collapse" href="#dropdown-level-1-1993168951593ad58ab75d4" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1993168951593ad58ab75d4" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/videos/big-data-tutorial"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Big Data Tutorial – Get Started With Big Data And Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/what-is-hadoop"   data-currpage="apache-hadoop-hdfs-architecture">What is Hadoop? Introduction to Big Data &#038; Hadoop</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hadoop-tutorial/"  data-currpage="apache-hadoop-hdfs-architecture"> <span>Hadoop Tutorial: All you need to know about Hadoop!</span><span data-toggle="collapse" href="#dropdown-level-1-299777468593ad58ab76a0" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-299777468593ad58ab76a0" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/videos/hadoop-tutorial"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Hadoop Tutorial – A Complete Tutorial For Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-ecosystem"   data-currpage="apache-hadoop-hdfs-architecture">Hadoop Ecosystem: Hadoop Tools for Crunching Big Data</a>
+</li>
+<li class="panel panel-default first-level  active" id="dropdown"><a href="https://www.edureka.co/blog/hdfs-tutorial"  data-currpage="apache-hadoop-hdfs-architecture"> <span>HDFS Tutorial: Introduction to HDFS &#038; its Features</span><span data-toggle="collapse" href="#dropdown-level-1-1941283751593ad58ab776b" class="fa fa-angle-right active"></span></a>
+<div id="dropdown-level-1-1941283751593ad58ab776b" class="panel-collapse collapse in"><div class="panel-body"><ul class="nav navbar-nav"><li class="active"><a href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/" class="active-link" data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Apache Hadoop HDFS Architecture</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>How to Set Up Hadoop Cluster with HDFS High Availability</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/overview-of-hadoop-2-0-cluster-architecture-federation/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Overview of Hadoop 2.0 Cluster Architecture Federation</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Install Hadoop: Setting up a Single Node Hadoop Cluster</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Setting Up A Multi Node Cluster In Hadoop 2.X</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>HDFS Commands: Hadoop Shell Commands to Manage HDFS</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/mapreduce-tutorial/"  data-currpage="apache-hadoop-hdfs-architecture"> <span>MapReduce Tutorial – Fundamentals of MapReduce with MapReduce Example</span><span data-toggle="collapse" href="#dropdown-level-1-1535162702593ad58ab7824" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1535162702593ad58ab7824" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/hadoop-streaming-mapreduce-program/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Hadoop Streaming: Writing A Hadoop MapReduce Program In Python</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/mapreduce-example-reduce-side-join/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>MapReduce Example: Reduce Side Join in Hadoop MapReduce</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/pig-tutorial/"  data-currpage="apache-hadoop-hdfs-architecture"> <span>Pig Tutorial: Apache Pig Architecture &#038; Twitter Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-1156542921593ad58ab78dd" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1156542921593ad58ab78dd" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/apache-pig-installation"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Apache Pig Installation on Linux</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/pig-programming-create-your-first-apache-pig-script/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Pig Programming: Create Your First Apache Pig Script</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/creating-udf-in-apache-pig/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Steps to Create UDF in Apache Pig</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hive-tutorial/"  data-currpage="apache-hadoop-hdfs-architecture"> <span>Hive Tutorial – Hive Architecture and NASA Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-438015736593ad58ab799b" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-438015736593ad58ab799b" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/apache-hive-installation-on-ubuntu"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Apache Hive Installation on Ubuntu</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/hive-commands-with-examples"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Top Hive Commands with Examples in HQL</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/apache-hadoop-hive-script/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Apache Hadoop : Create your First HIVE Script</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hbase-tutorial"  data-currpage="apache-hadoop-hdfs-architecture"> <span>HBase Tutorial: HBase Introduction and Facebook Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-361960141593ad58ab7a6d" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-361960141593ad58ab7a6d" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/hbase-architecture/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>HBase Architecture: HBase Data Model & HBase Read/Write Mechanism</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/sample-hbase-poc/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Sample HBase POC</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/brief-introduction-to-oozie/"   data-currpage="apache-hadoop-hdfs-architecture">Brief Introduction to Oozie</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/"  data-currpage="apache-hadoop-hdfs-architecture"> <span>Top 50 Hadoop Interview Questions For 2017</span><span data-toggle="collapse" href="#dropdown-level-1-1052341558593ad58ab7b74" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1052341558593ad58ab7b74" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hdfs-2/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HDFS</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hadoop-cluster/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Setting Up Hadoop Cluster</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-mapreduce/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – MapReduce</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-pig/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – PIG</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hive-interview-questions"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Apache Hive</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hbase-interview-questions/"  data-currpage="apache-hadoop-hdfs-architecture"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HBase</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-certification/"   data-currpage="apache-hadoop-hdfs-architecture">Hadoop Certification – Become a Certified Big Data Hadoop Professional</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-career/"   data-currpage="apache-hadoop-hdfs-architecture">Hadoop Career: Career in Big Data Analytics</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-3/"   data-currpage="apache-hadoop-hdfs-architecture">What's New in Hadoop 3.0 - Enhancements in Apache Hadoop 3</a>
+</li>
+</ul></div></nav></div></div>
+</div>
+<!-- Right Panel ends -->
+                        <div class="col-lg-8 col-md-7 col-xs-12 col-sm-12 blogmobfull">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 bread-herohead">
+    <div class="herohead">
+        <div class="">
+            <div class="row">
+                                <div class="">
+                    <h6 class="breadcrumb-section hidden-xs ">
+                        <a class="text-bold text-normal underline-remove brdcrumclrinac" href="/blog">Home</a>
+                        <!--                        &nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog chevron-level-0"></i>&nbsp;&nbsp;
+                        <a class="text-bold text-normal underline-remove brdcrumclrac reset-filters post-type-level" href="/blog">Blogs&nbsp;&nbsp;</a>-->
+                        <i class="fa fa-chevron-right chevronblog chevron-level-1 ">&nbsp;&nbsp;</i>
+                        <a class="text-bold text-normal underline-remove brdcrumclrac post-type-breadcrum reset-filters " href="/blog">Blogs</a>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog  cat-level-breadcrum"></i>&nbsp;&nbsp;
+                        <span class="text-bold text-normal underline-remove brdcrumclrac cat-level-breadcrum cat-level-breadcrum-title ">Big Data Analytics</span>&nbsp;
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<!-- Top Navigation to be sent in blog phase 2 starts-->
+
+<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainnavigator">
+    <article class="navigatedetail col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <span class="blogall"><a href="https://www.edureka.co/blog//all"><i class="icon-Home_icon"></i></a></span>
+        <span class="bloghome"><a href="https://www.edureka.co/blog/">Blogs</a></span>
+        <span class="videohome"><a href="https://www.edureka.co/blog/videos">Videos</a></span>
+        <span class="interviewhome"><a href="https://www.edureka.co/blog/interview-questions">Interview Questions</a></span>
+    </article>
+</section>
+<!--Top Navigation to be sent in blog phase 2-->
+                            <section class="mainsecblog">
+                                <section class="blogmaincontainer">
+                                    <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding topsection">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogmainheading">
+        <h1 class="blogheading">
+            Apache Hadoop HDFS Architecture        </h1>
+        <span class="recommendedsec clearfix"><p>
+                                                    <i class="fa fa-bookmark newbookmark"></i> Recommended by  134 users                            </p>
+        </span>
+        <div class="top-sec-infodetail">
+            <span class="authorblog"><a href="https://www.edureka.co/blog/author/ashishbedureka-co/" title="Posts by Ashish Bakshi" rel="author">Ashish Bakshi</a></span>
+            <span class="dateblog">May 31, 2013</span> 
+             
+<div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>        </div>
+    </article>
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topimage">
+        <img class="blogimg" src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/Heroimage 1.jpg" alt="Apache Hadoop HDFS Architecture" title="Apache Hadoop HDFS Architecture">    </article>
+</section>                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 no-padding hidden-sm hidden-xs share-leftnav">
+                                            <div class="nav-stacked-social affix-top" data-spy="affix" data-offset-top="350" data-offset-bottom="400">
+                                                <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_1' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_1' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_1' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_1' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                            </div>
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 no-padding">
+                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogdetailsec">
+    <article class="col-md-9 col-lg-9 col-sm-9 col-xs-12 blogdescription"> 
+        <span class="AddtoBookmark"><a  href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/" data-title="Apache Hadoop HDFS Architecture">
+                <i class="icon-Add_to_bookmark"></i>
+                <span class="Bookmark-text"><span>Add to</span> Bookmark</span></a>
+        </span>
+
+            <div class="modal thispost-mail fade" id="emailpostpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content centered">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span></button>
+                    <div class="Mailpost">
+                        <span class="icon"><i class="icon-Mail_this_post"></i></span>
+                        <span class="Mailthispost">Email this post</span>
+                        <form class="email-me-the-post" method="post" novalidate="novalidate">
+                            <div class="input-name  ">
+                                <input type="hidden" name="contentId" value="5152">
+                                <input type="text" name="name" class="required" required placeholder="Enter Your Name" autocomplete="false">
+                                <div class="error-name">
+                                    Please enter a valid input.
+                                </div>
+                            </div>
+                            <div class="input-email ">
+                                <input type="text" class="email required" required name="emails" placeholder="Enter Email ID’s ( Separated by commas )"  autocomplete="false">
+                                <div class="error-email">
+                                    Please enter a valid email id or comma separated email id's.
+                                </div>
+                            </div>
+                            <button type="submit" class="Submit-mailpost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="Mailpost-thankyou">
+                        <i class="icon-success"></i>
+                        <span class="Mailthispost">The post has been successfully mailed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="EmailthisPost" data-toggle="modal" data-target="#emailpostpop">
+            <i class="icon-Mail_this_post"></i>
+            <span class="EmailthisPost-text">Email <Span>this Post</span></span>
+        </span> 
+        <span class="viewsblogsec">
+            <span class="viewscount details-page-views-count"><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 25.7K</span>
+        </span>
+        <span class="commentsblogsec">
+            <a href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/#comments-wrapper" class="commentcount">
+                <span><i class="icon-comments"></i></span>
+            </a>&nbsp;&nbsp;
+            <a class="disqus-comment-count" data-disqus-url="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/" href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/#disqus_thread" class="commentcount">
+                <span>24</span>
+            </a>
+        </span>
+    </article>
+            <article class="col-md-3 col-lg-3 col-sm-3 col-xs-12 related-blog hidden-sm hidden-xs">
+            <ul class="pager">
+                <li><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="show-next-in-series"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </article>
+            <!-- <article class = "col-md-3 col-lg-3 col-sm-3 col-xs-12 downloadpdfblog">
+         <span class = "downloadpdf"></span>
+ </article> -->
+</section>                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogcontentsec">
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <h2 style="text-align: justify;"><span style="color: #333333;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Apache Hadoop HDFS </span></strong></span><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Architecture</span></strong></h2>
+<h2 style="text-align: center;"></h2>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Introduction:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In this blog, I am going to talk about Apache Hadoop HDFS Architecture. From my <span style="color: #3366ff;"><em><strong><a style="color: #3366ff;" href="http://www.edureka.co/blog/hdfs-tutorial/?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=apache-hadoop-hdfs-architecture" target="_blank">previous blog</a></strong></em></span>, you already know that HDFS is a distributed file system which is deployed on low cost commodity hardware. So, </span><span style="font-family: verdana, geneva, sans-serif;"><span style="font-size: 14px;">it&#8217;s </span></span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">high time that we should take a deep dive into Apache Hadoop HDFS Architecture and unlock its beauty.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The topics that will be covered in this blog on Apache Hadoop HDFS Architecture are as following:</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><a href="#hdfs_architecture"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">HDFS Master/Slave Topology</span></strong></a></li>
+<li style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><a href="#namenode">NameNode</a>, <a href="#datanode">DataNode</a> and <a href="#secondary_namenode">Secondary NameNode</a></span></strong></li>
+<li style="text-align: justify;"><a href="#hdfs_block"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">What is a block?</span></strong></a></li>
+<li style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><a href="#replication_management">Replication Management</a></span></strong><a name="hdfs_architecture"></a></li>
+<li style="text-align: justify;"><a href="#rack_awareness"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Rack Awareness</span></strong></a></li>
+<li style="text-align: justify;"><a href="#hdfs_read_or_write_architecture"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">HDFS Read/Write – Behind the scenes</span></strong></a></li>
+</ul>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">HDFS Architecture:</span></strong></h2>
+<p><img class="aligncenter size-large wp-image-36674" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-intoduction-HDFS-Tutorial-Edureka-489x300.png" alt="HDFS Topology - Apache Hadoop HDFS Architecture - Edureka" width="489" height="300" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-intoduction-HDFS-Tutorial-Edureka-489x300.png 489w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-intoduction-HDFS-Tutorial-Edureka-300x184.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-intoduction-HDFS-Tutorial-Edureka-768x472.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-intoduction-HDFS-Tutorial-Edureka.png 816w" sizes="(max-width: 489px) 100vw, 489px" /></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Apache HDFS</strong> or <strong>Hadoop Distributed File System</strong> is a block-structured file system where each file is divided into blocks of a pre-determined size. These blocks are stored across a cluster of one or several machines. Apache Hadoop HDFS Architecture follows a <em>Master/Slave Architecture</em>, where a cluster comprises of a single NameNode (Master node) and all the other nodes are DataNodes (Slave nodes). <a name="namenode"></a> HDFS can be deployed on a broad spectrum of machines that support Java. Though one can run several DataNodes on a single machine, but in the practical world, these DataNodes are spread across various machines.</span></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">NameNode:</span></strong></h2>
+<p style="text-align: center;"><img class="aligncenter wp-image-40401 " src="https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Apache-Hadoop-HDFS-Architecture-Edureka.png" alt="Apache Hadoop HDFS Architecture - Edureka" width="653" height="337" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Apache-Hadoop-HDFS-Architecture-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Apache-Hadoop-HDFS-Architecture-Edureka-300x155.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Apache-Hadoop-HDFS-Architecture-Edureka-768x396.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Apache-Hadoop-HDFS-Architecture-Edureka-528x272.png 528w" sizes="(max-width: 653px) 100vw, 653px" /></p>
+<p style="text-align: justify;"><span style="font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif;">NameNode is the master node in the Apache Hadoop HDFS Architecture that maintains and manages the blocks present on the DataNodes (slave nodes). </span><span style="font-family: verdana, geneva, sans-serif;">NameNode is a very highly available server that manages the File System Namespace and controls access to files by clients. I will be discussing this High Availability feature of Apache Hadoop HDFS in my next blog. The HDFS architecture is built in such a way that the user data never resides on the NameNode. The data resides on DataNodes only.  </span></span></p>
+<h3 style="text-align: justify;"><span style="font-size: 14px;"><em><span style="font-family: verdana, geneva, sans-serif;">Functions of NameNode:</span></em></span></h3>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It is the master daemon that maintains and manages the DataNodes (slave nodes)</span></li>
+<li><span style="font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif;">It records the metadata of all the files stored in the cluster, e.g. The location of blocks stored, </span><span style="font-family: verdana, geneva, sans-serif;">the size of the files, permissions, hierarchy, etc. There are two files associated with the metadata:</span></span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b>FsImage:</b> It contains the complete state of the file system namespace since the start of the NameNode.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b>EditLogs:</b> It contains all the recent modifications made to the file system with respect to the most recent FsImage.</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It records each change that takes place to the file system metadata. For example, if a file is deleted in HDFS, the NameNode will immediately record this in the EditLog.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It regularly receives a Heartbeat and a block report from all the DataNodes in the cluster to ensure that the DataNodes are live.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It keeps a record of all the blocks in HDFS and in which nodes these blocks are located.</span></li>
+<li><span style="font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif;">The NameNode is also responsible to take care of the <strong>replication </strong></span><span style="font-family: verdana, geneva, sans-serif;"><strong>factor </strong></span>of<span style="font-family: verdana, geneva, sans-serif;"> all the blocks which we will discuss in detail later in this HDFS tutorial blog.</span></span><a name="datanode"></a></li>
+<li><span style="font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif;">In <strong>case of the DataNode failure</strong>, the NameNode chooses new DataNodes for new replicas,</span> </span><span style="font-family: verdana, geneva, sans-serif;"><span style="font-size: 14px;">balance</span> <span style="font-size: 14px;">disk usage and manages the communication traffic to the DataNodes.</span></span></li>
+</ul>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">DataNode:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">DataNodes are the slave nodes in HDFS. Unlike NameNode, DataNode is a commodity hardware, that is, a non-expensive system which is not of high quality or high-availability. The DataNode is a block server that stores the data in the local file ext3 or ext4.</span></p>
+<h3 style="text-align: justify;"><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Functions of DataNode:</span></em></h3>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">These are slave daemons or process which runs on each slave machine.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The actual data is stored on DataNodes.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The DataNodes perform the low-level read and write requests from the file system’s clients.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">They send heartbeats to the NameNode periodically to report the overall health of HDFS, by default, this frequency is set to 3 seconds.</span><a name="secondary_namenode"></a></li>
+</ul>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Till now, you must have realized that the NameNode is pretty much important to us. If it fails, we are doomed.  But don’t worry, we will be talking about how Hadoop solved this single point of failure problem in the next Apache Hadoop HDFS Architecture blog. So, just relax for now and let’s take one step at a time.</span></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Secondary NameNode:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Apart from these two daemons, there is a third daemon or a process called Secondary NameNode. The Secondary NameNode works concurrently with the primary NameNode as a <strong>helper daemon. </strong>And don’t be confused about the Secondary NameNode being a<strong> backup NameNode because it is not.</strong></span></p>
+<p style="text-align: center;"><img class="aligncenter wp-image-36660 size-large" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Secondary-NameNode-Function-Apache-Hadoop-HDFS-Architecture-Edureka-528x185.png" alt="Secondary NameNode Function - Apache Hadoop HDFS Architecture - Edureka" width="528" height="185" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Secondary-NameNode-Function-Apache-Hadoop-HDFS-Architecture-Edureka-528x185.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Secondary-NameNode-Function-Apache-Hadoop-HDFS-Architecture-Edureka-300x105.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Secondary-NameNode-Function-Apache-Hadoop-HDFS-Architecture-Edureka-768x270.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Secondary-NameNode-Function-Apache-Hadoop-HDFS-Architecture-Edureka.png 815w" sizes="(max-width: 528px) 100vw, 528px" /></p>
+<h3 style="text-align: justify;"><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Functions of Secondary NameNode:</span></em></h3>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The Secondary NameNode is one which constantly reads all the file systems and metadata from the RAM of the NameNode and writes it into the hard disk or the file system.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It is responsible for combining the EditLogs<em> </em>with FsImage from the NameNode. </span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It downloads the EditLogs from the NameNode at regular intervals and applies to FsImage. The new FsImage is copied back to the NameNode, which is used whenever the NameNode is started the next time.</span><a name="hdfs_block"></a></li>
+</ul>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Hence, Secondary NameNode performs regular checkpoints in HDFS. Therefore, it is also called CheckpointNode.</span></p>
+<p style="text-align: center;"><a class="maxbutton-10 maxbutton maxbutton-enroll-blue-medium" target="_blank" href="http://www.edureka.co/big-data-and-hadoop?utm_source=blog&#038;utm_medium=blog-cta&#038;utm_campaign=apache-hadoop-hdfs-architecture-1"><span class='mb-text'>Become a HDFS Expert!</span></a></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Blocks:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif;">Now,</span> <span style="font-family: verdana, geneva, sans-serif;">as</span></span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> we know that the data in HDFS is scattered across the DataNodes as blocks. <strong>Let’s have a look at what is a block and how is it formed?</strong></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Blocks are the nothing but the smallest continuous location on your hard drive where data is stored. In general, in any of the File System, you store the data as a collection of blocks. Similarly, HDFS stores each file as blocks which are scattered throughout the Apache Hadoop cluster. The default size of each block is 128 MB in Apache Hadoop 2</span>.<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">x (64 MB in Apache Hadoop 1</span>.x<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">) which you can configure as per your requirement.</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36357 size-large" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/HDFS-File-Block-Apache-Hadoop-HDFS-Architecture-Edureka-528x91.png" alt="HDFS ARCHITECTURE – HDFS TUTORIAL Introduction In this blog, we are going to talk about HDFS Architecture. From my previous blog, we already know that HDFS is a distributed file system which is deployed on low cost commodity hardware. I discussed many of its features too. So, its high time that we take a deep dive into Apache Hadoop HDFS Architecture and unlock its beauty. The topics that will be covered in this blog are as follows: • HDFS Master/Slave Topology • NameNode and DataNode • What is a block • Replication Management • Rack Awareness • HDFS Read/Write – Behind the scenes HDFS Architecture HDFS or Hadoop Distributed File System is a block-structured file system where each file is divided into blocks of a pre-determined size. These blocks are stored across a cluster of one or several machines. Apache Hadoop HDFS Architecture follows a Master/Slave Architecture, where a cluster comprises of a single NameNode (Master node) and all the other nodes are DataNodes (Slave nodes). HDFS is based on Java programming language, due to which HDFS can be deployed on broad spectrum of machines that support Java. Though one can run several DataNodes on a single machine, but in practical world, these DataNodes are spread across various machines. NameNode and DataNode NameNode: NameNode is the master of HDFS that maintains and manages the blocks present on the DataNodes (slave nodes). Think of the NameNode as a Lamborghini in midst of various other cars. Thus, like a Lamborghini, NameNode is a very highly available server that manages the File System Namespace and controls access to files by clients. I will be discussing this High Availability feature of Apache Hadoop HDFS in my next blog. The HDFS architecture is built in such a way that the user data is never stored in the NameNode. The data resides on DataNodes only. Functions of NameNode: • It is the master daemon that maintains and manages the DataNodes (slave nodes) • It records the metadata of all the files stored in the cluster, e.g. location of blocks stored, size of the files, permissions, hierarchy, etc. There are two files associated with metadata: o FsImage: An image of the file system on starting the NameNode. o EditLogs: A series of modifications done to the file system after starting the NameNode. • It records each change that takes place to the file system metadata. For example, if a file is deleted in HDFS, the NameNode will immediately record this in the EditLog. • It regularly receives a Heartbeat and a block report from all the DataNodes in the cluster to ensure that the DataNodes are live. • It keeps a record of all the blocks in HDFS and in which nodes these blocks are located. • The NameNode is also responsible to take care of the replication factor of all the blocks which we will discuss in detail later in this HDFS tutorial blog. • In case of a DataNode failure, the NameNode chooses new DataNodes for new replicas, balances disk usage and manages the communication traffic to the DataNodes. DataNode: DataNodes are the slave nodes in HDFS, just like any average car in front of a Lamborghini! Unlike NameNode, DataNode is a commodity hardware, that is, a non-expensive system which is not of high quality or high-availability. DataNode is a block server that stores the data in the local file ext3 or ext4. Functions of DataNode: • These are slave daemons or process which runs on each slave machine. • The actual data is stored on DataNodes. • DataNodes perform the low-level read and write requests from the file system’s clients. • They send heartbeats to the NameNode periodically to report the overall health of HDFS, by default, this frequency is set to 3 seconds. So, till now, you folks must have realized that the NameNode is pretty much important to us. If it fails, we are doomed. But don’t worry, we will be talking about how Hadoop solved this single point of failure problem in the next HDFS tutorial blog. So, just relax for now and let’s take one step at a time. Secondary NameNode Apart from these two daemons there is a third daemon or process called Secondary NameNode. The Secondary NameNode works concurrently with the primary NameNode as a helper daemon. And don’t confuse Secondary NameNode as a backup NameNode because it is not. Functions of Secondary NameNode: • The Secondary NameNode is one which constantly reads all the file systems and metadata from the RAM of the NameNode and writes it into the hard disk or the file system. • It is responsible for combining the EditLogs with FsImage from the NameNode. • It downloads the EditLogs from the NameNode at regular intervals and applies to FsImage. The new FsImage is copied back to the NameNode, which is used whenever the NameNode is started the next time. Hence, Secondary NameNode just performs regular checkpoints in HDFS. Therefore, it is also called CheckpointNode. Blocks Now as we know that the data in HDFS is scattered across the DataNodes as blocks. Let’s have a look on what is a block and how is it formed? Blocks are the nothing but smallest continuous location in your hard drive where data is stored. In general, in any of the File System the data are stored as collection of blocks. Similarly, HDFS stores each file as blocks which is scattered throughout the Apache Hadoop cluster. The default size of each block is 128MB in Apache Hadoop 2.x (64 MB in Apache Hadoop 1.x) which you can configure as per your requirement. It is not necessary that in HDFS, each file is stored in exact multiple of the configured block size (128MB, 256MB etc.). Let’s take an example where I have a file “example.txt” of size 514MB as shown in above figure. Suppose, we are using the default block size configuration which is 128Mb. So, how many blocks will be created? 5, Right. First four blocks will be of 128 MB. But, the last block will be of 2 MB size only. Now you must be thinking why we need to have such a huge blocks size i.e. 128MB? Well, whenever we talk about HDFS, we talk about huge data sets i.e. terabytes and petabytes of data. So, if we had a block size of let’s say 4KB as in Linux file system, we would be having too many of blocks and therefore too much of metadata. So, managing these no. of blocks and metadata will create huge overhead which is something, we don’t want. As you understood what a block is, lets understand how these blocks are places in the next section. Replication Management and Rack Awareness Replication Management: HDFS provides a reliable way to store huge data in a distributed environment as data blocks. The blocks are also replicated to provide fault tolerance. The default replication factor is 3 which is again configurable. So, if you want to store a file of 1GB in your HDFS, you will be consuming a space of 3GB (replication factor =3) and 24 (1GB/128MB=8 data blocks) data blocks in total, considering the default configuration. Don’t worry guys, if you didn’t get the math in one go. Take your time then move ahead. The NameNode collects block report from DataNode periodically to maintain the replication factor. Therefore, whenever a block is over-replicated or under-replicated the NameNode deletes or add replicas as needed. Rack Awareness: Anyways, moving ahead, let’s talk more about how replica are placed and what is rack awareness? Again, the NameNode also ensures that all the replicas are not stored on the same rack or a single rack. It follows an in-built Rack Awareness Algorithm to reduce latency. Considering the replication factor is 3, the Rack Awareness Algorithm says that the first replica of a block will be stored on a local rack and the next two replicas will be stored on a different (remote) rack but on a different DataNode within that (remote) rack. If you have more replicas, the rest of the replicas will be placed on random DataNodes provided not more than two replicas reside on the same rack, if possible. This is how an actual Hadoop production cluster looks like. Here, you have multiple racks populated with many DataNodes. Advantages of Rack Awareness: So now you will be thinking why do we need Rack Awareness algorithm? The reasons are: • To improve the network performance: The communication between nodes residing on different racks is directed via switch. In general, you will find greater network bandwidth between machines in the same rack than the machines residing in different rack. So, the Rack Awareness helps you to have reduce write traffic in between different racks and thus providing a better write performance. Also, you will be gaining increased read performance because you are using the bandwidth of multiple racks. • To prevent loss of data: We don’t have to worry about the data even if an entire rack fails because of the switch failure or power failure. And if you think about it, it will make sense, as it is said that never put all your eggs in the same basket. HDFS Read/ Write Architecture Now let’s talk about how the data read/write operations are performed on HDFS. HDFS follows Write Once - Read Many philosophy. So, you can’t edit files already stored in HDFS. But, you can append new data in a file. HDFS Write Architecture: Imagine a situation where a HDFS client, want to write a file named “example.txt” of size 248MB. Assume that the system block size is configured to 128 MB (default). So, the client will be dividing the file “example.txt” into 2 blocks – one of 128MB (Block A) and the other of 120 MB (block B). Now, the following protocol will be followed whenever the data is written into HDFS: • At first, the HDFS client will reach out to the NameNode for a Write Request against the two blocks, say, Block A &amp; Block B. • The NameNode will then grant client the write permission and will provide the IP addresses of the DataNodes where the file blocks will be copied eventually. • The selection of IP addresses of DataNodes is purely randomized based on availability, replication factor and rack awareness that we have discussed earlier. • Let’s say the replication factor is set to default i.e. 3. Therefore, for each block the NameNode will be providing the client a list of (3) IP addresses of DataNodes. The list will be unique for each block. • Suppose, the NameNode provided following lists of IP addresses to the client: o For Block A, list A = {IP of DataNode 1, IP of DataNode 4, IP of DataNode 5} o For Block B, set B = {IP of DataNode 3, IP of DataNode 7, IP of DataNode 9} • Each block will be copied in three different DataNodes to maintain the replication factor consistent. • Now the whole data copy process will happen in three stages: 1. Set up of Pipeline 2. Data streaming and replication 3. Shutdown of Pipeline (Acknowledgement stage) 1. Set up of Pipeline: Before writing the blocks, client confirms whether the DataNodes present in each of the list of IPs are ready to receive the data or not. For doing so, the client creates a pipeline for each of the blocks by connecting the individual DataNodes in the respective list for that block. Let us consider Block A. The list of DataNodes provided by the NameNode is : For Block A, list A = {IP of DataNode 1, IP of DataNode 4, IP of DataNode 5}. So, for block A, the client will be performing following steps to create a pipeline:  Client will choose first DataNode in the list (DataNode IPs for Block A) which is DataNode 1 and will open a TCP/IP connection.  Client will inform DataNode 1 to be ready to receive the block. It will also provide the IPs of next two DataNodes (4 and 5) where the block will be replicated.  DataNode 1 will connect to DataNode 4. DataNode 1 will inform DataNode 4 to be ready to receive the block and will give it the IP of DataNode 5. Then, DataNode 4 will tell DataNode 5 to be ready for receiving the data.  Next, the acknowledgement of readiness will follow the reverse sequence i.e. From DataNode 5 to 4 and then to 1.  At last DataNode 1 will inform the client that all the DataNodes are ready and a pipeline is formed between client, DataNode 1, 4 and 5.  Now pipeline set up is complete and the client will finally begin the data copy or streaming process. 2. Data Streaming: As the pipeline has been created, the client will push the data into the pipeline. Now, don’t forget that in HDFS, data is replicated based on replication factor. So, here Block A will be stored to three DataNodes as the assumed replication factor is 3. Moving ahead, the client will copy the block (A) to DataNode 1 only. The replication is always done by DataNodes sequentially. So, following steps will take place during replication:  Once the block has been written to DataNode 1, it will connect to DataNode 4.  Then, it will push the block in the pipeline and data will be copied to DataNode 4.  Again, DataNode 4 will connect to DataNode 5 and will copy the block. 3. Shutdown of Pipeline or Acknowledgement stage: Once the block has been copied into all the three DataNodes, a series of acknowledgements will take place to ensure the client and NameNode that the data has been written successfully. And client will finally close the pipeline to end the TCP session. As shown in the figure, the acknowledgement happens in the reverse sequence i.e. from DataNode 5 to 4 and then to 1. Finally, the DataNode 1 will push three acknowledgements (including its own) into the pipeline and send it to client. Client will inform NameNode that data has been written successfully. NameNode will update its metadata and the client will shut down the pipeline. Similarly, Block B will also be copied into the DataNodes in parallel with Block A. But, following things are to be noticed here:  Client will copy Block A and Block B to the first DataNode simultaneously.  Therefore, in our case two pipelines will be formed for each of the block and all the process discussed above will happen in parallel in these two pipelines.  Client writes the block into first DataNode and then the DataNodes will be replicating the block sequentially. Folks! Its time for a quiz now: In HDFS, blocks of a file are written in parallel, however the replication of the blocks are done sequentially: a. True b. False True. Right guys. So, if you are still confused, go through the HDFS write architecture again. I am sure you will understand it this time. HDFS Read Architecture: HDFS Read architecture is comparatively easy to understand. Let’s the above example again where a HDFS clients want to read the file “example.txt” which is already there in HDFS. Now, following steps will be taking place while reading the file: • Client will reach out to NameNode asking for the block metadata for the file example.txt. • The NameNode will return the list of DataNodes where each block (Block A and B) are stored. • After that client, will connect to the DataNodes where the blocks are stored. • Client starts reading data parallel from the Data nodes (Block A from DataNode 1 and Block B from DataNode 5). • Once it gets all the required file blocks, it will combine these blocks to form a file. While serving read request of the client, HDFS selects the replica which is closest to the client. This reduces the read latency and the bandwidth consumption. Therefore, that replica is selected which resides on the same rack as the reader node, if possible. " width="528" height="91" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/HDFS-File-Block-Apache-Hadoop-HDFS-Architecture-Edureka-528x91.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/HDFS-File-Block-Apache-Hadoop-HDFS-Architecture-Edureka-300x51.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/HDFS-File-Block-Apache-Hadoop-HDFS-Architecture-Edureka-768x132.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/HDFS-File-Block-Apache-Hadoop-HDFS-Architecture-Edureka.png 816w" sizes="(max-width: 528px) 100vw, 528px" /></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It is not necessary that in HDFS, each file is stored in exact multiple of the configured block size (128 MB, 256 MB etc.). Let’s take an example where I have a file “example.txt” of size 514 MB as shown in above figure.  Suppose that we are using the default configuration of block size, which</span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"> is 128 MB. Then, how many blocks will be created? 5, Right. The</span><span style="font-family: verdana, geneva, sans-serif;"><span style="font-size: 14px;"> f</span>irst <span style="font-size: 14px;">four blocks will be </span></span>of<span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> 128 MB. But, the last block will be of 2 MB size only.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong>Now, you must be thinking why we need to have such a huge blocks size i.e. 128 MB?</strong></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif;"><span style="font-size: 14px;">Well, whenever we talk about HDFS, we talk about huge data sets, i.e. Terabytes and Petabytes of data. So, if we had a block size of let’s say of 4 KB, as in Linux file system, we would be having too many blocks and therefore too much of the metadata. So, managing these no. </span>of<span style="font-size: 14px;"> blocks and metadata will create huge overhead</span>, <span style="font-size: 14px;">which is something, we don’t want.</span></span></p>
+<p style="text-align: justify;"><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">As you understood <strong>what a block is</strong>, let us understand how the replication of these blocks takes place in the next section of this HDFS Architecture. Meanwhile</span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">, you may check out this video tutorial on HDFS Architecture where all the HDFS Architecture concepts has been discussed in detail: </span></em></p>
+<h2 style="text-align: center;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">HDFS Architecture Tutorial Video | Edureka</span></strong></h2>
+<p><a name="replication_management"></a></p>
+<div><iframe src="//www.youtube.com/embed/m9v9lky3zcE?rel=0&amp;showinfo=0" width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen" data-mce-fragment="1"></iframe></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Replication Management:</span></strong></h2>
+</div>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">HDFS provides a reliable way to store huge data in a distributed environment as data blocks. The blocks are also replicated to provide fault tolerance. The default replication factor is 3 which is again configurable. So, as you can see in the figure below where each block is replicated three times and stored on different DataNodes (considering the default replication factor): <img class="aligncenter wp-image-36374 " src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Replication-Management-Apache-Hadoop-HDFS-Architecture-Edureka-Blog.png" alt="Replication Management - Apache Hadoop HDFS Architecture - Edureka" width="618" height="394" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Replication-Management-Apache-Hadoop-HDFS-Architecture-Edureka-Blog.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Replication-Management-Apache-Hadoop-HDFS-Architecture-Edureka-Blog-300x191.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Replication-Management-Apache-Hadoop-HDFS-Architecture-Edureka-Blog-768x489.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Replication-Management-Apache-Hadoop-HDFS-Architecture-Edureka-Blog-471x300.png 471w" sizes="(max-width: 618px) 100vw, 618px" /></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Therefore, if you are storing a file of 128 MB in HDFS using the default configuration, you will end up occupying a space of 384 MB (3*128 MB) as the blocks will be replicated three times and each replica will be residing on a different DataNode. </span><a name="rack_awareness"></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Note:</strong></em> The NameNode collects block report from DataNode periodically to maintain the replication factor. Therefore, whenever a block is over-replicated or under-replicated the NameNode deletes or add replicas as needed. </span></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Rack Awareness:</span></strong></h2>
+<p style="text-align: justify;"><img class="aligncenter wp-image-40402 " src="https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Rack-Awareness-Apache-Hadoop-HDFS-Architecture-Edureka.png" alt="Rack Awareness - Apache Hadoop HDFS Architecture - Edureka" width="643" height="340" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Rack-Awareness-Apache-Hadoop-HDFS-Architecture-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Rack-Awareness-Apache-Hadoop-HDFS-Architecture-Edureka-300x159.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Rack-Awareness-Apache-Hadoop-HDFS-Architecture-Edureka-768x407.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2013/05/Rack-Awareness-Apache-Hadoop-HDFS-Architecture-Edureka-528x280.png 528w" sizes="(max-width: 643px) 100vw, 643px" /></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Anyways, moving ahead, let’s talk more about how HDFS places replica and what is rack awareness? Again, the NameNode also ensures that all the replicas are not stored on the same rack or a single rack. It follows an in-built Rack Awareness Algorithm to reduce latency as well as provide fault tolerance. Considering the replication factor is 3, the Rack Awareness Algorithm says that the first replica of a block will be stored on a local rack and the next two replicas will be stored on a different (remote) rack but, on a different DataNode within that (remote) rack as shown in the figure above. If you have more replicas, the rest of the replicas will be placed on random DataNodes provided not more than two replicas reside on the same rack, if possible.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">This is how an actual Hadoop production cluster looks like. Here, you have multiple racks populated with DataNodes:</span></p>
+<p style="text-align: center;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"> <img class="aligncenter wp-image-36738 " src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-cluster-Apache-Hadoop-HDFS-Architecture-Edureka-1.png" alt="Hadoop Cluster - Apache Hadoop HDFS Architecture - Edureka" width="607" height="485" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-cluster-Apache-Hadoop-HDFS-Architecture-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-cluster-Apache-Hadoop-HDFS-Architecture-Edureka-1-300x240.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-cluster-Apache-Hadoop-HDFS-Architecture-Edureka-1-768x613.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-cluster-Apache-Hadoop-HDFS-Architecture-Edureka-1-376x300.png 376w" sizes="(max-width: 607px) 100vw, 607px" /><br />
+</span></p>
+<h3 style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Advantages of Rack Awareness:</span></h3>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">So, now you will be thinking why do we need a Rack Awareness algorithm? The reasons are:</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>To improve the network performance: </strong>The communication between nodes residing on different racks is directed via switch. In general, you will find<em> greater network bandwidth</em> between machines in the same rack than the machines residing in different rack. So, the Rack Awareness helps you to have reduce write traffic in between different racks and thus providing a better write performance. Also, you will be gaining increased read performance because you are using the bandwidth of multiple racks.</span></li>
+</ul>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>To prevent loss of data: </strong>We don’t have to worry about the data even if an entire rack fails because of the switch failure or power failure. And if you think about it, it will make sense, as it is said that <em>never put all your eggs in the same basket.</em></span><a name="hdfs_read_or_write_architecture"></a></li>
+</ul>
+<p style="text-align: center;"><a class="maxbutton-22 maxbutton maxbutton-certification-blue-big" target="_blank" href="http://www.edureka.co/big-data-and-hadoop?utm_source=blog&#038;utm_medium=blog-cta&#038;utm_campaign=apache-hadoop-hdfs-architecture-1"><span class='mb-text'>Check out our Hadoop Course</span></a></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">HDFS Read/ Write Architecture:</span></strong><a name="hdfs_write_architecture"></a></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Now let’s talk about how the data read/write operations are performed on HDFS. HDFS follows Write Once &#8211; Read Many Philosophy. So, you can’t edit files already stored in HDFS. But, you can append new data by re-opening the file.</span></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">HDFS Write Architecture:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Suppose a situation where an HDFS client, wants to write a file named “example.txt” of size 248 MB.</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36545 " src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-File-Blocks-Apache-Hadoop-HDFS-Architecture-Edureka.png" alt="hdfs-file-blocks-apache-hadoop-hdfs-architecture-edureka" width="416" height="128" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-File-Blocks-Apache-Hadoop-HDFS-Architecture-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-File-Blocks-Apache-Hadoop-HDFS-Architecture-Edureka-300x92.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-File-Blocks-Apache-Hadoop-HDFS-Architecture-Edureka-768x236.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-File-Blocks-Apache-Hadoop-HDFS-Architecture-Edureka-528x162.png 528w" sizes="(max-width: 416px) 100vw, 416px" /></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Assume that the system block size is configured for 128 MB (default). So, the client will be dividing the file “example.txt” into 2 blocks – one of 128 MB (Block A) and the other of 120 MB (block B). </span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now, the following protocol will be followed whenever the data is written into HDFS:</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">At first, the HDFS client will reach out to the NameNode for a Write Request against the two blocks, say, Block A &amp; Block B.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The NameNode will then grant the client the write permission and will provide the IP addresses of the DataNodes where the file blocks will be copied eventually.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The selection of IP addresses of DataNodes is purely randomized based on availability, replication factor and rack awareness that we have discussed earlier.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Let’s say the replication factor is set to default i.e. 3. Therefore, for each block the NameNode will be providing the client a list of (3) IP addresses of DataNodes. The list will be unique for each block.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Suppose, the NameNode provided following lists of IP addresses to the client: </span>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">For Block A, list A = {IP of DataNode 1, IP of DataNode 4, IP of DataNode 6}</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">For Block B, set B = {IP of DataNode 3, IP of DataNode 7, IP of DataNode 9}</span></li>
+</ul>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Each block will be copied in three different DataNodes to maintain the replication factor consistent throughout the cluster.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now the whole data copy process will happen in three stages:</span></li>
+</ul>
+<p style="text-align: center;"><img class="aligncenter wp-image-36664 " src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka.png" alt="HDFS Pipeline - Apache Hadoop HDFS Architecture - Edureka" width="531" height="136" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka-300x77.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka-768x197.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka-528x135.png 528w" sizes="(max-width: 531px) 100vw, 531px" /></p>
+<ol>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Set up of Pipeline</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Data streaming and replication</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Shutdown of Pipeline (Acknowledgement stage) </span></li>
+</ol>
+<h3><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><strong>1. Set up of Pipeline:</strong></span></h3>
+<p style="text-align: justify;"><span style="font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif;">Before writing the blocks,</span> <span style="font-family: verdana, geneva, sans-serif;">the client confirms whether the DataNodes, present in each of the list of IPs, are ready to receive the data or not.</span> <span style="font-family: verdana, geneva, sans-serif;">In doing so, the client creates a pipeline for each of the blocks by connecting the individual DataNodes in the respective list for that block. Let us consider Block A. The list of DataNodes provided by the NameNode is</span>:</span></p>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>For Block A, list A = {IP of DataNode 1, IP of DataNode 4, IP of DataNode 6}. </strong></span></p>
+<p style="text-align: center;"><img class="aligncenter wp-image-36919" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Set-up-Apache-Hadoop-HDFS-Architecture-Edureka-1.png" alt="HDFS Pipeline Set Up - Apache Hadoop HDFS Architecture - Edureka" width="586" height="427" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Set-up-Apache-Hadoop-HDFS-Architecture-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Set-up-Apache-Hadoop-HDFS-Architecture-Edureka-1-300x219.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Set-up-Apache-Hadoop-HDFS-Architecture-Edureka-1-768x560.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Pipeline-Set-up-Apache-Hadoop-HDFS-Architecture-Edureka-1-412x300.png 412w" sizes="(max-width: 586px) 100vw, 586px" /></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">So, for block A, the client will be performing the following steps to create a pipeline:</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The client will choose the first DataNode in the list (DataNode IPs for Block A) which is DataNode 1 and will establish a TCP/IP connection.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The client will inform DataNode 1 to be ready to receive the block. It will also provide the IPs of next two DataNodes (4 and 6) to the DataNode 1 where the block is supposed to be replicated.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The DataNode 1 will connect to DataNode 4. The DataNode 1 will inform DataNode 4 to be ready to receive the block and will give it the IP of DataNode 6. Then, DataNode 4 will tell DataNode 6 to be ready for receiving the data.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Next, the acknowledgement of readiness will follow the reverse sequence, i.e. From the DataNode 6 to 4 and then to 1.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">At last DataNode 1 will inform the client that all the DataNodes are ready and a pipeline will be formed between the client, DataNode 1, 4 and 6.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now pipeline set up is complete and the client will finally begin the data copy or streaming process.</span></li>
+</ul>
+<h3><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>2. Data Streaming:</strong></span></h3>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">As the pipeline has been created, the client will push the data into the pipeline. Now, don’t forget that in HDFS, data is replicated based on replication factor. So, here Block A will be stored to three DataNodes as the assumed replication factor is 3. Moving ahead, the client will copy the block (A) to DataNode 1 only. The replication is always done by DataNodes sequentially.</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36920" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Apache-Hadoop-HDFS-Architecture-Edureka-1.png" alt="HDFS Write - Apache Hadoop HDFS Architecture - Edureka" width="607" height="417" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Apache-Hadoop-HDFS-Architecture-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Apache-Hadoop-HDFS-Architecture-Edureka-1-300x206.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Apache-Hadoop-HDFS-Architecture-Edureka-1-768x528.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Apache-Hadoop-HDFS-Architecture-Edureka-1-437x300.png 437w" sizes="(max-width: 607px) 100vw, 607px" /></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">So, the following steps will take place during replication:</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Once the block has been written to DataNode 1 by the client, DataNode 1 will connect to DataNode 4.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Then, DataNode 1 will push the block in the pipeline and data will be copied to DataNode 4.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Again, DataNode 4 will connect to DataNode 6 and will copy the last replica of the block.</span></li>
+</ul>
+<h3><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><strong>3. Shutdown of Pipeline or Acknowledgement stage:</strong></span></h3>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Once the block has been copied into all the three DataNodes, a series of acknowledgements will take place to ensure the client and NameNode that the data has been written successfully. Then, the client will finally close the pipeline to end the TCP session.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">As shown in the figure below, the acknowledgement happens in the reverse sequence i.e. from DataNode 6 to 4 and then to 1. Finally, the DataNode 1 will push three acknowledgements (including its own) into the pipeline and send it to the client. The client will inform NameNode that data has been written successfully. The NameNode will update its metadata and the client will shut down the pipeline.</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36921" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Acknowledgement-Apache-Hadoop-HDFS-Architecture-Edureka-1.png" alt="HDFS Write Acknowledgement - Apache Hadoop HDFS Architecture - Edureka" width="628" height="457" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Acknowledgement-Apache-Hadoop-HDFS-Architecture-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Acknowledgement-Apache-Hadoop-HDFS-Architecture-Edureka-1-300x219.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Acknowledgement-Apache-Hadoop-HDFS-Architecture-Edureka-1-768x560.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Write-Acknowledgement-Apache-Hadoop-HDFS-Architecture-Edureka-1-412x300.png 412w" sizes="(max-width: 628px) 100vw, 628px" /></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Similarly, Block B will also be copied into the DataNodes in parallel with Block A. So, the following things are to be noticed here:</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The client will copy Block A and Block B to the first DataNode <strong>simultaneously</strong>.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Therefore, in our case, two pipelines will be formed for each of the block and all the process discussed above will happen in parallel in these two pipelines.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The client writes the block into the first DataNode and then the DataNodes will be replicating the block sequentially.</span></li>
+</ul>
+<p style="text-align: center;"><img class="aligncenter wp-image-36923" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Multi-Write-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka.png" alt="HDFS Multiple Write Pipeline - Apache Hadoop HDFS Architecture - Edureka" width="619" height="431" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Multi-Write-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Multi-Write-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka-300x209.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Multi-Write-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka-768x535.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Multi-Write-Pipeline-Apache-Hadoop-HDFS-Architecture-Edureka-431x300.png 431w" sizes="(max-width: 619px) 100vw, 619px" /></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">As you can see in the above image, there are two pipelines formed for each block (A and B). Following is the flow of operations that is taking place for each block in their respective pipelines:</span><a name="hdfs_read_architecture"></a></p>
+<ul>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">For Block A: 1A -&gt; 2A -&gt; 3A -&gt; 4A</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">For Block B: 1B -&gt; 2B -&gt; 3B -&gt; 4B -&gt; 5B -&gt; 6B </span></li>
+</ul>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">HDFS Read Architecture:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">HDFS Read architecture is comparatively easy to understand. Let’s take the above example again where the HDFS client wants to read the file “example.txt” now.</span></p>
+<p style="text-align: center;"><img class="aligncenter wp-image-36924" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Read-Apache-Hadoop-HDFS-Architecture-Edureka-1.png" alt="HDFS Read - Apache Hadoop HDFS Architecture - Edureka" width="611" height="445" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Read-Apache-Hadoop-HDFS-Architecture-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Read-Apache-Hadoop-HDFS-Architecture-Edureka-1-300x219.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Read-Apache-Hadoop-HDFS-Architecture-Edureka-1-768x560.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Read-Apache-Hadoop-HDFS-Architecture-Edureka-1-412x300.png 412w" sizes="(max-width: 611px) 100vw, 611px" /></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now, following steps will be taking place while reading the file:</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The client will reach out to NameNode asking for the block metadata for the file &#8220;example.txt&#8221;.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The NameNode will return the list of DataNodes where each block (Block A and B) are stored.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">After that client, will connect to the DataNodes where the blocks are stored.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The client starts reading data parallel from the DataNodes (Block A from DataNode 1 and Block B from DataNode 3).</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Once the client gets all the required file blocks, it will combine these blocks to form a file.</span></li>
+</ul>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">While serving read request of the client, HDFS selects the replica which is closest to the client. This reduces the read latency and the bandwidth consumption. Therefore, that replica is selected which resides on the same rack as the reader node, if possible.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now, you should have a pretty good idea about Apache Hadoop HDFS Architecture. I understand that there is a lot of information here and it may not be easy to get it in one go. I would suggest you to go through it again and I am sure you will find it easier this time. Now, in my next blog, I will be talking about Apache Hadoop HDFS Federation and High Availability Architecture.</span></p>
+<p style="text-align: center;"><a class="maxbutton-15 maxbutton maxbutton-download-blue-small" target="_blank" href="http://www.edureka.co/blog/hdfs-tutorial?utm_source=blog&#038;utm_medium=blog-cta&#038;utm_campaign=apache-hadoop-hdfs-architecture-p"><span class='mb-text'>&lt;&lt;      Previous Blog</span></a>   <a class="maxbutton-15 maxbutton maxbutton-download-blue-small" target="_blank" href="http://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability?utm_source=blog&#038;utm_medium=blog-cta&#038;utm_campaign=apache-hadoop-hdfs-architecture-n"><span class='mb-text'>Next Blog      &gt;&gt;</span></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em>Now that you have understood Hadoop architecture, check out the <span style="color: #3366ff;"><strong><a style="color: #3366ff;" href="http://www.edureka.co/big-data-and-hadoop/?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=apache-hadoop-hdfs-architecture" target="_blank">Hadoop training</a></strong></span> by Edureka, a trusted online learning company with a network of more than 250,000 satisfied learners spread across the globe. The Edureka Big Data Hadoop Certification Training course helps learners become expert in HDFS, Yarn, MapReduce, Pig, Hive, HBase, Oozie, Flume and Sqoop using real-time use cases on Retail, Social Media, Aviation, Tourism, Finance domain.</em></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em>Got a question for us? Please mention it in the comments section and we will get back to you.</em></span></p>
+                                                    </p>
+                                                </article>
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <div id="author-bio-box"><img alt='' src='https://secure.gravatar.com/avatar/b669e7f2bc40d7ed2b75d11c3fd911fc?s=80&d=mm&r=g' srcset="https://secure.gravatar.com/avatar/b669e7f2bc40d7ed2b75d11c3fd911fc?s=160&d=mm&r=g 2x" class='avatar avatar-80 photo' height='80' width='80' /><span class="author-name">About Ashish Bakshi (<a href="https://www.edureka.co/blog/author/ashishbedureka-co/">8 Posts</a>)</span><p></p><div class="bio-socials"></div></div><br/><div class="clear"></div>                                                    </p>
+                                                </article>
+                                                <div class="bot-shareoption">
+                                                    <span class="Shareon-bot">
+                                                        Share on
+                                                    </span>
+                                                    <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_2' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_2' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_2' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_2' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                                </div>
+                                                                                                    <article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 related-blog next-blog-leftnav">
+                                                        <ul class="pager">
+                                                            <li class="pull-left"><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i> PREVIOUS</a></li>
+                                                            <li class="pull-right"><a href="#" class="show-next-in-series">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </article>
+                                                                                                    <section id="edu-related-blog-carousel-2" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Posts</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/introduction-to-apache-hadoop-hdfs/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2013/05/featured-image1.jpg" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Introduction to Apache MapReduce and HDFS</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 23.5K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/10-reasons-why-big-data-analytics-is-the-best-career-move"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2015/01/10-Reasons-Why-Big-Data-Analytics-is-the-Best-Career-Move-01.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>10 Reasons Why Big Data Analytics is the Best Career Move</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 184.5K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/5-reasons-to-learn-hadoop"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2014/03/HadoopTutorialThemeImage_final.jpg" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>5 Reasons to Learn Hadoop</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 128.5K</div>
+                            </div>
+                        </article></a>
+                    </div></div>
+                    </article></section>
+                                                <!--Comments Area Single post-->
+                                                <section class="padcomments" >
+    <span class="comments"> Comments <div class="arrow-down"></div></span>
+    <span class="pull-right comment"> 24 Comments </span>
+</section>
+<section class="commsec" id="comments-wrapper">
+    
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+            <div class="navigation">
+                <div class="nav-previous">
+                    <span class="meta-nav">&larr;</span>&nbsp;
+                    <a href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/comment-page-1/#comments" >Older Comments</a>                </div>
+                <div class="nav-next">
+                                        &nbsp;<span class="meta-nav">&rarr;</span>
+                </div>
+            </div> <!-- .navigation -->
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-21480">
+        <div id="dsq-comment-header-21480" class="dsq-comment-header">
+            <cite id="dsq-cite-21480">
+                <span id="dsq-author-user-21480">Jojo De La Cruz</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21480" class="dsq-comment-body">
+            <div id="dsq-comment-message-21480" class="dsq-comment-message"><p>Hi, I need help to further understand this statement from Rack Awareness vs the block B sequence in HDFS Multi &#8211; Block Write Pipeline diagram..</p>
+<p>Rack Awareness:<br />
+&#8220;Considering the replication factor is 3, the Rack Awareness Algorithm says that the first replica of a block will be stored on a local rack and the next two replicas will be stored on a different (remote) rack but, on a different DataNode within that (remote) rack as shown in the figure above. If you have more replicas, the rest of the replicas will be placed on random DataNodes provided not more than two replicas reside on the same rack, if possible.&#8221;</p>
+<p>HDFS Multi &#8211; Block Write Pipeline:<br />
+The block B first replica was written in Node 7 in rack 7, then written in Node 9 still in rack 7 and then to Node 3 in rack 1</p>
+<p>My understanding, the first replica will be in the local and that the subsequent write will be on another node in a different rack and then to another node to that within that same rack, but the &#8220;block B&#8221; shows otherwise. Can you help explain this further please?</p>
+<p>Thanks you very much in advance.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+            </ul>
+
+            <div class="navigation">
+                <div class="nav-previous">
+                    <span class="meta-nav">&larr;</span>
+                    &nbsp;<a href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/comment-page-1/#comments" >Older Comments</a>                </div>
+                <div class="nav-next">
+                                        &nbsp;<span class="meta-nav">&rarr;</span>
+                </div>
+            </div><!-- .navigation -->
+
+        </div>
+
+    </div>
+
+</section>	
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>	
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-12 col-sm-12 no-padding blog-sidepanel"> 
+    <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maincontainer detailpagesidebar" 
+             data-post_type="post" 
+             data-post_name="apache-hadoop-hdfs-architecture" >
+             <section id="edu-related-blogs-2" class="right-side-widget custom-edu-widgets widget_edu-related-blogs"><h3 class="widget-title"><span>Related Blogs</span></h3><ul class="edu-hiran custom-widget-listing related-blogs"><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hdfs-2/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Feature-Image-Hadoop-HDFS-Interview-Questions-Edureka.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Feature Image - Hadoop HDFS Interview Questions - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Feature-Image-Hadoop-HDFS-Interview-Questions-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Feature-Image-Hadoop-HDFS-Interview-Questions-Edureka-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Feature-Image-Hadoop-HDFS-Interview-Questions-Edureka-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Feature-Image-Hadoop-HDFS-Interview-Questions-Edureka-513x300.png 513w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hdfs-2/" class="custom-rel-article"><span>Hadoop Interview Questions &#8211; HDFS<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/introduction-to-apache-hadoop-hdfs/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2013/05/featured-image1.jpg" class="attachment-550x50 size-550x50 wp-post-image" alt="Apache Hadoop HDFS" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2013/05/featured-image1.jpg 600w, https://cdn.edureka.co/blog/wp-content/uploads/2013/05/featured-image1-300x175.jpg 300w, https://cdn.edureka.co/blog/wp-content/uploads/2013/05/featured-image1-514x300.jpg 514w, https://cdn.edureka.co/blog/wp-content/uploads/2013/05/featured-image1-150x87.jpg 150w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/introduction-to-apache-hadoop-hdfs/" class="custom-rel-article"><span>Introduction to Apache MapReduce and HDFS<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/10-reasons-why-big-data-analytics-is-the-best-career-move" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/01/10-Reasons-Why-Big-Data-Analytics-is-the-Best-Career-Move-01.png" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/01/10-Reasons-Why-Big-Data-Analytics-is-the-Best-Career-Move-01.png 600w, https://cdn.edureka.co/blog/wp-content/uploads/2015/01/10-Reasons-Why-Big-Data-Analytics-is-the-Best-Career-Move-01-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/01/10-Reasons-Why-Big-Data-Analytics-is-the-Best-Career-Move-01-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/10-reasons-why-big-data-analytics-is-the-best-career-move" class="custom-rel-article"><span>10 Reasons Why Big Data Analytics is the Best Career...<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/5-reasons-to-learn-hadoop" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2014/03/HadoopTutorialThemeImage_final.jpg" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2014/03/HadoopTutorialThemeImage_final.jpg 600w, https://cdn.edureka.co/blog/wp-content/uploads/2014/03/HadoopTutorialThemeImage_final-300x175.jpg 300w, https://cdn.edureka.co/blog/wp-content/uploads/2014/03/HadoopTutorialThemeImage_final-514x300.jpg 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/5-reasons-to-learn-hadoop" class="custom-rel-article"><span>5 Reasons to Learn Hadoop<span></a></article></li></ul></section><section id="edu-ads-2" class="right-side-widget custom-edu-widgets widget_edu-ads"><section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 courseimgadv">
+                    <a href="http://www.edureka.co/big-data-and-hadoop?utm_source=blog&utm_medium=blog-display-ad&utm_campaign=apache-hadoop-hdfs-architecture" target="_blank" class="thumbnail custom-promotion" >
+                        <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-2.png" /></a></section></section><section id="edu-custom-subscribe-2" class="right-side-widget custom-edu-widgets widget_edu-custom-subscribe">        <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding Newsletter-sub">
+            
+                        <form id="subscribe-form" novalidate class="custom-subscribe-form-wrapper hide">
+                <div class="subscribesec">
+                                    <!--<div class="close-thissub"><i class="icon-cross"></i></div>	-->
+                    <div class="subscribesec-box">										
+                        <h4 class="clearfix subscribeblogtitle"><p><i class="icon-Mail_this_post"></i></p><span>Subscribe to get free Newsletter</span></h4>
+                        <section class="sectrendcom">
+                            <article class="relatedcontmain">
+                                <div class="input-group Subscribeinput">                              
+                                    <input name="subscription-mail" type="email" autocomplete="off" class="form-control " required placeholder="Enter Email"> 
+                                    <!-- Add classes successform and errorform to toggle the input form -->
+
+                                </div>
+                                <input type="hidden"  id="is_user_loggedin" value="0"/>
+                                <label id="loader" style="margin-left:120px;display:none" ><img src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/loader.gif" /></label>
+
+                                <p class="errormessage"> Please provide a valid Email Id </p>
+                            </article>                         
+                        </section>  
+                    </div>
+                    <div class="subscribesec-success">
+                        <i class="icon-success"></i>
+                        <p class="successmessage" style="display: none;"> Thank you, your subscription is successful</p> 
+                        <p class="alreadysubscribed" style="display: none;"> You have already subscribed.</p> 
+                    </div>
+                </div>
+                <button type="submit" id="subscribe-button" class="btn subscribebtn successbutton">
+                    <div class="sub-news-letter">SUBSCRIBE</div></button>
+            </form>
+            <div class="sub-browse-letter show-after-success hide">
+                <a class="" href="/all-courses" target="_blank">BROWSE COURSES</a>
+            </div>
+        </section>
+        </section></section>
+</div>
+<!-- Right Panel ends -->
+</div></div></div>
+</section>
+
+<footer class="footer-new" id="footer_v2">
+        <div class="container">
+        <div class="row">
+            <div class="padding-xs-only clearfix">
+                <div class="panel-group no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="col-md-12 visible-xs accordion-head">
+
+                            <a data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" href="javascript:void(0)">
+                                <h3 class="no-margin footer-new-hd-lineht"><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></h3>
+                                <p class=" margin-vr5 grey-txt marg-btm-0-xs">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd.</p>
+                                <i class="fa fa-angle-up"></i>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+
+                        </div>
+                        <div id="collapse1" class="div-collapse collapse clearfix">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 item-padding">
+                                <h4>Edureka</h4>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/about-us">About us</a></li>
+                                    <li><a href="https://www.edureka.co/allmedia">News & Media</a></li>
+                                    <li><a href="https://www.edureka.co/contact-us">Contact us</a></li>
+                                    <li><a href="https://www.edureka.co/careers">Careers</a></li>
+                                </ul>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/blog/all">Blog</a></li>
+                                    <li><a href="https://www.edureka.co/reviews">Reviews</a></li>
+                                    <li><a href="https://www.edureka.co/terms-and-conditions">Terms & conditions</a></li>
+                                    <li><a href="https://www.edureka.co/privacy-policy">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Work with us </h4>
+                                <ul class="list-unstyled footer-menu">
+                                    <li><a href="https://www.edureka.co/instructors/add">Become  an Instructor</a></li>
+                                    <li><a href="https://www.edureka.co/hire-from-edureka">Hire from Edureka</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3  col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Follow us on </h4>
+                                <ul class="list-unstyled footer-social-icon">
+                                    <li><a class="fb" target="_blank" href="https://www.facebook.com/edurekaIN"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="tw" target="_blank" href="https://twitter.com/edurekaIN"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="in" target="_blank" href="https://www.linkedin.com/company/edureka"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="ut" target="_blank" href="https://www.youtube.com/user/edurekaIN"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 item-padding padding-lft-25 text-center-xs">
+                                <h4>Learn on the GO!</h4>
+                                <ul class="list-unstyled footer-menu-store">
+                                    <li><a target="_blank" href="https://itunes.apple.com/in/app/edureka/id1033145415?mt=8">
+                                            <img alt="appleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/applestorebtn.png"></a></li>
+                                    <li><a target="_blank" href="https://play.google.com/store/apps/details?id=co.edureka.app">
+                                            <img alt="googleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/googleplaybtn.png"></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding border-top-half">
+                                <div class="padding-vr20 clearfix">
+                                    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-12 no-padding">
+                                        <h3 class="no-margin footer-new-hd-lineht"><a href=https://www.edureka.co><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></a></h3>
+                                        <p class=" margin-vr5 grey-txt">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd. All rights Reserved.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-7 col-xs-12 no-padding txt-marg-top text-xs-left">
+                                        <p class="grey-txt">"PMP®","PMI®", "PMI-ACP®" and "PMBOK®" are registered marks of the Project Management Institute, Inc. <br>
+                                            MongoDB®, Mongo and the leaf logo are the registered trademarks of MongoDB, Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<div class="footerbar">
+    <div class="container clearfix">
+        <div class="row">
+            <a href="javascript:void(0);" class="call-us">
+                <span><img src="//cdn.edureka.co/imgver.1496301546/img/phone-icon.png" alt="phoneicon"></span>
+                Call us on 
+                <span>1-800-275-9730 <i>(Toll Free)</i></span>
+                <span>+91 88808 62004</span>
+            </a>
+            <div class="dropdown pull-left hidden-xs">
+                <div class="bfh-selectbox country-style-footer triangle country-pop-small bfh-countries" data-country="IN" data-flags="true" data-filter="true">
+                    <input type="hidden" value="">
+                    <a class="bfh-selectbox-toggle res-popup" role="button" data-toggle="bfh-selectbox" href="#">
+                        <span class="bfh-selectbox-option input-medium" data-option="">
+                        </span>
+
+
+                    </a>
+                    <div class="bfh-selectbox-options">
+                        <input type="text" class="bfh-selectbox-filter">
+                        <div role="listbox">
+                            <ul role="option" class="dropdown-menu-scrollbar">
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="call-us-xs">
+            <h3>24 X 7 Customer Support
+                <a class="close-call" href="javascript:void(0);">X</a>
+            </h3>
+            <ul class="list-unstyled">
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/us-flag.png" alt="us flag"> 1-800-275-9730   (Toll Free)     </li>
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/ind-flag.png" alt="india flag"> +91 88808 62004</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                jQuery(function($) {
+                    function equalHeight(group) {
+                        tallest = 0;
+                        group.each(function() {
+                            thisHeight = $(this).height();
+                            if(thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        group.height(tallest);
+                    }
+
+                    equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+
+                    $(window).resize(function() {
+                        equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+                    });
+                });
+            </script>
+            <script type="text/javascript"> 
+				var fonts_loaded =[];
+			</script><!--email_off--><style type='text/css'>.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook{border-color:#000;box-shadow-color:#333;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon{text-align:center;padding-top:8px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff;font-size:21px}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-text{color:#fff}
+.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter{border-color:#000;box-shadow-color:#333;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff;font-size:22px}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-text{color:#fff}
+.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin{border-color:#000;box-shadow-color:#333;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff;font-size:22px}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-text{color:#fff}
+.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus{border-color:#000;box-shadow-color:#333;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff;font-size:22px}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-text{color:#fff}
+.maxcollection.maxcollection-1{display:inline-block;z-index:9999;margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px}.maxcollection.maxcollection-1 .mb-collection-item.item-24{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-25{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-26{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-27{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}
+.maxbutton-10.maxbutton.maxbutton-enroll-blue-medium{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:210px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-10.maxbutton:hover.maxbutton-enroll-blue-medium{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-10.maxbutton.maxbutton-enroll-blue-medium .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-10.maxbutton:hover.maxbutton-enroll-blue-medium .mb-text{color:#fff}
+.maxbutton-22.maxbutton.maxbutton-certification-blue-big{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton.maxbutton-certification-blue-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big .mb-text{color:#fff}
+.maxbutton-15.maxbutton.maxbutton-download-blue-small{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:140px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-15.maxbutton:hover.maxbutton-download-blue-small{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-15.maxbutton.maxbutton-download-blue-small .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-15.maxbutton:hover.maxbutton-download-blue-small .mb-text{color:#fff}
+</style><!--/email_off-->
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var postasmail = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/fancyquote.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var videolib = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/video-library.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/jquery.fitvids.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var fvpdata = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","nonce":"79d293a9a4","fitvids":"1","dynamic":"","overlay":"","opacity":"0.75","color":"b","width":"640"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/frontend.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var mb_ajax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/js/min/front.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons_fonts.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons-pro-front.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/bootstrap.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/masonry.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/imagesloaded.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.bootpag.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/nprogress.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/CustomScrollbar.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/owl.carousel.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0187-formValidation.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0188-bootstrap.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/blog.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects-related.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/mfb.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/signup.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var php_array = {"admin_ajax":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var wnm_custom = {"template_url":"\/blog\/wp-content\/themes\/edu-hiran"};
+var myAjax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var afp_vars = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","postID":"5152","single":"1"};
+var post_vars = {"postID":"5152","postType":"post"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/ajax-pagination.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.7.5","language":""},"disqusIdentifier":"5152 http:\/\/www.edureka.in\/blog\/?p=5152","disqusShortname":"edurekablog","disqusTitle":"Apache Hadoop HDFS Architecture","disqusUrl":"https:\/\/www.edureka.co\/blog\/apache-hadoop-hdfs-architecture\/","options":{"manualSync":"1"},"postId":"5152"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/disqus.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"edurekablog"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/count.js'></script>
+
+
+</body>
+</html>
+<!-- mfunc setPostViews(get_the_ID()); --><!-- /mfunc -->
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 2860/3504 objects using disk
+Page Caching using disk
+Content Delivery Network via Amazon Web Services: CloudFront: cdn.edureka.co
+Database Caching 29/195 queries in 0.068 seconds using disk
+
+ Served from: www.edureka.co @ 2017-06-09 17:06:20 by W3 Total Cache -->

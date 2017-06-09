@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.edureka.co/blog/xmlrpc.php" />
+        
+<!-- This site is optimized with the Yoast SEO plugin v4.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>How to Set Up Hadoop Cluster with HDFS High Availability - Edureka</title>
+<meta name="description" content="This blog provides an overview of the HDFS High Availability architecture and how to set up and configure a HDFS High Availability cluster in simple steps."/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/" />
+<link rel="publisher" href="https://plus.google.com/+edurekaIN"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How to Set Up Hadoop Cluster with HDFS High Availability - Edureka" />
+<meta property="og:description" content="This blog provides an overview of the HDFS High Availability architecture and how to set up and configure a HDFS High Availability cluster in simple steps." />
+<meta property="og:url" content="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/" />
+<meta property="og:site_name" content="Edureka Blog" />
+<meta property="article:publisher" content="https://www.facebook.com/edurekaIN/" />
+<meta property="article:section" content="Big Data and Hadoop" />
+<meta property="article:published_time" content="2015-06-17T12:58:30+00:00" />
+<meta property="article:modified_time" content="2017-02-02T11:47:55+00:00" />
+<meta property="og:updated_time" content="2017-02-02T11:47:55+00:00" />
+<meta property="fb:app_id" content="334689249900154" />
+<meta property="og:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/name-node-bspline.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="This blog provides an overview of the HDFS High Availability architecture and how to set up and configure a HDFS High Availability cluster in simple steps." />
+<meta name="twitter:title" content="How to Set Up Hadoop Cluster with HDFS High Availability - Edureka" />
+<meta name="twitter:site" content="@edurekaIN" />
+<meta name="twitter:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/name-node-bspline.jpg" />
+<meta name="twitter:creator" content="@edurekaIN" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdn.edureka.co' />
+<link rel='dns-prefetch' href='//maxcdn.bootstrapcdn.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Edureka Blog &raquo; How to Set Up Hadoop Cluster with HDFS High Availability Comments Feed" href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.edureka.co\/blog\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='download-button-shortcode-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-button-shortcode/css/downloadbutton.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fancyquote-css-css'  href='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/css/fancyquote.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-fontAwesome-css-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-animate-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/animate.css' type='text/css' media='all' />
+<link rel='stylesheet' id='dg-grid-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/dg-grid.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fvp-frontend-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/styles/frontend.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mbpro-font-awesome-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/assets/libraries/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-font-awesome-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0121-font-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0121-font.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogmain-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogmain.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-nprogress-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/nprogress.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetail_newfont-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/Newfonts-ico.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-customscrollbar-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/CustomScrollbar.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-owl.carousel-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/owl.carousel.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetailnew-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogdetailnew.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0180-global-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0180-global.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-formhelpers-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap-formhelpers.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0181-formValidation-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0181-formValidation.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0139-common-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0139-common.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-dashboard-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/dashboard.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-header-2-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/header-2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-signin-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/new-signin-signup.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-mfb-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/mfb.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-main_css-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp_dlmp_styles-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/styles.css' type='text/css' media='all' />
+<link rel='https://api.w.org/' href='https://www.edureka.co/blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.edureka.co/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.edureka.co/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://www.edureka.co/blog/?p=26012' />
+<link rel="alternate" type="application/json+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fhow-to-set-up-hadoop-cluster-with-hdfs-high-availability%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fhow-to-set-up-hadoop-cluster-with-hdfs-high-availability%2F&#038;format=xml" />
+	<style type='text/css'>
+	.download-info .download-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+<style type="text/css">
+#author-bio-box {
+	float:left;
+	width: 99%;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	box-shadow: 5px 5px 2px #ddd;
+	padding: 5px;
+        margin-bottom: 10px;
+}
+#author-bio-box img {
+	float: left;
+	margin: 4px 10px 2px 4px;
+}
+#author-bio-box .author-name {
+	font-weight: bold;
+	margin-left: 2px;
+	font-size: 14px;
+}
+#author-bio-box p {
+	font-size: 13px;
+	line-height: 20px;
+        margin-left: 95px;
+        margin-top: 5px;
+}
+#author-bio-box thead th {
+	border: 0;
+}
+#author-bio-box tbody {
+	border: 0;
+}
+.bio-spacer { min-height:44px; padding: 1px; display: block; clear: both; border:1px;}
+.bio-socials {
+	border-top:1px solid #e8e8e8;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	width: 100%;
+	height: 32px;
+	clear: both;
+}
+</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://cdn.edureka.co/blog/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <script>
+            var webURL = 'https://www.edureka.co/';
+            var imgURL = 'https://cdn.edureka.co/imgver.1465813195/img/';
+            var kmkey = 'c685629a1766aa24ed42e4bc8476e8789cd97477';
+            var GaTID = 'UA-33865789-1';
+            var GaUATID = 'UA-33865789-2';
+            var iscustomerGA = 'false';
+            var repcustomerGA = 'false';
+            var baildown = true;
+            var homepageloadbanner = true;
+            var prev_offer_code = '';
+
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-33865789-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+        <!-- Google Code for Remarketing Tag -->
+        <!--------------------------------------------------
+        Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+        --------------------------------------------------->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 977137586;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+        <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+</head>
+<body class="post-template-default single single-post postid-26012 single-format-standard wpb-js-composer js-comp-ver-5.1.1 vc_responsive" id="margin-top-value">
+
+    <div id="fb-root"></div>
+    <script>
+
+            window.fbAsyncInit = function () {
+                FB.init({appId: '334689249900154', status: true, cookie: true,
+                    xfbml: true});
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+    </script>
+
+    <header id="header-II">
+        <section>
+            <nav style="" role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-homepage">
+                <div class="container menubar-visibility edureka-blog-header">
+                    <div class="navbar-header">
+                        <a href="/?utm_source=blog&utm_medium=blog-edureka-logo" class="navbar-brand" > <img alt="edureka!" src="/imgver.1496301546/img/logo.png"> </a> 			
+                    </div>
+                    <!-- ddl starts--><form action="/blog" class="main-search"><ul class="list-unstyled course-search-box-nav">
+                        <input  type="hidden" class="searchinputbox" id="categoryinputbox" value="">
+                        <input  type="hidden" class="searchinputbox" id="authorinputbox" value="">
+                        <li class="search-nav pull-left"><div class="dropdown  categories-filter-dropdown">
+    <a class="select_down dropdown-toggle search-drop menu-common catbtnblog catbtnblogmob btn" type="button" id="menu1" data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Select Category
+    </a>
+    <ul class="dropdown-menu list-inline search-header-navigation dropdown-menu-scrollbar" role="menu" aria-labelledby="menu1">
+        <li role="presentation"><a role="menuitem" tabindex="0" href="#" data-slug="" class="category-selector">Select Category</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="1" href="/blog/category/big-data-analytics" data-slug="big-data-analytics" class="category-selector">Big Data Analytics</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="2" href="/blog/category/big-data-nosql" data-slug="big-data-nosql" class="category-selector">Big Data NoSQL</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="3" href="/blog/category/business-intelligence" data-slug="business-intelligence" class="category-selector">Business Intelligence</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="4" href="/blog/category/cloud-computing" data-slug="cloud-computing" class="category-selector">Cloud Computing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="5" href="/blog/category/finance" data-slug="finance" class="category-selector">Finance</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="6" href="/blog/category/frameworks" data-slug="frameworks" class="category-selector">Frameworks</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="7" href="/blog/category/ibm-bluemix" data-slug="ibm-bluemix" class="category-selector">IBM Bluemix</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="8" href="/blog/category/marketing" data-slug="marketing" class="category-selector">Marketing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="9" href="/blog/category/mobile-development" data-slug="mobile-development" class="category-selector">Mobile Development</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="10" href="/blog/category/operations" data-slug="operations" class="category-selector">Operations</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="11" href="/blog/category/programming" data-slug="programming" class="category-selector">Programming</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="12" href="/blog/category/project-management" data-slug="project-management" class="category-selector">Project Management</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="13" href="/blog/category/success-story" data-slug="success-story" class="category-selector">Success Story</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="14" href="/blog/category/systems-architecture" data-slug="systems-architecture" class="category-selector">Systems &amp; Architecture</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="15" href="/blog/category/systems-engineering" data-slug="systems-engineering" class="category-selector">Systems Engineering</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="16" href="/blog/category/testing" data-slug="testing" class="category-selector">Testing</a>
+                </li>      
+    </ul>
+</div>
+<span id ="desktop-searchbox"><div id="remote" class="typeahead-container"><div class="typeahead-field">
+                        <span class="typeahead-query">
+                            <input type="text" maxlength="150" autocomplete="off" placeholder = "Search edureka blogs" value=""
+                          name="s" data-value="" class="search_inp collapse searchinputbox">
+                        </span><span class="typeahead-button"><i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></span></li></ul></form><form action="/blog" class="form-element-mobile">
+                    <div class="visible-sm visible-xs mobsearch" id="mobile-searchbox">
+                        <a data-toggle="collapse" id="mobile-search-icon" class="mobile-search-icon" href="#mobsearch" aria-expanded="false" aria-controls="mobsearch">
+                            <i class="fa fa-search search_ico visible-sm visible-xs"></i>
+                        </a><div class="collapse search-course" id="mobsearch" aria-expanded="false"><div>
+                    <div id="remote" class="typeahead-container result backdrop hint">
+                        <div class="typeahead-field"><span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" class="search_inp search_inp_mob" placeholder = "Search edureka blogs" name="s" type="text" value="" data-value="" ></span>
+                        <span class="typeahead-button">
+                        <i  class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></div></div></div></form><div class="loggedin-usernav-wrapper hide"><div aria-expanded="false" id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs">
+                <li >
+                    <div class="dropdown menu-dropdown dropdownafterlogin">
+                        <a href="javascript:void(0);" class="dropdown-toggle withripple" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false"> BROWSE COURSES <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                            <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=my-courses">My Courses</a></li>
+                            <li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="logged-in-customer hide"></li>
+                <li class="">
+                    <div class="dropdown user-dropdown">
+                        <a id="signin-logout" class="signin" href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292">Logout</a> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right profile pull-right">
+            <li class="dropdown userdrop hidden-lg hidden-md profile-pic-header">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+                    <img alt="" class="img30 user-image-icon" src="/imgver.1496301546/img//defaultpp2.png">     
+                </a>
+                <ul class="dropdown-menu user-menu profile-xs">
+                    <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=all-courses">My Courses</a></li>
+                    <li class="logged-in-customer hide"></li><li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                    <li> <a href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292" id="signin-logoutresp">Log Out</a> </li>
+                </ul>
+            </li>
+        </ul></div><div class="loggedout-usernav-wrapper hide"><a class="signin md-trigger" href="javascript:void(0)" data-modal="signin-modal" data-toggle="modal">Sign In</a><style>
+    .highlighterror input[type=text],
+    .highlighterror input[type=email],
+    .highlighterror input[type=password],
+    .highlighterror {
+        border-color: #ed1f24 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
+<!--googleon: all-->
+<div class="md-modal md-effect-1 newsigninsignup" id="signin-modal">
+    <div class="md-content">
+        <span id="signin_signup_cancel" class="md-close onclicktab pull-right">X</span>
+
+        <ul class="nav nav-tabs">
+            <li class="Signinspace active"><a class="onclicktab" data-toggle="tab" href="#LogIn"><span>Log In</span></a></li>
+            <li class="SignUpspace "><a class="onclicktab" data-toggle="tab" href="#SignUp"><span>Sign Up</span></a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="LogIn" class="tab-pane fade in active">
+                <div class="col-md-12 col-xs-12 signinformnew newsignclik">
+                    <form id="signinForm">
+                        <!--                        <form id="signinForm">-->
+                        <div class="alertnew" role="alert" >
+                            <span  id="signin_error_message" class="signin_formerror redalertnew" style="display: none;"><i class="fa fa-check-circle"></i>  Please enter a valid emailid</span>
+                        </div>
+                        <div class="form-group">
+                            <input id="inputName" type="email" class="form-control inputstyle emailnew inputNamesignup signinvalid" required autocomplete="off" placeholder="Email"  name="data[User][email]" value="" onkeyup="checkdisable();">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd" class="form-control inputstyle passwordnew masked" required autocomplete="off" placeholder="Password"  name="data[User][password]" value="">
+                            <div class="verficacheckeye" id="eye">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><a id="Forgotnew" href="javascript:void(0)" class="btn btn-link pull-left forgetpass">Forgot Password?</a>
+
+                            <button type="submit" class="bluebtn pull-right defdisablesignin ga-signin disabled"  id="signin-blog">Start Learning</button>
+                        </div>
+                    </form>
+                    <!--<div class="mobilealertnew green clearfix">
+                      <span class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i>  Verification Code sent to er.creator@gmail.com</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-12 col-xs-12 signinformnew forgetpassnew">
+                    <form id="resetcode">
+                        <div id="successmssg" class="alertnew" role="alert">
+                            <span id="messages"  class="greenalertnew hidden-xs"><i class="fa fa-check-circle"></i>  </span>
+                        </div>
+                        <div class="form-group">
+                            <input id="prefilledemail" type="email" disabled="disable" class="form-control inputstyle emailnew inputDisabled" required autocomplete="off" placeholder="Email">
+                            <input id="emailfield" type="hidden" class="form-control inputstyle"  name="data[User][email]">
+
+                            <!--<div class="verficacheck"><a href="" id="editemail">change ?</a></div>-->
+                        </div>
+                        <div class="form-group">
+                            <input id="otpfield" type="text" class="form-control inputstyle emailnew verifycheck" required autocomplete="off" placeholder="Verification code"  name="data[User][otpCode]">
+                            <input id="verificationfield" type="hidden" class="form-control inputstyle emailnew" required name="data[User][verification_code]">
+                            <div  class="verficacheck verifycheck"><div id="resendcode" href="javascript:void(0);" style="cursor: pointer;">resend ?</div></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd2" class="form-control inputstyle passwordnew masked" required autocomplete="off" min=8 placeholder="New Password"  name="data[User][password]">
+                            <div class="verficacheckeye" id="eye2">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><!--<a id="Backnew" href="#" class="btn btn-link pull-left forgetpass">Back</a>-->
+
+                            <button id="passresetbutton" type="submit" class="bluebtn pull-right">reset password</button>
+                        </div>
+                    </form>
+                    <div class="notestarreg verifycheck">
+                        * Can't find the email? Check your Spam folder or Promotions tab for an email from no-reply@edureka.co. Send us an email at <a href="mailto:support@edureka.co">support@edureka.co</a> or call us at +91 88808 62004
+                    </div>
+                </div>
+            </div>
+            <div id="SignUp" class="tab-pane fade  ">
+
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center signinformnew signupformnew">
+
+                    <form id="signupForm">
+                        <div class="alertnew" role="alert">
+                            <span id="signup_error_message" class="signup_formerror redalertnew hidden-xs " style="display: none;"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input value="/blog/" name="data[User][pageurl]" id="pageurl_signup" type="hidden">
+                            <div class="form-control-wrapper"><input id="signupname" class="form-control inputstyle empty" placeholder="Name*" required="" autocomplete="off" name="data[User][name]" type="text"></div>
+                            <i data-bv-icon-for="data[User][name]" class="form-control-feedback fv-icon-no-label fa fa-close" style="display: block;"></i>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input  id="signupemail" class="form-control inputstyle  empty" placeholder="Email*" required="" autocomplete="off" name="data[User][email]" type="email"></div><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        </div>
+                        <input style="display:none;" name="hiddenname" type="text">
+                        <input style="display:none;" name="hiddenpassword" type="password">
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][mobile]" id="mobnum" class="form-control inputstyle empty" placeholder="Mobile Number*" required="" name="data[User][mobile]" type="text"></div><i data-bv-icon-for="data[User][mobile]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+
+                        </div>
+                        <div class="form-group has-feedback">
+
+                            <div class="form-control-wrapper">
+                                <input id="pwd3" class="form-control inputstyle passwordnew masked empty" required="" autocomplete="off" placeholder="Password more than 8 characters*" name="data[User][password]" type="password"></div><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                            <div class="verficacheckeye" id="eye3">show</div>
+                        </div>
+                        <p class="signupinfotext">
+                            By Signing up you agree to our <span><a class=" withripple" href="/terms-and-conditions" target="_blank">T&amp;C</a></span> and <span>
+                                <a class=" withripple" href="/privacy-policy" target="_blank">Privacy Policy</a></span>
+                        </p>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding spaceafterbutton">
+                            <button type="submit" class="bluebtn pull-right defdisablesignup ga-signup disabled">Create an account</button>
+                        </div>
+
+                    </form>
+                    <!--<div class="mobilealertnew red clearfix">
+                      <span class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobileredclass" class="mobilealertnew red clearfix" style="display:none;">
+        <span id="mobileredmsg" class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input    </span>
+    </div>
+    <div id="mobilegreenclass"class="mobilealertnew green clearfix" style="display:none;">
+        <span id="mobilegreenmsg" class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i> </span>
+    </div>
+</div>
+<div class="md-overlay"></div>
+<section>
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="capturemobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header signup-header">
+                    <h4 class="modal-title color-white">
+                        <span class="pull-left">
+                            WELCOME <label id="capturemobile_user_name"></label>
+                        </span>
+                        <span class="pull-right">                           
+                        </span>
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 linkedin-content">
+                            <h5 class="line-height23">It seems we don't have your phone number. Please share as it helps us to provide better customer service. Thank you!</h5>
+                            <form id="captureMobileForm" action="" method="post">
+                                <input type="hidden" name="data[User][email]" id="email_capturemobile">
+                                <input type="hidden" name="data[User][password]" id="password_capturemobile">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Mobile Number" required name="data[User][mobile]">
+                                </div>
+                                <!--                                <button type="button"  class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn">Continue</button>-->
+                                <button type="button" id="btnCaptureMobile" class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn" style="">Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--googleon: all--><div class="navbar-collapse collapse navbar-right" id="navbar" aria-expanded="false">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs"><!--
+                <li><a href="/instructors/add">For Instructors</a></li> -->
+                <li><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Course</a></li>
+            </ul>
+        </div></div>                </div>
+            </nav>
+        </section>
+    </header>
+<section >
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding">
+                <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 left-menu"> 
+    <div class="row left-menu-row">
+<div class="side-menu"><nav class="navbar navbar-default" role="navigation">
+<div class="side-menu-container side-menu-blog"><button type="button" class="navbar-toggle navbar-tog-open-close side-body"><span class="fa fa-bars"></span></button><div class="side-nav-title"><h2>Hadoop Tutorial Series</h2></div><ul class="nav navbar-nav cus-nav-scroll dropdown-menu-scrollbar">
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/big-data-tutorial"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"> <span>Big Data Tutorial: All You Need To Know About Big Data!</span><span data-toggle="collapse" href="#dropdown-level-1-1094955113593ad71402ba2" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1094955113593ad71402ba2" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/videos/big-data-tutorial"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Big Data Tutorial – Get Started With Big Data And Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/what-is-hadoop"   data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability">What is Hadoop? Introduction to Big Data &#038; Hadoop</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hadoop-tutorial/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"> <span>Hadoop Tutorial: All you need to know about Hadoop!</span><span data-toggle="collapse" href="#dropdown-level-1-801141885593ad71402c65" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-801141885593ad71402c65" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/videos/hadoop-tutorial"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Hadoop Tutorial – A Complete Tutorial For Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-ecosystem"   data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability">Hadoop Ecosystem: Hadoop Tools for Crunching Big Data</a>
+</li>
+<li class="panel panel-default first-level  active" id="dropdown"><a href="https://www.edureka.co/blog/hdfs-tutorial"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"> <span>HDFS Tutorial: Introduction to HDFS &#038; its Features</span><span data-toggle="collapse" href="#dropdown-level-1-662517397593ad71402d27" class="fa fa-angle-right active"></span></a>
+<div id="dropdown-level-1-662517397593ad71402d27" class="panel-collapse collapse in"><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Apache Hadoop HDFS Architecture</span></a></li>
+
+<li class="active"><a href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/" class="active-link" data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>How to Set Up Hadoop Cluster with HDFS High Availability</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/overview-of-hadoop-2-0-cluster-architecture-federation/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Overview of Hadoop 2.0 Cluster Architecture Federation</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Install Hadoop: Setting up a Single Node Hadoop Cluster</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Setting Up A Multi Node Cluster In Hadoop 2.X</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>HDFS Commands: Hadoop Shell Commands to Manage HDFS</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/mapreduce-tutorial/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"> <span>MapReduce Tutorial – Fundamentals of MapReduce with MapReduce Example</span><span data-toggle="collapse" href="#dropdown-level-1-705032309593ad71402dde" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-705032309593ad71402dde" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/hadoop-streaming-mapreduce-program/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Hadoop Streaming: Writing A Hadoop MapReduce Program In Python</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/mapreduce-example-reduce-side-join/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>MapReduce Example: Reduce Side Join in Hadoop MapReduce</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/pig-tutorial/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"> <span>Pig Tutorial: Apache Pig Architecture &#038; Twitter Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-626499751593ad71402ea1" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-626499751593ad71402ea1" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/apache-pig-installation"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Apache Pig Installation on Linux</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/pig-programming-create-your-first-apache-pig-script/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Pig Programming: Create Your First Apache Pig Script</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/creating-udf-in-apache-pig/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Steps to Create UDF in Apache Pig</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hive-tutorial/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"> <span>Hive Tutorial – Hive Architecture and NASA Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-1309003656593ad71402f7f" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1309003656593ad71402f7f" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/apache-hive-installation-on-ubuntu"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Apache Hive Installation on Ubuntu</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/hive-commands-with-examples"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Top Hive Commands with Examples in HQL</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/apache-hadoop-hive-script/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Apache Hadoop : Create your First HIVE Script</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hbase-tutorial"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"> <span>HBase Tutorial: HBase Introduction and Facebook Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-1171525370593ad71403076" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-1171525370593ad71403076" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/hbase-architecture/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>HBase Architecture: HBase Data Model & HBase Read/Write Mechanism</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/sample-hbase-poc/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Sample HBase POC</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/brief-introduction-to-oozie/"   data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability">Brief Introduction to Oozie</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"> <span>Top 50 Hadoop Interview Questions For 2017</span><span data-toggle="collapse" href="#dropdown-level-1-137036061593ad71403145" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-137036061593ad71403145" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hdfs-2/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HDFS</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hadoop-cluster/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Setting Up Hadoop Cluster</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-mapreduce/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – MapReduce</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-pig/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – PIG</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hive-interview-questions"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Apache Hive</span></a></li>
+
+<li ><a href="https://www.edureka.co/blog/interview-questions/hbase-interview-questions/"  data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HBase</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-certification/"   data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability">Hadoop Certification – Become a Certified Big Data Hadoop Professional</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-career/"   data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability">Hadoop Career: Career in Big Data Analytics</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-3/"   data-currpage="how-to-set-up-hadoop-cluster-with-hdfs-high-availability">What's New in Hadoop 3.0 - Enhancements in Apache Hadoop 3</a>
+</li>
+</ul></div></nav></div></div>
+</div>
+<!-- Right Panel ends -->
+                        <div class="col-lg-8 col-md-7 col-xs-12 col-sm-12 blogmobfull">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 bread-herohead">
+    <div class="herohead">
+        <div class="">
+            <div class="row">
+                                <div class="">
+                    <h6 class="breadcrumb-section hidden-xs ">
+                        <a class="text-bold text-normal underline-remove brdcrumclrinac" href="/blog">Home</a>
+                        <!--                        &nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog chevron-level-0"></i>&nbsp;&nbsp;
+                        <a class="text-bold text-normal underline-remove brdcrumclrac reset-filters post-type-level" href="/blog">Blogs&nbsp;&nbsp;</a>-->
+                        <i class="fa fa-chevron-right chevronblog chevron-level-1 ">&nbsp;&nbsp;</i>
+                        <a class="text-bold text-normal underline-remove brdcrumclrac post-type-breadcrum reset-filters " href="/blog">Blogs</a>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog  cat-level-breadcrum"></i>&nbsp;&nbsp;
+                        <span class="text-bold text-normal underline-remove brdcrumclrac cat-level-breadcrum cat-level-breadcrum-title ">Big Data Analytics</span>&nbsp;
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<!-- Top Navigation to be sent in blog phase 2 starts-->
+
+<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainnavigator">
+    <article class="navigatedetail col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <span class="blogall"><a href="https://www.edureka.co/blog//all"><i class="icon-Home_icon"></i></a></span>
+        <span class="bloghome"><a href="https://www.edureka.co/blog/">Blogs</a></span>
+        <span class="videohome"><a href="https://www.edureka.co/blog/videos">Videos</a></span>
+        <span class="interviewhome"><a href="https://www.edureka.co/blog/interview-questions">Interview Questions</a></span>
+    </article>
+</section>
+<!--Top Navigation to be sent in blog phase 2-->
+                            <section class="mainsecblog">
+                                <section class="blogmaincontainer">
+                                    <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding topsection">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogmainheading">
+        <h1 class="blogheading">
+            How to Set Up Hadoop Cluster with HDFS High Availability        </h1>
+        <span class="recommendedsec clearfix"><p>
+                                                    <i class="fa fa-bookmark newbookmark"></i> Recommended by  218 users                            </p>
+        </span>
+        <div class="top-sec-infodetail">
+            <span class="authorblog"><a href="https://www.edureka.co/blog/author/ashishbedureka-co/" title="Posts by Ashish Bakshi" rel="author">Ashish Bakshi</a></span>
+            <span class="dateblog">Jun 17, 2015</span> 
+             
+<div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>        </div>
+    </article>
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topimage">
+        <img class="blogimg" src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/Heroimage 1.jpg" alt="How to Set Up Hadoop Cluster with HDFS High Availability" title="How to Set Up Hadoop Cluster with HDFS High Availability">    </article>
+</section>                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 no-padding hidden-sm hidden-xs share-leftnav">
+                                            <div class="nav-stacked-social affix-top" data-spy="affix" data-offset-top="350" data-offset-bottom="400">
+                                                <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_1' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_1' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_1' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_1' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                            </div>
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 no-padding">
+                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogdetailsec">
+    <article class="col-md-9 col-lg-9 col-sm-9 col-xs-12 blogdescription"> 
+        <span class="AddtoBookmark"><a  href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/" data-title="How to Set Up Hadoop Cluster with HDFS High Availability">
+                <i class="icon-Add_to_bookmark"></i>
+                <span class="Bookmark-text"><span>Add to</span> Bookmark</span></a>
+        </span>
+
+            <div class="modal thispost-mail fade" id="emailpostpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content centered">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span></button>
+                    <div class="Mailpost">
+                        <span class="icon"><i class="icon-Mail_this_post"></i></span>
+                        <span class="Mailthispost">Email this post</span>
+                        <form class="email-me-the-post" method="post" novalidate="novalidate">
+                            <div class="input-name  ">
+                                <input type="hidden" name="contentId" value="26012">
+                                <input type="text" name="name" class="required" required placeholder="Enter Your Name" autocomplete="false">
+                                <div class="error-name">
+                                    Please enter a valid input.
+                                </div>
+                            </div>
+                            <div class="input-email ">
+                                <input type="text" class="email required" required name="emails" placeholder="Enter Email ID’s ( Separated by commas )"  autocomplete="false">
+                                <div class="error-email">
+                                    Please enter a valid email id or comma separated email id's.
+                                </div>
+                            </div>
+                            <button type="submit" class="Submit-mailpost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="Mailpost-thankyou">
+                        <i class="icon-success"></i>
+                        <span class="Mailthispost">The post has been successfully mailed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="EmailthisPost" data-toggle="modal" data-target="#emailpostpop">
+            <i class="icon-Mail_this_post"></i>
+            <span class="EmailthisPost-text">Email <Span>this Post</span></span>
+        </span> 
+        <span class="viewsblogsec">
+            <span class="viewscount details-page-views-count"><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 20.4K</span>
+        </span>
+        <span class="commentsblogsec">
+            <a href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/#comments-wrapper" class="commentcount">
+                <span><i class="icon-comments"></i></span>
+            </a>&nbsp;&nbsp;
+            <a class="disqus-comment-count" data-disqus-url="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/" href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/#disqus_thread" class="commentcount">
+                <span>12</span>
+            </a>
+        </span>
+    </article>
+            <article class="col-md-3 col-lg-3 col-sm-3 col-xs-12 related-blog hidden-sm hidden-xs">
+            <ul class="pager">
+                <li><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="show-next-in-series"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </article>
+            <!-- <article class = "col-md-3 col-lg-3 col-sm-3 col-xs-12 downloadpdfblog">
+         <span class = "downloadpdf"></span>
+ </article> -->
+</section>                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogcontentsec">
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <h2 style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/name-node.png"></a></span></h2>
+<h2 style="text-align: justify;"><strong><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;">HDFS 2.x High Availability Cluster Architecture</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In this blog, I am going to talk about HDFS 2.x High Availability Cluster Architecture and the procedure to set up an HDFS High Availability cluster. </span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The order in which the topics have been covered in this blog are as follows:</span></p>
+<ul>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS HA Architecture</span>
+<ul>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Introduction</span></li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">NameNode Availability</span></li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Architecture of HA</span></li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Implementation of HA (JournalNode and Shared storage)</span></li>
+</ul>
+</li>
+<li style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">How to set up HA (Quorum Journal Nodes) in a Hadoop cluster?</span></li>
+</ul>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Introduction:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The concept of High Availability cluster was introduced in Hadoop 2</span>.<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">x to solve the single point of failure problem in Hadoop 1.x. As you know from my previous blog that the <em><strong><a href="http://www.edureka.co/blog/apache-hadoop-hdfs-architecture?utm_source=blog&amp;utm_medium=related-posts&amp;utm_campaign=how-to-setup-hadoop-cluster-with-hdfs-high-availability" target="_blank">HDFS Architecture</a> </strong></em>follows Master/Slave Topology where NameNode acts as a master daemon and is responsible for managing other slave nodes called DataNodes. This single Master Daemon or NameNode becomes a bottleneck. Although, the introduction of Secondary NameNode did prevent us from data loss and offloading some of the burden of the NameNode but, it did not solve the availability issue of the NameNode.</span></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">NameNode Availability:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">If you consider the standard configuration of HDFS cluster, the NameNode becomes a <strong>single point of failure</strong>. It happens because the moment the NameNode becomes unavailable, the whole cluster becomes unavailable until someone restarts the NameNode or brings a new one.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The reasons for unavailability of NameNode can be:</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">A planned event like maintenance work such has upgradation of software or hardware.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It may also be due to an unplanned event where the NameNode crashes because of some reasons.</span></li>
+</ul>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In either of the above cases, we have a downtime where we are not able to use the HDFS cluster which becomes a challenge. </span></p>
+<h2 style="text-align: justify;"><strong><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;">HDFS HA Architecture:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Let us understand that how HDFS HA Architecture solved this critical problem of NameNode availability:</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The HA architecture solved this problem of NameNode availability by allowing us to have two NameNodes in an active/passive configuration. So, we have two running NameNodes at the same time in a High Availability cluster:</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Active NameNode</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Standby/Passive NameNode.</span></li>
+</ul>
+<p><img class="aligncenter wp-image-37406 " src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/HDFS-HA-Architecture-Edureka.png" alt="HDFS HA Architecture - High Availability Cluster - Edureka" width="602" height="371" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/HDFS-HA-Architecture-Edureka.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/HDFS-HA-Architecture-Edureka-300x185.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/HDFS-HA-Architecture-Edureka-768x473.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/HDFS-HA-Architecture-Edureka-487x300.png 487w" sizes="(max-width: 602px) 100vw, 602px" /></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">If one NameNode goes down, the other NameNode can take over the responsibility and therefore, reduce the cluster down time. The standby NameNode serves the purpose of a backup NameNode (unlike the Secondary NameNode) which incorporate failover capabilities to the Hadoop cluster. Therefore, with the StandbyNode, we can have automatic failover whenever a NameNode crashes (unplanned event) or we can have a graceful (manually initiated) failover during the maintenance period. </span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">There are two issues in maintaining consistency in the HDFS High Availability cluster:</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Active and Standby NameNode should always be in sync with each other, i.e. They should have the same metadata. This will allow us to restore the Hadoop cluster to the same namespace state where it got crashed and therefore, will provide us to have fast failover.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">There should be only one active NameNode at a time because two active NameNode will lead to corruption of the data. <em>This kind of scenario is termed as a split-brain scenario where a cluster gets divided into smaller cluster, each one believing that it is the only active cluster.</em> To avoid such scenarios fencing is done. Fencing is a process of ensuring that only one NameNode remains active at a particular time.</span></li>
+</ul>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Implementation of HA Architecture:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now, you know that in HDFS HA Architecture, we have two NameNodes running at the same time. So, we can implement the Active and Standby NameNode configuration in following two ways:</span></p>
+<ol style="text-align: justify;">
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Using Quorum Journal Nodes</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Shared Storage using NFS</span></li>
+</ol>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Let us understand these two ways of implementation taking one at a time:</span></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">1. Using Quorum Journal Nodes:</span></strong></h2>
+<p><img class="aligncenter wp-image-37407 " src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JournalNode-HDFS-HA-Architecture-Edureka.png" alt="Journalnode - HDFS HA Architecture - Edureka" width="609" height="349" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JournalNode-HDFS-HA-Architecture-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JournalNode-HDFS-HA-Architecture-Edureka-300x172.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JournalNode-HDFS-HA-Architecture-Edureka-768x440.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JournalNode-HDFS-HA-Architecture-Edureka-524x300.png 524w" sizes="(max-width: 609px) 100vw, 609px" /></p>
+<ul>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The standby NameNode and the active NameNode keep in sync with each other through a separate group of nodes or daemons -called <strong>JournalNodes</strong>. </span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The JournalNodes follows the ring topology where the nodes are connected to each other to form a ring. </span><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The JournalNode serves the request coming to it and copies the information into other nodes in the ring</span>.<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">This provides fault tolerance in case of JournalNode failure. </span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The active NameNode is responsible for updating the EditLogs (metadata information) present in the JournalNodes.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The StandbyNode reads the changes made to the EditLogs in the JournalNode and applies it to its own namespace in a constant manner.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">During failover, the StandbyNode makes sure that it has updated its meta data information from the JournalNodes before becoming the new Active NameNode. This makes the current namespace state synchronized with the state before failover.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The IP Addresses of both the NameNodes are available to all the DataNodes and they send their heartbeats and block location information to both the NameNode. This provides a fast failover (less down time) as the StandbyNode has an updated information about the block location in the cluster.</span></li>
+</ul>
+<h2 style="text-align: justify;"><span style="font-size: 16px;"><strong><span style="font-family: verdana, geneva, sans-serif;">Fencing of NameNode:</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now, as discussed earlier, it is very important to ensure that there is only one Active NameNode at a time. So, fencing is a process to ensure this very property in a cluster. </span></p>
+<ul>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The JournalNodes performs this fencing by allowing only one NameNode to be the writer at a time.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The Standby NameNode takes over the responsibility of writing to the JournalNodes and forbid any other NameNode to remain active.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Finally, the new Active NameNode can perform its activities safely.   </span></li>
+</ul>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">2. Using Shared Storage:</span></strong></h2>
+<p><img class="aligncenter wp-image-37408 " src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Shared-Storage-HDFS-HA-Architecture-Edureka.png" alt="Shared Storage - HDFS HA Architecture - Edureka" width="605" height="271" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Shared-Storage-HDFS-HA-Architecture-Edureka.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Shared-Storage-HDFS-HA-Architecture-Edureka-300x134.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Shared-Storage-HDFS-HA-Architecture-Edureka-768x344.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Shared-Storage-HDFS-HA-Architecture-Edureka-528x236.png 528w" sizes="(max-width: 605px) 100vw, 605px" /></p>
+<ul>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The StandbyNode and the active NameNode keep in sync with each other by using a <strong>shared storage device</strong>. </span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The active NameNode logs the record of any modification done in its namespace to an EditLog present in this shared storage. </span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The StandbyNode reads the changes made to the EditLogs in this shared storage and applies it to its own namespace.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now, in case of failover, the StandbyNode updates its metadata information using the EditLogs in the shared storage at first. Then, it takes the responsibility of the Active NameNode. This makes the current namespace state synchronized with the state before failover.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The administrator must configure at least one fencing method to avoid a split-brain scenario.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The system may employ a range of fencing mechanisms. It may include killing of the NameNode’s process and revoking its access to the shared storage directory.</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">As a last resort, we can fence the previously active NameNode with a technique known as STONITH, or “shoot the other node in the head”. STONITH uses a specialized power distribution unit to forcibly power down the NameNode machine.</span></li>
+</ul>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Automatic Failover:</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Failover is a procedure by which a system automatically transfers control to secondary system when it detects a fault or failure. There are two types of failover:</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Graceful Failover:</strong> In this case, we manually initiate the failover for routine maintenance.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Automatic Failover:</strong> In this case, the failover is initiated automatically in case of NameNode failure (unplanned event).</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Apache Zookeeper is a service that provides the automatic failover capability in HDFS High Availabilty cluster. It maintains small amounts of coordination data, informs clients of changes in that data, and monitors clients for failures. Zookeeper maintains a session with the NameNodes. In case of failure, the session will expire and the Zookeeper will inform other NameNodes to initiate the failover process. In case of NameNode failure, other passive NameNode can take a lock in Zookeeper stating that it wants to become the next Active NameNode.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The ZookeerFailoverController (ZKFC) is a Zookeeper client that also monitors and manages the NameNode status. Each of the NameNode runs a ZKFC also. ZKFC is responsible for monitoring the health of the NameNodes periodically.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now that you have understood what is High Availability in a Hadoop cluster, it&#8217;s time to set it up. To set up High Availability in Hadoop cluster you have to use Zookeeper in all the nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The daemons in Active NameNode are:</span></p>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Zookeeper</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Zookeeper Fail Over controller</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">JournalNode</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">NameNode</span></li>
+</ul>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The daemons in Standby NameNode are:</span></p>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Zookeeper</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Zookeeper Fail Over controller</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">JournalNode</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">NameNode</span></li>
+</ul>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The daemons in DataNode are:</span></p>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Zookeeper</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">JournalNode</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">DataNode</span></li>
+</ul>
+<p>If you wish to master HDFS and Hadoop, check out the specially curated Big Data and Hadoop course by Edureka. Click on the button below to get started.</p>
+<p><a href="http://www.edureka.co/big-data-and-hadoop?utm_source=blog&amp;utm_medium=button&amp;utm_campaign=how-to-set-up-hadoop-cluster-with-hdfs-high-availability-become-a-hdfs-expert" target="_blank"><img class="aligncenter size-full wp-image-33694" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Become-a-HDFS-Expert.png" alt="Become-a-HDFS-Expert!" width="294" height="42" /></a></p>
+<h2><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;"><strong>Setting Up and Configuring High Availability Cluster in Hadoop:</strong></span></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">You have to first set up the Java and host names of each node.</span></p>
+<table border="1" width="625" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b>Virtual machine</b></span></td>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b> IP address</b></span></td>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b> Host name</b></span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Active NameNode</span></td>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">192.168.1.81</span></td>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">nn1.cluster.com or nn1</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Standby NameNode</span></td>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">192.168.1.58</span></td>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">nn2.cluster.com or nn2</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">DataNode</span></td>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">192.168.1.82</span></td>
+<td style="text-align: center;" valign="top" width="208"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">dn1.cluster.com or dn1</span></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Download the Hadoop and Zookeeper binary tar file, extract the files to edit configuration files.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Command :</strong> wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz</span></p>
+<p><img class="wp-image-38979 alignleft" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper-download.png" alt="Zookeeper Download - High Availability Cluster - Edureka" width="655" height="266" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper-download.png 719w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper-download-300x122.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper-download-528x214.png 528w" sizes="(max-width: 655px) 100vw, 655px" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">                                </span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">                            Untar the zookeeper-3.4.6.tar.gz</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>:  tar –xvf zookeeper-3.4.6.tar.gz</span></p>
+<p><img class="alignleft wp-image-38980 " src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/untar-zookeepr-package.png" alt="Untar Zookeepr Package - High Availability Cluster - Edureka" width="657" height="85" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/untar-zookeepr-package.png 718w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/untar-zookeepr-package-300x39.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/untar-zookeepr-package-528x68.png 528w" sizes="(max-width: 657px) 100vw, 657px" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Download the stable Hadoop binary tar to from Apache Hadoop site.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: wget https://archive.apache.org/dist/hadoop/core/hadoop-2.6.0/hadoop-2.6.0.tar.gz</span></p>
+<p><img class="alignleft wp-image-38983 " src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/hadoop-download-ha.png" alt="Hadoop Download HA - High Availability Cluster - Edureka" width="659" height="102" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/hadoop-download-ha.png 750w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/hadoop-download-ha-300x46.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/hadoop-download-ha-528x82.png 528w" sizes="(max-width: 659px) 100vw, 659px" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Extract the Hadoop tar ball.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: tar –xvf hadoop-2.6.0.tar.gz</span></p>
+<div id="attachment_26023" style="width: 671px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/untar_Hadoop_binary.png"><img class="size-full wp-image-26023" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/untar_Hadoop_binary.png" alt="Download Hadoop binary file and extract it." width="661" height="85" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/untar_Hadoop_binary.png 661w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/untar_Hadoop_binary-300x38.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/untar_Hadoop_binary-528x67.png 528w" sizes="(max-width: 661px) 100vw, 661px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Untar hadoop binary.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Add the Hadoop, Zookeeper and paths to .bashrc file.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Open the .bashrc file.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: sudo gedit ~/.bashrc</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Add the below paths:</span></p>
+<pre class="pre_code"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">export HADOOP_HOME=&lt; Path to your Hadoop-2.6.0 directory&gt;
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export JAVA_HOME=&lt;Path to your Java Directory&gt;
+export ZOOKEEPER_HOME =&lt;Path to your Zookeeper Directory&gt;
+export PATH=$PATH: $JAVA_HOME/bin: $HADOOP_HOME/bin: $HADOOP_HOME/sbin:$ZOOKEEPER_HOME/bin</span></pre>
+<div id="attachment_26026" style="width: 660px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/bashrc.png"><img class="size-full wp-image-26026" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/bashrc.png" alt="Add Hadoop and zookeeper paths to .bashrc file" width="650" height="573" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/bashrc.png 650w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/bashrc-300x264.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/bashrc-340x300.png 340w" sizes="(max-width: 650px) 100vw, 650px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Edit .bashrc file.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Enable the SSH in all the node.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Generate the SSH key in all the nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: ssh-keygen –t rsa (This Step in all the Nodes)</span></p>
+<div id="attachment_26029" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_generation.png"><img class="size-full wp-image-26029" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_generation.png" alt="Set up SSH key in all the nodes" width="660" height="464" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_generation.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_generation-300x210.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_generation-426x300.png 426w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Set up SSH key in all the nodes.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Don’t give any path to the Enter file to save the key and don’t give any passphrase. Press enter button.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Generate the ssh key process in all the nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Once ssh key is generated, you will get the public key and private key.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The .ssh key Directory should contain the Permission 700 and all the keys inside the .ssh directory should contain the permissions 600.</span></p>
+<div id="attachment_26030" style="width: 667px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh-permission.png"><img class="size-full wp-image-26030" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh-permission.png" alt="Change the SSH directory permission" width="657" height="91" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh-permission.png 657w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh-permission-300x41.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh-permission-528x73.png 528w" sizes="(max-width: 657px) 100vw, 657px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Change the SSH directory permission.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Change the directory to .ssh and change the permission of files to 600</span></p>
+<div id="attachment_26031" style="width: 671px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_permission.png"><img class="size-full wp-image-26031" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_permission.png" alt="Change public and private key permission" width="661" height="129" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_permission.png 661w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_permission-300x58.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_key_permission-528x103.png 528w" sizes="(max-width: 661px) 100vw, 661px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Change public and private key permission.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">You have to copy the Name nodes ssh public key to all the nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In Active Namenode, copy the id_rsa.pub using cat command.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span></p>
+<div id="attachment_26032" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/copy_ssh_to_namenode.png"><img class="size-full wp-image-26032" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/copy_ssh_to_namenode.png" alt="Copy Namenode ssh key to it's authorized keys" width="660" height="100" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/copy_ssh_to_namenode.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/copy_ssh_to_namenode-300x45.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/copy_ssh_to_namenode-528x80.png 528w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Copy Namenode ssh key to it&#8217;s authorized keys.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Copy the NameNode public key to all the nodes using <b>ssh-copy-id</b> command.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: ssh-copy-id –i .ssh/id_rsa.pub <a href="mailto:edureka@nn2.cluster.com">edureka@nn2.cluster.com</a></span></p>
+<div id="attachment_26033" style="width: 671px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_seconday.png"><img class="size-full wp-image-26033" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_seconday.png" alt="Copy namenode key to Standby NameNode" width="661" height="89" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_seconday.png 661w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_seconday-300x40.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_seconday-528x71.png 528w" sizes="(max-width: 661px) 100vw, 661px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Copy namenode key to Standby NameNode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Copy NameNode public key to data node.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: ssh-copy-id –i .ssh/id_rsa.pub <a href="mailto:edureka@dn1.cluster.com">edureka@dn1.cluster.com</a></span></p>
+<div id="attachment_26034" style="width: 673px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_datanodes.png"><img class="size-full wp-image-26034" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_datanodes.png" alt="Copy Namenode public key to data node." width="663" height="98" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_datanodes.png 663w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_datanodes-300x44.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ssh_copy_datanodes-528x78.png 528w" sizes="(max-width: 663px) 100vw, 663px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Copy Namenode public key to data node.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Restart the sshd service in all the nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: sudo service sshd restart (Do in all the nodes)</span></p>
+<div id="attachment_26035" style="width: 669px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/restartsshdservice.png"><img class="size-full wp-image-26035" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/restartsshdservice.png" alt="Restart SSH service" width="659" height="154" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/restartsshdservice.png 659w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/restartsshdservice-300x70.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/restartsshdservice-528x123.png 528w" sizes="(max-width: 659px) 100vw, 659px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Restart SSH service.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now you can login to the any node from Namenode without any authentication.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Open the core-site.xml file from the Active Name node and add the below properties.</span></p>
+<div id="attachment_26036" style="width: 662px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/core-site.png"><img class="size-full wp-image-26036" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/core-site.png" alt="Edit core-site.xml from Active namenode " width="652" height="570" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/core-site.png 652w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/core-site-300x262.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/core-site-343x300.png 343w" sizes="(max-width: 652px) 100vw, 652px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Edit core-site.xml from Active namenode</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Open hdfs-site.xml file in Active Namenode. Add the below Properties.</span></p>
+<pre class="pre_code"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">&lt;property&gt;
+ &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+ &lt;value&gt;/home/edureka/HA/data/namenode&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.replication&lt;/name&gt;
+ &lt;value&gt;1&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.permissions&lt;/name&gt;
+ &lt;value&gt;false&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.nameservices&lt;/name&gt;
+ &lt;value&gt;ha-cluster&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.ha.namenodes.ha-cluster&lt;/name&gt;
+ &lt;value&gt;nn1,nn2&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.namenode.rpc-address.ha-cluster.nn1&lt;/name&gt;
+ &lt;value&gt;nn1.cluster.com:9000&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.namenode.rpc-address.ha-cluster.nn2&lt;/name&gt;
+ &lt;value&gt;nn2.cluster.com:9000&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.namenode.http-address.ha-cluster.nn1&lt;/name&gt;
+ &lt;value&gt;nn1.cluster.com:50070&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.namenode.http-address.ha-cluster.nn2&lt;/name&gt;
+ &lt;value&gt;nn2.cluster.com:50070&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.namenode.shared.edits.dir&lt;/name&gt;
+ &lt;value&gt;qjournal://nn1.cluster.com:8485;nn2.cluster.com:8485;dn1.cluster.com:8485/ha-cluster&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.client.failover.proxy.provider.ha-cluster&lt;/name&gt;
+ &lt;value&gt;org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.ha.automatic-failover.enabled&lt;/name&gt;
+ &lt;value&gt;true&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;ha.zookeeper.quorum&lt;/name&gt;
+ &lt;value&gt; nn1.cluster.com:2181,nn2.cluster.com:2181,dn1.cluster.com:2181 &lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.ha.fencing.methods&lt;/name&gt;
+ &lt;value&gt;sshfence&lt;/value&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+ &lt;name&gt;dfs.ha.fencing.ssh.private-key-files&lt;/name&gt;
+ &lt;value&gt;/home/edureka/.ssh/id_rsa&lt;/value&gt;
+ &lt;/property&gt;</span></pre>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Change the directory to zookeeper’s conf directory.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: cd zookeeper-3.4.6/conf</span></p>
+<div id="attachment_26041" style="width: 668px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/change_zookeepr_directory_2.13.png"><img class="size-full wp-image-26041" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/change_zookeepr_directory_2.13.png" alt="change your current directory to Zookeeper Conf directory" width="658" height="126" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/change_zookeepr_directory_2.13.png 658w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/change_zookeepr_directory_2.13-300x57.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/change_zookeepr_directory_2.13-528x101.png 528w" sizes="(max-width: 658px) 100vw, 658px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Zookeeper Conf directory.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In a conf directory you have zoo_sample.cfg file, create the zoo.cfg using zoo_sample.cfg file.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: cp zoo_sample.cfg zoo.cfg</span></p>
+<div id="attachment_26042" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zoo_cfg_2.14.png"><img class="size-full wp-image-26042" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zoo_cfg_2.14.png" alt="Create zoo.cfg file" width="660" height="96" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zoo_cfg_2.14.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zoo_cfg_2.14-300x43.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zoo_cfg_2.14-528x76.png 528w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Create zoo.cfg file.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Create the directory in any location and use this directory to store the zookeeper data.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: mkdir &lt;path, where you want to store the zookeeper files&gt;</span></p>
+<div id="attachment_26043" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zookeepr_data_2.15.png"><img class="size-full wp-image-26043" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zookeepr_data_2.15.png" alt="create a directory to store zookeeper data" width="660" height="85" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zookeepr_data_2.15.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zookeepr_data_2.15-300x38.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/create_zookeepr_data_2.15-528x68.png 528w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Create a directory to store zookeeper data.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Open the zoo.cfg file.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: gedit zoo.cfg</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Add the directory path that is created in above step to the dataDir property and add the below details regarding remaining node, in the zoo.cfg file.</span></p>
+<p><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Server.1=nn1.cluster.com:2888:3888</span></strong></p>
+<p><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Server.2=nn2.cluster.com:2888:3888</span></strong></p>
+<p><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Server.3=dn1.cluster.com:2888:3888</span></strong></p>
+<div id="attachment_26044" style="width: 666px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zoo_cfg_file_2.16.1.png"><img class="size-full wp-image-26044" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zoo_cfg_file_2.16.1.png" alt="Edit zoo.cfg file" width="656" height="562" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zoo_cfg_file_2.16.1.png 656w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zoo_cfg_file_2.16.1-300x257.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zoo_cfg_file_2.16.1-350x300.png 350w" sizes="(max-width: 656px) 100vw, 656px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Edit zoo.cfg file.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now copy the Java and Hadoop-2.6.0, zookeeper-3.4.6 directories, and .bashrc file to all the nodes (Standby name node, Data node) using scp command.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: scp –r &lt;path of directory&gt; edureka@&lt;ip address&gt;:&lt;path where you need to copy&gt;</span></p>
+<div id="attachment_26045" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Copy_HA_Z_.png"><img class="size-full wp-image-26045" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Copy_HA_Z_.png" alt="Copy Hadoop, Zookeeper and .bashrc file to all nodes" width="660" height="85" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Copy_HA_Z_.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Copy_HA_Z_-300x38.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/Copy_HA_Z_-528x68.png 528w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Copy Hadoop, Zookeeper and .bashrc file to all nodes.</span></p></div>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Similarly, copy the .bashrc file and zookeeper directory to all the nodes and change the environment variables in each according to the respective node.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In a data node, create any directory where you need to store the HDFS blocks.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In a data node, you have to add the dfs.datanode.data.dir properties.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In my case, I created <b>datanode</b> directory to store the blocks.</span></p>
+<div id="attachment_26046" style="width: 669px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/createdatanode.png"><img class="size-full wp-image-26046" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/createdatanode.png" alt="Create Datanode directory" width="659" height="89" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/createdatanode.png 659w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/createdatanode-300x40.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/createdatanode-528x71.png 528w" sizes="(max-width: 659px) 100vw, 659px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Create Datanode directory.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Change the permission to data node directory.</span></p>
+<div id="attachment_26047" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/datanode_permission.png"><img class="size-full wp-image-26047" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/datanode_permission.png" alt="Change Datanode directory permission" width="660" height="91" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/datanode_permission.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/datanode_permission-300x41.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/datanode_permission-528x72.png 528w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Change Datanode directory permission.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Open the HDFS-site.xml file, add this Datanode directory path in dfs.datanode.data.dir property.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Note: Keep all the properties that are copied from the Active namenode; add dfs.datanode.data.dir  one extract property in namenode.</span></p>
+<pre class="pre_code"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">&lt;property&gt;
+&lt;name&gt; dfs.datanode.data.dir&lt;/name&gt;
+&lt;value&gt;/home/edureka/HA/data/datanode&lt;/value&gt;
+&lt;/property&gt;</span></pre>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In Active namenode, change the directory where you want to store the zookeeper configuration file (dataDir property path).</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Create the myid file inside the directory and add numeric 1 to the file and save the file.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: vi myid</span></p>
+<div id="attachment_26048" style="width: 668px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/myid.png"><img class="size-full wp-image-26048" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/myid.png" alt="Create myid file" width="658" height="265" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/myid.png 658w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/myid-300x120.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/myid-528x212.png 528w" sizes="(max-width: 658px) 100vw, 658px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Create myid file.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In a standby namenode change the directory where you want to store the zookeeper configuration file (dataDir property path).</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Create the myid file inside the directory and add numeric 2 to the file and save the file.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In a data node, change the directory where you want to store the zookeeper configuration file (dataDir property path).</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Create the myid file inside the directory and add numeric 3 to the file and save the file.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start the Journalnode in all the three nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: hadoop-daemon.sh start journalnode</span></p>
+<div id="attachment_26049" style="width: 669px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startjournal.png"><img class="size-full wp-image-26049" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startjournal.png" alt="Start the Journalnode " width="659" height="180" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startjournal.png 659w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startjournal-300x81.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startjournal-528x144.png 528w" sizes="(max-width: 659px) 100vw, 659px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start the Journalnode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">When you enter jps command, you will see the JournalNode daemon in all the nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Format the <span style="color: #333333;"> Active namenode.</span></span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: HDFS namenode -format</span></p>
+<div id="attachment_26051" style="width: 668px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatNN.png"><img class="size-full wp-image-26051" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatNN.png" alt="Format Active Name Node" width="658" height="121" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatNN.png 658w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatNN-300x55.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatNN-528x97.png 528w" sizes="(max-width: 658px) 100vw, 658px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Format Active NameNode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start the Namenode daemon in Active namenode.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: hadoop-daemon.sh start namenode</span></p>
+<div id="attachment_26052" style="width: 673px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startNN.png"><img class="size-full wp-image-26052" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startNN.png" alt="Start Namenode in Active Node" width="663" height="193" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startNN.png 663w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startNN-300x87.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/startNN-528x153.png 528w" sizes="(max-width: 663px) 100vw, 663px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start Namenode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Copy the HDFS Meta data from active name node to standby namenode.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: HDFS namenode -bootstrapStandby</span></p>
+<div id="attachment_26053" style="width: 667px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/boostrap.png"><img class="size-full wp-image-26053" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/boostrap.png" alt="Copy the HDFS Meta data from Active name node to Standby Name node" width="657" height="208" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/boostrap.png 657w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/boostrap-300x94.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/boostrap-528x167.png 528w" sizes="(max-width: 657px) 100vw, 657px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Copy the HDFS Meta data from Active name node to Standby Namenode.</span></p></div>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Once you run this command, you will get the information from which node and location the meta data is copying and whether it is copying successfully or not.</span></p>
+<div id="attachment_26054" style="width: 668px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/information.png"><img class="size-full wp-image-26054" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/information.png" alt="Information of Active namenode details" width="658" height="460" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/information.png 658w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/information-300x209.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/information-429x300.png 429w" sizes="(max-width: 658px) 100vw, 658px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Information of Active namenode details.</span></p></div>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Once Meta data is copied from Active namenode to standby namenode, you will get the message shown  below in the screenshot.</span></p>
+<div id="attachment_26055" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/completed_.png"><img class="size-full wp-image-26055" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/completed_.png" alt="Information regarding HDFS in Standby Name node" width="660" height="389" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/completed_.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/completed_-300x176.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/completed_-508x300.png 508w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Information regarding HDFS in Standby Namenode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start the namenode daemon in Standby namenode machine.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: hadoop-daemon.sh start namenode</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now start the Zookeeper service in all the three nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: zkServer.sh start (Run this command in all the nodes)</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In Active Namenode:</span></p>
+<div id="attachment_26056" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/activezookeepr.png"><img class="size-full wp-image-26056" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/activezookeepr.png" alt="Start zookeeper in Active Name Node" width="660" height="74" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/activezookeepr.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/activezookeepr-300x33.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/activezookeepr-528x59.png 528w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start zookeeper in Active NameNode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In Standby Namenode:</span></p>
+<div id="attachment_26057" style="width: 671px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_standby.png"><img class="size-full wp-image-26057" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_standby.png" alt="Start zookeepr in standby Name Node" width="661" height="72" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_standby.png 661w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_standby-300x32.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_standby-528x57.png 528w" sizes="(max-width: 661px) 100vw, 661px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start zookeeper in standby NameNode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In Data node:</span></p>
+<div id="attachment_26058" style="width: 672px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_datanode.png"><img class="size-full wp-image-26058" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_datanode.png" alt="Start zookeeper in Data Node" width="662" height="72" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_datanode.png 662w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_datanode-300x32.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zookeeper_datanode-528x57.png 528w" sizes="(max-width: 662px) 100vw, 662px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start zookeeper in DataNode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">After running the Zookeeper server, enter JPS command. In all the nodes you will see the QuorumPeerMain service.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start the Data node daemon in Data node machine.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: hadoop-daemon.sh start datanode</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start the Zookeeper fail over controller in Active name node and standby name node.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Format the zookeeper fail over controller in Active namenode.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="text-decoration: underline;"><strong>Command:</strong></span> HDFS zkfc –formatZK</span></p>
+<div id="attachment_26061" style="width: 671px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatzk.png"><img class="size-full wp-image-26061" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatzk.png" alt="Format ZKFC" width="661" height="238" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatzk.png 661w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatzk-300x108.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/formatzk-528x190.png 528w" sizes="(max-width: 661px) 100vw, 661px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Format ZKFC.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start the ZKFC in Active namenode.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: hadoop-daemon.sh start zkfc</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Enter jps command to check the DFSZkFailoverController daemons.</span></p>
+<div id="attachment_26062" style="width: 671px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zkfcrun.png"><img class="size-full wp-image-26062" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zkfcrun.png" alt="Start ZKFC" width="661" height="156" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zkfcrun.png 661w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zkfcrun-300x70.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/zkfcrun-528x124.png 528w" sizes="(max-width: 661px) 100vw, 661px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start ZKFC.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Format the zookeeper fail over controller in Standby namenode.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: hdfs zkfc –formatZK</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Start the ZKFC in Standby namenode.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="text-decoration: underline;"><strong>Command</strong></span>: hadoop-daemon.sh start zkfc</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Enter jps command to check the DFSZkFailoverController daemons.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now check the status of each Namenode, which node is Active or which node is on Standby by using the below command.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><b><span style="text-decoration: underline;">Command</span></b>: hdfs haadmin –getServiceState nn1</span></p>
+<div id="attachment_26063" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/NNstatus.png"><img class="size-full wp-image-26063" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/NNstatus.png" alt="Check status of each Name Node" width="660" height="160" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/NNstatus.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/NNstatus-300x72.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/NNstatus-528x128.png 528w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Check status of each NameNode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now Check the status of each Namenode using the web browser.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Open the Web browser and enter the below URL.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">&lt;IP Address of Active Namenode&gt;:50070</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">It will show whether the name node is Active or on standby.</span></p>
+<div id="attachment_26064" style="width: 1077px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ActiveNN.png"><img class="size-full wp-image-26064" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ActiveNN.png" alt="Active Name Node" width="1067" height="462" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ActiveNN.png 1067w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ActiveNN-300x129.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/ActiveNN-528x228.png 528w" sizes="(max-width: 1067px) 100vw, 1067px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Active NameNode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Open another name node details using the web browser.</span></p>
+<div id="attachment_26065" style="width: 1059px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/standby.png"><img class="size-full wp-image-26065" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/standby.png" alt="Sandby Name Node" width="1049" height="472" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/standby.png 1049w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/standby-300x134.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/standby-528x237.png 528w" sizes="(max-width: 1049px) 100vw, 1049px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Standby NameNode.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In the Active namenode, kill the namenode daemon to change the Standby name node to active namenode.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Enter jps in Active namenode and kill the daemon.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="text-decoration: underline;"><strong>Command:</strong></span> sudo kill -9 &lt;namenode process ID&gt;</span></p>
+<div id="attachment_26066" style="width: 670px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JPS.png"><img class="size-full wp-image-26066" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JPS.png" alt="Daemons Process ID" width="660" height="181" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JPS.png 660w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JPS-300x82.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/JPS-528x144.png 528w" sizes="(max-width: 660px) 100vw, 660px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Daemons Process ID.</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The Namenode process ID is 7606, kill the namenode.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="text-decoration: underline;"><strong>Command</strong> </span>: Sudo kill -9 7606</span></p>
+<div id="attachment_26067" style="width: 667px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/kill.png"><img class="size-full wp-image-26067" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/kill.png" alt="Kill the Name Node process" width="657" height="71" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/kill.png 657w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/kill-300x32.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/kill-528x57.png 528w" sizes="(max-width: 657px) 100vw, 657px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Kill the Name Node process</span></p></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Open the two nodes through web browser and check the status.</span></p>
+<div id="attachment_26068" style="width: 1375px" class="wp-caption alignnone"><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/afterS.png"><img class="size-full wp-image-26068" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/afterS.png" alt="Namenode details" width="1365" height="464" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/afterS.png 1365w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/afterS-300x101.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/afterS-528x179.png 528w" sizes="(max-width: 1365px) 100vw, 1365px" /></a><p class="wp-caption-text"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Namenode details.</span></p></div>
+<p><a href="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/new.png"><img class="size-full wp-image-26069" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/new.png" alt="Name Node status" width="1365" height="480" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/new.png 1365w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/new-300x105.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/new-528x185.png 528w" sizes="(max-width: 1365px) 100vw, 1365px" /></a></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">NameNode status.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Congratulations, you have successfully setup a HDFS High Availability Cluster in Hadoop.</span></p>
+<p style="text-align: center;"><a class="maxbutton-15 maxbutton maxbutton-download-blue-small" target="_blank" href="http://www.edureka.co/blog/hdfs-tutorial?utm_source=blog&#038;utm_medium=blog-cta&#038;utm_campaign=high-availability-cluster-p"><span class='mb-text'>&lt;&lt;      Previous Blog</span></a>   <a class="maxbutton-15 maxbutton maxbutton-download-blue-small" target="_blank" href="http://www.edureka.co/blog/overview-of-hadoop-2-0-cluster-architecture-federation?utm_source=blog&#038;utm_medium=blog-cta&#038;utm_campaign=high-availability-cluster-n"><span class='mb-text'>Next Blog      &gt;&gt;</span></a></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em>Now that you have understood Hadoop High Availability Cluster Architecture, check out the <strong><a href="http://www.edureka.co/big-data-and-hadoop/?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=overview-of-hadoop-2-0-cluster-architecture-federation" target="_blank">Hadoop training</a></strong></em><em><strong> </strong>by Edureka, a trusted online learning company with a network of more than 250,000 satisfied learners spread across the globe. The Edureka Big Data Hadoop Certification Training course helps learners become expert in HDFS, Yarn, MapReduce, Pig, Hive, HBase, Oozie, Flume and Sqoop using real-time use cases on Retail, Social Media, Aviation, Tourism, Finance domain.</em></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em>Got a question for us? Please mention it in the comments section and we will get back to you.</em></span></p>
+                                                    </p>
+                                                </article>
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <div id="author-bio-box"><img alt='' src='https://secure.gravatar.com/avatar/b669e7f2bc40d7ed2b75d11c3fd911fc?s=80&d=mm&r=g' srcset="https://secure.gravatar.com/avatar/b669e7f2bc40d7ed2b75d11c3fd911fc?s=160&d=mm&r=g 2x" class='avatar avatar-80 photo' height='80' width='80' /><span class="author-name">About Ashish Bakshi (<a href="https://www.edureka.co/blog/author/ashishbedureka-co/">8 Posts</a>)</span><p></p><div class="bio-socials"></div></div><br/><div class="clear"></div>                                                    </p>
+                                                </article>
+                                                <div class="bot-shareoption">
+                                                    <span class="Shareon-bot">
+                                                        Share on
+                                                    </span>
+                                                    <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_2' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_2' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_2' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_2' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                                </div>
+                                                                                                    <article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 related-blog next-blog-leftnav">
+                                                        <ul class="pager">
+                                                            <li class="pull-left"><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i> PREVIOUS</a></li>
+                                                            <li class="pull-right"><a href="#" class="show-next-in-series">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </article>
+                                                                                                    <section id="edu-related-blog-carousel-2" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Posts</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/overview-of-hadoop-2-0-cluster-architecture-federation/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Feature-image-Overview-of-Hadoop-2.0-Cluster-Architecture-Federation-Edureka.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Overview of Hadoop 2.0 Cluster Architecture Federation</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 10.9K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/hadoop-developer-job-responsibilities-skills/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2014/09/Trends-in-project-management-jobs1.jpg" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Hadoop Developer-Job Responsibilities &#038; Skills</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 38.9K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2015/11/Hadoop-Installation-Multi-Node-Cluster.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Setting Up A Multi Node Cluster In Hadoop 2.X</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 233K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/hadoop-tutorial/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Hadoop Tutorial: All you need to know about Hadoop!</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 31.3K</div>
+                            </div>
+                        </article></a>
+                    </div></div>
+                    </article></section>
+                                                <!--Comments Area Single post-->
+                                                <section class="padcomments" >
+    <span class="comments"> Comments <div class="arrow-down"></div></span>
+    <span class="pull-right comment"> 12 Comments </span>
+</section>
+<section class="commsec" id="comments-wrapper">
+    
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-21030">
+        <div id="dsq-comment-header-21030" class="dsq-comment-header">
+            <cite id="dsq-cite-21030">
+                <span id="dsq-author-user-21030">Den Kushnerik</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21030" class="dsq-comment-body">
+            <div id="dsq-comment-message-21030" class="dsq-comment-message"><p>Hello. Its a very helpful instruction for me!</p>
+<p>Do we need to format the ZKFC on Standby NameNode too?<br />
+According to this page: <a href="http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html#Initializing_HA_state_in_ZooKeeper" rel="nofollow">http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html#Initializing_HA_state_in_ZooKeeper</a> we must do it one time: &#8220;&#8230;next step is to initialize required state in ZooKeeper. You can do so by running the following command from one of the NameNode hosts.&#8221;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-20952">
+        <div id="dsq-comment-header-20952" class="dsq-comment-header">
+            <cite id="dsq-cite-20952">
+                <span id="dsq-author-user-20952">aagnasoft</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20952" class="dsq-comment-body">
+            <div id="dsq-comment-message-20952" class="dsq-comment-message"><p>Wow, It is a very helpful information. Thank you so much.<br />
+<a href="http://www.aagnasoft.com/sap-hana.php" rel="nofollow">sap hana online training in usa</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-20746">
+        <div id="dsq-comment-header-20746" class="dsq-comment-header">
+            <cite id="dsq-cite-20746">
+                <span id="dsq-author-user-20746">Sanjay</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20746" class="dsq-comment-body">
+            <div id="dsq-comment-message-20746" class="dsq-comment-message"><p>Normally when we setup a hadoop cluster (non HA), we need to configure yarn by modifying its yarn-site.xml . For HA, don&#8217;t we require any HA specific modification to yarn-site.xml ?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-20769">
+        <div id="dsq-comment-header-20769" class="dsq-comment-header">
+            <cite id="dsq-cite-20769">
+                <span id="dsq-author-user-20769">Ashish Bakshi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20769" class="dsq-comment-body">
+            <div id="dsq-comment-message-20769" class="dsq-comment-message"><p>Thanks Sanjay for going through the blog.</p>
+<p>In this blog, we are modifying hdfs-site.xml because we are enabling HA feature only for NameNode. And yes you are absolutely correct, you can have HA for ResourceManager as well where you will have to modify the yarn-site.xml similarly. You can follow the Hadoop documentations to setup HA for ResouceManager which is given below:<br />
+<a href="https://hadoop.apache.org/docs/r2.7.2/hadoop-yarn/hadoop-yarn-site/ResourceManagerHA.html" rel="nofollow">https://hadoop.apache.org/docs/r2.7.2/hadoop-yarn/hadoop-yarn-site/ResourceManagerHA.html</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-20543">
+        <div id="dsq-comment-header-20543" class="dsq-comment-header">
+            <cite id="dsq-cite-20543">
+                <span id="dsq-author-user-20543">Rakibul hassan Rakib</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20543" class="dsq-comment-body">
+            <div id="dsq-comment-message-20543" class="dsq-comment-message"><p>I am just correcting your HA Architecture image</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-20538">
+        <div id="dsq-comment-header-20538" class="dsq-comment-header">
+            <cite id="dsq-cite-20538">
+                <span id="dsq-author-user-20538">Rakibul hassan Rakib</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20538" class="dsq-comment-body">
+            <div id="dsq-comment-message-20538" class="dsq-comment-message"><p>After killing active or standby namenode I am not getting web view of killing namenode. Is it possible to getting web view after killing namenode ?. But you have seen two namenode web view after killing one namenode. How it is possible? I am facing some problem in my namenode.</p>
+<p>Thank you<br />
+Rakib</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-2" id="dsq-comment-20560">
+        <div id="dsq-comment-header-20560" class="dsq-comment-header">
+            <cite id="dsq-cite-20560">
+                <span id="dsq-author-user-20560">Mani</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20560" class="dsq-comment-body">
+            <div id="dsq-comment-message-20560" class="dsq-comment-message"><p>Hey Rakib,<br />
+If the namenode is manualy transitioned from active to standby you should be able to see the WEB UI of the namenode as it is still active. But if there is a failover in the active namenode and the it got a  automatic transition to the standby namenode you can&#8217;t have the web ui because of the obvious reason that the namenode is down. Once you fix the dead namenode you can see the UI with STANDBY mentioned in the UI. Hope this helps</p>
+<p>Thanks,<br />
+MK</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt depth-2" id="dsq-comment-20577">
+        <div id="dsq-comment-header-20577" class="dsq-comment-header">
+            <cite id="dsq-cite-20577">
+                <span id="dsq-author-user-20577">EdurekaSupport</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20577" class="dsq-comment-body">
+            <div id="dsq-comment-message-20577" class="dsq-comment-message"><p>Hey Rakibul, thanks for checking out the blog. Please follow the steps given below:<br />
+-&gt; Please Check your hdfs-site.xml configuration file and make sure that you have set up the automatic failover as per given in the blog.<br />
+-&gt; In case you are still facing the issue, change the directory for namenode, datanode, JN and zookeeper and give the permission 755 for these directories<br />
+chmod 755 directory_path<br />
+-&gt; Format the Active Namenode and start the services as per given in the blog<br />
+Hope this helps.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-20054">
+        <div id="dsq-comment-header-20054" class="dsq-comment-header">
+            <cite id="dsq-cite-20054">
+                <span id="dsq-author-user-20054">anil kumar</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20054" class="dsq-comment-body">
+            <div id="dsq-comment-message-20054" class="dsq-comment-message"><p>am inistaling high avalability like nn1 &amp; nn2 and dn1 &#8230;. in that nn1 and nn2 both are standby mode only what i do now</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-20324">
+        <div id="dsq-comment-header-20324" class="dsq-comment-header">
+            <cite id="dsq-cite-20324">
+                <span id="dsq-author-user-20324">Mani</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20324" class="dsq-comment-body">
+            <div id="dsq-comment-message-20324" class="dsq-comment-message"><p>Hope you got the solution by now anil. It might be the reason that you did not enable automatic failover property in hdfs-site.xml. According to what you are saying that your cluster is in manual failover mode. In this scenario you have to individually designate which name node should be active or standby.</p>
+<p>hdfs haadmin -transitionToActive nn1<br />
+(nn1 &#8211; Active , nn2 &#8211; Standby)</p>
+<p>hdfs haadmin -transitionToStandby nn1<br />
+(nn1 &#8211; Standby , nn2 &#8211; Standby)</p>
+<p>hdfs haadmin -transitionToActive nn2<br />
+(nn1 &#8211; Standby , nn2 &#8211; Active)</p>
+<p>hdfs haadmin -transitionToStandby nn2<br />
+(nn1 &#8211; Standby , nn2 &#8211; Standby)</p>
+<p>Check your name node service status using the command:<br />
+hdfs haadmin -getServiceStatus </p>
+<p>If you by mistake make both of them active you might encounter scenario of split-brain where on both nodes edits will be in progress resulting in corrupted metadata. </p>
+<p>Hope this helps!</p>
+<p>Thanks,<br />
+MK</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-19993">
+        <div id="dsq-comment-header-19993" class="dsq-comment-header">
+            <cite id="dsq-cite-19993">
+                <span id="dsq-author-user-19993">sureseh</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19993" class="dsq-comment-body">
+            <div id="dsq-comment-message-19993" class="dsq-comment-message"><p>Getting below error when i follow the above configuration settings. </p>
+<p>15/11/08 01:58:34 ERROR namenode.FSNamesystem: FSNamesystem initialization failed.</p>
+<p>java.io.IOException: Invalid configuration: a shared edits dir must not be specified if HA is not enabled.</p>
+<p>and i dont find solution for this from google. </p>
+<p>Can someone help </p>
+<p>regards<br />
+suresh bk</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-20006">
+        <div id="dsq-comment-header-20006" class="dsq-comment-header">
+            <cite id="dsq-cite-20006">
+                <span id="dsq-author-user-20006">EdurekaSupport</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20006" class="dsq-comment-body">
+            <div id="dsq-comment-message-20006" class="dsq-comment-message"><p>Hi Suresh bk<br />
+Thank you for reaching out to us.<br />
+You can connect with our 24/7 support team with all your queries and doubts regarding Hadoop once you enroll for the course.<br />
+You can also get in touch with us by contacting our sales team on +91-8880862004 (India) or 1800 275 9730 (US toll free). You can mail us on <a href="mailto:sales@edureka.co">sales@edureka.co</a>.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+</section>	
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>	
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-12 col-sm-12 no-padding blog-sidepanel"> 
+    <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maincontainer detailpagesidebar" 
+             data-post_type="post" 
+             data-post_name="how-to-set-up-hadoop-cluster-with-hdfs-high-availability" >
+             <section id="edu-related-blogs-2" class="right-side-widget custom-edu-widgets widget_edu-related-blogs"><h3 class="widget-title"><span>Related Blogs</span></h3><ul class="edu-hiran custom-widget-listing related-blogs"><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/overview-of-hadoop-2-0-cluster-architecture-federation/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Feature-image-Overview-of-Hadoop-2.0-Cluster-Architecture-Federation-Edureka.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Feature Image - Overview of Hadoop 2.x Cluster Architecture Federation - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Feature-image-Overview-of-Hadoop-2.0-Cluster-Architecture-Federation-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Feature-image-Overview-of-Hadoop-2.0-Cluster-Architecture-Federation-Edureka-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Feature-image-Overview-of-Hadoop-2.0-Cluster-Architecture-Federation-Edureka-768x448.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Feature-image-Overview-of-Hadoop-2.0-Cluster-Architecture-Federation-Edureka-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/overview-of-hadoop-2-0-cluster-architecture-federation/" class="custom-rel-article"><span>Overview of Hadoop 2.0 Cluster Architecture Federation<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Top 50 Hadoop Interview Question for 2017 - Hadoop Interview Questions - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka-513x300.png 513w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/" class="custom-rel-article"><span>Top 50 Hadoop Interview Questions For 2017<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/hadoop-developer-job-responsibilities-skills/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2014/09/Trends-in-project-management-jobs1.jpg" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2014/09/Trends-in-project-management-jobs1.jpg 600w, https://cdn.edureka.co/blog/wp-content/uploads/2014/09/Trends-in-project-management-jobs1-300x175.jpg 300w, https://cdn.edureka.co/blog/wp-content/uploads/2014/09/Trends-in-project-management-jobs1-514x300.jpg 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/hadoop-developer-job-responsibilities-skills/" class="custom-rel-article"><span>Hadoop Developer-Job Responsibilities &#038; Skills<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/11/Hadoop-Installation-Multi-Node-Cluster.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Hadoop Installation - Multi Node Cluster in Hadoop - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/11/Hadoop-Installation-Multi-Node-Cluster.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2015/11/Hadoop-Installation-Multi-Node-Cluster-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/11/Hadoop-Installation-Multi-Node-Cluster-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2015/11/Hadoop-Installation-Multi-Node-Cluster-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X" class="custom-rel-article"><span>Setting Up A Multi Node Cluster In Hadoop 2.X<span></a></article></li></ul></section><section id="edu-ads-2" class="right-side-widget custom-edu-widgets widget_edu-ads"><section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 courseimgadv">
+                    <a href="http://www.edureka.co/big-data-and-hadoop?utm_source=blog&utm_medium=blog-display-ad&utm_campaign=how-to-setup-hadoop-cluster-with-hdfs-high-availability" target="_blank" class="thumbnail custom-promotion" >
+                        <img src="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-10.png" /></a></section></section><section id="edu-custom-subscribe-2" class="right-side-widget custom-edu-widgets widget_edu-custom-subscribe">        <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding Newsletter-sub">
+            
+                        <form id="subscribe-form" novalidate class="custom-subscribe-form-wrapper hide">
+                <div class="subscribesec">
+                                    <!--<div class="close-thissub"><i class="icon-cross"></i></div>	-->
+                    <div class="subscribesec-box">										
+                        <h4 class="clearfix subscribeblogtitle"><p><i class="icon-Mail_this_post"></i></p><span>Subscribe to get free Newsletter</span></h4>
+                        <section class="sectrendcom">
+                            <article class="relatedcontmain">
+                                <div class="input-group Subscribeinput">                              
+                                    <input name="subscription-mail" type="email" autocomplete="off" class="form-control " required placeholder="Enter Email"> 
+                                    <!-- Add classes successform and errorform to toggle the input form -->
+
+                                </div>
+                                <input type="hidden"  id="is_user_loggedin" value="0"/>
+                                <label id="loader" style="margin-left:120px;display:none" ><img src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/loader.gif" /></label>
+
+                                <p class="errormessage"> Please provide a valid Email Id </p>
+                            </article>                         
+                        </section>  
+                    </div>
+                    <div class="subscribesec-success">
+                        <i class="icon-success"></i>
+                        <p class="successmessage" style="display: none;"> Thank you, your subscription is successful</p> 
+                        <p class="alreadysubscribed" style="display: none;"> You have already subscribed.</p> 
+                    </div>
+                </div>
+                <button type="submit" id="subscribe-button" class="btn subscribebtn successbutton">
+                    <div class="sub-news-letter">SUBSCRIBE</div></button>
+            </form>
+            <div class="sub-browse-letter show-after-success hide">
+                <a class="" href="/all-courses" target="_blank">BROWSE COURSES</a>
+            </div>
+        </section>
+        </section></section>
+</div>
+<!-- Right Panel ends -->
+</div></div></div>
+</section>
+
+<footer class="footer-new" id="footer_v2">
+        <div class="container">
+        <div class="row">
+            <div class="padding-xs-only clearfix">
+                <div class="panel-group no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="col-md-12 visible-xs accordion-head">
+
+                            <a data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" href="javascript:void(0)">
+                                <h3 class="no-margin footer-new-hd-lineht"><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></h3>
+                                <p class=" margin-vr5 grey-txt marg-btm-0-xs">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd.</p>
+                                <i class="fa fa-angle-up"></i>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+
+                        </div>
+                        <div id="collapse1" class="div-collapse collapse clearfix">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 item-padding">
+                                <h4>Edureka</h4>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/about-us">About us</a></li>
+                                    <li><a href="https://www.edureka.co/allmedia">News & Media</a></li>
+                                    <li><a href="https://www.edureka.co/contact-us">Contact us</a></li>
+                                    <li><a href="https://www.edureka.co/careers">Careers</a></li>
+                                </ul>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/blog/all">Blog</a></li>
+                                    <li><a href="https://www.edureka.co/reviews">Reviews</a></li>
+                                    <li><a href="https://www.edureka.co/terms-and-conditions">Terms & conditions</a></li>
+                                    <li><a href="https://www.edureka.co/privacy-policy">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Work with us </h4>
+                                <ul class="list-unstyled footer-menu">
+                                    <li><a href="https://www.edureka.co/instructors/add">Become  an Instructor</a></li>
+                                    <li><a href="https://www.edureka.co/hire-from-edureka">Hire from Edureka</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3  col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Follow us on </h4>
+                                <ul class="list-unstyled footer-social-icon">
+                                    <li><a class="fb" target="_blank" href="https://www.facebook.com/edurekaIN"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="tw" target="_blank" href="https://twitter.com/edurekaIN"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="in" target="_blank" href="https://www.linkedin.com/company/edureka"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="ut" target="_blank" href="https://www.youtube.com/user/edurekaIN"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 item-padding padding-lft-25 text-center-xs">
+                                <h4>Learn on the GO!</h4>
+                                <ul class="list-unstyled footer-menu-store">
+                                    <li><a target="_blank" href="https://itunes.apple.com/in/app/edureka/id1033145415?mt=8">
+                                            <img alt="appleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/applestorebtn.png"></a></li>
+                                    <li><a target="_blank" href="https://play.google.com/store/apps/details?id=co.edureka.app">
+                                            <img alt="googleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/googleplaybtn.png"></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding border-top-half">
+                                <div class="padding-vr20 clearfix">
+                                    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-12 no-padding">
+                                        <h3 class="no-margin footer-new-hd-lineht"><a href=https://www.edureka.co><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></a></h3>
+                                        <p class=" margin-vr5 grey-txt">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd. All rights Reserved.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-7 col-xs-12 no-padding txt-marg-top text-xs-left">
+                                        <p class="grey-txt">"PMP®","PMI®", "PMI-ACP®" and "PMBOK®" are registered marks of the Project Management Institute, Inc. <br>
+                                            MongoDB®, Mongo and the leaf logo are the registered trademarks of MongoDB, Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<div class="footerbar">
+    <div class="container clearfix">
+        <div class="row">
+            <a href="javascript:void(0);" class="call-us">
+                <span><img src="//cdn.edureka.co/imgver.1496301546/img/phone-icon.png" alt="phoneicon"></span>
+                Call us on 
+                <span>1-800-275-9730 <i>(Toll Free)</i></span>
+                <span>+91 88808 62004</span>
+            </a>
+            <div class="dropdown pull-left hidden-xs">
+                <div class="bfh-selectbox country-style-footer triangle country-pop-small bfh-countries" data-country="IN" data-flags="true" data-filter="true">
+                    <input type="hidden" value="">
+                    <a class="bfh-selectbox-toggle res-popup" role="button" data-toggle="bfh-selectbox" href="#">
+                        <span class="bfh-selectbox-option input-medium" data-option="">
+                        </span>
+
+
+                    </a>
+                    <div class="bfh-selectbox-options">
+                        <input type="text" class="bfh-selectbox-filter">
+                        <div role="listbox">
+                            <ul role="option" class="dropdown-menu-scrollbar">
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="call-us-xs">
+            <h3>24 X 7 Customer Support
+                <a class="close-call" href="javascript:void(0);">X</a>
+            </h3>
+            <ul class="list-unstyled">
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/us-flag.png" alt="us flag"> 1-800-275-9730   (Toll Free)     </li>
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/ind-flag.png" alt="india flag"> +91 88808 62004</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                jQuery(function($) {
+                    function equalHeight(group) {
+                        tallest = 0;
+                        group.each(function() {
+                            thisHeight = $(this).height();
+                            if(thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        group.height(tallest);
+                    }
+
+                    equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+
+                    $(window).resize(function() {
+                        equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+                    });
+                });
+            </script>
+            <script type="text/javascript"> 
+				var fonts_loaded =[];
+			</script><!--email_off--><style type='text/css'>.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook{border-color:#000;box-shadow-color:#333;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon{text-align:center;padding-top:8px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff;font-size:21px}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-text{color:#fff}
+.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter{border-color:#000;box-shadow-color:#333;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff;font-size:22px}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-text{color:#fff}
+.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin{border-color:#000;box-shadow-color:#333;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff;font-size:22px}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-text{color:#fff}
+.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus{border-color:#000;box-shadow-color:#333;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff;font-size:22px}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-text{color:#fff}
+.maxcollection.maxcollection-1{display:inline-block;z-index:9999;margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px}.maxcollection.maxcollection-1 .mb-collection-item.item-24{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-25{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-26{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-27{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}
+.maxbutton-15.maxbutton.maxbutton-download-blue-small{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:140px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-15.maxbutton:hover.maxbutton-download-blue-small{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-15.maxbutton.maxbutton-download-blue-small .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-15.maxbutton:hover.maxbutton-download-blue-small .mb-text{color:#fff}
+</style><!--/email_off-->
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var postasmail = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/fancyquote.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var videolib = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/video-library.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/jquery.fitvids.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var fvpdata = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","nonce":"79d293a9a4","fitvids":"1","dynamic":"","overlay":"","opacity":"0.75","color":"b","width":"640"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/frontend.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var mb_ajax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/js/min/front.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons_fonts.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons-pro-front.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/bootstrap.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/masonry.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/imagesloaded.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.bootpag.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/nprogress.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/CustomScrollbar.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/owl.carousel.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0187-formValidation.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0188-bootstrap.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/blog.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects-related.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/mfb.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/signup.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var php_array = {"admin_ajax":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var wnm_custom = {"template_url":"\/blog\/wp-content\/themes\/edu-hiran"};
+var myAjax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var afp_vars = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","postID":"26012","single":"1"};
+var post_vars = {"postID":"26012","postType":"post"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/ajax-pagination.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.7.5","language":""},"disqusIdentifier":"26012 http:\/\/www.edureka.co\/blog\/?p=26012","disqusShortname":"edurekablog","disqusTitle":"How to Set Up Hadoop Cluster with HDFS High Availability","disqusUrl":"https:\/\/www.edureka.co\/blog\/how-to-set-up-hadoop-cluster-with-hdfs-high-availability\/","options":{"manualSync":"1"},"postId":"26012"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/disqus.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"edurekablog"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/count.js'></script>
+
+
+</body>
+</html>
+<!-- mfunc setPostViews(get_the_ID()); --><!-- /mfunc -->
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 2898/3209 objects using disk
+Page Caching using disk
+Content Delivery Network via Amazon Web Services: CloudFront: cdn.edureka.co
+Database Caching 31/119 queries in 0.037 seconds using disk
+
+ Served from: www.edureka.co @ 2017-06-09 17:12:53 by W3 Total Cache -->

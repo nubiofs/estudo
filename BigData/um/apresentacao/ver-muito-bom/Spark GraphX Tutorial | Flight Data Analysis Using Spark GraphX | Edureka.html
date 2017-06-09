@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.edureka.co/blog/xmlrpc.php" />
+        
+<!-- This site is optimized with the Yoast SEO plugin v4.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Spark GraphX Tutorial | Flight Data Analysis Using Spark GraphX | Edureka</title>
+<meta name="description" content="This GraphX Tutorial blog will introduce you to Apache Spark GraphX, its features and components including a Flight Data Analysis project."/>
+<meta name="robots" content="noodp"/>
+<meta name="keywords" content="apache spark graphx, what is graphx, learn apache spark graphx, apache graphx blog, spark graphx tutorial, spark graphx training, spark edureka, spark graphx edureka, graphx course, apache spark course, apache spark material, apache spark pdf, graphx pdf, graph tutorial, graph computation, flight data analysis, graphx use case, graphx example, graphx case study, apache spark use case, apache spark case study, apache spark example"/>
+<link rel="canonical" href="https://www.edureka.co/blog/spark-graphx/" />
+<link rel="publisher" href="https://plus.google.com/+edurekaIN"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Spark GraphX Tutorial | Flight Data Analysis Using Spark GraphX | Edureka" />
+<meta property="og:description" content="This GraphX Tutorial blog will introduce you to Apache Spark GraphX, its features and components including a Flight Data Analysis project." />
+<meta property="og:url" content="https://www.edureka.co/blog/spark-graphx/" />
+<meta property="og:site_name" content="Edureka Blog" />
+<meta property="article:publisher" content="https://www.facebook.com/edurekaIN/" />
+<meta property="article:author" content="www.facebook.com/sandeep.dayananda" />
+<meta property="article:section" content="Apache Spark &amp; Scala" />
+<meta property="article:published_time" content="2017-05-12T12:12:22+00:00" />
+<meta property="article:modified_time" content="2017-05-12T12:14:16+00:00" />
+<meta property="og:updated_time" content="2017-05-12T12:14:16+00:00" />
+<meta property="fb:app_id" content="334689249900154" />
+<meta property="og:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-GraphX-Tutorial-Edureka.jpg" />
+<meta property="og:image:width" content="815" />
+<meta property="og:image:height" content="476" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="This GraphX Tutorial blog will introduce you to Apache Spark GraphX, its features and components including a Flight Data Analysis project." />
+<meta name="twitter:title" content="Spark GraphX Tutorial | Flight Data Analysis Using Spark GraphX | Edureka" />
+<meta name="twitter:site" content="@edurekaIN" />
+<meta name="twitter:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-GraphX-Tutorial-Edureka.jpg" />
+<meta name="twitter:creator" content="@edurekaIN" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdn.edureka.co' />
+<link rel='dns-prefetch' href='//maxcdn.bootstrapcdn.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Edureka Blog &raquo; Spark GraphX Tutorial &#8211; Graph Analytics In Apache Spark Comments Feed" href="https://www.edureka.co/blog/spark-graphx/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.edureka.co\/blog\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='download-button-shortcode-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-button-shortcode/css/downloadbutton.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fancyquote-css-css'  href='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/css/fancyquote.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-fontAwesome-css-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sn-animate-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/animate.css' type='text/css' media='all' />
+<link rel='stylesheet' id='dg-grid-css-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/dynamic-menu-manager/duogeek/inc/dg-grid.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fvp-frontend-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/styles/frontend.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mbpro-font-awesome-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/assets/libraries/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-font-awesome-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0121-font-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0121-font.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogmain-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogmain.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-nprogress-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/nprogress.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetail_newfont-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/Newfonts-ico.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-customscrollbar-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/CustomScrollbar.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-owl.carousel-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/owl.carousel.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-blogdetailnew-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/blogdetailnew.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0180-global-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0180-global.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-bootstrap-formhelpers-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/bootstrap-formhelpers.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0181-formValidation-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0181-formValidation.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-0139-common-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/0139-common.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-dashboard-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/dashboard.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-header-2-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/header-2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-signin-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/new-signin-signup.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-mfb-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/css/mfb.css' type='text/css' media='all' />
+<link rel='stylesheet' id='edu-hiran-main_css-css'  href='//cdn.edureka.co/blog/assets/ver.1496301546/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp_dlmp_styles-css'  href='https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/styles.css' type='text/css' media='all' />
+<link rel='https://api.w.org/' href='https://www.edureka.co/blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.edureka.co/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.edureka.co/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://www.edureka.co/blog/?p=46304' />
+<link rel="alternate" type="application/json+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fspark-graphx%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fspark-graphx%2F&#038;format=xml" />
+	<style type='text/css'>
+	.download-info .download-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+<style type="text/css">
+#author-bio-box {
+	float:left;
+	width: 99%;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	box-shadow: 5px 5px 2px #ddd;
+	padding: 5px;
+        margin-bottom: 10px;
+}
+#author-bio-box img {
+	float: left;
+	margin: 4px 10px 2px 4px;
+}
+#author-bio-box .author-name {
+	font-weight: bold;
+	margin-left: 2px;
+	font-size: 14px;
+}
+#author-bio-box p {
+	font-size: 13px;
+	line-height: 20px;
+        margin-left: 95px;
+        margin-top: 5px;
+}
+#author-bio-box thead th {
+	border: 0;
+}
+#author-bio-box tbody {
+	border: 0;
+}
+.bio-spacer { min-height:44px; padding: 1px; display: block; clear: both; border:1px;}
+.bio-socials {
+	border-top:1px solid #e8e8e8;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	width: 100%;
+	height: 32px;
+	clear: both;
+}
+</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://cdn.edureka.co/blog/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <script>
+            var webURL = 'https://www.edureka.co/';
+            var imgURL = 'https://cdn.edureka.co/imgver.1465813195/img/';
+            var kmkey = 'c685629a1766aa24ed42e4bc8476e8789cd97477';
+            var GaTID = 'UA-33865789-1';
+            var GaUATID = 'UA-33865789-2';
+            var iscustomerGA = 'false';
+            var repcustomerGA = 'false';
+            var baildown = true;
+            var homepageloadbanner = true;
+            var prev_offer_code = '';
+
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-33865789-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+        <!-- Google Code for Remarketing Tag -->
+        <!--------------------------------------------------
+        Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+        --------------------------------------------------->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 977137586;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+        <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+</head>
+<body class="post-template-default single single-post postid-46304 single-format-standard wpb-js-composer js-comp-ver-5.1.1 vc_responsive" id="margin-top-value">
+
+    <div id="fb-root"></div>
+    <script>
+
+            window.fbAsyncInit = function () {
+                FB.init({appId: '334689249900154', status: true, cookie: true,
+                    xfbml: true});
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+    </script>
+
+    <header id="header-II">
+        <section>
+            <nav style="" role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-homepage">
+                <div class="container menubar-visibility edureka-blog-header">
+                    <div class="navbar-header">
+                        <a href="/?utm_source=blog&utm_medium=blog-edureka-logo" class="navbar-brand" > <img alt="edureka!" src="/imgver.1496301546/img/logo.png"> </a> 			
+                    </div>
+                    <!-- ddl starts--><form action="/blog" class="main-search"><ul class="list-unstyled course-search-box-nav">
+                        <input  type="hidden" class="searchinputbox" id="categoryinputbox" value="">
+                        <input  type="hidden" class="searchinputbox" id="authorinputbox" value="">
+                        <li class="search-nav pull-left"><div class="dropdown  categories-filter-dropdown">
+    <a class="select_down dropdown-toggle search-drop menu-common catbtnblog catbtnblogmob btn" type="button" id="menu1" data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Select Category
+    </a>
+    <ul class="dropdown-menu list-inline search-header-navigation dropdown-menu-scrollbar" role="menu" aria-labelledby="menu1">
+        <li role="presentation"><a role="menuitem" tabindex="0" href="#" data-slug="" class="category-selector">Select Category</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="1" href="/blog/category/big-data-analytics" data-slug="big-data-analytics" class="category-selector">Big Data Analytics</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="2" href="/blog/category/big-data-nosql" data-slug="big-data-nosql" class="category-selector">Big Data NoSQL</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="3" href="/blog/category/business-intelligence" data-slug="business-intelligence" class="category-selector">Business Intelligence</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="4" href="/blog/category/cloud-computing" data-slug="cloud-computing" class="category-selector">Cloud Computing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="5" href="/blog/category/finance" data-slug="finance" class="category-selector">Finance</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="6" href="/blog/category/frameworks" data-slug="frameworks" class="category-selector">Frameworks</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="7" href="/blog/category/ibm-bluemix" data-slug="ibm-bluemix" class="category-selector">IBM Bluemix</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="8" href="/blog/category/marketing" data-slug="marketing" class="category-selector">Marketing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="9" href="/blog/category/mobile-development" data-slug="mobile-development" class="category-selector">Mobile Development</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="10" href="/blog/category/operations" data-slug="operations" class="category-selector">Operations</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="11" href="/blog/category/programming" data-slug="programming" class="category-selector">Programming</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="12" href="/blog/category/project-management" data-slug="project-management" class="category-selector">Project Management</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="13" href="/blog/category/success-story" data-slug="success-story" class="category-selector">Success Story</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="14" href="/blog/category/systems-architecture" data-slug="systems-architecture" class="category-selector">Systems &amp; Architecture</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="15" href="/blog/category/systems-engineering" data-slug="systems-engineering" class="category-selector">Systems Engineering</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="16" href="/blog/category/testing" data-slug="testing" class="category-selector">Testing</a>
+                </li>      
+    </ul>
+</div>
+<span id ="desktop-searchbox"><div id="remote" class="typeahead-container"><div class="typeahead-field">
+                        <span class="typeahead-query">
+                            <input type="text" maxlength="150" autocomplete="off" placeholder = "Search edureka blogs" value=""
+                          name="s" data-value="" class="search_inp collapse searchinputbox">
+                        </span><span class="typeahead-button"><i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></span></li></ul></form><form action="/blog" class="form-element-mobile">
+                    <div class="visible-sm visible-xs mobsearch" id="mobile-searchbox">
+                        <a data-toggle="collapse" id="mobile-search-icon" class="mobile-search-icon" href="#mobsearch" aria-expanded="false" aria-controls="mobsearch">
+                            <i class="fa fa-search search_ico visible-sm visible-xs"></i>
+                        </a><div class="collapse search-course" id="mobsearch" aria-expanded="false"><div>
+                    <div id="remote" class="typeahead-container result backdrop hint">
+                        <div class="typeahead-field"><span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" class="search_inp search_inp_mob" placeholder = "Search edureka blogs" name="s" type="text" value="" data-value="" ></span>
+                        <span class="typeahead-button">
+                        <i  class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></div></div></div></form><div class="loggedin-usernav-wrapper hide"><div aria-expanded="false" id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs">
+                <li >
+                    <div class="dropdown menu-dropdown dropdownafterlogin">
+                        <a href="javascript:void(0);" class="dropdown-toggle withripple" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false"> BROWSE COURSES <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                            <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=my-courses">My Courses</a></li>
+                            <li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="logged-in-customer hide"></li>
+                <li class="">
+                    <div class="dropdown user-dropdown">
+                        <a id="signin-logout" class="signin" href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292">Logout</a> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right profile pull-right">
+            <li class="dropdown userdrop hidden-lg hidden-md profile-pic-header">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+                    <img alt="" class="img30 user-image-icon" src="/imgver.1496301546/img//defaultpp2.png">     
+                </a>
+                <ul class="dropdown-menu user-menu profile-xs">
+                    <li><a href="/mycourses?utm_source=blog&utm_medium=courses&utm_term=all-courses">My Courses</a></li>
+                    <li class="logged-in-customer hide"></li><li class="ga-allcourses"><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Courses</a></li>
+                    <li> <a href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=5c52961292" id="signin-logoutresp">Log Out</a> </li>
+                </ul>
+            </li>
+        </ul></div><div class="loggedout-usernav-wrapper hide"><a class="signin md-trigger" href="javascript:void(0)" data-modal="signin-modal" data-toggle="modal">Sign In</a><style>
+    .highlighterror input[type=text],
+    .highlighterror input[type=email],
+    .highlighterror input[type=password],
+    .highlighterror {
+        border-color: #ed1f24 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
+<!--googleon: all-->
+<div class="md-modal md-effect-1 newsigninsignup" id="signin-modal">
+    <div class="md-content">
+        <span id="signin_signup_cancel" class="md-close onclicktab pull-right">X</span>
+
+        <ul class="nav nav-tabs">
+            <li class="Signinspace active"><a class="onclicktab" data-toggle="tab" href="#LogIn"><span>Log In</span></a></li>
+            <li class="SignUpspace "><a class="onclicktab" data-toggle="tab" href="#SignUp"><span>Sign Up</span></a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="LogIn" class="tab-pane fade in active">
+                <div class="col-md-12 col-xs-12 signinformnew newsignclik">
+                    <form id="signinForm">
+                        <!--                        <form id="signinForm">-->
+                        <div class="alertnew" role="alert" >
+                            <span  id="signin_error_message" class="signin_formerror redalertnew" style="display: none;"><i class="fa fa-check-circle"></i>  Please enter a valid emailid</span>
+                        </div>
+                        <div class="form-group">
+                            <input id="inputName" type="email" class="form-control inputstyle emailnew inputNamesignup signinvalid" required autocomplete="off" placeholder="Email"  name="data[User][email]" value="" onkeyup="checkdisable();">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd" class="form-control inputstyle passwordnew masked" required autocomplete="off" placeholder="Password"  name="data[User][password]" value="">
+                            <div class="verficacheckeye" id="eye">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><a id="Forgotnew" href="javascript:void(0)" class="btn btn-link pull-left forgetpass">Forgot Password?</a>
+
+                            <button type="submit" class="bluebtn pull-right defdisablesignin ga-signin disabled"  id="signin-blog">Start Learning</button>
+                        </div>
+                    </form>
+                    <!--<div class="mobilealertnew green clearfix">
+                      <span class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i>  Verification Code sent to er.creator@gmail.com</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-12 col-xs-12 signinformnew forgetpassnew">
+                    <form id="resetcode">
+                        <div id="successmssg" class="alertnew" role="alert">
+                            <span id="messages"  class="greenalertnew hidden-xs"><i class="fa fa-check-circle"></i>  </span>
+                        </div>
+                        <div class="form-group">
+                            <input id="prefilledemail" type="email" disabled="disable" class="form-control inputstyle emailnew inputDisabled" required autocomplete="off" placeholder="Email">
+                            <input id="emailfield" type="hidden" class="form-control inputstyle"  name="data[User][email]">
+
+                            <!--<div class="verficacheck"><a href="" id="editemail">change ?</a></div>-->
+                        </div>
+                        <div class="form-group">
+                            <input id="otpfield" type="text" class="form-control inputstyle emailnew verifycheck" required autocomplete="off" placeholder="Verification code"  name="data[User][otpCode]">
+                            <input id="verificationfield" type="hidden" class="form-control inputstyle emailnew" required name="data[User][verification_code]">
+                            <div  class="verficacheck verifycheck"><div id="resendcode" href="javascript:void(0);" style="cursor: pointer;">resend ?</div></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="pwd2" class="form-control inputstyle passwordnew masked" required autocomplete="off" min=8 placeholder="New Password"  name="data[User][password]">
+                            <div class="verficacheckeye" id="eye2">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><!--<a id="Backnew" href="#" class="btn btn-link pull-left forgetpass">Back</a>-->
+
+                            <button id="passresetbutton" type="submit" class="bluebtn pull-right">reset password</button>
+                        </div>
+                    </form>
+                    <div class="notestarreg verifycheck">
+                        * Can't find the email? Check your Spam folder or Promotions tab for an email from no-reply@edureka.co. Send us an email at <a href="mailto:support@edureka.co">support@edureka.co</a> or call us at +91 88808 62004
+                    </div>
+                </div>
+            </div>
+            <div id="SignUp" class="tab-pane fade  ">
+
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center signinformnew signupformnew">
+
+                    <form id="signupForm">
+                        <div class="alertnew" role="alert">
+                            <span id="signup_error_message" class="signup_formerror redalertnew hidden-xs " style="display: none;"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input value="/blog/" name="data[User][pageurl]" id="pageurl_signup" type="hidden">
+                            <div class="form-control-wrapper"><input id="signupname" class="form-control inputstyle empty" placeholder="Name*" required="" autocomplete="off" name="data[User][name]" type="text"></div>
+                            <i data-bv-icon-for="data[User][name]" class="form-control-feedback fv-icon-no-label fa fa-close" style="display: block;"></i>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input  id="signupemail" class="form-control inputstyle  empty" placeholder="Email*" required="" autocomplete="off" name="data[User][email]" type="email"></div><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        </div>
+                        <input style="display:none;" name="hiddenname" type="text">
+                        <input style="display:none;" name="hiddenpassword" type="password">
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][mobile]" id="mobnum" class="form-control inputstyle empty" placeholder="Mobile Number*" required="" name="data[User][mobile]" type="text"></div><i data-bv-icon-for="data[User][mobile]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+
+                        </div>
+                        <div class="form-group has-feedback">
+
+                            <div class="form-control-wrapper">
+                                <input id="pwd3" class="form-control inputstyle passwordnew masked empty" required="" autocomplete="off" placeholder="Password more than 8 characters*" name="data[User][password]" type="password"></div><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                            <div class="verficacheckeye" id="eye3">show</div>
+                        </div>
+                        <p class="signupinfotext">
+                            By Signing up you agree to our <span><a class=" withripple" href="/terms-and-conditions" target="_blank">T&amp;C</a></span> and <span>
+                                <a class=" withripple" href="/privacy-policy" target="_blank">Privacy Policy</a></span>
+                        </p>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding spaceafterbutton">
+                            <button type="submit" class="bluebtn pull-right defdisablesignup ga-signup disabled">Create an account</button>
+                        </div>
+
+                    </form>
+                    <!--<div class="mobilealertnew red clearfix">
+                      <span class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobileredclass" class="mobilealertnew red clearfix" style="display:none;">
+        <span id="mobileredmsg" class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input    </span>
+    </div>
+    <div id="mobilegreenclass"class="mobilealertnew green clearfix" style="display:none;">
+        <span id="mobilegreenmsg" class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i> </span>
+    </div>
+</div>
+<div class="md-overlay"></div>
+<section>
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="capturemobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header signup-header">
+                    <h4 class="modal-title color-white">
+                        <span class="pull-left">
+                            WELCOME <label id="capturemobile_user_name"></label>
+                        </span>
+                        <span class="pull-right">                           
+                        </span>
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 linkedin-content">
+                            <h5 class="line-height23">It seems we don't have your phone number. Please share as it helps us to provide better customer service. Thank you!</h5>
+                            <form id="captureMobileForm" action="" method="post">
+                                <input type="hidden" name="data[User][email]" id="email_capturemobile">
+                                <input type="hidden" name="data[User][password]" id="password_capturemobile">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Mobile Number" required name="data[User][mobile]">
+                                </div>
+                                <!--                                <button type="button"  class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn">Continue</button>-->
+                                <button type="button" id="btnCaptureMobile" class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn" style="">Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--googleon: all--><div class="navbar-collapse collapse navbar-right" id="navbar" aria-expanded="false">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs"><!--
+                <li><a href="/instructors/add">For Instructors</a></li> -->
+                <li><a href="/all-courses?utm_source=blog&utm_medium=courses&utm_term=all-courses">All Course</a></li>
+            </ul>
+        </div></div>                </div>
+            </nav>
+        </section>
+    </header>
+<section >
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding">
+                <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 left-menu"> 
+    <div class="row left-menu-row">
+<div class="side-menu"><nav class="navbar navbar-default" role="navigation">
+<div class="side-menu-container side-menu-blog"><button type="button" class="navbar-toggle navbar-tog-open-close side-body"><span class="fa fa-bars"></span></button><div class="side-nav-title"><h2>Spark Tutorial Series</h2></div><ul class="nav navbar-nav cus-nav-scroll dropdown-menu-scrollbar">
+<li class="first-level "><a href="https://www.edureka.co/blog/spark-tutorial/"   data-currpage="spark-graphx">Spark Tutorial: Real Time Cluster Computing Framework</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/spark-streaming/"   data-currpage="spark-graphx">Spark Streaming Tutorial – Sentiment Analysis Using Apache Spark</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/spark-mllib/"   data-currpage="spark-graphx">Spark MLlib – Machine Learning Library Of Apache Spark</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/spark-sql-tutorial/"   data-currpage="spark-graphx">Spark SQL Tutorial – Understanding Spark SQL With Examples</a>
+</li>
+<li class="first-level active"><a href="https://www.edureka.co/blog/spark-graphx/" class="active-link"  data-currpage="spark-graphx">Spark GraphX Tutorial – Graph Analytics In Apache Spark</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/interview-questions/top-apache-spark-interview-questions-2016/"   data-currpage="spark-graphx">Top Apache Spark Interview Questions You Should Prepare For In 2017</a>
+</li>
+</ul></div></nav></div></div>
+</div>
+<!-- Right Panel ends -->
+                        <div class="col-lg-8 col-md-7 col-xs-12 col-sm-12 blogmobfull">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 bread-herohead">
+    <div class="herohead">
+        <div class="">
+            <div class="row">
+                                <div class="">
+                    <h6 class="breadcrumb-section hidden-xs ">
+                        <a class="text-bold text-normal underline-remove brdcrumclrinac" href="/blog">Home</a>
+                        <!--                        &nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog chevron-level-0"></i>&nbsp;&nbsp;
+                        <a class="text-bold text-normal underline-remove brdcrumclrac reset-filters post-type-level" href="/blog">Blogs&nbsp;&nbsp;</a>-->
+                        <i class="fa fa-chevron-right chevronblog chevron-level-1 ">&nbsp;&nbsp;</i>
+                        <a class="text-bold text-normal underline-remove brdcrumclrac post-type-breadcrum reset-filters " href="/blog">Blogs</a>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog  cat-level-breadcrum"></i>&nbsp;&nbsp;
+                        <span class="text-bold text-normal underline-remove brdcrumclrac cat-level-breadcrum cat-level-breadcrum-title ">Big Data Analytics</span>&nbsp;
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<!-- Top Navigation to be sent in blog phase 2 starts-->
+
+<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainnavigator">
+    <article class="navigatedetail col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <span class="blogall"><a href="https://www.edureka.co/blog//all"><i class="icon-Home_icon"></i></a></span>
+        <span class="bloghome"><a href="https://www.edureka.co/blog/">Blogs</a></span>
+        <span class="videohome"><a href="https://www.edureka.co/blog/videos">Videos</a></span>
+        <span class="interviewhome"><a href="https://www.edureka.co/blog/interview-questions">Interview Questions</a></span>
+    </article>
+</section>
+<!--Top Navigation to be sent in blog phase 2-->
+                            <section class="mainsecblog">
+                                <section class="blogmaincontainer">
+                                    <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding topsection">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogmainheading">
+        <h1 class="blogheading">
+            Spark GraphX Tutorial &#8211; Graph Analytics In Apache Spark        </h1>
+        <span class="recommendedsec clearfix"><p>
+                                                    <i class="fa fa-bookmark newbookmark"></i> Recommended by  19 users                            </p>
+        </span>
+        <div class="top-sec-infodetail">
+            <span class="authorblog"><a href="https://www.edureka.co/blog/author/sandeepdedureka-co/" title="Posts by Sandeep Dayananda" rel="author">Sandeep Dayananda</a></span>
+            <span class="dateblog">May 12, 2017</span> 
+             
+<div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>        </div>
+    </article>
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topimage">
+        <img class="blogimg" src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/Heroimage 1.jpg" alt="Spark GraphX Tutorial &#8211; Graph Analytics In Apache Spark" title="Spark GraphX Tutorial &#8211; Graph Analytics In Apache Spark">    </article>
+</section>                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 no-padding hidden-sm hidden-xs share-leftnav">
+                                            <div class="nav-stacked-social affix-top" data-spy="affix" data-offset-top="350" data-offset-bottom="400">
+                                                <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_1' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_1' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_1' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_1' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                            </div>
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 no-padding">
+                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogdetailsec">
+    <article class="col-md-9 col-lg-9 col-sm-9 col-xs-12 blogdescription"> 
+        <span class="AddtoBookmark"><a  href="https://www.edureka.co/blog/spark-graphx/" data-title="Spark GraphX Tutorial &#8211; Graph Analytics In Apache Spark">
+                <i class="icon-Add_to_bookmark"></i>
+                <span class="Bookmark-text"><span>Add to</span> Bookmark</span></a>
+        </span>
+
+            <div class="modal thispost-mail fade" id="emailpostpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content centered">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span></button>
+                    <div class="Mailpost">
+                        <span class="icon"><i class="icon-Mail_this_post"></i></span>
+                        <span class="Mailthispost">Email this post</span>
+                        <form class="email-me-the-post" method="post" novalidate="novalidate">
+                            <div class="input-name  ">
+                                <input type="hidden" name="contentId" value="46304">
+                                <input type="text" name="name" class="required" required placeholder="Enter Your Name" autocomplete="false">
+                                <div class="error-name">
+                                    Please enter a valid input.
+                                </div>
+                            </div>
+                            <div class="input-email ">
+                                <input type="text" class="email required" required name="emails" placeholder="Enter Email ID’s ( Separated by commas )"  autocomplete="false">
+                                <div class="error-email">
+                                    Please enter a valid email id or comma separated email id's.
+                                </div>
+                            </div>
+                            <button type="submit" class="Submit-mailpost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="Mailpost-thankyou">
+                        <i class="icon-success"></i>
+                        <span class="Mailthispost">The post has been successfully mailed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="EmailthisPost" data-toggle="modal" data-target="#emailpostpop">
+            <i class="icon-Mail_this_post"></i>
+            <span class="EmailthisPost-text">Email <Span>this Post</span></span>
+        </span> 
+        <span class="viewsblogsec">
+            <span class="viewscount details-page-views-count"><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 264</span>
+        </span>
+        <span class="commentsblogsec">
+            <a href="https://www.edureka.co/blog/spark-graphx/#comments-wrapper" class="commentcount">
+                <span><i class="icon-comments"></i></span>
+            </a>&nbsp;&nbsp;
+            <a class="disqus-comment-count" data-disqus-url="https://www.edureka.co/blog/spark-graphx/" href="https://www.edureka.co/blog/spark-graphx/#disqus_thread" class="commentcount">
+                <span>0</span>
+            </a>
+        </span>
+    </article>
+            <article class="col-md-3 col-lg-3 col-sm-3 col-xs-12 related-blog hidden-sm hidden-xs">
+            <ul class="pager">
+                <li><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="show-next-in-series"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </article>
+            <!-- <article class = "col-md-3 col-lg-3 col-sm-3 col-xs-12 downloadpdfblog">
+         <span class = "downloadpdf"></span>
+ </article> -->
+</section>                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogcontentsec">
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em>GraphX</em> is Apache Spark&#8217;s API for graphs and graph-parallel computation. GraphX unifies ETL (Extract, Transform &amp; Load) process, exploratory analysis and iterative graph computation within a single system. The usage of graphs can be seen in Facebook&#8217;s friends, LinkedIn&#8217;s connections, internet&#8217;s routers, relationships between galaxies and stars in astrophysics and Google&#8217;s Maps. Even though the concept of graph computation seems to be very simple, the applications of graphs is literally limitless with use cases in disaster detection, banking, stock market, banking and geographical systems just to name a few. Through this blog, we will learn the concepts of Spark GraphX, its features and components through examples and go through a complete use case of Flight Data Analytics using GraphX.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">We will be covering the following topics in this Spark GraphX blog:</span></p>
+<ol style="text-align: justify;">
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><a href="#What_Are_Graphs">What are Graphs?</a></span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><a href="#Graph_Use_Cases">Use Cases of Graph Computation</a></span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><a href="#What_Is_GraphX">What is Spark GraphX?</a></span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><a href="#Spark_GraphX_Features">Spark GraphX Features</a></span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><a href="#Understanding_GraphX_With_Examples">Understanding GraphX with Examples</a><a name="What_Are_Graphs"></a></span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><a href="#Use_Case_Flight_Data_Analysis">Use Case &#8211; Flight Data Analysis using GraphX</a></span></li>
+</ol>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">What are Graphs?</span></strong></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">A Graph is a mathematical structure amounting to a set of objects in which some pairs of the objects are related in some sense. These relations can be represented using edges and vertices forming a graph. The vertices represent the objects and the edges show the various relationships between those objects.</span></p>
+<p style="text-align: center;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><img class="aligncenter size-full wp-image-46355" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Graph-Concepts-Spark-GraphX-Tutorial-Edureka.png" alt="Graph Concepts - Spark GraphX Tutorial - Edureka" width="3398" height="189" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Graph-Concepts-Spark-GraphX-Tutorial-Edureka.png 3398w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Graph-Concepts-Spark-GraphX-Tutorial-Edureka-150x8.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Graph-Concepts-Spark-GraphX-Tutorial-Edureka-300x17.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Graph-Concepts-Spark-GraphX-Tutorial-Edureka-768x43.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Graph-Concepts-Spark-GraphX-Tutorial-Edureka-528x29.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Graph-Concepts-Spark-GraphX-Tutorial-Edureka-590x33.png 590w" sizes="(max-width: 3398px) 100vw, 3398px" /><span style="font-size: 12px;">Figure: </span></span></strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><span style="font-size: 12px;"><em>Spark GraphX Tutorial &#8211; Vertices, edges and triplets in graphs</em></span></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">In computer science, a graph is an abstract data type that is meant to implement the undirected graph and directed graph concepts from mathematics, specifically the field of graph theory. A graph data structure may also associate to each edge some <i>edge value</i>, such as a symbolic label or a numeric attribute (cost, capacity, length, <a name="Graph_Use_Cases"></a>etc.).</span></p>
+<p style="text-align: center;"><a class="maxbutton-12 maxbutton maxbutton-enroll-green-big" target="_blank" href="https://www.edureka.co/apache-spark-scala-training?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=spark-graphx"><span class='mb-text'>GET STARTED WITH SPARK</span></a></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Use Cases of Graph Computation</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The following use cases give a perspective into graph computation and further scope to implement other solutions using graphs.</span></p>
+<ol>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Disaster Detection System</strong>  <img class="aligncenter wp-image-46322" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Disaster-Detection-Spark-GraphX-Tutorial-Edureka.png" alt="Disaster Detection - Spark GraphX Tutorial - Edureka" width="358" height="83" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Disaster-Detection-Spark-GraphX-Tutorial-Edureka.png 878w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Disaster-Detection-Spark-GraphX-Tutorial-Edureka-150x35.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Disaster-Detection-Spark-GraphX-Tutorial-Edureka-300x70.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Disaster-Detection-Spark-GraphX-Tutorial-Edureka-768x178.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Disaster-Detection-Spark-GraphX-Tutorial-Edureka-528x123.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Disaster-Detection-Spark-GraphX-Tutorial-Edureka-590x137.png 590w" sizes="(max-width: 358px) 100vw, 358px" /></span></span>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Graphs can be used to detect disasters such as hurricanes, earthquakes, tsunami, forest fires and volcanoes so as to provide warnings to alert people.</span></p>
+</li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Page Rank </strong><img class="aligncenter wp-image-46324" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Page-Rank-Spark-GraphX-Tutorial-Edureka.png" alt="Page Rank - Spark GraphX Tutorial - Edureka" width="119" height="70" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Page-Rank-Spark-GraphX-Tutorial-Edureka.png 283w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Page-Rank-Spark-GraphX-Tutorial-Edureka-150x89.png 150w" sizes="(max-width: 119px) 100vw, 119px" /></span></span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Page Rank can be used in finding the influencers in any network such as paper-citation network or social media network.</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Financial Fraud Detection </strong><img class="aligncenter wp-image-46327" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Financial-Fraud-Detection-Spark-GraphX-Tutorial-Edureka.png" alt="Financial Fraud Detection - Spark GraphX Tutorial - Edureka" width="290" height="82" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Financial-Fraud-Detection-Spark-GraphX-Tutorial-Edureka.png 776w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Financial-Fraud-Detection-Spark-GraphX-Tutorial-Edureka-150x42.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Financial-Fraud-Detection-Spark-GraphX-Tutorial-Edureka-300x85.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Financial-Fraud-Detection-Spark-GraphX-Tutorial-Edureka-768x217.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Financial-Fraud-Detection-Spark-GraphX-Tutorial-Edureka-528x149.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Financial-Fraud-Detection-Spark-GraphX-Tutorial-Edureka-590x167.png 590w" sizes="(max-width: 290px) 100vw, 290px" /></span></span></span>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Graph analysis can be used to monitor financial transaction and detect people involved in financial fraud and money laundering.</span></p>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Business Analysis </strong><img class="aligncenter wp-image-46328" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Business-Analysis-Spark-GraphX-Tutorial-Edureka.png" alt="Business Analysis - Spark GraphX Tutorial - Edureka" width="277" height="89" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Business-Analysis-Spark-GraphX-Tutorial-Edureka.png 760w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Business-Analysis-Spark-GraphX-Tutorial-Edureka-150x48.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Business-Analysis-Spark-GraphX-Tutorial-Edureka-300x96.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Business-Analysis-Spark-GraphX-Tutorial-Edureka-528x170.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Business-Analysis-Spark-GraphX-Tutorial-Edureka-561x180.png 561w" sizes="(max-width: 277px) 100vw, 277px" /></span></span>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Graphs, when used along with Machine Learning, helps in understanding the customer purchase trends. E.g. Uber, McDonald&#8217;s, etc.</span></p>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Geographic Information Systems </strong><img class="aligncenter wp-image-46329" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Geographic-Information-System-Spark-GraphX-Tutorial-Edureka.png" alt="Geographic Information System - Spark GraphX Tutorial - Edureka" width="242" height="94" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Geographic-Information-System-Spark-GraphX-Tutorial-Edureka.png 785w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Geographic-Information-System-Spark-GraphX-Tutorial-Edureka-150x58.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Geographic-Information-System-Spark-GraphX-Tutorial-Edureka-300x117.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Geographic-Information-System-Spark-GraphX-Tutorial-Edureka-768x298.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Geographic-Information-System-Spark-GraphX-Tutorial-Edureka-528x205.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Geographic-Information-System-Spark-GraphX-Tutorial-Edureka-463x180.png 463w" sizes="(max-width: 242px) 100vw, 242px" /><br />
+</span></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Graphs are intensively used to develop functionalities on geographic information systems like watershed delineation and weather prediction.</span></p>
+</li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Google Pregel</strong> <img class="aligncenter wp-image-46330" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Google-Pregel-Spark-GraphX-Tutorial-Edureka.png" alt="Google Pregel - Spark GraphX Tutorial - Edureka" width="219" height="74" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Google-Pregel-Spark-GraphX-Tutorial-Edureka.png 450w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Google-Pregel-Spark-GraphX-Tutorial-Edureka-150x51.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Google-Pregel-Spark-GraphX-Tutorial-Edureka-300x101.png 300w" sizes="(max-width: 219px) 100vw, 219px" /></span></span></span>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Pregel is Google’s scalable and fault-tolerant platform with an API that is sufficiently flexible to express arbitrary graph<a name="What_Is_GraphX"></a> algorithms.</span></p>
+</li>
+</ol>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">What is Spark GraphX?</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em>GraphX</em> is the Spark API for graphs and graph-parallel computation. It includes a growing collection of graph algorithms and builders to simplify graph analytics tasks.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><img class="aligncenter size-full wp-image-46346" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Property-Graph-Spark-GraphX-Tutorial-Edureka-1.png" alt="Property Graph - Spark GraphX Tutorial - Edureka" width="2048" height="537" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Property-Graph-Spark-GraphX-Tutorial-Edureka-1.png 2048w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Property-Graph-Spark-GraphX-Tutorial-Edureka-1-150x39.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Property-Graph-Spark-GraphX-Tutorial-Edureka-1-300x79.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Property-Graph-Spark-GraphX-Tutorial-Edureka-1-768x201.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Property-Graph-Spark-GraphX-Tutorial-Edureka-1-528x138.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Property-Graph-Spark-GraphX-Tutorial-Edureka-1-590x155.png 590w" sizes="(max-width: 2048px) 100vw, 2048px" /><br />
+GraphX extends the Spark RDD with a Resilient Distributed Property Graph. </span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The property graph is a directed multigraph which can have multiple edges in parallel. Every edge and vertex have user defined properties associated with it. The parallel edges allow multiple <a name="Spark_GraphX_Features"></a>relationships between the same vertices.</span></p>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Spark GraphX Features</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The following are the features of Spark GraphX:</span></p>
+<ol>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Flexibility</strong>:<br />
+Spark GraphX works with both graphs and computations. GraphX unifies ETL (Extract, Transform &amp; Load), exploratory analysis and iterative graph computation within a single system. We can view the same data as both graphs and collections, transform and join graphs with RDDs efficiently and write custom iterative graph algorithms using the Pregel API.</span></span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Speed</strong>:<br />
+Spark GraphX provides comparable performance to the fastest specialized graph processing systems. It is comparable with the fastest graph systems while retaining Spark&#8217;s flexibility, fault tolerance and ease of use.</span></span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Growing Algorithm Library</strong>:<br />
+We can choose from a growing library of graph algorithms that Spark GraphX has to offer. Some of the popular algorithms are page rank, connected components, label propagation, SVD++, strongly connected components and <a name="Understanding_GraphX_With_Examples"></a>triangle count.</span></li>
+</ol>
+<h2 style="text-align: justify;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Understanding GraphX with Examples</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">We will now understand the concepts of Spark GraphX using an example. Let us consider a simple graph as shown in the image below. </span></p>
+<p style="text-align: center;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><img class="aligncenter size-full wp-image-46408" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/GraphX-Example-Spark-GraphX-Tutorial-Edureka.png" alt="GraphX Example - Spark GraphX Tutorial - Edureka" width="2598" height="734" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/GraphX-Example-Spark-GraphX-Tutorial-Edureka.png 2598w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/GraphX-Example-Spark-GraphX-Tutorial-Edureka-150x42.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/GraphX-Example-Spark-GraphX-Tutorial-Edureka-300x85.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/GraphX-Example-Spark-GraphX-Tutorial-Edureka-768x217.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/GraphX-Example-Spark-GraphX-Tutorial-Edureka-528x149.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/GraphX-Example-Spark-GraphX-Tutorial-Edureka-590x167.png 590w" sizes="(max-width: 2598px) 100vw, 2598px" /><span style="font-size: 12px;">Figure: </span></span></strong><span style="font-size: 12px;"><em><span style="font-family: verdana, geneva, sans-serif;">Spark GraphX Tutorial &#8211; Graph Example</span></em></span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Looking at the graph, we can extract information about the people (vertices) and the relations between them (edges). The graph here represents the Twitter users and whom they follow on Twitter. For e.g. Bob follows Davide and Alice on Twitter.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Let us implement the same using Apache Spark. First, we will import the necessary classes for GraphX.</span></p>
+<pre class="brush: scala; title: ; notranslate" title=""> 
+//Importing the necessary classes 
+import org.apache.spark._ 
+import org.apache.spark.rdd.RDD 
+import org.apache.spark.util.IntParam 
+import org.apache.spark.graphx._ 
+import org.apache.spark.graphx.util.GraphGenerators 
+</pre>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Displaying Vertices</strong>: </span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Further, we will now display all the names and ages of the users (vertices).</span></p>
+<pre class="brush: scala; title: ; notranslate" title="">
+val vertexRDD: RDD[(Long, (String, Int))] = sc.parallelize(vertexArray)
+val edgeRDD: RDD[Edge[Int]] = sc.parallelize(edgeArray)
+val graph: Graph[(String, Int), Int] = Graph(vertexRDD, edgeRDD)
+graph.vertices.filter { case (id, (name, age)) =&gt; age &gt; 30 }
+.collect.foreach { case (id, (name, age)) =&gt; println(s&quot;$name is $age&quot;)}
+</pre>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The output for the above code is as below:</span></p>
+<pre><span style="color: #008000;">David</span> is <span style="color: #0000ff;">42</span> 
+<span style="color: #008000;">Fran</span> is <span style="color: #0000ff;">50</span> 
+<span style="color: #008000;">Ed</span> is <span style="color: #0000ff;">55</span> 
+<span style="color: #008000;">Charlie</span> is <span style="color: #0000ff;">65</span></pre>
+<p style="text-align: center;"><a class="maxbutton-12 maxbutton maxbutton-enroll-green-big" target="_blank" href="https://www.edureka.co/apache-spark-scala-training?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=spark-graphx"><span class='mb-text'>LEARN SPARK FROM EXPERTS</span></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Displaying Edges</strong>: Let us look at which person likes whom on Twitter.</span></p>
+<pre class="brush: scala; title: ; notranslate" title="">
+for (triplet &lt;- graph.triplets.collect)
+{
+println(s&quot;${triplet.srcAttr._1} likes ${triplet.dstAttr._1}&quot;)
+}
+</pre>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The output for the above code is as below:</span></p>
+<pre><span style="color: #008000;">Bob</span> likes <span style="color: #008000;">Alice</span>
+<span style="color: #008000;">Bob</span> likes <span style="color: #008000;">David</span>
+<span style="color: #008000;">Charlie</span> likes <span style="color: #008000;">Bob</span>
+<span style="color: #008000;">Charlie</span> likes <span style="color: #008000;">Fran</span>
+<span style="color: #008000;">David</span> likes <span style="color: #008000;">Alice</span>
+<span style="color: #008000;">Ed</span> likes <span style="color: #008000;">Bob</span>
+<span style="color: #008000;">Ed</span> likes <span style="color: #008000;">Charlie</span>
+<span style="color: #008000;">Ed</span> likes <span style="color: #008000;">Fran</span></pre>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Now that we have understood the basics of GraphX, let us dive a bit deeper and perform some advanced computations on the same.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Number of followers</strong>: Every user in our graph has a different number of followers. Let us look at all the followers for every user.</span></p>
+<pre class="brush: scala; title: ; notranslate" title="">
+// Defining a class to more clearly model the user property
+case class User(name: String, age: Int, inDeg: Int, outDeg: Int)
+// Creating a user Graph
+val initialUserGraph: Graph[User, Int] = graph.mapVertices{ case (id, (name, age)) =&gt; User(name, age, 0, 0) }
+
+// Filling in the degree information
+val userGraph = initialUserGraph.outerJoinVertices(initialUserGraph.inDegrees) {
+case (id, u, inDegOpt) =&gt; User(u.name, u.age, inDegOpt.getOrElse(0), u.outDeg)
+}.outerJoinVertices(initialUserGraph.outDegrees) {
+case (id, u, outDegOpt) =&gt; User(u.name, u.age, u.inDeg, outDegOpt.getOrElse(0))
+}
+for ((id, property) &lt;- userGraph.vertices.collect) {
+println(s&quot;User $id is called ${property.name} and is liked by ${property.inDeg} people.&quot;)
+}
+</pre>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The output for the above code is as below:</span></p>
+<pre class="prettyprint lang-bsh"><span class="typ" style="color: #008000;">User</span> <span class="lit" style="color: #0000ff;">1</span><span class="pln"> is called </span><span class="typ" style="color: #008000;">Alice</span><span class="pln"> and is liked by </span><span class="lit" style="color: #0000ff;">2</span><span class="pln"> people</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">User</span> <span class="lit" style="color: #0000ff;">2</span><span class="pln"> is called </span><span class="typ" style="color: #008000;">Bob</span><span class="pln"> and is liked by </span><span class="lit" style="color: #0000ff;">2</span><span class="pln"> people</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">User</span> <span class="lit" style="color: #0000ff;">3</span><span class="pln"> is called </span><span class="typ" style="color: #008000;">Charlie</span><span class="pln"> and is liked by </span><span class="lit" style="color: #0000ff;">1</span><span class="pln"> people</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">User</span> <span class="lit" style="color: #0000ff;">4</span><span class="pln"> is called </span><span class="typ" style="color: #008000;">David</span><span class="pln"> and is liked by </span><span class="lit" style="color: #0000ff;">1</span><span class="pln"> people</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">User</span> <span class="lit" style="color: #0000ff;">5</span><span class="pln"> is called </span><span class="typ" style="color: #008000;">Ed</span><span class="pln"> and is liked by </span><span class="lit" style="color: #0000ff;">0</span><span class="pln"> people</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">User</span> <span class="lit" style="color: #0000ff;">6</span><span class="pln"> is called </span><span class="typ" style="color: #008000;">Fran</span><span class="pln"> and is liked by </span><span class="lit" style="color: #0000ff;">2</span><span class="pln"> people</span><span class="pun">.</span></pre>
+<p style="text-align: justify;"><strong><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">Oldest Followers</span></strong><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">: We can also sort the followers by their characteristics. Let us find the oldest followers of each user by age.</span></p>
+<pre class="brush: scala; title: ; notranslate" title="">
+// Finding the oldest follower for each user
+val oldestFollower: VertexRDD[(String, Int)] = userGraph.mapReduceTriplets[(String, Int)](
+// For each edge send a message to the destination vertex with the attribute of the source vertex
+ edge =&gt; Iterator((edge.dstId, (edge.srcAttr.name, edge.srcAttr.age))),
+ // To combine messages take the message for the older follower
+ (a, b) =&gt; if (a._2 &gt; b._2) a else b
+ )
+</pre>
+<p class="prettyprint lang-bsh"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">The output for the above code is as below:</span></p>
+<pre><span class="typ" style="color: #008000;">David</span><span class="pln"> is the oldest follower of </span><span class="typ" style="color: #008000;">Alice</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">Charlie</span><span class="pln"> is the oldest follower of </span><span class="typ" style="color: #008000;">Bob</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">Ed</span><span class="pln"> is the oldest follower of </span><span class="typ" style="color: #008000;">Charlie</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">Bob</span><span class="pln"> is the oldest follower of </span><span class="typ" style="color: #008000;">David</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">Ed</span><span class="pln"> does not have any followers</span><span class="pun">.</span>
+<span class="typ" style="color: #008000;">Charlie</span><span class="pln"> is the oldest follower of </span><a name="Use_Case_Flight_Data_Analysis"></a><span class="typ" style="color: #008000;">Fran</span><span class="pun">.</span>
+</pre>
+<h2 class="prettyprint lang-bsh"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><a name="z8"></a>Use Case: Flight Data Analysis using Spark GraphX</span></strong></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now that we have understood the core concepts of Spark GraphX, let us solve a real-life problem using GraphX. This will help give us the confidence to work on any Spark projects in the future.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Problem Statement</strong>: <em>To analyze Real-Time Flight data using Spark GraphX, provide near real-time computation results and visualize the results using Google Data Studio.</em></span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Use Case &#8211; Computations to be done</strong>:</span></p>
+<ol>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Compute the total number of flight routes</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Compute and sort the longest flight routes</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Display the airport with the highest degree vertex</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">List the most important airports according to PageRank</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">List the routes with the lowest flight costs</span></li>
+</ol>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">We will use Spark GraphX for the above computations and visualize the results using Google Data Studio.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Use Case &#8211; Dataset</strong>:</span></p>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><img class="aligncenter size-full wp-image-46652" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/US-Flight-Dataset-Spark-GraphX-Edureka.png" alt="US Flight Dataset - Spark GraphX - Edureka" width="1064" height="334" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/US-Flight-Dataset-Spark-GraphX-Edureka.png 1064w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/US-Flight-Dataset-Spark-GraphX-Edureka-150x47.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/US-Flight-Dataset-Spark-GraphX-Edureka-300x94.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/US-Flight-Dataset-Spark-GraphX-Edureka-768x241.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/US-Flight-Dataset-Spark-GraphX-Edureka-528x166.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/US-Flight-Dataset-Spark-GraphX-Edureka-573x180.png 573w" sizes="(max-width: 1064px) 100vw, 1064px" /><span style="font-size: 12px;"><strong>Figure:</strong> <em>Use Case &#8211; USA Flight Dataset </em></span></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Click here to download the complete dataset: <a href="https://goo.gl/n65As3" target="_blank"><span style="text-decoration: underline;"><em>USA Flight Dataset &#8211; GraphX &#8211; Edureka</em></span></a></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Use Case &#8211; Flow Diagram</strong></span>:</p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">The following illustration clearly explains all the steps involved in our Flight Data Analysis.</span></p>
+<p style="text-align: center;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong><img class="aligncenter size-full wp-image-46654" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Flow-Diagram-Spark-GraphX-Edureka.gif" alt="Flow Diagram - Spark GraphX - Edureka" width="1135" height="592" /></strong></span><span style="font-family: verdana, geneva, sans-serif; font-size: 12px;"><strong>Figure:</strong> <em>Use Case &#8211; Flow diagram of Flight Data Analysis using Spark GraphX</em></span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Use Case &#8211; Spark Implementation</strong></span>:</p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Moving ahead, now let us implement our project using Eclipse IDE for Spark.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Find the Pseudo Code below: </span></p>
+<pre class="brush: scala; title: ; notranslate" title="">
+//Importing the necessary classes
+import org.apache.spark._
+...
+import java.io.File
+
+object airport {
+ 
+ def main(args: Array[String]){
+
+//Creating a Case Class Flight
+case class Flight(dofM:String, dofW:String, ... ,dist:Int)
+
+//Defining a Parse String function to parse input into Flight class
+def parseFlight(str: String): Flight = {
+val line = str.split(&quot;,&quot;)
+Flight(line(0), line(1), ... , line(16).toInt)
+}
+val conf = new SparkConf().setAppName(&quot;airport&quot;).setMaster(&quot;local[2]&quot;)
+val sc = new SparkContext(conf) 
+//Load the data into a RDD 
+
+val textRDD = sc.textFile(&quot;/home/edureka/usecases/airport/airportdataset.csv&quot;)
+
+//Parse the RDD of CSV lines into an RDD of flight classes 
+val flightsRDD = Map ParseFlight to Text RDD
+
+//Create airports RDD with ID and Name
+val airports = Map Flight OriginID and Origin
+airports.take(1)
+
+//Defining a default vertex called nowhere and mapping Airport ID for printlns
+val nowhere = &quot;nowhere&quot;
+val airportMap = Use Map Function .collect.toList.toMap
+
+//Create routes RDD with sourceID, destinationID and distance
+val routes = flightsRDD. Use Map Function .distinct
+routes.take(2)
+
+//Create edges RDD with sourceID, destinationID and distance
+val edges = routes.map{( Map OriginID and DestinationID ) =&gt; Edge(org_id.toLong, dest_id.toLong, distance)}
+edges.take(1)
+
+//Define the graph and display some vertices and edges
+val graph = Graph( Airports, Edges and Nowhere )
+graph.vertices.take(2)
+graph.edges.take(2)
+
+//Query 1 - Find the total number of airports
+val numairports = Vertices Number
+
+//Query 2 - Calculate the total number of routes?
+val numroutes = Number Of Edges
+
+//Query 3 - Calculate those routes with distances more than 1000 miles
+graph.edges.filter { Get the edge distance )=&gt; distance &gt; 1000}.take(3)
+
+//Similarly write Scala code for the below queries
+//Query 4 - Sort and print the longest routes
+//Query 5 - Display highest degree vertices for incoming and outgoing flights of airports
+//Query 6 - Get the airport name with IDs 10397 and 12478
+//Query 7 - Find the airport with the highest incoming flights
+//Query 8 - Find the airport with the highest outgoing flights
+//Query 9 - Find the most important airports according to PageRank
+//Query 10 - Sort the airports by ranking
+//Query 11 - Display the most important airports
+//Query 12 - Find the Routes with the lowest flight costs
+//Query 13 - Find airports and their lowest flight costs
+//Query 14 - Display airport codes along with sorted lowest flight costs
+</pre>
+<p style="text-align: justify;"><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Click here to <a href="https://goo.gl/xUFqrk" target="_blank">get the full source code</a> of Flight Analysis using Apache Spark GraphX.</span></em></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>Use Case &#8211; Visualizing Results</strong>:</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">We will be using Google Data Studio to visualize our analysis. Google Data Studio is a product under Google Analytics 360 Suite. We will use Geo Map service to map the Airports on their respective locations on the USA map and display the metrics quantity.</span></p>
+<ol>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Display the total number of flights per Airport</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Display the metric sum of Destination routes from every Airport</span></li>
+<li style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Display the total delay of all flights per Airport<br />
+</span></li>
+</ol>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-46657" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Visualizing-Results-Spark-GraphX-Edureka.gif" alt="Visualizing Results - Spark GraphX - Edureka" width="700" height="429" /></p>
+<p style="text-align: center;"><a class="maxbutton-22 maxbutton maxbutton-certification-blue-big" target="_blank" href="https://goo.gl/xUFqrk"><span class='mb-text'>GET FLIGHT ANALYSIS SOURCE CODE</span></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now, this concludes the Spark GraphX blog. I hope you enjoyed reading it and found it informative. Do check out the next blog in our Apache Spark series on <strong><em><a href="https://www.edureka.co/blog/interview-questions/top-apache-spark-interview-questions-2016?utm_source=blog&amp;amp;utm_medium=content-link&amp;amp;utm_campaign=spark-graphx" target="_blank">Spark Interview Questions</a></em></strong> to become market ready in Apache Spark.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em>We recommend the following <span class="qlink_container"><a class="external_link tooltip_parent" href="https://www.youtube.com/watch?v=BQlgZaKvfac&amp;amp;list=PL9ooVrP1hQOGyFc60sExNX1qBWJyV5IMb" target="_blank" rel="noopener nofollow">Apache Spark Training | Flight Data Analysis video</a></span> from Edureka to begin with:</em></span></p>
+<div>
+<div>
+<h2 style="text-align: center;"><strong><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;">Apache Spark Training | Spark GraphX Flight Data Analysis | Edureka</span></strong></h2>
+<div id="schema-videoobject" class="video-container"><iframe src="//www.youtube.com/embed/BQlgZaKvfac?rel=0&amp;showinfo=0" width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen" data-mce-fragment="1"></iframe></div>
+</div>
+<div id="schema-videoobject" class="video-container"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"> </span></strong></div>
+</div>
+<p style="text-align: left;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><i>Got a question for us? Please mention it in the comments section and we will get back to you at the earliest. </i></span></p>
+<p style="text-align: center;"><span style="font-size: 12px; font-family: verdana, geneva, sans-serif;"> </span><a class="maxbutton-12 maxbutton maxbutton-enroll-green-big" target="_blank" href="https://www.edureka.co/apache-spark-scala-training?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=spark-graphx"><span class='mb-text'>GET SPARK CERTIFIED TODAY</span></a></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><i>If you wish to learn Spark and build a career in domain of Spark and build expertise to perform large-scale Data Processing using RDD, Spark Streaming, SparkSQL, MLlib, GraphX and Scala with Real Life use-cases, check out our interactive, live-online </i><em><strong><a href="https://www.edureka.co/apache-spark-scala-training?utm_source=blog&amp;amp;utm_medium=content-link&amp;amp;utm_campaign=spark-graphx" target="_blank">Apache Spark Certification Training</a> </strong>here, </em><i>that comes with 24*7 support to guide you throughout your learning period.</i></span></p>
+                                                    </p>
+                                                </article>
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        <div id="author-bio-box"><img alt='' src='https://secure.gravatar.com/avatar/cdbfe9d2d198794e0996fab7d94e8758?s=80&d=mm&r=g' srcset="https://secure.gravatar.com/avatar/cdbfe9d2d198794e0996fab7d94e8758?s=160&d=mm&r=g 2x" class='avatar avatar-80 photo' height='80' width='80' /><span class="author-name">About Sandeep Dayananda (<a href="https://www.edureka.co/blog/author/sandeepdedureka-co/">5 Posts</a>)</span><p>Sandeep Dayananda is a Research Analyst at Edureka. He has expertise in Big Data technologies like Hadoop & Spark, DevOps and Business Intelligence tools. He is passionate in bringing out creative solutions to existing business problems.</p><div class="bio-socials"></div></div><br/><div class="clear"></div>                                                    </p>
+                                                </article>
+                                                <div class="bot-shareoption">
+                                                    <span class="Shareon-bot">
+                                                        Share on
+                                                    </span>
+                                                    <div class='maxcollection maxcollection-1' data-collection='1'><span class='mb-collection-item item-24' data-doc-id='24_2' data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-25' data-doc-id='25_2' data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-26' data-doc-id='26_2' data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&#038;url=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span><span class='mb-collection-item item-27' data-doc-id='27_2' data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/spark-graphx/"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class='mb-text'><span class='share_count'></span></span></a></span></div>                                                </div>
+                                                                                                    <article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 related-blog next-blog-leftnav">
+                                                        <ul class="pager">
+                                                            <li class="pull-left"><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i> PREVIOUS</a></li>
+                                                            <li class="pull-right"><a href="#" class="show-next-in-series">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </article>
+                                                                                                    <section id="edu-related-blog-carousel-2" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Posts</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/spark-tutorial/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-Tutorial-Edureka.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Spark Tutorial: Real Time Cluster Computing Framework</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 1.2K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/apache-spark-vs-hadoop-mapreduce"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1.jpg" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Apache Spark vs Hadoop MapReduce</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 50.7K</div>
+                            </div>
+                        </article></a>
+                    </div><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/spark-mllib/"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Spark-MLlib-Tutorial-Edureka.jpg" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Spark MLlib &#8211; Machine Learning Library Of Apache Spark</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 371</div>
+                            </div>
+                        </article></a>
+                    </div></div>
+                    </article></section>
+                                                <!--Comments Area Single post-->
+                                                <section class="padcomments" >
+    <span class="comments"> Comments <div class="arrow-down"></div></span>
+    <span class="pull-right comment"> 0 Comments </span>
+</section>
+<section class="commsec" id="comments-wrapper">
+    
+<div id="disqus_thread">
+    </div>
+
+</section>	
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>	
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-12 col-sm-12 no-padding blog-sidepanel"> 
+    <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maincontainer detailpagesidebar" 
+             data-post_type="post" 
+             data-post_name="spark-graphx" >
+             <section id="edu-related-blogs-2" class="right-side-widget custom-edu-widgets widget_edu-related-blogs"><h3 class="widget-title"><span>Related Blogs</span></h3><ul class="edu-hiran custom-widget-listing related-blogs"><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/spark-tutorial/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-Tutorial-Edureka.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Spark Tutorial - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-Tutorial-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-Tutorial-Edureka-150x88.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-Tutorial-Edureka-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-Tutorial-Edureka-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-Tutorial-Edureka-513x300.png 513w, https://cdn.edureka.co/blog/wp-content/uploads/2017/05/Spark-Tutorial-Edureka-308x180.png 308w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/spark-tutorial/" class="custom-rel-article"><span>Spark Tutorial: Real Time Cluster Computing Framework<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/apache-spark-vs-hadoop-mapreduce" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1.jpg" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1.jpg 600w, https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1-300x175.jpg 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/12/b1-514x300.jpg 514w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/apache-spark-vs-hadoop-mapreduce" class="custom-rel-article"><span>Apache Spark vs Hadoop MapReduce<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/spark-mllib/" class="custom-rel-thumb"><img width="86" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Spark-MLlib-Tutorial-Edureka.jpg" class="attachment-550x50 size-550x50 wp-post-image" alt="Spark MLlib Tutorial - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Spark-MLlib-Tutorial-Edureka.jpg 815w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Spark-MLlib-Tutorial-Edureka-150x88.jpg 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Spark-MLlib-Tutorial-Edureka-300x175.jpg 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Spark-MLlib-Tutorial-Edureka-768x449.jpg 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Spark-MLlib-Tutorial-Edureka-514x300.jpg 514w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Spark-MLlib-Tutorial-Edureka-308x180.jpg 308w" sizes="(max-width: 86px) 100vw, 86px" /></a><a href="https://www.edureka.co/blog/spark-mllib/" class="custom-rel-article"><span>Spark MLlib &#8211; Machine Learning Library Of Apache Spark<span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/interview-questions/top-apache-spark-interview-questions-2016/" class="custom-rel-thumb"><img width="85" height="50" src="https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Apache-Spark-Interview-Questions-Edureka.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Apache Spark Interview Questions - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Apache-Spark-Interview-Questions-Edureka.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Apache-Spark-Interview-Questions-Edureka-150x88.png 150w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Apache-Spark-Interview-Questions-Edureka-300x176.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Apache-Spark-Interview-Questions-Edureka-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Apache-Spark-Interview-Questions-Edureka-513x300.png 513w, https://cdn.edureka.co/blog/wp-content/uploads/2017/04/Apache-Spark-Interview-Questions-Edureka-308x180.png 308w" sizes="(max-width: 85px) 100vw, 85px" /></a><a href="https://www.edureka.co/blog/interview-questions/top-apache-spark-interview-questions-2016/" class="custom-rel-article"><span>Top Apache Spark Interview Questions You Should Prepare For In...<span></a></article></li></ul></section><section id="edu-custom-subscribe-2" class="right-side-widget custom-edu-widgets widget_edu-custom-subscribe">        <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding Newsletter-sub">
+            
+                        <form id="subscribe-form" novalidate class="custom-subscribe-form-wrapper hide">
+                <div class="subscribesec">
+                                    <!--<div class="close-thissub"><i class="icon-cross"></i></div>	-->
+                    <div class="subscribesec-box">										
+                        <h4 class="clearfix subscribeblogtitle"><p><i class="icon-Mail_this_post"></i></p><span>Subscribe to get free Newsletter</span></h4>
+                        <section class="sectrendcom">
+                            <article class="relatedcontmain">
+                                <div class="input-group Subscribeinput">                              
+                                    <input name="subscription-mail" type="email" autocomplete="off" class="form-control " required placeholder="Enter Email"> 
+                                    <!-- Add classes successform and errorform to toggle the input form -->
+
+                                </div>
+                                <input type="hidden"  id="is_user_loggedin" value="0"/>
+                                <label id="loader" style="margin-left:120px;display:none" ><img src="https://cdn.edureka.co/blog/wp-content/themes/edu-hiran/img/loader.gif" /></label>
+
+                                <p class="errormessage"> Please provide a valid Email Id </p>
+                            </article>                         
+                        </section>  
+                    </div>
+                    <div class="subscribesec-success">
+                        <i class="icon-success"></i>
+                        <p class="successmessage" style="display: none;"> Thank you, your subscription is successful</p> 
+                        <p class="alreadysubscribed" style="display: none;"> You have already subscribed.</p> 
+                    </div>
+                </div>
+                <button type="submit" id="subscribe-button" class="btn subscribebtn successbutton">
+                    <div class="sub-news-letter">SUBSCRIBE</div></button>
+            </form>
+            <div class="sub-browse-letter show-after-success hide">
+                <a class="" href="/all-courses" target="_blank">BROWSE COURSES</a>
+            </div>
+        </section>
+        </section></section>
+</div>
+<!-- Right Panel ends -->
+</div></div></div>
+</section>
+
+<footer class="footer-new" id="footer_v2">
+        <div class="container">
+        <div class="row">
+            <div class="padding-xs-only clearfix">
+                <div class="panel-group no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="col-md-12 visible-xs accordion-head">
+
+                            <a data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" href="javascript:void(0)">
+                                <h3 class="no-margin footer-new-hd-lineht"><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></h3>
+                                <p class=" margin-vr5 grey-txt marg-btm-0-xs">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd.</p>
+                                <i class="fa fa-angle-up"></i>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+
+                        </div>
+                        <div id="collapse1" class="div-collapse collapse clearfix">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 item-padding">
+                                <h4>Edureka</h4>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/about-us">About us</a></li>
+                                    <li><a href="https://www.edureka.co/allmedia">News & Media</a></li>
+                                    <li><a href="https://www.edureka.co/contact-us">Contact us</a></li>
+                                    <li><a href="https://www.edureka.co/careers">Careers</a></li>
+                                </ul>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/blog/all">Blog</a></li>
+                                    <li><a href="https://www.edureka.co/reviews">Reviews</a></li>
+                                    <li><a href="https://www.edureka.co/terms-and-conditions">Terms & conditions</a></li>
+                                    <li><a href="https://www.edureka.co/privacy-policy">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Work with us </h4>
+                                <ul class="list-unstyled footer-menu">
+                                    <li><a href="https://www.edureka.co/instructors/add">Become  an Instructor</a></li>
+                                    <li><a href="https://www.edureka.co/hire-from-edureka">Hire from Edureka</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3  col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Follow us on </h4>
+                                <ul class="list-unstyled footer-social-icon">
+                                    <li><a class="fb" target="_blank" href="https://www.facebook.com/edurekaIN"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="tw" target="_blank" href="https://twitter.com/edurekaIN"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="in" target="_blank" href="https://www.linkedin.com/company/edureka"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="ut" target="_blank" href="https://www.youtube.com/user/edurekaIN"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 item-padding padding-lft-25 text-center-xs">
+                                <h4>Learn on the GO!</h4>
+                                <ul class="list-unstyled footer-menu-store">
+                                    <li><a target="_blank" href="https://itunes.apple.com/in/app/edureka/id1033145415?mt=8">
+                                            <img alt="appleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/applestorebtn.png"></a></li>
+                                    <li><a target="_blank" href="https://play.google.com/store/apps/details?id=co.edureka.app">
+                                            <img alt="googleplaystore" class="img-responsive" src="//cdn.edureka.co/imgver.1496301546/img/googleplaybtn.png"></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding border-top-half">
+                                <div class="padding-vr20 clearfix">
+                                    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-12 no-padding">
+                                        <h3 class="no-margin footer-new-hd-lineht"><a href=https://www.edureka.co><img src="//cdn.edureka.co/imgver.1496301546/img/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></a></h3>
+                                        <p class=" margin-vr5 grey-txt">&copy; 2014 Brain4ce Education Solutions Pvt. Ltd. All rights Reserved.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-7 col-xs-12 no-padding txt-marg-top text-xs-left">
+                                        <p class="grey-txt">"PMP®","PMI®", "PMI-ACP®" and "PMBOK®" are registered marks of the Project Management Institute, Inc. <br>
+                                            MongoDB®, Mongo and the leaf logo are the registered trademarks of MongoDB, Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<div class="footerbar">
+    <div class="container clearfix">
+        <div class="row">
+            <a href="javascript:void(0);" class="call-us">
+                <span><img src="//cdn.edureka.co/imgver.1496301546/img/phone-icon.png" alt="phoneicon"></span>
+                Call us on 
+                <span>1-800-275-9730 <i>(Toll Free)</i></span>
+                <span>+91 88808 62004</span>
+            </a>
+            <div class="dropdown pull-left hidden-xs">
+                <div class="bfh-selectbox country-style-footer triangle country-pop-small bfh-countries" data-country="IN" data-flags="true" data-filter="true">
+                    <input type="hidden" value="">
+                    <a class="bfh-selectbox-toggle res-popup" role="button" data-toggle="bfh-selectbox" href="#">
+                        <span class="bfh-selectbox-option input-medium" data-option="">
+                        </span>
+
+
+                    </a>
+                    <div class="bfh-selectbox-options">
+                        <input type="text" class="bfh-selectbox-filter">
+                        <div role="listbox">
+                            <ul role="option" class="dropdown-menu-scrollbar">
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="call-us-xs">
+            <h3>24 X 7 Customer Support
+                <a class="close-call" href="javascript:void(0);">X</a>
+            </h3>
+            <ul class="list-unstyled">
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/us-flag.png" alt="us flag"> 1-800-275-9730   (Toll Free)     </li>
+                <li><img src="//cdn.edureka.co/imgver.1496301546/img/ind-flag.png" alt="india flag"> +91 88808 62004</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                jQuery(function($) {
+                    function equalHeight(group) {
+                        tallest = 0;
+                        group.each(function() {
+                            thisHeight = $(this).height();
+                            if(thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        group.height(tallest);
+                    }
+
+                    equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+
+                    $(window).resize(function() {
+                        equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+                    });
+                });
+            </script>
+            <script type="text/javascript"> 
+				var fonts_loaded =[];
+			</script><!--email_off--><style type='text/css'>.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook{border-color:#000;box-shadow-color:#333;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon{text-align:center;padding-top:8px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff;font-size:21px}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-text{color:#fff}
+.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter{border-color:#000;box-shadow-color:#333;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff;font-size:22px}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-text{color:#fff}
+.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin{border-color:#000;box-shadow-color:#333;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff;font-size:22px}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-text{color:#fff}
+.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus{border-color:#000;box-shadow-color:#333;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff;font-size:22px}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-text{color:#fff}
+.maxcollection.maxcollection-1{display:inline-block;z-index:9999;margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px}.maxcollection.maxcollection-1 .mb-collection-item.item-24{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-25{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-26{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-27{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}
+.maxbutton-12.maxbutton.maxbutton-enroll-green-big{position:relative;text-decoration:none;display:inline-block;border-color:#438683;box-shadow-color:#438683;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(67, 134, 131, 1);-pie-background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(67, 134, 131, 1)), color-stop(1, rgba(67, 134, 131, 1)));background:-moz-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-o-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1))}.maxbutton-12.maxbutton:hover.maxbutton-enroll-green-big{border-color:#438683;box-shadow-color:#438683;background:rgba(67, 134, 131, 1);-pie-background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(67, 134, 131, 1)), color-stop(1, rgba(67, 134, 131, 1)));background:-moz-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-o-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1))}.maxbutton-12.maxbutton.maxbutton-enroll-green-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-12.maxbutton:hover.maxbutton-enroll-green-big .mb-text{color:#fff}
+.maxbutton-22.maxbutton.maxbutton-certification-blue-big{position:relative;text-decoration:none;display:inline-block;border-color:#3778b0;box-shadow-color:#333;width:280px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big{border-color:#3778b0;box-shadow-color:#333;background:rgba(55, 120, 176, 1);-pie-background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(55, 120, 176, 1)), color-stop(1, rgba(55, 120, 176, 1)));background:-moz-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:-o-linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1));background:linear-gradient(rgba(55, 120, 176, 1) 45%, rgba(55, 120, 176, 1))}.maxbutton-22.maxbutton.maxbutton-certification-blue-big .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-22.maxbutton:hover.maxbutton-certification-blue-big .mb-text{color:#fff}
+</style><!--/email_off-->
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushScala.js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var postasmail = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/fancyquote.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var videolib = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/plugins/ver.1496301546/custom-widgets/js/video-library.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/jquery.fitvids.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var fvpdata = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","nonce":"79d293a9a4","fitvids":"1","dynamic":"","overlay":"","opacity":"0.75","color":"b","width":"640"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/featured-video-plus/js/frontend.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var mb_ajax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/MaxButtons/js/min/front.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons_fonts.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/maxbuttons-pro/js/min/maxbuttons-pro-front.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/bootstrap.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/masonry.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/imagesloaded.pkgd.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/jquery.bootpag.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/nprogress.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/CustomScrollbar.min.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/owl.carousel.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0187-formValidation.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/0188-bootstrap.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/blog.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/modalEffects-related.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/mfb.js'></script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/signup.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var php_array = {"admin_ajax":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var wnm_custom = {"template_url":"\/blog\/wp-content\/themes\/edu-hiran"};
+var myAjax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var afp_vars = {"afp_nonce":"cfd9a2d70e","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","postID":"46304","single":"1"};
+var post_vars = {"postID":"46304","postType":"post"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//cdn.edureka.co/blog/assets/ver.1496301546/js/ajax-pagination.js'></script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.7.5","language":""},"disqusIdentifier":"46304 https:\/\/www.edureka.co\/blog\/?p=46304","disqusShortname":"edurekablog","disqusTitle":"Spark GraphX Tutorial \u2013 Graph Analytics In Apache Spark","disqusUrl":"https:\/\/www.edureka.co\/blog\/spark-graphx\/","options":{"manualSync":"1"},"postId":"46304"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/disqus.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"edurekablog"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.edureka.co/blog/wp-content/plugins/disqus-comment-system/media/js/count.js'></script>
+
+
+</body>
+</html>
+<!-- mfunc setPostViews(get_the_ID()); --><!-- /mfunc -->
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 1815/1907 objects using disk
+Page Caching using disk
+Content Delivery Network via Amazon Web Services: CloudFront: cdn.edureka.co
+Database Caching 30/78 queries in 0.020 seconds using disk
+
+ Served from: www.edureka.co @ 2017-06-09 16:51:00 by W3 Total Cache -->
