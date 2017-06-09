@@ -503,3 +503,14 @@ https://docs.cloud.databricks.com/docs/latest/databricks_guide/07%20Spark%20Stre
 
 https://github.com/gomex/docker-para-desenvolvedores
 
+
+
+https://github.com/apache/spark/blob/master/examples/src/main/java/org/apache/spark/examples/JavaWordCount.java
+https://github.com/kennycason/kumo
+https://github.com/adymimos/rWordCloud
+https://arnesund.com/2015/07/13/analyzing-popular-topics-in-my-twitter-timeline-using-apache-spark/
+https://docs.cloud.databricks.com/docs/latest/databricks_guide/07%20Spark%20Streaming/03%20Twitter%20Hashtag%20Count%20-%20Scala.html
+https://devpost.com/software/spark-mllib-twitter-sentiment-analysis
+https://hub.docker.com/r/p7hb/p7hb-docker-mllib-twitter-sentiment/
+https://github.com/P7h/Spark-MLlib-Twitter-Sentiment-Analysis
+
