@@ -275,8 +275,9 @@ System.out.println("A primeira linha contém: " + textos.get(0));
 sc.close();
 
 ==========
-===========
+==========
 ========== (apache spark java character counter)
+==========
 ==========
 
 https://gist.github.com/amithn/344a648b7471988d2472
@@ -353,3 +354,130 @@ public class CharacterCounterSparkJob {
 http://www.hadooptpoint.org/apache-spark-examples-on-character-count/
 
 https://stackoverflow.com/questions/38732846/count-number-of-characters-for-each-line-pyspark
+
+
+==== Java word cloud
+
+https://github.com/kennycason/kumo
+http://kennycason.com/posts/2014-07-03-kumo-wordcloud.html
+
+---
+
+https://www.cloudera.com/documentation/enterprise/5-5-x/topics/spark_develop_run.html
+https://www.cloudera.com/documentation/enterprise/5-5-x/topics/spark_develop_run.html#wordcount__fig_bfm_ddj_h5
+
+$ spark-submit --class com.cloudera.sparkwordcount.JavaWordCount \
+--master local --deploy-mode client --executor-memory 1g \
+--name wordcount --conf "spark.app.id=wordcount" \
+sparkwordcount-1.0-SNAPSHOT-jar-with-dependencies.jar hdfs://namenode_host:8020/path/to/inputfile.txt 2
+
+==> // word count (https://www.ashishpaliwal.com/blog/2015/01/learning-spark-with-examples-famous-word-count/)
+==> // count characters
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import org.apache.spark.api.java.*;
+import org.apache.spark.api.java.function.*;
+import org.apache.spark.SparkConf;
+import scala.Tuple2;
+
+public class JavaWordCount {
+  public static void main(String[] args) {
+
+    // create Spark context with Spark configuration
+    JavaSparkContext sc = new JavaSparkContext(new SparkConf().setAppName("Spark Count"));
+
+    // get threshold
+    final int threshold = Integer.parseInt(args[1]);
+
+    // read in text file and split each document into words
+    JavaRDD<String> tokenized = sc.textFile(args[0]).flatMap(
+      new FlatMapFunction() {
+        public Iterable call(String s) {
+          return Arrays.asList(s.split(" "));
+        }
+      }
+    );
+
+    // count the occurrence of each word
+    JavaPairRDD<String, Integer> counts = tokenized.mapToPair(
+      new PairFunction() {
+        public Tuple2 call(String s) {
+          return new Tuple2(s, 1);
+        }
+      }
+    ).reduceByKey(
+      new Function2() {
+        public Integer call(Integer i1, Integer i2) {
+          return i1 + i2;
+        }
+      }
+    );
+
+    // filter out words with fewer than threshold occurrences
+    JavaPairRDD<String, Integer> filtered = counts.filter(
+      new Function, Boolean>() {
+        public Boolean call(Tuple2 tup) {
+          return tup._2 >= threshold;
+        }
+      }
+    );
+
+    // count characters
+    JavaPairRDD<Character, Integer> charCounts = filtered.flatMap(
+      new FlatMapFunction<Tuple2<String, Integer>, Character>() {
+        @Override
+        public Iterable<Character> call(Tuple2<String, Integer> s) {
+          Collection<Character> chars = new ArrayList<Character>(s._1().length());
+          for (char c : s._1().toCharArray()) {
+            chars.add(c);
+          }
+          return chars;
+        }
+      }
+    ).mapToPair(
+      new PairFunction<Character, Character, Integer>() {
+        @Override
+        public Tuple2<Character, Integer> call(Character c) {
+          return new Tuple2<Character, Integer>(c, 1);
+        }
+      }
+    ).reduceByKey(
+      new Function2<Integer, Integer, Integer>() {
+        @Override
+        public Integer call(Integer i1, Integer i2) {
+          return i1 + i2;
+        }
+      }
+    );
+
+    System.out.println(charCounts.collect());
+  }
+}
+
+===
+https://www.cloudera.com/documentation/enterprise/5-5-x/topics/spark_mllib.html
+https://raw.githubusercontent.com/apache/spark/branch-1.5/examples/src/main/scala/org/apache/spark/examples/mllib/MovieLensALS.scala
+
+---
+
+Twitter_Hashtag_Analysis.ipynb
+
+==> https://github.com/arnesund/tw-hashtags/blob/master/Twitter_Hashtag_Analysis.ipynb
+
+==> https://github.com/ibm-cds-labs/spark.samples
+https://developer.ibm.com/clouddataservices/2016/01/15/real-time-sentiment-analysis-of-twitter-hashtags-with-spark/
+
+https://www.javacodegeeks.com/2016/04/spark-streaming-twitter-sentiment-analysis.html
+
+https://github.com/zezutom/spark-tweetalyzer
+
+https://databricks.gitbooks.io/databricks-spark-reference-applications/content/twitter_classifier/collect.html
+
+https://blog.rackspace.com/behind-the-curtain-twitter-sentiment-analysis-demo-sample-app-code
+==> https://github.com/rackerlabs/cloudbigdata-extras/tree/master/examples/twitter_sentiment_v2
+https://github.com/rackerlabs/cloudbigdata-extras/blob/master/examples/twitter_sentiment_v2/backend/src/main/scala/com/rackspace/spark/Sentiment.scala
+
+==> https://devpost.com/software/spark-mllib-twitter-sentiment-analysis
+
