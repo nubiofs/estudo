@@ -479,5 +479,22 @@ https://blog.rackspace.com/behind-the-curtain-twitter-sentiment-analysis-demo-sa
 ==> https://github.com/rackerlabs/cloudbigdata-extras/tree/master/examples/twitter_sentiment_v2
 https://github.com/rackerlabs/cloudbigdata-extras/blob/master/examples/twitter_sentiment_v2/backend/src/main/scala/com/rackspace/spark/Sentiment.scala
 
-==> https://devpost.com/software/spark-mllib-twitter-sentiment-analysis
+==> twitter-sentiment-analysis
+::FAZER::
+https://github.com/P7h/Spark-MLlib-Twitter-Sentiment-Analysis
+https://github.com/P7h/p7hb-docker-mllib-twitter-sentiment
+https://github.com/P7h/p7hb-docker-spark
+https://github.com/P7h/Spark-MLlib-Twitter-Sentiment-Analysis/wiki/Blog
+https://github.com/P7h/Spark-MLlib-Twitter-Sentiment-Analysis/wiki
+https://devpost.com/software/spark-mllib-twitter-sentiment-analysis
+https://hub.docker.com/r/p7hb/p7hb-docker-mllib-twitter-sentiment/
+
+::Para apresentacao::
+https://www.edureka.co/blog/category/big-data-nosql/
+https://www.edureka.co/blog/spark-streaming/
+https://www.edureka.co/blog/spark-sql-tutorial/?utm_source=blog&utm_medium=left-menu&utm_campaign=spark-streaming
+https://www.edureka.co/blog/spark-tutorial/?utm_source=blog&utm_medium=left-menu&utm_campaign=spark-sql-tutorial
+
+
+https://docs.cloud.databricks.com/docs/latest/databricks_guide/07%20Spark%20Streaming/03%20Twitter%20Hashtag%20Count%20-%20Scala.html
 
