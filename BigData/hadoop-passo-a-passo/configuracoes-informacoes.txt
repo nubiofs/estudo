@@ -1,0 +1,169 @@
+http://192.168.0.25/bitnami/index.html
+
+* acesso navegador:
+
+http://192.168.0.25/cluster/
+
+* Enable The SSH Server:
+
+Debian
+$ sudo rm -f /etc/ssh/sshd_not_to_be_run
+$ sudo systemctl enable ssh
+$ sudo systemctl start ssh
+
+* Disable The SSH Server:
+
+Debian
+$ sudo systemctl stop ssh
+$ sudo systemctl disable ssh
+
+* Configure The SSH Server To Support Key-Based Authentication:
+
+1) Log in to the server console as the bitnami user. ("bitnami" "bitnami")
+2) Create a key pair, consisting of a public and private key, as shown below. Set a long passphrase when prompted.
+
+$ ssh-keygen
+ Generating public/private rsa key pair.
+ Enter file in which to save the key (/home/bitnami/.ssh/id_rsa):
+ Enter passphrase (empty for no passphrase):
+ Enter same passphrase again:
+ Your identification has been saved in /home/bitnami/.ssh/id_rsa.
+ Your public key has been saved in /home/bitnami/.ssh/id_rsa.pub.
+ The key fingerprint is:
+ XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX bitnami@linux
+
+(This command should create two files named id_rsa and id_rsa.pub in the /home/bitnami/.ssh directory.)
+
+3) Copy the private key file named id_rsa to a secure location. Do not share this private key file.
+
+4) Transfer the contents of the public key file to the /home/bitnami/.ssh/authorized_keys file:
+
+$ cd /home/bitnami/.ssh
+$ cat id_rsa.pub >> /home/bitnami/.ssh/authorized_keys
+
+5) Edit the /etc/ssh/sshd_config and uncomment (or add if not already present) the following lines:
+
+RSAAuthentication yes
+PubkeyAuthentication yes
+
+6) In the same file, disable basic password authentication:
+
+ ChallengeResponseAuthentication no
+ PasswordAuthentication no
+ UsePAM no
+
+7) Restart the SSH server for the new configuration to take effect:
+
+$ sudo /etc/init.d/ssh force-reload
+
+8) (Na máquina cliente) Set the permissions for your private key file to 0600 using a command like the one below:
+
+9) (Na máquina cliente) Connect to the server using the following command:
+
+$ chmod 600 KEYFILE
+
+("KEYFILE" in .pem format for Linux and Mac OS X).
+
+$ ssh -i KEYFILE bitnami@100.101.102.103
+
+(Remember to replace KEYFILE in the previous commands with the path to your private key file (.pem), and 100.101.102.103 with the public IP address or hostname of your server.)
+
+Linux And Mac OS X
+To access the server on a specific port using an SSH tunnel, follow the steps below.
+
+i) Open a new terminal window on your local system
+
+ii) Run the following command to configure the SSH tunnel. Remember that LOCAL-PORT, REMOTE-PORT, USERNAME and SERVER-IP are placeholders for local port number, remote port number, server SSH username and remote server IP address, respectively and should be replaced with correct values. Enter your SSH password when prompted.
+
+$ ssh -N -L LOCAL-PORT:127.0.0.1:REMOTE-PORT USERNAME@SERVER-IP
+
+iii) if you are using a private key to connect to the server, use the following command instead, remembering to replace KEYFILE with the path to your private key:
+
+$ ssh -N -L LOCAL-PORT:127.0.0.1:REMOTE-PORT -i KEYFILE USERNAME@SERVER-IP
+
+While the tunnel is active, you should be able to access the server through the secure SSH tunnel you created, by browsing to http://127.0.0.1:LOCAL-PORT. Remember to replace LOCAL-PORT with the local port number specified.
+
+*****************************
+Configurações importantes :
+*****************************
+
+- Obtain Root Privileges
+
+$ sudo /opt/bitnami/ctlscript.sh status
+$ sudo su
+
+- Start Or Stop The Services:
+
+$ sudo /opt/bitnami/ctlscript.sh start
+$ sudo /opt/bitnami/ctlscript.sh stop
+
+- Obtain a list of available services and operations by running the script without any arguments:
+
+$ sudo /opt/bitnami/ctlscript.sh
+
+- to restart a single service, such as Apache only, by passing the service name as argument:
+
+$ sudo /opt/bitnami/ctlscript.sh restart apache
+
+- To see the current IP address, execute the ifconfig command at the server console after logging in:
+
+$ ifconfig
+
+- If no IP address is assigned, consider the various options below:
+
+$ sudo /etc/init.d/networking force-reload
+
+- An alternative approach is to configure the network manually and assign a static IP address to the virtual machine. 
+
+$ sudo ifconfig eth0 192.168.1.234 netmask 255.255.255.0 up 
+
+(With this configuration, the Bitnami application should be accessible from any host on the same network at the IP address 192.168.1.234.)
+
+- Open The Server Ports For Remote Acces
+
+(By default, the Bitnami virtual machines firewall is configured to allow access in any ports required by the application and SSH (usually ports 80, 443 and 22).
+
+$ sudo ufw allow PORT
+
+- Close The Server Ports And Deny Remote Access
+
+$ sudo ufw deny PORT
+
+- Change The Keyboard Layou:
+
+$ sudo dpkg-reconfigure keyboard-configuration
+
+- Enable Desktop Access
+
+(To allow desktop access for the bitnami user, follow these steps:)
+
+Para (debian) Install the gnome-core package:
+
+$ sudo apt-get update
+$ sudo apt-get install gnome-core
+
+- How To Upload Files To The Server With SFT
+
+NOTE: Bitnami applications can be found in /opt/bitnami/apps.
+NOTE: The steps in this section assume that the virtual machine's SSH server is enabled and running. Read instructions for enabling the SSH server.
+
+--> Usar "FileZilla"
+
+- Install And Configure Webmin
+
+(Webmin is a web-based interface for system administration. Using any modern web browser, it enables management of user accounts, Apache, DNS, file sharing and much more.)
+
+$ sudo apt-get install perl5 libnet-ssleay-perl
+$ tar -xzvf webmin-*
+$ cd webmin-*
+$ sudo sh setup.sh
+
+--> Open the default Webmin port of 10000 in the server firewall
+--> Once Webmin is installed, access it with the credentials set during the installation process by browsing to http://SERVER-IP:10000.
+
+
+* fontes:
+https://docs.bitnami.com/virtual-machine/apps/hadoop/
+https://docs.bitnami.com/virtual-machine/faq/#how-to-remotely-access-the-bitnami-application
+https://docs.bitnami.com/virtual-machine/faq/#connect_ssh
+https://docs.bitnami.com/virtual-machine/components/pagespeed/
