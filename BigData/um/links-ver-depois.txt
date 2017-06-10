@@ -30,3 +30,12 @@ http://wikipapers.referata.com/wiki/List_of_visualization_tools
 http://listen.hatnote.com/#nowelcomes
 https://github.com/hatnote/listen-to-wikipedia/blob/master/static/index.html
 https://sourceforge.net/projects/wikivis-um/?source=typ_redirect
+
+==>http://www.bmw-carit.com/blog/barefoot-release-an-open-source-java-library-for-map-matching-with-openstreetmap/
+https://github.com/bmwcarit/barefoot
+https://github.com/bmwcarit/barefoot/wiki
+
+==> https://raazesh-sainudiin.gitbooks.io/scalable-data-science/content/db/studentProjects/01_DillonGeorge/039_OSMMap2GraphX.html
+==> http://adrianulbona.github.io/2016/12/18/osm-parquetizer.html
+https://github.com/openstreetmap/osmosis
+https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/4082562773728035/2089274675795739/3712305628257488/latest.html

@@ -316,6 +316,13 @@ https://databricks.com/blog/2014/10/10/spark-petabyte-sort.html
 
 https://bigdatauniversity.com/
 https://www.udemy.com
+https://archive.bigdatauniversity.com/learn/hadoop/
+https://www.bigdatauniversity.com.br/courses/BDUPT/BD001PT/2015/info
+https://cognitiveclass.ai/courses/
+https://cognitiveclass.ai/courses/introduction-to-hadoop/
+https://courses.cognitiveclass.ai/courses/course-v1%3ABigDataUniversity%2BBD0101EN%2B2016_T2/
+https://courses.cognitiveclass.ai/courses/course-v1:BigDataUniversity+BD0111EN+2016/courseware/abee0aa450b24b97bbf39a3272a06891/9971509d64984f8ebd7aeeea770aa394/
+https://courses.cognitiveclass.ai/courses/course-v1%3ABigDataUniversity%2BBD0115EN%2B2016/
 
 ==> https://bigdatauniversity.com/learn/big-data/
 ==> https://www.udemy.com/hadoopstarterkit/learn/v4/content
