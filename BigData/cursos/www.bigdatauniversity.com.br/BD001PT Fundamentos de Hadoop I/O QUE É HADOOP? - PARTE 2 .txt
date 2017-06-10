@@ -1,0 +1,65 @@
+Eclipse é um popular IDE doado pela IBM para a comunidade open source.
+Lucene é uma biblioteca de ferramentas de busca de texto escrita em Java.
+Hbase é um banco de dados do Hadoop. Hive fornece ferramentas de armazenamento de dados para extrair,
+transformar e carregar dados, e então, consultar esses dados armazenados em
+arquivos do Hadoop. Pig é uma linguagem de nível avançado que gera
+códigos MapReduce para analisar enormes conjuntos de dados.
+Jaql é uma linguagem condicional para JavaScript open notation.
+ZooKeeper é um serviço de configuração centralizado e registro de nomes para
+grandes sistemas de distribuição. Avro é um sistema de serialização de dados.
+UIMA é uma arquitetura para desenvolvimento, descoberta, composição
+e lançamento de análises de dados não-estruturados.
+Vamos agora conversar sobre exemplos do Hadoop em ação.
+Mais cedo em 2011, Watson, um super computador desenvolvido pela IBM competiu
+em um popular programa de perguntas e respostas chamado Jeopardy. Naquele concurso, Watson foi vitorioso
+derrotando os dois jogadores mais vencedores do Jeopardy.
+Aproximadamente 200 milhões de páginas de texto foram colocadas usando o Hadoop para
+distribuir toda essa carga de informações na memória.
+Uma vez que as informações foram carregadas, Watson usou outras tecnologias para
+buscas e análises avançadas. Na indústria de telecomunicações, nós temos
+a China Mobile, uma empresa que construiu uma cluster Hadoop para realizar coleta
+de dados em registros de chamadas. China Mobile estava produzindo 5-8TB desses
+registros diariamente. Usando o sistema baseado no Hadoop, eles foram capazes de processar
+10 vezes mais dados em comparação quando estavam usando o sistema antigo, e por
+um quinto do custo. Na mídia, nós temos o New York Times o qual
+queria hospedar em seu website, todos os artigos de domínio público de
+1851 até 1922. Eles converteram artigos a partir de 11 milhões de imagens
+para 1.5TB de documentos em PDF. Isso foi implementado por um funcionário
+que executou o trabalho em 24 horas em 100 instâncias do cluster Amazon EC2 Hadoop
+a um custo muito baixo. No campo da tecnologia, nós temos novamente a IBM
+com o IBM ES2, uma empresa de busca de tecnologias baseadas no Hadoop, no Lucene
+e em Jaql. ES2 é projetado para resolver desafios únicos
+de buscas corporativas como o uso de um vocabulário especifíco de empresas,
+abreviações e acrônimos.
+ES2 pode realizar tarefas de coleta para construir bibliotecas de acrônimos, padrões
+de expressões comuns, e regras de geoclassificação.
+Existem também muitas empresas de internet There are also many internet or social network ou redes sociais usando o Hadoop
+como Yahoo, Facebook, Amazon, eBay, Twitter, StumbleUpon,
+Rackspace, Ning, AOL, e assim por diante. Yahoo é, claro, o usuário de maior
+produção com uma aplicação executando um cluster Hadoop consistindo em aproxidamente
+10,000 máquinas Linux.
+Yahoo é também o maior contribuinte para o projeto Hadoop open source.
+Agora, o Hadoop não é uma arma mágica que resolve todos os tipos de problemas.
+O Hadoop não é bom para processar transações devido a sua falta de acesso
+aleatório. Ele não é bom quando o trabalho não pode ser paralelizado
+ou quando existem dependências dentro dos dados, ou seja, o registro
+um deve ser processado antes do registro dois.
+Ele não é bom para acesso de dados em baixas latências. Não é bom para processar muitos arquivos pequenos
+apesar de haver trabalhos sendo feitos nessa área, por exemplo, IBM’s Adaptive
+MapReduce. E ele não é bom para cálculos intensos
+com poucos dados. Agora vamos em frente, e falar sobre as soluções
+Big Data. As soluções Big Data vão além do Hadoop.
+Elas podem integrar soluções analíticas para a mistura para derivar importantes
+informações que podem combinar dados estruturados com dados novos
+não-estruturados. Soluções Big data podem também serer usadas para derivar
+informações a partir de dados em movimento.
+Por exemplo, a IBM tem um produto chamado InfoSphere Streams que pode ser
+usado para rapidamente determinar o sentimento do cliente em relação à um novo produto baseado
+nos comentários no Facebook ou Twitter. Finalmente, vamos terminar essa apresentação com
+um último pensamento: Computação nas Nuvens tem obtido um tremendo rastro nos
+últimos anos, e ela é uma combinação perfeita para as soluções Big Data.
+Usando a nuvem, um cluster Hadoop pode ser configurado em minutos, sob demanda,
+e pode executar pelo tempo necessário sem ter que pagar mais
+do que é usado. Isso é o fim desse vídeo. Obrigado por
+assistir. Por favor continue com as outras unidades desse curso.
+Aqui está uma lista das marcas que podem ter sido usadas nessa apresentação.

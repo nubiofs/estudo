@@ -1,0 +1,88 @@
+0
+00:00:00,787 --> 00:00:04,151
+- [Narrator] Hello, and welcome to Big Data University.
+
+1
+00:00:04,151 --> 00:00:06,188
+In this course, you will get answers
+
+2
+00:00:06,188 --> 00:00:10,000
+to fundamental questions such as what is Big Data?
+
+3
+00:00:10,000 --> 00:00:11,990
+Where is Big Data coming from?
+
+4
+00:00:11,990 --> 00:00:15,488
+And, how can businesses derive value from it?
+
+5
+00:00:15,488 --> 00:00:18,190
+The syllabus goes beyond the hype of Big Data
+
+6
+00:00:18,190 --> 00:00:20,905
+to talk about adoption, and the skills required
+
+7
+00:00:20,905 --> 00:00:24,279
+for data scientists in the Big Data era.
+
+8
+00:00:24,279 --> 00:00:28,120
+We will cover the Vs that have come to define Big Data,
+
+9
+00:00:28,120 --> 00:00:31,453
+velocity, volume, variety, and veracity,
+
+10
+00:00:32,323 --> 00:00:37,011
+as well as the final, and perhaps most important V, value.
+
+11
+00:00:37,011 --> 00:00:40,143
+We will look for some use cases for Big Data, and cover
+
+12
+00:00:40,143 --> 00:00:43,904
+important considerations, like governance and security.
+
+13
+00:00:43,904 --> 00:00:47,863
+We will also provide a high-level introduction to Hadoop.
+
+14
+00:00:47,863 --> 00:00:49,708
+We discuss what it is, and why
+
+15
+00:00:49,708 --> 00:00:52,921
+it is relevant to a Big Data discussion.
+
+16
+00:00:52,921 --> 00:00:54,461
+Once you have taken this course,
+
+17
+00:00:54,461 --> 00:00:56,978
+you will be familiar with the terminology used
+
+18
+00:00:56,978 --> 00:00:59,993
+in Big Data conversations, and you will have an idea
+
+19
+00:00:59,993 --> 00:01:03,942
+of how Big Data can be applied in different industries.
+
+20
+00:01:03,942 --> 00:01:08,306
+Thank you for taking the time to learn more about Big Data.
+
+21
+00:01:08,306 --> 00:01:09,556
+Happy learning.
+

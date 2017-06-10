@@ -1,0 +1,54 @@
+o Hadoop. Meu nome é Warren Pettit. Nesse vídeo, explicaremos o que é o Hadoop
+e o que é Big Data. Definiremos alguns projetos open source relacionados
+ao Hadoop e daremos alguns exemplos do Hadoop em ação.
+Imagine esse cenário: você tem 1GB de dados que você precisa processar.
+Os dados são armazenados em um banco de dados relacional em seu computador e
+o mesmo não tem problema em lidar com esse carregamento.
+Então sua empresa começa a crescer muito rapidamente, e aqueles dados aumentam para
+10GB. E então 100GB.
+E você começa a alcançar os limites do seu atual computador.
+Então você amplia o sistema investindo em um computador maior, e você então está tranquilo
+por alguns meses. Quando seus dados aumentam para 10TB, e então 100TB,
+você está rapidamente chegando aos limites daquele computador.
+Além disso, te solicitam para alimentar seu aplicativo com dados
+não-estruturados vindo de fontes como Facebook, Twitter, leitores RFID,
+sensores, e assim por diante. Sua gestão precisa obter informações de
+dados relacionais e de dados não-estruturados e quer
+as mesmas o mais rápido possível.
+O que você deve fazer? O Hadoop pode ser a solução! O que é o Hadoop?
+O Hadoop é um projeto open source da Apache Foundation.
+Ele é um framework escrito em Java originalmente desenvolvido por  Doug Cutting
+que nomeou o mesmo com o nome do elefante de brinquedo do seu filho. O Hadoop usa o MapReduce do Google e as tecnologias
+do Google File System como sua base.
+Ele é optimizado para manusear grandes quantidades de dados os quais podem ser
+estruturados, não-estruturados ou semi-estruturados, usando hardware commodity,
+que é, relativamente computadores baratos. Esse processamento paralelo massivo é feito com
+ótima performance. O Hadoop replica seus dados através de múltiplos
+computadores, de modo que se um deles falhar, os dados são processados em um dos
+outros computadores. É uma operação de processamento de cargas massivas
+de dados, então o tempo de resposta não é imediato.
+O Hadoop não é apropriado para trabalhos de processamento de transações online
+onde os dados são acessados aleatoriamente em dados estruturados como em um banco de dados
+relacional. Também, o Hadoop não é adequado para processamentos
+analíticos online ou trabalhos de sistemas de suporte de decisões onde os dados
+são acessados sequencialmente em dados estruturados como em um banco de dados relacional,
+para gerar relatórios que provem inteligência de negócios.
+A partir da versão 2.2 do Hadoopt, atualizações não são possíveis, mas anexações são
+possíveis. O Hadoop é usado para Big Data. Ele complementa
+OnLine Transaction Processing e OnLine Analytical Processing.
+Ele não é uma substituição para um sistema de banco de dados relacional.
+Então, o que é Big Data? Com todos os dispositivos disponíveis hoje para
+dados, como leitores RFID, microfones, cameras, sensores, e
+assim por diante, nós estamos vendo uma explosão de dados sendo coletados no mundo inteiro.
+Big Data é um termo usado para descrever enormes quantidades de dados (também conhecidas
+como datasets) que podem ser não-estruturados, e crescem tanto e muito rapidamente que
+é difícil gerenciar com banco de dados comuns ou analisar com ferramentas de estatísticas.
+Outras estatísticas que mostram exemplos dessa explosão de dados são:
+Existem mais de 2 bilhões de usuários de internet no mundo hoje em dia,
+e em 2014 haverão 7.3 bilhões de celulares ativos.
+O Twitter processa 7TB de dados diariamente, e 500TB de dados são
+processados pelo Facebook todos os dias. Curiosamente, aproximadamente 80% de todos
+os dados são não-estruturados. Com essa quantidade massiva de dados, os negócios
+requerem agilidade, confiabilidade, introspecção profunda de dados.
+Portanto, as soluções Big Data baseadas no Hadoop e outros programas
+analíticos estão se tornando cada vez mais relevantes.

@@ -1,0 +1,74 @@
+Nome da Transcrição: O que é Hadoop?
+
+Olá a todos e sejam bem-vindos! Meu nome é Akmal Chaudhri.
+
+Neste vídeo vamos explicar o que é o Hadoop e o conceito de Big Data.
+
+Imagine a seguinte situação: Você tem 1 GB de dados a serem processados.
+
+Os dados estão armazenados em um banco de dados relacional em seu computador e esta máquina não tem problema para manipular todo esse conteúdo.
+
+Então, a sua empresa se expande rapidamente e o seu banco de dados chega a 10 GB.
+
+E depois chega a 100GB.
+
+A partir deste ponto, o computador usado para armazenar todas essas informações passa a trabalhar próxima ao seu limite de processamento.
+
+Devido a esta nova situação, você redimensiona sua infraestrutura com um computador com mais capacidade de processamento. Entretanto, este novo redimensionamento só lhe permitirá trabalhar com tranquilidade por mais alguns meses.
+
+Quando os seus dados cresce até 10TB, e depois 100TB.
+
+E você começa a se aproximar rapidamente dos limites de processamento por mais uma vez.
+
+Além disso, a partir de agora lhe solicitam que alimente a sua aplicação com dados não estruturados provenientes de fontes como Facebook, Twitter, leitores de RFID, sensores, e outros.
+
+A gerência da companhia pretende usar as informações de ambos os bancos dados (relacionais e não estruturados), e quer estas  informações o mais rápido possível.
+
+O que você deve fazer? A tecnologia Hadoop pode ser a resposta!
+
+O Hadoop é um projeto open source da Fundação Apache.
+
+É um framework escrito em Java originalmente desenvolvido por Doug Cutting, que deu o nome do elefante de brinquedo de seu filho para esta tecnologia.
+
+O Hadoop usa as tecnologias Google's MapReduce e o Google File Sytem em sua estrutura.
+
+Ele foi otimizado para trabalhar com grandes quantidades de dados que podem ser dados estruturados, dados não estruturados ou dados semi estruturados, utilizando o conceito de hardware como commodity, isto é, computadores relativamente baratos.
+
+Este processamento paralelo é feito com um ótimo desempenho. Entretanto, pela operação ser feita em lotes e manipular grandes quantidades de dados, o tempo de resposta não é imediato.
+
+
+A partir da versão 0.20.2 do Hadoop, não é possível fazer atualizações mas a partir da versão 0,21 será possível criar apêndices.
+
+O Hadoop duplica os dados em vários computadores, assim, se algum dos computadores falharem, os dados serão automaticamente processados por outro computador.
+
+O Hadoop não é indicado para processamento de transações on-line, onde os dados são acessados aleatoriamente em bancos de dados estruturados como num banco de dados relacional.
+
+Hadoop, não é indicado para aplicações de processamento analítico on-line (OLAP) ou aplicações em sistemas de suporte de decisão (DSS), onde os dados são acessados de forma sequencial em banco de dados estruturados, como num banco de dados relacional,
+
+para gerar relatórios que forneçam suporte a inteligência de negócios (BI).
+
+Hadoop é indicado para grande quantidades de dados ou Big Data. Ele complementa o processamento de transações on-line e o processamento analítico on-line.
+
+Ele NÃO é um substituto para um sistema de banco de dados relacional.
+
+Então, o que são grandes quantidades de dados ou Big Data?
+
+Com a enorme quantidade de dados, atualmente, gerada pelos mais diferentes dispositivos como: leitores de RFID, microfones, câmeras, sensores, e outros; vemos uma explosão na geração de dados pelo mundo afora.
+
+O termo Big Data é usado para descrever grandes lotes de dados (também conhecido como datasets ou conjuntos de dados) que podem ser dados não estruturados,
+
+e crescer de forma tão rápida e volumosa que se torna difícil o seu gerenciamento através do uso de banco de dados convencionais ou ferramentas estatísticas.
+
+Além disso, podemos apresentar outras estatísticas interessantes que demonstram essa explosão de dados gerados pelo mundo afora como: a existência de mais de 2 bilhões de usuários da internet atualmente,
+
+a existência de mais de 4,6 bilhões de telefones celulares em 2011,
+
+o processamento de 7TB de dados pelo Twitter todos os dias,
+
+e o processamento 10 TB de dados pelo Facebook todos os dias.
+
+Curiosamente, cerca de 80% destes dados são desestruturados.
+
+Com essa quantidade gigantesca de dados, as empresas demandam por uma análise mais rápida, confiável, e mais profunda nos dados.
+
+Portanto, as soluções do tipo Big Data baseadas em Hadoop e/ou outros software de análise estão se tornando cada vez mais relevante.
