@@ -3,8 +3,10 @@ http://192.168.0.25/bitnami/index.html
 * acesso navegador:
 
 http://192.168.0.25/cluster/
+ou
+http://192.168.0.27/cluster/
 
-* Enable The SSH Server:
+* Enable The SSH Server (debian virtual):
 
 Debian
 $ sudo rm -f /etc/ssh/sshd_not_to_be_run
@@ -16,6 +18,25 @@ $ sudo systemctl start ssh
 Debian
 $ sudo systemctl stop ssh
 $ sudo systemctl disable ssh
+
+>>* SSH entre host e hospedeiro (virtualbox)
+>>
+>>- No Ubuntu (host):
+>>
+>>Selecione a Virtual Machine > Configurações > Rede 
+>>
+>>
+>>     Configure o adaptador como NAT
+>>     Clique em Redirecionamento de Portas
+>>
+>>definir as seguintes configurações:
+>>
+>>IP do hospedeiro (Sua máquina): 127.0.0.1
+>>Porta do hospedeiro(Sua máquina): 2222
+>>IP do Convidado (Máquina Virtual): 10.0.2.15 
+>>Porta do Convidado (Máquina Virtual): 22
+>>
+>>$ ssh bitnami@127.0.0.1 -p 2222
 
 * Configure The SSH Server To Support Key-Based Authentication:
 
@@ -76,6 +97,8 @@ i) Open a new terminal window on your local system
 ii) Run the following command to configure the SSH tunnel. Remember that LOCAL-PORT, REMOTE-PORT, USERNAME and SERVER-IP are placeholders for local port number, remote port number, server SSH username and remote server IP address, respectively and should be replaced with correct values. Enter your SSH password when prompted.
 
 $ ssh -N -L LOCAL-PORT:127.0.0.1:REMOTE-PORT USERNAME@SERVER-IP
+
+>> $ sudo ssh -N -L 22:127.0.0.1:22 bitnami@192.8.0.28
 
 iii) if you are using a private key to connect to the server, use the following command instead, remembering to replace KEYFILE with the path to your private key:
 
