@@ -514,3 +514,20 @@ https://devpost.com/software/spark-mllib-twitter-sentiment-analysis
 https://hub.docker.com/r/p7hb/p7hb-docker-mllib-twitter-sentiment/
 https://github.com/P7h/Spark-MLlib-Twitter-Sentiment-Analysis
 
+===> (Test Drive Data Science Virtual Machine for Linux (Ubuntu) - por Microsoft -- Azure Marketplace)
+https://azuremarketplace.microsoft.com/pt-br/marketplace/apps/microsoft-ads.linux-data-science-vm-ubuntu/manage/testdrive?tab=Overview&signInModalType=1&testDrive=true&instanceId=8a34133a-20b8-4083-b67b-22451d078d5b
+https://ctlabsn.blob.core.windows.net/7f987c4eca2946ea91414942dda41738/demo%5Clinux-dsvm-testdrive%5Cartifact%5Ctutorialdocument%5Cdocument1.pdf
+
+https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-data-science-virtual-machine-overview
+
+--> https://dsvmtdl2icrk2dxz6xk.westcentralus.cloudapp.azure.com:8000/hub/login
+(Seu Test Drive está pronto
+"7 horas 42 minutos restantes"
+Your test drive is available. Access your server at dsvmtdl2icrk2dxz6xk.westcentralus.cloudapp.azure.com with username dsvm and password Dsvm@l2icrk2d.)
+
+https://dsvmtdl2icrk2dxz6xk.westcentralus.cloudapp.azure.com:8000/hub/home
+
+https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-data-science-process-hive-walkthrough
+https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-data-science-virtual-machine-overview
+
+
