@@ -22,3 +22,20 @@ http://elmo.sbs.arizona.edu/sandiway/sudoku/examples.html
 
 /org/apache/hadoop/examples/dancing/
 
+===========
+
+osgeo@osgeo-VirtualBox:~/hadoop/hadoop-2.8.0-1/hadoop/share/hadoop/mapreduce$ ../../../bin/hadoop jar hadoop-mapreduce-examples-2.8.0.jar sudoku ./temp/puzzle1.dta 
+Solving ./temp/puzzle1.dta
+8 5 1 3 9 2 6 4 7 
+4 3 2 6 7 8 1 9 5 
+7 9 6 5 1 4 3 8 2 
+6 1 4 8 2 3 7 5 9 
+5 7 8 9 6 1 4 2 3 
+3 2 9 4 5 7 8 1 6 
+9 4 7 2 8 6 5 3 1 
+1 8 5 7 3 9 2 6 4 
+2 6 3 1 4 5 9 7 8 
+
+Found 1 solutions
+
+
