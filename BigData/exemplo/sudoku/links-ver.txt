@@ -16,6 +16,9 @@ www.7sudoku.com/very-difficult
 www.extremesudoku.info/
 http://www.sudokusolver.co.uk/challenge1.html
 
+-- (The "Unsolvable" 11)
+http://elmo.sbs.arizona.edu/sandiway/sudoku/unsolvable11.html
+
 http://elmo.sbs.arizona.edu/sandiway/sudoku/examples.html
 
 * Exemplo dentro do hadoop (hadoop-mapreduce-examples-2.8.0-sources.jar):
@@ -38,4 +41,118 @@ Solving ./temp/puzzle1.dta
 
 Found 1 solutions
 
+===========
 
+osgeo@osgeo-VirtualBox:~/hadoop/hadoop-2.8.0-1/hadoop/share/hadoop/mapreduce$ ../../../bin/hadoop jar hadoop-mapreduce-examples-2.8.0.jar sudoku ./temp/challenge1.dta 
+Solving ./temp/challenge1.dta
+1 2 6 4 3 7 9 5 8 
+8 9 5 6 2 1 4 7 3 
+3 7 4 9 8 5 1 2 6 
+4 5 7 1 9 3 8 6 2 
+9 8 3 2 4 6 5 1 7 
+6 1 2 5 7 8 3 9 4 
+2 6 9 3 1 4 7 8 5 
+5 4 8 7 6 9 2 3 1 
+7 3 1 8 5 2 6 4 9 
+
+Found 1 solutions
+
+===========
+
+osgeo@osgeo-VirtualBox:~/hadoop/hadoop-2.8.0-1/hadoop/share/hadoop/mapreduce$ ../../../bin/hadoop jar hadoop-mapreduce-examples-2.8.0.jar sudoku ./temp/unsolvable\ 8.dta 
+Solving ./temp/unsolvable 8.dta
+6 5 2 3 4 8 9 1 7 
+8 7 9 2 1 5 4 3 6 
+4 1 3 7 6 9 2 8 5 
+5 6 4 1 3 2 8 7 9 
+9 2 7 5 8 6 1 4 3 
+3 8 1 9 7 4 5 6 2 
+7 3 5 4 2 1 6 9 8 
+1 9 8 6 5 7 3 2 4 
+2 4 6 8 9 3 7 5 1 
+
+Found 1 solutions
+
+=======
+=== Programa Java comum para solucionar
+=======
+
+https://bob-carpenter.github.io/games/sudoku/java_sudoku.html
+
+$ javac Sudoku.java
+
+$ java -cp . Sudoku  014 023 037 069 088 \
+125 143 211 263 306 342 357 404 427 461 483 \
+535 544 589 622 673 745 764 805 824 851 862 876
+
+ou
+
+$ java -cp . Sudoku  014 023 037 069 088 125 143 211 263 306 342 357 404 427 461 483 535 544 589 622 673 745 764 805 824 851 862 876
+
+ou Para Melhor para entender
+
+$ 02963357460@serpro-1455337:~/estudo.git/BigData/exemplo/sudoku$ java -cp . Sudoku \
+ 018 034 052 076 \
+ 113 124 169 171 \
+ 209 216 278 284 \
+ 332 341 356     \
+ 533 545 557     \
+ 608 614 677 685 \
+ 712 726 761 773 \
+ 819 837 851 874 \
+ ;
+
+ * <pre>
+ *     0 1 2   3 4 5   6 7 8
+ *    -----------------------
+ * 0 |   8   | 4   2 |   6   |
+ * 1 |   3 4 |       | 9 1   |
+ * 2 | 9 6   |       |   8 4 |
+ *    -----------------------
+ * 3 |       | 2 1 6 |       |
+ * 4 |       |       |       |
+ * 5 |       | 3 5 7 |       |
+ *   -----------------------
+ * 6 | 8 4   |       |   7 5 |
+ * 7 |   2 6 |       | 1 3   |
+ * 8 |   9   | 7   1 |   4   |
+ *    -----------------------
+ * </pre>
+
+ * <pre>
+ * % java -cp . Sudoku 018 034 052 076 \
+ *                     113 124 169 171 \
+ *                     209 216 278 284 \
+ *                     332 341 356     \
+ *                     533 545 557     \
+ *                     608 614 677 685 \
+ *                     712 726 761 773 \
+ *                     819 837 851 874 \
+ * </pre>
+
+
+xxxxxxxxxxxx
+xxxxxxxxxxxx
+(ALGORITMO PARA GERAR UM SUDOKU NXN VÁLIDO.)
+https://simasware.wordpress.com/2009/10/08/algoritmo-para-gerar-um-sudoku-nxn-valido/
+
+
+zzzzzzzzzzzzz
+zzzzzzzzzzz MUITO BOM PARA VARIOS EXEMPLOS N X N
+zzzzzzzzzz
+
+===> http://heinerkuecker.de/Sudoku.html
+
+http://heinerkuecker.de/sudoku_16_x_16_block_4_x_4.html
+
+http://heinerkuecker.de/sudoku_42_x_42_block_7_x_6.html
+
+--> http://heinerkuecker.de/sudoku_49_x_49_block_7_x_7_0_bottom.html
+
+
+++++
+
+
+osgeo@osgeo-VirtualBox:~/hadoop/hadoop-2.8.0-1/hadoop/share/hadoop/mapreduce$ ../../../bin/hadoop jar hadoop-mapreduce-examples-2.8.0.jar sudoku ./temp/sudoku_16_x_16_block_4_x_4\ -\ com\ interrogacao.dta
+
+Found 80 solutions
