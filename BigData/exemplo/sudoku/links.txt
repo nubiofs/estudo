@@ -1,0 +1,24 @@
+* links:
+
+https://en.wikipedia.org/wiki/Pentomino
+https://www.mkyong.com/hadoop/how-to-solve-sudoku-using-hadoop/
+http://hanishblogger.blogspot.com.br/2012/12/how-to-run-examples-of-hadoop.html
+https://docs.microsoft.com/pt-br/azure/hdinsight/hdinsight-hadoop-run-samples-linux
+https://docs.microsoft.com/pt-br/azure/hdinsight/hdinsight-hadoop-linux-use-ssh-unix
+https://docs.microsoft.com/pt-br/azure/hdinsight/hdinsight-apps-use-edge-node#access-an-edge-node
+https://en.wikipedia.org/wiki/Sudoku
+
+http://elmo.sbs.arizona.edu/sandiway/sudoku/examples.html
+http://elmo.sbs.arizona.edu/sandiway/sudoku/h1p.html#example1
+
+* Extreme Sudoku - Difficult Sudoku Puzzles and Solver:
+www.7sudoku.com/very-difficult
+www.extremesudoku.info/
+http://www.sudokusolver.co.uk/challenge1.html
+
+http://elmo.sbs.arizona.edu/sandiway/sudoku/examples.html
+
+* Exemplo dentro do hadoop (hadoop-mapreduce-examples-2.8.0-sources.jar):
+
+/org/apache/hadoop/examples/dancing/
+
