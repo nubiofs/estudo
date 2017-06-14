@@ -27,3 +27,7 @@ http://g1.globo.com/tecnologia/noticia/alphago-inteligencia-artificial-do-google
 
 (Training DQN on Atari games)
 ===> https://github.com/deepmind/dqn
+
+https://github.com/deepmind/dnc
+https://www.tensorflow.org/
+https://github.com/deepmind/learning-to-learn
