@@ -1,0 +1,29 @@
+https://deepmind.com/research/alphago/
+https://blog.google/topics/machine-learning/alphago-machine-learning-game-go/
+https://events.google.com/alphago2017/
+
+--
+https://deepmind.com/research/open-source/
+https://deepmind.com/research/open-source/open-source-environments/
+https://deepmind.com/research/open-source/open-source-datasets/
+https://deepmind.com/research/open-source/open-source-code/
+https://deepmind.com/blog/open-sourcing-deepmind-lab/
+https://github.com/deepmind/lab
+https://deepmind.com/blog/reinforcement-learning-unsupervised-auxiliary-tasks/
+https://deepmind.com/research/alphago/alphago-vs-alphago-self-play-games/
+https://deepmind.com/research/open-source/open-source-code/
+https://en.wikipedia.org/wiki/AlphaGo
+--
+
+https://tecnoblog.net/190868/computador-google-jogo-go/
+https://www.publico.pt/2017/05/23/tecnologia/noticia/num-jogo-de-go-google-volta-a-marcar-pontos-para-a-inteligencia-artificial-1773167
+http://revistacriatica.com.br/programa-do-google-vence-o-campeao-mundial-do-jogo-go/
+
+http://super.abril.com.br/tecnologia/robo-do-google-perde-jogo-para-humano-mas-ganha-o-campeonato-mesmo-assim/
+http://gizmodo.uol.com.br/inteligencia-artificial-google-go-imbativel/
+
+Noticia atual:
+http://g1.globo.com/tecnologia/noticia/alphago-inteligencia-artificial-do-google-vence-desafio-de-go-contra-melhor-jogador-do-mundo.ghtml
+
+(Training DQN on Atari games)
+===> https://github.com/deepmind/dqn
