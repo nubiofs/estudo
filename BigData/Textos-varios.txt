@@ -188,6 +188,38 @@ https://canaltech.com.br/coluna/cloud-computing/Big-Data-e-Cloud-Computing/
 O conteúdo do Canaltech é protegido sob a licença Creative Commons (CC BY-NC-ND). Você pode reproduzi-lo, desde que insira créditos COM O LINK para o conteúdo original e não faça uso comercial de nossa produção.
 
 
+Fortunately, scalability and
+simplicity are not mutually exclusive—you just need to take a different approach. Big
+Data systems use many machines working in parallel to store and process data
+
+
+HDFS is optimally designed for batch processing, which provides a high throughput of data access,
+rather than a low latency of data access. Applications that run on HDFS have large datasets. A typi-
+cal fi le in HDFS can be hundreds of gigabytes or more in size, and so HDFS of course supports large
+fi les.
+
+Hadoop is a single functional distributed system that works directly with clustered machines in
+order to read the dataset in parallel and provide a much higher throughput. Consider Hadoop as a
+power house single CPU running across clustered and low cost machines.
+
+MapReduce will allow
+its users to process unlimited amounts of data of any type that’s stored in HDFS by dividing work-
+loads into multiple tasks across servers that are run in parallel.
+
+The YARN Infrastructure (Yet Another Resource Negotiator) is the framework responsible for pro-
+viding the computational resources (memory, CPUs, etc.) needed for executing applications.
+
+The YARN framework in Hadoop 2 allows
+workloads to share cluster resources dynamically between a variety of processing frameworks,
+including MapReduce, Impala, and Spark.
+
+HDFS provides several types of interfaces for fi lesystem users. The most basic one is the command-
+line tool included in Hadoop HDFS. Command-line tools can be separated into two categories: the
+fi lesystem shell interface and the admin tool for HDFS.
+
+HDFS can store any type of data, including text data in binary format, including even image
+or audio fi les. HDFS was initially and currently developed to be used by MapReduce. So, the
+fi le format that fi ts to the MapReduce or Hive workload is usually used.
 
 
 

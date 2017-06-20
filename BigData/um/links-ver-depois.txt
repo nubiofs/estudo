@@ -39,3 +39,14 @@ https://github.com/bmwcarit/barefoot/wiki
 ==> http://adrianulbona.github.io/2016/12/18/osm-parquetizer.html
 https://github.com/openstreetmap/osmosis
 https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/4082562773728035/2089274675795739/3712305628257488/latest.html
+
+
+===================
+
+https://examples.javacodegeeks.com/enterprise-java/apache-hadoop/apache-hadoop-hue-tutorial/
+https://www.packtpub.com/mapt/book/big_data_and_business_intelligence/9781782161080/2/ch02lvl1sec26/introducing-hue
+https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-hue-linux
+https://docs.microsoft.com/pt-br/azure/hdinsight/hdinsight-hadoop-hue-linux
+https://github.com/cloudera/hue
+https://github.com/cloudera/hue/tree/master/tools/docker
+https://blogs.msdn.microsoft.com/cloud_solution_architect/2016/03/06/provisioning-a-cloudera-hadoop-cluster-on-azure/
