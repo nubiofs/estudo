@@ -324,6 +324,8 @@ https://courses.cognitiveclass.ai/courses/course-v1%3ABigDataUniversity%2BBD0101
 https://courses.cognitiveclass.ai/courses/course-v1:BigDataUniversity+BD0111EN+2016/courseware/abee0aa450b24b97bbf39a3272a06891/9971509d64984f8ebd7aeeea770aa394/
 https://courses.cognitiveclass.ai/courses/course-v1%3ABigDataUniversity%2BBD0115EN%2B2016/
 
+https://elements.heroku.com/addons/citus
+
 ==> https://bigdatauniversity.com/learn/big-data/
 ==> https://www.udemy.com/hadoopstarterkit/learn/v4/content
 clenubio@gmail.com
