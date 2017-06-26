@@ -335,6 +335,21 @@ http://www.metistream.com/comparing-hadoop-mapreduce-spark-flink-storm/
 https://www.quora.com/What-is-the-difference-between-Apache-Flink-and-Apache-Spark/answer/Radhika-K-10
 https://www.thomashenson.com/ultimate-big-data-battle-batch-processing-vs-streaming-processing/
 
+https://beam.apache.org/
+http://apex.apache.org/
+
+https://www.linkedin.com/pulse/100-open-source-big-data-architecture-papers-anil-madan
+
+
+https://amsterdam.luminis.eu/2016/05/23/jumpstarting-stream-processing-with-kafka-and-flink/
+xxxxxxxxxxxxx
+(https://www.confluent.io/blog/real-time-stream-processing-the-next-step-for-apache-flink/)
+What about the Lambda and Kappa architectures?
+
+When talking about streaming, the Lambda architecture is an oft-mentioned concept. The Lambda architecture uses a batch processor for the “heavy lifting”, and a stream processor in order to keep up with the fresh data, taking care of the updates that the batch processor did not have time to deal with. While the Lambda architecture philosophy contains several concepts that are extremely useful when building large-scale services, we believe that the specific use of a batch and stream processor in this manner is to some extent an artifact of stream processors not being powerful enough when Lambda was proposed.
+
+This is also the idea behind the Kappa architecture, which advocates using a stream processor for all processing. Flink is exactly this, a stream processor that surfaces both a batch and a streaming API, which are both executed by the underlying stream processor. However, we have observed that there are certain additions needed to the Kappa architecture.
+xxxxxxxxxxxxx
 
 ==> https://bigdatauniversity.com/learn/big-data/
 ==> https://www.udemy.com/hadoopstarterkit/learn/v4/content
