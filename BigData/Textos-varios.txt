@@ -197,6 +197,19 @@ HDFS is optimally designed for batch processing, which provides a high throughpu
 rather than a low latency of data access. Applications that run on HDFS have large datasets. A typi-
 cal fi le in HDFS can be hundreds of gigabytes or more in size, and so HDFS of course supports large
 fi les.
+==> VER 
+https://stackoverflow.com/questions/16718095/high-throughput-vs-low-latency-in-hdfs
+https://stackoverflow.com/questions/30049989/why-hdfs-not-preferred-with-applications-that-require-low-latency?rq=1
+
+"HDFS is optimized to access batches of data set quicker (high throughput), rather then particular records in that data set (low latency)"
+
+"Low latency data access:  I hit the enter key (or submit button) and I
+expect results within seconds at most.  My database query time should be
+sub-second.
+High throughput of data:  I want to scan millions of rows of data and count
+or sum some subset.  I expect this will take a few minutes (or much longer
+depending on complexity) to complete.  Think of more batch style jobs."
+"Fast in terms of Hadoop means processing TBs of data in a relatively very small time(maybe a few hours) and not processing a few MBs in milliseconds."
 
 Hadoop is a single functional distributed system that works directly with clustered machines in
 order to read the dataset in parallel and provide a much higher throughput. Consider Hadoop as a

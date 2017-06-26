@@ -326,6 +326,16 @@ https://courses.cognitiveclass.ai/courses/course-v1%3ABigDataUniversity%2BBD0115
 
 https://elements.heroku.com/addons/citus
 
+
+http://data-flair.training/blogs/big-data-history-use-cases/
+http://data-flair.training/blogs/hadoop-vs-spark-vs-flink-comparison/
+https://www.digitalocean.com/community/tutorials/an-introduction-to-big-data-concepts-and-terminology
+https://www.digitalocean.com/community/tutorials/hadoop-storm-samza-spark-and-flink-big-data-frameworks-compared
+http://www.metistream.com/comparing-hadoop-mapreduce-spark-flink-storm/
+https://www.quora.com/What-is-the-difference-between-Apache-Flink-and-Apache-Spark/answer/Radhika-K-10
+https://www.thomashenson.com/ultimate-big-data-battle-batch-processing-vs-streaming-processing/
+
+
 ==> https://bigdatauniversity.com/learn/big-data/
 ==> https://www.udemy.com/hadoopstarterkit/learn/v4/content
 clenubio@gmail.com
