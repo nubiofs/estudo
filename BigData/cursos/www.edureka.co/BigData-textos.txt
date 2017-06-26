@@ -129,3 +129,81 @@ First Google faced the problem of bigdata and researched and released the white-
 Later inspired by GFS and Mapreduce papers Doug Cutting and team lead to a open source Framework “HADOOP” by yahoo.
 
 Now Facebook, Linkedin, ebay, Hortonworks, Cloudera etc have contributed to the Hadoop project.
+
+* What is Hadoop?
+
+Hadoop is a framework that allows you to first store Big Data in a distributed environment so that you can process it parallely. There are basically two components in Hadoop:
+
+The first one is HDFS for storage (Hadoop distributed File System) that allows you to store data of various formats across a cluster. The second one is YARN, it is nothing but a processing unit of Hadoop. It allows parallel processing of data i.e. stored across the HDFS.
+
+HDFS creates an abstraction of resources, let me simplify it for you. Similar as virtualization, you can see HDFS logically as a single unit for storing Big Data, but actually you are storing your data across multiple nodes in a distributed fashion. Here, you have master-slave architecture.
+
+In HDFS, Namenode is a master node and Datanodes are slaves. Namenode contains the metadata about the data stored in Data nodes, like which data block is stored in which data node, where are the replications of the data block kept etc. The actual data is stored in Data Nodes.
+
+I also want to add, we actually replicate the data blocks present in Data Nodes, and by default, the replication factor is 3. Since we are using commodity hardware and we know the failure rate of these hardwares are pretty high, so if one of the DataNodes fails, HDFS will still have the copy of those lost data blocks. That’s the reason we need to replicate the data block. You can configure replication factor based on your requirements.
+
+* Hadoop-as-a-Solution
+
+- The first problem is storing Big data. HDFS solved it, let’s know how.
+
+HDFS provides a distributed way to store Big data. Your Data is stored in blocks in data nodes and you specify the size of each block. Basically, if you have 512MB of data and you have configured HDFS such that it will create 128 MB of data blocks. So HDFS will divide data into 4 blocks as 512/128=4 and store it across different DataNodes, it will also replicate the data blocks on different DataNodes.
+
+It focuses on horizontal scaling instead of vertical scaling. You can always add some extra data nodes to HDFS cluster as and when required, instead of scaling up the resources of your data nodes. Let me summarize it for you basically for storing 1 TB of data I don’t need a 1TB system. You can instead do it on multiple 128GB systems or even less.
+
+- Next problem was storing the variety of data. This problem is also addressed by HDFS.
+
+With HDFS you can store all kinds of data whether it is structured, semi-structured or unstructured. Since in HDFS, there is no pre-dumping schema validation. And it also follows write once and read many model. Due to this, you can just write the data once and you can read it multiple times for finding insights.
+
+- the third challenge was accessing & processing the data faster. Yes, this is one of the major challenges with Big Data. In order to solve it, we move processing to data and not data to processing. What does it mean? Instead of moving data to the master node and then processing it. In YARN, the processing logic is sent to the various slave nodes & then data is processed parallely across different slave nodes. Then the processed results are sent to the master node where the results is merged and the response is sent back to the client.
+
+* When to use Hadoop ? 
+
+Hadoop is used for:
+
+    Search – Yahoo, Amazon, Zvents
+    Log processing – Facebook, Yahoo
+    Data Warehouse – Facebook, AOL
+    Video and Image Analysis – New York Times, Eyealike
+
+* When to not to use Hadoop ?
+
+Following are some of those scenarios :
+
+    Low Latency data access : Quick access to small parts of data
+    Multiple data modification : Hadoop is a better fit only if we are primarily concerned about reading data and not writing data.
+    Lots of small files : Hadoop is a better fit in scenarios, where we have few but large files.
+
+* Hadoop-CERN Case Study
+
+The Large Hadron Collider in Switzerland is one of the largest and most powerful machines in the world. It is equipped with around 150 million sensors, producing a petabyte of data every second, and the data is growing continuously.
+
+CERN researches said that this data has been scaling up in terms of amount and complexity, and one of the important task is to serve these scalable requirements. So, they setup a Hadoop cluster. By using Hadoop, they limited their cost in hardware and complexity in maintenance.
+
+* They integrated Oracle & Hadoop and they got advantages of integrating. Oracle, optimized their Online Transactional System & Hadoop provided them scalable distributed data processing platform. They designed a hybrid systems, and first they moved data from Oracle to Hadoop. Then, they executed query over Hadoop data from Oracle using Oracle APIs. They also used Hadoop data formats like Avro & Parquet for high performance analytics without need of changing the end-user apps connecting to Oracle.
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+(https://www.edureka.co/blog/hadoop-tutorial/?utm_source=blog&utm_medium=left-menu&utm_campaign=what-is-hadoop)
+
+*  an interesting story on how Hadoop came into the picture and why is it so popular in the industry nowadays
+
+So, it all started with two people, Mike Cafarella and Doug Cutting, who were in the process of building a search engine system that can index 1 billion pages. After their research, they estimated that such a system will cost around half a million dollars in hardware, with a monthly running cost of $30,000, which is quite expensive. However, they soon realized that their architecture will not be capable enough to work around with billions of pages on the web.
+
+They came across a paper, published in 2003, that described the architecture of Google’s distributed file system, called GFS, which was being used in production at Google. Now, this paper on GFS proved to be something that they were looking for, and soon, they realized that it would solve all their problems of storing very large files that are generated as a part of the web crawl and indexing process. Later in 2004, Google published one more paper that introduced MapReduce to the world. Finally, these two papers led to the foundation of  the framework called “Hadoop“. Doug quoted on Google’s contribution in the development of Hadoop framework:
+
+“Google is living a few years in the future and sending the rest of us messages.”
+
+* Introduction
+
+Social media is actually one of the most important factors in the evolution of Big Data as it provides information about the people’s behavior. You can look at the figure below and get an idea how much data is getting generated every minute:
+
+* Big Data & Hadoop – Restaurant Analogy
+
+Let us take an analogy of a restaurant to understand the problems associated with Big Data and how Hadoop solved that problem.
+
+Bob is a businessman who has opened a small restaurant. Initially, in his restaurant, he used to receive two orders per hour and he had one chef with one food shelf in his restaurant which was sufficient enough to handle all the orders. 
+
+
+----
+
+Hadoop was developed, based on the paper written by Google on MapReduce system and it applies concepts of functional programming.
