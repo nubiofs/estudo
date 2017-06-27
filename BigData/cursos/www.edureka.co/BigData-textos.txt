@@ -193,6 +193,9 @@ They came across a paper, published in 2003, that described the architecture of 
 
 “Google is living a few years in the future and sending the rest of us messages.”
 
+
+IoT connects your physical device to the internet and makes it smarter.
+
 * Introduction
 
 Social media is actually one of the most important factors in the evolution of Big Data as it provides information about the people’s behavior. You can look at the figure below and get an idea how much data is getting generated every minute:
@@ -201,8 +204,104 @@ Social media is actually one of the most important factors in the evolution of B
 
 Let us take an analogy of a restaurant to understand the problems associated with Big Data and how Hadoop solved that problem.
 
-Bob is a businessman who has opened a small restaurant. Initially, in his restaurant, he used to receive two orders per hour and he had one chef with one food shelf in his restaurant which was sufficient enough to handle all the orders. 
+Bob is a businessman who has opened a small restaurant. Initially, in his restaurant, he used to receive two orders per hour and he had one chef with one food shelf in his restaurant which was sufficient enough to handle all the orders.
 
+Now let us compare the restaurant example with the traditional scenario where data was getting generated at a steady rate and our traditional systems like RDBMS is capable enough to handle it, just like Bob’s chef. Here, you can relate the data storage with the restaurant’s food shelf and the traditional processing unit with the chef as shown in the figure above.
+
+(Traditional-Restaurant-Analogy-Hadoop-Tutorial-Edureka-768x353.png)
+
+After few months, Bob thought of expanding his business and therefore, he started taking online orders and added few more cuisines to the restaurant’s menu in order to engage a larger audience. Because of this transition, the rate at which they were receiving orders rose to an alarming figure of 10 orders per hour and it became quite difficult for a single cook to cope up with the current situation. Aware of the situation in processing the orders, Bob started thinking about the solution. 
+
+(Traditional-Scenario-Failed-Hadoop-Tutorial-Edureka-768x350.png) 
+
+
+Similarly, in Big Data scenario, the data started getting generated at an alarming rate because of the introduction of various data growth drivers such as social media, smartphones etc. Now, the traditional system, just like cook in Bob’s restaurant, was not efficient enough to handle this sudden change. Thus, there was a need for a different kind of solutions strategy to cope up with this problem.
+
+After a lot of research, Bob came up with a solution where he hired 4 more chefs to tackle the huge rate of orders being received. Everything was going quite well but, this solution led to one more problem. Since four chefs were sharing the same food shelf, the very food shelf becoming the bottleneck of the whole process. Hence, the solution was not that efficient as Bob had thought. 
+
+"Bringing data to processing generated lot of Network overhead"!!!
+
+Similarly, to tackle the problem of processing huge datasets, multiple processing units were installed so as to process the data parallelly (just like Bob hired 4 chefs). But even in this case bringing multiple processing units was not an effective solution because: the centralized storage unit is the bottleneck. In other words, the performance of the whole system is driven by the performance of the central storage unit. Therefore, the moment our central storage goes down, the whole system gets compromised. Hence, again there was a need to resolve this single point of failure. 
+
+
+(Distributed-Chef-Hadoop-Tutorial-Edureka-768x371.png)
+
+
+Bob came up with another efficient solution, he divided all the chefs in two hierarchies, i.e. junior and head chef and assigned each junior chef with a food shelf. Let us assume that the dish is Meat Sauce. Now, according to Bob’s plan, one junior chef will prepare meat and the other junior chef will prepare the sauce. Moving ahead they will transfer both meat and sauce to the head chef, where the head chef will prepare the meat sauce after combining both the ingredients, which then will be delivered as the final order.
+
+(Restaurant-Solution-Hadoop-Tutorial-Edureka-768x362.png)
+
+Hadoop functions in a similar fashion as Bob’s restaurant. As the food shelf is distributed in Bob’s restaurant, similarly, in Hadoop, the data is stored in a distributed fashion with replications, to provide fault tolerance. For parallel processing, first the data is processed by the slaves where it is stored for some intermediate results and then those intermediate results are merged by master node to send the final result.
+
+(Hadoop-as-a-Solution-Restaurant-Analogy-Hadoop-Tutorial-Edureka-768x315.png)
+
+Now, you must have got an idea why Big Data is a problem statement and how Hadoop solves it.
+
+there were three major challenges with Big Data:
+
+    The first problem is storing the colossal amount of data. Storing huge data in a traditional system is not possible. The reason is obvious, the storage will be limited to one system and the data is increasing at a tremendous rate.
+    The second problem is storing heterogeneous data. Now we know that storing is a problem, but let me tell you it is just one part of the problem. The data is not only huge, but it is also present in various formats i.e. unstructured, semi-structured and structured. So, you need to make sure that you have a system to store different types of data that is generated from various sources.
+    Finally let’s focus on the third problem, which is the processing speed. Now the time taken to process this huge amount of data is quite high as the data to be processed is too large.
+
+- The first problem is storing huge amount of data. 
+
+HDFS provides a distributed way to store Big Data. Your data is stored in blocks in DataNodes and you specify the size of each block. Suppose you have 512MB of data and you have configured HDFS such that it will create 128 MB of data blocks. Now, HDFS will divide data into 4 blocks as 512/128=4 and stores it across different DataNodes. While storing these data blocks into DataNodes, data blocks are replicated on different DataNodes to provide fault tolerance.
+
+Hadoop follows horizontal scaling instead of vertical scaling. In horizontal scaling, you can add new nodes to HDFS cluster on the run as per requirement, instead of increasing the hardware stack present in each node.
+
+- Next problem was storing the variety of data. 
+
+HDFS you can store all kinds of data whether it is structured, semi-structured or unstructured. In HDFS, there is no pre-dumping schema validation. It also follows write once and read many model. Due to this, you can just write any kind of data once and you can read it multiple times for finding insights.
+
+- third challenge was about processing the data faster
+
+In order to solve this, we move processing unit to data instead of moving data to processing unit. So, what does it mean by moving the computation unit to data? It means that instead of moving data from different nodes to a single master node for processing, the processing logic is sent to the nodes where data is stored so as that each node can process a part of data in parallel. Finally, all of the intermediary output produced by each node is merged together and the final response is sent back to the client.
+
+* Hadoop Features
+
+Reliability
+Economical
+Scalability
+Flexibility
+
+* Hadoop Ecosystem
+
+So far you would have figured out that Hadoop is neither a programming language nor a service, it is a platform or framework which solves Big Data problems. You can consider it as a suite which encompasses a number of services for ingesting, storing and analyzing huge data sets along with tools for configuration management.
+ 
+Below are the Hadoop components, that together form a Hadoop ecosystem
+
+
+    HDFS -> Hadoop Distributed File System
+    YARN -> Yet Another Resource Negotiator
+    MapReduce -> Data processing using programming
+    Spark -> In-memory Data Processing
+    PIG, HIVE-> Data Processing Services using Query (SQL-like)
+    HBase -> NoSQL Database
+    Mahout, Spark MLlib -> Machine Learning
+    Apache Drill -> SQL on Hadoop
+    Zookeeper -> Managing Cluster
+    Oozie -> Job Scheduling
+    Flume, Sqoop -> Data Ingesting Services
+    Solr & Lucene -> Searching & Indexing 
+    Ambari -> Provision, Monitor and Maintain cluster
+
+- HDFS
+
+Hadoop Distributed File System is the core component or you can say, the backbone of Hadoop Ecosystem. 
+HDFS is the one, which makes it possible to store different types of large data sets (i.e. structured, unstructured and semi structured data).
+HDFS creates a level of abstraction over the resources, from where we can see the whole HDFS as a single unit.
+It helps us in storing our data across various nodes and maintaining the log file about the stored data (metadata).
+HDFS has two core components, i.e. NameNode and DataNode. 
+
+- YARN
+
+Consider YARN as the brain of your Hadoop Ecosystem. It performs all your processing activities by allocating resources and scheduling tasks.
+
+It has two major components, i.e. ResourceManager and NodeManager.
+
+- MAPREDUCE
+
+It is the core component of processing in a Hadoop Ecosystem as it provides the logic of processing. In other words, MapReduce is a software framework which helps in writing applications that processes large data sets using distributed and parallel algorithms inside Hadoop environment.
 
 ----
 
