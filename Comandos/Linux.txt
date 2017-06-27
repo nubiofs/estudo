@@ -1,3 +1,6 @@
+https://www.ostechnix.com/create-animated-gif-ubuntu-16-04/
+
+
 **  Abrir um terminal (para execultar comandos):
 
 atalho --> ctrl + alt + t
