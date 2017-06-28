@@ -346,6 +346,11 @@ https://github.com/hadoopecosystemtable/hadoopecosystemtable.github.io
 http://projects.spring.io/spring-xd/
 
 https://amsterdam.luminis.eu/2016/05/23/jumpstarting-stream-processing-with-kafka-and-flink/
+
+
+
+http://www.devmedia.com.br/conheca-a-geracao-de-banco-de-dados-nosql-e-newsql/33202
+
 xxxxxxxxxxxxx
 (https://www.confluent.io/blog/real-time-stream-processing-the-next-step-for-apache-flink/)
 What about the Lambda and Kappa architectures?
