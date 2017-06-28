@@ -1,0 +1,1631 @@
+
+html, body{ 
+    height: 100%; 
+    min-width: 0;
+}
+body{
+    font-family: open sans, Arial,sans-serif;
+}
+.search-nav > ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.nav > li > a {
+    padding: 10px 15px;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+    line-height: 2;
+    outline: 0 none;
+}	
+.navbar-brand {
+    line-height: 1; 
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #000000;
+    color: #ffffff !important;
+    cursor:pointer;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #000000 !important;
+    color:#ffffff !important;
+}
+.notificationdropdown li ul.notify {
+    border-radius: 5px;
+    left: auto;
+    max-height: 400px;
+    min-height: 38px;
+    width: 400px;
+}
+
+.redcrossed:after {
+    position: absolute;
+    content: "/";
+    color: red;
+    font-weight: 700;
+    font-size: 1.7em;
+    left: 4px;
+    top: -6px;
+}
+
+.notificationdropdown li ul.notify li {
+    border-bottom: 1px solid #ddd;
+    color: #333333;
+    line-height: 15px;
+    outline: 0 none;
+    padding: 10px;
+    text-decoration: none;
+}
+.notificationdropdown li ul.notify li:first-child {
+    font-size: 14px;
+    font-weight: 600;
+}
+.notificationdropdown li ul.notify li:first-child:hover{
+    background:transparent;
+}
+.notificationdropdown li ul.notify li a {
+    color: #333333;
+    font-size: 13px;
+    font-weight: normal;
+    text-decoration: none;
+    outline:0;
+}
+.notificationdropdown li ul.notify li a small {
+    color: #999999;
+    font-size: 10px !important;
+}
+.notificationdropdown li ul.notify li:hover{
+    background:#f1f1f1;
+}
+
+.notificationdropdown li ul.notify li.viewed{
+    background:#f8f8f8;
+}
+
+.notificationdropdown li ul.notify::before {
+    border-color: transparent transparent #ffffff;
+    border-style: solid;
+    border-width: 0 10px 10px;
+    content: " ";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: 7px;
+    top: -10px;
+    width: 0;
+    z-index: 1;
+}
+
+.notificationcount {
+    background: #ae353c none repeat scroll 0 0;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    left: 9px;
+    padding: 1px 3px;
+    position: relative;
+    top: -11px;
+}
+.Instructortitle h4 {
+    color: #333333;
+    font-family: Open Sans;
+    font-size: 30px;
+    font-weight: 100 !important;
+    line-height: 40px;
+}
+.innerbox {
+    background-color: #f9f9f9;
+    border:1px solid #dfdfdf;
+    margin-bottom: 17px;
+    padding: 15px;
+}
+.Lifetime {
+    min-height: 137px;
+    text-align: center;
+}
+.Accountdrop ul li {
+    width: 100% !important;
+}
+.Lifetime h3, .Unpaid h3{
+    text-align:left;
+}
+
+.Paymentmode {
+    color: #777777;
+    min-height: 137px;
+}
+
+.Unpaid{
+    text-align:center;	
+    min-height: 137px;
+}
+.Lifetime p {
+    background: #e8fae0 none repeat scroll 0 0;
+    border: 1px solid #d4e6d0;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 12px 4px;
+    text-align: center;
+}
+.Unpaid p{
+    background:#fdf6e6;
+    border:1px solid #e9e6d7;	
+    font-size: 24px;
+    font-weight: 600;
+    padding:12px 4px;
+    text-align:center;
+}
+.insdashboard h4 {
+    color: #333333;
+    font-weight: 600;
+    margin: 6px 0;
+    font-size:18px;
+}
+.insdashboard h3 {
+    color: #777777;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 14px 0;
+    text-transform: uppercase;
+}
+.insdashboard ul {
+    list-style: outside none none;
+    margin: 0 auto;
+    padding: 0;
+}
+.insdashboard ul li {
+}
+.insdashboard ul li:nth-child(even) {
+    border-bottom: 1px solid #ededed;
+    border-right: 1px solid #fff;
+}
+.insdashboard ul li:nth-child(odd) {
+    border-bottom: 1px solid #ededed;
+    border-right: 1px solid #ededed;
+}
+.insdashboard ul li .coursebatch {
+    overflow: hidden;
+    padding: 14px 0;
+}
+.insdashboard ul li .coursebatch h4 {
+    border-right: 1px solid #ededed;
+    line-height: 1;
+    margin: 0 9px;
+    padding-right: 6px;
+    text-align: center;
+}
+.insdashboard ul li .coursebatch span {
+    color: #333333;
+    font-size: 12px;
+}
+
+.insdashboard ul li .coursebatch span small {
+    color: #999999;
+    font-size: 12px !important;
+}
+
+.insdashboard ul li .coursebatch h4 small {
+    position: relative;
+    text-transform: uppercase;
+    top: -4px;
+}
+.BatchSchedule .coursebatch h4 {
+    border-right: 1px solid #ededed;
+    line-height: 1;
+    margin: 0 9px;
+    padding-right: 6px;
+    text-align: center;
+}
+.lightred{
+    color:#000000;
+    background:#ffdcdc !important;
+    border-color:#ffffff !important;
+}
+.darkred{
+    color:#000000;
+    background:#f49797 !important;
+    border-color:#ffffff !important;
+}
+.approved {
+    border-radius: 3px;
+    color: #c5e791;
+    padding: 5px;
+}
+.Calendar{}
+.Calendar div {
+    background: #9ea2a5 none repeat scroll 0 0;
+    border-radius: 3px;
+    border-top: 10px solid #84888b;
+    padding: 7px;
+}
+.Calendar div h4 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 28px;
+}
+.Calendar div small {
+    color: #ffffff;
+    font-size: 16px !important;
+}
+
+.supportticket{}
+.supportticket .circleboxspan {
+    border-bottom: 1px solid #ddd;
+}
+.supportticket h4{
+    color:#333333;
+    font-weight:bold;
+    font-size:16px;
+    margin-top: 0;
+}
+.Lifetimeperformance h3 {
+    color: #333333;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+.Lifetimeperformance h3{}
+
+.supportticket>.circleboxspan>p {color: #333333;
+                                 font-size: 30px;
+                                 font-weight:lighter;
+}
+.supportticket>.circleboxspan>h6{color: #777777;
+                                 font-size: 13px;}
+
+
+/*lukku coded start*/
+.approvedchecked {
+    color: #c5e791;
+    position: absolute;
+    right: 8px;
+    top: 10px;
+}
+.alert-msgred {
+    background-color: #e3686a;
+    color: #fff;
+    margin: 5px 0 0;
+    padding: 10px;
+    width: 100%;
+}
+.alert-msgred span {
+    line-height: 31px;
+    font-size: 18px;
+}
+.alert-msglightred {
+    background-color: #fee0e0;
+    color: #fff;
+    margin: 5px 0 0;
+    padding: 10px;
+    width: 100%;
+    border:1px solid #e8bcbd;
+    color:#c48687;
+}
+.alert-msglightred span {
+    line-height: 31px;
+    font-size: 18px;
+}
+.alert-msggreen {
+    background-color: #e8f5e3;
+    color: #fff;
+    margin: 5px 0 0;
+    padding: 10px;
+    width: 100%;
+    border:1px solid #b7d6ac;
+    color:#6b9958;
+}
+.alert-msggreen span {
+    line-height: 31px;
+    font-size: 18px;
+}
+
+.course-dropdown {
+    padding-bottom: 13px;
+}
+.join-check {
+    margin: -4px 0 0 0;
+    position: absolute;
+    right: 13px;
+    top: 0;
+}
+.pending {
+    border-radius: 3px;
+    color: #f5b673;
+    padding: 5px;
+}
+.rupee-symbol {
+    background-color: #79a67d;
+    border-radius: 20px;
+    color: #fff;
+    float: left;
+    font-size: 10px;
+    max-height: 13px;
+    max-width: 13px;
+    padding: 0 3px;
+    margin: 5px;
+    line-height: 1;
+}
+.rupee-symbolH {
+    background-color: #79a67d;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 10px;
+    padding: 0 4px;
+}
+.btnalignment button {
+    min-width: 155px;
+    padding: 4px;
+}
+.border-top-margin{
+    border-top: solid 1px #ededed;
+    margin-top:10px;
+}
+.pendingchecked {
+    color: #f5b673;
+    position: absolute;
+    right:8px;
+    top: 10px;
+}
+.joinbtn {
+    color: #ffffff;
+    font-size: 10px;
+    padding: 0 5px;
+    position: absolute;
+    right: 2px;
+    top: 10px;
+}
+.joinbtn:hover{
+    color:#ffffff;
+}
+
+.started {
+    background: #f4f9ec none repeat scroll 0 0;
+    border: 1px solid #e5f3d0;
+    color: #81ae33;
+    font-size: 9px;
+    padding: 0 4px;
+    position: absolute;
+    right: 8px;
+    top: 10px;
+}
+.startedbatch {
+    background: #f4f9ec none repeat scroll 0 0;
+    border: 1px solid #e5f3d0;
+    color: #81ae33;
+    font-size: 9px;
+    padding: 0 4px;
+    position:absolute;
+    margin-left:2px;
+    margin-top:4px;
+    text-transform: uppercase;
+}
+.completedbatch {
+    background: #ff8e8e none repeat scroll 0 0;
+    border: 1px solid #ff8e8e;
+    color:#ffffff;
+    font-size: 9px;
+    padding: 0 4px;
+    position:absolute;
+    margin-left:2px;
+    margin-top:4px;
+    text-transform: uppercase;
+}
+/*lukku coded end*/
+
+.Batchhead {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    color: #999999;
+    padding: 8px 0 !important;
+    overflow: hidden;
+}
+.Batchdetail {
+    border-bottom: 1px solid #ddd;
+    color: #777777;
+    font-size: 12px;
+    padding: 5px 0 !important;
+}
+.img22 {
+    height: 20px;
+    margin-right: 5px;
+    width: 20px;
+}
+.mobilesubmenu{
+    display:none;}
+
+.topvalue {
+    top: 0 !important;
+}
+.Scheduletable {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+.Schedulebatchs {
+    max-height: 165px;
+    min-height: 42px;
+}
+.Schedulecourses {
+    max-height: 188px;
+    min-height: 88px;
+}
+.Invoicestable {
+    max-height: 163px;
+    min-height: 69px;
+}
+.vacationtable {
+    max-height: 100px;
+    min-height: 68px;
+}
+/*lukku coded start*/
+.disabled {
+    background-color: #f9f9f9;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1000;
+}
+.capital-letter {
+    text-transform:uppercase;
+}
+.btnalignment {
+    text-align: right;
+    margin-bottom: -1px;
+}
+.panel-min-height {
+    min-height:242px;
+}
+.Instab > .tab-content > .tab-pane {
+    display:block;
+}
+.user-det-dash {
+    margin-left: -11px;
+    padding: 4px 0;
+    text-align: center;
+}
+.performance-panel {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    min-height: 153px;
+    -webkit-min-logical-height: 155px;
+    height:auto !important;
+    height:154px !important;
+}
+.performance-panel small{
+    color: #333333;
+    font-size: 12px;
+}
+.performance-panel small span{
+    color: #999999;
+}
+.bg-light-grey{
+    background-color:#f3f3f3;
+}
+.no-shadow{
+    box-shadow:none;
+}
+.performance-panel h6 {
+    font-family: open sans;
+    font-size: 10px !important;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+.performance-panel p small {
+    font-size: 9px !important;
+}
+.img25{
+    width:25px;
+    height:25px;
+}
+.performence-crc-head {
+    border-bottom: 1px solid #ddd;
+    display: inline-block;
+    width: 100%;
+    padding: 5px;
+}
+.performence-crc-head img {
+    margin-right: 7px;
+}
+.showicon{
+    display:block;
+}
+
+.hover-panel-dashboard, .hidden-panel-dashboard{
+    cursor:pointer;
+}
+.hidden-panel-dashboard {
+    background-color: #eff0f2;
+    color: #888;
+    display: none;
+    line-height: 17px;
+    margin-top: -5px;
+    padding: 0 11px;
+    text-align: left;
+}
+.hidden-panel-dashboard span{
+    font-size:9px;
+}
+.Lifetimeperformance{}
+.Student {
+    border-right: 1px solid #ddd;
+}
+.Lifetimeperformance .Student .circlebox {
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #e2e2e2;
+    border-radius: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 11px 0;
+    text-align: center;
+    width: 54px;
+}
+.Punctuality{border-right: 1px solid #ddd;}
+.Lifetimeperformance .Punctuality .circlebox {
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #e2e2e2;
+    border-radius: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 11px 13px;
+    text-align: center;
+    width: 54px;
+}
+.Foruminst{}
+.Lifetimeperformance .Foruminst .circlebox {
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #e2e2e2;
+    border-radius: 50px;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0 18px;
+    padding: 10px 15px;
+    text-align: center;
+}
+.Lifetimeperformance h6 {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+.circleboxspan {
+    display: inline-block;
+    margin-right: 21px;
+    text-align: center;
+    vertical-align: top;
+}
+
+/*Performance inner page css*/
+
+/* Main content */
+.main {
+    z-index: 50;
+}
+/* Grid container */
+.grid {
+    position: relative;
+    height: 330px;
+    /*overflow-y: auto;*/
+}
+/* Overlay */
+.grid::after {
+    content: '';
+    background: rgba(202, 202, 202, 0.4);
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+/* Grid item */
+.grid__item {
+    padding: 5px;
+    position: relative;
+    color: inherit;
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+    text-decoration: none !important;
+}
+
+
+
+/* grid item element and full content element styles */
+
+
+.loader {
+    height: 1px;
+    width: 40%;
+    margin: 1em auto;
+    position: relative;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.loader::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #a4e7ad;
+    left: 0;
+    top: -1px;
+    -webkit-transform: scale3d(0, 1, 1);
+    transform: scale3d(0, 1, 1);
+    -webkit-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+}
+
+.grid__item--loading .loader::before {
+    -webkit-transition: -webkit-transform 1s;
+    transition: transform 1s;
+    -webkit-transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    outline:0;
+}
+.moduletableand{
+    display:none;
+}
+/* closing (delays) */
+
+.loader {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+
+.grid__item .category {
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+/* opening */
+
+.grid__item--animate .loader {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+    opacity: 0;
+    -webkit-transform: translate3d(0, -30px, 0);
+    transform: translate3d(0, -30px, 0);
+}
+
+.grid__item:hover,.grid__item:focus{
+    outline:0;
+}
+
+
+/* Placeholder element (dummy that gets animated when we click on an item) */
+.placeholder {
+    pointer-events: none;
+    position: absolute;
+    width: calc(100% + 5px);
+    height: calc(100vh + 5px);
+    z-index: 100;
+    top: 0;
+    left: 0;
+    background: #fff;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.placeholder.placeholder--trans-in {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.placeholder.placeholder--trans-out {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+.noscroll {
+    overflow: hidden;
+}
+/* main content */
+.content {
+    position: absolute;
+    top: 0 !important;
+    background: #f3f3f5 none repeat scroll 0 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    height: 0;
+    /* Avoid second scroll bar in Chrome! */
+    visibility: hidden;
+    z-index: 400;
+    overflow: hidden;
+}
+
+.content.content--show {
+    height: 100%;
+    overflow-y: auto;
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.performance-box-panel .graphmargin {
+    margin-left: -37px;
+}
+
+/* single content item */
+.content__item {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    padding: 25px;
+    pointer-events: none;
+    font-size: 0.85em;
+}
+.content__item.content__item--show {
+    background: #f4f4f5 none repeat scroll 0 0;
+    height: auto;
+    opacity: 1;
+    overflow-y: auto;
+    pointer-events: auto;
+    transition: opacity 0.6s ease 0s;
+}
+.content__item table tr{ border: 1px solid #dcdcdc;
+                         color:#777777;
+}
+.content__item table tr th{
+    padding:5px;
+    text-align: center;
+}
+.content__item table tr td{
+    padding:5px;
+}
+.hover-panel-dashboard .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;}
+/* close button (for content and sidebar) */
+.close-button {
+    position: absolute;
+    border: none;
+    background: none;
+    margin: 0;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    font-size: 18px;
+    color: #ddd;
+    cursor: pointer;
+    pointer-events: none;
+    padding:0 4px;
+    opacity: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+}
+.main {
+    height: 330px;
+    min-height: 181px;
+    position: relative;
+}
+.close-button--show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/*Performance inner page css end*/
+/*Invoice History page css*/
+.Invoicehistory {
+    height: 478px;
+    overflow-y: auto;
+}
+.Invoicehistoryinner {
+    min-height: 86px;
+}
+.InvoiceHtitle {
+    background: #e7e7e7 none repeat scroll 0 0;
+    color: #999999;
+    padding: 11px !important;
+}
+.InvoiceHcontent{
+    padding: 11px !important;
+    border-bottom:1px solid #eaeaea;
+    background:#ffffff;
+}
+.possionfix{
+    position:inherit;
+    right:0;
+}
+/*Invoice History page css end*/
+/*Vacation Calendar page css*/
+.VacationCal{
+    background:#ffffff;
+}
+.VacationCal .heading {
+    font-size: 18px;
+    margin: 14px 0 0;
+}
+.VacationCaltable{
+}
+.VacationCaltable button span{
+    border-bottom: 0;
+    display:inherit;
+    padding:0;
+    overflow: inherit;
+}
+.VacationCal .tab-content {
+    overflow: hidden;
+    padding: 0 20px;
+}
+.VacationCal .nav-tabs > li.active > a, .VacationCal .nav-tabs > li.active > a:hover,.VacationCal .nav-tabs > li.active > a:focus{
+    border:0 !important;
+    color:#333333;
+    font-weight:600;
+}
+.VacationCal > .nav-tabs {
+    background: #e5e5e5 none repeat scroll 0 0;
+}
+.VacationCal > .nav-tabs > li > a {
+    border: 0px;
+    border-radius: 0;
+    margin-right: 0px;
+    color:#333333;
+}
+.VacationPlan {
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #eeeeee;
+    max-height: 370px;
+    min-height: 1px;
+    overflow-y: auto;
+}
+.VacationPlanbutton .hoveredit {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 none;
+    color: #ffffff;
+}
+.VacationPlanbutton:hover .hoveredit {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #fff;
+    font-size: 12px;
+}
+.VacationPlanbutton .hoverdelete {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 none;
+    color: #ffffff;
+}
+.VacationPlanbutton:hover .hoverdelete {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    color: #fff;
+    font-size: 12px;
+}
+.VacationPlan span {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    overflow: hidden;
+    padding: 10px 0;
+}
+.Vacationheading {
+    background: #e4e4e4 none repeat scroll 0 0;
+    border: 1px solid #e8e8e8;
+    color: #333333;
+    font-weight: bold;
+    padding: 6px;
+}
+.Vacationcontent{
+    background: #ffffff none repeat scroll 0 0;
+    border-top:0;
+    border-left:1px solid #e8e8e8;
+    border-right:1px solid #e8e8e8;
+    border-bottom:1px solid #e8e8e8;
+    color: #333333;
+    padding: 6px;
+}
+.VacationUpBatch{
+    max-height: 151px;
+    min-height: 30px;
+    overflow-y: auto;
+}
+.VacationUpBatch article {
+    overflow: hidden;
+    padding: 4px 0;
+}
+.Calendardate p.caldate {
+    border-bottom: 1px solid #e8eaea;
+}
+/*Vacation Calender css*/
+.pickmeup {
+    background: #ffffff;
+    border-radius: 0.4em;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    display: none;
+    position: absolute; }
+.pickmeup * {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+.pickmeup .pmu-instance {
+    display: inline-block;
+    height: 13.8em;
+    padding: .5em;
+    text-align: center;
+    width: 15em; }
+.pickmeup .pmu-instance .pmu-button {
+    color: #333333;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none; }
+.pickmeup .pmu-instance .pmu-today {
+    background: #17384d;
+    color: #88c5eb; }
+.pickmeup .pmu-instance .pmu-button:hover {
+    background: "transparent";
+    color: #88c5eb; }
+.pickmeup .pmu-instance .pmu-not-in-month {
+    color: #666; }
+.pickmeup .pmu-instance .pmu-disabled,
+.pickmeup .pmu-instance .pmu-disabled:hover {
+    color: #333;
+    cursor: default; }
+.pickmeup .pmu-instance .pmu-selected {
+    background: #136a9f;
+    color: #eee; }
+.pickmeup .pmu-instance .pmu-not-in-month.pmu-selected {
+    background: #17384d; }
+.pickmeup .pmu-instance nav {
+    color: #eee;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    line-height: 2em; }
+.pickmeup .pmu-instance nav *:first-child :hover {
+    color: #88c5eb; }
+.pickmeup .pmu-instance nav .pmu-prev,
+.pickmeup .pmu-instance nav .pmu-next {
+    display: none;
+    height: 2em;
+    width: 1em; }
+.pickmeup .pmu-instance nav .pmu-month {
+    width: 14em; }
+.pickmeup .pmu-instance .pmu-years *,
+.pickmeup .pmu-instance .pmu-months * {
+    display: inline-block;
+    line-height: 3.6em;
+    width: 3.5em; }
+.pickmeup .pmu-instance .pmu-day-of-week {
+    color: #999;
+    cursor: default; }
+.pickmeup .pmu-instance .pmu-day-of-week *,
+.pickmeup .pmu-instance .pmu-days * {
+    display: inline-block;
+    line-height: 1.5em;
+    width: 2em; }
+.pickmeup .pmu-instance .pmu-day-of-week * {
+    line-height: 1.8em; }
+.pickmeup .pmu-instance:first-child .pmu-prev,
+.pickmeup .pmu-instance:last-child .pmu-next {
+    display: block; }
+.pickmeup .pmu-instance:first-child .pmu-month,
+.pickmeup .pmu-instance:last-child .pmu-month {
+    width: 13em; }
+.pickmeup .pmu-instance:first-child:last-child .pmu-month {
+    width: 12em; }
+.pickmeup:not(.pmu-view-days) .pmu-days, .pickmeup:not(.pmu-view-days) .pmu-day-of-week, .pickmeup:not(.pmu-view-months) .pmu-months, .pickmeup:not(.pmu-view-years) .pmu-years {
+    display: none; }
+/*Vacation Calender css*/
+/*time*/
+.ti_tx,
+.mi_tx,
+.mer_tx {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.time,
+.mins,
+.meridian {
+    width: 60px;
+    float: left;
+    margin: 0 0px;
+    font-size: 16px;
+    color: #333333;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    padding: 9px 29px 15px 8px;
+    width: 28%;
+    border: 1px solid #ccc;
+    margin: auto;
+    background: url(../img/arrow.png) no-repeat;
+    border-radius: 5px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: #ccc;
+}
+
+.next {
+    background-position: 50% 112%;
+}
+
+.prev {
+    background-position: 50% -27%;
+}
+
+.time_pick {
+    position: relative;
+}
+
+.timepicker_wrap {
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 998;
+    display: none;
+    box-shadow: 2px 2px 5px 0 rgba(50,50,50,0.35);
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    float: left;
+    position: absolute;
+    top: 27px;
+    left: 0;
+}
+
+.arrow_top {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: url(../img/top_arr.png) no-repeat;
+    width: 18px;
+    height: 10px;
+    z-index: 999;
+}
+input.timepicki-input {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    float: none;
+    margin: 0;
+    text-align: center;
+    width: 70%;
+}
+a.reset_time {
+    float: left;
+    margin-top: 5px;
+    color: #000;
+}
+
+/*time end*/
+/*Vacation Calendar page css end*/
+
+
+/*upload css start*/
+
+.ins-upload-header {
+    border-bottom: 1px solid #ddd;
+    margin: 0 -15px 10px;
+    padding: 0 30px;
+}
+.module-names-head {
+    font-size: 15px;
+    padding: 5px 0 0;
+}
+.module-names-head .fa{
+    color:#b2b2b2;
+}
+.btn-upload {
+    padding: 4px 13px;
+}
+.btn-upload .fa{
+    color:#fff !important;
+}
+.padding-left0{
+    padding-left:0;
+}
+.line-height35 {
+    line-height: 35px;
+}
+
+
+
+.signup-header {
+    background-color: #313b3d;
+    color: #fff;
+    text-transform: uppercase;
+}
+.signup-header h4 {
+    font-weight: 100;
+    font-size:14px;
+}
+
+.color-white {
+    color: #fff;
+}
+.closebutton_signup {
+    cursor: pointer;
+}
+
+.instructor-content .ccundone {
+    line-height: 0;
+}
+.module-names{
+    cursor:pointer;
+}
+.lms-search-panelbox .module-chapterdone {
+    color: #29a53a !important;
+    left: 9px;
+    position: absolute;
+    top: 2px;
+}
+
+@media only screen and (min-width:1px) and (max-width: 767px){
+    .btn-upload {
+        font-size: 10px;
+        margin: 6px 0 0 23px;
+        padding: 1px 8px;
+        float:none !important;
+    }
+    .signup-header h4 {
+        font-size: 12px;
+    }
+}
+
+/*upload css end*/
+
+
+/*lukku coded end*/
+@media only screen and (min-width:991px) and (max-width: 1199px)  {
+    .Performancetopbox{
+        padding: 0 10px 0 0 !important;
+    }
+    .circleboxspan {
+        margin-right: 7px;
+    }
+    .insdashboard ul li {
+        padding: 0;
+    }
+    .insdashboard ul li .coursebatch {
+        padding: 18px 0 6px 5px;
+    }
+    .joinbtn{top: 4px;}
+    .started{top: 4px;}
+    .approvedchecked{top: 4px;}
+    .pendingchecked{top: 4px;}
+    .insdashboard ul li .coursebatch h4 {
+        margin: 0 5px;
+    }
+}
+@media only screen and (min-width:768px) and (max-width: 1024px)  {
+
+    .Lifetimeperformance h6 {
+        font-size: 10px;
+    }
+    .Calendar div small {
+        color: #ffffff;
+        font-size: 12px !important;
+    }
+    .nogap{
+        padding:0;
+    }
+    .supportticket h4 {font-size: 15px;}
+    .main {
+        height: 330px;
+        min-height: 181px;
+    }
+    .Lifetimeperformance h6 {
+        font-size: 0.7em;
+    }
+    .supportticket .circleboxspan {
+        border-bottom: 0;
+    }
+    .circleboxspan {
+        margin-right: 0;
+    }
+    .Student{
+        margin-right: 0;
+    }
+    .Punctuality{
+        margin-right: 0;
+    }
+    .Foruminst{
+        margin-right:0px;
+    }
+    .Lifetimeperformance .Punctuality .circlebox {
+        margin: 0 8px;
+    }
+    .Lifetimeperformance .Student .circlebox {
+        margin: 0 5px;
+    }
+    .Lifetimeperformance .Foruminst .circlebox {
+        margin: 0 20px;
+    }
+}
+@media only screen and (min-width:768px) and (max-width: 991px)  {
+    .Student {
+        width: 60%;
+        padding:0;
+    }
+    .Punctuality{
+        width: 20%;
+    }
+    .Foruminst{
+        width: 20%;
+    }
+}
+@media only screen and (min-width:320px) and (max-width: 767px)  {
+    .logoformobile {
+        width: 100px;
+    }
+    .Calendardate p.caldate {
+        border-bottom: 1px solid #e8eaea;
+        float: left;
+        width: 50%;
+    }
+    .padnone{
+        padding:0;
+    }
+    .VacationPlanbutton .hoveredit {
+        background-color: #428bca;
+        border-color: #357ebd;
+        color: #fff;
+        font-size: 14px;
+        padding: 7px;
+    }
+    .VacationPlanbutton:hover .hoveredit {
+        padding: 7px;
+        font-size: 14px;}
+
+    .VacationPlanbutton .hoverdelete {
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        color: #fff;
+        font-size: 14px;
+        padding: 7px;
+    }
+    .VacationPlanbutton:hover .hoverdelete {
+        padding: 7px;
+        font-size: 14px;}
+    .Student{
+        border-right:0;
+    }
+    .Lifetimeperformance h6 {
+        font-size: 10px;
+    }
+    .supportticket .circleboxspan {
+        border-bottom: 0;
+    }
+    .Punctuality, .Foruminst {
+        width:50%;
+        margin-top:10px;
+    }
+    .circleboxspan {
+        margin-right: 2px;
+    }
+    .mobiledrill {
+        background: #eee none repeat scroll 0 0 !important;
+        box-shadow: 0 1px 5px #777 inset;
+        color: #777777;
+    }
+    .ui-slider-tabs-rightPanelArrow.showOnHover, .ui-slider-tabs-leftPanelArrow.showOnHover{
+        display:none !important;
+    }
+    .Instructortitle h4{font-size: 23px;}
+    .moduletable{
+        border-right: 1px solid #ddd;
+        overflow-y: scroll;
+    }
+    .Student,.Punctuality,.Foruminst{
+        margin-right:0;
+    }
+    .accord {
+        background: #ffffff none repeat scroll 0 0;
+        padding: 14px 10px;
+    }
+    #demo {
+        background: #ddd none repeat scroll 0 0;
+        border: 1px solid #ddd;
+        box-shadow: 0 -2px 7px #777 inset;
+        margin-bottom: 11px;
+        margin-top: -11px;
+        padding: 0 10px;
+    }
+    #perform {
+        margin-top: -9px;
+    }
+    .supportticket{text-align:center;}
+
+    .main {
+        height: 330px;
+        min-height: 181px;
+    }
+    .mobilesubmenu{
+        display:inherit;
+        position:absolute;
+        z-index:1;
+        /*lukku coded start*/
+        width: 100%;
+        /*lukku coded end*/
+    }
+
+    /*lukku coded start*/
+    .panel-min-height {
+        min-height:inherit;
+    }
+    .text-center-xs{
+        text-align:center;
+    }
+    .Instab > .tab-content > .tab-pane {
+        display:none;
+    }
+    .Instab > .tab-content > .active {
+        display: block;
+    }
+    .alert-msgred {
+        float: none !important;
+        margin: 0;
+        text-align: center;
+    }
+    .alert-msgred span {
+        font-size: 13px;
+        line-height: 31px;
+        float: none !important;
+    }
+    .alert-msgred .btn{
+        float: none !important;
+        display:none;
+    }
+    .alert-msgred .alert {
+        padding: 0;
+        margin-bottom:0;
+    }
+    .alert-msggreen {
+        float: none !important;
+        margin: 0;
+        text-align: center;
+    }
+    .alert-msggreen span {
+        font-size: 13px;
+        line-height: 31px;
+        float: none !important;
+    }
+    .alert-msggreen .btn{
+        float: none !important;
+        display:none;
+    }
+    .alert-msggreen .alert {
+        padding: 0;
+        margin-bottom:0;
+    }
+    .alert-msglightred {
+        float: none !important;
+        margin: 0;
+        text-align: center;
+    }
+    .alert-msglightred span {
+        font-size: 13px;
+        line-height: 31px;
+        float: none !important;
+    }
+    .alert-msglightred .btn{
+        float: none !important;
+        display:none;
+    }
+    .alert-msglightred .alert {
+        padding: 0;
+        margin-bottom:0;
+    }
+
+
+    .no-padding-xs{
+        padding:0;
+    }
+    .Instructortitle {
+        text-align: center;
+    }
+    .navbar-nav {
+        margin: 0.5px 0 !important;
+    }
+    .nav > li > a {
+        padding: 12px 15px;
+    }
+    .mobilesubmenu .container-fluid{
+        padding:0 !important;
+    }
+    .mobilesubmenu ul{
+        margin:0 !important;}
+    .mobilesubmenu ul li {
+        margin: 0 auto;
+        text-align: center;
+        width: 20%;
+    }
+    .mobilesubmenu ul li img {
+        height: 19px;
+    }
+    .navbar{
+        min-height:20px;}
+    .mobilesubmenu ul li a {
+        color: #333333 !important;
+        font-size: 0.8em;
+        padding: 4px !important;
+    }
+    .mobilesubmenu ul li a:hover{
+        color:#ffffff !important;
+    }
+    .mobilesubmenu ul li a:active{
+        color:#ffffff !important;
+    }
+    .Paymentmode {
+        min-height: 0;
+    }
+    .Lifetime {
+        min-height: 0;
+    }
+    .Unpaid{
+        min-height: 0;
+    }
+    .navbar-header {
+        clear: both;
+        display: inline-block;
+        width: 33%;
+    }
+    .navbar-nav > li {
+        float: left;
+    }
+    .navbar-nav .open .dropdown-menu{
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    }
+    .notificationdropdown li ul.notify::before {
+        right: 76px;
+    }
+    .navbar-nav .open .notify-menu {
+        background: #ffffff none repeat scroll 0 0;
+        position: absolute;
+        right: -66px;
+        top: 54px;
+        width: 300px;
+    }
+    .navbar-nav .open .user-menu {
+        background: #ffffff none repeat scroll 0 0;
+        left: -100px;
+        position: absolute;
+        top: 54px;
+    }
+    .navbar-nav .open .mydashboard-menu {
+        background: #ffffff none repeat scroll 0 0;
+        left: -135px;
+        position: absolute;
+        top: 54px;
+    }
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+        background:#333;
+    }
+    .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+        background:#333 !important;
+    }
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+        background-color: #333 !important;
+        color: #fff !important;
+    }
+    .mobileh4{
+        text-align:center;
+    }
+    .nogap{
+        padding:0 !important
+    }
+    .insdashboard h4 {
+        margin-top: 28px;
+        text-align: center;
+    }
+    .ScheduleBatches h4 {
+        margin: 15px 0 15px;
+        text-align: center;
+    }
+    .insdashboard h3{
+        text-align:center;
+    }
+    .Calendardate p{text-align:center;}
+    .btnalignment {
+        text-align: center;
+        margin-top:20px;
+    }
+    .btnalignment button{
+        width:80%;
+    }
+    #vacationCalendar p {
+        text-align: center;
+    }
+    .tab-content{
+        padding-top: 44px;
+    }
+}
+@media only screen and (min-width:641px) and (max-width: 767px)  {
+    .Student {
+        width: 100%;
+    }
+    .Punctuality{
+        width: 30%;
+    }
+    .Foruminst{
+        width: 30%;
+    }
+    .circleboxspan {
+        margin-right: 7%;
+    }
+    .mobileh4{
+        text-align:center;
+    }
+}
+@media only screen and (min-width:481px) and (max-width: 640px)  {
+    .circleboxspan {
+        margin-right: 6% !important;
+    }
+}
+@media only screen and (min-width:320px) and (max-width: 570px){
+    .moduletabletext{
+        display:none;
+    }
+    .moduletableand{
+        display:inherit;
+    }
+    .Batchhead{
+        display:none;
+    }
+    .pullleftdate {
+        clear: both;
+        float: left;
+    }
+    .grid__item{
+        padding:5px;}
+    .pullrightvalue {
+        float: right;
+        text-align:center;
+    }
+    .statussection {
+        position: absolute;
+        right: 0;
+        text-align:center;
+    }
+    .hidetext{
+    }
+    .showicon{
+        display:'';
+    }
+
+    /*lukku coded start*/
+    .mobilesubmenu ul li {
+        font-size: 11px;
+    }
+    .course-name-table {
+        width: 75%;
+    }
+    .course-name-date {
+        width: 75%;
+    }
+    /*lukku coded end*/
+
+}

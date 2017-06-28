@@ -1,0 +1,100 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 6 Jan, 2017, 4:14:57 PM
+    Author     : himanshu
+*/
+
+.custom-blocked-fancy-quote {
+  background-color: #f5f5f5;
+  display: inline-block;
+  padding: 20px;
+  width: 100%;
+	position: relative;
+}
+.custom-blocked-fancy-quote .fancycontent {
+    display: inline;
+    font-size: 20px;
+	color: #222222;
+    padding: 0 10px;
+}
+.custom-blocked-fancy-quote i {
+    font-size: 18px;
+	color: #3778b0;
+}
+.fancycontent > i.fa-quote-right{
+	padding-left: 10px;
+}
+.custom-blocked-fancy-quote .social-icon-wrapper .maxbutton {
+    height: 35px !important;
+    width: 35px !important;
+}
+.custom-blocked-fancy-quote .social-icon-wrapper .maxbutton > span > i {
+    font-size: 16px !important;
+}
+.custom-blocked-fancy-quote .colorme {
+    color: #f0b018;
+}
+.fancyshareicons {
+  bottom: 0px;
+  position: absolute;
+  right: 0px;
+}
+.social-icon-wrapper{
+	display:none;
+	padding-right: 16px;
+}
+.fancyshareicons:hover {
+  background: rgba(206, 206, 206, 0.5) none repeat scroll 0 0;
+  bottom: 0;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+.fancyshareicons:hover > .social-icon-wrapper {
+  bottom: 0;
+  display: block;
+  padding-right: 16px;
+  position: absolute;
+  right: 3px;
+}
+.fancyshareicons:hover > i.shareopen{
+	color: #ffffff;
+    right: 10px;
+}
+.shareopen{
+	bottom: 14px;
+    position: absolute;
+    right: 10px;
+	font-size: 21px;
+}
+.custom-blocked-fancy-quote > .fancyshareicons > .social-icon-wrapper{
+	margin-right: 10px;
+}
+.custom-blocked-fancy-quote > .fancyshareicons > .social-icon-wrapper > .maxcollection > span{
+	margin-right: 10px !important;
+	cursor: pointer;
+}
+
+.custom-blocked-fancy-hr {
+    position: relative;
+}
+.custom-blocked-fancy-hr > hr{
+	border-color: #dddddd;
+    border-width: 1px;
+}
+.custom-blocked-fancy-hr > .yelloborder{
+	background-color: #f0b017;
+    height: 5px;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: -2px;
+    width: 43px;
+    z-index: 1;
+}

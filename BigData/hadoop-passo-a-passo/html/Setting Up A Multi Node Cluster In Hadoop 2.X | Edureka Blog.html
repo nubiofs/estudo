@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html class=" " prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" lang="en-US"><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.edureka.co/blog/xmlrpc.php">
+        
+<!-- This site is optimized with the Yoast SEO plugin v4.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Setting Up A Multi Node Cluster In Hadoop 2.X | Edureka Blog</title>
+<meta name="description" content="In this blog post you will learn how to set up a multi node cluster in Hadoop 2.x. This Hadoop tutorial is a step-by-step guide to multi node cluster setup">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X">
+<link rel="publisher" href="https://plus.google.com/+edurekaIN">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setting Up A Multi Node Cluster In Hadoop 2.X | Edureka Blog">
+<meta property="og:description" content="In this blog post you will learn how to set up a multi node cluster in Hadoop 2.x. This Hadoop tutorial is a step-by-step guide to multi node cluster setup">
+<meta property="og:url" content="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X">
+<meta property="og:site_name" content="Edureka Blog">
+<meta property="article:publisher" content="https://www.facebook.com/edurekaIN/">
+<meta property="article:section" content="Big Data Analytics">
+<meta property="article:published_time" content="2015-11-18T10:52:16+00:00">
+<meta property="article:modified_time" content="2017-05-25T09:46:33+00:00">
+<meta property="og:updated_time" content="2017-05-25T09:46:33+00:00">
+<meta property="fb:app_id" content="334689249900154">
+<meta property="og:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2015/11/Hadoop-Installation-Multi-Node-Cluster.png">
+<meta property="og:image:width" content="815">
+<meta property="og:image:height" content="476">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="In this blog post you will learn how to set up a multi node cluster in Hadoop 2.x. This Hadoop tutorial is a step-by-step guide to multi node cluster setup">
+<meta name="twitter:title" content="Setting Up A Multi Node Cluster In Hadoop 2.X | Edureka Blog">
+<meta name="twitter:site" content="@edurekaIN">
+<meta name="twitter:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2015/11/Hadoop-Installation-Multi-Node-Cluster.png">
+<meta name="twitter:creator" content="@edurekaIN">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://cdn.edureka.co/">
+<link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Edureka Blog » Setting Up A Multi Node Cluster In Hadoop 2.X Comments Feed" href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X/feed/">
+		<script src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/analytics.js" async=""></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.edureka.co\/blog\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script defer="defer" type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/wp-emoji-release.js"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="download-button-shortcode-css-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/downloadbutton.css" type="text/css" media="all">
+<link rel="stylesheet" id="fancyquote-css-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/fancyquote.css" type="text/css" media="all">
+<link rel="stylesheet" id="sn-fontAwesome-css-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/font-awesome.css" type="text/css" media="all">
+<link rel="stylesheet" id="sn-animate-css-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/animate.css" type="text/css" media="all">
+<link rel="stylesheet" id="dg-grid-css-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/dg-grid.css" type="text/css" media="all">
+<link rel="stylesheet" id="fvp-frontend-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/frontend.css" type="text/css" media="all">
+<link rel="stylesheet" id="mbpro-font-awesome-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/font-awesome_003.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-font-awesome-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/font-awesome_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-0121-font-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/0121-font.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-bootstrap-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-blogmain-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/blogmain.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-nprogress-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/nprogress.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-blogdetail_newfont-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Newfonts-ico.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-customscrollbar-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/CustomScrollbar.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-owl.carousel-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/owl.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-blogdetailnew-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/blogdetailnew.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-0180-global-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/0180-global.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-bootstrap-formhelpers-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/bootstrap-formhelpers.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-0181-formValidation-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/0181-formValidation.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-0139-common-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/0139-common.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-dashboard-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/dashboard.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-header-2-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/header-2.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-signin-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/new-signin-signup.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-mfb-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/mfb.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-main_css-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp_dlmp_styles-css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/styles.css" type="text/css" media="all">
+<link rel="https://api.w.org/" href="https://www.edureka.co/blog/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.edureka.co/blog/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.edureka.co/blog/wp-includes/wlwmanifest.xml"> 
+<link rel="shortlink" href="https://www.edureka.co/blog/?p=29363">
+<link rel="alternate" type="application/json+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fsetting-up-a-multi-node-cluster-in-hadoop-2.X">
+<link rel="alternate" type="text/xml+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fsetting-up-a-multi-node-cluster-in-hadoop-2.X&amp;format=xml">
+	<style type="text/css">
+	.download-info .download-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+<style type="text/css">
+#author-bio-box {
+	float:left;
+	width: 99%;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	box-shadow: 5px 5px 2px #ddd;
+	padding: 5px;
+        margin-bottom: 10px;
+}
+#author-bio-box img {
+	float: left;
+	margin: 4px 10px 2px 4px;
+}
+#author-bio-box .author-name {
+	font-weight: bold;
+	margin-left: 2px;
+	font-size: 14px;
+}
+#author-bio-box p {
+	font-size: 13px;
+	line-height: 20px;
+        margin-left: 95px;
+        margin-top: 5px;
+}
+#author-bio-box thead th {
+	border: 0;
+}
+#author-bio-box tbody {
+	border: 0;
+}
+.bio-spacer { min-height:44px; padding: 1px; display: block; clear: both; border:1px;}
+.bio-socials {
+	border-top:1px solid #e8e8e8;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	width: 100%;
+	height: 32px;
+	clear: both;
+}
+</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress.">
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://cdn.edureka.co/blog/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><link href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/shCore.css" type="text/css" rel="stylesheet"><link href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/shThemeDefault.css" type="text/css" rel="stylesheet"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <script>
+            var webURL = 'https://www.edureka.co/';
+            var imgURL = 'https://cdn.edureka.co/imgver.1465813195/img/';
+            var kmkey = 'c685629a1766aa24ed42e4bc8476e8789cd97477';
+            var GaTID = 'UA-33865789-1';
+            var GaUATID = 'UA-33865789-2';
+            var iscustomerGA = 'false';
+            var repcustomerGA = 'false';
+            var baildown = true;
+            var homepageloadbanner = true;
+            var prev_offer_code = '';
+
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-33865789-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+        <!-- Google Code for Remarketing Tag -->
+        <!--------------------------------------------------
+        Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+        --------------------------------------------------->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 977137586;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/conversion.js"></script><script src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/embed.js" async="" type="text/javascript"></script><script src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/count.js" type="text/javascript" async=""></script><link rel="stylesheet" type="text/css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/css.css"><link rel="stylesheet" type="text/css" href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/css.html"><script src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/count-data.js"></script><link href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/a_data_002/lounge.css" rel="prefetch"><link href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/a_data_002/common.js" rel="prefetch"><link href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/a_data_002/lounge.js" rel="prefetch"><link href="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/a_data_002/config.js" rel="prefetch"></head><body class="post-template-default single single-post postid-29363 single-format-standard wpb-js-composer js-comp-ver-5.1.1 vc_responsive" id="margin-top-value"><iframe name="google_conversion_frame" title="Google conversion frame" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?random=1498658615136&amp;cv=8&amp;fst=1498658615136&amp;num=1&amp;fmt=1&amp;guid=ON&amp;u_h=825&amp;u_w=1320&amp;u_ah=803&amp;u_aw=1320&amp;u_cd=24&amp;u_his=17&amp;u_tz=-180&amp;u_java=true&amp;u_nplug=3&amp;u_nmime=89&amp;frm=0&amp;url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fsetting-up-a-multi-node-cluster-in-hadoop-2.X%3Futm_source%3Dblog%26utm_medium%3Dleft-menu%26utm_campaign%3Dinstall-hadoop-single-node-hadoop-cluster&amp;ref=https%3A%2F%2Fwww.edureka.co%2Fblog%2Finstall-hadoop-single-node-hadoop-cluster%3Futm_source%3Dblog%26utm_medium%3Dleft-menu%26utm_campaign%3Doverview-of-hadoop-2-0-cluster-architecture-federation&amp;tiba=Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" frameborder="0" height="13" width="300"></iframe>
+        <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+
+
+
+    <div id="fb-root"><script src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/all.js" async=""></script></div>
+    <script>
+
+            window.fbAsyncInit = function () {
+                FB.init({appId: '334689249900154', status: true, cookie: true,
+                    xfbml: true});
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+    </script>
+
+    <header id="header-II">
+        <section>
+            <nav style="" role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-homepage">
+                <div class="container menubar-visibility edureka-blog-header">
+                    <div class="navbar-header">
+                        <a href="https://www.edureka.co/?utm_source=blog&amp;utm_medium=blog-edureka-logo" class="navbar-brand"> <img alt="edureka!" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/logo.png"> </a> 			
+                    </div>
+                    <!-- ddl starts--><form action="/blog" class="main-search"><ul class="list-unstyled course-search-box-nav">
+                        <input class="searchinputbox" id="categoryinputbox" value="" type="hidden">
+                        <input class="searchinputbox" id="authorinputbox" value="" type="hidden">
+                        <li class="search-nav pull-left"><div class="dropdown  categories-filter-dropdown">
+    <a class="select_down dropdown-toggle search-drop menu-common catbtnblog catbtnblogmob btn" type="button" id="menu1" data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Select Category
+    </a>
+    <ul style="overflow: visible;" class="dropdown-menu list-inline search-header-navigation dropdown-menu-scrollbar mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" role="menu" aria-labelledby="menu1"><div tabindex="0" id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+        <li style="display: none;" role="presentation"><a role="menuitem" tabindex="0" href="#" data-slug="" class="category-selector">Select Category</a>
+                </li><li style="display: none;" role="presentation"><a role="menuitem" tabindex="1" href="https://www.edureka.co/blog/category/big-data-analytics" data-slug="big-data-analytics" class="category-selector">Big Data Analytics</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="2" href="https://www.edureka.co/blog/category/big-data-nosql" data-slug="big-data-nosql" class="category-selector">Big Data NoSQL</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="3" href="https://www.edureka.co/blog/category/business-intelligence" data-slug="business-intelligence" class="category-selector">Business Intelligence</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="4" href="https://www.edureka.co/blog/category/cloud-computing" data-slug="cloud-computing" class="category-selector">Cloud Computing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="5" href="https://www.edureka.co/blog/category/finance" data-slug="finance" class="category-selector">Finance</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="6" href="https://www.edureka.co/blog/category/frameworks" data-slug="frameworks" class="category-selector">Frameworks</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="7" href="https://www.edureka.co/blog/category/ibm-bluemix" data-slug="ibm-bluemix" class="category-selector">IBM Bluemix</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="8" href="https://www.edureka.co/blog/category/marketing" data-slug="marketing" class="category-selector">Marketing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="9" href="https://www.edureka.co/blog/category/mobile-development" data-slug="mobile-development" class="category-selector">Mobile Development</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="10" href="https://www.edureka.co/blog/category/operations" data-slug="operations" class="category-selector">Operations</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="11" href="https://www.edureka.co/blog/category/programming" data-slug="programming" class="category-selector">Programming</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="12" href="https://www.edureka.co/blog/category/project-management" data-slug="project-management" class="category-selector">Project Management</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="13" href="https://www.edureka.co/blog/category/success-story" data-slug="success-story" class="category-selector">Success Story</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="14" href="https://www.edureka.co/blog/category/systems-architecture" data-slug="systems-architecture" class="category-selector">Systems &amp; Architecture</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="15" href="https://www.edureka.co/blog/category/systems-engineering" data-slug="systems-engineering" class="category-selector">Systems Engineering</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="16" href="https://www.edureka.co/blog/category/testing" data-slug="testing" class="category-selector">Testing</a>
+                </li>      
+    </div></div><div style="display: none;" id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; top: 0px;" oncontextmenu="return false;"><div style="line-height: 50px;" class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></ul>
+</div>
+<span id="desktop-searchbox"><div id="remote" class="typeahead-container"><div class="typeahead-field">
+                        <span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" placeholder="Search edureka blogs" name="s" data-value="" class="search_inp collapse searchinputbox" type="text">
+                        </span><span class="typeahead-button"><i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></span></li></ul></form><form action="/blog" class="form-element-mobile">
+                    <div class="visible-sm visible-xs mobsearch" id="mobile-searchbox">
+                        <a data-toggle="collapse" id="mobile-search-icon" class="mobile-search-icon" href="#mobsearch" aria-expanded="false" aria-controls="mobsearch">
+                            <i class="fa fa-search search_ico visible-sm visible-xs"></i>
+                        </a><div class="collapse search-course" id="mobsearch" aria-expanded="false"><div>
+                    <div id="remote" class="typeahead-container result backdrop hint">
+                        <div class="typeahead-field"><span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" class="search_inp search_inp_mob" placeholder="Search edureka blogs" name="s" data-value="" type="text"></span>
+                        <span class="typeahead-button">
+                        <i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></div></div></div></form><div class="loggedin-usernav-wrapper hide"><div aria-expanded="false" id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs">
+                <li>
+                    <div class="dropdown menu-dropdown dropdownafterlogin">
+                        <a href="javascript:void(0);" class="dropdown-toggle withripple" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false"> BROWSE COURSES <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                            <li><a href="https://www.edureka.co/mycourses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=my-courses">My Courses</a></li>
+                            <li class="ga-allcourses"><a href="https://www.edureka.co/all-courses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=all-courses">All Courses</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="logged-in-customer hide"></li>
+                <li class="">
+                    <div class="dropdown user-dropdown">
+                        <a id="signin-logout" class="signin" href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=827e2b9603">Logout</a> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right profile pull-right">
+            <li class="dropdown userdrop hidden-lg hidden-md profile-pic-header">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+                    <img alt="" class="img30 user-image-icon" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/defaultpp2.png">     
+                </a>
+                <ul class="dropdown-menu user-menu profile-xs">
+                    <li><a href="https://www.edureka.co/mycourses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=all-courses">My Courses</a></li>
+                    <li class="logged-in-customer hide"></li><li class="ga-allcourses"><a href="https://www.edureka.co/all-courses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=all-courses">All Courses</a></li>
+                    <li> <a href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=827e2b9603" id="signin-logoutresp">Log Out</a> </li>
+                </ul>
+            </li>
+        </ul></div><div class="loggedout-usernav-wrapper"><a class="signin md-trigger" href="javascript:void(0)" data-modal="signin-modal" data-toggle="modal">Sign In</a><style>
+    .highlighterror input[type=text],
+    .highlighterror input[type=email],
+    .highlighterror input[type=password],
+    .highlighterror {
+        border-color: #ed1f24 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
+<!--googleon: all-->
+<div class="md-modal md-effect-1 newsigninsignup" id="signin-modal">
+    <div class="md-content">
+        <span id="signin_signup_cancel" class="md-close onclicktab pull-right">X</span>
+
+        <ul class="nav nav-tabs">
+            <li class="Signinspace active"><a class="onclicktab" data-toggle="tab" href="#LogIn"><span>Log In</span></a></li>
+            <li class="SignUpspace "><a class="onclicktab" data-toggle="tab" href="#SignUp"><span>Sign Up</span></a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="LogIn" class="tab-pane fade in active">
+                <div class="col-md-12 col-xs-12 signinformnew newsignclik">
+                    <form class="fv-form fv-form-bootstrap" novalidate="novalidate" id="signinForm"><button style="display: none; width: 0px; height: 0px;" class="fv-hidden-submit" type="submit"></button>
+                        <!--                        <form id="signinForm">-->
+                        <div class="alertnew" role="alert">
+                            <span id="signin_error_message" class="signin_formerror redalertnew" style="display: none;"><i class="fa fa-check-circle"></i>  Please enter a valid emailid</span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input data-bv-field="data[User][email]" id="inputName" class="form-control inputstyle emailnew inputNamesignup signinvalid" required="" autocomplete="off" placeholder="Email" name="data[User][email]" onkeyup="checkdisable();" type="email"><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Email is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="regexp" class="help-block" style="display: none;">The value is not a valid email address</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="emailAddress" class="help-block" style="display: none;">Please enter a valid email address</small></div>
+                        <div class="form-group has-feedback">
+                            <input data-bv-field="data[User][password]" id="pwd" class="form-control inputstyle passwordnew masked" required="" autocomplete="off" placeholder="Password" name="data[User][password]" value="" type="password"><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                            <div class="verficacheckeye" id="eye">
+                                show
+                            </div>
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][password]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Password is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][password]" data-bv-validator="stringLength" class="help-block" style="display: none;">Password should be atleast 8 character</small></div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><a id="Forgotnew" href="javascript:void(0)" class="btn btn-link pull-left forgetpass">Forgot Password?</a>
+
+                            <button type="submit" class="bluebtn pull-right defdisablesignin ga-signin disabled" id="signin-blog">Start Learning</button>
+                        </div>
+                    </form>
+                    <!--<div class="mobilealertnew green clearfix">
+                      <span class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i>  Verification Code sent to er.creator@gmail.com</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-12 col-xs-12 signinformnew forgetpassnew">
+                    <form id="resetcode">
+                        <div id="successmssg" class="alertnew" role="alert">
+                            <span id="messages" class="greenalertnew hidden-xs"><i class="fa fa-check-circle"></i>  </span>
+                        </div>
+                        <div class="form-group">
+                            <input id="prefilledemail" disabled="disable" class="form-control inputstyle emailnew inputDisabled" required="" autocomplete="off" placeholder="Email" type="email">
+                            <input id="emailfield" class="form-control inputstyle" name="data[User][email]" type="hidden">
+
+                            <!--<div class="verficacheck"><a href="" id="editemail">change ?</a></div>-->
+                        </div>
+                        <div class="form-group">
+                            <input id="otpfield" class="form-control inputstyle emailnew verifycheck" required="" autocomplete="off" placeholder="Verification code" name="data[User][otpCode]" type="text">
+                            <input id="verificationfield" class="form-control inputstyle emailnew" required="" name="data[User][verification_code]" type="hidden">
+                            <div class="verficacheck verifycheck"><div id="resendcode" href="javascript:void(0);" style="cursor: pointer;">resend ?</div></div>
+                        </div>
+                        <div class="form-group">
+                            <input id="pwd2" class="form-control inputstyle passwordnew masked" required="" autocomplete="off" min="8" placeholder="New Password" name="data[User][password]" type="password">
+                            <div class="verficacheckeye" id="eye2">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><!--<a id="Backnew" href="#" class="btn btn-link pull-left forgetpass">Back</a>-->
+
+                            <button id="passresetbutton" type="submit" class="bluebtn pull-right">reset password</button>
+                        </div>
+                    </form>
+                    <div class="notestarreg verifycheck">
+                        * Can't find the email? Check your Spam folder 
+or Promotions tab for an email from no-reply@edureka.co. Send us an 
+email at <a href="mailto:support@edureka.co">support@edureka.co</a> or call us at +91 88808 62004
+                    </div>
+                </div>
+            </div>
+            <div id="SignUp" class="tab-pane fade  ">
+
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center signinformnew signupformnew">
+
+                    <form class="fv-form fv-form-bootstrap" novalidate="novalidate" id="signupForm"><button style="display: none; width: 0px; height: 0px;" class="fv-hidden-submit" type="submit"></button>
+                        <div class="alertnew" role="alert">
+                            <span id="signup_error_message" class="signup_formerror redalertnew hidden-xs " style="display: none;"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input value="/blog/" name="data[User][pageurl]" id="pageurl_signup" type="hidden">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][name]" id="signupname" class="form-control inputstyle empty" placeholder="Name*" required="" autocomplete="off" name="data[User][name]" type="text"><i data-bv-icon-for="data[User][name]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i></div>
+                            
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][name]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Name is required.</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][name]" data-bv-validator="regexp" class="help-block" style="display: none;">Name is required.</small></div>
+
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][email]" id="signupemail" class="form-control inputstyle  empty" placeholder="Email*" required="" autocomplete="off" name="data[User][email]" type="email"><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i></div>
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Email is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="regexp" class="help-block" style="display: none;">The value is not a valid email address</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="emailAddress" class="help-block" style="display: none;">Please enter a valid email address</small></div>
+                        <input style="display:none;" name="hiddenname" type="text">
+                        <input style="display:none;" name="hiddenpassword" type="password">
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][mobile]" id="mobnum" class="form-control inputstyle empty" placeholder="Mobile Number*" required="" name="data[User][mobile]" type="text"><i data-bv-icon-for="data[User][mobile]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i></div>
+
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][mobile]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Mobile Number is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][mobile]" data-bv-validator="regexp" class="help-block" style="display: none;">The value is not a valid mobile number</small></div>
+                        <div class="form-group has-feedback">
+
+                            <div class="form-control-wrapper">
+                                <input data-bv-field="data[User][password]" id="pwd3" class="form-control inputstyle passwordnew masked empty" required="" autocomplete="off" placeholder="Password more than 8 characters*" name="data[User][password]" type="password"><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i></div>
+                            <div class="verficacheckeye" id="eye3">show</div>
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][password]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Password is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][password]" data-bv-validator="stringLength" class="help-block" style="display: none;">Password should be atleast 8 character</small></div>
+                                                <p class="signupinfotext">
+                            By Signing up you agree to our <span><a class=" withripple" href="https://www.edureka.co/terms-and-conditions" target="_blank">T&amp;C</a></span> and <span>
+                                <a class=" withripple" href="https://www.edureka.co/privacy-policy" target="_blank">Privacy Policy</a></span>
+                        </p>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding spaceafterbutton">
+                            <button type="submit" class="bluebtn pull-right defdisablesignup ga-signup disabled">Create an account</button>
+                        </div>
+
+                    </form>
+                    <!--<div class="mobilealertnew red clearfix">
+                      <span class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobileredclass" class="mobilealertnew red clearfix" style="display:none;">
+        <span id="mobileredmsg" class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input    </span>
+    </div>
+    <div id="mobilegreenclass" class="mobilealertnew green clearfix" style="display:none;">
+        <span id="mobilegreenmsg" class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i> </span>
+    </div>
+</div>
+<div class="md-overlay"></div>
+<section>
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="capturemobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header signup-header">
+                    <h4 class="modal-title color-white">
+                        <span class="pull-left">
+                            WELCOME <label id="capturemobile_user_name"></label>
+                        </span>
+                        <span class="pull-right">                           
+                        </span>
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 linkedin-content">
+                            <h5 class="line-height23">It seems we don't have your phone number. Please share as it helps us to provide better customer service. Thank you!</h5>
+                            <form id="captureMobileForm" action="" method="post">
+                                <input name="data[User][email]" id="email_capturemobile" type="hidden">
+                                <input name="data[User][password]" id="password_capturemobile" type="hidden">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Mobile Number" required="" name="data[User][mobile]" type="text">
+                                </div>
+                                <!--                                <button type="button"  class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn">Continue</button>-->
+                                <button type="button" id="btnCaptureMobile" class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn" style="">Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--googleon: all--><div class="navbar-collapse collapse navbar-right" id="navbar" aria-expanded="false">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs"><!--
+                <li><a href="/instructors/add">For Instructors</a></li> -->
+                <li><a href="https://www.edureka.co/all-courses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=all-courses">All Course</a></li>
+            </ul>
+        </div></div>                </div>
+            </nav>
+        </section>
+    </header>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding">
+                <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 left-menu"> 
+    <div class="row left-menu-row">
+<div class="side-menu"><nav class="navbar navbar-default" role="navigation">
+<div class="side-menu-container side-menu-blog"><button type="button" class="navbar-toggle navbar-tog-open-close side-body"><span class="fa fa-bars"></span></button><div class="side-nav-title"><h2>Hadoop Tutorial Series</h2></div><ul style="position: relative; overflow: visible;" class="nav navbar-nav cus-nav-scroll dropdown-menu-scrollbar mCustomScrollbar _mCS_2 mCS-autoHide"><div tabindex="0" id="mCSB_2" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"><div id="mCSB_2_container" class="mCSB_container" style="position: relative; top: -701px; left: 0px;" dir="ltr">
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/big-data-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"> <span>Big Data Tutorial: All You Need To Know About Big Data!</span><span data-toggle="collapse" href="#dropdown-level-1-11710684035953b96620902" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-11710684035953b96620902" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/videos/big-data-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Big Data Tutorial – Get Started With Big Data And Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/what-is-hadoop?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X">What is Hadoop? Introduction to Big Data &amp; Hadoop</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hadoop-tutorial/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"> <span>Hadoop Tutorial: All you need to know about Hadoop!</span><span data-toggle="collapse" href="#dropdown-level-1-19045743585953b966209c2" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-19045743585953b966209c2" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/videos/hadoop-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Hadoop Tutorial – A Complete Tutorial For Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-ecosystem?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X">Hadoop Ecosystem: Hadoop Tools for Crunching Big Data</a>
+</li>
+<li class="panel panel-default first-level  active" id="dropdown"><a href="https://www.edureka.co/blog/hdfs-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"> <span>HDFS Tutorial: Introduction to HDFS &amp; its Features</span><span data-toggle="collapse" href="#dropdown-level-1-5299324875953b96620a82" class="fa fa-angle-right active"></span></a>
+<div id="dropdown-level-1-5299324875953b96620a82" class="panel-collapse collapse in"><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Apache Hadoop HDFS Architecture</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>How to Set Up Hadoop Cluster with HDFS High Availability</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/overview-of-hadoop-2-0-cluster-architecture-federation/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Overview of Hadoop 2.0 Cluster Architecture Federation</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Install Hadoop: Setting up a Single Node Hadoop Cluster</span></a></li>
+
+<li class="active"><a href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" class="active-link" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Setting Up A Multi Node Cluster In Hadoop 2.X</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>HDFS Commands: Hadoop Shell Commands to Manage HDFS</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/mapreduce-tutorial/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"> <span>MapReduce Tutorial – Fundamentals of MapReduce with MapReduce Example</span><span data-toggle="collapse" href="#dropdown-level-1-8006020805953b96620b36" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-8006020805953b96620b36" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/hadoop-streaming-mapreduce-program/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Hadoop Streaming: Writing A Hadoop MapReduce Program In Python</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/mapreduce-example-reduce-side-join/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>MapReduce Example: Reduce Side Join in Hadoop MapReduce</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/pig-tutorial/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"> <span>Pig Tutorial: Apache Pig Architecture &amp; Twitter Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-10249491315953b96620be9" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-10249491315953b96620be9" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/apache-pig-installation?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Apache Pig Installation on Linux</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/pig-programming-create-your-first-apache-pig-script/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Pig Programming: Create Your First Apache Pig Script</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/creating-udf-in-apache-pig/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Steps to Create UDF in Apache Pig</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hive-tutorial/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"> <span>Hive Tutorial – Hive Architecture and NASA Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-12224581955953b96620c9c" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-12224581955953b96620c9c" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/apache-hive-installation-on-ubuntu?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Apache Hive Installation on Ubuntu</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/hive-commands-with-examples?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Top Hive Commands with Examples in HQL</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/apache-hadoop-hive-script/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Apache Hadoop : Create your First HIVE Script</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hbase-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"> <span>HBase Tutorial: HBase Introduction and Facebook Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-21050762815953b96620d4d" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-21050762815953b96620d4d" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/hbase-architecture/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>HBase Architecture: HBase Data Model &amp; HBase Read/Write Mechanism</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/sample-hbase-poc/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Sample HBase POC</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/brief-introduction-to-oozie/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X">Brief Introduction to Oozie</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"> <span>Top 50 Hadoop Interview Questions For 2017</span><span data-toggle="collapse" href="#dropdown-level-1-18232638875953b96620e0b" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-18232638875953b96620e0b" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hdfs-2/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HDFS</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hadoop-cluster/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Setting Up Hadoop Cluster</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-mapreduce/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – MapReduce</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-pig/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – PIG</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hive-interview-questions?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Apache Hive</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hbase-interview-questions/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HBase</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-certification/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X">Hadoop Certification – Become a Certified Big Data Hadoop Professional</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-career/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X">Hadoop Career: Career in Big Data Analytics</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-3/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2.X" data-currpage="setting-up-a-multi-node-cluster-in-hadoop-2.X">What's New in Hadoop 3.0 - Enhancements in Apache Hadoop 3</a>
+</li>
+</div></div><div style="display: block;" id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: 220px; max-height: 579px; top: 259px;" oncontextmenu="return false;"><div style="line-height: 50px;" class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></ul></div></nav></div></div>
+</div>
+<!-- Right Panel ends -->
+                        <div class="col-lg-8 col-md-7 col-xs-12 col-sm-12 blogmobfull">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 bread-herohead">
+    <div class="herohead">
+        <div class="">
+            <div class="row">
+                                <div class="">
+                    <h6 class="breadcrumb-section hidden-xs ">
+                        <a class="text-bold text-normal underline-remove brdcrumclrinac" href="https://www.edureka.co/blog">Home</a>
+                        <!--                        &nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog chevron-level-0"></i>&nbsp;&nbsp;
+                        <a class="text-bold text-normal underline-remove brdcrumclrac reset-filters post-type-level" href="/blog">Blogs&nbsp;&nbsp;</a>-->
+                        <i class="fa fa-chevron-right chevronblog chevron-level-1 ">&nbsp;&nbsp;</i>
+                        <a class="text-bold text-normal underline-remove brdcrumclrac post-type-breadcrum reset-filters " href="https://www.edureka.co/blog">Blogs</a>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog hide cat-level-breadcrum"></i>&nbsp;&nbsp;
+                        <span class="text-bold text-normal underline-remove brdcrumclrac cat-level-breadcrum cat-level-breadcrum-title hide"></span>&nbsp;
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<!-- Top Navigation to be sent in blog phase 2 starts-->
+
+<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainnavigator">
+    <article class="navigatedetail col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <span class="blogall"><a href="https://www.edureka.co/blog//all"><i class="icon-Home_icon"></i></a></span>
+        <span class="bloghome"><a href="https://www.edureka.co/blog/">Blogs</a></span>
+        <span class="videohome"><a href="https://www.edureka.co/blog/videos">Videos</a></span>
+        <span class="interviewhome"><a href="https://www.edureka.co/blog/interview-questions">Interview Questions</a></span>
+    </article>
+</section>
+<!--Top Navigation to be sent in blog phase 2-->
+                            <section class="mainsecblog">
+                                <section class="blogmaincontainer">
+                                    <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding topsection">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogmainheading">
+        <h1 class="blogheading">
+            Setting Up A Multi Node Cluster In Hadoop 2.X        </h1>
+        <span class="recommendedsec clearfix"><p>
+                                                    <i class="fa fa-bookmark newbookmark"></i> Recommended by  55 users                            </p>
+        </span>
+        <div class="top-sec-infodetail">
+            <span class="authorblog"><a href="https://www.edureka.co/blog/author/shubham-sinha/" title="Posts by Shubham Sinha" rel="author">Shubham Sinha</a></span>
+            <span class="dateblog">Nov 18, 2015</span> 
+             
+<div class="maxcollection maxcollection-1" data-collection="1"><span class="mb-collection-item item-24" data-doc-id="24" data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-25" data-doc-id="25" data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-26" data-doc-id="26" data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-27" data-doc-id="27" data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span></div>        </div>
+    </article>
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topimage">
+        <img class="blogimg" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Heroimage%25201.jpg" alt="Setting Up A Multi Node Cluster In Hadoop 2.X" title="Setting Up A Multi Node Cluster In Hadoop 2.X">    </article>
+</section>                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 no-padding hidden-sm hidden-xs share-leftnav">
+                                            <div class="nav-stacked-social affix" data-spy="affix" data-offset-top="350" data-offset-bottom="400">
+                                                <div class="maxcollection maxcollection-1" data-collection="1"><span class="mb-collection-item item-24" data-doc-id="24_1" data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-25" data-doc-id="25_1" data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-26" data-doc-id="26_1" data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-27" data-doc-id="27_1" data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span></div>                                            </div>
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 no-padding">
+                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogdetailsec">
+    <article class="col-md-9 col-lg-9 col-sm-9 col-xs-12 blogdescription"> 
+        <span class="AddtoBookmark"><a href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X" data-title="Setting Up A Multi Node Cluster In Hadoop 2.X">
+                <i class="icon-Add_to_bookmark"></i>
+                <span class="Bookmark-text"><span>Add to</span> Bookmark</span></a>
+        </span>
+
+            <div class="modal thispost-mail fade" id="emailpostpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content centered">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span></button>
+                    <div class="Mailpost">
+                        <span class="icon"><i class="icon-Mail_this_post"></i></span>
+                        <span class="Mailthispost">Email this post</span>
+                        <form class="email-me-the-post" method="post" novalidate="novalidate">
+                            <div class="input-name  ">
+                                <input name="contentId" value="29363" type="hidden">
+                                <input name="name" class="required" required="" placeholder="Enter Your Name" autocomplete="false" type="text">
+                                <div class="error-name">
+                                    Please enter a valid input.
+                                </div>
+                            </div>
+                            <div class="input-email ">
+                                <input class="email required" required="" name="emails" placeholder="Enter Email ID’s ( Separated by commas )" autocomplete="false" type="text">
+                                <div class="error-email">
+                                    Please enter a valid email id or comma separated email id's.
+                                </div>
+                            </div>
+                            <button type="submit" class="Submit-mailpost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="Mailpost-thankyou">
+                        <i class="icon-success"></i>
+                        <span class="Mailthispost">The post has been successfully mailed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="EmailthisPost" data-toggle="modal" data-target="#emailpostpop">
+            <i class="icon-Mail_this_post"></i>
+            <span class="EmailthisPost-text">Email <span>this Post</span></span>
+        </span> 
+        <span class="viewsblogsec">
+            <span class="viewscount details-page-views-count"><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 236.6K</span>
+        </span>
+        <span class="commentsblogsec">
+            <a href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X#comments-wrapper" class="commentcount">
+                <span><i class="icon-comments"></i></span>
+            </a>&nbsp;&nbsp;
+            <a class="disqus-comment-count" data-disqus-url="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X" href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X#disqus_thread">14 </a>
+        </span>
+    </article>
+            <article class="col-md-3 col-lg-3 col-sm-3 col-xs-12 related-blog hidden-sm hidden-xs">
+            <ul class="pager">
+                <li><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="show-next-in-series"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </article>
+            <!-- <article class = "col-md-3 col-lg-3 col-sm-3 col-xs-12 downloadpdfblog">
+         <span class = "downloadpdf"></span>
+ </article> -->
+</section>                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogcontentsec">
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        </p><h2><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;"><strong>Multi Node Cluster in Hadoop 2.x</strong></span></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">From our previous blog in&nbsp;<a href="http://www.edureka.co/blog/hadoop-tutorial/?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=multi-node-cluster-in-hadoop" target="_blank" rel="noopener noreferrer"><strong>Hadoop Tutorial </strong><strong>Series</strong></a>, we learnt how to setup a<strong>&nbsp;</strong><strong><a href="http://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=multi-node-cluster-in-hadoop" target="_blank" rel="noopener noreferrer">Hadoop Single Node Cluster</a></strong>. Now, I will show how to set up a <em><strong>Hadoop Multi Node Cluster</strong></em>.
+ A Multi Node Cluster in Hadoop contains two or more DataNodes in a 
+distributed Hadoop environment.&nbsp;This is practically used in 
+organizations to store and analyze their Petabytes and Exabytes of data.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Here, we are taking two machines – <strong>master</strong> and <strong>slave</strong>. On both the machines, a Datanode will be running.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Let us start with the setup of Multi Node Cluster in Hadoop.</span></p>
+<h2><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Prerequisites</span></strong></h2>
+<ul>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Cent OS 6.5</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Hadoop-2.7.3</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">JAVA 8</span></li>
+<li><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">SSH</span></li>
+</ul>
+<h2><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">Setup of Multi Node Cluster in Hadoop</span></strong></h2>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">We have two machines (master and slave) with IP:</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Master IP: <strong>192.168.56.102</strong></span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Slave IP: <strong>192.168.56.103</strong></span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 1:</strong> Check the IP address of all machines.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> ip addr&nbsp;show (you can use the&nbsp;<em><strong>ifconfig</strong></em>&nbsp;command as well)</span></p>
+<p><img class="aligncenter size-large wp-image-37006" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Master-IP-Address-Hadoop-Multi-Node-Cluster-Edureka-528x221.png" alt="Master IP Address - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Master-IP-Address-Hadoop-Multi-Node-Cluster-Edureka-528x221.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Master-IP-Address-Hadoop-Multi-Node-Cluster-Edureka-300x126.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Master-IP-Address-Hadoop-Multi-Node-Cluster-Edureka-768x321.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Master-IP-Address-Hadoop-Multi-Node-Cluster-Edureka.png 1056w" sizes="(max-width: 528px) 100vw, 528px" height="221" width="528"></p>
+<p><img class="aligncenter size-large wp-image-37007" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Slave-IP-Address-Hadoop-Multi-Node-Cluster-Edureka-528x230.png" alt="Slave IP Address - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Slave-IP-Address-Hadoop-Multi-Node-Cluster-Edureka-528x230.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Slave-IP-Address-Hadoop-Multi-Node-Cluster-Edureka-300x130.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Slave-IP-Address-Hadoop-Multi-Node-Cluster-Edureka-768x334.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Slave-IP-Address-Hadoop-Multi-Node-Cluster-Edureka.png 1111w" sizes="(max-width: 528px) 100vw, 528px" height="230" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 2:</strong> Disable the firewall restrictions.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong> Command:</strong></em> service iptables stop</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em>&nbsp;sudo chkconfig iptables off</span></p>
+<p><img class="aligncenter size-large wp-image-37008" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Resolve-Firewall-issues-Hadoop-Multi-Node-Cluster-Edureka-52.png" alt="Resolve Firewall Issues - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Resolve-Firewall-issues-Hadoop-Multi-Node-Cluster-Edureka-528x77.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Resolve-Firewall-issues-Hadoop-Multi-Node-Cluster-Edureka-300x44.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Resolve-Firewall-issues-Hadoop-Multi-Node-Cluster-Edureka-768x113.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Resolve-Firewall-issues-Hadoop-Multi-Node-Cluster-Edureka.png 1111w" sizes="(max-width: 528px) 100vw, 528px" height="77" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 3:</strong> Open hosts file to add master and data node with their respective IP addresses.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> sudo nano /etc/hosts</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Same properties will be displayed in the master and slave hosts files.</span></p>
+<p><img class="aligncenter size-large wp-image-37009" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Open-Hosts-File-Hadoop-Multi-Node-Cluster-Edureka-528x74.png" alt="Open hosts file - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Open-Hosts-File-Hadoop-Multi-Node-Cluster-Edureka-528x74.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Open-Hosts-File-Hadoop-Multi-Node-Cluster-Edureka-300x42.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Open-Hosts-File-Hadoop-Multi-Node-Cluster-Edureka-768x107.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Open-Hosts-File-Hadoop-Multi-Node-Cluster-Edureka.png 1025w" sizes="(max-width: 528px) 100vw, 528px" height="74" width="528"></p>
+<p><img class="aligncenter size-large wp-image-37010" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Master-Hosts-file-cofiguration-Hadoop-Multi-Node-Cluster-Edu.png" alt="Master's hosts file cofiguration - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Master-Hosts-file-cofiguration-Hadoop-Multi-Node-Cluster-Edureka-528x117.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Master-Hosts-file-cofiguration-Hadoop-Multi-Node-Cluster-Edureka-300x66.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Master-Hosts-file-cofiguration-Hadoop-Multi-Node-Cluster-Edureka-768x170.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Master-Hosts-file-cofiguration-Hadoop-Multi-Node-Cluster-Edureka.png 1055w" sizes="(max-width: 528px) 100vw, 528px" height="117" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 4:</strong> Restart the sshd service.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em>&nbsp;service sshd restart</span></p>
+<p><img class="aligncenter size-large wp-image-37011" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/ssh-service-restart-Hadoop-Multi-Node-Cluster-Edureka-528x59.png" alt="ssh Service Restart - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/ssh-service-restart-Hadoop-Multi-Node-Cluster-Edureka-528x59.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/ssh-service-restart-Hadoop-Multi-Node-Cluster-Edureka-300x34.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/ssh-service-restart-Hadoop-Multi-Node-Cluster-Edureka-768x86.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/ssh-service-restart-Hadoop-Multi-Node-Cluster-Edureka.png 1058w" sizes="(max-width: 528px) 100vw, 528px" height="59" width="528"></p>
+<p>&nbsp;</p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 5:</strong>
+ Create the SSH Key in the master node. (Press&nbsp;enter button when it
+ asks you to&nbsp;enter a&nbsp;filename to save the key).</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> ssh-keygen -t rsa -P “”</span></p>
+<p><img class="aligncenter size-large wp-image-37012" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Generating-keygen-in-master-Hadoop-Multi-Node-Cluster-Edurek.png" alt="Generating ssh key on master node - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Generating-keygen-in-master-Hadoop-Multi-Node-Cluster-Edureka-528x268.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Generating-keygen-in-master-Hadoop-Multi-Node-Cluster-Edureka-300x152.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Generating-keygen-in-master-Hadoop-Multi-Node-Cluster-Edureka-768x390.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Generating-keygen-in-master-Hadoop-Multi-Node-Cluster-Edureka.png 1021w" sizes="(max-width: 528px) 100vw, 528px" height="268" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 6:</strong> Copy the generated ssh key to master node’s authorized keys.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> cat $HOME/.ssh/id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_keys</span></p>
+<p><img class="aligncenter size-large wp-image-37013" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Authorizing-localhost-Hadoop-Multi-Node-Cluster-Edureka-528x.png" alt="ssh Authorizing localhost - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Authorizing-localhost-Hadoop-Multi-Node-Cluster-Edureka-528x72.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Authorizing-localhost-Hadoop-Multi-Node-Cluster-Edureka-300x41.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Authorizing-localhost-Hadoop-Multi-Node-Cluster-Edureka-768x105.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Authorizing-localhost-Hadoop-Multi-Node-Cluster-Edureka.png 1024w" sizes="(max-width: 528px) 100vw, 528px" height="72" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 7:&nbsp;</strong>Copy the master node’s ssh key to slave’s authorized keys.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong> </em>ssh-copy-id -i $HOME/.ssh/id_rsa.pub edureka@slave</span></p>
+<p><img class="aligncenter size-large wp-image-37014" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Copy-masters-key-to-slave-Hadoop-Multi-Node-Cluster-Edureka-.png" alt="Copy master node key to slave - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Copy-masters-key-to-slave-Hadoop-Multi-Node-Cluster-Edureka-528x74.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Copy-masters-key-to-slave-Hadoop-Multi-Node-Cluster-Edureka-300x42.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Copy-masters-key-to-slave-Hadoop-Multi-Node-Cluster-Edureka-768x107.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Copy-masters-key-to-slave-Hadoop-Multi-Node-Cluster-Edureka.png 1059w" sizes="(max-width: 528px) 100vw, 528px" height="74" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 8: </strong><a href="https://goo.gl/B2BAk2" target="_blank" rel="noopener noreferrer">Click here</a> to download the Java 8 Package. Save&nbsp;this file in your home directory.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 9:</strong> Extract the Java Tar File on all nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong><em>Command</em>:</strong> tar -xvf jdk-8u101-linux-i586.tar.gz</span></p>
+<p><img class="aligncenter size-large wp-image-37017" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/extract-java-Hadoop-Multi-Node-Cluster-Edureka-528x85.png" alt="Extract java - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/extract-java-Hadoop-Multi-Node-Cluster-Edureka-528x85.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/extract-java-Hadoop-Multi-Node-Cluster-Edureka-300x48.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/extract-java-Hadoop-Multi-Node-Cluster-Edureka-768x123.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/extract-java-Hadoop-Multi-Node-Cluster-Edureka.png 924w" sizes="(max-width: 528px) 100vw, 528px" height="85" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 10: </strong>Download the Hadoop 2.7.3 Package on all nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong><em>Command</em>:</strong> wget https://archive.apache.org/dist/hadoop/core/hadoop-2.7.3/hadoop-2.7.3.tar.gz</span></p>
+<p><img class="aligncenter size-large wp-image-37018" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/download-hadoop-Hadoop-Multi-Node-Cluster-Edureka-528x79.png" alt="Download Hadoop tar - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/download-hadoop-Hadoop-Multi-Node-Cluster-Edureka-528x79.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/download-hadoop-Hadoop-Multi-Node-Cluster-Edureka-300x45.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/download-hadoop-Hadoop-Multi-Node-Cluster-Edureka-768x115.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/download-hadoop-Hadoop-Multi-Node-Cluster-Edureka.png 925w" sizes="(max-width: 528px) 100vw, 528px" height="79" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 11: </strong>Extract the Hadoop tar File on all nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong><em>Command</em>:</strong> tar -xvf hadoop-2.7.3.tar.gz</span></p>
+<p><img class="aligncenter size-large wp-image-37019" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/extract-hadoop-Hadoop-Multi-Node-Cluster-Edureka-528x79.png" alt="Extract Hadoop tar file - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/extract-hadoop-Hadoop-Multi-Node-Cluster-Edureka-528x79.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/extract-hadoop-Hadoop-Multi-Node-Cluster-Edureka-300x45.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/extract-hadoop-Hadoop-Multi-Node-Cluster-Edureka-768x116.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/extract-hadoop-Hadoop-Multi-Node-Cluster-Edureka.png 924w" sizes="(max-width: 528px) 100vw, 528px" height="79" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 12: </strong>Add the Hadoop and Java paths in the bash file&nbsp;(.bashrc) on all nodes.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Open<strong>.</strong>&nbsp;<strong>bashrc</strong> file. Now, add Hadoop and Java Path as shown below:</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong><em>Command</em>:</strong>&nbsp; sudo gedit .bashrc</span></p>
+<p><img class="aligncenter size-large wp-image-37020" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/open-bashrc-Hadoop-Multi-Node-Cluster-Edureka-528x63.png" alt="Open bashrc - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-bashrc-Hadoop-Multi-Node-Cluster-Edureka-528x63.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-bashrc-Hadoop-Multi-Node-Cluster-Edureka-300x36.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-bashrc-Hadoop-Multi-Node-Cluster-Edureka-768x92.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-bashrc-Hadoop-Multi-Node-Cluster-Edureka.png 1024w" sizes="(max-width: 528px) 100vw, 528px" height="63" width="528"></p>
+<p><img class="aligncenter size-large wp-image-37086" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/bash-file-Hadoop-Multi-Node-Cluster-Edureka-528x216.png" alt="bash file - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/bash-file-Hadoop-Multi-Node-Cluster-Edureka-528x216.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/bash-file-Hadoop-Multi-Node-Cluster-Edureka-300x123.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/bash-file-Hadoop-Multi-Node-Cluster-Edureka-768x314.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/bash-file-Hadoop-Multi-Node-Cluster-Edureka.png 992w" sizes="(max-width: 528px) 100vw, 528px" height="216" width="528"></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Then, save the bash file and close it.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">For applying all these changes to the current Terminal, execute the source command.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong><em>Command</em>:</strong> source .bashrc</span></p>
+<p><img class="aligncenter size-large wp-image-37021" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/source-bash-Hadoop-Multi-Node-Cluster-Edureka-528x101.png" alt="Source bash - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/source-bash-Hadoop-Multi-Node-Cluster-Edureka-528x101.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/source-bash-Hadoop-Multi-Node-Cluster-Edureka-300x58.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/source-bash-Hadoop-Multi-Node-Cluster-Edureka-768x148.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/source-bash-Hadoop-Multi-Node-Cluster-Edureka.png 1025w" sizes="(max-width: 528px) 100vw, 528px" height="101" width="528"></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">To
+ make sure that Java and Hadoop have been properly installed on your 
+system and&nbsp;can be accessed&nbsp;through the Terminal, execute the 
+java -version and hadoop version commands.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong><em>Command</em>: </strong>java&nbsp;-version</span></p>
+<p><img class="aligncenter size-large wp-image-37022" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/java-version-Hadoop-Multi-Node-Cluster-Edureka-528x123.png" alt="java version - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/java-version-Hadoop-Multi-Node-Cluster-Edureka-528x123.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/java-version-Hadoop-Multi-Node-Cluster-Edureka-300x70.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/java-version-Hadoop-Multi-Node-Cluster-Edureka-768x179.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/java-version-Hadoop-Multi-Node-Cluster-Edureka.png 1023w" sizes="(max-width: 528px) 100vw, 528px" height="123" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong><em>Command</em>: </strong>hadoop&nbsp;version</span></p>
+<p><img class="aligncenter size-large wp-image-37023" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/hadoop-version-Hadoop-Multi-Node-Cluster-Edureka-528x167.png" alt="hadoop version - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/hadoop-version-Hadoop-Multi-Node-Cluster-Edureka-528x167.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/hadoop-version-Hadoop-Multi-Node-Cluster-Edureka-300x95.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/hadoop-version-Hadoop-Multi-Node-Cluster-Edureka-768x243.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/hadoop-version-Hadoop-Multi-Node-Cluster-Edureka.png 1025w" sizes="(max-width: 528px) 100vw, 528px" height="167" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now edit the configuration files in <strong>hadoop-2.7.3/etc/hadoop</strong> directory.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 13:</strong> Create masters file and edit as follows in both master and slave machines as below:</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command</strong></em>: sudo gedit masters</span></p>
+<p><img class="aligncenter size-large wp-image-37041" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/masters-Hadoop-Multi-Node-Cluster-Edureka-528x103.png" alt="masters - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/masters-Hadoop-Multi-Node-Cluster-Edureka-528x103.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/masters-Hadoop-Multi-Node-Cluster-Edureka-300x59.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/masters-Hadoop-Multi-Node-Cluster-Edureka-768x150.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/masters-Hadoop-Multi-Node-Cluster-Edureka.png 1038w" sizes="(max-width: 528px) 100vw, 528px" height="103" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 14:</strong> Edit slaves file in master machine as follows:</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> sudo gedit /home/edureka/hadoop-2.7.3/etc/hadoop/slaves</span></p>
+<p><img class="aligncenter size-large wp-image-37042" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/master-slaves-file-Hadoop-Multi-Node-Cluster-Edureka-528x89.png" alt="master node slaves file - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/master-slaves-file-Hadoop-Multi-Node-Cluster-Edureka-528x89.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/master-slaves-file-Hadoop-Multi-Node-Cluster-Edureka-300x50.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/master-slaves-file-Hadoop-Multi-Node-Cluster-Edureka-768x129.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/master-slaves-file-Hadoop-Multi-Node-Cluster-Edureka.png 1035w" sizes="(max-width: 528px) 100vw, 528px" height="89" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 15:</strong> Edit slaves file in slave machine as follows:</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> sudo gedit /home/edureka/hadoop-2.7.3/etc/hadoop/slaves</span></p>
+<p><img class="aligncenter size-large wp-image-37043" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/slave-node-slaves-file-Hadoop-Multi-Node-Cluster-Edureka-528.png" alt="slave node slaves file - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/slave-node-slaves-file-Hadoop-Multi-Node-Cluster-Edureka-528x130.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/slave-node-slaves-file-Hadoop-Multi-Node-Cluster-Edureka-300x74.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/slave-node-slaves-file-Hadoop-Multi-Node-Cluster-Edureka.png 726w" sizes="(max-width: 528px) 100vw, 528px" height="130" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 16:</strong> Edit core-site.xml on both master and slave machines as follows:</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> sudo gedit /home/edureka/hadoop-2.7.3/etc/hadoop/core-site.xml</span></p>
+<p><img class="aligncenter size-large wp-image-37025" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/open-core-site-Hadoop-Multi-Node-Cluster-Edureka-528x55.png" alt="open core-site - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-core-site-Hadoop-Multi-Node-Cluster-Edureka-528x55.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-core-site-Hadoop-Multi-Node-Cluster-Edureka-300x31.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-core-site-Hadoop-Multi-Node-Cluster-Edureka-768x80.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-core-site-Hadoop-Multi-Node-Cluster-Edureka.png 1022w" sizes="(max-width: 528px) 100vw, 528px" height="55" width="528"></p>
+<p>&nbsp;</p>
+<div><div id="highlighter_909472" class="syntaxhighlighter  xml"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;?</code><code class="xml keyword">xml</code> <code class="xml color1">version</code><code class="xml plain">=</code><code class="xml string">"1.0"</code> <code class="xml color1">encoding</code><code class="xml plain">=</code><code class="xml string">"UTF-8"</code><code class="xml plain">?&gt;</code></div><div class="line number2 index1 alt1"><code class="xml plain">&lt;?</code><code class="xml keyword">xml-stylesheet</code> <code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"text/xsl"</code> <code class="xml color1">href</code><code class="xml plain">=</code><code class="xml string">"configuration.xsl"</code><code class="xml plain">?&gt;</code></div><div class="line number3 index2 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;fs.default.name&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;<a href="hdfs://master:9000">hdfs://master:9000</a>&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number8 index7 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 7:</strong> Edit hdfs-site.xml on master as follows:</span><br>
+<span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> sudo gedit /home/edureka/hadoop-2.7.3/etc/hadoop/hdfs-site.xml</span></p>
+<p><img class="aligncenter size-large wp-image-37027" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/open-hdfs-site-Hadoop-Multi-Node-Cluster-Edureka-528x86.png" alt="open hdfs-site Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-hdfs-site-Hadoop-Multi-Node-Cluster-Edureka-528x86.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-hdfs-site-Hadoop-Multi-Node-Cluster-Edureka-300x49.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-hdfs-site-Hadoop-Multi-Node-Cluster-Edureka-768x125.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-hdfs-site-Hadoop-Multi-Node-Cluster-Edureka.png 1021w" sizes="(max-width: 528px) 100vw, 528px" height="86" width="528"></p>
+<p>&nbsp;</p>
+<div><div id="highlighter_249442" class="syntaxhighlighter  xml"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;?</code><code class="xml keyword">xml</code> <code class="xml color1">version</code><code class="xml plain">=</code><code class="xml string">"1.0"</code> <code class="xml color1">encoding</code><code class="xml plain">=</code><code class="xml string">"UTF-8"</code><code class="xml plain">?&gt;</code></div><div class="line number2 index1 alt1"><code class="xml plain">&lt;?</code><code class="xml keyword">xml-stylesheet</code> <code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"text/xsl"</code> <code class="xml color1">href</code><code class="xml plain">=</code><code class="xml string">"configuration.xsl"</code><code class="xml plain">?&gt;</code></div><div class="line number3 index2 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;dfs.replication&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;2&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number8 index7 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number9 index8 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;dfs.permissions&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number10 index9 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;false&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number11 index10 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number12 index11 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number13 index12 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;dfs.namenode.name.dir&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number14 index13 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;/home/edureka/hadoop-2.7.3/namenode&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number15 index14 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number16 index15 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number17 index16 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;dfs.datanode.data.dir&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number18 index17 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;/home/edureka/hadoop-2.7.3/datanode&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number19 index18 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number20 index19 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 18:</strong> Edit hdfs-site.xml on slave machine as follows:</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> sudo gedit /home/edureka/hadoop-2.7.3/etc/hadoop/hdfs-site.xml</span></p>
+<div><div id="highlighter_344808" class="syntaxhighlighter  xml"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;?</code><code class="xml keyword">xml</code> <code class="xml color1">version</code><code class="xml plain">=</code><code class="xml string">"1.0"</code> <code class="xml color1">encoding</code><code class="xml plain">=</code><code class="xml string">"UTF-8"</code><code class="xml plain">?&gt;</code></div><div class="line number2 index1 alt1"><code class="xml plain">&lt;?</code><code class="xml keyword">xml-stylesheet</code> <code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"text/xsl"</code> <code class="xml color1">href</code><code class="xml plain">=</code><code class="xml string">"configuration.xsl"</code><code class="xml plain">?&gt;</code></div><div class="line number3 index2 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;dfs.replication&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;2&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number8 index7 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number9 index8 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;dfs.permissions&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number10 index9 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;false&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number11 index10 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number12 index11 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number13 index12 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;dfs.datanode.data.dir&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number14 index13 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;/home/edureka/hadoop-2.7.3/datanode&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number15 index14 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number16 index15 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 19:</strong>
+ Copy mapred-site from the template in configuration folder and the edit
+ mapred-site.xml on both master and slave machines as follows:</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em>&nbsp;cp mapred-site.xml.template mapred-site.xml</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> sudo gedit /home/edureka/hadoop-2.7.3/etc/hadoop/mapred-site.xml</span></p>
+<p><img class="aligncenter size-large wp-image-37030" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/copy-mapred-site-from-template-Hadoop-Multi-Node-Cluster-Edu.png" alt="copy mapred-site from template - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/copy-mapred-site-from-template-Hadoop-Multi-Node-Cluster-Edureka-528x76.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/copy-mapred-site-from-template-Hadoop-Multi-Node-Cluster-Edureka-300x43.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/copy-mapred-site-from-template-Hadoop-Multi-Node-Cluster-Edureka-768x110.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/copy-mapred-site-from-template-Hadoop-Multi-Node-Cluster-Edureka.png 1025w" sizes="(max-width: 528px) 100vw, 528px" height="76" width="528"></p>
+<p><img class="aligncenter size-large wp-image-37031" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka-528x77.png" alt="open yarn-site - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka-528x77.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka-300x44.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka-768x112.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka.png 1023w" sizes="(max-width: 528px) 100vw, 528px" height="77" width="528"></p>
+<p>&nbsp;</p>
+<div><div id="highlighter_206662" class="syntaxhighlighter  xml"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;?</code><code class="xml keyword">xml</code> <code class="xml color1">version</code><code class="xml plain">=</code><code class="xml string">"1.0"</code> <code class="xml color1">encoding</code><code class="xml plain">=</code><code class="xml string">"UTF-8"</code><code class="xml plain">?&gt;</code></div><div class="line number2 index1 alt1"><code class="xml plain">&lt;?</code><code class="xml keyword">xml-stylesheet</code> <code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"text/xsl"</code> <code class="xml color1">href</code><code class="xml plain">=</code><code class="xml string">"configuration.xsl"</code><code class="xml plain">?&gt;</code></div><div class="line number3 index2 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;mapreduce.framework.name&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;yarn&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number8 index7 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 20:</strong> Edit yarn-site.xml on both master and slave machines as follows:</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> sudo gedit /home/edureka/hadoop-2.7.3/etc/hadoop/yarn-site.xml</span></p>
+<p><img class="aligncenter size-large wp-image-37033" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka-1-528x77.png" alt="open yarn-site - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka-1-528x77.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka-1-300x44.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka-1-768x112.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/open-yarn-site-Hadoop-Multi-Node-Cluster-Edureka-1.png 1023w" sizes="(max-width: 528px) 100vw, 528px" height="77" width="528"></p>
+<p>&nbsp;</p>
+<div><div id="highlighter_386830" class="syntaxhighlighter  xml"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;?</code><code class="xml keyword">xml</code> <code class="xml color1">version</code><code class="xml plain">=</code><code class="xml string">"1.0"</code> <code class="xml color1">encoding</code><code class="xml plain">=</code><code class="xml string">"UTF-8"</code><code class="xml plain">?&gt;</code></div><div class="line number2 index1 alt1"><code class="xml plain">&lt;?</code><code class="xml keyword">xml-stylesheet</code> <code class="xml color1">type</code><code class="xml plain">=</code><code class="xml string">"text/xsl"</code> <code class="xml color1">href</code><code class="xml plain">=</code><code class="xml string">"configuration.xsl"</code><code class="xml plain">?&gt;</code></div><div class="line number3 index2 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;yarn.nodemanager.aux-services&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;mapreduce_shuffle&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number8 index7 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number9 index8 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">name</code><code class="xml plain">&gt;yarn.nodemanager.auxservices.mapreduce.shuffle.class&lt;/</code><code class="xml keyword">name</code><code class="xml plain">&gt;</code></div><div class="line number10 index9 alt1"><code class="xml plain">&lt;</code><code class="xml keyword">value</code><code class="xml plain">&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/</code><code class="xml keyword">value</code><code class="xml plain">&gt;</code></div><div class="line number11 index10 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number12 index11 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">configuration</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 21:</strong>&nbsp;Format the namenode&nbsp;(Only on master machine).</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> hadoop namenode -format</span></p>
+<p><img class="aligncenter size-large wp-image-37035" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/namenode-format-Hadoop-Multi-Node-Cluster-Edureka-528x77.png" alt="Namenode format - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/namenode-format-Hadoop-Multi-Node-Cluster-Edureka-528x77.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/namenode-format-Hadoop-Multi-Node-Cluster-Edureka-300x43.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/namenode-format-Hadoop-Multi-Node-Cluster-Edureka-768x111.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/namenode-format-Hadoop-Multi-Node-Cluster-Edureka.png 1021w" sizes="(max-width: 528px) 100vw, 528px" height="77" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 22:</strong> Start all daemons&nbsp;(Only on master machine).</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong></em> ./sbin/start-all.sh</span></p>
+<p><img class="aligncenter size-large wp-image-37036" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/start-all-Hadoop-Multi-Node-Cluster-Edureka-528x62.png" alt="start-all daemon - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/start-all-Hadoop-Multi-Node-Cluster-Edureka-528x62.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/start-all-Hadoop-Multi-Node-Cluster-Edureka-300x35.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/start-all-Hadoop-Multi-Node-Cluster-Edureka-768x90.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/start-all-Hadoop-Multi-Node-Cluster-Edureka.png 1023w" sizes="(max-width: 528px) 100vw, 528px" height="62" width="528"></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><strong>STEP 23:</strong> Check all the daemons running on&nbsp;both master and slave machines.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Command:</strong> </em>jps</span></p>
+<p style="text-align: center;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em>On master</em></span></strong></p>
+<p><img class="aligncenter size-large wp-image-37037" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/jps-Hadoop-Multi-Node-Cluster-Edureka-528x121.png" alt="jps - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/jps-Hadoop-Multi-Node-Cluster-Edureka-528x121.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/jps-Hadoop-Multi-Node-Cluster-Edureka-300x68.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/jps-Hadoop-Multi-Node-Cluster-Edureka-768x175.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/jps-Hadoop-Multi-Node-Cluster-Edureka.png 1060w" sizes="(max-width: 528px) 100vw, 528px" height="121" width="528"></p>
+<p style="text-align: center;"><strong><em><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">On slave</span></em></strong></p>
+<p><img class="aligncenter size-large wp-image-37038" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/jps-slave-Hadoop-Multi-Node-Cluster-Edureka-528x94.png" alt="jps slave - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/jps-slave-Hadoop-Multi-Node-Cluster-Edureka-528x94.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/jps-slave-Hadoop-Multi-Node-Cluster-Edureka-300x53.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/jps-slave-Hadoop-Multi-Node-Cluster-Edureka-768x137.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/jps-slave-Hadoop-Multi-Node-Cluster-Edureka.png 1112w" sizes="(max-width: 528px) 100vw, 528px" height="94" width="528"></p>
+<p>&nbsp;</p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">At last, open the browser and go to <strong>master</strong>:<strong>50070/dfshealth.html</strong> on your master machine, this will give you the NameNode interface. Scroll down and see for the number of <strong>live nodes</strong>, if its <strong>2</strong>,
+ you have successfully setup a multi node Hadoop&nbsp;cluster. In case, 
+it’s not 2, you might have missed out any of the&nbsp;steps which I have
+ mentioned above. But no need to worry, you can go back and verify all 
+the configurations again to find the issues and then correct them.</span></p>
+<p><img class="aligncenter size-large wp-image-37039" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Web-UI-Hadoop-Multi-Node-Cluster-Edureka-528x206.png" alt="web UI - Hadoop Multi Node Cluster - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Web-UI-Hadoop-Multi-Node-Cluster-Edureka-528x206.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Web-UI-Hadoop-Multi-Node-Cluster-Edureka-300x117.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Web-UI-Hadoop-Multi-Node-Cluster-Edureka-768x300.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Web-UI-Hadoop-Multi-Node-Cluster-Edureka.png 1023w" sizes="(max-width: 528px) 100vw, 528px" height="206" width="528"></p>
+<p>&nbsp;</p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Here, we have only 2 DataNodes. If you want, you can add more DataNodes according to your needs, refer our&nbsp;blog on <strong><a href="http://www.edureka.co/blog/commissioning-and-decommissioning-nodes-in-a-hadoop-cluster/?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=multi-node-cluster-in-hadoop" target="_blank" rel="noopener noreferrer">Commissioning and Decommissioning Nodes in a Hadoop Cluster</a></strong>.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">I
+ hope you would have successfully installed a Hadoop Multi Node Cluster.
+ If you are facing any problem, you can comment below, we will be 
+replying shortly. In our next blog of <strong><a href="http://www.edureka.co/blog/hadoop-tutorial/?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=multi-node-cluster-in-hadoop" target="_blank" rel="noopener noreferrer">Hadoop Tutorial Series</a>,</strong>&nbsp;you will learn some important <strong><a href="http://www.edureka.co/blog/hdfs-commands-hadoop-shell-command?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=multi-node-cluster-in-hadoop" target="_blank" rel="noopener noreferrer">HDFS commands</a></strong>&nbsp;and you can start playing with Hadoop.</span></p>
+<p style="text-align: center;"><a class="maxbutton-14 maxbutton maxbutton-download-green-small" target="_blank" href="http://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster?utm_source=blog&amp;utm_medium=blog-cta&amp;utm_campaign=multinode-hadoop-installation-p"><span class="mb-text">&lt;&lt;      Previous Blog</span></a> &nbsp; <a class="maxbutton-14 maxbutton maxbutton-download-green-small" target="_blank" href="http://www.edureka.co/blog/hdfs-commands-hadoop-shell-command?utm_source=blog&amp;utm_medium=blog-cta&amp;utm_campaign=multinode-hadoop-installation-n"><span class="mb-text">Next Blog      &gt;&gt;</span></a></p>
+<p><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now that you have understood how to install Hadoop Multi Node Cluster, check out the <strong><a href="http://www.edureka.co/big-data-and-hadoop/?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=multi-node-cluster-in-hadoop" target="_blank" rel="noopener noreferrer">Hadoop training</a></strong>
+ by Edureka, a trusted online learning company with a network of more 
+than 250,000 satisfied learners spread across the globe. The Edureka Big
+ Data Hadoop Certification Training course helps learners become expert 
+in HDFS, Yarn, MapReduce, Pig, Hive, HBase, Oozie, Flume and Sqoop using
+ real-time use cases on Retail, Social Media, Aviation, Tourism, Finance
+ domain.</span></em></p>
+<p><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Got a question for us? Please mention it in the comments section and we will get back to you.</span></em></p>
+                                                    <p></p>
+                                                </article>
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        </p><div id="author-bio-box"><img alt="Shubham Sinha" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Shubham-Sinha_avatar-80x80.jpg" class="avatar avatar-80 photo" height="80" width="80"><span class="author-name">About Shubham Sinha (<a href="https://www.edureka.co/blog/author/shubham-sinha/">13 Posts</a>)</span><p>Shubham
+ Sinha is a Big Data and Hadoop expert working as a Research Analyst at 
+Edureka. He is keen to work with Big Data related technologies such as 
+Hadoop, Spark, Flink and Storm and web development technologies 
+including Angular, Node.js &amp; PHP.</p><div class="bio-socials"></div></div><br><div class="clear"></div>                                                    <p></p>
+                                                </article>
+                                                <div class="bot-shareoption">
+                                                    <span class="Shareon-bot">
+                                                        Share on
+                                                    </span>
+                                                    <div class="maxcollection maxcollection-1" data-collection="1"><span class="mb-collection-item item-24" data-doc-id="24_2" data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X&amp;utm_source=blog&amp;utm_medium=button&amp;utm_campaign=blog-"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-25" data-doc-id="25_2" data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X&amp;utm_source=blog&amp;utm_medium=button&amp;utm_campaign=blog-"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-26" data-doc-id="26_2" data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X&amp;utm_source=blog&amp;utm_medium=button&amp;utm_campaign=blog-"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-27" data-doc-id="27_2" data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X&amp;utm_source=blog&amp;utm_medium=button&amp;utm_campaign=blog-"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span></div>                                                </div>
+                                                                                                    <article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 related-blog next-blog-leftnav">
+                                                        <ul class="pager">
+                                                            <li class="pull-left"><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i> PREVIOUS</a></li>
+                                                            <li class="pull-right"><a href="#" class="show-next-in-series">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </article>
+                                                                                                    <section id="edu-related-blog-carousel-2" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Posts</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom owl-loaded owl-drag"><div class="owl-stage-outer"><div style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 626px;" class="owl-stage"><div style="width: 146.4px; margin-right: 10px;" class="owl-item active"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster?utm_source=blog&amp;utm_medium=bottom-related-blog-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Hadoop-Installation-Install-Hadoop-Edureka-1.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Install Hadoop: Setting up a Single Node Hadoop Cluster</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 10.7K</div>
+                            </div>
+                        </article></a>
+                    </div></div><div style="width: 146.4px; margin-right: 10px;" class="owl-item active"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/?utm_source=blog&amp;utm_medium=bottom-related-blog-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/name-node.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>How to Set Up Hadoop Cluster with HDFS High Availability</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 21.5K</div>
+                            </div>
+                        </article></a>
+                    </div></div><div style="width: 146.4px; margin-right: 10px;" class="owl-item active"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/commissioning-and-decommissioning-nodes-in-a-hadoop-cluster/?utm_source=blog&amp;utm_medium=bottom-related-blog-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Remove-Nodes.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Commissioning and Decommissioning Nodes in a Hadoop Cluster</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 17.2K</div>
+                            </div>
+                        </article></a>
+                    </div></div><div style="width: 146.4px; margin-right: 10px;" class="owl-item active"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/hadoop-cluster-configuration-files/?utm_source=blog&amp;utm_medium=bottom-related-blog-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/1-1.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Hadoop Cluster Configuration Files</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 17K</div>
+                            </div>
+                        </article></a>
+                    </div></div></div></div><div class="owl-nav disabled"><div class="owl-prev">prev</div><div class="owl-next">next</div></div><div class="owl-dots disabled"><div class="owl-dot active"><span></span></div></div></div>
+                    </article></section>
+                                                <!--Comments Area Single post-->
+                                                <section class="padcomments">
+    <span class="comments"> Comments <div class="arrow-down"></div></span>
+    <span class="pull-right comment"> 12 Comments </span>
+</section>
+<section class="commsec" id="comments-wrapper">
+    
+<div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/a.html" style="width: 1px ! important; min-width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 3386px ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" name="dsq-app1" id="dsq-app1" frameborder="0" width="100%"></iframe></div>
+
+</section>	
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>	
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-12 col-sm-12 no-padding blog-sidepanel"> 
+    <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maincontainer detailpagesidebar" data-post_type="post" data-post_name="setting-up-a-multi-node-cluster-in-hadoop-2-x">
+             <section id="edu-related-blogs-2" class="right-side-widget custom-edu-widgets widget_edu-related-blogs"><h3 class="widget-title"><span>Related Blogs</span></h3><ul class="edu-hiran custom-widget-listing related-blogs"><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x" class="custom-rel-thumb"><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Hadoop-Installation-Install-Hadoop-Edureka-1.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Hadoop Installation - Install Hadoop - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-Installation-Install-Hadoop-Edureka-1.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-Installation-Install-Hadoop-Edureka-1-300x176.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-Installation-Install-Hadoop-Edureka-1-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/11/Hadoop-Installation-Install-Hadoop-Edureka-1-513x300.png 513w" sizes="(max-width: 85px) 100vw, 85px" height="50" width="85"></a><a href="https://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x" class="custom-rel-article"><span>Install Hadoop: Setting up a Single Node Hadoop Cluster<span></span></span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x" class="custom-rel-thumb"><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Q.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Top 50 Hadoop Interview Question for 2017 - Hadoop Interview Questions - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/12/Top-50-Hadoop-Interview-question-for-2017-Hadoop-Interview-Questions-Edureka-513x300.png 513w" sizes="(max-width: 86px) 100vw, 86px" height="50" width="86"></a><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x" class="custom-rel-article"><span>Top 50 Hadoop Interview Questions For 2017<span></span></span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x" class="custom-rel-thumb"><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/name-node.png" class="attachment-550x50 size-550x50 wp-post-image" alt="" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2015/06/name-node.png 600w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/name-node-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2015/06/name-node-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" height="50" width="86"></a><a href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x" class="custom-rel-article"><span>How to Set Up Hadoop Cluster with HDFS High Availability<span></span></span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/commissioning-and-decommissioning-nodes-in-a-hadoop-cluster/?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x" class="custom-rel-thumb"><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/Remove-Nodes.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Remove Nodes" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2013/12/Remove-Nodes.png 600w, https://cdn.edureka.co/blog/wp-content/uploads/2013/12/Remove-Nodes-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2013/12/Remove-Nodes-514x300.png 514w, https://cdn.edureka.co/blog/wp-content/uploads/2013/12/Remove-Nodes-150x87.png 150w" sizes="(max-width: 86px) 100vw, 86px" height="50" width="86"></a><a href="https://www.edureka.co/blog/commissioning-and-decommissioning-nodes-in-a-hadoop-cluster/?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=setting-up-a-multi-node-cluster-in-hadoop-2-x" class="custom-rel-article"><span>Commissioning and Decommissioning Nodes in a Hadoop Cluster<span></span></span></a></article></li></ul></section><section id="edu-custom-subscribe-2" class="right-side-widget custom-edu-widgets widget_edu-custom-subscribe">        <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding Newsletter-sub">
+            
+                        <form id="subscribe-form" novalidate="" class="custom-subscribe-form-wrapper">
+                <div class="subscribesec">
+                                    <!--<div class="close-thissub"><i class="icon-cross"></i></div>	-->
+                    <div class="subscribesec-box">										
+                        <h4 class="clearfix subscribeblogtitle"><p><i class="icon-Mail_this_post"></i></p><span>Subscribe to get free Newsletter</span></h4>
+                        <section class="sectrendcom">
+                            <article class="relatedcontmain">
+                                <div class="input-group Subscribeinput">                              
+                                    <input name="subscription-mail" autocomplete="off" class="form-control " required="" placeholder="Enter Email" type="email"> 
+                                    <!-- Add classes successform and errorform to toggle the input form -->
+
+                                </div>
+                                <input id="is_user_loggedin" value="0" type="hidden">
+                                <label id="loader" style="margin-left:120px;display:none"><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/loader.gif"></label>
+
+                                <p class="errormessage"> Please provide a valid Email Id </p>
+                            </article>                         
+                        </section>  
+                    </div>
+                    <div class="subscribesec-success">
+                        <i class="icon-success"></i>
+                        <p class="successmessage" style="display: none;"> Thank you, your subscription is successful</p> 
+                        <p class="alreadysubscribed" style="display: none;"> You have already subscribed.</p> 
+                    </div>
+                </div>
+                <button type="submit" id="subscribe-button" class="btn subscribebtn successbutton">
+                    <div class="sub-news-letter">SUBSCRIBE</div></button>
+            </form>
+            <div class="sub-browse-letter show-after-success hide">
+                <a class="" href="https://www.edureka.co/all-courses" target="_blank">BROWSE COURSES</a>
+            </div>
+        </section>
+        </section></section>
+</div>
+<!-- Right Panel ends -->
+</div></div></div>
+</section>
+
+<footer style="position: static;" class="footer-new" id="footer_v2">
+        <div class="container">
+        <div class="row">
+            <div class="padding-xs-only clearfix">
+                <div class="panel-group no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="col-md-12 visible-xs accordion-head">
+
+                            <a data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" href="javascript:void(0)">
+                                <h3 class="no-margin footer-new-hd-lineht"><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></h3>
+                                <p class=" margin-vr5 grey-txt marg-btm-0-xs">© 2014 Brain4ce Education Solutions Pvt. Ltd.</p>
+                                <i class="fa fa-angle-up"></i>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+
+                        </div>
+                        <div id="collapse1" class="div-collapse collapse clearfix">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 item-padding">
+                                <h4>Edureka</h4>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/about-us">About us</a></li>
+                                    <li><a href="https://www.edureka.co/allmedia">News &amp; Media</a></li>
+                                    <li><a href="https://www.edureka.co/contact-us">Contact us</a></li>
+                                    <li><a href="https://www.edureka.co/careers">Careers</a></li>
+                                </ul>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/blog/all">Blog</a></li>
+                                    <li><a href="https://www.edureka.co/reviews">Reviews</a></li>
+                                    <li><a href="https://www.edureka.co/terms-and-conditions">Terms &amp; conditions</a></li>
+                                    <li><a href="https://www.edureka.co/privacy-policy">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Work with us </h4>
+                                <ul class="list-unstyled footer-menu">
+                                    <li><a href="https://www.edureka.co/instructors/add">Become  an Instructor</a></li>
+                                    <li><a href="https://www.edureka.co/hire-from-edureka">Hire from Edureka</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3  col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Follow us on </h4>
+                                <ul class="list-unstyled footer-social-icon">
+                                    <li><a class="fb" target="_blank" href="https://www.facebook.com/edurekaIN"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="tw" target="_blank" href="https://twitter.com/edurekaIN"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="in" target="_blank" href="https://www.linkedin.com/company/edureka"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="ut" target="_blank" href="https://www.youtube.com/user/edurekaIN"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 item-padding padding-lft-25 text-center-xs">
+                                <h4>Learn on the GO!</h4>
+                                <ul class="list-unstyled footer-menu-store">
+                                    <li><a target="_blank" href="https://itunes.apple.com/in/app/edureka/id1033145415?mt=8">
+                                            <img alt="appleplaystore" class="img-responsive" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/applestorebtn.png"></a></li>
+                                    <li><a target="_blank" href="https://play.google.com/store/apps/details?id=co.edureka.app">
+                                            <img alt="googleplaystore" class="img-responsive" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/googleplaybtn.png"></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding border-top-half">
+                                <div class="padding-vr20 clearfix">
+                                    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-12 no-padding">
+                                        <h3 class="no-margin footer-new-hd-lineht"><a href="https://www.edureka.co/"><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></a></h3>
+                                        <p class=" margin-vr5 grey-txt">© 2014 Brain4ce Education Solutions Pvt. Ltd. All rights Reserved.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-7 col-xs-12 no-padding txt-marg-top text-xs-left">
+                                        <p class="grey-txt">"PMP®","PMI®", "PMI-ACP®" and "PMBOK®" are registered marks of the Project Management Institute, Inc. <br>
+                                            MongoDB®, Mongo and the leaf logo are the registered trademarks of MongoDB, Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<div class="footerbar">
+    <div class="container clearfix">
+        <div class="row">
+            <a href="javascript:void(0);" class="call-us">
+                <span><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/phone-icon.png" alt="phoneicon"></span>
+                Call us on 
+                <span>1-800-275-9730 <i>(Toll Free)</i></span>
+                <span>+91 88808 62004</span>
+            </a>
+            <div class="dropdown pull-left hidden-xs">
+                <div class="bfh-selectbox country-style-footer triangle country-pop-small bfh-countries" data-country="IN" data-flags="true" data-filter="true">
+                    <input value="" type="hidden">
+                    <a class="bfh-selectbox-toggle res-popup" role="button" data-toggle="bfh-selectbox" href="#">
+                        <span class="bfh-selectbox-option input-medium" data-option="">
+                        </span>
+
+
+                    </a>
+                    <div class="bfh-selectbox-options">
+                        <input class="bfh-selectbox-filter" type="text">
+                        <div role="listbox">
+                            <ul style="position: relative; overflow: visible;" role="option" class="dropdown-menu-scrollbar mCustomScrollbar _mCS_3 mCS-autoHide mCS_no_scrollbar"><div tabindex="0" style="max-height: 200px;" id="mCSB_3" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"><div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+                            </div></div><div style="display: none;" id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; top: 0px;" oncontextmenu="return false;"><div style="line-height: 50px;" class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="call-us-xs">
+            <h3>24 X 7 Customer Support
+                <a class="close-call" href="javascript:void(0);">X</a>
+            </h3>
+            <ul class="list-unstyled">
+                <li><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/us-flag.png" alt="us flag"> 1-800-275-9730   (Toll Free)     </li>
+                <li><img src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/ind-flag.png" alt="india flag"> +91 88808 62004</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                jQuery(function($) {
+                    function equalHeight(group) {
+                        tallest = 0;
+                        group.each(function() {
+                            thisHeight = $(this).height();
+                            if(thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        group.height(tallest);
+                    }
+
+                    equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+
+                    $(window).resize(function() {
+                        equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+                    });
+                });
+            </script>
+            <script type="text/javascript"> 
+				var fonts_loaded =[];
+			</script><!--email_off--><style type="text/css">.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(77,
+ 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%,
+ rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, 
+left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, 
+rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 
+164, 1) 45%, rgba(77, 103, 164, 
+1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 
+103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, 
+rgba(77, 103, 164, 
+1))}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook{border-color:#000;box-shadow-color:#333;background:rgba(77,
+ 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%,
+ rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, 
+left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, 
+rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 
+164, 1) 45%, rgba(77, 103, 164, 
+1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 
+103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, 
+rgba(77, 103, 164, 
+1))}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook 
+.mb-icon{text-align:center;padding-top:8px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook
+ .mb-icon 
+.fa.fa-facebook{color:#fff;font-size:21px}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook
+ .mb-icon 
+.fa.fa-facebook{color:#fff}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook
+ .mb-text{color:#fff;font-family:PT Sans 
+Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook
+ .mb-text{color:#fff}
+.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(38,
+ 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%,
+ rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, 
+left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, 
+rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 
+223, 1) 45%, rgba(38, 167, 223, 
+1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 
+167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, 
+rgba(38, 167, 223, 
+1))}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter{border-color:#000;box-shadow-color:#333;background:rgba(38,
+ 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%,
+ rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, 
+left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, 
+rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 
+223, 1) 45%, rgba(38, 167, 223, 
+1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 
+167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, 
+rgba(38, 167, 223, 
+1))}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter 
+.mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter
+ .mb-icon 
+.fa.fa-twitter{color:#fff;font-size:22px}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter
+ .mb-icon 
+.fa.fa-twitter{color:#fff}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter
+ .mb-text{color:#fff;font-family:PT Sans 
+Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter
+ .mb-text{color:#fff}
+.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(1,
+ 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, 
+rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left
+ bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 
+120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%,
+ rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 
+1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 
+181, 1) 45%, rgba(1, 120, 181, 
+1))}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin{border-color:#000;box-shadow-color:#333;background:rgba(1,
+ 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, 
+rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left
+ bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 
+120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%,
+ rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 
+1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 
+181, 1) 45%, rgba(1, 120, 181, 
+1))}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin 
+.mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin
+ .mb-icon 
+.fa.fa-linkedin{color:#fff;font-size:22px}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin
+ .mb-icon 
+.fa.fa-linkedin{color:#fff}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin
+ .mb-text{color:#fff;font-family:PT Sans 
+Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin
+ .mb-text{color:#fff}
+.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(216,
+ 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, 
+rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left
+ bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 
+74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, 
+rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1)
+ 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54,
+ 1) 45%, rgba(216, 74, 54, 
+1))}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus{border-color:#000;box-shadow-color:#333;background:rgba(216,
+ 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, 
+rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left
+ bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 
+74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, 
+rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1)
+ 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54,
+ 1) 45%, rgba(216, 74, 54, 
+1))}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus 
+.mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus
+ .mb-icon 
+.fa.fa-google-plus{color:#fff;font-size:22px}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus
+ .mb-icon 
+.fa.fa-google-plus{color:#fff}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus
+ .mb-text{color:#fff;font-family:PT Sans 
+Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus
+ .mb-text{color:#fff}
+.maxcollection.maxcollection-1{display:inline-block;z-index:9999;margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px}.maxcollection.maxcollection-1
+ 
+.mb-collection-item.item-24{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1
+ 
+.mb-collection-item.item-25{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1
+ 
+.mb-collection-item.item-26{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1
+ 
+.mb-collection-item.item-27{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}
+.maxbutton-14.maxbutton.maxbutton-download-green-small{position:relative;text-decoration:none;display:inline-block;border-color:#438683;box-shadow-color:#438683;width:140px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(67,
+ 134, 131, 1);-pie-background:linear-gradient(rgba(67, 134, 131, 1) 45%,
+ rgba(67, 134, 131, 1));background:-webkit-gradient(linear, left top, 
+left bottom, color-stop(45%, rgba(67, 134, 131, 1)), color-stop(1, 
+rgba(67, 134, 131, 1)));background:-moz-linear-gradient(rgba(67, 134, 
+131, 1) 45%, rgba(67, 134, 131, 
+1));background:-o-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 
+134, 131, 1));background:linear-gradient(rgba(67, 134, 131, 1) 45%, 
+rgba(67, 134, 131, 
+1))}.maxbutton-14.maxbutton:hover.maxbutton-download-green-small{border-color:#438683;box-shadow-color:#438683;background:rgba(67,
+ 134, 131, 1);-pie-background:linear-gradient(rgba(67, 134, 131, 1) 45%,
+ rgba(67, 134, 131, 1));background:-webkit-gradient(linear, left top, 
+left bottom, color-stop(45%, rgba(67, 134, 131, 1)), color-stop(1, 
+rgba(67, 134, 131, 1)));background:-moz-linear-gradient(rgba(67, 134, 
+131, 1) 45%, rgba(67, 134, 131, 
+1));background:-o-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 
+134, 131, 1));background:linear-gradient(rgba(67, 134, 131, 1) 45%, 
+rgba(67, 134, 131, 
+1))}.maxbutton-14.maxbutton.maxbutton-download-green-small 
+.mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-14.maxbutton:hover.maxbutton-download-green-small
+ .mb-text{color:#fff}
+</style><!--/email_off-->
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/shCore.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/shBrushXml.js"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = 
+"https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, 
+document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = 
+"https://cdn.edureka.co/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		
+//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+
+		document.getElementsByTagName("head")[0].insertBefore( themecss, 
+document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t 
+configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/jquery_002.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var postasmail = {"afp_nonce":"7cda17556f","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/fancyquote.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var videolib = {"afp_nonce":"7cda17556f","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/video-library.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/jquery_003.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var fvpdata = 
+{"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","nonce":"4f9d532874","fitvids":"1","dynamic":"","overlay":"","opacity":"0.75","color":"b","width":"640"};
+/*
+ ]]> */
+</script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/frontend.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var mb_ajax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/front.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/maxbuttons_fonts.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/maxbuttons-pro-front.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/bootstrap.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/masonry.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/imagesloaded.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/jquery.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/nprogress.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/CustomScrollbar.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/owl.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/0187-formValidation.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/0188-bootstrap.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/blog.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/modalEffects.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/modalEffects-related.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/mfb.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/signup.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var php_array = 
+{"admin_ajax":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var
+ wnm_custom = {"template_url":"\/blog\/wp-content\/themes\/edu-hiran"};
+var myAjax = 
+{"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var afp_vars = 
+{"afp_nonce":"7cda17556f","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","postID":"29363","single":"1"};
+var
+ post_vars = {"postID":"29363","postType":"post"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/ajax-pagination.js"></script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/wp-embed.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var embedVars = 
+{"disqusConfig":{"platform":"wordpress@4.7.5","language":""},"disqusIdentifier":"29363
+ 
+http:\/\/www.edureka.co\/blog\/?p=29363","disqusShortname":"edurekablog","disqusTitle":"Setting
+ Up A Multi Node Cluster In Hadoop 
+2.X","disqusUrl":"https:\/\/www.edureka.co\/blog\/setting-up-a-multi-node-cluster-in-hadoop-2.X","options":{"manualSync":"1"},"postId":"29363"};
+/*
+ ]]> */
+</script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/disqus.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"edurekablog"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Setting%20Up%20A%20Multi%20Node%20Cluster%20In%20Hadoop%202.X%20%7C%20Edureka%20Blog_arquivos/count_002.js"></script>
+
+
+
+
+
+<img style="display: none;" alt="preload image"><img style="display: none;" alt="preload image"><iframe style="display: none;"></iframe></body></html>
+<!-- mfunc setPostViews(get_the_ID()); -->
+<!-- /mfunc -->
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 3054/3153 objects using disk
+Page Caching using disk
+Content Delivery Network via Amazon Web Services: CloudFront: cdn.edureka.co
+Database Caching 27/64 queries in 0.048 seconds using disk
+
+ Served from: www.edureka.co @ 2017-06-28 14:12:55 by W3 Total Cache -->

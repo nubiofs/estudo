@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html class=" " prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" lang="en-US"><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.edureka.co/blog/xmlrpc.php">
+        
+<!-- This site is optimized with the Yoast SEO plugin v4.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>HDFS Commands | Hadoop Shell Commands to Manage HDFS | Edureka</title>
+<meta name="description" content="This blog talks about the various HDFS commands like fsck, copyFromLocal, expunge, cat etc. which are used to manage the Hadoop File System.">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command">
+<link rel="publisher" href="https://plus.google.com/+edurekaIN">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS Commands | Hadoop Shell Commands to Manage HDFS | Edureka">
+<meta property="og:description" content="This blog talks about the various HDFS commands like fsck, copyFromLocal, expunge, cat etc. which are used to manage the Hadoop File System.">
+<meta property="og:url" content="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command">
+<meta property="og:site_name" content="Edureka Blog">
+<meta property="article:publisher" content="https://www.facebook.com/edurekaIN/">
+<meta property="article:section" content="Big Data and Hadoop">
+<meta property="article:published_time" content="2016-11-03T13:32:42+00:00">
+<meta property="article:modified_time" content="2017-05-25T09:47:39+00:00">
+<meta property="og:updated_time" content="2017-05-25T09:47:39+00:00">
+<meta property="fb:app_id" content="334689249900154">
+<meta property="og:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Commands-Hadoop-Shell-Commands-to-Manage-HDFS-01-01.png">
+<meta property="og:image:width" content="815">
+<meta property="og:image:height" content="476">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="This blog talks about the various HDFS commands like fsck, copyFromLocal, expunge, cat etc. which are used to manage the Hadoop File System.">
+<meta name="twitter:title" content="HDFS Commands | Hadoop Shell Commands to Manage HDFS | Edureka">
+<meta name="twitter:site" content="@edurekaIN">
+<meta name="twitter:image" content="https://cdn.edureka.co/blog/wp-content/uploads/2016/11/HDFS-Commands-Hadoop-Shell-Commands-to-Manage-HDFS-01-01.png">
+<meta name="twitter:creator" content="@edurekaIN">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://cdn.edureka.co/">
+<link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Edureka Blog » HDFS Commands: Hadoop Shell Commands to Manage HDFS Comments Feed" href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command/feed/">
+		<script src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/analytics.js" async=""></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.edureka.co\/blog\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script defer="defer" type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/wp-emoji-release.js"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="download-button-shortcode-css-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/downloadbutton.css" type="text/css" media="all">
+<link rel="stylesheet" id="fancyquote-css-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/fancyquote.css" type="text/css" media="all">
+<link rel="stylesheet" id="sn-fontAwesome-css-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/font-awesome.css" type="text/css" media="all">
+<link rel="stylesheet" id="sn-animate-css-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/animate.css" type="text/css" media="all">
+<link rel="stylesheet" id="dg-grid-css-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/dg-grid.css" type="text/css" media="all">
+<link rel="stylesheet" id="fvp-frontend-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/frontend.css" type="text/css" media="all">
+<link rel="stylesheet" id="mbpro-font-awesome-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/font-awesome_003.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-font-awesome-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/font-awesome_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-0121-font-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/0121-font.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-bootstrap-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-blogmain-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/blogmain.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-nprogress-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/nprogress.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-blogdetail_newfont-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/Newfonts-ico.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-customscrollbar-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/CustomScrollbar.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-owl.carousel-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/owl.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-blogdetailnew-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/blogdetailnew.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-0180-global-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/0180-global.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-bootstrap-formhelpers-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/bootstrap-formhelpers.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-0181-formValidation-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/0181-formValidation.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-0139-common-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/0139-common.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-dashboard-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/dashboard.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-header-2-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/header-2.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-signin-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/new-signin-signup.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-mfb-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/mfb.css" type="text/css" media="all">
+<link rel="stylesheet" id="edu-hiran-main_css-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp_dlmp_styles-css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/styles.css" type="text/css" media="all">
+<link rel="https://api.w.org/" href="https://www.edureka.co/blog/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.edureka.co/blog/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.edureka.co/blog/wp-includes/wlwmanifest.xml"> 
+<link rel="shortlink" href="https://www.edureka.co/blog/?p=36250">
+<link rel="alternate" type="application/json+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fhdfs-commands-hadoop-shell-command">
+<link rel="alternate" type="text/xml+oembed" href="https://www.edureka.co/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fhdfs-commands-hadoop-shell-command&amp;format=xml">
+	<style type="text/css">
+	.download-info .download-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(https://cdn.edureka.co/blog/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+<style type="text/css">
+#author-bio-box {
+	float:left;
+	width: 99%;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	box-shadow: 5px 5px 2px #ddd;
+	padding: 5px;
+        margin-bottom: 10px;
+}
+#author-bio-box img {
+	float: left;
+	margin: 4px 10px 2px 4px;
+}
+#author-bio-box .author-name {
+	font-weight: bold;
+	margin-left: 2px;
+	font-size: 14px;
+}
+#author-bio-box p {
+	font-size: 13px;
+	line-height: 20px;
+        margin-left: 95px;
+        margin-top: 5px;
+}
+#author-bio-box thead th {
+	border: 0;
+}
+#author-bio-box tbody {
+	border: 0;
+}
+.bio-spacer { min-height:44px; padding: 1px; display: block; clear: both; border:1px;}
+.bio-socials {
+	border-top:1px solid #e8e8e8;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	width: 100%;
+	height: 32px;
+	clear: both;
+}
+</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress.">
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://cdn.edureka.co/blog/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <script>
+            var webURL = 'https://www.edureka.co/';
+            var imgURL = 'https://cdn.edureka.co/imgver.1465813195/img/';
+            var kmkey = 'c685629a1766aa24ed42e4bc8476e8789cd97477';
+            var GaTID = 'UA-33865789-1';
+            var GaUATID = 'UA-33865789-2';
+            var iscustomerGA = 'false';
+            var repcustomerGA = 'false';
+            var baildown = true;
+            var homepageloadbanner = true;
+            var prev_offer_code = '';
+
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-33865789-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+        <!-- Google Code for Remarketing Tag -->
+        <!--------------------------------------------------
+        Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+        --------------------------------------------------->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 977137586;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/conversion.js"></script><script src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/embed.js" async="" type="text/javascript"></script><script src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/count.js" type="text/javascript" async=""></script><script src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/count-data.js"></script><link rel="stylesheet" type="text/css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/css.css"><link rel="stylesheet" type="text/css" href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/css.html"><link href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/a_data_002/lounge.css" rel="prefetch"><link href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/a_data_002/common.js" rel="prefetch"><link href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/a_data_002/lounge.js" rel="prefetch"><link href="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/a_data_002/config.js" rel="prefetch"></head><body class="post-template-default single single-post postid-36250 single-format-standard wpb-js-composer js-comp-ver-5.1.1 vc_responsive" id="margin-top-value"><iframe name="google_conversion_frame" title="Google conversion frame" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?random=1498658781374&amp;cv=8&amp;fst=1498658781374&amp;num=1&amp;fmt=1&amp;guid=ON&amp;u_h=825&amp;u_w=1320&amp;u_ah=803&amp;u_aw=1320&amp;u_cd=24&amp;u_his=18&amp;u_tz=-180&amp;u_java=true&amp;u_nplug=3&amp;u_nmime=89&amp;frm=0&amp;url=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fhdfs-commands-hadoop-shell-command%3Futm_source%3Dblog%26utm_medium%3Dleft-menu%26utm_campaign%3Dsetting-up-a-multi-node-cluster-in-hadoop-2.X&amp;ref=https%3A%2F%2Fwww.edureka.co%2Fblog%2Fsetting-up-a-multi-node-cluster-in-hadoop-2.X%3Futm_source%3Dblog%26utm_medium%3Dleft-menu%26utm_campaign%3Dinstall-hadoop-single-node-hadoop-cluster&amp;tiba=HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" frameborder="0" height="13" width="300"></iframe>
+        <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977137586/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+
+
+
+    <div id="fb-root"><script src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/all.js" async=""></script></div>
+    <script>
+
+            window.fbAsyncInit = function () {
+                FB.init({appId: '334689249900154', status: true, cookie: true,
+                    xfbml: true});
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+    </script>
+
+    <header id="header-II">
+        <section>
+            <nav style="" role="navigation" class="navbar navbar-inverse navbar-fixed-top navbar-homepage">
+                <div class="container menubar-visibility edureka-blog-header">
+                    <div class="navbar-header">
+                        <a href="https://www.edureka.co/?utm_source=blog&amp;utm_medium=blog-edureka-logo" class="navbar-brand"> <img alt="edureka!" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/logo.png"> </a> 			
+                    </div>
+                    <!-- ddl starts--><form action="/blog" class="main-search"><ul class="list-unstyled course-search-box-nav">
+                        <input class="searchinputbox" id="categoryinputbox" value="" type="hidden">
+                        <input class="searchinputbox" id="authorinputbox" value="" type="hidden">
+                        <li class="search-nav pull-left"><div class="dropdown  categories-filter-dropdown">
+    <a class="select_down dropdown-toggle search-drop menu-common catbtnblog catbtnblogmob btn" type="button" id="menu1" data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Select Category
+    </a>
+    <ul style="overflow: visible;" class="dropdown-menu list-inline search-header-navigation dropdown-menu-scrollbar mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" role="menu" aria-labelledby="menu1"><div tabindex="0" id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+        <li style="display: none;" role="presentation"><a role="menuitem" tabindex="0" href="#" data-slug="" class="category-selector">Select Category</a>
+                </li><li style="display: none;" role="presentation"><a role="menuitem" tabindex="1" href="https://www.edureka.co/blog/category/big-data-analytics" data-slug="big-data-analytics" class="category-selector">Big Data Analytics</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="2" href="https://www.edureka.co/blog/category/big-data-nosql" data-slug="big-data-nosql" class="category-selector">Big Data NoSQL</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="3" href="https://www.edureka.co/blog/category/business-intelligence" data-slug="business-intelligence" class="category-selector">Business Intelligence</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="4" href="https://www.edureka.co/blog/category/cloud-computing" data-slug="cloud-computing" class="category-selector">Cloud Computing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="5" href="https://www.edureka.co/blog/category/finance" data-slug="finance" class="category-selector">Finance</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="6" href="https://www.edureka.co/blog/category/frameworks" data-slug="frameworks" class="category-selector">Frameworks</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="7" href="https://www.edureka.co/blog/category/ibm-bluemix" data-slug="ibm-bluemix" class="category-selector">IBM Bluemix</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="8" href="https://www.edureka.co/blog/category/marketing" data-slug="marketing" class="category-selector">Marketing</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="9" href="https://www.edureka.co/blog/category/mobile-development" data-slug="mobile-development" class="category-selector">Mobile Development</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="10" href="https://www.edureka.co/blog/category/operations" data-slug="operations" class="category-selector">Operations</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="11" href="https://www.edureka.co/blog/category/programming" data-slug="programming" class="category-selector">Programming</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="12" href="https://www.edureka.co/blog/category/project-management" data-slug="project-management" class="category-selector">Project Management</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="13" href="https://www.edureka.co/blog/category/success-story" data-slug="success-story" class="category-selector">Success Story</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="14" href="https://www.edureka.co/blog/category/systems-architecture" data-slug="systems-architecture" class="category-selector">Systems &amp; Architecture</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="15" href="https://www.edureka.co/blog/category/systems-engineering" data-slug="systems-engineering" class="category-selector">Systems Engineering</a>
+                </li><li role="presentation"><a role="menuitem" tabindex="16" href="https://www.edureka.co/blog/category/testing" data-slug="testing" class="category-selector">Testing</a>
+                </li>      
+    </div></div><div style="display: none;" id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; top: 0px;" oncontextmenu="return false;"><div style="line-height: 50px;" class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></ul>
+</div>
+<span id="desktop-searchbox"><div id="remote" class="typeahead-container"><div class="typeahead-field">
+                        <span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" placeholder="Search edureka blogs" name="s" data-value="" class="search_inp collapse searchinputbox" type="text">
+                        </span><span class="typeahead-button"><i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></span></li></ul></form><form action="/blog" class="form-element-mobile">
+                    <div class="visible-sm visible-xs mobsearch" id="mobile-searchbox">
+                        <a data-toggle="collapse" id="mobile-search-icon" class="mobile-search-icon" href="#mobsearch" aria-expanded="false" aria-controls="mobsearch">
+                            <i class="fa fa-search search_ico visible-sm visible-xs"></i>
+                        </a><div class="collapse search-course" id="mobsearch" aria-expanded="false"><div>
+                    <div id="remote" class="typeahead-container result backdrop hint">
+                        <div class="typeahead-field"><span class="typeahead-query">
+                            <input maxlength="150" autocomplete="off" class="search_inp search_inp_mob" placeholder="Search edureka blogs" name="s" data-value="" type="text"></span>
+                        <span class="typeahead-button">
+                        <i class="fa fa-search search_ico submit-ico-button search-button-top"></i>
+                        <i style="display:none;" class="fa fa-circle-o-notch fa-spin search_ico autosearchload_top"></i>
+                        </span></div></div></div></div></div></form><div class="loggedin-usernav-wrapper hide"><div aria-expanded="false" id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs">
+                <li>
+                    <div class="dropdown menu-dropdown dropdownafterlogin">
+                        <a href="javascript:void(0);" class="dropdown-toggle withripple" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false"> BROWSE COURSES <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                            <li><a href="https://www.edureka.co/mycourses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=my-courses">My Courses</a></li>
+                            <li class="ga-allcourses"><a href="https://www.edureka.co/all-courses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=all-courses">All Courses</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="logged-in-customer hide"></li>
+                <li class="">
+                    <div class="dropdown user-dropdown">
+                        <a id="signin-logout" class="signin" href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=827e2b9603">Logout</a> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right profile pull-right">
+            <li class="dropdown userdrop hidden-lg hidden-md profile-pic-header">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+                    <img alt="" class="img30 user-image-icon" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/defaultpp2.png">     
+                </a>
+                <ul class="dropdown-menu user-menu profile-xs">
+                    <li><a href="https://www.edureka.co/mycourses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=all-courses">My Courses</a></li>
+                    <li class="logged-in-customer hide"></li><li class="ga-allcourses"><a href="https://www.edureka.co/all-courses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=all-courses">All Courses</a></li>
+                    <li> <a href="https://www.edureka.co/blog/wp-login.php?action=logout&amp;_wpnonce=827e2b9603" id="signin-logoutresp">Log Out</a> </li>
+                </ul>
+            </li>
+        </ul></div><div class="loggedout-usernav-wrapper"><a class="signin md-trigger" href="javascript:void(0)" data-modal="signin-modal" data-toggle="modal">Sign In</a><style>
+    .highlighterror input[type=text],
+    .highlighterror input[type=email],
+    .highlighterror input[type=password],
+    .highlighterror {
+        border-color: #ed1f24 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
+<!--googleon: all-->
+<div class="md-modal md-effect-1 newsigninsignup" id="signin-modal">
+    <div class="md-content">
+        <span id="signin_signup_cancel" class="md-close onclicktab pull-right">X</span>
+
+        <ul class="nav nav-tabs">
+            <li class="Signinspace active"><a class="onclicktab" data-toggle="tab" href="#LogIn"><span>Log In</span></a></li>
+            <li class="SignUpspace "><a class="onclicktab" data-toggle="tab" href="#SignUp"><span>Sign Up</span></a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="LogIn" class="tab-pane fade in active">
+                <div class="col-md-12 col-xs-12 signinformnew newsignclik">
+                    <form class="fv-form fv-form-bootstrap" novalidate="novalidate" id="signinForm"><button style="display: none; width: 0px; height: 0px;" class="fv-hidden-submit" type="submit"></button>
+                        <!--                        <form id="signinForm">-->
+                        <div class="alertnew" role="alert">
+                            <span id="signin_error_message" class="signin_formerror redalertnew" style="display: none;"><i class="fa fa-check-circle"></i>  Please enter a valid emailid</span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input data-bv-field="data[User][email]" id="inputName" class="form-control inputstyle emailnew inputNamesignup signinvalid" required="" autocomplete="off" placeholder="Email" name="data[User][email]" onkeyup="checkdisable();" type="email"><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Email is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="regexp" class="help-block" style="display: none;">The value is not a valid email address</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="emailAddress" class="help-block" style="display: none;">Please enter a valid email address</small></div>
+                        <div class="form-group has-feedback">
+                            <input data-bv-field="data[User][password]" id="pwd" class="form-control inputstyle passwordnew masked" required="" autocomplete="off" placeholder="Password" name="data[User][password]" value="" type="password"><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                            <div class="verficacheckeye" id="eye">
+                                show
+                            </div>
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][password]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Password is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][password]" data-bv-validator="stringLength" class="help-block" style="display: none;">Password should be atleast 8 character</small></div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><a id="Forgotnew" href="javascript:void(0)" class="btn btn-link pull-left forgetpass">Forgot Password?</a>
+
+                            <button type="submit" class="bluebtn pull-right defdisablesignin ga-signin disabled" id="signin-blog">Start Learning</button>
+                        </div>
+                    </form>
+                    <!--<div class="mobilealertnew green clearfix">
+                      <span class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i>  Verification Code sent to er.creator@gmail.com</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-12 col-xs-12 signinformnew forgetpassnew">
+                    <form id="resetcode">
+                        <div id="successmssg" class="alertnew" role="alert">
+                            <span id="messages" class="greenalertnew hidden-xs"><i class="fa fa-check-circle"></i>  </span>
+                        </div>
+                        <div class="form-group">
+                            <input id="prefilledemail" disabled="disable" class="form-control inputstyle emailnew inputDisabled" required="" autocomplete="off" placeholder="Email" type="email">
+                            <input id="emailfield" class="form-control inputstyle" name="data[User][email]" type="hidden">
+
+                            <!--<div class="verficacheck"><a href="" id="editemail">change ?</a></div>-->
+                        </div>
+                        <div class="form-group">
+                            <input id="otpfield" class="form-control inputstyle emailnew verifycheck" required="" autocomplete="off" placeholder="Verification code" name="data[User][otpCode]" type="text">
+                            <input id="verificationfield" class="form-control inputstyle emailnew" required="" name="data[User][verification_code]" type="hidden">
+                            <div class="verficacheck verifycheck"><div id="resendcode" href="javascript:void(0);" style="cursor: pointer;">resend ?</div></div>
+                        </div>
+                        <div class="form-group">
+                            <input id="pwd2" class="form-control inputstyle passwordnew masked" required="" autocomplete="off" min="8" placeholder="New Password" name="data[User][password]" type="password">
+                            <div class="verficacheckeye" id="eye2">
+                                show
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding text-left spaceafterbutton" style="margin-top: 9px;"><!--<a id="Backnew" href="#" class="btn btn-link pull-left forgetpass">Back</a>-->
+
+                            <button id="passresetbutton" type="submit" class="bluebtn pull-right">reset password</button>
+                        </div>
+                    </form>
+                    <div class="notestarreg verifycheck">
+                        * Can't find the email? Check your Spam folder 
+or Promotions tab for an email from no-reply@edureka.co. Send us an 
+email at <a href="mailto:support@edureka.co">support@edureka.co</a> or call us at +91 88808 62004
+                    </div>
+                </div>
+            </div>
+            <div id="SignUp" class="tab-pane fade  ">
+
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center signinformnew signupformnew">
+
+                    <form class="fv-form fv-form-bootstrap" novalidate="novalidate" id="signupForm"><button style="display: none; width: 0px; height: 0px;" class="fv-hidden-submit" type="submit"></button>
+                        <div class="alertnew" role="alert">
+                            <span id="signup_error_message" class="signup_formerror redalertnew hidden-xs " style="display: none;"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input value="/blog/" name="data[User][pageurl]" id="pageurl_signup" type="hidden">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][name]" id="signupname" class="form-control inputstyle empty" placeholder="Name*" required="" autocomplete="off" name="data[User][name]" type="text"><i data-bv-icon-for="data[User][name]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i></div>
+                            
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][name]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Name is required.</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][name]" data-bv-validator="regexp" class="help-block" style="display: none;">Name is required.</small></div>
+
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][email]" id="signupemail" class="form-control inputstyle  empty" placeholder="Email*" required="" autocomplete="off" name="data[User][email]" type="email"><i data-bv-icon-for="data[User][email]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i></div>
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Email is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="regexp" class="help-block" style="display: none;">The value is not a valid email address</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][email]" data-bv-validator="emailAddress" class="help-block" style="display: none;">Please enter a valid email address</small></div>
+                        <input style="display:none;" name="hiddenname" type="text">
+                        <input style="display:none;" name="hiddenpassword" type="password">
+                        <div class="form-group has-feedback">
+                            <div class="form-control-wrapper"><input data-bv-field="data[User][mobile]" id="mobnum" class="form-control inputstyle empty" placeholder="Mobile Number*" required="" name="data[User][mobile]" type="text"><i data-bv-icon-for="data[User][mobile]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i></div>
+
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][mobile]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Mobile Number is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][mobile]" data-bv-validator="regexp" class="help-block" style="display: none;">The value is not a valid mobile number</small></div>
+                        <div class="form-group has-feedback">
+
+                            <div class="form-control-wrapper">
+                                <input data-bv-field="data[User][password]" id="pwd3" class="form-control inputstyle passwordnew masked empty" required="" autocomplete="off" placeholder="Password more than 8 characters*" name="data[User][password]" type="password"><i data-bv-icon-for="data[User][password]" class="form-control-feedback fv-icon-no-label" style="display: none;"></i></div>
+                            <div class="verficacheckeye" id="eye3">show</div>
+                        <small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][password]" data-bv-validator="notEmpty" class="help-block" style="display: none;">Password is required</small><small data-bv-result="NOT_VALIDATED" data-bv-for="data[User][password]" data-bv-validator="stringLength" class="help-block" style="display: none;">Password should be atleast 8 character</small></div>
+                                                <p class="signupinfotext">
+                            By Signing up you agree to our <span><a class=" withripple" href="https://www.edureka.co/terms-and-conditions" target="_blank">T&amp;C</a></span> and <span>
+                                <a class=" withripple" href="https://www.edureka.co/privacy-policy" target="_blank">Privacy Policy</a></span>
+                        </p>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding spaceafterbutton">
+                            <button type="submit" class="bluebtn pull-right defdisablesignup ga-signup disabled">Create an account</button>
+                        </div>
+
+                    </form>
+                    <!--<div class="mobilealertnew red clearfix">
+                      <span class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input</span>
+                    </div>-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobileredclass" class="mobilealertnew red clearfix" style="display:none;">
+        <span id="mobileredmsg" class="redalertnew visible-xs"><i class="fa fa-exclamation-triangle"></i>  Please provide a valid input    </span>
+    </div>
+    <div id="mobilegreenclass" class="mobilealertnew green clearfix" style="display:none;">
+        <span id="mobilegreenmsg" class="greenalertnew visible-xs"><i class="fa fa-check-circle"></i> </span>
+    </div>
+</div>
+<div class="md-overlay"></div>
+<section>
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="capturemobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header signup-header">
+                    <h4 class="modal-title color-white">
+                        <span class="pull-left">
+                            WELCOME <label id="capturemobile_user_name"></label>
+                        </span>
+                        <span class="pull-right">                           
+                        </span>
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 linkedin-content">
+                            <h5 class="line-height23">It seems we don't have your phone number. Please share as it helps us to provide better customer service. Thank you!</h5>
+                            <form id="captureMobileForm" action="" method="post">
+                                <input name="data[User][email]" id="email_capturemobile" type="hidden">
+                                <input name="data[User][password]" id="password_capturemobile" type="hidden">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Mobile Number" required="" name="data[User][mobile]" type="text">
+                                </div>
+                                <!--                                <button type="button"  class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn">Continue</button>-->
+                                <button type="button" id="btnCaptureMobile" class="btn btn-primary btn-lg btn-block signin-login-btn continue-btn" style="">Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--googleon: all--><div class="navbar-collapse collapse navbar-right" id="navbar" aria-expanded="false">
+            <ul class="nav navbar-nav home-login hidden-sm hidden-xs"><!--
+                <li><a href="/instructors/add">For Instructors</a></li> -->
+                <li><a href="https://www.edureka.co/all-courses?utm_source=blog&amp;utm_medium=courses&amp;utm_term=all-courses">All Course</a></li>
+            </ul>
+        </div></div>                </div>
+            </nav>
+        </section>
+    </header>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding">
+                <div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 left-menu"> 
+    <div class="row left-menu-row">
+<div class="side-menu"><nav class="navbar navbar-default" role="navigation">
+<div class="side-menu-container side-menu-blog"><button type="button" class="navbar-toggle navbar-tog-open-close side-body"><span class="fa fa-bars"></span></button><div class="side-nav-title"><h2>Hadoop Tutorial Series</h2></div><ul style="position: relative; overflow: visible;" class="nav navbar-nav cus-nav-scroll dropdown-menu-scrollbar mCustomScrollbar _mCS_2 mCS-autoHide"><div tabindex="0" id="mCSB_2" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"><div id="mCSB_2_container" class="mCSB_container" style="position: relative; top: -765px; left: 0px;" dir="ltr">
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/big-data-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"> <span>Big Data Tutorial: All You Need To Know About Big Data!</span><span data-toggle="collapse" href="#dropdown-level-1-15712587235953ba0c53c5f" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-15712587235953ba0c53c5f" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/videos/big-data-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Big Data Tutorial – Get Started With Big Data And Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/what-is-hadoop?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command">What is Hadoop? Introduction to Big Data &amp; Hadoop</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hadoop-tutorial/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"> <span>Hadoop Tutorial: All you need to know about Hadoop!</span><span data-toggle="collapse" href="#dropdown-level-1-4176586105953ba0c53d24" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-4176586105953ba0c53d24" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/videos/hadoop-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Hadoop Tutorial – A Complete Tutorial For Hadoop</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-ecosystem?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command">Hadoop Ecosystem: Hadoop Tools for Crunching Big Data</a>
+</li>
+<li class="panel panel-default first-level  active" id="dropdown"><a href="https://www.edureka.co/blog/hdfs-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"> <span>HDFS Tutorial: Introduction to HDFS &amp; its Features</span><span data-toggle="collapse" href="#dropdown-level-1-11380298325953ba0c53de8" class="fa fa-angle-right active"></span></a>
+<div id="dropdown-level-1-11380298325953ba0c53de8" class="panel-collapse collapse in"><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/apache-hadoop-hdfs-architecture/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Apache Hadoop HDFS Architecture</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>How to Set Up Hadoop Cluster with HDFS High Availability</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/overview-of-hadoop-2-0-cluster-architecture-federation/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Overview of Hadoop 2.0 Cluster Architecture Federation</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Install Hadoop: Setting up a Single Node Hadoop Cluster</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/setting-up-a-multi-node-cluster-in-hadoop-2.X?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Setting Up A Multi Node Cluster In Hadoop 2.X</span></a></li>
+
+<li class="active"><a href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" class="active-link" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>HDFS Commands: Hadoop Shell Commands to Manage HDFS</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/mapreduce-tutorial/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"> <span>MapReduce Tutorial – Fundamentals of MapReduce with MapReduce Example</span><span data-toggle="collapse" href="#dropdown-level-1-10082847855953ba0c53e9f" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-10082847855953ba0c53e9f" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/hadoop-streaming-mapreduce-program/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Hadoop Streaming: Writing A Hadoop MapReduce Program In Python</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/mapreduce-example-reduce-side-join/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>MapReduce Example: Reduce Side Join in Hadoop MapReduce</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/pig-tutorial/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"> <span>Pig Tutorial: Apache Pig Architecture &amp; Twitter Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-14053045335953ba0c53f56" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-14053045335953ba0c53f56" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/apache-pig-installation?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Apache Pig Installation on Linux</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/pig-programming-create-your-first-apache-pig-script/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Pig Programming: Create Your First Apache Pig Script</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/creating-udf-in-apache-pig/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Steps to Create UDF in Apache Pig</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hive-tutorial/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"> <span>Hive Tutorial – Hive Architecture and NASA Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-15514008025953ba0c5400b" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-15514008025953ba0c5400b" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/apache-hive-installation-on-ubuntu?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Apache Hive Installation on Ubuntu</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/hive-commands-with-examples?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Top Hive Commands with Examples in HQL</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/apache-hadoop-hive-script/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Apache Hadoop : Create your First HIVE Script</span></a></li>
+</ul></div></div>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/hbase-tutorial?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"> <span>HBase Tutorial: HBase Introduction and Facebook Case Study</span><span data-toggle="collapse" href="#dropdown-level-1-9827831925953ba0c540be" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-9827831925953ba0c540be" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/hbase-architecture/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>HBase Architecture: HBase Data Model &amp; HBase Read/Write Mechanism</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/sample-hbase-poc/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Sample HBase POC</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/brief-introduction-to-oozie/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command">Brief Introduction to Oozie</a>
+</li>
+<li class="panel panel-default first-level " id="dropdown"><a href="https://www.edureka.co/blog/interview-questions/top-50-hadoop-interview-questions-2016/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"> <span>Top 50 Hadoop Interview Questions For 2017</span><span data-toggle="collapse" href="#dropdown-level-1-9540368815953ba0c5417f" class="fa fa-angle-right "></span></a>
+<div id="dropdown-level-1-9540368815953ba0c5417f" class="panel-collapse collapse "><div class="panel-body"><ul class="nav navbar-nav"><li><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hdfs-2/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HDFS</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-hadoop-cluster/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Setting Up Hadoop Cluster</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-mapreduce/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – MapReduce</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hadoop-interview-questions-pig/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – PIG</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hive-interview-questions?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – Apache Hive</span></a></li>
+
+<li><a href="https://www.edureka.co/blog/interview-questions/hbase-interview-questions/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command"><i class="icon-Bullet-points"></i><span>Hadoop Interview Questions – HBase</span></a></li>
+</ul></div></div>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-certification/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command">Hadoop Certification – Become a Certified Big Data Hadoop Professional</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-career/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command">Hadoop Career: Career in Big Data Analytics</a>
+</li>
+<li class="first-level "><a href="https://www.edureka.co/blog/hadoop-3/?utm_source=blog&amp;utm_medium=left-menu&amp;utm_campaign=hdfs-commands-hadoop-shell-command" data-currpage="hdfs-commands-hadoop-shell-command">What's New in Hadoop 3.0 - Enhancements in Apache Hadoop 3</a>
+</li>
+</div></div><div style="display: block;" id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: 220px; max-height: 579px; top: 283px;" oncontextmenu="return false;"><div style="line-height: 50px;" class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></ul></div></nav></div></div>
+</div>
+<!-- Right Panel ends -->
+                        <div class="col-lg-8 col-md-7 col-xs-12 col-sm-12 blogmobfull">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 bread-herohead">
+    <div class="herohead">
+        <div class="">
+            <div class="row">
+                                <div class="">
+                    <h6 class="breadcrumb-section hidden-xs ">
+                        <a class="text-bold text-normal underline-remove brdcrumclrinac" href="https://www.edureka.co/blog">Home</a>
+                        <!--                        &nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog chevron-level-0"></i>&nbsp;&nbsp;
+                        <a class="text-bold text-normal underline-remove brdcrumclrac reset-filters post-type-level" href="/blog">Blogs&nbsp;&nbsp;</a>-->
+                        <i class="fa fa-chevron-right chevronblog chevron-level-1 ">&nbsp;&nbsp;</i>
+                        <a class="text-bold text-normal underline-remove brdcrumclrac post-type-breadcrum reset-filters " href="https://www.edureka.co/blog">Blogs</a>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right chevronblog  cat-level-breadcrum"></i>&nbsp;&nbsp;
+                        <span class="text-bold text-normal underline-remove brdcrumclrac cat-level-breadcrum cat-level-breadcrum-title ">Big Data Analytics</span>&nbsp;
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<!-- Top Navigation to be sent in blog phase 2 starts-->
+
+<section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainnavigator">
+    <article class="navigatedetail col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <span class="blogall"><a href="https://www.edureka.co/blog//all"><i class="icon-Home_icon"></i></a></span>
+        <span class="bloghome"><a href="https://www.edureka.co/blog/">Blogs</a></span>
+        <span class="videohome"><a href="https://www.edureka.co/blog/videos">Videos</a></span>
+        <span class="interviewhome"><a href="https://www.edureka.co/blog/interview-questions">Interview Questions</a></span>
+    </article>
+</section>
+<!--Top Navigation to be sent in blog phase 2-->
+                            <section class="mainsecblog">
+                                <section class="blogmaincontainer">
+                                    <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding topsection">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogmainheading">
+        <h1 class="blogheading">
+            HDFS Commands: Hadoop Shell Commands to Manage HDFS        </h1>
+        <span class="recommendedsec clearfix"><p>
+                                                    <i class="fa fa-bookmark newbookmark"></i> Recommended by  30 users                            </p>
+        </span>
+        <div class="top-sec-infodetail">
+            <span class="authorblog"><a href="https://www.edureka.co/blog/author/awanish/" title="Posts by Awanish" rel="author">Awanish</a></span>
+            <span class="dateblog">Nov 3, 2016</span> 
+             
+<div class="maxcollection maxcollection-1" data-collection="1"><span class="mb-collection-item item-24" data-doc-id="24" data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-25" data-doc-id="25" data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-26" data-doc-id="26" data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-27" data-doc-id="27" data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span></div>        </div>
+    </article>
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topimage">
+        <img class="blogimg" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/Heroimage%25201.jpg" alt="HDFS Commands: Hadoop Shell Commands to Manage HDFS" title="HDFS Commands: Hadoop Shell Commands to Manage HDFS">    </article>
+</section>                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 no-padding hidden-sm hidden-xs share-leftnav">
+                                            <div class="nav-stacked-social affix" data-spy="affix" data-offset-top="350" data-offset-bottom="400">
+                                                <div class="maxcollection maxcollection-1" data-collection="1"><span class="mb-collection-item item-24" data-doc-id="24_1" data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-25" data-doc-id="25_1" data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-26" data-doc-id="26_1" data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-27" data-doc-id="27_1" data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span></div>                                            </div>
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 no-padding">
+                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogdetailsec">
+    <article class="col-md-9 col-lg-9 col-sm-9 col-xs-12 blogdescription"> 
+        <span class="AddtoBookmark"><a href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command" data-title="HDFS Commands: Hadoop Shell Commands to Manage HDFS">
+                <i class="icon-Add_to_bookmark"></i>
+                <span class="Bookmark-text"><span>Add to</span> Bookmark</span></a>
+        </span>
+
+            <div class="modal thispost-mail fade" id="emailpostpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content centered">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span></button>
+                    <div class="Mailpost">
+                        <span class="icon"><i class="icon-Mail_this_post"></i></span>
+                        <span class="Mailthispost">Email this post</span>
+                        <form class="email-me-the-post" method="post" novalidate="novalidate">
+                            <div class="input-name  ">
+                                <input name="contentId" value="36250" type="hidden">
+                                <input name="name" class="required" required="" placeholder="Enter Your Name" autocomplete="false" type="text">
+                                <div class="error-name">
+                                    Please enter a valid input.
+                                </div>
+                            </div>
+                            <div class="input-email ">
+                                <input class="email required" required="" name="emails" placeholder="Enter Email ID’s ( Separated by commas )" autocomplete="false" type="text">
+                                <div class="error-email">
+                                    Please enter a valid email id or comma separated email id's.
+                                </div>
+                            </div>
+                            <button type="submit" class="Submit-mailpost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="Mailpost-thankyou">
+                        <i class="icon-success"></i>
+                        <span class="Mailthispost">The post has been successfully mailed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="EmailthisPost" data-toggle="modal" data-target="#emailpostpop">
+            <i class="icon-Mail_this_post"></i>
+            <span class="EmailthisPost-text">Email <span>this Post</span></span>
+        </span> 
+        <span class="viewsblogsec">
+            <span class="viewscount details-page-views-count"><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 8K</span>
+        </span>
+        <span class="commentsblogsec">
+            <a href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command#comments-wrapper" class="commentcount">
+                <span><i class="icon-comments"></i></span>
+            </a>&nbsp;&nbsp;
+            <a class="disqus-comment-count" data-disqus-url="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command" href="https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command#disqus_thread">1 </a>
+        </span>
+    </article>
+            <article class="col-md-3 col-lg-3 col-sm-3 col-xs-12 related-blog hidden-sm hidden-xs">
+            <ul class="pager">
+                <li><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="show-next-in-series"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </article>
+            <!-- <article class = "col-md-3 col-lg-3 col-sm-3 col-xs-12 downloadpdfblog">
+         <span class = "downloadpdf"></span>
+ </article> -->
+</section>                                            <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 blogcontentsec">
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        </p><h2 style="text-align: justify;"><strong><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;">HDFS Commands</span></strong></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">I have discussed about what is HDFS, its features and architecture in my <em><strong><a href="http://www.edureka.co/blog/hdfs-tutorial?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=hdfs-commands" target="_blank" rel="noopener noreferrer">previous blogs</a></strong></em>. In this blog, I will talk&nbsp;about&nbsp;the HDFS commands using&nbsp;which you can access the Hadoop File System.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">So,
+ let me tell you the important HDFS commands and their working which are
+ used most of the times when working with Hadoop File System.</span></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;">fsck</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to check the health of the Hadoop file system.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em>&nbsp;hdfs fsck /</span></p>
+<p style="text-align: justify;"><img class="aligncenter size-large wp-image-36346" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/hdfs-filesystem-hdfs-commands-edureka-1-528x229.png" alt="HDFS Filesystem Health - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/hdfs-filesystem-hdfs-commands-edureka-1-528x229.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/hdfs-filesystem-hdfs-commands-edureka-1-300x130.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/hdfs-filesystem-hdfs-commands-edureka-1-768x334.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/hdfs-filesystem-hdfs-commands-edureka-1.png 1365w" sizes="(max-width: 528px) 100vw, 528px" height="229" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">ls</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to display the list of Files and Directories in HDFS.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong><em>Command:</em></strong>&nbsp;hdfs&nbsp;dfs –ls /</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36281 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/list-hdfs-files-hdfs-commands-edureka-e1477640158858-528x169.png" alt="List HDFS Files - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/list-hdfs-files-hdfs-commands-edureka-e1477640158858-528x169.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/list-hdfs-files-hdfs-commands-edureka-e1477640158858-300x96.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/list-hdfs-files-hdfs-commands-edureka-e1477640158858-768x246.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/list-hdfs-files-hdfs-commands-edureka-e1477640158858.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="169" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">mkdir</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to create the directory in HDFS.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:</strong> </em>hdfs&nbsp;dfs –mkdir /directory_name</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em>&nbsp;hdfs&nbsp;dfs –mkdir /new_edureka</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36285 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/make-directory-in-hdfs-hdfs-commands-edureka-e1477640498319-.png" alt="Make Directory in HDFS - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/make-directory-in-hdfs-hdfs-commands-edureka-e1477640498319-528x207.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/make-directory-in-hdfs-hdfs-commands-edureka-e1477640498319-300x118.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/make-directory-in-hdfs-hdfs-commands-edureka-e1477640498319-768x301.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/make-directory-in-hdfs-hdfs-commands-edureka-e1477640498319.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="207" width="528"></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong><span style="color: #800000;">Note:</span></strong> Here we are trying to create a directory named “new_edureka” in HDFS.</span></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">touchz</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to create a file in HDFS with file size 0 bytes.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:</strong></em> hdfs&nbsp;dfs&nbsp;–touchz&nbsp;/directory/filename</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em>&nbsp;hdfs&nbsp;dfs&nbsp;–touchz /new_edureka/sample.</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36287 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/create-file-in-hdfs-hdfs-commands-edureka-e1477644325401-528.png" alt="Create File in HDFS - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/create-file-in-hdfs-hdfs-commands-edureka-e1477644325401-528x137.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/create-file-in-hdfs-hdfs-commands-edureka-e1477644325401-300x78.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/create-file-in-hdfs-hdfs-commands-edureka-e1477644325401-768x200.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/create-file-in-hdfs-hdfs-commands-edureka-e1477644325401.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="137" width="528"></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><span style="color: #800000;"><strong>Note:</strong></span>
+ Here we are trying to create a file named “sample” in the 
+directory&nbsp;&nbsp; “new_edureka” of&nbsp; hdfs with file size 0 
+bytes.</span></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">du</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">HDFS Command to check the file size.&nbsp;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:</strong></em> hdfs&nbsp;dfs&nbsp;–du&nbsp;–s /directory/filename</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em>&nbsp;hdfs dfs&nbsp;–du&nbsp;–s /new_edureka/sample</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36290 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/check-file-size-hdfs-commands-edureka-e1477644293563-528x90.png" alt="Check File Size - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/check-file-size-hdfs-commands-edureka-e1477644293563-528x90.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/check-file-size-hdfs-commands-edureka-e1477644293563-300x51.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/check-file-size-hdfs-commands-edureka-e1477644293563-768x130.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/check-file-size-hdfs-commands-edureka-e1477644293563.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="90" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">cat</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command that copies source paths to stdout.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:&nbsp;</strong></em>hdfs&nbsp;dfs –cat /path/to/file_in_hdfs</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs dfs –cat /new_edureka/test</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36291 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/copy-source-paths-hdfs-commands-edureka-e1477644254351-528x1.png" alt="Copy Source Paths - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-source-paths-hdfs-commands-edureka-e1477644254351-528x138.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-source-paths-hdfs-commands-edureka-e1477644254351-300x79.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-source-paths-hdfs-commands-edureka-e1477644254351-768x201.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-source-paths-hdfs-commands-edureka-e1477644254351.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="138" width="528"></p>
+<h2 style="text-align: left;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">text</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command that takes a source file and outputs the file in text format.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:</strong></em>&nbsp;hdfs dfs –text /directory/filename</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em>&nbsp;hdfs dfs –text&nbsp; /new_edureka/test</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36293 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/convert-to-text-hdfs-commands-edureka-e1477644198756-528x124.png" alt="Convert into Text - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/convert-to-text-hdfs-commands-edureka-e1477644198756-528x124.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/convert-to-text-hdfs-commands-edureka-e1477644198756-300x70.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/convert-to-text-hdfs-commands-edureka-e1477644198756-768x180.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/convert-to-text-hdfs-commands-edureka-e1477644198756.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="124" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;">copyFromLocal</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to copy the file from Local file system to HDFS.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:</strong></em> hdfs dfs -copyFromLocal &lt;localsrc&gt; &lt;hdfs destination&gt;&nbsp;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs&nbsp;dfs&nbsp;–copyFromLocal /home/edureka/test /new_edureka</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36295 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/copy-file-from-local-to-hdfs-hdfs-commands-edureka-e14776441.png" alt="Copy File from Local to HDFS - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-file-from-local-to-hdfs-hdfs-commands-edureka-e1477644134743-528x138.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-file-from-local-to-hdfs-hdfs-commands-edureka-e1477644134743-300x79.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-file-from-local-to-hdfs-hdfs-commands-edureka-e1477644134743-768x201.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-file-from-local-to-hdfs-hdfs-commands-edureka-e1477644134743.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="138" width="528"></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong><span style="color: #800000;">Note:&nbsp;</span></strong>Here
+ test is the file present in the local directory /home/edureka and after
+ the command gets executed the test file will be copied in /new_edureka 
+directory of HDFS.</span></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">copyToLocal</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to copy the file from HDFS to Local File System.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:</strong></em> hdfs&nbsp;dfs -copyToLocal &lt;hdfs source&gt; &lt;localdst&gt;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:&nbsp;</strong></em>hdfs&nbsp;dfs&nbsp;–copyToLocal /new_edureka/test /home/edureka</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36296 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/copy-file-from-hdfs-to-local-hdfs-commands-edureka-e14776440.png" alt="Copy File from HDFS to Local - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-file-from-hdfs-to-local-hdfs-commands-edureka-e1477644081938-528x80.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-file-from-hdfs-to-local-hdfs-commands-edureka-e1477644081938-300x46.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-file-from-hdfs-to-local-hdfs-commands-edureka-e1477644081938-768x117.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-file-from-hdfs-to-local-hdfs-commands-edureka-e1477644081938.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="80" width="528"></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong><span style="color: #800000;">Note:</span></strong>
+ Here test is a file present in the new_edureka directory of HDFS and 
+after the command gets executed the test file will be copied to local 
+directory /home/edureka</span></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">put</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to copy single source, or multiple sources from local file system to the destination file system.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:&nbsp;</strong></em>hdfs dfs -put &lt;localsrc&gt; &lt;destination&gt;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs&nbsp;dfs&nbsp;–put /home/edureka/test /user</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36297 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/put-command-hdfs-commands-edureka-e1477644046962-528x158.png" alt="Put Command - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/put-command-hdfs-commands-edureka-e1477644046962-528x158.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/put-command-hdfs-commands-edureka-e1477644046962-300x90.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/put-command-hdfs-commands-edureka-e1477644046962-768x230.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/put-command-hdfs-commands-edureka-e1477644046962.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="158" width="528"></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong><span style="color: #800000;">Note:</span></strong>&nbsp; The command copyFromLocal is similar to put command, except that the source is restricted to a local file reference.</span></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-size: 16px; font-family: verdana, geneva, sans-serif;">get</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to copy files from hdfs to the local file system.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:</strong></em> hdfs&nbsp;dfs&nbsp;-get &lt;src&gt; &lt;localdst&gt;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em>&nbsp;hdfs dfs –get /user/test /home/edureka</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36299 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/get-command-hdfs-commands-edureka-e1477644008996-528x145.png" alt="Get Command - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/get-command-hdfs-commands-edureka-e1477644008996-528x145.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/get-command-hdfs-commands-edureka-e1477644008996-300x82.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/get-command-hdfs-commands-edureka-e1477644008996-768x211.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/get-command-hdfs-commands-edureka-e1477644008996.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="145" width="528"></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong><span style="color: #800000;">Note:</span></strong> The command copyToLocal is similar to get command, except that the destination is restricted to a local file reference.</span></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">count</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to count the number of directories, files and bytes under the paths that match the specified file pattern.</span></p>
+<p style="text-align: justify;"><em><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Usage: </span></strong></em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">hdfs</span><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">&nbsp;</span></em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">dfs</span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">&nbsp;-count &lt;path&gt;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs dfs –count /user</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36301 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/count-directories-or-files-hdfs-commands-edureka-e1477643963.png" alt="Count Directories or Files - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/count-directories-or-files-hdfs-commands-edureka-e1477643963637-528x90.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/count-directories-or-files-hdfs-commands-edureka-e1477643963637-300x51.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/count-directories-or-files-hdfs-commands-edureka-e1477643963637-768x130.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/count-directories-or-files-hdfs-commands-edureka-e1477643963637.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="90" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">rm</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to remove the file from HDFS.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Usage:</strong></em> hdfs dfs –rm&nbsp;&lt;path&gt; &nbsp; &nbsp;&nbsp;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em>&nbsp; hdfs dfs –rm /new_edureka/test</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36303 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/remove-file-from-hdfs-hdfs-commands-edureka-e1477643922115-5.png" alt="Remove File from HDFS - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-file-from-hdfs-hdfs-commands-edureka-e1477643922115-528x116.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-file-from-hdfs-hdfs-commands-edureka-e1477643922115-300x66.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-file-from-hdfs-hdfs-commands-edureka-e1477643922115-768x169.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-file-from-hdfs-hdfs-commands-edureka-e1477643922115.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="116" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">rm&nbsp;-r</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to remove the entire directory and all of its content from HDFS.</span></p>
+<p style="text-align: justify;"><em><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Usage: </span></strong></em><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">hdfs dfs&nbsp;-rm -r &lt;path&gt;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs dfs -rm -r&nbsp; /new_edureka</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36306 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/remove-directory-from-hdfs-hdfs-commands-edureka-e1477643859.png" alt="Remove Entire Directory from HDFS - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-directory-from-hdfs-hdfs-commands-edureka-e1477643859419-528x113.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-directory-from-hdfs-hdfs-commands-edureka-e1477643859419-300x64.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-directory-from-hdfs-hdfs-commands-edureka-e1477643859419-768x165.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-directory-from-hdfs-hdfs-commands-edureka-e1477643859419.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="113" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">cp</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS
+ Command to copy files from source to destination. This command allows 
+multiple sources as well, in which case the destination must be a 
+directory.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Usage:</strong></em> hdfs&nbsp;dfs</span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">&nbsp;-cp &lt;src&gt; &lt;dest&gt;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs dfs -cp&nbsp;/user/hadoop/file1 /user/hadoop/file2</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs dfs -cp /user/hadoop/file1 /user/hadoop/file2 /user/hadoop/dir&nbsp;&nbsp;</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36310 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/copy-from-source-to-dest-hdfs-command-edureka-e1477643798848.png" alt="Copy from Source to Destination - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-from-source-to-dest-hdfs-command-edureka-e1477643798848-528x138.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-from-source-to-dest-hdfs-command-edureka-e1477643798848-300x79.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-from-source-to-dest-hdfs-command-edureka-e1477643798848-768x201.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/copy-from-source-to-dest-hdfs-command-edureka-e1477643798848.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="138" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">mv</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS
+ Command to move files from source to destination. This command allows 
+multiple sources as well, in which case the destination needs to be a 
+directory.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Usage:</strong></em>&nbsp; hdfs&nbsp;dfs -mv &lt;src&gt; &lt;dest&gt;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:&nbsp;</strong></em> hdfs&nbsp;dfs&nbsp;-mv /user/hadoop/file1 /user/hadoop/file2</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36312 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/move-files-from-source-to-dest-hdfs-commands-edureka-e147764.png" alt="Move Files from Source to Destination - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/move-files-from-source-to-dest-hdfs-commands-edureka-e1477643755614-528x178.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/move-files-from-source-to-dest-hdfs-commands-edureka-e1477643755614-300x101.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/move-files-from-source-to-dest-hdfs-commands-edureka-e1477643755614-768x259.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/move-files-from-source-to-dest-hdfs-commands-edureka-e1477643755614.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="178" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">expunge</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command that makes the trash empty.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong>Command:</strong> hdfs&nbsp;dfs&nbsp;-expunge</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36314 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/make-trash-empty-hdfs-commands-edureka-e1477643689973-528x10.png" alt="Make Trash Empty - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/make-trash-empty-hdfs-commands-edureka-e1477643689973-528x101.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/make-trash-empty-hdfs-commands-edureka-e1477643689973-300x58.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/make-trash-empty-hdfs-commands-edureka-e1477643689973-768x147.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/make-trash-empty-hdfs-commands-edureka-e1477643689973.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="101" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">rmdir</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command to remove the directory.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Usage:</strong></em> hdfs&nbsp;dfs&nbsp;-rmdir&nbsp;</span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">&lt;path&gt;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs&nbsp;dfs&nbsp;–rmdir&nbsp;/user/hadoop</span></p>
+<p style="text-align: justify;"><img class="aligncenter size-large wp-image-36305" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/remove-hdfs-directory-hdfs-commands-edureka-528x256.png" alt="Remove Hdfs Directory - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-hdfs-directory-hdfs-commands-edureka-528x256.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-hdfs-directory-hdfs-commands-edureka-300x146.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-hdfs-directory-hdfs-commands-edureka-768x373.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/remove-hdfs-directory-hdfs-commands-edureka.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="256" width="528"></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">usage</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command that returns the help for an individual command.</span></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;"><em><strong>Usage:</strong></em> hdfs dfs -usage &lt;command&gt;</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs dfs -usage mkdir</span></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-36318 size-large" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/help-for-individual-command-hdfs-commands-edureka-e147764364.png" alt="Help for Individual Command - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/help-for-individual-command-hdfs-commands-edureka-e1477643641296-528x136.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/help-for-individual-command-hdfs-commands-edureka-e1477643641296-300x77.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/help-for-individual-command-hdfs-commands-edureka-e1477643641296-768x198.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/help-for-individual-command-hdfs-commands-edureka-e1477643641296.png 1301w" sizes="(max-width: 528px) 100vw, 528px" height="136" width="528"></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><strong><span style="color: #800000;">Note:</span></strong> By using usage command you can get information about any command.</span></p>
+<h2 style="text-align: justify;"><span style="text-decoration: underline;"><strong><span style="font-family: verdana, geneva, sans-serif; font-size: 16px;">help</span></strong></span></h2>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;">HDFS Command that displays help for given command or all commands if none is specified.</span></p>
+<p style="text-align: justify;"><span style="font-size: 14px; font-family: verdana, geneva, sans-serif;"><em><strong>Command:</strong></em> hdfs dfs -help</span></p>
+<p style="text-align: justify;"><img class="aligncenter size-large wp-image-36320" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/help-command-hdfs-commands-edureka-528x256.png" alt="Help Command - HDFS Commands - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/help-command-hdfs-commands-edureka-528x256.png 528w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/help-command-hdfs-commands-edureka-300x146.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/help-command-hdfs-commands-edureka-768x373.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/help-command-hdfs-commands-edureka.png 1366w" sizes="(max-width: 528px) 100vw, 528px" height="256" width="528"></p>
+<p style="text-align: justify;"><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">This
+ is the end of the HDFS Commands blog, I hope it was informative and you
+ were able to execute all the commands. For more HDFS Commands, you may 
+refer Apache Hadoop</span><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">&nbsp;documentation <strong><a href="https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/FileSystemShell.html?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=hdfs-commands" target="_blank" rel="noopener noreferrer">here</a></strong>.</span></p>
+<p style="text-align: center;"><a class="maxbutton-14 maxbutton maxbutton-download-green-small" target="_blank" href="http://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster?utm_source=blog&amp;utm_medium=blog-cta&amp;utm_campaign=hdfs-commands-p"><span class="mb-text">&lt;&lt;      Previous Blog</span></a> &nbsp; <a class="maxbutton-14 maxbutton maxbutton-download-green-small" target="_blank" href="http://www.edureka.co/blog/hadoop-ecosystem?utm_source=blog&amp;utm_medium=blog-cta&amp;utm_campaign=hdfs-commands-n"><span class="mb-text">Next Blog      &gt;&gt;</span></a></p>
+<p style="text-align: justify;"><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Now that you have executed the above HDFS commands, check out the <strong><a href="http://www.edureka.co/big-data-and-hadoop/?utm_source=blog&amp;utm_medium=content-link&amp;utm_campaign=hdfs-commands" target="_blank" rel="noopener noreferrer">Hadoop training</a></strong>
+ by Edureka, a trusted online learning company with a network of more 
+than 250,000 satisfied learners spread across the globe. The Edureka Big
+ Data Hadoop Certification Training course helps learners become expert 
+in HDFS, Yarn, MapReduce, Pig, Hive, HBase, Oozie, Flume and Sqoop</span></em><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">&nbsp;using real-time use cases on Retail, Social Media, Aviation, Tourism, Finance domain.</span></em></p>
+<p style="text-align: justify;"><em><span style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Got a question for us? Please mention it in the comments section and we will get back to you.</span></em></p>
+                                                    <p></p>
+                                                </article>
+                                                <article class="maincontentblog">
+                                                    <p class="contentblogdetail">
+                                                        </p><div id="author-bio-box"><img alt="Awanish" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/Awanish_avatar-80x70.jpg" class="avatar avatar-80 photo" height="80" width="80"><span class="author-name">About Awanish (<a href="https://www.edureka.co/blog/author/awanish/">19 Posts</a>)</span><p>Awanish
+ is a Sr. Research Analyst at Edureka.
+He has rich expertise in Big Data technologies like Hadoop, Spark, 
+Storm, Kafka, Flink. Awanish also holds good knowledge on Devops tools 
+like Git, Jenkins, Docker, Puppet, Nagios. He is passionate about new 
+technologies which provide realistic solutions.</p><div class="bio-socials"></div></div><br><div class="clear"></div>                                                    <p></p>
+                                                </article>
+                                                <div class="bot-shareoption">
+                                                    <span class="Shareon-bot">
+                                                        Share on
+                                                    </span>
+                                                    <div class="maxcollection maxcollection-1" data-collection="1"><span class="mb-collection-item item-24" data-doc-id="24_2" data-popup="{&quot;width&quot;:400,&quot;height&quot;:300}"><a class="maxbutton-24 maxbutton maxbutton-circle-social-share-facebook" href="https://www.facebook.com/sharer.php?u=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command&amp;utm_source=blog&amp;utm_medium=button&amp;utm_campaign=blog-"><span class="mb-icon"><i class="fa fa-facebook"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-25" data-doc-id="25_2" data-popup="{&quot;width&quot;:550,&quot;height&quot;:420}"><a class="maxbutton-25 maxbutton maxbutton-circle-social-share-twitter" href="https://twitter.com/intent/tweet?url=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command&amp;utm_source=blog&amp;utm_medium=button&amp;utm_campaign=blog-"><span class="mb-icon"><i class="fa fa-twitter"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-26" data-doc-id="26_2" data-popup="{&quot;width&quot;:700,&quot;height&quot;:500}"><a class="maxbutton-26 maxbutton maxbutton-circle-social-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command&amp;utm_source=blog&amp;utm_medium=button&amp;utm_campaign=blog-"><span class="mb-icon"><i class="fa fa-linkedin"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span><span class="mb-collection-item item-27" data-doc-id="27_2" data-popup="{&quot;width&quot;:600,&quot;height&quot;:600}"><a class="maxbutton-27 maxbutton maxbutton-circle-social-share-google-plus" href="https://plus.google.com/share?url=https://www.edureka.co/blog/hdfs-commands-hadoop-shell-command&amp;utm_source=blog&amp;utm_medium=button&amp;utm_campaign=blog-"><span class="mb-icon"><i class="fa fa-google-plus"></i></span><span class="mb-text"><span class="share_count"></span></span></a></span></div>                                                </div>
+                                                                                                    <article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 related-blog next-blog-leftnav">
+                                                        <ul class="pager">
+                                                            <li class="pull-left"><a href="#" class="show-prev-in-series"><i class="fa fa-angle-left" aria-hidden="true"></i> PREVIOUS</a></li>
+                                                            <li class="pull-right"><a href="#" class="show-next-in-series">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </article>
+                                                                                                    <section id="edu-related-blog-carousel-2" class="bottom-webinar-widget widget_edu-related-blog-carousel"><div class="heading-title"><h3 class="bottom-widget-title"><span>Related Posts</span></h3></div><article class="Continue-watch-carousel">
+                        <div class="owl-carousel carousel-watch-again-carousel carousel-custom owl-loaded owl-drag"><div class="owl-stage-outer"><div style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 626px;" class="owl-stage"><div style="width: 146.4px; margin-right: 10px;" class="owl-item active"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/big-data-tutorial?utm_source=blog&amp;utm_medium=bottom-related-blog-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/big-data-tutorial-feature-image-2-01.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Big Data Tutorial: All You Need To Know About Big Data!</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 5.9K</div>
+                            </div>
+                        </article></a>
+                    </div></div><div style="width: 146.4px; margin-right: 10px;" class="owl-item active"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/hadoop-tutorial/?utm_source=blog&amp;utm_medium=bottom-related-blog-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/Hadoop-Tutorial-Edureka.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Hadoop Tutorial: All you need to know about Hadoop!</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 33.3K</div>
+                            </div>
+                        </article></a>
+                    </div></div><div style="width: 146.4px; margin-right: 10px;" class="owl-item active"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/hdfs-tutorial?utm_source=blog&amp;utm_medium=bottom-related-blog-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/HDFS-Tutorial-Introduction-to-HDFS-its-Features.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>HDFS Tutorial: Introduction to HDFS &amp; its Features</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 12.2K</div>
+                            </div>
+                        </article></a>
+                    </div></div><div style="width: 146.4px; margin-right: 10px;" class="owl-item active"><div class="item">
+                        <a class="related-blog-link" href="https://www.edureka.co/blog/hadoop-ecosystem?utm_source=blog&amp;utm_medium=bottom-related-blog-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command"><article class="col-md-12 col-lg-12 col-sm-12 col-xs-12 box-video-single no-padding">
+                            <div class="video-image">
+                                <img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/Hadoop-Ecosystem.png" alt="video image">
+                                
+                            </div>
+                            <div class="video-info">
+                                <span>Hadoop Ecosystem: Hadoop Tools for Crunching Big Data</span>
+                                <div><span class="hidden-xs"><i class="icon-View"></i></span><span class="visible-xs-inline-block"><i class="icon-View"></i></span> 13.9K</div>
+                            </div>
+                        </article></a>
+                    </div></div></div></div><div class="owl-nav disabled"><div class="owl-prev">prev</div><div class="owl-next">next</div></div><div class="owl-dots disabled"><div class="owl-dot active"><span></span></div></div></div>
+                    </article></section>
+                                                <!--Comments Area Single post-->
+                                                <section class="padcomments">
+    <span class="comments"> Comments <div class="arrow-down"></div></span>
+    <span class="pull-right comment"> 1 Comment </span>
+</section>
+<section class="commsec" id="comments-wrapper">
+    
+<div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/a.html" style="width: 1px ! important; min-width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 698px ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" name="dsq-app1" id="dsq-app1" frameborder="0" width="100%"></iframe></div>
+
+</section>	
+                                            </section>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>	
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-12 col-sm-12 no-padding blog-sidepanel"> 
+    <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maincontainer detailpagesidebar" data-post_type="post" data-post_name="hdfs-commands-hadoop-shell-command">
+             <section id="edu-related-blogs-2" class="right-side-widget custom-edu-widgets widget_edu-related-blogs"><h3 class="widget-title"><span>Related Blogs</span></h3><ul class="edu-hiran custom-widget-listing related-blogs"><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/big-data-tutorial?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command" class="custom-rel-thumb"><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/big-data-tutorial-feature-image-2-01.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Big Data Tutorial - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/big-data-tutorial-feature-image-2-01-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" height="50" width="86"></a><a href="https://www.edureka.co/blog/big-data-tutorial?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command" class="custom-rel-article"><span>Big Data Tutorial: All You Need To Know About Big...<span></span></span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/hadoop-tutorial/?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command" class="custom-rel-thumb"><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/Hadoop-Tutorial-Edureka.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Hadoop Tutorial - Big Data and Hadoop - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka-300x176.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Tutorial-Edureka-513x300.png 513w" sizes="(max-width: 85px) 100vw, 85px" height="50" width="85"></a><a href="https://www.edureka.co/blog/hadoop-tutorial/?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command" class="custom-rel-article"><span>Hadoop Tutorial: All you need to know about Hadoop!<span></span></span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/hdfs-tutorial?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command" class="custom-rel-thumb"><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/HDFS-Tutorial-Introduction-to-HDFS-its-Features.png" class="attachment-550x50 size-550x50 wp-post-image" alt="HDFS Tutorial - Introduction to HDFS its Features - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/HDFS-Tutorial-Introduction-to-HDFS-its-Features.png 815w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/HDFS-Tutorial-Introduction-to-HDFS-its-Features-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/HDFS-Tutorial-Introduction-to-HDFS-its-Features-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/HDFS-Tutorial-Introduction-to-HDFS-its-Features-514x300.png 514w" sizes="(max-width: 86px) 100vw, 86px" height="50" width="86"></a><a href="https://www.edureka.co/blog/hdfs-tutorial?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command" class="custom-rel-article"><span>HDFS Tutorial: Introduction to HDFS &amp; its Features<span></span></span></a></article></li><li><article class="custom-related-post"><a href="https://www.edureka.co/blog/hadoop-ecosystem?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command" class="custom-rel-thumb"><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/Hadoop-Ecosystem.png" class="attachment-550x50 size-550x50 wp-post-image" alt="Hadoop Ecosystem - Edureka" srcset="https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem.png 816w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem-300x175.png 300w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem-768x449.png 768w, https://cdn.edureka.co/blog/wp-content/uploads/2016/10/Hadoop-Ecosystem-513x300.png 513w" sizes="(max-width: 86px) 100vw, 86px" height="50" width="86"></a><a href="https://www.edureka.co/blog/hadoop-ecosystem?utm_source=blog&amp;utm_medium=right-related-blogs&amp;utm_campaign=hdfs-commands-hadoop-shell-command" class="custom-rel-article"><span>Hadoop Ecosystem: Hadoop Tools for Crunching Big Data<span></span></span></a></article></li></ul></section><section id="edu-custom-subscribe-2" class="right-side-widget custom-edu-widgets widget_edu-custom-subscribe">        <section class="col-lg-12 col-md-12 col-xs-12 col-sm-12 no-padding Newsletter-sub">
+            
+                        <form id="subscribe-form" novalidate="" class="custom-subscribe-form-wrapper">
+                <div class="subscribesec">
+                                    <!--<div class="close-thissub"><i class="icon-cross"></i></div>	-->
+                    <div class="subscribesec-box">										
+                        <h4 class="clearfix subscribeblogtitle"><p><i class="icon-Mail_this_post"></i></p><span>Subscribe to get free Newsletter</span></h4>
+                        <section class="sectrendcom">
+                            <article class="relatedcontmain">
+                                <div class="input-group Subscribeinput">                              
+                                    <input name="subscription-mail" autocomplete="off" class="form-control " required="" placeholder="Enter Email" type="email"> 
+                                    <!-- Add classes successform and errorform to toggle the input form -->
+
+                                </div>
+                                <input id="is_user_loggedin" value="0" type="hidden">
+                                <label id="loader" style="margin-left:120px;display:none"><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/loader.gif"></label>
+
+                                <p class="errormessage"> Please provide a valid Email Id </p>
+                            </article>                         
+                        </section>  
+                    </div>
+                    <div class="subscribesec-success">
+                        <i class="icon-success"></i>
+                        <p class="successmessage" style="display: none;"> Thank you, your subscription is successful</p> 
+                        <p class="alreadysubscribed" style="display: none;"> You have already subscribed.</p> 
+                    </div>
+                </div>
+                <button type="submit" id="subscribe-button" class="btn subscribebtn successbutton">
+                    <div class="sub-news-letter">SUBSCRIBE</div></button>
+            </form>
+            <div class="sub-browse-letter show-after-success hide">
+                <a class="" href="https://www.edureka.co/all-courses" target="_blank">BROWSE COURSES</a>
+            </div>
+        </section>
+        </section></section>
+</div>
+<!-- Right Panel ends -->
+</div></div></div>
+</section>
+
+<footer style="position: static;" class="footer-new" id="footer_v2">
+        <div class="container">
+        <div class="row">
+            <div class="padding-xs-only clearfix">
+                <div class="panel-group no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <div class="col-md-12 visible-xs accordion-head">
+
+                            <a data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" href="javascript:void(0)">
+                                <h3 class="no-margin footer-new-hd-lineht"><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></h3>
+                                <p class=" margin-vr5 grey-txt marg-btm-0-xs">© 2014 Brain4ce Education Solutions Pvt. Ltd.</p>
+                                <i class="fa fa-angle-up"></i>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+
+                        </div>
+                        <div id="collapse1" class="div-collapse collapse clearfix">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 item-padding">
+                                <h4>Edureka</h4>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/about-us">About us</a></li>
+                                    <li><a href="https://www.edureka.co/allmedia">News &amp; Media</a></li>
+                                    <li><a href="https://www.edureka.co/contact-us">Contact us</a></li>
+                                    <li><a href="https://www.edureka.co/careers">Careers</a></li>
+                                </ul>
+                                <ul class="list-unstyled footer-menu wid-50-left">
+                                    <li><a href="https://www.edureka.co/blog/all">Blog</a></li>
+                                    <li><a href="https://www.edureka.co/reviews">Reviews</a></li>
+                                    <li><a href="https://www.edureka.co/terms-and-conditions">Terms &amp; conditions</a></li>
+                                    <li><a href="https://www.edureka.co/privacy-policy">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Work with us </h4>
+                                <ul class="list-unstyled footer-menu">
+                                    <li><a href="https://www.edureka.co/instructors/add">Become  an Instructor</a></li>
+                                    <li><a href="https://www.edureka.co/hire-from-edureka">Hire from Edureka</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3  col-md-3 col-sm-3 col-xs-6 item-padding">
+                                <h4>Follow us on </h4>
+                                <ul class="list-unstyled footer-social-icon">
+                                    <li><a class="fb" target="_blank" href="https://www.facebook.com/edurekaIN"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="tw" target="_blank" href="https://twitter.com/edurekaIN"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="in" target="_blank" href="https://www.linkedin.com/company/edureka"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="ut" target="_blank" href="https://www.youtube.com/user/edurekaIN"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 item-padding padding-lft-25 text-center-xs">
+                                <h4>Learn on the GO!</h4>
+                                <ul class="list-unstyled footer-menu-store">
+                                    <li><a target="_blank" href="https://itunes.apple.com/in/app/edureka/id1033145415?mt=8">
+                                            <img alt="appleplaystore" class="img-responsive" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/applestorebtn.png"></a></li>
+                                    <li><a target="_blank" href="https://play.google.com/store/apps/details?id=co.edureka.app">
+                                            <img alt="googleplaystore" class="img-responsive" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/googleplaybtn.png"></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding border-top-half">
+                                <div class="padding-vr20 clearfix">
+                                    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-12 no-padding">
+                                        <h3 class="no-margin footer-new-hd-lineht"><a href="https://www.edureka.co/"><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/edureka-logo.png" alt="edureka logo" class="footer-new_logo"></a></h3>
+                                        <p class=" margin-vr5 grey-txt">© 2014 Brain4ce Education Solutions Pvt. Ltd. All rights Reserved.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-7 col-xs-12 no-padding txt-marg-top text-xs-left">
+                                        <p class="grey-txt">"PMP®","PMI®", "PMI-ACP®" and "PMBOK®" are registered marks of the Project Management Institute, Inc. <br>
+                                            MongoDB®, Mongo and the leaf logo are the registered trademarks of MongoDB, Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<div class="footerbar">
+    <div class="container clearfix">
+        <div class="row">
+            <a href="javascript:void(0);" class="call-us">
+                <span><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/phone-icon.png" alt="phoneicon"></span>
+                Call us on 
+                <span>1-800-275-9730 <i>(Toll Free)</i></span>
+                <span>+91 88808 62004</span>
+            </a>
+            <div class="dropdown pull-left hidden-xs">
+                <div class="bfh-selectbox country-style-footer triangle country-pop-small bfh-countries" data-country="IN" data-flags="true" data-filter="true">
+                    <input value="" type="hidden">
+                    <a class="bfh-selectbox-toggle res-popup" role="button" data-toggle="bfh-selectbox" href="#">
+                        <span class="bfh-selectbox-option input-medium" data-option="">
+                        </span>
+
+
+                    </a>
+                    <div class="bfh-selectbox-options">
+                        <input class="bfh-selectbox-filter" type="text">
+                        <div role="listbox">
+                            <ul style="position: relative; overflow: visible;" role="option" class="dropdown-menu-scrollbar mCustomScrollbar _mCS_3 mCS-autoHide mCS_no_scrollbar"><div tabindex="0" style="max-height: 200px;" id="mCSB_3" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"><div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+                            </div></div><div style="display: none;" id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; top: 0px;" oncontextmenu="return false;"><div style="line-height: 50px;" class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="call-us-xs">
+            <h3>24 X 7 Customer Support
+                <a class="close-call" href="javascript:void(0);">X</a>
+            </h3>
+            <ul class="list-unstyled">
+                <li><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/us-flag.png" alt="us flag"> 1-800-275-9730   (Toll Free)     </li>
+                <li><img src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/ind-flag.png" alt="india flag"> +91 88808 62004</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                jQuery(function($) {
+                    function equalHeight(group) {
+                        tallest = 0;
+                        group.each(function() {
+                            thisHeight = $(this).height();
+                            if(thisHeight > tallest) {
+                                tallest = thisHeight;
+                            }
+                        });
+                        group.height(tallest);
+                    }
+
+                    equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+
+                    $(window).resize(function() {
+                        equalHeight($(".dg-grid-shortcode .dg_grid-shortcode-col"));
+                    });
+                });
+            </script>
+            <script type="text/javascript"> 
+				var fonts_loaded =[];
+			</script><!--email_off--><style type="text/css">.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook{border-color:#000;box-shadow-color:#333;background:rgba(77, 103, 164, 1);-pie-background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(77, 103, 164, 1)), color-stop(1, rgba(77, 103, 164, 1)));background:-moz-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:-o-linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1));background:linear-gradient(rgba(77, 103, 164, 1) 45%, rgba(77, 103, 164, 1))}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon{text-align:center;padding-top:8px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff;font-size:21px}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-icon .fa.fa-facebook{color:#fff}.maxbutton-24.maxbutton.maxbutton-circle-social-share-facebook .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-24.maxbutton:hover.maxbutton-circle-social-share-facebook .mb-text{color:#fff}
+.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter{border-color:#000;box-shadow-color:#333;background:rgba(38, 167, 223, 1);-pie-background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(38, 167, 223, 1)), color-stop(1, rgba(38, 167, 223, 1)));background:-moz-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:-o-linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1));background:linear-gradient(rgba(38, 167, 223, 1) 45%, rgba(38, 167, 223, 1))}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff;font-size:22px}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-icon .fa.fa-twitter{color:#fff}.maxbutton-25.maxbutton.maxbutton-circle-social-share-twitter .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-25.maxbutton:hover.maxbutton-circle-social-share-twitter .mb-text{color:#fff}
+.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin{border-color:#000;box-shadow-color:#333;background:rgba(1, 120, 181, 1);-pie-background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(1, 120, 181, 1)), color-stop(1, rgba(1, 120, 181, 1)));background:-moz-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:-o-linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1));background:linear-gradient(rgba(1, 120, 181, 1) 45%, rgba(1, 120, 181, 1))}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff;font-size:22px}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-icon .fa.fa-linkedin{color:#fff}.maxbutton-26.maxbutton.maxbutton-circle-social-share-linkedin .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-26.maxbutton:hover.maxbutton-circle-social-share-linkedin .mb-text{color:#fff}
+.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus{position:relative;text-decoration:none;display:inline-block;border-color:#000;box-shadow-color:#333;width:50px;height:50px;border-top-left-radius:80px;border-top-right-radius:80px;border-bottom-left-radius:80px;border-bottom-right-radius:80px;border-style:solid;border-width:0px;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus{border-color:#000;box-shadow-color:#333;background:rgba(216, 74, 54, 1);-pie-background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(216, 74, 54, 1)), color-stop(1, rgba(216, 74, 54, 1)));background:-moz-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:-o-linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1));background:linear-gradient(rgba(216, 74, 54, 1) 45%, rgba(216, 74, 54, 1))}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon{text-align:center;padding-top:7px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:0px;display:block;background-color:unset}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff;font-size:22px}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-icon .fa.fa-google-plus{color:#fff}.maxbutton-27.maxbutton.maxbutton-circle-social-share-google-plus .mb-text{color:#fff;font-family:PT Sans Narrow;font-size:12px;text-align:center;font-style:normal;font-weight:normal;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-27.maxbutton:hover.maxbutton-circle-social-share-google-plus .mb-text{color:#fff}
+.maxcollection.maxcollection-1{display:inline-block;z-index:9999;margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px}.maxcollection.maxcollection-1 .mb-collection-item.item-24{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-25{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-26{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}.maxcollection.maxcollection-1 .mb-collection-item.item-27{margin-right:0px;margin-bottom:0px;float:left;display:inline-block}
+.maxbutton-14.maxbutton.maxbutton-download-green-small{position:relative;text-decoration:none;display:inline-block;border-color:#438683;box-shadow-color:#438683;width:140px;height:35px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-style:solid;border-width:0px;background:rgba(67, 134, 131, 1);-pie-background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(67, 134, 131, 1)), color-stop(1, rgba(67, 134, 131, 1)));background:-moz-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-o-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1))}.maxbutton-14.maxbutton:hover.maxbutton-download-green-small{border-color:#438683;box-shadow-color:#438683;background:rgba(67, 134, 131, 1);-pie-background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-webkit-gradient(linear, left top, left bottom, color-stop(45%, rgba(67, 134, 131, 1)), color-stop(1, rgba(67, 134, 131, 1)));background:-moz-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:-o-linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1));background:linear-gradient(rgba(67, 134, 131, 1) 45%, rgba(67, 134, 131, 1))}.maxbutton-14.maxbutton.maxbutton-download-green-small .mb-text{color:#fff;font-size:13px;text-align:center;font-style:normal;font-weight:bold;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;line-height:1em;box-sizing:border-box;display:block;background-color:unset;position:relative}.maxbutton-14.maxbutton:hover.maxbutton-download-green-small .mb-text{color:#fff}
+</style><!--/email_off-->
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/jquery.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var postasmail = {"afp_nonce":"7cda17556f","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/fancyquote.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var videolib = {"afp_nonce":"7cda17556f","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/video-library.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/jquery_003.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var fvpdata = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","nonce":"4f9d532874","fitvids":"1","dynamic":"","overlay":"","opacity":"0.75","color":"b","width":"640"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/frontend.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var mb_ajax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/front.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/maxbuttons_fonts.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/maxbuttons-pro-front.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/bootstrap.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/masonry.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/imagesloaded.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/jquery_002.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/nprogress.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/CustomScrollbar.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/owl.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/0187-formValidation.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/0188-bootstrap.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/blog.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/modalEffects.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/modalEffects-related.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/mfb.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/signup.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var php_array = {"admin_ajax":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var wnm_custom = {"template_url":"\/blog\/wp-content\/themes\/edu-hiran"};
+var myAjax = {"ajaxurl":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php"};
+var afp_vars = {"afp_nonce":"7cda17556f","afp_ajax_url":"https:\/\/www.edureka.co\/blog\/wp-admin\/admin-ajax.php","postID":"36250","single":"1"};
+var post_vars = {"postID":"36250","postType":"post"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/ajax-pagination.js"></script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/wp-embed.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.7.5","language":""},"disqusIdentifier":"36250 http:\/\/www.edureka.co\/blog\/?p=36250","disqusShortname":"edurekablog","disqusTitle":"HDFS Commands: Hadoop Shell Commands to Manage HDFS","disqusUrl":"https:\/\/www.edureka.co\/blog\/hdfs-commands-hadoop-shell-command","options":{"manualSync":"1"},"postId":"36250"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/disqus.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"edurekablog"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="HDFS%20Commands%20%7C%20Hadoop%20Shell%20Commands%20to%20Manage%20HDFS%20%7C%20Edureka_arquivos/count_002.js"></script>
+
+
+
+
+
+<img style="display: none;" alt="preload image"><img style="display: none;" alt="preload image"><iframe style="display: none;"></iframe></body></html>
+<!-- mfunc setPostViews(get_the_ID()); -->
+<!-- /mfunc -->
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 3119/3398 objects using disk
+Page Caching using disk
+Content Delivery Network via Amazon Web Services: CloudFront: cdn.edureka.co
+Database Caching 25/63 queries in 0.024 seconds using disk
+
+ Served from: www.edureka.co @ 2017-06-28 14:15:41 by W3 Total Cache -->
