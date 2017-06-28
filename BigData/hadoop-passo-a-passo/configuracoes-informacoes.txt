@@ -185,6 +185,36 @@ $ sudo sh setup.sh
 --> Once Webmin is installed, access it with the credentials set during the installation process by browsing to http://SERVER-IP:10000.
 
 
+================
+
+Add the Hadoop, Zookeeper and paths to .bashrc file.
+
+Open the .bashrc file.
+
+Command: sudo gedit ~/.bashrc
+
+Add the below paths:
+
+export HADOOP_HOME=< Path to your Hadoop-2.6.0 directory>
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export JAVA_HOME=<Path to your Java Directory>
+export ZOOKEEPER_HOME =<Path to your Zookeeper Directory>
+export PATH=$PATH: $JAVA_HOME/bin: $HADOOP_HOME/bin: $HADOOP_HOME/sbin:$ZOOKEEPER_HOME/bin
+
+
+==> Ver demais configurações em (setup a HDFS High Availability Cluster in Hadoop.):
+(https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/?utm_source=blog&utm_medium=left-menu&utm_campaign=apache-hadoop-hdfs-architecture)
+
+==> IMPORTANTE "Install Hadoop: Setting up a Single Node Hadoop Cluster":
+(https://www.edureka.co/blog/install-hadoop-single-node-hadoop-cluster?utm_source=blog&utm_medium=left-menu&utm_campaign=overview-of-hadoop-2-0-cluster-architecture-federation)
+================
+
+
 * fontes:
 https://docs.bitnami.com/virtual-machine/apps/hadoop/
 https://docs.bitnami.com/virtual-machine/faq/#how-to-remotely-access-the-bitnami-application

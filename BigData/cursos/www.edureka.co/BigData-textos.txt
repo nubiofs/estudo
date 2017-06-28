@@ -372,6 +372,10 @@ Once the client gets all the required file blocks, it will combine these blocks 
 
 While serving read request of the client, HDFS selects the replica which is closest to the client. This reduces the read latency and the bandwidth consumption. 
 
+==============
+MapReduce Tutorial: Introduction
+=============
+
 ---
 
 Hadoop was developed, based on the paper written by Google on MapReduce system and it applies concepts of functional programming.
