@@ -293,6 +293,14 @@ HDFS creates a level of abstraction over the resources, from where we can see th
 It helps us in storing our data across various nodes and maintaining the log file about the stored data (metadata).
 HDFS has two core components, i.e. NameNode and DataNode. 
 
+insane statistics related to HDFS:
+
+    In 2010, Facebook claimed to have one of the largest HDFS cluster storing 21 Petabytes of data.
+    In 2012, Facebook declared that they have the largest single HDFS cluster with more than 100 PB of data.
+    And Yahoo! has more than 100,000 CPU in over 40,000 servers running Hadoop, with its biggest Hadoop cluster running 4,500 nodes. All told, Yahoo! stores 455 petabytes of data in HDFS.
+    In fact, by 2013, most of the big names in the Fortune 50 started using Hadoop.
+
+
 - YARN
 
 Consider YARN as the brain of your Hadoop Ecosystem. It performs all your processing activities by allocating resources and scheduling tasks.
@@ -304,5 +312,66 @@ It has two major components, i.e. ResourceManager and NodeManager.
 It is the core component of processing in a Hadoop Ecosystem as it provides the logic of processing. In other words, MapReduce is a software framework which helps in writing applications that processes large data sets using distributed and parallel algorithms inside Hadoop environment.
 
 ----
+
+I would like to draw your attention on three things importantly:
+
+1. Hadoop Ecosystem owes its success to the whole developer community, many big companies like Facebook, Google, Yahoo, University of California (Berkeley) etc. have contributed their part to increase Hadoop’s capabilities.
+
+2. Inside a Hadoop Ecosystem, knowledge about one or two tools (Hadoop components) would not help in building a solution. You need to learn a set of Hadoop components, which works together to build a solution.
+
+3. Based on the use cases, we can choose a set of services from Hadoop Ecosystem and create a tailored solution for an organization.
+
+----
+
+ Distributed & Parallel Computation
+
+(Parallel-Processing-HDFS-Introduction-HDFS-tutorial-Edureka-768x472.png)
+
+
+Because the data is divided across the machines, it allows us to take advantage of Distributed and Parallel Computation. Let’s understand this concept by the above example. Suppose, it takes 43 minutes to process 1 TB file on a single machine. So, now tell me, how much time will it take to process the same 1 TB file when you have 10 machines in a Hadoop cluster with similar configuration – 43 minutes or 4.3 minutes? 4.3 minutes, Right! What happened here? Each of the nodes is working with a part of the 1 TB file in parallel. Therefore, the work which was taking 43 minutes before, gets finished in just 4.3 minutes now as the work got divided over ten machines.
+
+There are two types of scaling: vertical and horizontal. In vertical scaling (scale up), you increase the hardware capacity of your system. In other words, you procure more RAM or CPU and add it to your existing system to make it more robust and powerful. But there are challenges associated with vertical scaling or scaling up:
+
+    There is always a limit to which you can increase your hardware capacity. So, you can’t keep on increasing the RAM or CPU of the machine.
+    In vertical scaling, you stop your machine first. Then you increase the RAM or CPU to make it a more robust hardware stack. After you have increased your hardware capacity, you restart the machine. This down time when you are stopping your system becomes a challenge.
+
+In case of horizontal scaling (scale out), you add more nodes to existing cluster instead of increasing the hardware capacity of individual machines. And most importantly, you can add more machines on the go i.e. Without stopping the system.
+
+
+High Throughput: Throughput is the amount of work done in a unit time. It talks about how fast you can access the data from the file system. Basically, it gives you an insight about the system performance. As you have seen in the above example where we used ten machines collectively to enhance computation. There we were able to reduce the processing time from 43 minutes to a mere 4.3 minutes as all the machines were working in parallel. Therefore, by processing data in parallel, we decreased the processing time tremendously and thus, achieved high throughput. 
+
+
+
+    Data Locality: Data locality talks about moving processing unit to data rather than the data to processing unit. In our traditional system, we used to bring the data to the application layer and then process it. But now, because of the architecture and huge volume of the data, bringing the data to the application layer will reduce the network performance to a noticeable extent. So, in HDFS, we bring the computation part to the data nodes where the data is residing. Hence, you are not moving the data, you are bringing the program or processing part to the data. 
+
+
+, if we had a block size of let’s say of 4 KB, as in Linux file system, we would be having too many blocks and therefore too much of the metadata. So, managing these no. of blocks and metadata will create huge overhead, which is something, we don’t want.
+
+- Advantages of Rack Awareness:
+
+So, now you will be thinking why do we need a Rack Awareness algorithm? The reasons are:
+
+    To improve the network performance: The communication between nodes residing on different racks is directed via switch. In general, you will find greater network bandwidth between machines in the same rack than the machines residing in different rack. So, the Rack Awareness helps you to have reduce write traffic in between different racks and thus providing a better write performance. Also, you will be gaining increased read performance because you are using the bandwidth of multiple racks.
+
+    To prevent loss of data: We don’t have to worry about the data even if an entire rack fails because of the switch failure or power failure. And if you think about it, it will make sense, as it is said that never put all your eggs in the same basket.
+
+- HDFS Read/ Write Architecture:
+
+Now let’s talk about how the data read/write operations are performed on HDFS. HDFS follows Write Once – Read Many Philosophy. So, you can’t edit files already stored in HDFS. But, you can append new data by re-opening the file.
+
+The client will copy Block A and Block B to the first DataNode simultaneously.
+Therefore, in our case, two pipelines will be formed for each of the block and all the process discussed above will happen in parallel in these two pipelines.
+The client writes the block into the first DataNode and then the DataNodes will be replicating the block sequentially.
+
+- HDFS Read Architecture:
+
+Now, following steps will be taking place while reading the file:
+
+The client will reach out to NameNode asking for the block metadata for the file “example.txt”.
+Once the client gets all the required file blocks, it will combine these blocks to form a file.
+
+While serving read request of the client, HDFS selects the replica which is closest to the client. This reduces the read latency and the bandwidth consumption. 
+
+---
 
 Hadoop was developed, based on the paper written by Google on MapReduce system and it applies concepts of functional programming.
