@@ -379,3 +379,17 @@ MapReduce Tutorial: Introduction
 ---
 
 Hadoop was developed, based on the paper written by Google on MapReduce system and it applies concepts of functional programming.
+
+(The Battle for Next Generation Big Data Analysis Framework)
+
+Apache Flink is a new forth generation Big Data processing tool that is changing the landscape of data processing technologies.
+
+The movement towards the unification of batch and stream processing has been a challenging one. 2nd Generation frameworks such as Scalding or Storm failed to satisfy both requirements at the same time.
+
+Apache Spark was, and continues to be, a great evolution as it introduced lightweight threads instead of heavyweight JVMs, perfected lazy evaluation and introduced SQL and streaming capabilities, while targeting multiple languages. The above, made Apache Spark the 3rd Generation analytics framework.
+
+At the same time and across the industry we were the witnesses of stream processing emerging as a first-class citizen in multiple open source projects including Akka and Kafka. The new technical innovations that bring with them a unique vision and philosophy is now more visible than ever.
+
+Apache Flink is one of the most promising incubating projects and is already considered the 4th Generation of Big Data Analytics Frameworks.
+
+The reason is that since it's conceptual design it was a project born to run everything in a streaming fashion. Even when you get to execute Batch jobs onto Flink, they are executed by the framework as a streaming job, where data stream from the filesystem.

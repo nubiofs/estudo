@@ -340,6 +340,10 @@ http://apex.apache.org/
 
 https://www.linkedin.com/pulse/100-open-source-big-data-architecture-papers-anil-madan
 
+https://hadoopecosystemtable.github.io/
+https://github.com/hadoopecosystemtable/hadoopecosystemtable.github.io
+
+http://projects.spring.io/spring-xd/
 
 https://amsterdam.luminis.eu/2016/05/23/jumpstarting-stream-processing-with-kafka-and-flink/
 xxxxxxxxxxxxx
