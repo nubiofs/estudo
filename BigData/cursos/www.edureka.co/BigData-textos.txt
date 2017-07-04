@@ -376,6 +376,46 @@ While serving read request of the client, HDFS selects the replica which is clos
 MapReduce Tutorial: Introduction
 =============
 
+Google released a paper on MapReduce technology in December, 2004. This became the genesis of the Hadoop Processing Model. So, MapReduce is a programming model that allows us to perform parallel and distributed processing on huge data sets.
+
+MapReduce is a programming framework that allows us to perform distributed and parallel processing on large data sets in a distributed environment.
+
+MapReduce is based on Divide and Conquer paradigm which helps us to process the data using different machines. As the data is processed by multiple machine instead of a single machine in parallel, the time taken to process the data gets reduced by a tremendous amount
+
+ Data Locality: 
+
+Instead of moving data to the processing unit, we are moving processing unit to the data in the MapReduce Framework.  In the traditional system, we used to bring data to the processing unit and process it. But, as the data grew and became very huge, bringing this huge amount of data to the processing unit posed following issues: 
+
+    Moving huge data to processing is costly and deteriorates the network performance. 
+    Processing takes time as the data is processed by a single unit which becomes the bottleneck.
+    Master node can get over-burdened and may fail.
+
+the data is distributed among multiple nodes where each node processes the part of the data residing on it. This allows us to have the following advantages:
+
+    It is very cost effective to move processing unit to the data.
+    The processing time is reduced as all the nodes are working with their part of the data in parallel.
+    Every node gets a part of the data to process and therefore, there is no chance of a node getting overburdened. 
+
+---
+
+IBM states that, every day, almost 2.5 quintillion bytes of data are created, with 90 percent of world’s data created in the last two years! It is a challenging task to store such an expansive amount of data. Hadoop can handle large volumes of structured and unstructured data more efficiently than the traditional enterprise Data Warehouse. It stores these enormous data sets across distributed clusters of computers. Hadoop Streaming uses MapReduce framework which can be used to write applications to process humongous amounts of data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 Hadoop was developed, based on the paper written by Google on MapReduce system and it applies concepts of functional programming.
