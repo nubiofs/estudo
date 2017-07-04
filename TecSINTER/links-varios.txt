@@ -347,7 +347,10 @@ http://projects.spring.io/spring-xd/
 
 https://amsterdam.luminis.eu/2016/05/23/jumpstarting-stream-processing-with-kafka-and-flink/
 
+http://clusterhq.com/projects/
+http://clusterhq.com/flocker/introduction/
 
+https://www.cockroachlabs.com/
 
 http://www.devmedia.com.br/conheca-a-geracao-de-banco-de-dados-nosql-e-newsql/33202
 
