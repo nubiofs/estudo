@@ -1,0 +1,3 @@
+* Open Source Academy (TechNet) DevOps, java e containers no Azure:
+
+https://technet.microsoft.com/pt-br/mt652115.aspx
