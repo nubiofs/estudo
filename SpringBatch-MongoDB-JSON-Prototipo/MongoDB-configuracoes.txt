@@ -33,7 +33,27 @@ $ sudo apt-get install -y mongodb-org
 
 - Como iniciar o MongoDB:
 
-Obs.: Colocar em "/etc/systemd/system/mongodb.service":
+$ mkdir mongodb
+
+$ cd mongodb
+
+$ sudo mongod --config /etc/mongod.conf --dbpath . &
+
+#$ sudo service mongod status
+
+$ cat /var/log/mongodb/mongod.log
+
+$ mongo
+
+---
+
+Obs.: 
+
+1) "Ver se necessário": 
+
+Colocar em "/etc/systemd/system/mongodb.service":
+
+$ sudo nano /etc/systemd/system/mongodb.service
 
 [Unit]
 Description=High-performance, schema-free document-oriented database
@@ -53,6 +73,25 @@ $ sudo systemctl status mongodb
 $ sudo systemctl enable mongodb
 
 $ sudo ufw allow 27017
+
+2) https://github.com/boaglio/mongodb-casadocodigo/blob/master/capitulo-03/megasena.csv
+
+$ mongoimport -c megasena --type csv --headerline megasena.csv
+2017-07-10T14:47:45.282-0300	connected to: localhost
+2017-07-10T14:47:45.376-0300	imported 2032 documents
+
+$ mongo
+
+> show dbs
+admin  0.000GB
+local  0.000GB
+test   0.000GB
+> use test
+switched to db test
+> show collections
+megasena
+> db.megasena.count();
+2032
 
 *** conexão ***
 
