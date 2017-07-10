@@ -5,18 +5,33 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 *** Configuração inicial ***
 
-Como Instalar o MongoDB no Ubuntu 16.04
-(fonte: https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt)
+- Como Instalar o MongoDB no Ubuntu 16.04:
 
-$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+#Para versão 3.2.15:
+#(fonte: https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt)
+#
+#$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+#
+#$ echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+#
+#$ sudo apt-get update
+#
+#$ sudo apt-get install -y mongodb-org
+#
+#$ sudo nano /etc/systemd/system/mongodb.service
 
-$ echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+Para versão 3.4.6:
+(fonte: https://docs.mongodb.com/master/tutorial/install-mongodb-on-ubuntu/?_ga=2.4744374.428294677.1499698545-1004286758.1499698545)
+
+$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+
+$ echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
 
 $ sudo apt-get update
 
 $ sudo apt-get install -y mongodb-org
 
-$ sudo nano /etc/systemd/system/mongodb.service
+- Como iniciar o MongoDB:
 
 Obs.: Colocar em "/etc/systemd/system/mongodb.service":
 
@@ -38,7 +53,6 @@ $ sudo systemctl status mongodb
 $ sudo systemctl enable mongodb
 
 $ sudo ufw allow 27017
-
 
 *** conexão ***
 
