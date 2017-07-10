@@ -74,7 +74,7 @@ $ sudo systemctl enable mongodb
 
 $ sudo ufw allow 27017
 
-2) https://github.com/boaglio/mongodb-casadocodigo/blob/master/capitulo-03/megasena.csv
+2) Exemplor para "https://github.com/boaglio/mongodb-casadocodigo/blob/master/capitulo-03/megasena.csv"
 
 $ mongoimport -c megasena --type csv --headerline megasena.csv
 2017-07-10T14:47:45.282-0300	connected to: localhost
@@ -86,14 +86,29 @@ $ mongo
 admin  0.000GB
 local  0.000GB
 test   0.000GB
+
 > use test
 switched to db test
+
 > show collections
 megasena
+
 > db.megasena.count();
 2032
 
-*** conexão ***
+> db.megasena.stats();
+
+...
+
+> db.megasena.find({"Concurso" : 1}).pretty();
+
+...
+
+> db.megasena.find({"Concurso" : 1}, {"_id" : false}).pretty();
+
+...
+
+3) Exemplo *** conexão e criacao coleção/usuario ***
 
 $ mongo 127.0.0.1:27017
 
@@ -114,7 +129,29 @@ $ mongo 127.0.0.1:27017
 
 $ mongo 127.0.0.1:27017/benchmark --username mongo --password mongo --quiet
 
+4) Instalação "Robomongo":
+
+i. download file in https://robomongo.org/download
+
 Obs.:
+
+wget -b -c https://download.robomongo.org/1.1.1/linux/robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
+
+ii. unzip the file to `/opt`: `tar -zxvf robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz`
+iii. cd to `/opt/robo3t-1.1.1-linux-x86_64-c93c6b0/bin`, execute `robomongo`
+iv. create a new alias in ZSH: `alias robomongo='/opt/robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robomongo'`
+
+$ ~/robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robo3t &
+
+5) Sobre conexão do mongoDB via java:
+
+http://mongodb.github.io/mongo-java-driver/
+https://github.com/mongodb/mongo-java-driver/tree/master
+
+---
+---
+
+Obs. Outros:
 
 1)Aproveitar uma interface gráfica
 
