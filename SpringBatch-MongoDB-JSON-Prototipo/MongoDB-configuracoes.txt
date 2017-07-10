@@ -35,7 +35,12 @@ $ sudo apt-get install -y mongodb-org
 
 $ mkdir mongodb
 
+# mkdir /var/lib/mongodb/dbs
+# mkdir /var/lib/mongodb/dbs/mongodb
+
 $ cd mongodb
+
+# cd /var/lib/mongodb/dbs/mongodb
 
 $ sudo mongod --config /etc/mongod.conf --dbpath . &
 
@@ -147,6 +152,7 @@ $ ~/robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robo3t &
 
 http://mongodb.github.io/mongo-java-driver/
 https://github.com/mongodb/mongo-java-driver/tree/master
+https://github.com/mongodb/morphia
 
 ---
 ---
