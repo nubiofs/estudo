@@ -1,9 +1,46 @@
+$ cp estudo.git/SpringBatch/outros/infra-batch/workspace/infra-batch-master/infra-batch/infra-batch-sample .
+
+$ mv infra-batch-sample infra-batch-sample-mongo
+
+$ cd infra-batch-sample-mongo
+
+$ ~/mvn eclipse:eclipse
+
+-> "Import Existing Maven Project"
+
+- Mudar para Java 1.8
+
+- Colocar no pom.xml:
+
+<!-- https://mongodb.github.io/mongo-java-driver/ -->
+<dependency>
+ <groupId>org.mongodb</groupId>
+ <artifactId>mongodb-driver</artifactId>
+ <version>3.4.2</version>
+</dependency>
+
+- Execução (via prompt):
+
+$ java -Dinfra.config.dir=/media/sf_compartilhamento/workspace/infra-batch-sample-mongo/src/main/resources/configs -Dinfra.verbose=true -jar target/infra-batch-sample-mongo-3.0.1-executable.jar sample-jobs/sampleCSV-job.xml sampleCSVJob -report
+
+xxxxxxxxxxxx
+
 VER (referências base):
 
 http://www.dineshonjava.com/2014/03/spring-batch-xml-to-mongodb-database.html
 --> https://sites.google.com/a/dineshonjava.com/dineshonjava/dineshonjava/SpringBatchXMLtoMongoDB.zip?attredirects=0
 
 http://www.javabydefault.com/2014/12/using-spring-batch-to-read-process-and.html
+
+https://github.com/spring-projects/spring-data-mongodb
+
+===> https://stackoverflow.com/questions/33098548/mongodb-equivalent-of-writer-in-spring-batch
+
+----> https://stackoverflow.com/questions/31073000/spring-batch-mongodb-example-not-working
+
+http://www.journaldev.com/4144/spring-data-mongodb-example
+
+=====> https://github.com/spring-projects/spring-data-mongodb/blob/master/spring-data-mongodb-cross-store/src/test/resources/META-INF/spring/applicationContext.xml
 
 ===========
 LINKS:
