@@ -1,0 +1,34 @@
+VER (referências base):
+
+http://www.dineshonjava.com/2014/03/spring-batch-xml-to-mongodb-database.html
+--> https://sites.google.com/a/dineshonjava.com/dineshonjava/dineshonjava/SpringBatchXMLtoMongoDB.zip?attredirects=0
+
+http://www.javabydefault.com/2014/12/using-spring-batch-to-read-process-and.html
+
+===========
+LINKS:
+
+https://github.com/ttrelle/spring-batch-mongodb-support
+--> https://github.com/ttrelle/spring-batch-mongodb-support/blob/master/src/test/resources/org/springframework/batch/item/mongodb/MongoDBItemWriterJobTest-context.xml
+https://blog.codecentric.de/en/2012/11/spring-batch-mongodb/
+
+https://github.com/Yingliang-Du/spring-batch-mongo-boot-scheduler-example
+
+https://github.com/jbaruch/springbatch-over-mongodb
+
+https://www.mkyong.com/spring-batch/spring-batch-example-xml-file-to-database/
+
+http://docs.spring.io/spring-batch/apidocs/org/springframework/batch/item/data/MongoItemReader.html
+
+--Spring Batch Example – XML File To MongoDB Database
+http://lib.csdn.net/article/javaee/3746
+
+https://mongodb.github.io/mongo-java-driver/
+
+https://github.com/erh/mongo-jdbc
+
+-- spring-batch samples source code patched to work with mongo-db
+https://gist.github.com/jbaruch/384265
+
+-- public MongoTemplate mongoTemplate()
+https://github.com/Dan-Dongcheol-Lee/spring-batch-example/blob/master/src/main/java/spring/batch/example/configuration/BatchApplicationConfig.java
