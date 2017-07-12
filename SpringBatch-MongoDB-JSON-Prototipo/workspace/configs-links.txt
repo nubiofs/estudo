@@ -93,7 +93,47 @@ $ ~/mvn -DargLine="-Dhost=127.0.0.1 -Dport=27017" -Dtest=MongoDBItemWriterTest#s
 
 $ ~/mvn -DargLine="-Dhost=127.0.0.1 -Dport=27017" -Dtest=MongoDBItemWriterJobTest#should_write_to_collection test
 
+============= Estou aqui...
+
+* https://github.com/spring-guides/gs-batch-processing
+
+- Objetivo:
+
+"Adaptando projeto inicial Spring Batch para (read json) e MongoDB Write (com Spring Data MongoDB)"!!!
+
+- Configuração "Getting Started" -> Creating a Batch Service (https://spring.io/guides/gs/batch-processing/#initial):
+
+- download "gs-batch-processing-master.zip"
+
+- descompatando apenas "/gs-batch-processing-master/initial/" para pasta "gs-batch-processing-master-initial-mongo"
+
+- substituir no pom.xml para:
+
+ <artifactId>gs-batch-processing-master-initial-mongo</artifactId>
+
+$ rm estudo.git/SpringBatch-MongoDB-JSON-Prototipo/workspace/gs-batch-processing-master-initial-mongo/gradle
+
+Observação Importante:
+
+Ver que há a pasta "/gs-batch-processing-master-initial-mongo/.mvn/wrapper/" para processamento via maven!!!
+
+$ cd estudo.git/SpringBatch-MongoDB-JSON-Prototipo/workspace/gs-batch-processing-master-initial-mongo/
+
+$ rm build.gradle
+
+$ rm gradlew*
+
+$ ~/mvn eclipse:eclipse
+
+$ mvn eclipse:eclipse
+
+- No Eclipse: "Import Existing Maven Project"
+
+- Mudar para Java 1.8
+
+
 =============
+
 
 * https://github.com/spring-projects/spring-data-examples/tree/master/rest/starbucks
 
@@ -138,6 +178,8 @@ Original com
 =============
 
 * http://www.dineshonjava.com/2013/01/spring-data-mongodb-examples.html
+
+http://www.baeldung.com/spring-data-mongodb-tutorial
 
 =============
 
