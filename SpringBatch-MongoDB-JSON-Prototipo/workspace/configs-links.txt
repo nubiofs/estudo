@@ -95,6 +95,21 @@ $ ~/mvn -DargLine="-Dhost=127.0.0.1 -Dport=27017" -Dtest=MongoDBItemWriterJobTes
 
 =============
 
+* https://github.com/spring-projects/spring-data-examples/tree/master/rest/starbucks
+
+(Technologies used)
+
+Spring Data REST & Spring Data MongoDB
+MongoDB
+Spring Batch (to read the CSV file containing the store data and pipe it into MongoDB)
+Spring Boot
+
+=============
+
+* https://github.com/eugenp/tutorials/tree/master/spring-data-mongodb
+
+=============
+
 * https://github.com/nmorel/spring-batch-extension-mongodb
 
 --> spring-batch-extension-mongodb-master.zip
@@ -105,17 +120,6 @@ Original com
  		
         <spring.batch.version>2.2.0.RELEASE</spring.batch.version>
         <mongodb.version>2.11.1</mongodb.version>
-
-=============
-
-* https://github.com/spring-projects/spring-data-examples/tree/master/rest/starbucks
-
-(Technologies used)
-
-Spring Data REST & Spring Data MongoDB
-MongoDB
-Spring Batch (to read the CSV file containing the store data and pipe it into MongoDB)
-Spring Boot
 
 =============
 
