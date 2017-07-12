@@ -133,7 +133,26 @@ $ mvn eclipse:eclipse
 
 - Create a business class (Person.java) "src/main/java/hello/Person.java"
 
-Obs.: Utilizando o banco padrão "No database type set, using meta data indicating: HSQL"
+Obs.: 
+
+i) Utilizando o banco padrão "No database type set, using meta data indicating: HSQL":
+
+(https://examples.javacodegeeks.com/enterprise-java/spring/spring-batch-jobrepository-example/)
+(https://github.com/spring-projects/spring-batch/blob/master/spring-batch-samples/src/main/resources/batch-hsql.properties)
+spring-batch-core-3.0.7.RELEASE-sources.jar
+
+	INFO 7548 --- [           main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+
+ii) Spring Boot can auto-configure embedded H2, HSQL and Derby databases. You don’t need to provide any connection URLs, simply include a build dependency to the embedded database that you want to use.
+
+	(29.1.1 Embedded Database Support)
+	https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html
+
+<dependency>
+    <groupId>org.hsqldb</groupId>
+    <artifactId>hsqldb</artifactId>
+    <scope>runtime</scope>
+</dependency>
 
 - Create an intermediate processor (PersonItemProcessor.java) "src/main/java/hello/batch/PersonItemProcessor.java"
 

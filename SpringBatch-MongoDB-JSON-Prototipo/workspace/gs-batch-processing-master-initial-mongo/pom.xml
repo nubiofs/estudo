@@ -22,10 +22,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
         </dependency>
-        <!-- utiliza banco "HSQL" -->
+        <!-- (Embedded Database Support) utiliza banco "HSQL" -->
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
