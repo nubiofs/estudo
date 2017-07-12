@@ -146,10 +146,20 @@ Obs.: Utilizando o banco padrão "No database type set, using meta data indicati
 - Build an executable JAR:
 
 1) build the JAR file with:
+
 	$ ./mvnw clean package
 
 2) Then you can run the JAR file: 
+
 	$ java -jar target/gs-batch-processing-master-initial-mongo-0.1.0.jar
+
+3) If you are using Maven, you can run the application using:
+
+	$ ./mvnw spring-boot:run
+	
+	ou
+
+	$ ~/mvn spring-boot:run
 
 =============
 
