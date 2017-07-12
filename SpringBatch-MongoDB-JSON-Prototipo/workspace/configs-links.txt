@@ -131,6 +131,25 @@ $ mvn eclipse:eclipse
 
 - Mudar para Java 1.8
 
+- Create a business class (Person.java) "src/main/java/hello/Person.java"
+
+Obs.: Utilizando o banco padrão "No database type set, using meta data indicating: HSQL"
+
+- Create an intermediate processor (PersonItemProcessor.java) "src/main/java/hello/batch/PersonItemProcessor.java"
+
+- Put together a batch job (BatchConfiguration.java) "src/main/java/hello/batch/BatchConfiguration.java"
+
+- Criar (JobCompletionNotificationListener.java) "src/main/java/hello/batch/JobCompletionNotificationListener.java"
+
+- Make the application executable (Application.java) "src/main/java/hello/Application.java"
+
+- Build an executable JAR:
+
+1) build the JAR file with:
+	$ ./mvnw clean package
+
+2) Then you can run the JAR file: 
+	$ java -jar target/gs-batch-processing-master-initial-mongo-0.1.0.jar
 
 =============
 
