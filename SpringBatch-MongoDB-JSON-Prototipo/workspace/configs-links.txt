@@ -1,3 +1,57 @@
+Observações:
+
+Versões mais novas (atuais em 12-07-2017):
+
+i) Opcao 1 "mais baixo nível":
+
+- http://projects.spring.io/spring-batch/
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.batch</groupId>
+        <artifactId>spring-batch-core</artifactId>
+        <version>3.0.7.RELEASE</version>
+    </dependency>
+</dependencies>
+
+com
+
+- https://mongodb.github.io/mongo-java-driver/
+
+<dependencies>
+    <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver</artifactId>
+        <version>3.4.2</version>
+    </dependency>
+</dependencies>
+
+ii) Opcao 2 "talvez melhor escolha":
+
+- http://projects.spring.io/spring-batch/
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.batch</groupId>
+        <artifactId>spring-batch-core</artifactId>
+        <version>3.0.7.RELEASE</version>
+    </dependency>
+</dependencies>
+
+com
+
+- http://projects.spring.io/spring-data-mongodb/
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-mongodb</artifactId>
+        <version>1.10.4.RELEASE</version>
+    </dependency>
+</dependencies>
+
+xxxxxxxxxxxxxxx (NOT OK)
+
 * https://git.serpro/05601970475/infra-batch/tree/master/infra-batch/infra-batch-sample (NOT OK)
 
 --> infra-batch-master-10863e50f5b81e65582249e1526e3de76803dd76.zip
@@ -9,11 +63,11 @@
 - Spring Batch
 - MongoDB Java driver
 
-Ou junto também com:
+Ou utilizar:
 
-- Spring Data MongoDB
+- Spring Batch com Spring Data MongoDB "spring-data-mongodb sem necessidade de utilizar (MongoDB Java driver)"
 
-==============
+============== (OK)
 
 * https://github.com/ttrelle/spring-batch-mongodb-support (OK)
 
@@ -41,13 +95,54 @@ $ ~/mvn -DargLine="-Dhost=127.0.0.1 -Dport=27017" -Dtest=MongoDBItemWriterJobTes
 
 =============
 
+* https://github.com/nmorel/spring-batch-extension-mongodb
+
+--> spring-batch-extension-mongodb-master.zip
+
+Obs.: 
+
+Original com
+ 		
+        <spring.batch.version>2.2.0.RELEASE</spring.batch.version>
+        <mongodb.version>2.11.1</mongodb.version>
+
+=============
+
+* https://github.com/spring-projects/spring-data-examples/tree/master/rest/starbucks
+
+(Technologies used)
+
+Spring Data REST & Spring Data MongoDB
+MongoDB
+Spring Batch (to read the CSV file containing the store data and pipe it into MongoDB)
+Spring Boot
+
+=============
+
+
+* http://walkingtechie.blogspot.com.br/2017/03/spring-batch-mongodb-xml-file.html
+
+
+"Spring Batch com Spring Data MongoDB"
+
+=============
+
+* http://walkingtechie.blogspot.com.br/2017/03/spring-batch-example-in-spring-boot-csv.html
+
+"Spring Batch com Spring Data MongoDB"
+
+=============
+
+* http://www.dineshonjava.com/2013/01/spring-data-mongodb-examples.html
+
+=============
+
+* https://examples.javacodegeeks.com/enterprise-java/spring/spring-data-mongodb-example/
+
+=============
+
 * http://www.dineshonjava.com/2014/03/spring-batch-xml-to-mongodb-database.html
 
 --> SpringBatchXMLtoMongoDB.zip
 
-=============
-
-* https://github.com/nmorel/spring-batch-extension-mongodb
-
---> spring-batch-extension-mongodb-master.zip
 
