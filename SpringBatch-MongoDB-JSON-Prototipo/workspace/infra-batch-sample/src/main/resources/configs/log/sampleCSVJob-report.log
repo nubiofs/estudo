@@ -1,0 +1,30 @@
+2017-04-19 16:38:54 INFO  InfraJobContext:432 - #############  Logger configurado para execução de sampleCSVJob  ##############
+2017-04-19 16:38:54 INFO  InfraJobContext:188 - Carregando configurações do recurso sampleCSVJob.properties
+2017-04-19 16:38:54 INFO  InfraJobContext:188 - Carregando configurações do recurso app-context.properties
+2017-04-19 16:38:54 INFO  InfraJobContext:206 - Carregando configurações do arquivo /media/sf_compartilhamento/workspace/infra-batch-sample/src/main/resources/configs/infra-batch.properties
+2017-04-19 16:38:55 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@31b7dea0: startup date [Wed Apr 19 16:38:55 BRT 2017]; root of context hierarchy
+2017-04-19 16:38:55 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [sample-jobs/sampleCSV-job.xml]
+2017-04-19 16:38:55 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/infra-batch-memory-context.xml]
+2017-04-19 16:38:55 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/import/common-context.xml]
+2017-04-19 16:38:56 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/import/data-source-context.xml]
+2017-04-19 16:38:56 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/import/transaction-context.xml]
+2017-04-19 16:38:56 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/import/job-repository-memory-launcher-context.xml]
+2017-04-19 16:38:57 INFO  PropertyPlaceholderConfigurer:172 - Loading properties file from URL [file:/media/sf_compartilhamento/workspace/infra-batch-sample/src/main/resources/configs/infra-batch.properties]
+2017-04-19 16:38:57 INFO  ThreadPoolTaskExecutor:165 - Initializing ExecutorService  'threadPoolTaskExecutor'
+2017-04-19 16:38:57 INFO  ConcurrentTaskExecutorDelegate:45 - concurrentTaskExecutor carregado para utilizar o Executor FixedThreadPool e 8 threads.
+2017-04-19 16:38:57 INFO  SimpleJobLauncher:195 - No TaskExecutor has been set, defaulting to synchronous executor.
+2017-04-19 16:39:52 INFO  InfraJobContext:432 - #############  Logger configurado para execução de sampleCSVJob  ##############
+2017-04-19 16:39:52 INFO  InfraJobContext:188 - Carregando configurações do recurso sampleCSVJob.properties
+2017-04-19 16:39:52 INFO  InfraJobContext:188 - Carregando configurações do recurso app-context.properties
+2017-04-19 16:39:52 INFO  InfraJobContext:206 - Carregando configurações do arquivo /media/sf_compartilhamento/workspace/infra-batch-sample/src/main/resources/configs/infra-batch.properties
+2017-04-19 16:39:53 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@31b7dea0: startup date [Wed Apr 19 16:39:53 BRT 2017]; root of context hierarchy
+2017-04-19 16:39:53 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [sample-jobs/sampleCSV-job.xml]
+2017-04-19 16:39:53 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/infra-batch-memory-context.xml]
+2017-04-19 16:39:53 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/import/common-context.xml]
+2017-04-19 16:39:53 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/import/data-source-context.xml]
+2017-04-19 16:39:54 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/import/transaction-context.xml]
+2017-04-19 16:39:54 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/context/infra/batch/import/job-repository-memory-launcher-context.xml]
+2017-04-19 16:39:54 INFO  PropertyPlaceholderConfigurer:172 - Loading properties file from URL [file:/media/sf_compartilhamento/workspace/infra-batch-sample/src/main/resources/configs/infra-batch.properties]
+2017-04-19 16:39:55 INFO  ThreadPoolTaskExecutor:165 - Initializing ExecutorService  'threadPoolTaskExecutor'
+2017-04-19 16:39:55 INFO  ConcurrentTaskExecutorDelegate:45 - concurrentTaskExecutor carregado para utilizar o Executor FixedThreadPool e 8 threads.
+2017-04-19 16:39:55 INFO  SimpleJobLauncher:195 - No TaskExecutor has been set, defaulting to synchronous executor.

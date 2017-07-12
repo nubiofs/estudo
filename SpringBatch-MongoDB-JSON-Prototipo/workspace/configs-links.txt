@@ -1,0 +1,28 @@
+* https://github.com/ttrelle/spring-batch-mongodb-support (OK)
+
+--> spring-batch-mongodb-support-master.zip
+
+$ cd spring-batch-mongodb-support-master
+
+$ ~/mvn clean install -Dmaven.test.skip=true --offline -Dmaven.javadoc.skip=true
+
+ou ~/mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
+
+$ ~/mvn -DargLine="-Dhost=127.0.0.1 -Dport=27017" -Dtest=MongoDBItemWriterTest#should_write_one_document_transactional test
+
+$ ~/mvn -DargLine="-Dhost=127.0.0.1 -Dport=27017" -Dtest=MongoDBItemWriterTest#should_write_multiple_documents_transactional test
+
+$ ~/mvn -DargLine="-Dhost=127.0.0.1 -Dport=27017" -Dtest=MongoDBItemWriterJobTest#should_write_to_collection test
+
+=============
+
+* http://www.dineshonjava.com/2014/03/spring-batch-xml-to-mongodb-database.html
+
+--> SpringBatchXMLtoMongoDB.zip
+
+=============
+
+* https://github.com/nmorel/spring-batch-extension-mongodb
+
+--> spring-batch-extension-mongodb-master.zip
+

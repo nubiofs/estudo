@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd">
+
+	<!-- Exemplo de um Job que lê de um arquivo CSV e inclui no Banco de Dados -->
+		
+	<beans:import
+		resource="classpath:/spring/context/infra/batch/infra-batch-memory-context.xml" />
+
+	<!-- job possui arquivo opcional "sampleCSVJob.properties" -->
+	<batch:job id="sampleCSVJob" parent="infraParentJob">
+		<batch:step id="csv2DatabaseStep" parent="infraParentChunkedStep">
+			<batch:tasklet task-executor="syncTaskExecutor">
+				<batch:chunk reader="sampleCSVReader" processor="experienceProcessor" writer="sampleDatabaseWriter" skip-limit="2">
+					<batch:skippable-exception-classes merge="true">
+						<batch:include class="org.springframework.batch.item.file.FlatFileParseException"/>
+					</batch:skippable-exception-classes>
+				</batch:chunk>
+			</batch:tasklet>
+			<batch:listeners>
+				<batch:listener ref="monitoracaoExperience" />
+			</batch:listeners>
+		</batch:step>
+	</batch:job>
+
+	<beans:bean name="sampleCSVReader"
+		class="br.gov.serpro.supde.infra.batch.core.support.CSVFileItemReader">
+		<beans:property name="lineMapper" ref="experienceLineMapper" />
+		<beans:property name="resource" value="classpath:/sampleJob_input/experience.csv" />
+	</beans:bean>
+
+	<beans:bean name="experienceLineMapper"
+		class="br.gov.serpro.supde.infra.batch.core.support.CSVLineMapper">
+		<beans:property name="lineTokenizer">
+			<beans:bean
+				class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+				<beans:property name="names"
+					value="id, name, country, birthdate, company, depto" />
+			</beans:bean>
+		</beans:property>
+		<beans:property name="fieldSetMapper">
+			<beans:bean
+				class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+				<beans:property name="prototypeBeanName" value="experience" />
+				<beans:property name="customEditors">
+					<beans:map>
+						<beans:entry key="java.util.Date">							
+							<beans:ref bean="dateEditor"/>							
+						</beans:entry>
+					</beans:map>
+				</beans:property>
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="experience"
+		class="br.gov.serpro.supde.infra.batch.sample.domain.Experience"
+		scope="prototype" />
+
+	<beans:bean id="monitoracaoExperience"
+		class="br.gov.serpro.supde.infra.batch.support.MonitoracaoExperience"/>
+
+	<beans:bean id="dateEditor"
+		class="org.springframework.beans.propertyeditors.CustomDateEditor">
+		<beans:constructor-arg>
+			<beans:bean class="java.text.SimpleDateFormat">
+				<beans:constructor-arg value="dd/MM/yyyy" />
+			</beans:bean>
+		</beans:constructor-arg>
+		<beans:constructor-arg value="true" />
+	</beans:bean>
+	
+	<beans:bean id="experienceProcessor"
+		class="br.gov.serpro.supde.infra.batch.sample.ExperienceProcessor"></beans:bean>
+
+	<beans:bean id="sampleDatabaseWriter"
+		class="org.springframework.batch.item.database.JdbcBatchItemWriter">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="sql">
+			<beans:value>
+            <![CDATA[            
+            	INSERT INTO experience(id, name, country, birthdate, company, depto) 
+				VALUES (:id, :name, :country, :birthdate, :company, :depto)
+            ]]>
+			</beans:value>
+		</beans:property>
+		<beans:property name="itemSqlParameterSourceProvider">
+			<beans:bean
+				class="org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider" />
+		</beans:property>
+	</beans:bean>
+
+</beans:beans>

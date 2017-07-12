@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd">
+
+	<!-- Exemplo de um Job que lê de um arquivo JSON e inclui no Banco de Dados (Postgres no Campo JSONB) -->
+		
+	<beans:import
+		resource="classpath:/spring/context/infra/batch/infra-batch-memory-context.xml" />
+
+	<!-- job possui arquivo opcional "sampleJSONJob.properties" -->
+	<batch:job id="sampleJSONJob" parent="infraParentJob">
+		<batch:step id="json2DatabaseStep" parent="infraParentChunkedStep">
+			<batch:tasklet task-executor="syncTaskExecutor">
+				<batch:chunk reader="sampleJSONReader" processor="productProcessor" writer="sampleDatabaseWriter" skip-limit="200">
+					<batch:skippable-exception-classes merge="true">
+						<batch:include class="org.springframework.batch.item.file.FlatFileParseException"/>
+						<batch:include class="com.google.gson.JsonSyntaxException"/>
+						<batch:include class="org.codehaus.jettison.json.JSONException"/>
+						<batch:include class="org.springframework.dao.DataAccessException"/>
+						<batch:include class="java.lang.IllegalStateException"/>
+						<batch:include class="java.sql.SQLException"/>
+						<batch:include class="br.gov.serpro.supde.infra.batch.util.InvalidDataException"/>
+						<batch:include class="javax.validation.ValidationException"/>
+<!-- 						<batch:include class="java.lang.Exception"/> -->
+					</batch:skippable-exception-classes>
+				</batch:chunk>
+			</batch:tasklet>
+			<batch:listeners>
+				<batch:listener ref="monitoracaoProduct" />
+			</batch:listeners>
+		</batch:step>
+	</batch:job>
+
+	<beans:bean name="sampleJSONReader"
+		class="org.springframework.batch.item.file.FlatFileItemReader">
+		<beans:property name="lineMapper" ref="productLineMapper" />
+		<beans:property name="resource" value="classpath:/sampleJob_input/product.json" />
+	</beans:bean>
+
+	<beans:bean name="productLineMapper"
+		class="br.gov.serpro.supde.infra.batch.support.JSLineMapper" />
+		
+	<beans:bean id="product"
+		class="br.gov.serpro.supde.infra.batch.sample.domain.Product"
+		scope="prototype" />
+
+	<beans:bean id="monitoracaoProduct"
+		class="br.gov.serpro.supde.infra.batch.support.MonitoracaoProduct"/>
+	
+	<beans:bean id="productProcessor"
+		class="br.gov.serpro.supde.infra.batch.sample.ProductProcessor"/>
+	
+	<beans:bean id="sampleDatabaseWriter"
+		class="org.springframework.batch.item.database.JdbcBatchItemWriter">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="sql">
+			<beans:value>
+            <![CDATA[            
+            	INSERT INTO product(id, name, brand, type, color, price, warranty_years, available, description, json) 
+				VALUES (:id, :name, :brand, :type, :color, :price, :warranty_years, :available, :description, CAST(:json AS JSONB))
+            ]]>
+			</beans:value>
+		</beans:property>
+		<beans:property name="itemSqlParameterSourceProvider">
+			<beans:bean
+				class="org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider" />
+		</beans:property>
+	</beans:bean>
+
+</beans:beans>
