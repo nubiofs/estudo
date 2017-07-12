@@ -1,3 +1,20 @@
+* https://git.serpro/05601970475/infra-batch/tree/master/infra-batch/infra-batch-sample (NOT OK)
+
+--> infra-batch-master-10863e50f5b81e65582249e1526e3de76803dd76.zip
+
+"Não conecta com o MongoDB, devido a versão atual do infra-batch utilizar apenas JDBC para conexão com SGDBs Objeto-relacional (PostgreSQL, MySQL...)"
+
+==> Dessa forma, enquanto o infra-batch não for extendido para NoSQL --> Utilizar apenas:
+
+- Spring Batch
+- MongoDB Java driver
+
+Ou junto também com:
+
+- Spring Data MongoDB
+
+==============
+
 * https://github.com/ttrelle/spring-batch-mongodb-support (OK)
 
 --> spring-batch-mongodb-support-master.zip
