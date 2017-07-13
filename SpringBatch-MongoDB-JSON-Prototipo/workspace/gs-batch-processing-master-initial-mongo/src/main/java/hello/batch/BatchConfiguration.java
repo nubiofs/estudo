@@ -1,5 +1,10 @@
 package hello.batch;
 
+import hello.batch.toNoSql.JobCarroToNoSqlCompletionNotificationListener;
+import hello.batch.toNoSql.MongoDBItemWriter;
+import hello.batch.toSql.JobCarroToSqlCompletionNotificationListener;
+import hello.batch.toSql.JobPersonCompletionNotificationListener;
+import hello.batch.toSql.PersonItemProcessor;
 import hello.pojo.Carro;
 import hello.pojo.Person;
 
@@ -23,6 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+
+import com.mongodb.MongoClient;
 
 @Configuration
 //This example uses a memory-based database (provided by @EnableBatchProcessing)
@@ -120,26 +127,26 @@ public class BatchConfiguration {
     // end::reader-processor-writer-Person[]
     
     //
-    // tag::job-step-Carro["Lendo de arquivo JSON e escrevento para banco relacional HSQL ou H2"]
+    // tag::job-step-Carro-to-sql["Lendo de arquivo JSON e escrevento para banco relacional HSQL ou H2"]
     //
     @Bean
     //Defines the job
-    public Job jobCarro(JobCarroCompletionNotificationListener listener) {
-        return jobBuilderFactory.get("jobCarro")
+    public Job jobCarroToSQL(JobCarroToSqlCompletionNotificationListener listener) {
+        return jobBuilderFactory.get("jobCarroToSQL")
         		//you need an incrementer because jobs use a database to maintain execution state
                 .incrementer(new RunIdIncrementer())
                 //job execution listener
                 .listener(listener)
                 //Jobs are built from steps, where each step can involve a reader, a processor, and a writer.
-                .flow(stepCarro())
+                .flow(stepCarroToSQL())
                 .end()
                 .build();
     }
 
     @Bean
     //Single step
-    public Step stepCarro() {
-        return stepBuilderFactory.get("stepCarro")
+    public Step stepCarroToSQL() {
+        return stepBuilderFactory.get("stepCarroToSQL")
         		//you define how much data to write at a time. 
         		//In this case, it writes up to ten records at a time.
         		// This represents the input and output types of each "chunk" of processing, 
@@ -150,13 +157,13 @@ public class BatchConfiguration {
                 //step can involve a processor
                 .processor(processorCarro())
                 //step can involve a writer
-                .writer(writerCarro())
+                .writer(writerCarroToSQL())
                 .build();
     }
-    // end::job-step-Carro[]
+    // end::job-step-Carro-to-sql[]
 
     //
-    // tag::reader-processor-writer-Carro[]
+    // tag::reader-processor-writer-Carro-to-sql[]
     //
     @Bean
     //reader
@@ -179,7 +186,7 @@ public class BatchConfiguration {
 
     @Bean
     //writer
-    public JdbcBatchItemWriter<Carro> writerCarro() {
+    public JdbcBatchItemWriter<Carro> writerCarroToSQL() {
     	
         JdbcBatchItemWriter<Carro> writer = new JdbcBatchItemWriter<Carro>();
         writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Carro>());
@@ -191,6 +198,59 @@ public class BatchConfiguration {
         return writer;
         
     }
-    // end::reader-processor-writer-Carro[]
+    // end::reader-processor-writer-Carro-to-sql[]
+
+    //
+    // tag::job-step-Carro-to-nosql["Lendo de arquivo JSON e escrevento para banco NoSQL MongoDB (via Mongo Java Driver)"]
+    //
+    @Bean
+    //Defines the job
+    public Job jobCarroToNoSQL(JobCarroToNoSqlCompletionNotificationListener listener) {
+        return jobBuilderFactory.get("jobCarroToNoSQL")
+        		//you need an incrementer because jobs use a database to maintain execution state
+                .incrementer(new RunIdIncrementer())
+                //job execution listener
+                .listener(listener)
+                //Jobs are built from steps, where each step can involve a reader, a processor, and a writer.
+                .flow(stepCarroToNoSQL())
+                .end()
+                .build();
+    }
+
+    @Bean
+    //Single step
+    public Step stepCarroToNoSQL() {
+        return stepBuilderFactory.get("stepCarroToNoSQL")
+        		//you define how much data to write at a time. 
+        		//In this case, it writes up to ten records at a time.
+        		// This represents the input and output types of each "chunk" of processing, 
+        		//and lines up with ItemReader<Person> and ItemWriter<Person>
+                .<Carro, Carro> chunk(10)
+                //step can involve a reader
+                .reader(readerCarro())
+                //step can involve a processor
+                .processor(processorCarro())
+                //step can involve a writer
+                .writer(writerCarroToNoSQL())
+                .build();
+    }
+    // end::job-step-Carro-to-nosql[]
+
+    //
+    // tag::writer-Carro-to-nosql[]
+    //
+    @Bean
+    //writer
+    public MongoDBItemWriter writerCarroToNoSQL() {
+    	
+    	MongoDBItemWriter writer = 
+    			new MongoDBItemWriter("test", "carro");
+    	//com.mongodb.MongoClient
+    	writer.setMongo(new MongoClient(System.getProperty("host", "localhost"), Integer.parseInt(System.getProperty("port", "27017"))));
+        
+        return writer;
+        
+    }
+    // end::writer-Carro-to-nosql[]
 
 }
