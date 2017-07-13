@@ -40,23 +40,23 @@
         <!-- 
         (Persistência) 
         -->
-        <!-- MongoDB Java driver -->
+        <!-- (Embedded Database Support) utiliza banco "HSQL" -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- (Embedded Database Support) utiliza banco "H2" -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>com.h2database</groupId> -->
+<!-- 		    <artifactId>h2</artifactId> -->
+<!-- 		    <scope>runtime</scope> -->
+<!-- 		</dependency> -->
+        <!-- (MongoDB Java driver) utiliza banco mongoDB -->
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.mongodb</groupId> -->
 <!-- 			<artifactId>mongo-java-driver</artifactId> -->
 <!-- 		</dependency> -->
-        <!-- (Embedded Database Support) utiliza banco "HSQL" -->
-<!--         <dependency> -->
-<!--             <groupId>org.hsqldb</groupId> -->
-<!--             <artifactId>hsqldb</artifactId> -->
-<!--             <scope>runtime</scope> -->
-<!--         </dependency> -->
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-		<dependency>
-		    <groupId>com.h2database</groupId>
-		    <artifactId>h2</artifactId>
-		    <scope>runtime</scope>
-		</dependency>
         
     </dependencies>
 

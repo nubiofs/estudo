@@ -40,7 +40,7 @@ public class BatchConfiguration {
     public DataSource dataSource;
 
     //
-    // tag::job-step-Person[]
+    // tag::job-step-Person["Lendo de arquivo CSV e escrevento para banco relacional HSQL ou H2"]
     //
     @Bean
     //Defines the job
@@ -120,7 +120,7 @@ public class BatchConfiguration {
     // end::reader-processor-writer-Person[]
     
     //
-    // tag::job-step-Carro[]
+    // tag::job-step-Carro["Lendo de arquivo JSON e escrevento para banco relacional HSQL ou H2"]
     //
     @Bean
     //Defines the job
