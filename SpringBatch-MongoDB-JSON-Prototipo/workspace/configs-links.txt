@@ -208,6 +208,27 @@ Obs.:
 
 	$ ~/mvn spring-boot:run
 
+4) Utilizando h2-console 
+
+(fonte: https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.1.0.Beta/h2-console)
+
+$ wget -b -c https://github.com/jboss-developer/jboss-eap-quickstarts/blob/7.1.0.Beta/h2-console/h2console.war
+
+Colocar https://github.com/jboss-developer/jboss-eap-quickstarts/blob/7.1.0.Beta/h2-console/h2console.war no path EAP7_HOME/standalone/deployments
+
+access the console at the following URL: http://localhost:8080/h2console/
+
+You need to enter the JDBC URL, and credentials. To access the "test" database that the greeter quickstart uses, enter these details:
+    
+    Em (Setting Name) ==> ACESSAR "Generic H2 (Server)"
+    Driver Class: org.h2.Driver
+    JDBC URL: jdbc:h2:mem:test
+    User Name: sa
+    Password: sa
+
+Click on the Test Connection button to make sure you can connect. If you can, go ahead and click Connect.
+
+
 =============
 
 
