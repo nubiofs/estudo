@@ -45,7 +45,7 @@ public class JobCarroCompletionNotificationListener extends JobExecutionListener
 			});
 
 			for (Carro car : results) {
-				log.info("Found <" + car + "> in the database.");
+				log.info("Found Carro <" + car.getKm() + ", " + car.getNome() + "> in the database.");
 			}
 
 		}
