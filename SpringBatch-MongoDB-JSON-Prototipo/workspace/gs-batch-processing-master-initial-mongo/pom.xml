@@ -18,16 +18,40 @@
     </properties>
 
     <dependencies>
+    
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
         </dependency>
+
+		<!-- 
+		(Leitura dados JSON)
+		 -->        
+        <!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
+        	Para org.codehaus.jackson.map.MappingJsonFactory em 
+        	org.springframework.batch.item.file.mapping.JsonLineMapper
+        -->
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-asl</artifactId>
+		    <version>1.9.13</version>
+		</dependency>
+        
+        <!-- 
+        (Persistência) 
+        -->
+        <!-- MongoDB Java driver -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.mongodb</groupId> -->
+<!-- 			<artifactId>mongo-java-driver</artifactId> -->
+<!-- 		</dependency> -->
         <!-- (Embedded Database Support) utiliza banco "HSQL" -->
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
         </dependency>
+        
     </dependencies>
 
     <build>

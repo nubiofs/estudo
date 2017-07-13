@@ -7,8 +7,6 @@ import java.util.Map;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.JsonLineMapper;
 
-import com.mongodb.DBObject;
-
 /**
  * This line mapper converts a JSON string to a {@link Carro}. 
  */

@@ -165,7 +165,6 @@ public class BatchConfiguration {
         FlatFileItemReader<Carro> reader = new FlatFileItemReader<Carro>();
         reader.setResource(new ClassPathResource("input.json"));
         reader.setRecordSeparatorPolicy(new JsonRecordSeparatorPolicy());
-		//reader.setLineMapper(new WrappedJsonLineMapper());//OK
         reader.setLineMapper(new JsonCarroLineMapper());
 
         return reader;
