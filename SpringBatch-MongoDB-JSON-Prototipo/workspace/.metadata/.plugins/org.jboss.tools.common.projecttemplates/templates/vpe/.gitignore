@@ -1,0 +1,15 @@
+/jsf-core.jpt
+/jsf-html.jpt
+/jsp.jpt
+/jstl-c.jpt
+/jstl-fmt.jpt
+/jstl-sql.jpt
+/jstl-x.jpt
+/prefixmap.xml
+/struts-bean.jpt
+/struts-html.jpt
+/struts-logic.jpt
+/struts-nested.jpt
+/struts-template.jpt
+/tagmap.xml
+/tmp

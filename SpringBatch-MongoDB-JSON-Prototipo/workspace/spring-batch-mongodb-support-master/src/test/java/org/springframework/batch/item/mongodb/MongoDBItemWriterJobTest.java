@@ -151,7 +151,9 @@ public class MongoDBItemWriterJobTest extends AbstractMongoDBTest {
     }
     
     @After public void tearDown() {
-    	tearDownMongo();
+    	//teste+
+    	//tearDownMongo();
+    	//teste-
     }	
 	
 }
