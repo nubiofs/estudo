@@ -1,6 +1,6 @@
-package hello.batch;
+package hello.batch.toNoSql;
 
-import hello.pojo.Person;
+import hello.pojo.Carro;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,14 +17,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JobPersonCompletionNotificationListener extends JobExecutionListenerSupport {
+public class JobCarroToNoSqlCompletionNotificationListener extends JobExecutionListenerSupport {
 
-	private static final Logger log = LoggerFactory.getLogger(JobPersonCompletionNotificationListener.class);
+	private static final Logger log = LoggerFactory.getLogger(JobCarroToNoSqlCompletionNotificationListener.class);
 
 	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public JobPersonCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
+	public JobCarroToNoSqlCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
@@ -37,15 +37,15 @@ public class JobPersonCompletionNotificationListener extends JobExecutionListene
 			log.info("!!! JOB FINISHED! Time to verify the results");
 
 			// uses JdbcTemplate to inspect the results.
-			List<Person> results = jdbcTemplate.query("SELECT first_name, last_name FROM people", new RowMapper<Person>() {
+			List<Carro> results = jdbcTemplate.query("SELECT km, nome FROM carro", new RowMapper<Carro>() {
 				@Override
-				public Person mapRow(ResultSet rs, int row) throws SQLException {
-					return new Person(rs.getString(1), rs.getString(2));
+				public Carro mapRow(ResultSet rs, int row) throws SQLException {
+					return new Carro(rs.getString(1), rs.getString(2));
 				}
 			});
 
-			for (Person person : results) {
-				log.info("Found <" + person + "> in the database.");
+			for (Carro car : results) {
+				log.info("Found Carro <" + car.getKm() + ", " + car.getNome() + "> in the database.");
 			}
 
 		}
