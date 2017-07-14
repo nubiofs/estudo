@@ -1,4 +1,4 @@
-package hello.batch.toNoSql;
+package hello.batch.sql;
 
 import hello.pojo.Carro;
 
@@ -17,14 +17,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JobCarroToNoSqlCompletionNotificationListener extends JobExecutionListenerSupport {
+public class JobCarroSqlCompletionNotificationListener extends JobExecutionListenerSupport {
 
-	private static final Logger log = LoggerFactory.getLogger(JobCarroToNoSqlCompletionNotificationListener.class);
+	private static final Logger log = LoggerFactory.getLogger(JobCarroSqlCompletionNotificationListener.class);
 
 	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public JobCarroToNoSqlCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
+	public JobCarroSqlCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 

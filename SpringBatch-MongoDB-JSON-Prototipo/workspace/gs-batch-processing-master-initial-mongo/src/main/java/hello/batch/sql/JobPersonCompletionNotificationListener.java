@@ -1,4 +1,4 @@
-package hello.batch.toSql;
+package hello.batch.sql;
 
 import hello.pojo.Person;
 

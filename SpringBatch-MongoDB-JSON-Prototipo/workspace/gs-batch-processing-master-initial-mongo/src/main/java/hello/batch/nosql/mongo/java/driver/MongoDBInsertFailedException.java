@@ -1,4 +1,4 @@
-package hello.batch.toNoSql;
+package hello.batch.nosql.mongo.java.driver;
 
 /**
  * This exception is thrown when an insert operation on a collection fails.
