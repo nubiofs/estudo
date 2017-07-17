@@ -168,13 +168,19 @@ public class MongoDBItemReader
 
 		// create the cursor
 		cursor = createCursor(mongoDB.getCollection(collection));
+		
 	}
 	
 	@Override
 	public Object doRead() throws Exception {
+		
 		try {
 			
-			return converter != null ? converter.convert(cursor.next() ) : cursor.next();
+			if(cursor.hasNext()){
+				return converter != null ? (BasicDBObject) converter.convert(cursor.next()) : (BasicDBObject) cursor.next();
+			}
+			
+			return null;
 		
 		} catch (RuntimeException e) {
 			if (NO_MORE.equals(e.getMessage())) {
@@ -191,18 +197,21 @@ public class MongoDBItemReader
 		if ( cursor != null ) {
 			cursor.close();
 		}
-	}	
-
+	}
+	
+	public DBCursor getCursor() {
+		return cursor;
+	}
 	
 	// Internal methods .....................................................
 	
 	private boolean dbExists() {
 		List<String> dbNames = mongo.getDatabaseNames();
-		
 		return dbNames != null && dbNames.contains(db);
 	}
 	
 	private DBCursor createCursor(DBCollection coll) {
+		
 		DBCursor crsr;
 		DBObject ref = null;
 		DBObject keysDoc = null;
@@ -263,7 +272,6 @@ public class MongoDBItemReader
 		this.collection = collection;
 	}
 
-
 	public void setQuery(String query) {
 		this.query = query;
 	}
@@ -314,15 +322,16 @@ public class MongoDBItemReader
 		return doc;
 	}
 
-	private class DocumentCarroConverter implements Converter<DBObject, Carro> {
+	private class DocumentCarroConverter implements Converter<BasicDBObject, Carro> {
 
 		@Override
-		public Carro convert(DBObject document) {
+		public Carro convert(BasicDBObject document) {
 			return new Carro((String) document.get("km"), (String)document.get("nome"));
 		}
 		
 	}
-	public Carro convert(DBObject document) {
+	
+	public Carro convert(BasicDBObject document) {
 		return new DocumentCarroConverter().convert(document);
 	}
 

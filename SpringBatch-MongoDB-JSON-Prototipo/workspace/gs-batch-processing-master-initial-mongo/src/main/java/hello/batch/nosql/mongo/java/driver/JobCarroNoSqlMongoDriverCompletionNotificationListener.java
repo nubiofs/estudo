@@ -13,7 +13,7 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.stereotype.Component;
 
-import com.mongodb.DBObject;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 
 @Component
@@ -49,33 +49,36 @@ public class JobCarroNoSqlMongoDriverCompletionNotificationListener extends JobE
 
 				reader.doOpen();
 
-				for (DBObject car : readAll()) {
+				for (BasicDBObject car : readAll()) {
+				
 					Carro c = reader.convert(car);
 					log.info("Found Carro <" + c.getKm() + ", " + c.getNome() + "> in the database.");
+					
 				}
 
+				reader.doClose();
+				
 			} catch (Exception e) {
 				log.info("Exception: " + e.getMessage());
+				reader.getCursor().close();
 			}
-
+			
 		}
 
 	}
 
-	private List<DBObject> readAll() throws Exception {
+	private List<BasicDBObject> readAll() throws Exception {
 		
-		List<DBObject> docs = new ArrayList<DBObject>();
+		List<BasicDBObject> docs = new ArrayList<BasicDBObject>();
 
-		DBObject doc = (DBObject) reader.doRead();
-		//log.info(doc != null ? "reader.doRead(): " + doc.get("km") : "Erro reader.doRead()");
-		
-		while ( doc != null ) {
+		BasicDBObject doc = (BasicDBObject) reader.doRead();
+		while (doc != null){
 			docs.add(doc);
-			doc = (DBObject) reader.doRead();
-			//log.info(doc != null ? "reader.doRead(): " + doc.get("km") : "Erro reader.doRead()");
-		}		
-
+			doc = (BasicDBObject) reader.doRead();
+		}
+		
 		return docs;
+		
 	}	
 
 }

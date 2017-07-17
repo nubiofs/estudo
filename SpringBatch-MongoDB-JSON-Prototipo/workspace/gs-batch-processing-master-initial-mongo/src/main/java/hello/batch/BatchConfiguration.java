@@ -174,9 +174,22 @@ public class BatchConfiguration {
     //reader
     public ItemReader<Carro> readerCarro() {
     	
+    	//MultiResourceItemReader "read resources that matches this pattern csv/inputs/domain-*.csv"
         FlatFileItemReader<Carro> reader = new FlatFileItemReader<Carro>();
+        //reader.setResource(new FileSystemResource("src/test/resources/"+pathToFile));
+        //ZipMultiResourceItemReader "Multi Resource Item Reader capable of reading zip archive files."
+        //GZipBufferedReaderFactory
         reader.setResource(new ClassPathResource("input.json"));
         reader.setRecordSeparatorPolicy(new JsonRecordSeparatorPolicy());
+        /*
+        reader.setLinesToSkip(2);
+        final List<String> headers = new ArrayList<String>();
+        reader.setSkippedLinesCallback(new LineCallbackHandler() {
+    		public void handleLine(String line) {
+    			headers.add(line);
+    		}
+    	});
+    	*/
         reader.setLineMapper(new JsonCarroLineMapper());
 
         return reader;
