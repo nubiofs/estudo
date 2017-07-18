@@ -1,7 +1,16 @@
 package hello;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import hello.pojo.Carro;
+import hello.pojo.Person;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+
+import com.mongodb.MongoClient;
 
 @SpringBootApplication
 public class Application {
@@ -23,6 +32,20 @@ public class Application {
 
 		//Spring Boot’s SpringApplication.run() method to launch an application.
 		SpringApplication.run(Application.class, args);
+		
+		//teste+
+		MongoOperations mongoOps = new MongoTemplate(new MongoClient(), "test");
+	    mongoOps.insert(new Carro("-1", "NONE"));
+	    System.out.println("mongoOps: " + mongoOps.findOne(new Query(where("nome").is("NONE")), Carro.class));
+	    // Update
+	    //mongoOps.updateFirst(query(where("name").is("Joe")), update("age", 35), Person.class);
+	    /*
+	    Query query = new Query(Criteria.where("firstName").is("Harry"));
+		Update update = new Update().inc("age", 1);
+		Person p = mongoTemplate.findAndModify(query, update, Person.class); // return's old person object
+	     */
+	    mongoOps.dropCollection("carro");
+		//teste-
 	}
 
 }

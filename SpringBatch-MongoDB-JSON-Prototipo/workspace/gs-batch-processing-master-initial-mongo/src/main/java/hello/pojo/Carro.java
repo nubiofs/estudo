@@ -1,6 +1,9 @@
 package hello.pojo;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 //format of data inputs and outputs, you write code to represent a row of data.
+@Document
 public class Carro {
 
 	private String km;

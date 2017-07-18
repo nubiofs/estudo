@@ -1,6 +1,7 @@
 package hello.batch.nosql.spring.data.mongo;
 
 import hello.pojo.Carro;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
@@ -19,9 +20,9 @@ public class JobCarroNoSqlSpringDataMongoDBCompletionNotificationListener extend
 	
 	@Override
 	public void beforeJob(JobExecution jobExecution) {
-		
-		//log.info("MongoDBItemReader: " + reader);
-
+		log.info("findByNomeOrderByKm: " + repository.findByNomeOrderByKm("CORSA"));
+		log.info("findByNomeOrderByKmDesc: " + repository.findByNomeOrderByKmDesc("CORSA"));
+		log.info("countByKm: " + repository.countByKm("10"));
 	}
 
 	@Override

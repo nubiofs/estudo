@@ -58,6 +58,7 @@
 			<artifactId>mongo-java-driver</artifactId>
 		</dependency>
         <!-- (Framework data acess) utiliza Spring Data Mongo -->
+        <!-- http://docs.spring.io/spring-data/data-mongo/docs/1.10.4.RELEASE/reference/html/ -->
         <dependency>
 	        <groupId>org.springframework.data</groupId>
 	        <artifactId>spring-data-mongodb</artifactId>
