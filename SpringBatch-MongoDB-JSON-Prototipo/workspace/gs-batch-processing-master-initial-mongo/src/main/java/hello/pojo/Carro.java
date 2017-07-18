@@ -1,5 +1,8 @@
 package hello.pojo;
 
+import java.util.Date;
+
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 //format of data inputs and outputs, you write code to represent a row of data.
@@ -9,6 +12,46 @@ public class Carro {
 	private String km;
     private String nome;
 
+    @CreatedDate
+    private Date createdDate;
+    
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private String id;
+    
+//    @DBRef
+//    private List<Account> accounts;
+    /*
+
+@Document
+public class Account {
+
+  @Id
+  private ObjectId id;
+  private Float total;
+}
+
+@Document
+public class Person {
+
+  @Id
+  private ObjectId id;
+  @Indexed
+  private Integer ssn;
+  @DBRef
+  private List<Account> accounts;
+}
+     */
+    
+//    @RelatedDocument
+//    private SurveyInfo surveyInfo;
+
+//    @Field("fName")
+//    private String firstName;
+
+//    @Indexed(unique = true)
+//    private Integer ssn;
+    
     public Carro() {
 
     }

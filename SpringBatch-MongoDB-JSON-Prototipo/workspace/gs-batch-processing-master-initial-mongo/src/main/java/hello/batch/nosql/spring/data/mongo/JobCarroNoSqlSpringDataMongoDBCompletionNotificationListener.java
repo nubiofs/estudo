@@ -45,6 +45,8 @@ public class JobCarroNoSqlSpringDataMongoDBCompletionNotificationListener extend
 				log.info("Found Carro <" + c.getKm() + ", " + c.getNome() + "> in the database.");
 			}
 			
+//			Page<Person> persons = repository.findAll(new PageRequest(0, 10));
+			
 		}
 
 	}

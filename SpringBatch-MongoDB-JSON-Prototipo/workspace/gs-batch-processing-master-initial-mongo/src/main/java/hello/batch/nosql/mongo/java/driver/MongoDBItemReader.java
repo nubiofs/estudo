@@ -341,4 +341,21 @@ public class MongoDBItemReader
 				+ ", collection=" + collection + "]";
 	}
 
+//	@ReadingConverter
+//	public class PersonReadConverter implements Converter<DBObject, Person> {
+//	
+//	  public Person convert(DBObject source) {
+//	    Person p = new Person((ObjectId) source.get("_id"), (String) source.get("name"));
+//	    p.setAge((Integer) source.get("age"));
+//	    return p;
+//	  }
+//	}
+	
+//	public class BeforeConvertListener extends AbstractMongoEventListener<Person> {
+//	  @Override
+//	  public void onBeforeConvert(BeforeConvertEvent<Person> event) {
+//	    ... does some auditing manipulation, set timestamps, whatever ...
+//	  }
+//	}
+
 }

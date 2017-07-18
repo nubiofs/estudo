@@ -24,5 +24,9 @@ public interface CarroRepository extends MongoRepository<Carro, String> {
     //List<Person> findByLastnameOrderByFirstnameDesc(String lastname);
     public List<Carro> findByNomeOrderByKmDesc(String nome);
     public List<Carro> findByNomeOrderByKm(String nome);
+    
+//    @Query("{ 'firstname' : ?0 }")
+//    @Query(value="{ 'firstname' : ?0 }", fields="{ 'firstname' : 1, 'lastname' : 1}")
+//    List<Person> findByThePersonsFirstname(String firstname);
 
 }
