@@ -44,6 +44,8 @@ public class Application {
 		Update update = new Update().inc("age", 1);
 		Person p = mongoTemplate.findAndModify(query, update, Person.class); // return's old person object
 	     */
+//	    List<Person> result = mongoTemplate.find(query(where("age").lt(50)
+//	    		  .and("accounts.balance").gt(1000.00d)), Person.class);
 	    mongoOps.dropCollection("carro");
 		//teste-
 	}

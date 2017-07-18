@@ -2,12 +2,15 @@ package hello.batch.nosql.spring.data.mongo;
 
 import hello.pojo.Carro;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,8 +26,13 @@ public class JobCarroNoSqlSpringDataMongoDBCompletionNotificationListener extend
 		log.info("findByNomeOrderByKm: " + repository.findByNomeOrderByKm("CORSA"));
 		log.info("findByNomeOrderByKmDesc: " + repository.findByNomeOrderByKmDesc("CORSA"));
 		log.info("countByKm: " + repository.countByKm("10"));
+		log.info("findCarro: " + findCarro(new Carro("10", "corsa")));
 	}
 
+	public List<Carro> findCarro(Carro c) {
+	    return repository.findAll(Example.of(c));
+	}
+	
 	@Override
 	public void afterJob(JobExecution jobExecution) {
 
