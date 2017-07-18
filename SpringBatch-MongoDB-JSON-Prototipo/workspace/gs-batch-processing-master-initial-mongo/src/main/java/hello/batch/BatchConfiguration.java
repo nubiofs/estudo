@@ -177,6 +177,10 @@ public class BatchConfiguration {
     	
     	//MultiResourceItemReader "read resources that matches this pattern csv/inputs/domain-*.csv"
         FlatFileItemReader<Carro> reader = new FlatFileItemReader<Carro>();
+        //ApplicationContext ctx
+        //Resource template = ctx.getResource("some/resource/path/myTemplate.txt");
+        //Resource template = ctx.getResource("classpath:some/resource/path/myTemplate.txt");
+        //Resource template = ctx.getResource("file:///some/resource/path/myTemplate.txt");
         //reader.setResource(new FileSystemResource("src/test/resources/"+pathToFile));
         //ZipMultiResourceItemReader "Multi Resource Item Reader capable of reading zip archive files."
         //GZipBufferedReaderFactory

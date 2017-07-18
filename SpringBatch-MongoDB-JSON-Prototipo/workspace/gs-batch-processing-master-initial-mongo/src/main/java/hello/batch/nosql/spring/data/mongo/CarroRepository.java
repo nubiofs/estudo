@@ -4,12 +4,17 @@ import hello.pojo.Carro;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 //@RepositoryRestResource(collectionResourceRel = "people", path = "people")
 public interface CarroRepository extends MongoRepository<Carro, String> {
 
     public List<Carro> findByKm(String km);
+    @Cacheable({"carro", "nome"})
+    //@Cacheable(cacheNames="carro", key="#nome")
+    //@Cacheable(cacheNames="carro", sync="true")
+    //@Cacheable(cacheNames="carro", condition="#nome.length() >= 32")
     public Carro findByNome(String nome);
     public Long countByKm(String km);
     public Long deleteByKm(String km);

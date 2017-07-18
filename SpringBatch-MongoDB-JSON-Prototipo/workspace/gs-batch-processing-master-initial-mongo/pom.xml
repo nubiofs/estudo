@@ -19,9 +19,18 @@
 
     <dependencies>
     
+    	<!-- http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/index.html -->
+    	<!-- http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
+        </dependency>
+        
+        <!-- https://spring.io/guides/gs/spring-boot/ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
 		<!-- 
