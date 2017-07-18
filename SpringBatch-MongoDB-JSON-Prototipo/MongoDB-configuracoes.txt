@@ -47,6 +47,7 @@ $ sudo mongod --config /etc/mongod.conf --dbpath . &
 #$ sudo service mongod status
 
 $ cat /var/log/mongodb/mongod.log
+$ less /var/log/mongodb/mongod.log
 
 $ mongo
 

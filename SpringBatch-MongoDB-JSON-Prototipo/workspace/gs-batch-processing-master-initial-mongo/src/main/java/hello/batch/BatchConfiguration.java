@@ -3,6 +3,7 @@ package hello.batch;
 import hello.batch.nosql.mongo.constantes.MongoDataAcessConstants;
 import hello.batch.nosql.mongo.java.driver.JobCarroNoSqlMongoDriverCompletionNotificationListener;
 import hello.batch.nosql.mongo.java.driver.MongoDBItemWriter;
+import hello.batch.nosql.spring.data.mongo.JobCarroNoSqlSpringDataMongoDBCompletionNotificationListener;
 import hello.batch.sql.JobCarroSqlCompletionNotificationListener;
 import hello.batch.sql.JobPersonCompletionNotificationListener;
 import hello.pojo.Carro;
@@ -275,11 +276,11 @@ public class BatchConfiguration {
     ///////////////////
     
     //
-    // tag::job-step-Carro-to-nosql-02["Lendo de arquivo JSON e escrevento para banco NoSQL MongoDB (via Spring Data Mongo)"]
+    // tag::job-step-Carro-to-nosql-02["Lendo de arquivo JSON e escrevento para banco NoSQL MongoDB (via Spring Data MongoDB)"]
     //
     @Bean
     //Defines the job
-    public Job jobCarroToNoSQL_02(JobCarroNoSqlMongoDriverCompletionNotificationListener listener) {
+    public Job jobCarroToNoSQL_02(JobCarroNoSqlSpringDataMongoDBCompletionNotificationListener listener) {
         return jobBuilderFactory.get("jobCarroToNoSQL_02")
         		//you need an incrementer because jobs use a database to maintain execution state
                 .incrementer(new RunIdIncrementer())
