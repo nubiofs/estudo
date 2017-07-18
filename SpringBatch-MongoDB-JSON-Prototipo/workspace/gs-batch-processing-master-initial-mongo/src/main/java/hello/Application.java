@@ -31,24 +31,24 @@ public class Application {
 		//Spring Boot’s SpringApplication.run() method to launch an application.
 		SpringApplication.run(Application.class, args);
 		
-		repository.deleteAll();
-
-		// save a couple of customers
-		repository.save(new Carro("2", "gol"));
-		repository.save(new Carro("130", "fusca"));
-
-		// fetch all customers
-		System.out.println("Carros found with findAll():");
-		System.out.println("-------------------------------");
-		for (Carro customer : repository.findAll()) {
-			System.out.println(customer);
-		}
-		System.out.println();
-
-		// fetch an individual customer
-		System.out.println("Carro found with findByFirstName('gol'):");
-		System.out.println("--------------------------------");
-		System.out.println(repository.findByNome("gol"));
+//		repository.deleteAll();
+//
+//		// save a couple of customers
+//		repository.save(new Carro("2", "gol"));
+//		repository.save(new Carro("130", "fusca"));
+//
+//		// fetch all customers
+//		System.out.println("Carros found with findAll():");
+//		System.out.println("-------------------------------");
+//		for (Carro customer : repository.findAll()) {
+//			System.out.println(customer);
+//		}
+//		System.out.println();
+//
+//		// fetch an individual customer
+//		System.out.println("Carro found with findByFirstName('gol'):");
+//		System.out.println("--------------------------------");
+//		System.out.println(repository.findByNome("gol"));
 		
 		//teste+
 //		MongoOperations mongoOps = new MongoTemplate(new MongoClient(), "test");
