@@ -4,6 +4,7 @@ import hello.batch.nosql.mongo.constantes.MongoDataAcessConstants;
 import hello.batch.nosql.mongo.java.driver.JobCarroNoSqlMongoDriverCompletionNotificationListener;
 import hello.batch.nosql.mongo.java.driver.MongoDBItemWriter;
 import hello.batch.nosql.spring.data.mongo.JobCarroNoSqlSpringDataMongoDBCompletionNotificationListener;
+import hello.batch.nosql.spring.data.mongo.StepCarroNoSqlSpringDataMongoDBCompletionNotificationListener;
 import hello.batch.sql.JobCarroSqlCompletionNotificationListener;
 import hello.batch.sql.JobPersonCompletionNotificationListener;
 import hello.pojo.Carro;
@@ -296,10 +297,11 @@ public class BatchConfiguration {
                 .build();
     }
 
-    @Bean
+	@Bean
     //Single step
     public Step stepCarroToNoSQL_02() {
         return stepBuilderFactory.get("stepCarroToNoSQL_02")
+        		.listener(new StepCarroNoSqlSpringDataMongoDBCompletionNotificationListener())
         		//you define how much data to write at a time. 
         		//In this case, it writes up to ten records at a time.
         		// This represents the input and output types of each "chunk" of processing, 

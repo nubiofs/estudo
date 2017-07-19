@@ -71,7 +71,6 @@
         <dependency>
 	        <groupId>org.springframework.data</groupId>
 	        <artifactId>spring-data-mongodb</artifactId>
-	        <version>1.10.4.RELEASE</version>
 	    </dependency>
         
     </dependencies>
