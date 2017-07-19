@@ -71,21 +71,21 @@ public class StepCarroNoSqlSpringDataMongoDBCompletionNotificationListener imple
 		log.info("Itens nao gravados: " + stepExecution.getWriteSkipCount());
 
 		if(onSkipsInRead.size() > 0) {
-			log.info("@@@@@@@@@@@@@@@@@@@@@ LISTA DE Product NAO LIDOS @@@@@@@@@@@@@@@@@@@@@");
+			log.info("@@@@@@@@@@@@@@@@@@@@@ LISTA DE Itens NAO LIDOS @@@@@@@@@@@@@@@@@@@@@");
 			for (LogRecord l : onSkipsInRead) {
 				log.info(l.t.toString());
 			}
 		}
 		
 		if(onSkipsInProcess.size() > 0) {
-			log.info("@@@@@@@@@@ LISTA DE Product IGNORADOS DURANTE PROCESSAMENTO @@@@@@@@@@");
+			log.info("@@@@@@@@@@ LISTA DE Itens IGNORADOS DURANTE PROCESSAMENTO @@@@@@@@@@");
 			for (LogRecord l : onSkipsInProcess) {
 				log.info("Imovel=[" + l.item + "], causa=[" + l.t.toString() + "]");
 			}
 		}
 
 		if(onSkipsInWrite.size() > 0) {
-			log.info("@@@@@@@@@@ LISTA DE Product NAO GRAVADOS @@@@@@@@@@");
+			log.info("@@@@@@@@@@ LISTA DE Itens NAO GRAVADOS @@@@@@@@@@");
 			for (LogRecord l : onSkipsInWrite) {
 				log.info("Imovel=[" + l.item + "], causa=[" + l.t.toString() + "]");
 			}
