@@ -111,3 +111,9 @@ $ sudo docker run -it ubuntu bash
 	$ sudo docker stop b25abe8a7e94
 
 $ sudo docker image inspect ubuntu
+
+Observação:
+
+	-> Começar a estudar o python:
+
+	$ sudo docker container run -it --rm --name meu_python python bash
