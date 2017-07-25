@@ -1,0 +1,110 @@
+* Instalação /configuração
+
+Fontes: 
+	
+		https://estaleiro.gitpages.serpro/Documentacao/Manual/Client/
+		https://console.estaleiro.serpro.gov.br/paas-web/#/dashboard
+
+02963357460@serpro-1455337:~/bin$ chmod +x estaleiro 
+02963357460@serpro-1455337:~/bin$ ./estaleiro 
+Client nao encontrado. A instalacao ira ocupar aproximadamente 50M.
+Instalar o client em /home/02963357460/.estaleiro? [s|n] s
+Criando virtualenv do Estaleiro...
+(http://mirror.estaleiro.serpro/cli/virtualenv-latest.tar.gz)
+Download do client...
+(http://mirror.estaleiro.serpro/cli/cli-latest.tar.gz)
+Instalando dependencias...
+  nose-1.3.7.tar.gz
+  Babel-2.3.4.tar.gz
+  pyaml-16.12.2.tar.gz
+  terminaltables-3.1.0.tar.gz
+  clint-0.5.1.tar.gz
+  requests-2.13.0.tar.gz
+  twine-1.8.1.tar.gz
+  click-6.6.tar.gz
+  pytz-2017.2-py2.7.egg
+  PyYAML-3.12.zip
+  args-0.1.0.tar.gz
+  requests-toolbelt-0.8.0.tar.gz
+  pkginfo-1.4.1.tar.gz
+Client 1.0-669 instalado com sucesso em /home/02963357460/.estaleiro
+
+Usage: estaleiro-cli [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --debug          Apresenta informações de debug.
+  --system TEXT    Executa a requisição para um sistema diferente do sistema
+                   default.
+  --token TEXT     Token de autenticação a ser utilizado na execução do
+                   comando.
+  --endpoint TEXT  URL do endpoint a ser utilizado na execução do comando.
+  --help           Show this message and exit.
+
+Commands:
+  app      Opções para gerar, publicar e promover...
+  config   Configuração do client.
+  get      Obter informações de recursos.
+  remove
+  version  Versão do backend Estaleiro.
+02963357460@serpro-1455337:~/bin$ 
+
+========================================================================
+
+~/bin$ ./estaleiro -u
+Download do client...
+(http://mirror.estaleiro.serpro/cli/cli-latest.tar.gz)
+Instalando dependencias...
+Client ja esta na versao 1.0-669
+
+Usage: estaleiro-cli [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --debug          Apresenta informações de debug.
+  --system TEXT    Executa a requisição para um sistema diferente do sistema
+                   default.
+  --token TEXT     Token de autenticação a ser utilizado na execução do
+                   comando.
+  --endpoint TEXT  URL do endpoint a ser utilizado na execução do comando.
+  --help           Show this message and exit.
+
+Commands:
+  app      Opções para gerar, publicar e promover...
+  config   Configuração do client.
+  get      Obter informações de recursos.
+  remove
+  version  Versão do backend Estaleiro.
+
+========================================================================
+
+Tokens de Acesso para o CLI
+-->
+
+https://console.estaleiro.serpro.gov.br/paas-web/#/token
+
+Descrição:
+
+token-jwt-estacao-trabalho-clenubio
+
+"Novo token criado":
+
+eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhMWY1NDlkNS1kMTc2LTRmOWYtODNlYy1lY2I5MWZlOWUxODkiLCJzdWIiOiJjbGVudWJpby5zb3V6YUBzZXJwcm8uZ292LmJyIiwiaWF0IjoxNTAxMDA0ODk2fQ.jHpJdZVSAYaBDG_q6ypdL_PPYkwkroBDAp3lZul-7wzSmj0n0djuNOptQX0zdsM4UahwWbNlQ1TWyhIIimUW2g
+
+========================================================================
+
+(https://git.serpro/Estaleiro/treinamento/blob/master/manual.md#cliente-estaleiro)
+
+02963357460@serpro-1455337:~/bin$ ./estaleiro config token --literal eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhMWY1NDlkNS1kMTc2LTRmOWYtODNlYy1lY2I5MWZlOWUxODkiLCJzdWIiOiJjbGVudWJpby5zb3V6YUBzZXJwcm8uZ292LmJyIiwiaWF0IjoxNTAxMDA0ODk2fQ.jHpJdZVSAYaBDG_q6ypdL_PPYkwkroBDAp3lZul-7wzSmj0n0djuNOptQX0zdsM4UahwWbNlQ1TWyhIIimUW2g
+Token configurado com sucesso.
+
+02963357460@serpro-1455337:~/bin$ ./estaleiro config system handson
+Sistema "handson" selecionado com sucesso.
+
+02963357460@serpro-1455337:~/bin$ ./estaleiro get sys
+
++Sistemas-------+-----------+-----+-----------------+
+| Identificador | RAM (GiB) | CPU | Limite DB (GiB) |
++---------------+-----------+-----+-----------------+
+| handson       | 20        | 20  | 20              |
++---------------+-----------+-----+-----------------+
+
+
