@@ -134,3 +134,28 @@ Sistema "handson" selecionado com sucesso.
 +---------------+---------------+-----------+
 
 
+$ mkdir -p htdocs/webnubiofs
+
+$ cd htdocs/webnubiofs
+
+$ touch index.html
+
+$ echo "<h1><center>Bem vindo ao Estaleiro!</center></h1>" >> index.html
+
+$ cd ..
+
+$ cd ..
+
+$ pwd
+/home/02963357460/bin
+
+$ ls
+
+estaleiro  htdocs
+
+$ ./estaleiro get env
+
+$ ./estaleiro app deploy dwebnubiofs --module webnubiofs --platform frontend:nginx --version 0.0.2
+
+$ curl https://dwebnubiofs.handson.estaleiro.serpro.gov.br/webnubiofs/
+
