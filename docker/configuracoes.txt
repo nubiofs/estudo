@@ -67,6 +67,21 @@ $ sudo docker run -it ubuntu bash
 	Digest: sha256:84c334414e2bfdcae99509a6add166bbb4fa4041dc3fa6af08046a66fed3005f
 	Status: Downloaded newer image for ubuntu:latest
 
+- Observação:
+
+	$ docker container run <parâmetros> <imagem> <CMD> <argumentos>
+
+	(Os	<parâmetros>	mais	utilizados	na	execução	do	container	são):
+	-d Execução	do	container	em	background
+	-i Modo	interativo.	Mantém	o	STDIN	aberto	mesmo	sem	console	anexado
+	-t Aloca	uma	pseudo	TTY
+	--rm Automaticamente	remove	o	container	após	finalização	(Não	funciona	com	-d)
+	--name Nomear	o	container
+	-v Mapeamento	de	volume
+	-p Mapeamento	de	porta
+	-m Limitar	o	uso	de	memória	RAM
+	-c Balancear	o	uso	de	CPU
+
 >root@f82d40ae724c:/# uname 
 	Linux
 >root@9abc1b95752f:/# df -h
@@ -95,3 +110,4 @@ $ sudo docker run -it ubuntu bash
 
 	$ sudo docker stop b25abe8a7e94
 
+$ sudo docker image inspect ubuntu
