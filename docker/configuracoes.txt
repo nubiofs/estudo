@@ -1,0 +1,97 @@
+* Instalacao (ubuntu 16.04 "xenial/stable amd64" LTS)
+
+Fontes:
+
+	https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
+	https://www.digitalocean.com/community/tutorials/como-instalar-e-utilizar-o-docker-primeiros-passos-pt
+
+$ sudo apt-get update
+
+$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+$ sudo apt-key fingerprint 0EBFCD88
+
+$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+$ sudo apt-get update
+
+$ sudo apt-get install docker-ce
+
+$ sudo docker run hello-world
+
+	Unable to find image 'hello-world:latest' locally
+	latest: Pulling from library/hello-world
+	b04784fba78d: Pull complete 
+	Digest: sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f
+	Status: Downloaded newer image for hello-world:latest
+
+	Hello from Docker!
+	This message shows that your installation appears to be working correctly.
+
+	To generate this message, Docker took the following steps:
+	 1. The Docker client contacted the Docker daemon.
+	 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+	 3. The Docker daemon created a new container from that image which runs the
+	    executable that produces the output you are currently reading.
+	 4. The Docker daemon streamed that output to the Docker client, which sent it
+	    to your terminal.
+
+	To try something more ambitious, you can run an Ubuntu container with:
+	 $ docker run -it ubuntu bash
+
+	Share images, automate workflows, and more with a free Docker ID:
+	 https://cloud.docker.com/
+
+	For more examples and ideas, visit:
+	 https://docs.docker.com/engine/userguide/
+
+$ sudo docker images
+
+$ sudo docker info
+
+$ sudo docker version
+
+$ sudo docker search ubuntu
+
+$ sudo docker run -it ubuntu bash
+
+	Unable to find image 'ubuntu:latest' locally
+	latest: Pulling from library/ubuntu
+	e0a742c2abfd: Pull complete 
+	486cb8339a27: Pull complete 
+	dc6f0d824617: Pull complete 
+	4f7a5649a30e: Pull complete 
+	672363445ad2: Pull complete 
+	Digest: sha256:84c334414e2bfdcae99509a6add166bbb4fa4041dc3fa6af08046a66fed3005f
+	Status: Downloaded newer image for ubuntu:latest
+
+>root@f82d40ae724c:/# uname 
+	Linux
+>root@9abc1b95752f:/# df -h
+	Filesystem      Size  Used Avail Use% Mounted on
+	none             37G  7.1G   28G  21% /
+	tmpfs           3.9G     0  3.9G   0% /dev
+	tmpfs           3.9G     0  3.9G   0% /sys/fs/cgroup
+	/dev/sda3        37G  7.1G   28G  21% /etc/hosts
+	shm              64M     0   64M   0% /dev/shm
+	tmpfs           3.9G     0  3.9G   0% /sys/firmware
+
+(em outro terminal):
+ 
+	$ sudo docker images
+		REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+		ubuntu              latest              14f60031763d        4 days ago          120MB
+		hello-world         latest              1815c82652c0        5 weeks ago         1.84kB
+
+	$ sudo docker ps
+		CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+		b25abe8a7e94        ubuntu              "bash"              16 seconds ago      Up 15 seconds                           focused_swanson
+
+	$ sudo docker container ls
+		CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+		b25abe8a7e94        ubuntu              "bash"              4 minutes ago       Up 4 minutes                            focused_swanson
+
+	$ sudo docker stop b25abe8a7e94
+
