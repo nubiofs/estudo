@@ -7,72 +7,72 @@ Fontes:
 
 02963357460@serpro-1455337:~/bin$ chmod +x estaleiro 
 02963357460@serpro-1455337:~/bin$ ./estaleiro 
-Client nao encontrado. A instalacao ira ocupar aproximadamente 50M.
-Instalar o client em /home/02963357460/.estaleiro? [s|n] s
-Criando virtualenv do Estaleiro...
-(http://mirror.estaleiro.serpro/cli/virtualenv-latest.tar.gz)
-Download do client...
-(http://mirror.estaleiro.serpro/cli/cli-latest.tar.gz)
-Instalando dependencias...
-  nose-1.3.7.tar.gz
-  Babel-2.3.4.tar.gz
-  pyaml-16.12.2.tar.gz
-  terminaltables-3.1.0.tar.gz
-  clint-0.5.1.tar.gz
-  requests-2.13.0.tar.gz
-  twine-1.8.1.tar.gz
-  click-6.6.tar.gz
-  pytz-2017.2-py2.7.egg
-  PyYAML-3.12.zip
-  args-0.1.0.tar.gz
-  requests-toolbelt-0.8.0.tar.gz
-  pkginfo-1.4.1.tar.gz
-Client 1.0-669 instalado com sucesso em /home/02963357460/.estaleiro
+	Client nao encontrado. A instalacao ira ocupar aproximadamente 50M.
+	Instalar o client em /home/02963357460/.estaleiro? [s|n] s
+	Criando virtualenv do Estaleiro...
+	(http://mirror.estaleiro.serpro/cli/virtualenv-latest.tar.gz)
+	Download do client...
+	(http://mirror.estaleiro.serpro/cli/cli-latest.tar.gz)
+	Instalando dependencias...
+	  nose-1.3.7.tar.gz
+	  Babel-2.3.4.tar.gz
+	  pyaml-16.12.2.tar.gz
+	  terminaltables-3.1.0.tar.gz
+	  clint-0.5.1.tar.gz
+	  requests-2.13.0.tar.gz
+	  twine-1.8.1.tar.gz
+	  click-6.6.tar.gz
+	  pytz-2017.2-py2.7.egg
+	  PyYAML-3.12.zip
+	  args-0.1.0.tar.gz
+	  requests-toolbelt-0.8.0.tar.gz
+	  pkginfo-1.4.1.tar.gz
+	Client 1.0-669 instalado com sucesso em /home/02963357460/.estaleiro
 
-Usage: estaleiro-cli [OPTIONS] COMMAND [ARGS]...
+	Usage: estaleiro-cli [OPTIONS] COMMAND [ARGS]...
 
-Options:
-  --debug          Apresenta informações de debug.
-  --system TEXT    Executa a requisição para um sistema diferente do sistema
-                   default.
-  --token TEXT     Token de autenticação a ser utilizado na execução do
-                   comando.
-  --endpoint TEXT  URL do endpoint a ser utilizado na execução do comando.
-  --help           Show this message and exit.
+	Options:
+	  --debug          Apresenta informações de debug.
+	  --system TEXT    Executa a requisição para um sistema diferente do sistema
+		           default.
+	  --token TEXT     Token de autenticação a ser utilizado na execução do
+		           comando.
+	  --endpoint TEXT  URL do endpoint a ser utilizado na execução do comando.
+	  --help           Show this message and exit.
 
-Commands:
-  app      Opções para gerar, publicar e promover...
-  config   Configuração do client.
-  get      Obter informações de recursos.
-  remove
-  version  Versão do backend Estaleiro.
+	Commands:
+	  app      Opções para gerar, publicar e promover...
+	  config   Configuração do client.
+	  get      Obter informações de recursos.
+	  remove
+	  version  Versão do backend Estaleiro.
 02963357460@serpro-1455337:~/bin$ 
 
 ========================================================================
 
 ~/bin$ ./estaleiro -u
-Download do client...
-(http://mirror.estaleiro.serpro/cli/cli-latest.tar.gz)
-Instalando dependencias...
-Client ja esta na versao 1.0-669
+	Download do client...
+	(http://mirror.estaleiro.serpro/cli/cli-latest.tar.gz)
+	Instalando dependencias...
+	Client ja esta na versao 1.0-669
 
-Usage: estaleiro-cli [OPTIONS] COMMAND [ARGS]...
+	Usage: estaleiro-cli [OPTIONS] COMMAND [ARGS]...
 
-Options:
-  --debug          Apresenta informações de debug.
-  --system TEXT    Executa a requisição para um sistema diferente do sistema
-                   default.
-  --token TEXT     Token de autenticação a ser utilizado na execução do
-                   comando.
-  --endpoint TEXT  URL do endpoint a ser utilizado na execução do comando.
-  --help           Show this message and exit.
+	Options:
+	  --debug          Apresenta informações de debug.
+	  --system TEXT    Executa a requisição para um sistema diferente do sistema
+		           default.
+	  --token TEXT     Token de autenticação a ser utilizado na execução do
+		           comando.
+	  --endpoint TEXT  URL do endpoint a ser utilizado na execução do comando.
+	  --help           Show this message and exit.
 
-Commands:
-  app      Opções para gerar, publicar e promover...
-  config   Configuração do client.
-  get      Obter informações de recursos.
-  remove
-  version  Versão do backend Estaleiro.
+	Commands:
+	  app      Opções para gerar, publicar e promover...
+	  config   Configuração do client.
+	  get      Obter informações de recursos.
+	  remove
+	  version  Versão do backend Estaleiro.
 
 ========================================================================
 
@@ -94,10 +94,10 @@ eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhMWY1NDlkNS1kMTc2LTRmOWYtODNlYy1lY2I5MWZlOWUxODk
 (https://git.serpro/Estaleiro/treinamento/blob/master/manual.md#cliente-estaleiro)
 
 02963357460@serpro-1455337:~/bin$ ./estaleiro config token --literal eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhMWY1NDlkNS1kMTc2LTRmOWYtODNlYy1lY2I5MWZlOWUxODkiLCJzdWIiOiJjbGVudWJpby5zb3V6YUBzZXJwcm8uZ292LmJyIiwiaWF0IjoxNTAxMDA0ODk2fQ.jHpJdZVSAYaBDG_q6ypdL_PPYkwkroBDAp3lZul-7wzSmj0n0djuNOptQX0zdsM4UahwWbNlQ1TWyhIIimUW2g
-Token configurado com sucesso.
+	Token configurado com sucesso.
 
 02963357460@serpro-1455337:~/bin$ ./estaleiro config system handson
-Sistema "handson" selecionado com sucesso.
+	Sistema "handson" selecionado com sucesso.
 
 02963357460@serpro-1455337:~/bin$ ./estaleiro get sys
 
@@ -133,8 +133,9 @@ Sistema "handson" selecionado com sucesso.
 | wrc           | /wrc          | m0:64:100 |
 +---------------+---------------+-----------+
 
-
 $ mkdir -p htdocs/webnubiofs
+
+Obs.: "htdocs" diretório raiz do conteúdo entregue pelo servidor web "plataforma web (frontend) com nginx"
 
 $ cd htdocs/webnubiofs
 
@@ -151,11 +152,15 @@ $ pwd
 
 $ ls
 
-estaleiro  htdocs
+	estaleiro  htdocs
 
 $ ./estaleiro get env
 
 $ ./estaleiro app deploy dwebnubiofs --module webnubiofs --platform frontend:nginx --version 0.0.2
 
 $ curl https://dwebnubiofs.handson.estaleiro.serpro.gov.br/webnubiofs/
+
+===================================================================
+
+https://git.serpro/Estaleiro/treinamento#configura%C3%A7%C3%A3o-da-pipeline
 
