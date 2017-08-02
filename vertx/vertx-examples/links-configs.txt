@@ -10,3 +10,29 @@ $ mvn eclipse:eclipse
 $ mvn package
 
 $ java -jar target/springboot-example-1.5.6.RELEASE.jar
+
+-> http://localhost:8080/
+
+====================================================================================
+
+(Fonte: https://github.com/vert-x3/vertx-examples/tree/master/spring-examples/spring-example)
+
+$ cd /home/02963357460/estudo.git/vertx/vertx-examples/workspace-examples/spring-example
+
+$ mvn eclipse:eclipse
+
+(Import Maven Project)
+
+$ mvn package
+
+$ java -jar target/spring-example-3.4.2-fat.jar
+
+-> http://localhost:8080/
+
+	Hello from vert.x
+
+-> http://localhost:8080/products
+	
+	[{"productId":1,"description":"product 1"},{"productId":2,"description":"product 2"},{"productId":1,"description":"product 1"},{"productId":4,"description":"product 4"}]
+
+
