@@ -1,0 +1,7 @@
+/home/02963357460/estudo.git/vertx/vertx-examples/workspace-all-examples-for-springboot-clustering-hazelcast/spring-example/src/main/java/io/vertx/examples/spring/repository/ProductRepository.java
+/home/02963357460/estudo.git/vertx/vertx-examples/workspace-all-examples-for-springboot-clustering-hazelcast/spring-example/src/main/java/io/vertx/examples/spring/verticle/SpringDemoVerticle.java
+/home/02963357460/estudo.git/vertx/vertx-examples/workspace-all-examples-for-springboot-clustering-hazelcast/spring-example/src/main/java/io/vertx/examples/spring/service/ProductService.java
+/home/02963357460/estudo.git/vertx/vertx-examples/workspace-all-examples-for-springboot-clustering-hazelcast/spring-example/src/main/java/io/vertx/examples/spring/verticle/ServerVerticle.java
+/home/02963357460/estudo.git/vertx/vertx-examples/workspace-all-examples-for-springboot-clustering-hazelcast/spring-example/src/main/java/io/vertx/examples/spring/context/ExampleSpringConfiguration.java
+/home/02963357460/estudo.git/vertx/vertx-examples/workspace-all-examples-for-springboot-clustering-hazelcast/spring-example/src/main/java/io/vertx/examples/spring/SpringExampleRunner.java
+/home/02963357460/estudo.git/vertx/vertx-examples/workspace-all-examples-for-springboot-clustering-hazelcast/spring-example/src/main/java/io/vertx/examples/spring/entity/Product.java

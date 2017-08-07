@@ -1,0 +1,4 @@
+io/vertx/examples/spring/clustering/hazelcast/HelloVerticle.class
+io/vertx/examples/spring/clustering/hazelcast/HttpVerticle.class
+io/vertx/examples/spring/clustering/hazelcast/VertxProducer.class
+io/vertx/examples/spring/clustering/hazelcast/Application.class

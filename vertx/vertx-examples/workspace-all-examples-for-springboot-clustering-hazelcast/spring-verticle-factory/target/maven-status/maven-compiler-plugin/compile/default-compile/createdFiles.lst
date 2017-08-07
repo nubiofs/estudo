@@ -1,0 +1,4 @@
+io/vertx/examples/spring/verticlefactory/SpringVerticleFactory.class
+io/vertx/examples/spring/verticlefactory/GreetingVerticle.class
+io/vertx/examples/spring/verticlefactory/ExampleApplication.class
+io/vertx/examples/spring/verticlefactory/Greeter.class

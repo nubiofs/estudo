@@ -1,0 +1,7 @@
+io/vertx/examples/spring/entity/Product.class
+io/vertx/examples/spring/service/ProductService.class
+io/vertx/examples/spring/repository/ProductRepository.class
+io/vertx/examples/spring/SpringExampleRunner.class
+io/vertx/examples/spring/context/ExampleSpringConfiguration.class
+io/vertx/examples/spring/verticle/SpringDemoVerticle.class
+io/vertx/examples/spring/verticle/ServerVerticle.class
