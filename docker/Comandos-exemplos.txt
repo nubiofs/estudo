@@ -39,6 +39,22 @@ $ docker run --rm -it sinter-valida-lote-rtd /bin/sh
 
 $ docker run --rm -it sinter-valida-lote-rtd make test-all
 
+
+* TESTE: 
+
+	$ docker run --rm -it sinter-valida-lote-rtd /bin/sh -c "while true; do echo ola mundo; sleep 1; done"
+
+	$ docker exec -it friendly_heyrovsky /bin/sh -c "make test-all"
+
+	$ docker run --rm -it -v $PWD/batch/src/test/resources/massa-dados/maquinas-sinter/qware/centralRTD/inbox/lotes:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes sinter-valida-lote-rtd
+
+
+	$ docker run --rm -it -v $PWD/batch/src/test/resources/massa-dados/maquinas-sinter/qware/centralRTD/inbox/lotes:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes -e PATH_JAVA_SIGNER=/opt/sinter/build/config sinter-valida-lote-rtd /opt/sinter/build/p_XPTO_sinter_rotinas/validar_loteRTD.sh 2017080600001003.zip
+
+$ docker run --rm -it -v $PWD/batch/src/test/resources/massa-dados/maquinas-sinter/qware/centralRTD/inbox/lotes:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes sinter-valida-lote-rtd sh -c "make build && /opt/sinter/build/p_XPTO_sinter_rotinas/validar_loteRTD.sh 2017080600001003.zip"
+
+
+
 $ docker logs -tf 7e3a5288c91a
 
 $ docker inspect 7e3a5288c91a
@@ -107,3 +123,30 @@ A flag ‘–restart’ aceita valores, como ‘always’ (sempre) e ‘on-failu
 
 	#!/bin/bash
 	docker cp /path/asdf.csv 2d55a8445409:/
+
+=================================
+===> Usando via "Docker Compose":
+
+$ curl -L --fail https://github.com/docker/compose/releases/download/1.14.0/run.sh -o ~/bin/docker-compose
+
+$ chmod 755 ~/bin/docker-compose
+
+obs.: "exemplo de conteudo do arquivo"
+
+	version: '2'
+
+	services:
+	  sinter-valida-rtd:
+	    image: sinter-valida-lote-rtd
+	    build:
+	      context: .
+	      dockerfile: Dockerfile
+	    
+	    volumes:
+	      - ~/sinter/qware/inbox:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes
+	      - ~/sinter/qware/outbox:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/outbox/lotes
+	      - ~/sinter/storage:/opt/sinter/appfiles/p_10465_sinter_arquivos/STaaS/centralRTD/lotes
+
+$ docker-compose up
+
+
