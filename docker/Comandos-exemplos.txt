@@ -1,0 +1,109 @@
+
+docker ps
+docker ps -a
+docker-compose stop
+docker-compose start
+docker-compose down
+docker-compose up -d
+docker-compose logs
+docker-compose logs -f
+docker info
+
+$ docker build -t sinter-valida-lote-rtd .
+
+obs.: Executar no diretorio que contem o arquivo "Dockerfile":
+
+	FROM openjdk
+
+	COPY . /opt/sinter
+
+	WORKDIR /opt/sinter
+
+	ENV CODIGO_DEMANDA=10465 \
+	    sinter_batch_job_dir=/opt/sinter/approtinas/p_${CODIGO_DEMANDA}_sinter_rotinas \
+	    sinter_batch_arq_dir=/opt/sinter/appfiles/p_${CODIGO_DEMANDA}_sinter_arquivos \
+	    ENTRADA_LOTES_RTD=$sinter_batch_arq_dir/qware/centralRTD/inbox/lotes
+
+	RUN apt-get update && \
+	    apt-get install -y --no-install-recommends make unzip file bc && \
+	    make build && \
+	    rm -rf /var/lib/apt/lists/*
+
+	CMD ['make test-all']
+
+$ docker run --rm -it sinter-valida-lote-rtd
+
+$ docker run --rm -it sinter-valida-lote-rtd /bin/bash
+
+$ docker run --rm -it sinter-valida-lote-rtd /bin/sh
+
+$ docker run --rm -it sinter-valida-lote-rtd make test-all
+
+$ docker logs -tf 7e3a5288c91a
+
+$ docker inspect 7e3a5288c91a
+
+root@ubuntu:~$ docker ps; # Lista os containers em execução
+
+root@ubuntu:~$ docker exec [container id] [comando]; #Executa comandos dentro do container
+
+root@ubuntu:~$ docker stop $(docker ps -aq); #Para a execução de todos dos containers
+
+rroot@ubuntu:~$ echo puts 'Tableless' > 'hello_ruby.rb' #Criando um arquivo .rb que imprime no console a frase "Tableless".
+
+root@ubuntu:~$ docker run -v "$(pwd)":/var/ruby -w /var/ruby google/ruby sh -c 'ruby hello_ruby.rb'
+
+	Executando esse docker run, caso você não tenha a imagem google/ruby baixada na sua máquina o próprio docker vai se encarregar disso, fazendo o 	download e iniciando o container.
+
+	A opção -v seguida do valor “$(pwd)”:/var/ruby mapeia a pasta atual (que você está executando o comando no terminal) onde criei o arquivo 		hello_ruby.rb para a pasta /var/ruby dentro container do docker.
+
+	A opção -w seta de qual path vai partir a execução do comando no nosso caso parte de /var/ruby, o google/ruby é o nome da imagem do ruby que vamos 		usar e o sh -c do unix para executar o seguinte comando ‘ruby hello_ruby.rb‘.
+
+$ docker run java:8 java -version
+
+$ docker run --rm -v "$PWD":/home/user/test -w /home/user/test java:8 java OlaDocker
+
+	A opção -v indica o volume que é carregado para o Container, e -w o diretório de trabalho. No exemplo as duas opções apontam para o mesmo diretório 
+	(/home/user/test), que contém o arquivo OlaDocker.class. Ajuste a instrução indicando o path e o nome adequado da sua classe Java.
+
+===============
+
+==> docker run hello-world
+
+==> docker run --name shell_script -it ubuntu bash
+
+obs.:
+
+$ docker run -i -t ubuntu /bin/bash
+
+	Veja o que mais foi feito acima:
+
+	    -i pede para que a entrada ou input permaneça aberta, para receber instruções
+	    -t pede ao contêiner para atribuir-lhe um terminal
+	    /bin/bash é a opção de programa terminal escolhida
+
+$ docker run --name primeiro_daemon -d ubuntu /bin/sh -c "while true; do echo ola mundo; sleep 1; done"
+
+	Aqui, usamos o comando ‘docker run’, em conjunto com o parâmetro ‘-d’ para enviar o contêiner pros bastidores ou background.
+
+$ docker logs primeiro_daemon
+
+$ docker exec -d primeiro_daemon touch /etc/new_config_file
+
+	Inicia outro processo dentro de um contêiner existente
+
+$ docker top primeiro_daemon
+
+** Como reiniciar automaticamente um contêiner:
+
+Se um contêiner parar ou for finalizado em consequência de um erro, é possível configurar o Docker para pô-lo pra rodar de novo automaticamente:
+
+$ docker run --restart=on-failure:3 --name segundo_daemon -d ubuntu /bin/sh -c "while true; do echo ola mundo; sleep 1; done"
+
+	Podemos sinalizar com ‘–restart’, quando queremos que haja um reinício e até quantas vezes tentar.
+A flag ‘–restart’ aceita valores, como ‘always’ (sempre) e ‘on-failure’ 
+
+==> docker exec -it shell_script ls
+
+	#!/bin/bash
+	docker cp /path/asdf.csv 2d55a8445409:/
