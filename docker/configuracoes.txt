@@ -19,6 +19,10 @@ $ sudo apt-get update
 
 $ sudo apt-get install docker-ce
 
+$ sudo gpasswd -a 02963357460 docker
+
+Obs.: para não precisar usar "sudo" e depois "$ newgrp docker" (apenas enquanto não reinicializa o Linux "init.d")
+
 $ sudo docker run hello-world
 
 	Unable to find image 'hello-world:latest' locally

@@ -29,7 +29,7 @@ obs.: Executar no diretorio que contem o arquivo "Dockerfile":
 	    make build && \
 	    rm -rf /var/lib/apt/lists/*
 
-	CMD ['make test-all']
+	CMD ["sh", "-c", "make test-all"]
 
 $ docker run --rm -it sinter-valida-lote-rtd
 
