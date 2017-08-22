@@ -1,12 +1,6 @@
 
 docker ps
 docker ps -a
-docker-compose stop
-docker-compose start
-docker-compose down
-docker-compose up -d
-docker-compose logs
-docker-compose logs -f
 docker info
 
 $ docker build -t sinter-valida-lote-rtd .
@@ -22,7 +16,8 @@ obs.: Executar no diretorio que contem o arquivo "Dockerfile":
 	ENV CODIGO_DEMANDA=10465 \
 	    sinter_batch_job_dir=/opt/sinter/approtinas/p_${CODIGO_DEMANDA}_sinter_rotinas \
 	    sinter_batch_arq_dir=/opt/sinter/appfiles/p_${CODIGO_DEMANDA}_sinter_arquivos \
-	    ENTRADA_LOTES_RTD=$sinter_batch_arq_dir/qware/centralRTD/inbox/lotes
+	    ENTRADA_LOTES_RTD=$sinter_batch_arq_dir/qware/centralRTD/inbox/lotes \
+	    PATH_JAVA_SIGNER=$sinter_batch_arq_dir/build/config
 
 	RUN apt-get update && \
 	    apt-get install -y --no-install-recommends make unzip file bc && \
@@ -33,14 +28,15 @@ obs.: Executar no diretorio que contem o arquivo "Dockerfile":
 
 $ docker run --rm -it sinter-valida-lote-rtd
 
-$ docker run --rm -it sinter-valida-lote-rtd /bin/bash
-
 $ docker run --rm -it sinter-valida-lote-rtd /bin/sh
 
-$ docker run --rm -it sinter-valida-lote-rtd make test-all
+$ docker run --rm -it sinter-valida-lote-rtd /bin/bash
 
+$ docker run --rm -it sinter-valida-lote-rtd sh -c "make test-all"
 
-* TESTE: 
+---
+
+* TESTES (com mapeamento de volumes): 
 
 	$ docker run --rm -it sinter-valida-lote-rtd /bin/sh -c "while true; do echo ola mundo; sleep 1; done"
 
@@ -48,12 +44,11 @@ $ docker run --rm -it sinter-valida-lote-rtd make test-all
 
 	$ docker run --rm -it -v $PWD/batch/src/test/resources/massa-dados/maquinas-sinter/qware/centralRTD/inbox/lotes:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes sinter-valida-lote-rtd
 
-
 	$ docker run --rm -it -v $PWD/batch/src/test/resources/massa-dados/maquinas-sinter/qware/centralRTD/inbox/lotes:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes -e PATH_JAVA_SIGNER=/opt/sinter/build/config sinter-valida-lote-rtd /opt/sinter/build/p_XPTO_sinter_rotinas/validar_loteRTD.sh 2017080600001003.zip
 
-$ docker run --rm -it -v $PWD/batch/src/test/resources/massa-dados/maquinas-sinter/qware/centralRTD/inbox/lotes:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes sinter-valida-lote-rtd sh -c "make build && /opt/sinter/build/p_XPTO_sinter_rotinas/validar_loteRTD.sh 2017080600001003.zip"
+	$ docker run --rm -it -v $PWD/batch/src/test/resources/massa-dados/maquinas-sinter/qware/centralRTD/inbox/lotes:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes sinter-valida-lote-rtd sh -c "make build && /opt/sinter/build/p_XPTO_sinter_rotinas/validar_loteRTD.sh 2017080600001003.zip"
 
-
+---
 
 $ docker logs -tf 7e3a5288c91a
 
@@ -121,17 +116,29 @@ A flag ‘–restart’ aceita valores, como ‘always’ (sempre) e ‘on-failu
 
 ==> docker exec -it shell_script ls
 
-	#!/bin/bash
-	docker cp /path/asdf.csv 2d55a8445409:/
+---
+- Copiar arquivo (sem volume):
 
-=================================
-===> Usando via "Docker Compose":
+#!/bin/bash
+docker cp /path/asdf.csv 2d55a8445409:/
+
+============================================================
+===> Execução de Conteiners docker, usando "Docker Compose":
+
+$ mkdir -p ~/sinter/qware/centralRTD/{inbox,outbox}/lotes
+$ mkdir -p ~/sinter/qware/centralRTD/outbox/lotes/rejeitados
+$ mkdir -p ~/sinter/qware/centralRTD/outbox/lotes/validados/processados
+
+$ mkdir -p ~/sinter/STaaS/centralRTD/lotes/rejeitados
+$ mkdir -p ~/sinter/STaaS/centralRTD/lotes/validados/processados
+
+$ mkdir -p ~/bin/docker
 
 $ curl -L --fail https://github.com/docker/compose/releases/download/1.14.0/run.sh -o ~/bin/docker-compose
 
 $ chmod 755 ~/bin/docker-compose
 
-obs.: "exemplo de conteudo do arquivo"
+obs.: "exemplo de conteudo do arquivo (docker-compose.yml) [após criação da imagem 'sinter-valida-rtd']"
 
 	version: '2'
 
@@ -143,10 +150,20 @@ obs.: "exemplo de conteudo do arquivo"
 	      dockerfile: Dockerfile
 	    
 	    volumes:
-	      - ~/sinter/qware/inbox:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes
-	      - ~/sinter/qware/outbox:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/outbox/lotes
-	      - ~/sinter/storage:/opt/sinter/appfiles/p_10465_sinter_arquivos/STaaS/centralRTD/lotes
+	      - ~/sinter/qware/centralRTD/inbox/lotes:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/inbox/lotes
+	      - ~/sinter/qware/centralRTD/outbox/lotes:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/outbox/lotes
+	      - ~/sinter/qware/centralRTD/outbox/lotes/rejeitados:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/outbox/lotes/rejeitados
+	      - ~/sinter/qware/centralRTD/outbox/lotes/validados:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/outbox/lotes/validados
+	      - ~/sinter/qware/centralRTD/outbox/lotes/validados/processados:/opt/sinter/appfiles/p_10465_sinter_arquivos/qware/centralRTD/outbox/lotes/validados/processados
+	      - ~/sinter/STaaS/centralRTD/lotes/rejeitados:/opt/sinter/appfiles/p_10465_sinter_arquivos/STaaS/centralRTD/lotes/rejeitados
+	      - ~/sinter/STaaS/centralRTD/lotes/validados:/opt/sinter/appfiles/p_10465_sinter_arquivos/STaaS/centralRTD/lotes/validados
+	      - ~/sinter/STaaS/centralRTD/lotes/validados/processados:/opt/sinter/appfiles/p_10465_sinter_arquivos/STaaS/centralRTD/lotes/validados/processados
 
 $ docker-compose up
 
-
+$ docker-compose stop
+$ docker-compose start
+$ docker-compose down
+$ docker-compose up -d
+$ docker-compose logs
+$ docker-compose logs -f
