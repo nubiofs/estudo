@@ -1,6 +1,8 @@
 
 docker ps
 docker ps -a
+docker ps -as
+docker ps -aq
 docker info
 
 $ docker build -t sinter-valida-lote-rtd .
@@ -13,18 +15,31 @@ obs.: Executar no diretorio que contem o arquivo "Dockerfile":
 
 	WORKDIR /opt/sinter
 
-	ENV CODIGO_DEMANDA=10465 \
-	    sinter_batch_job_dir=/opt/sinter/approtinas/p_${CODIGO_DEMANDA}_sinter_rotinas \
-	    sinter_batch_arq_dir=/opt/sinter/appfiles/p_${CODIGO_DEMANDA}_sinter_arquivos \
-	    ENTRADA_LOTES_RTD=$sinter_batch_arq_dir/qware/centralRTD/inbox/lotes \
-	    PATH_JAVA_SIGNER=$sinter_batch_arq_dir/build/config
+	ENV CODIGO_DEMANDA=10465
+	ENV sinter_batch_job_dir=/opt/sinter/p_${CODIGO_DEMANDA}_sinter_rotinas
+	ENV PATH_JAVA_SIGNER=$sinter_batch_job_dir
+	ENV sinter_batch_arq_dir=/opt/sinter/p_${CODIGO_DEMANDA}_sinter_arquivos
+	ENV ENTRADA_LOTES_RTD=$sinter_batch_arq_dir/qware/centralRTD/inbox/lotes
+	ENV SAIDA_RECEBIMENTO_LOTES_RTD_VALIDADOS=$sinter_batch_arq_dir/qware/centralRTD/outbox/lotes/validados
+	ENV SAIDA_RECEBIMENTO_LOTES_RTD_REJEITADOS=$sinter_batch_arq_dir/qware/centralRTD/outbox/lotes/rejeitados
+	ENV SAIDA_RELATORIO_LOTES_EXTRATOS_RTD_PROCESSADOS=$SAIDA_RECEBIMENTO_LOTES_RTD_VALIDADOS/processados
+	ENV PERMANENTE_LOTES_RTD=$sinter_batch_arq_dir/STaaS/centralRTD/lotes
+	ENV PERMANENTE_LOTES_RTD_VALIDADOS=$PERMANENTE_LOTES_RTD/validados
+	ENV PERMANENTE_LOTES_RTD_REJEITADOS=$PERMANENTE_LOTES_RTD/rejeitados
+	ENV PERMANENTE_LOTES_EXTRATOS_RTD_PROCESSADOS=$PERMANENTE_LOTES_RTD_VALIDADOS/processados
 
 	RUN apt-get update && \
-	    apt-get install -y --no-install-recommends make unzip file bc && \
-	    make build && \
+	    apt-get install -y --no-install-recommends make unzip file bc less && \
 	    rm -rf /var/lib/apt/lists/*
+	
 
-	CMD ["sh", "-c", "make test-all"]
+	CMD ["sh", "-c", "${sinter_batch_job_dir}/validar_loteRTD.sh 20170817000030003.zip"]
+
+
+---
+#ADD bootstrap.sh ${sinter_batch_job_dir}
+#ADD script.sh /root/script.sh
+#RUN cp ./p_${CODIGO_DEMANDA}_sinter_rotinas/* $sinter_batch_job_dir
 
 $ docker run --rm -it sinter-valida-lote-rtd
 
@@ -33,6 +48,14 @@ $ docker run --rm -it sinter-valida-lote-rtd /bin/sh
 $ docker run --rm -it sinter-valida-lote-rtd /bin/bash
 
 $ docker run --rm -it sinter-valida-lote-rtd sh -c "make test-all"
+
+==> https://stackoverflow.com/questions/17665283/how-does-one-remove-an-image-in-docker
+
+$ docker images
+
+$ docker rmi -f 084faf6b4c2b
+
+-> you can use -f option to force delete the containers .
 
 ---
 
