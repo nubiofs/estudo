@@ -131,3 +131,22 @@ $ sudo docker run busybox /bin/echo hello world
 	Status: Downloaded newer image for busybox:latest
 	hello world
 
+=============================
+== Instalação: Docker compose
+
+$ mkdir -p ~/bin/docker
+
+$ chmod 755 ~/bin/docker-compose
+
+$ curl -L --fail https://github.com/docker/compose/releases/download/1.14.0/run.sh -o ~/bin/docker-compose
+
+$ docker-compose up
+
+$ docker-compose stop
+$ docker-compose start
+$ docker-compose down
+$ docker-compose up -d
+$ docker-compose logs
+$ docker-compose logs -f
+
+

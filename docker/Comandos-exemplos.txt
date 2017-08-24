@@ -11,7 +11,7 @@ obs.: Executar no diretorio que contem o arquivo "Dockerfile":
 
 	FROM openjdk
 
-	COPY . /opt/sinter
+	COPY build /opt/sinter
 
 	WORKDIR /opt/sinter
 
@@ -33,8 +33,10 @@ obs.: Executar no diretorio que contem o arquivo "Dockerfile":
 	    rm -rf /var/lib/apt/lists/*
 	
 
-	CMD ["sh", "-c", "${sinter_batch_job_dir}/validar_loteRTD.sh 20170817000030003.zip"]
+	#CMD ["sh", "-c", "${sinter_batch_job_dir}/validar_loteRTD.sh 20170817000030003.zip"]
+	#CMD ["sh", "-c", "make"]
 
+	RUN make
 
 ---
 #ADD bootstrap.sh ${sinter_batch_job_dir}
@@ -48,6 +50,8 @@ $ docker run --rm -it sinter-valida-lote-rtd /bin/sh
 $ docker run --rm -it sinter-valida-lote-rtd /bin/bash
 
 $ docker run --rm -it sinter-valida-lote-rtd sh -c "make test-all"
+
+$ docker run --rm -it -e PATH_JAVA_SIGNER=/opt/sinter/build/config sinter-valida-lote-rtd sh -c "make test-all"
 
 ==> https://stackoverflow.com/questions/17665283/how-does-one-remove-an-image-in-docker
 
