@@ -1,0 +1,157 @@
+* Fontes:
+
+https://github.com/spring-projects/spring-boot
+
+https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
+
+* Criando Maven Wrapper para o projeto (observações):
+
+	-------------
+
+	I - (Adding the Maven Wrapper to a project)
+
+	"This allows you to run the Maven project without having Maven installed and present on the path. "
+
+	2.1. Adding the wrapper
+
+		Adding the Maven Wrapper is pretty simple. There is an Maven plugin called taraki-maven-plugin supports us to do that quickly. To add all the 			necessary Maven Wrapper files to your project, you just need to execute the following command:
+
+		$ cd your_project
+		$ mvn -N io.takari:maven:wrapper
+	 
+	2.2. Maven Wrapper generated files and directories
+
+		Let’s take a look what files and directories has just been added to your project.
+
+		mvnw (Unix Shell script)
+		mvnw .bat (Windows batch file)
+		.mvn/wrapper/maven-wrapper.jar (Maven Wrapper JAR)
+		.mvn/wrapper/maven-wrapper.properties (Maven Wrapper properties)
+
+		The plugin will add the latest release version of Maven to your project. Let’s take a look at the file maven-wrapper.properties.
+
+		.mvn/wrapper/maven-wrapper.properties
+
+			distributionUrl=https://repo1.maven.org/maven2/org/apache/maven/apache-maven/3.3.9/apache-maven-3.3.9-bin.zip
+			The Maven 3.3.9 was added to the properties file.
+
+	2.3. Where the Maven distributions are stored
+
+		If you looking for where the Maven distribution was stored, you’ll find them in your user home directory under $USER_HOME/.m2/wrapper/dists.
+
+		In my Ubuntu 16.04 OS, the distribution is: ~/.m2/wrapper/dists
+
+	You may need to add permission for mvnw so that it can be executed.
+
+	-------------
+
+	II - (maven-wrapper - a copy of the Gradle wrapper ported for use with Apache Maven.)
+
+	As described on the project’s wiki:
+
+	the Maven Command Line Wrapper will auto-download and install Apache Maven from the Internet and then run your Maven goals.
+	If you are ok with manual installation, all that’s needed is copying mvnw files and maven folder to your project - from say an example project. [2] This will make the file structure look pretty much like this.
+
+	sample
+	 ├── maven
+	 │   ├── maven-wrapper.jar
+	 │   └── maven-wrapper.properties
+	 ├── src
+	 │   └── main
+	 │       └── java
+	 ├── mvnw
+	 ├── mvnw.bat
+	 └── pom.xml
+
+	Now instead of running mvn clean install we can just go with ./mvnw clean install that will do the thing.
+
+	-------------
+
+	III - (Automate all the things)
+
+	Coping files is so nineties, so the next step would be to automatically get the wrapper through the Maven build process. This sounded reasonable, cause as the developer I obviously had Maven installed locally and the wrapper was targeting the continuous integration builds, not developers' machines.
+
+	Nothing easier, the Maven wrapper comes with a handy build plugin.
+
+	<plugin>
+	    <groupId>com.rimerosolutions.maven.plugins</groupId>
+	    <artifactId>wrapper-maven-plugin</artifactId>
+	    <version>0.0.4</version>
+	    <configuration>
+		<mavenVersion>3.3.1</mavenVersion>
+  		<!-- optional base distribution url --> 
+	        <baseDistributionUrl>https://repository.apache.org/content/repositories/releases/org/apache/maven/apache-maven</baseDistributionUrl>
+         	<!-- optional wrapper jar output folder -->
+          	<wrapperDirectory>${basedir}/maven</wrapperDirectory>
+	    </configuration>
+	</plugin>
+
+	Running mvn wrapper:wrapper does the job and the wrapper is installed.
+	
+	$ mvnw install
+	$ mvn wrapper:wrapper
+
+
+$ cd yourmavenproject
+
+$ mvn -N io.takari:maven:wrapper
+
+	ou usando uma versão específica do maven:
+
+	$ mvn -N io.takari:maven:wrapper -Dmaven=3.3.3
+
+	ou informando o caminho:
+
+	$ mvn -N io.takari:maven:wrapper -DdistributionUrl=https://repo1.maven.org/maven2/org/apache/maven/apache-maven/3.3.9/apache-maven-3.3.9-bin.zip
+
+
+Fontes: 
+
+	https://github.com/takari/maven-wrapper
+	https://github.com/takari/takari-maven-plugin
+	https://howtoprogram.xyz/2016/09/11/maven-wrapper-example/
+	http://jakub.marchwicki.pl/posts/2015/06/04/maven-wrapper/
+
+	https://github.com/rimerosolutions/maven-wrapper
+	https://github.com/rimerosolutions/maven-wrapper-example
+
+
+
+$ ./mvnw clean install
+
+$ ./mvnw clean package
+
+$ java -jar target/gs-spring-boot-0.1.0.jar
+
+----
+
+* Ver (	https://docs.spring.io/spring-boot/docs/current/maven-plugin/usage.html):
+
+$ mvn spring-boot:run
+
+Obs.: Repackaging an application
+
+In order to repackage your application, you simply need to add a reference to the plugin in your pom.xml:
+
+<build>
+  ...
+  <plugins>
+    ...
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <version>1.5.6.RELEASE</version>
+      <executions>
+        <execution>
+          <goals>
+            <goal>repackage</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    ...
+  </plugins>
+  ...
+</build>
+
+	
