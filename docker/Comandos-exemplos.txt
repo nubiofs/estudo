@@ -61,6 +61,12 @@ $ docker rmi -f 084faf6b4c2b
 
 -> you can use -f option to force delete the containers .
 
+$ docker container ls
+
+$ docker exec -it sinter-jboss /bin/sh
+
+obs.: run a command in a RUNNING CONTAINER using "docker exec [OPTIONS] CONTAINER COMMAND [ARG...]"
+
 ---
 
 * TESTES (com mapeamento de volumes): 
