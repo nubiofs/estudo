@@ -25,7 +25,7 @@
 	</organization>
 
 	<properties>
-		<demoiselle-certificate.version>1.1.0</demoiselle-certificate.version>
+		<demoiselle-certificate.version>1.1.1</demoiselle-certificate.version>
 	</properties>
 
 	<build>
@@ -51,7 +51,7 @@
 							<Application-Name>Assinador Web Desktop</Application-Name>
 							<Application-Library-Allowable-Codebase>*</Application-Library-Allowable-Codebase>
 							<Caller-Allowable-Codebase>*</Caller-Allowable-Codebase>
-							<Trusted-Only>true</Trusted-Only>
+							<Trusted-Only>false</Trusted-Only>
 							<Trusted-Library>false</Trusted-Library><!-- True em Producao, dependencias 
 								tambem precisam deste manifesto -->
 						</manifestEntries>
@@ -89,12 +89,25 @@
 					<!--<pack200> <enabled>true</enabled> </pack200> -->
 
 					<sign>
-						<keystore>${project.basedir}/src/main/jnlp/newcert.p12</keystore>
-						<keypass>secret</keypass>
-						<storepass>secret</storepass>
-						<alias>Spock</alias>
+					
+<!-- 						<keystore>${project.basedir}/src/main/jnlp/newcert.p12</keystore> -->
+<!-- 						<keypass>secret</keypass> -->
+<!-- 						<storepass>secret</storepass> -->
+<!-- 						<alias>Spock</alias> -->
+						
+<!-- 						<keystore>${project.basedir}/src/main/jnlp/_.ambiente.cliente.gov.br.p12</keystore> -->
+<!-- 						<keypass>ambCliente01</keypass> -->
+<!-- 						<storepass>ambCliente01</storepass> -->
+<!-- 						<alias>*.ambiente.cliente.gov.br</alias> -->
+
+						<keystore>${project.basedir}/src/main/jnlp/mycert.p12</keystore>
+						<keypass>changeit</keypass>
+						<storepass>changeit</storepass>
+						<alias>mycert</alias>
+
 						<storetype>pkcs12</storetype>
-						<verify>false</verify> <!-- verifica a assinatura depois de assinado -->
+						<verify>true</verify> <!-- verifica a assinatura depois de assinado -->
+						
 					</sign>
 					<unsign>true</unsign> <!-- remove a assinatura de pacotes e assinados e reassina com a minha chave -->
 					<verbose>true</verbose>
