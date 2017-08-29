@@ -96,6 +96,8 @@ ou
 
 $ mvn spring-boot:run
 
-	If you open a web browser to "localhost:8080" you should see the following output:
+$ mvn package && java -jar target/mywebproject-0.0.1-SNAPSHOT.jar
+
+	If you open a web browser to "localhost:8080" e "localhost:8080/oi" you should see the following output:
 
 	Hello World!
