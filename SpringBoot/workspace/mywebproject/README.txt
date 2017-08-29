@@ -99,5 +99,10 @@ $ mvn spring-boot:run
 $ mvn package && java -jar target/mywebproject-0.0.1-SNAPSHOT.jar
 
 	If you open a web browser to "localhost:8080" e "localhost:8080/oi" you should see the following output:
+	
+	ou
+
+	$ curl localhost:8080
+	$ curl localhost:8080/health
 
 	Hello World!
