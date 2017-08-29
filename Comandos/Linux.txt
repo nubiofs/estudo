@@ -2,12 +2,39 @@ https://www.ostechnix.com/create-animated-gif-ubuntu-16-04/
 https://github.com/fiji/fiji.github.io
 
 
-** Novo tipo de terminal linux:
+** Novos tipos de terminais linux:
 
+https://rodrigocarran.wordpress.com/2017/05/30/15-melhores-emuladores-de-terminal-para-linux/
+
+1) roxterm
 http://roxterm.sourceforge.net/index.php?page=installation&lang=en
 https://www.howtoinstall.co/en/ubuntu/xenial/roxterm
 
 $ sudo apt-get install roxterm
+
+2) terminix
+http://blog.programster.org/ubuntu-16-04-install-terminix
+http://www.edivaldobrito.com.br/instalar-o-emulador-de-terminal-terminix/
+http://www.webupd8.org/2016/07/terminix-now-available-in-ppa-for.html
+https://gnunn1.github.io/tilix-web/#features
+
+-- Instalação
+
+$ sudo add-apt-repository ppa:webupd8team/terminix -y
+$ sudo apt update
+$ sudo apt install terminix -y
+"ou"
+#sudo apt install tilix
+
+-- Execução:
+
+$ tilix & 
+
+-- Removação
+
+$ sudo add-apt-repository ppa:webupd8team/terminix -r -y
+$ sudo apt-get remove tilix
+$ sudo apt-get autoremove
 
 **  Abrir um terminal (para execultar comandos):
 
