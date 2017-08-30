@@ -15,6 +15,19 @@ services:
     secrets:
       - postgres_password
 
+#database:
+#  build:
+#      context: ./database
+#    image: atsea_db
+    # set default mysql root password, change as needed
+#    environment:
+#      MYSQL_ROOT_PASSWORD: password
+    # Expose port 3306 to host. Not for the application but
+    # handy to inspect the database from the host machine.
+#    ports:
+#      - "3306:3306" 
+#    restart: always
+
   appserver:
     build:
        context: app

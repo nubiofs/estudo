@@ -34,9 +34,10 @@ $ echo staging | docker secret create staging_token -
 
 ** Run as an application:
 
-To run the AtSea shop as an application:
+- To run the AtSea shop as an application:
 
-#$ docker-compose up --build
+$ docker swarm init
+$ docker-compose up --build
 
 ** Deploy to a swarm:
 
@@ -55,7 +56,6 @@ $ docker-compose --file docker-compose-dev.yml up --build
 The URL for the content is http://localhost:8080/
 
 $ curl -H "Content-Type: application/json" -X GET  http://localhost:8080/api/product/
-
 
 $ docker-compose stop
 $ docker-compose rm -fv postgres
