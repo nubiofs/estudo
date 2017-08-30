@@ -3,6 +3,8 @@ Fonte:
 	https://spring.io/guides/gs/spring-boot-docker/
 	https://github.com/spring-guides/gs-spring-boot-docker
 
+	https://blog.docker.com/2017/05/spring-boot-development-docker/
+
 * Sem container docker:
 
 $ cd ~/estudo.git/SpringBoot/workspace/gs-spring-boot-docker-master/complete
