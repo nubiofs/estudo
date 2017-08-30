@@ -1,0 +1,52 @@
+* Fonte:
+
+	https://github.com/aksakalli/todo-spring-angular
+
+
+** Deploy I:
+
+# Build the project
+$ mvn package
+
+# build the images
+$ docker build -t todo-rest todo-rest/.
+$ docker build -t todo-nginx todo-frontend/.
+
+# run the containers
+$ docker run -d --name todo-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=todo postgres:9.4.5
+$ docker run -d --name todo-rest --link todo-db:todo-db todo-rest
+$ docker run --name todo-nginx -p 8082:80 --link todo-rest:todo-rest -d todo-nginx
+
+** Deploy II:
+
+# or just use docker-compose
+# for building and running
+
+#$ cd ~/estudo.git/docker/workspace/todo-spring-angular-master/todo-rest
+$ cd ~/estudo.git/docker/workspace/todo-spring-angular-master
+
+$ mvn package
+
+#$ cd ~/estudo.git/docker/workspace/todo-spring-angular-master
+$ docker-compose up --build
+
+ou
+
+$ docker-compose up
+
+http://127.0.0.1/#/login
+
+Login: user
+passwd: user
+
+ou "todo-spring-angular/todo-rest/src/main/resources/config/application.yml":
+
+Login: clientapp
+passwd: 123456
+
+** portainer:
+
+$ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+
+http://localhost:9000/#/dashboard
+
