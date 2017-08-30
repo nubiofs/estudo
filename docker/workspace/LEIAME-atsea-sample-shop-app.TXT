@@ -39,6 +39,18 @@ $ echo staging | docker secret create staging_token -
 $ docker swarm init
 $ docker-compose up --build
 
+ou
+
+$ docker-compose up
+
+$ docker-compose stop
+$ docker container prune
+$ docker-compose rm -fv postgres
+
+* How to remove <none> images after building:
+
+$ docker rmi $(docker images --filter "dangling=true" -q --no-trunc) 
+
 ** Deploy to a swarm:
 
 #If you need to create a Swarm
@@ -47,18 +59,18 @@ $ docker stack deploy -c docker-stack.yml atsea
 
 ** A simplified development environment:
 
-This compose file creates a simplified development environment consisting of only the application server and the database.
+	This compose file creates a simplified development environment consisting of only the application server and the database.
 
-$ docker-compose --file docker-compose-dev.yml up --build
+	$ docker-compose --file docker-compose-dev.yml up --build
 
-** The AtSea Shop:
+	** The AtSea Shop:
 
-The URL for the content is http://localhost:8080/
+	The URL for the content is http://localhost:8080/
 
-$ curl -H "Content-Type: application/json" -X GET  http://localhost:8080/api/product/
+	$ curl -H "Content-Type: application/json" -X GET  http://localhost:8080/api/product/
 
-$ docker-compose stop
-$ docker-compose rm -fv postgres
+
+$ 
 
 ==========================
 ==========================
