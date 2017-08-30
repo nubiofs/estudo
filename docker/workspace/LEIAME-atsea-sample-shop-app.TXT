@@ -1,0 +1,75 @@
+Fonte:
+
+	https://blog.docker.com/2017/05/spring-boot-development-docker/
+
+	https://github.com/dockersamples
+	https://github.com/dockersamples/atsea-sample-shop-app
+
+
+The AtSea Shop is a demonstration application comprised of:
+
+    Java REST application written using Spring-Boot,
+    a database for product inventory, customer data, and orders,
+    a React shopping cart,
+    a NGINX reverse proxy implementing https,
+    a payment gateway to simulate certificate management
+
+** Building and Running the AtSea Shop:
+
+$ cd ~/estudo.git/docker/workspace/atsea-sample-shop-app-master
+
+$ mkdir certs \ 
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key -x509 -days 365 -out certs/domain.crt
+
+$ docker swarm init
+$ docker secret create revprox_cert certs/domain.crt
+$ docker secret create revprox_key certs/domain.key
+$ docker secret create postgres_password certs/domain.key
+
+$ echo staging | docker secret create staging_token - 
+
+  Obs.: para parar o swarm:
+
+	$ docker swarm leave --force
+
+** Run as an application:
+
+To run the AtSea shop as an application:
+
+#$ docker-compose up --build
+
+** Deploy to a swarm:
+
+#If you need to create a Swarm
+$ docker swarm init
+$ docker stack deploy -c docker-stack.yml atsea
+
+** A simplified development environment:
+
+This compose file creates a simplified development environment consisting of only the application server and the database.
+
+$ docker-compose --file docker-compose-dev.yml up --build
+
+** The AtSea Shop:
+
+The URL for the content is http://localhost:8080/
+
+$ curl -H "Content-Type: application/json" -X GET  http://localhost:8080/api/product/
+
+==========================
+==========================
+==========================
+
+$ cd ~/estudo.git/docker/workspace/atsea-sample-shop-app-master/app
+
+$ ~/mvn eclipse:eclipse
+
+In Eclipse, import the app directory of that project as an existing maven project
+
+File> Import Select Maven> Existing Maven Projects> Next
+
+$ ~/mvn clean install
+
+$ cd ~/estudo.git/docker/workspace/atsea-sample-shop-app-master
+
+$ docker-compose --file docker-compose-dev.yml up --build
