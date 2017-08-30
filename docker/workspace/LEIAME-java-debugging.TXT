@@ -1,0 +1,72 @@
+Fonte:
+
+	https://github.com/docker/labs
+
+	https://github.com/docker/labs/tree/master/developer-tools/java
+
+If you want info on configuring Eclipse, IntelliJ or Netbeans for remote debugging, you can check out the the Docker Labs Repository. 
+
+	https://github.com/docker/labs/tree/master/developer-tools/java-debugging
+	==> https://github.com/docker/labs/blob/master/developer-tools/java-debugging/Eclipse-README.md
+
+$ cd ~/estudo.git/docker/workspace/java-debugging/app
+
+$ ~/mvn eclipse:eclipse
+
+In Eclipse, import the app directory of that project as an existing maven project
+
+File> Import Select Maven> Existing Maven Projects> Next (pom.xml de "java-debugging/app" para o projeto "/UserSignup")
+
+$ ~/mvn clean install
+
+$ cd ~/estudo.git/docker/workspace/java-debugging
+
+$ docker-compose up
+
+- Docker will build the images for "Apache Tomcat" and "MySQL" and start the containers. It will also mount the application directory (./app/target/UserSignup) as a data volume on the host system to the Tomcat webapps directory in the web server container.
+
+	~/estudo.git/docker/workspace/java-debugging/app$ ls target/UserSignup
+
+- Open a browser window and go to: 'http://localhost:8080'; you should see the Tomcat home page
+
+- Click on the "Manager App" button to see the deployed applications. When prompted for username and password, enter "system" and "manager" respectively to log into the Tomcat Web Application Manager page.
+
+- To go to the application, Click on "/UserSignup" link.
+
+- In the application, click on "Signup" to create a new user. Fill out the registration form and click "Submit" and Click "Yes" to confirm.
+
+- Test out the login.
+
+	--> Well done! You have successfully logged-into the system.
+
+ou para gerar um exemplo de Erro:
+
+- Register a new user with the username of 'Moby' and with 'm0by' as the password, click "Submit", click "yes" and Test out the login.
+
+	--> Oh snap! Something is wrong. Check your password and try submitting again. 
+
+** Configure Remote Debugging:
+
+To configure remote debugging in Eclipse, click on Run > Debug Configurations ...
+
+- Select Remote Java Application and click on Launch New Configuration icon
+
+- Enter a Name for the configuration. Select the project using the browse button. Click on Apply to save the configuration and click on Debug to start the debugging connection between Tomcat and Eclipse.
+
+- Try registering a new user using the debugger. In Eclipse, change the view or Perspective to the debugger by clicking on Window > Perspective > Open Perspective > Debug
+
+- Set a breakpoint for in the "User.java" (line 87) class where the password is set.
+
+- Register a new user with the username of 'Moby' and with 'm0by' as the password, click Submit, click yes.
+
+- Eclipse will display the code at the breakpoint and the value of password in the variables window. Note that the value is m0by.
+
+- Click on resume or press F8 to let the code run.
+
+- Next, set a breakpoint on the getPassword in the "User.java" (line 83) class to see the value returned for password. You can also toggle off the breakpoint for setPassword.
+
+- Try to log into the application. Look at the value for password in the Eclipse variables window, note that it is "z0ol" which is "m0by" using ROT13.
+
+- the "UserController.java" uses the findByLogin method (line 58) in the UserServiceImpl class which uses the findByUsername method (line 24) to retrieve the information from the database. It then checks to see if the password from the form matches the user password. Since the password from the login form is not scrambled using ROT13, it does not match the user password and you cannot log into the application.
+
+- Set a breakpoint in UserServiceImpl on the findByLogin method. Log in again and look at the values for the breakpoint. The 'passwd' variable is z0ol which matches the password for the user moby.
