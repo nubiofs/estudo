@@ -1,0 +1,64 @@
+Fonte:
+
+	https://spring.io/guides/gs/spring-boot-docker/
+	https://github.com/spring-guides/gs-spring-boot-docker
+
+* Sem container docker:
+
+$ cd ~/estudo.git/SpringBoot/workspace/gs-spring-boot-docker-master/complete
+
+$ ~/mvn eclipse:eclipse
+
+$ ./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
+
+Obs.: Criando (Maven Wrapper) para o projeto:
+
+	$ mvn -N io.takari:maven:wrapper
+
+$ curl localhost:8080
+
+* Com container docker:
+
+$ ./mvnw install dockerfile:build
+
+$ docker run -p 8080:8080 -t springio/gs-spring-boot-docker
+
+$ docker container ls
+
+$ curl localhost:8080
+
+$ docker stop "CONTAINER ID IMAGE"
+
+$ docker container ls -a
+
+$ docker rm "CONTAINER ID IMAGE"
+
+$ docker container prune 
+
+	WARNING! This will remove all stopped containers.
+	Are you sure you want to continue? [y/N] y
+	Deleted Containers:
+
+Obs.:
+
+	** Debugging the application in a Docker container
+
+1) Prompt de comando:
+
+$ docker run -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t springio/gs-spring-boot-docker
+
+2) No eclipse:
+
+ i) Coloca breakpont no código
+ ii) "Run Debug" -> "Debug Configurations" -> "Remote Java Application":
+ 
+	Host: localhost
+	port: 5005
+
+ iii) Debug...
+
+3) Noutro prompt de comando:
+
+$ curl localhost:8080
+
+
