@@ -200,3 +200,26 @@ $ docker-compose down
 $ docker-compose up -d
 $ docker-compose logs
 $ docker-compose logs -f
+
+$ docker-compose up
+
+$ docker-compose stop
+$ docker container prune
+$ docker-compose rm -fv postgres
+
+* How to remove <none> images after building:
+
+docker images -f dangling=true
+
+$ docker rmi $(docker images --filter "dangling=true" -q --no-trunc) 
+
+* Remove all exited containers:
+
+docker ps -a -f status=exited
+
+docker rm $(docker ps -a -f status=exited -q)
+
+* Removerndo todos os volumes (não utilizados):
+
+$ docker volume rm $(docker volume ls -f dangling=true -q)
+
