@@ -54,6 +54,8 @@ Obs.:
 
 	$ eclipse -clean &
 
+$ gradle eclipse --refresh-dependencies
+
 Obs.:
 
 	**************************************************
@@ -84,6 +86,14 @@ Obs.:
 
 $ sdk install gradle
 
+obs.: Ou criar o wrapper:
+
+	$ gradle wrapper --gradle-version 2.13
+
+	ou
+
+	$ sudo apt-get install gradle
+
 $ mkdir sinter-projeto
 
 $ cd sinter-projeto
@@ -97,9 +107,18 @@ $ gradle init
 
 Obs.: Pode-se utilizar "gradle init" num projeto maven para importar o mesmo para gradle!!!
 
+$ gradle build
+$ ./gradlew build
+
 $ ./gradlew shadowJar
 
+$ jar tvf build/libs/sinter-projeto-0.0.1-all.jar
+
 $ java -jar build/libs/sinter-projeto-0.0.1-all.jar
+
+ou
+
+$ ./gradlew run
 
 Obs.: 
 
@@ -154,3 +173,33 @@ Obs.:
 	run all tests: $ ./gradlew test
 	run all unit tests: $ ./gradlew unitTest
 	run all functional tests: $ ./gradlew test -Dtest.single=cucumber/**/
+
+===============================================
+
+4) Gradle projects com spring boot:
+
+Fonte:
+	https://spring.io/guides/gs/spring-boot/
+
+-
+
+5) Gradle projects com docker:
+
+Fonte:
+
+	http://containertutorials.com/docker-compose/spring-boot-app.html
+
+	https://geowarin.github.io/spring-boot-app-in-docker-image.html
+
+$ ./gradlew build buildDocker 
+
+
+6) Gradle project acessando mongoDB:
+
+$ java -Dspring.data.mongodb.uri=mongodb://192.168.99.100:32777/micros -jar build/libs/Employee.jar
+
+obs.: no Dockerfile:
+
+ENTRYPOINT ["java","-Dspring.data.mongodb.uri=mongodb://mongodb/micros", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+
