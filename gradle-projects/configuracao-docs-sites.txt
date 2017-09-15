@@ -1,0 +1,156 @@
+* Fontes:
+
+	http://www.vogella.com/tutorials/EclipseGradle/article.html
+
+1) Install Eclipse Gradle (Buildship) tooling:
+
+	i) Installation via the Marketplace
+
+	-> The easiest way to install the Eclipse Gradle tooling is by using the Marketplace client. Search for Buildship.
+
+	==> "Buildship Gradle Integration 2.0"
+
+
+	ii) Installation via the Eclipse update manager
+
+	-> You also can use the Help ▸ Install New Software menu path to install the Gradle tooling.
+
+2) Creating Gradle projects (via eclipse)
+
+-> The Eclipse Gradle tooling provides a wizard for the creation of Java based Gradle projects.
+
+
+Obs.: 
+
+	*************************
+	* Configuração do lombok
+	*************************
+	Fonte:
+		https://howtodoinjava.com/automation/lombok-eclipse-installation-examples/
+		http://blog.caelum.com.br/java-menos-verboso-com-lombok/
+
+		http://www.vogella.com/tutorials/Lombok/article.html
+		https://projectlombok.org/download.html
+
+	1) Install Lombok in Eclipse (Enable lombok for Eclipse or Spring Tool Suite):
+	
+	i) ==> The lombok library "lombok-1.16.18.jar" can also be be added to the classpath (Edit JRE -> Add External JARs -> lombok.jar).
+	
+	"ou":
+	
+	ii)
+
+	$ java -jar lombok-1.16.18.jar 
+
+	==> ver em eclipse.ini: "-javaagent:/home/02963357460/Desenvolvimento-SINTER/ferramentas/eclipse/lombok.jar"
+		
+		1. copy `lombok.jar` to where your eclipse folder where is the `eclipse.ini` ;
+		2. open `eclipse.ini`，put at end the two lines below and save it：
+    		-Xbootclasspath/a:lombok.jar
+		-javaagent:lombok.jar
+		3. restart  `eclipse`.
+
+	==> E lançar o eclipse com:
+
+	$ eclipse -clean &
+
+Obs.:
+
+	**************************************************
+	* Configurações / utilizações no gradle no Eclipse
+	**************************************************
+	Fonte:
+		http://www.vogella.com/tutorials/EclipseGradle/article.html
+
+	i) usar view "Gradle Tasks" para cadas Gradle Import Project 
+
+===============================================
+
+3) Creating Gradle projects (via prompt)
+
+$ sdk version
+
+Obs.: 
+
+	****************
+	* Instalação sdk
+	****************
+	Fonte:
+		http://sdkman.io/install.html
+
+	i) $ curl -s "https://get.sdkman.io" | bash
+	ii) $ source "$HOME/.sdkman/bin/sdkman-init.sh"
+	iii) $ sdk version
+
+$ sdk install gradle
+
+$ mkdir sinter-projeto
+
+$ cd sinter-projeto
+
+$ mkdir -p src/{main,test}/java
+$ mkdir -p src/{main,test,resources}
+
+$ ./gradlew tasks
+
+$ gradle init
+
+Obs.: Pode-se utilizar "gradle init" num projeto maven para importar o mesmo para gradle!!!
+
+$ ./gradlew shadowJar
+
+$ java -jar build/libs/sinter-projeto-0.0.1-all.jar
+
+Obs.: 
+
+	*****************************************************
+	* Configurando para execultar ou não testes unitários
+	*****************************************************	
+	Fonte:
+
+		https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html
+
+	i) em colocar "build.gradle":
+
+	apply plugin: 'java' // adds 'test' task
+
+	test {
+
+	  // enable TestNG support (default is JUnit)
+	  //useTestNG()
+	  useJUnit()
+
+	  // set a system property for the test JVM(s)
+	  systemProperty 'some.prop', 'value'
+
+	  // explicitly include or exclude tests
+	  include 'org/foo/**'
+	  exclude 'org/boo/**'
+
+	  // show standard out and standard error of the test JVM(s) on the console
+	  testLogging.showStandardStreams = true
+
+	  // set heap size for the test JVM(s)
+	  minHeapSize = "128m"
+	  maxHeapSize = "512m"
+
+	  // set JVM arguments for the test JVM(s)
+	  jvmArgs '-XX:MaxPermSize=256m'
+
+	  // listen to events in the test execution lifecycle
+	  beforeTest { descriptor ->
+	     logger.lifecycle("Running test: " + descriptor)
+	  }
+
+	  // listen to standard out and standard error of the test JVM(s)
+	  onOutput { descriptor, event ->
+	     logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+	  }
+
+	}
+
+	$ gradle someTestTask --debug-jvm
+
+	run all tests: $ ./gradlew test
+	run all unit tests: $ ./gradlew unitTest
+	run all functional tests: $ ./gradlew test -Dtest.single=cucumber/**/
