@@ -1,3 +1,7 @@
+Fonte: https://git-scm.com/book/pt-br/v2
+
+---
+
 Install GIT 
 
 http://tecadmin.net/install-git-on-ubuntu/#
@@ -59,3 +63,75 @@ git push origin master
 ** ver **
 
 http://www.akitaonrails.com/2010/08/17/screencast-comecando-com-git https://try.github.io/levels/1/challenges/1
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxx Trabalhando com submodulos no git
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+ 1986   | 27/09/17 - 11:56:27 | cd /tmp/
+ 1987   | 27/09/17 - 11:56:30 | git clone git@gitcorporativo.serpro:sinterinf-10465/sinter-project.git
+ 1988   | 27/09/17 - 11:56:35 | cd sinter-project/
+ 1989   | 27/09/17 - 11:56:38 | ls sinter-commons/
+ 1990   | 27/09/17 - 11:56:43 | cat .gitmodules 
+ 1991   | 27/09/17 - 11:56:51 | ls
+ 1992   | 27/09/17 - 11:56:54 | ls -lah
+ 1993   | 27/09/17 - 11:57:27 | git submodule add git@gitcorporativo.serpro:sinterinf-10465/sinter-commons-util.git sinter-commons/sinter-comm
+ons-util
+ 1994   | 27/09/17 - 11:57:34 | git submodule init
+ 1995   | 27/09/17 - 11:57:41 | git submodule update
+ 1996   | 27/09/17 - 11:58:01 | vi .gitmodules 
+ 1997   | 27/09/17 - 11:58:23 | git submodule init
+ 1998   | 27/09/17 - 11:58:25 | git submodule update
+ 1999   | 27/09/17 - 11:58:27 | ls
+ 2000   | 27/09/17 - 11:58:32 | less .gitmodules 
+ 2001   | 27/09/17 - 11:58:37 | git status
+ 2002   | 27/09/17 - 11:58:45 | git add .gitmodules 
+ 2003   | 27/09/17 - 11:58:50 | git status
+ 2004   | 27/09/17 - 11:59:00 | ls -lah sinter-commons/sinter-commons-util/
+ 2005   | 27/09/17 - 11:59:04 | ls -lah sinter-commons/sinter-commons-util/.git
+ 2006   | 27/09/17 - 11:59:06 | cat sinter-commons/sinter-commons-util/.git
+ 2007   | 27/09/17 - 11:59:32 | git commit -m 'Readicionando submodulo sinter-commons-util'
+ 2008   | 27/09/17 - 11:59:36 | git push
+
+
+Obs.:
+
+Fonte: 
+	
+	"https://gist.github.com/korya/9047870"
+	"http://will.willandorla.com/extract-to-git-submodule"
+
+ Convert subfolder into Git submodule
+Subfolder to git repo.md
+
+Source: http://willandorla.com/will/2011/01/convert-folder-into-git-submodule/
+1. Clone new repository
+
+$ git clone --no-hardlinks original-repo copied-repo
+
+2. Filter out the files you want to keep and remove the others
+
+$ cd copied-repo
+$ git filter-branch --subdirectory-filter sub/module/path HEAD -- --all
+$ git reset --hard
+$ git gc --aggressive
+$ git prune
+$ git remote rm origin
+
+3. Push the new repositories to the upstream server
+
+$ git remote add git@github.com:korya/submodule-repo.git
+
+4. Add the new repository as submodules to the original repository
+
+$ cd original-repo
+$ git rm sub/module/path
+$ git commit -m "Removing the folders that are now repositories"
+$ git submodule add git@github.com:korya/submodule-repo.git sub/module/path
+$ git submodule init
+$ git submoduel update
+$ git add .gitmodules sub/module/path
+$ git commit -m "Added in submodules for removed folders"
+
+
+

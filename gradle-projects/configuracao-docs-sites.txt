@@ -36,11 +36,7 @@ Obs.:
 
 	1) Install Lombok in Eclipse (Enable lombok for Eclipse or Spring Tool Suite):
 	
-	i) ==> The lombok library "lombok-1.16.18.jar" can also be be added to the classpath (Edit JRE -> Add External JARs -> lombok.jar).
-	
-	"ou":
-	
-	ii)
+	i)
 
 	$ java -jar lombok-1.16.18.jar 
 
@@ -51,10 +47,14 @@ Obs.:
     		-Xbootclasspath/a:lombok.jar
 		-javaagent:lombok.jar
 		3. restart  `eclipse`.
-
-	==> E lançar o eclipse com:
-
-	$ eclipse -clean &
+	
+	ii) ==> The lombok library "lombok.jar"  (QUE ESTÁ NA PASTA DO ECLIPSE) can also be be added to the classpath (Edit JRE -> Add External JARs -> lombok.jar).
+	
+	iii) E lançar o eclipse com:
+		
+		$ eclipse &
+		ou		
+		$ eclipse -clean &
 
 $ gradle eclipse --refresh-dependencies
 
@@ -113,6 +113,15 @@ $ ./gradlew help --task jar
 
 $ ./gradlew build
 //$ ./gradlew jar
+
+Obs.: 	
+
+	*************************************	
+	* Comandos de construção importantes:
+	*************************************	
+	
+	$ gradle shadowJar
+	$ unzip -l build/libs/projetoXPTO-0.0.1-all.jar | less
 
 $ java -jar build/libs/projeto-0.0.1-all.jar --name=Nubio
 
