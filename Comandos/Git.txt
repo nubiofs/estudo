@@ -58,6 +58,17 @@ git commit -am ""
 
 git push origin master
 
+
+===> https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
+
+$ git log --graph --abbrev-commit --decorate --date=relative --all
+
+$ git log --all --decorate --oneline --graph
+
+$ git log --graph --date-order -C -M --pretty=format:"<%h> %ad [%an] %Cgreen%d%Creset %s" --all --date=short
+
+
+
 ** COMANDO INICIAIS DO GIT ** http://tableless.com.br/alguns-comandos-git/
 
 ** ver **
