@@ -22,6 +22,8 @@ http://www.syntevo.com/smartgit/download
 
 git --version
 
+$ git config --global http.sslverify false
+
 git config --list
 
 git config --global user.email "nubiofs@gmail.com"
