@@ -1,12 +1,18 @@
 https://minio.io/
+https://github.com/minio/minio
+https://docs.minio.io/
+
 https://minio.io/docker.html
+https://docs.minio.io/docs/minio-docker-quickstart-guide
+
+https://github.com/minio/minio-java
 
 ==> http://127.0.0.1:9000/minio/default/
-
 
 +++++++++++++++++++
 === rodar minio ===
 +++++++++++++++++++
+
 
 $ docker run --rm --interactive --tty -p 9000:9000 --name minio1 -v minio:/data -e MINIO_ACCESS_KEY=clenubio -e MINIO_SECRET_KEY=clenubio minio/minio server /data
 Unable to find image 'minio/minio:latest' locally
@@ -41,7 +47,6 @@ ERRO[0524] Received non-HTTP message from new connection 172.17.0.1:51048 at ser
 ERRO[0524] Received non-HTTP message from new connection 172.17.0.1:51052 at server 172.17.0.2:9000  cause=junk message source=[listener.go:205:github.com/minio/minio/pkg/http.(*httpListener).start.func2()]
 
 
-
 ===>: http://127.0.0.1:9000/minio
 
 
@@ -63,21 +68,6 @@ Content-Length: 21
 
 Internal Server Error02963357460@serpro-1455337:~/cephtest$ 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 02963357460@serpro-1455337:~/cephtest$ curl -i -X POST -H 'Content-Type: multipart/form-data' -F  "data=@abc" http://localhost:9595/ws/receive
 HTTP/1.1 500 Internal Server Error
 Content-Length: 21
@@ -89,11 +79,39 @@ Internal Server Error02963357460@serpro-1455337:~/cephtest$
 === Estudo no Sinter ===
 ++++++++++++++++++++++++
 
-SinterCephOperations.java
-FileUploadHandler.java
+0) git/sinter-project/sinter-rest/sinter-rest-ceph/build.gradle
+1) br.gov.serpro.supde.derce.sinter.rest.gw.ReceberLoteRTDGw.java
+2) br.gov.serpro.supde.derce.sinter.rest.handlers.FileUploadHandler.java
+3) br.gov.serpro.supde.derce.sinter.ceph.SinterCephRawOperations.java
 
+SinterCephOperations.java
 config.yaml
 
+Obs.:
+==> https://github.com/minio/minio-java/blob/master/examples/GetObject.java
+
+YYYYYYYYYYYYYYYYYYYYYYYYYYYY
+++ minio com SSL 	++++
+YYYYYYYYYYYYYYYYYYYYYYYYYYYY
+
+(13:36:31) tadeu: Rodar o minio com certificado SSL
+
+mkdir certs_minio
+openssl genrsa -out certs_minio/private.key 2048  # cria chave privada
+openssl req -new -x509 -days 3650 -key certs_minio/private.key -out certs_minio/public.crt -subj "/C=BR/ST=Pernambuco/L=Recife/O=SERPRO/CN=localhost" # cria chave publica
+docker run -d --rm --interactive --tty -v minio:/data -v $PWD/certs_minio:/root/.minio/certs -e "MINIO_ACCESS_KEY=XXXXX" -e "MINIO_SECRET_KEY=XXXXX" -p 9000:9000 minio/minio server /data
+(13:37:12) tadeu: endereço do servidor fica
+
+https://localhost:9000
+http://127.0.0.1:9000 
+
+xxxxxxxxxxxxxx
+xxx Outros xxx
+xxxxxxxxxxxxxx
+
+https://docs.minio.io/docs/minio-client-quickstart-guide
+
+* Minio Client "mc" Quickstart Guide 
 
 
 
