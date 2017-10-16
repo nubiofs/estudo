@@ -86,6 +86,30 @@ $ mongoimport -c megasena --type csv --headerline megasena.csv
 2017-07-10T14:47:45.282-0300	connected to: localhost
 2017-07-10T14:47:45.376-0300	imported 2032 documents
 
+$ mongoimport -c megasena --type json megasena.json
+
+Obs.: "Conteudo de (megasena.json)":
+
+	{"concurso" : "100", "data" : "01/01/2001", "acertos" : "3"}
+	{"concurso" : "200", "data" : "01/01/2002", "acertos" : "3"}
+
+
+	1) Execultando container para mongoDB
+	
+		$ mkdir -p $HOME/testes/mongodb/dbs
+	
+		i) "start a mongo instance" Para acesso com bash mongo:
+			
+			$ docker run --rm -p 27017:27017 --name some-mongo -d mongo
+		
+			"connect via mongo":
+			$ docker run -it --link some-mongo:mongo --rm mongo sh -c 'exec mongo "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/test"'
+		
+		ii) "start a mongo instance" Para acesso com "~/robo3t": 
+		
+			"conectar com (localhost:27017 ou 10.32.65.142:27017)
+			$ ~/robo3t
+
 $ mongo
 
 > show dbs
