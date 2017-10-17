@@ -1,0 +1,11 @@
+{
+	"version": "8",
+	"hosts": {
+		"local": {
+			"url": "http://172.17.0.2:9000",
+			"accessKey": "2INY1VVHTR6S20NWLHAO",
+			"secretKey": "L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY",
+			"api": "S3v4"
+		}
+	}
+}
