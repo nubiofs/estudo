@@ -1,18 +1,127 @@
-https://minio.io/
-https://github.com/minio/minio
-https://docs.minio.io/
+Fonte:
 
-https://minio.io/docker.html
-https://docs.minio.io/docs/minio-docker-quickstart-guide
+	https://minio.io/
+	https://docs.minio.io/
+	https://docs.minio.io/docs/minio-client-complete-guide
+	https://github.com/minio/minio
 
-https://github.com/minio/minio-java
+	https://minio.io/docker.html
+	https://docs.minio.io/docs/minio-docker-quickstart-guide
 
+	https://github.com/minio/minio-java
+
+------------------------
+--- Primeiro exemplo ---
+com * Minio Client "mc"
+------------------------
+
+$ docker run -p 9000:9000 --name minio1 -v /mnt/data:/data -v /mnt/config:/root/.minio minio/minio server /data
+
+	Created minio configuration file successfully at /root/.minio
+	Endpoint:  http://172.17.0.2:9000  http://127.0.0.1:9000
+	AccessKey: 2INY1VVHTR6S20NWLHAO 
+	SecretKey: L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY 
+
+	Browser Access:
+	   http://172.17.0.2:9000  http://127.0.0.1:9000
+
+	Command-line Access: https://docs.minio.io/docs/minio-client-quickstart-guide
+	   $ mc config host add myminio http://172.17.0.2:9000 2INY1VVHTR6S20NWLHAO L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY
+
+	Object API (Amazon S3 compatible):
+	   Go:         https://docs.minio.io/docs/golang-client-quickstart-guide
+	   Java:       https://docs.minio.io/docs/java-client-quickstart-guide
+	   Python:     https://docs.minio.io/docs/python-client-quickstart-guide
+	   JavaScript: https://docs.minio.io/docs/javascript-client-quickstart-guide
+	   .NET:       https://docs.minio.io/docs/dotnet-client-quickstart-guide
+
+	Drive Capacity: 21 GiB Free, 35 GiB Total
+
+...
 ==> http://127.0.0.1:9000/minio/default/
+...
+
+$ docker run -v $PWD/config.json:/root/.mc/config.json -it minio/mc mc ls
+
+Obs.:
+
+	1) Conteúdo de "config.json":
+
+	{
+		"version": "8",
+		"hosts": {
+		        "local": {
+		                "url": "http://172.17.0.2:9000",
+		                "accessKey": "2INY1VVHTR6S20NWLHAO",
+		                "secretKey": "L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY",
+		                "api": "S3v4"
+		        }
+		}
+	}
+	
+	2) Obtendo o ip:
+
+	$ docker exec -it minio1 sh
+	/ # ip a
+	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+	    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+	    inet 127.0.0.1/8 scope host lo
+	       valid_lft forever preferred_lft forever
+	59: eth0@if60: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP 
+	    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
+	    inet 172.17.0.2/16 scope global eth0
+	       valid_lft forever preferred_lft forever
+	/ # 
+
+$ docker run -v $PWD/config.json:/root/.mc/config.json -it minio/mc ls local
+
+$ docker run -v $PWD/config.json:/root/.mc/config.json -it minio/mc mb sinter-default/input local
+ou
+# $ docker run -v $PWD/config.json:/root/.mc/config.json -it minio/mc mb local/sinter-default/input
+
+# Copiando arquivos para o bucket e pasta:
+
+$ docker run -v $PWD/config.json:/root/.mc/config.json -v $PWD/teste.txt:/tmp/teste.txt -it minio/mc cp /tmp/teste.txt local/sinter-default/input/teste.txt
+
+Obs.: outros comandos:
+
+	$ docker run minio/mc config host add myminio http://172.17.0.2:9000 2INY1VVHTR6S20NWLHAO L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY
+
+	$ docker run minio/mc ls
+	ou
+	$ docker run -it --entrypoint=/bin/sh minio/mc
+
+	>  Commands:
+	ls       List files and folders.
+	mb       Make a bucket or a folder.
+	cat      Display file and object contents.
+	pipe     Redirect STDIN to an object or file or STDOUT.
+	share    Generate URL for sharing.
+	cp       Copy files and objects.
+	mirror   Mirror buckets and folders.
+	find     Finds files which match the given set of parameters.
+	diff     List objects with size difference or missing between two folders or buckets.
+	rm       Remove files and objects.
+	events   Manage object notifications.
+	watch    Watch for file and object events.
+	policy   Manage anonymous access to objects.
+	session  Manage saved sessions for cp command.
+	config   Manage mc configuration file.
+	update   Check for a new software update.
+	version  Print version info.
+
+----------------------------------------------------------------
+--- Minio Custom Access and Secret Keys using Docker secrets ---
+----------------------------------------------------------------
+
+$ echo "AKIAIOSFODNN7EXAMPLE" | docker secret create access_key -
+$ echo "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" | docker secret create secret_key -
+
+$ docker service create --name="minio-service" --secret="access_key" --secret="secret_key" minio/minio server /data
 
 +++++++++++++++++++
 === rodar minio ===
 +++++++++++++++++++
-
 
 $ docker run --rm --interactive --tty -p 9000:9000 --name minio1 -v minio:/data -e MINIO_ACCESS_KEY=clenubio -e MINIO_SECRET_KEY=clenubio minio/minio server /data
 Unable to find image 'minio/minio:latest' locally
@@ -49,10 +158,11 @@ ERRO[0524] Received non-HTTP message from new connection 172.17.0.1:51052 at ser
 
 ===>: http://127.0.0.1:9000/minio
 
-
-+++++++++++++++++++++++++++++++
-=== inserir arquivo no ceph ===
-+++++++++++++++++++++++++++++++
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+x++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++x
+x=== inserir arquivo no ceph "minio" (via Verticle do Sinter) ===x
+x++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++x
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 02963357460@serpro-1455337:~$ mkdir cephtest
 02963357460@serpro-1455337:~$ cd !$
@@ -81,11 +191,10 @@ Internal Server Error02963357460@serpro-1455337:~/cephtest$
 
 0) git/sinter-project/sinter-rest/sinter-rest-ceph/build.gradle
 1) br.gov.serpro.supde.derce.sinter.rest.gw.ReceberLoteRTDGw.java
+	1.1) br.gov.serpro.supde.derce.sinter.config.IConfigRetriever
 2) br.gov.serpro.supde.derce.sinter.rest.handlers.FileUploadHandler.java
 3) br.gov.serpro.supde.derce.sinter.ceph.SinterCephRawOperations.java
-
-SinterCephOperations.java
-config.yaml
+4) git/sinter-project/sinter-rest/sinter-rest-ceph/src/main/resources/config.yaml
 
 Obs.:
 ==> https://github.com/minio/minio-java/blob/master/examples/GetObject.java
@@ -96,22 +205,32 @@ YYYYYYYYYYYYYYYYYYYYYYYYYYYY
 
 (13:36:31) tadeu: Rodar o minio com certificado SSL
 
-mkdir certs_minio
-openssl genrsa -out certs_minio/private.key 2048  # cria chave privada
-openssl req -new -x509 -days 3650 -key certs_minio/private.key -out certs_minio/public.crt -subj "/C=BR/ST=Pernambuco/L=Recife/O=SERPRO/CN=localhost" # cria chave publica
-docker run -d --rm --interactive --tty -v minio:/data -v $PWD/certs_minio:/root/.minio/certs -e "MINIO_ACCESS_KEY=XXXXX" -e "MINIO_SECRET_KEY=XXXXX" -p 9000:9000 minio/minio server /data
+$ mkdir certs_minio
+
+# cria chave privada:
+$ openssl genrsa -out certs_minio/private.key 2048  
+
+# cria chave publica:
+$ openssl req -new -x509 -days 3650 -key certs_minio/private.key -out certs_minio/public.crt -subj "/C=BR/ST=Pernambuco/L=Recife/O=SERPRO/CN=localhost" 
+
+$ docker run -d --rm --interactive --tty -v minio:/data -v $PWD/certs_minio:/root/.minio/certs -e "MINIO_ACCESS_KEY=XXXXX" -e "MINIO_SECRET_KEY=XXXXX" -p 9000:9000 minio/minio server /data
+
+Obs.:
+
 (13:37:12) tadeu: endereço do servidor fica
 
 https://localhost:9000
-http://127.0.0.1:9000 
+http://127.0.0.1:9000
+
+http://127.0.0.1:9000/minio/default/ 
 
 xxxxxxxxxxxxxx
 xxx Outros xxx
 xxxxxxxxxxxxxx
 
-https://docs.minio.io/docs/minio-client-quickstart-guide
 
-* Minio Client "mc" Quickstart Guide 
+
+
 
 
 
