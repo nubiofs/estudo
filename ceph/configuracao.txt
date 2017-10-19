@@ -10,12 +10,14 @@ Fonte:
 
 	https://github.com/minio/minio-java
 
+https://blog.alexellis.io/meet-minio/
+
 ------------------------
 --- Primeiro exemplo ---
 com * Minio Client "mc"
 ------------------------
 
-$ docker run -p 9000:9000 --name minio1 -v /mnt/data:/data -v /mnt/config:/root/.minio minio/minio server /data
+$ docker run --rm -p 9000:9000 --name minio1 -v /mnt/data:/data -v /mnt/config:/root/.minio minio/minio server /data
 
 	Created minio configuration file successfully at /root/.minio
 	Endpoint:  http://172.17.0.2:9000  http://127.0.0.1:9000
@@ -41,7 +43,9 @@ $ docker run -p 9000:9000 --name minio1 -v /mnt/data:/data -v /mnt/config:/root/
 ==> http://127.0.0.1:9000/minio/default/
 ...
 
-$ docker run -v $PWD/config.json:/root/.mc/config.json -it minio/mc mc ls
+$ cd /home/02963357460/estudo.git/ceph
+
+$ docker run --rm -v $PWD/config.json:/root/.mc/config.json -it minio/mc ls
 
 Obs.:
 
@@ -73,15 +77,21 @@ Obs.:
 	       valid_lft forever preferred_lft forever
 	/ # 
 
-$ docker run -v $PWD/config.json:/root/.mc/config.json -it minio/mc ls local
+$ docker run --rm -v $PWD/config.json:/root/.mc/config.json -it minio/mc ls local
 
-$ docker run -v $PWD/config.json:/root/.mc/config.json -it minio/mc mb sinter-default/input local
+$ docker run --rm -v $PWD/config.json:/root/.mc/config.json -it minio/mc mb sinter-default/input local
 ou
-# $ docker run -v $PWD/config.json:/root/.mc/config.json -it minio/mc mb local/sinter-default/input
+# $ docker run --rm -v $PWD/config.json:/root/.mc/config.json -it minio/mc mb local/sinter-default/input
 
 # Copiando arquivos para o bucket e pasta:
 
-$ docker run -v $PWD/config.json:/root/.mc/config.json -v $PWD/teste.txt:/tmp/teste.txt -it minio/mc cp /tmp/teste.txt local/sinter-default/input/teste.txt
+$ docker run --rm -v $PWD/config.json:/root/.mc/config.json -v $PWD/teste.txt:/tmp/teste.txt -it minio/mc cp /tmp/teste.txt local/sinter-default/input/teste.txt
+
+$ docker run --rm -v $PWD/config.json:/root/.mc/config.json -v $PWD/2017092700001.zip:/tmp/2017092700001.zip -it minio/mc cp /tmp/2017092700001.zip local/sinter-default/input/2017092700001.zip
+
+$ docker run --rm -v $PWD/config.json:/root/.mc/config.json -it minio/mc ls local/sinter-default/input
+
+==> http://127.0.0.1:9000/minio/sinter-default/input/
 
 Obs.: outros comandos:
 
