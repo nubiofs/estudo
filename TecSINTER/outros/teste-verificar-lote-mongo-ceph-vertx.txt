@@ -1,10 +1,70 @@
-$ cd git/sinter-project/sinter-rest/sinter-rest-gw/
+/**
+ *   - Configuração para Teste de Integração com MongoDB (via container docker):
+ *   
+ *   	i) "diretorio para a base":
+ *    		
+ *    		$ mkdir -p $HOME/testes/mongodb/dbs
+ *    
+ *    	ii) "start a mongo instance":
+ *    
+ *    		$ docker run --rm -p 27017:27017 --name some-mongo -d mongo
+ *    
+ *    	iii) Acesso com "~/robo3t":
+ *    
+ *     		"conectar com (localhost:27017 ou 10.32.65.142:27017)
+ *			$ ~/robo3t
+ *
+ *	- Configuração para Teste de Integração com MongoDB e Ceph (via container docker):
+ *
+ *		i) "start a ceph instance":
+ * 
+ * 			$ docker run --rm -p 9000:9000 --name minio1 -v /mnt/data:/data -v /mnt/config:/root/.minio minio/minio server /data &
+ * 
+ *       		Created minio configuration file successfully at /root/.minio
+ *       		Endpoint:  http://172.17.0.2:9000  http://127.0.0.1:9000
+ *       		AccessKey: 2INY1VVHTR6S20NWLHAO 
+ *       		SecretKey: L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY
+ *       		...
+ *
+ *		ii) "criar bucket e folder":
+ * 
+ * 			$ docker run --rm -v $PWD/config.json:/root/.mc/config.json -it minio/mc mb local/sinter-default/input
+ *
+ * 			Obs.: Conteúdo de "config.json":
+ *
+ *  		{
+ *    			"version": "8",
+ *    			"hosts": {
+ *					"local": {
+ *						"url": "http://172.17.0.2:9000",
+ *                    	"accessKey": "2INY1VVHTR6S20NWLHAO",
+ *                    	"secretKey": "L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY",
+ *                    	"api": "S3v4"
+ *            		}
+ *    			}
+ *  		}
+ *  
+ *  - Ver resultados em:
+ *  
+ *  	i) http://localhost:9000/minio/sinter-default/input/
+ *  
+ *  	ii) ~/robo3t
+ *
+*/
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+$ cd ~/git/sinter-project/sinter-rest/sinter-rest-gw/
 
 $ gradle shadowJar
 
-//$ cd git/sinter-project/sinter-rest/sinter-rest-gw/build/libs
+//$ cd ~/git/sinter-project/sinter-rest/sinter-rest-gw/build/libs
 
-$ java  \
+//$ export JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8001,server=y,suspend=n -Xms512m -Xmx512m"
+$ export JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n"
+
+$ java  $JAVA_OPTS \
 -Dspring.data.mongodb.host=127.0.0.1 \
 -Dspring.data.mongodb.port=27017 \
 -Dspring.data.mongodb.database=test \
@@ -16,14 +76,15 @@ $ java  \
 -Dsinter.rest.receber_lote_rtd.ceph.ssl=false \
 -jar build/libs/sinter-rest-gw-0.0.1-fat.jar -cluster &
 
-$ cd git/sinter-project/sinter-eventbus/sinter-eventbus-verificar-lote
+$ cd ~/git/sinter-project/sinter-eventbus/sinter-eventbus-verificar-lote
 
 //$ gradle runShadow &
 $ gradle shadowJar
 
 //$ cd git/sinter-project/sinter-eventbus/sinter-eventbus-verificar-lote/build/libs
+$ export JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,address=5006,server=y,suspend=n"
 
-$ java  \
+$ java $JAVA_OPTS \
 -Dspring.data.mongodb.host=127.0.0.1 \
 -Dspring.data.mongodb.port=27017 \
 -Dspring.data.mongodb.database=test \
@@ -35,4 +96,13 @@ $ java  \
 -Dsinter.rest.receber_lote_rtd.ceph.ssl=false \
 -jar build/libs/sinter-eventbus-verificar-lote-0.0.1-fat.jar -cluster &
 
-$ curl http://localhost:9090/api/verificarLote/2017092700001.zip
+#$ curl http://localhost:9090/api/verificarLote/2017092700001.zip
+
+Obs.:
+	No Eclipse:
+
+	1) Projeto "sinter-rest-gw" (Debug As -> Debug Configuration... -> Remote Java Application -> "New com Port: 5005")
+
+	2) Projeto "sinter-eventbus-verificar-lote" (Debug As -> Debug Configuration... -> Remote Java Application -> "New com Port: 5006")	
+
+$ curl http://localhost:9090/api/verificarLote/?loteZip=2017092700001.zip
