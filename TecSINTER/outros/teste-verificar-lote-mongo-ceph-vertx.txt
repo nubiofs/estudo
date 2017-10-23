@@ -68,8 +68,7 @@ $ java  $JAVA_OPTS \
 -Dspring.data.mongodb.host=127.0.0.1 \
 -Dspring.data.mongodb.port=27017 \
 -Dspring.data.mongodb.database=test \
--Dsinter.rest.receber_lote_rtd.ceph.accessToken=2INY1VVHTR6S20NWLHAO \
--Dsinter.rest.receber_lote_rtd.ceph.secretKey=L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY \
+-Dsinter.rest.receber_lote_rtd.ceph.accessToken=2INY1VVHTR6S20NWLHAO -Dsinter.rest.receber_lote_rtd.ceph.secretKey=L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY \
 -Dsinter.rest.receber_lote_rtd.ceph.bucket=sinter-default \
 -Dsinter.rest.receber_lote_rtd.ceph.folder=input \
 -Dsinter.rest.receber_lote_rtd.ceph.endpoint=http://127.0.0.1:9000 \
@@ -88,8 +87,7 @@ $ java $JAVA_OPTS \
 -Dspring.data.mongodb.host=127.0.0.1 \
 -Dspring.data.mongodb.port=27017 \
 -Dspring.data.mongodb.database=test \
--Dsinter.rest.receber_lote_rtd.ceph.accessToken=2INY1VVHTR6S20NWLHAO \
--Dsinter.rest.receber_lote_rtd.ceph.secretKey=L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY \
+-Dsinter.rest.receber_lote_rtd.ceph.accessToken=2INY1VVHTR6S20NWLHAO -Dsinter.rest.receber_lote_rtd.ceph.secretKey=L/Gln1zJEw090OAqbzfcBDDFXkepYI9wgZGobGfY \
 -Dsinter.rest.receber_lote_rtd.ceph.bucket=sinter-default \
 -Dsinter.rest.receber_lote_rtd.ceph.folder=input \
 -Dsinter.rest.receber_lote_rtd.ceph.endpoint=http://127.0.0.1:9000 \
