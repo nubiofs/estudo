@@ -4,6 +4,6 @@ Fontes:
 	https://portainer.io/
 	https://github.com/portainer/portainer
 
-$ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+$ docker run --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
 
 ==> http://localhost:9000/#/dashboard
