@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter version="5.0" xml:id="redis" xmlns="http://docbook.org/ns/docbook"
+	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:svg="http://www.w3.org/2000/svg" xmlns:m="http://www.w3.org/1998/Math/MathML"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:db="http://docbook.org/ns/docbook">
+
+	<title>Redis Engine</title>
+
+	<section>
+		<title>Redis</title>
+
+		<para>
+			<application>Redis</application>
+			is an open source, advanced key-value store. It is often referred to
+			as a data structure server since keys can contain strings, hashes,
+			lists, sets and sorted sets.
+		</para>
+
+		<para>
+			<emphasis role="bold">NoSQLUnit</emphasis>
+			supports
+			<emphasis>Redis</emphasis>
+			by using next classes:
+		</para>
+		<para>
+			<table border="1">
+				<caption>Lifecycle Management Rules</caption>
+
+				<tr>
+					<td>Embedded</td>
+					<td>
+						<classname>com.lordofthejars.nosqlunit.redis.EmbeddedRedis
+						</classname>
+					</td>
+				</tr>
+				<tr>
+					<td>Managed</td>
+
+					<td>
+						<classname>com.lordofthejars.nosqlunit.redis.ManagedRedis
+						</classname>
+					</td>
+				</tr>
+			</table>
+		</para>
+		<para>
+			<table border="1">
+				<caption>Manager Rule</caption>
+
+				<tr>
+					<td>NoSQLUnit Management</td>
+
+					<td>
+						<classname>com.lordofthejars.nosqlunit.redis.RedisRule
+						</classname>
+					</td>
+				</tr>
+			</table>
+		</para>
+
+		<section>
+			<title>Maven Setup</title>
+
+			<para>
+				To use
+				<emphasis role="bold">NoSQLUnit</emphasis>
+				with
+				<application>Redis</application>
+				you only need to add next
+				dependency:
+			</para>
+
+			<example xml:id="conf.nosqlunit_redis_dep">
+				<title>NoSqlUnit Maven Repository</title>
+
+				<programlisting language="xml"><![CDATA[<dependency>
+	<groupId>com.lordofthejars</groupId>
+	<artifactId>nosqlunit-redis</artifactId>
+	<version>${version.nosqlunit}</version>
+</dependency>]]></programlisting>
+			</example>
+		</section>
+
+		<section>
+			<title>Dataset Format</title>
+
+			<para>
+				Default dataset file format in
+				<emphasis>Redis</emphasis>
+				module is json.
+			</para>
+
+			<para>
+				Datasets must have next
+				<link linkend="ex.redis_dataset">
+					format
+				</link>
+				:
+			</para>
+
+			<example xml:id="ex.redis_dataset">
+				<title>Example of Redis Dataset</title>
+
+				<programlisting language="json"><![CDATA[{
+"data":[
+			{"simple": [
+				{
+					"key":"key1", 
+					"value":"value1"
+				}
+				]
+			},
+      		{"list": [{
+              			"key":"key3",
+              			"values":[
+                  			{"value":"value3"},
+                  			{"value":"value4"}
+              			]
+					  }]
+      		},
+      		
+     		{"sortset": [{
+                     "key":"key4",
+                     "values":[
+                           {"score":2, "value":"value5" },{"score":3, "value":1 }, {"score":1, "value":"value6" }]
+                 }]
+      		}, 
+      		{"hash": [
+      					{
+      						"key":"user",
+      						"values":[
+      							{"field":"name", "value":"alex"},
+      							{"field":"password", "value":"alex"}
+      						]
+      					}
+      				]
+      		},
+      		{"set":[{
+              			"key":"key3",
+              			"values":[
+                  			{"value":"value3"},
+                  			{"value":"value4"}
+              			]
+					  }]
+      		}
+]
+}]]></programlisting>
+			</example>
+
+			<para>
+				Root element must be called
+				<emphasis>data</emphasis>
+				, and then depending on kind of structured data we need to store,
+				one or more of next elements should appear. Note that key field is
+				used to set the key of the element, and value field is used to set a
+				value.
+			</para>
+
+			<para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis>simple</emphasis>
+							:
+							In case we want to store simple key/value elements. This
+							element
+							will contain an array of key/value entries.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis>list</emphasis>
+							:
+							In case we want to store a key with a list of values. This
+							element
+							contain a
+							<emphasis>key</emphasis>
+							field
+							for key name and
+							<emphasis>values</emphasis>
+							field
+							with an array of values.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis>set</emphasis>
+							In case we want to store a key within a set (no duplicates
+							allowed). Structure is the same as list element.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis>sortset</emphasis>
+							:
+							In case we want to store a key within a sorted set. This element
+							contain the key, and an array of values, which each one, apart
+							from value field, also contain
+							<emphasis>score</emphasis>
+							field of type Number, to set the order into sorted set.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis>hash</emphasis>
+							:
+							In case we want to store a key within a map of field/value. In
+							this case
+							<emphasis>field</emphasis>
+							element set the field name, and
+							<emphasis>value</emphasis>
+							set the
+							value of that field.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+
+		</section>
+
+
+		<section>
+			<title>Getting Started</title>
+
+			<section>
+				<title>Lifecycle Management Strategy</title>
+
+				<para>
+					First step is defining which lifecycle management strategy is
+					required for your tests. Depending on kind of test you are
+					implementing (unit test, integration test, deployment test, ...)
+					you will require an embedded approach, managed approach or remote
+					approach.
+				</para>
+
+				<section>
+					<title>Embedded Lifecycle</title>
+					<para>
+						To configure
+						<emphasis role="bold">embedded</emphasis>
+						approach you should only instantiate next
+						<link linkend="program.redis_embedded_conf">rule</link>
+						:
+					</para>
+
+					<example xml:id="program.redis_embedded_conf">
+						<title>Embedded Redis</title>
+
+						<programlisting language="java"><![CDATA[@ClassRule
+	public static EmbeddedRedis embeddedRedis = newEmbeddedRedisRule().build();]]></programlisting>
+					</example>
+
+					<para>
+						By default managed
+						<emphasis>Redis</emphasis>
+						rule uses next
+						default values but can be configured
+						programmatically:
+					</para>
+					<table>
+						<caption>Default Embedded Values</caption>
+						<tr>
+							<td>
+								Target path
+							</td>
+							<td>
+								This is the directory where
+								<emphasis>Redis</emphasis>
+								embedded instance is started and is
+								<constant>target/redis-test-data/impermanent-db</constant>
+								.
+							</td>
+						</tr>
+					</table>
+					<para>Note that target path is only used as a configuration
+						parameter to allow multiple instances of embedded in-memory Redis engine.
+					</para>
+					<para>For more information about embedded in-memory Redis take a tour to section: <link linkend="advanced.redis_embedded.section">Embedded In-Memory Redis</link></para>
+				</section>
+				<section>
+					<title>Managed Lifecycle</title>
+					<para>
+						To configure
+						<emphasis role="bold">managed</emphasis>
+						approach you should only instantiate next
+						<link linkend="program.redis_managed_conf">rule</link>
+						:
+					</para>
+
+					<example xml:id="program.redis_managed_conf">
+						<title>Managed Redis</title>
+
+						<programlisting language="java"><![CDATA[@ClassRule
+public static ManagedRedis managedRedis = newManagedRedisRule().redisPath("/opt/redis-2.4.16").build();]]></programlisting>
+					</example>
+
+					<para>
+						By default managed
+						<emphasis>Redis</emphasis>
+						rule uses next
+						default values but can be configured
+						programmatically:
+					</para>
+
+					<para>
+						<table>
+							<caption>Default Managed Values</caption>
+							<tr>
+								<td>
+									Target path
+								</td>
+								<td>
+									This is the directory where
+									<emphasis>Redis</emphasis>
+									server is started and is
+									<constant>target/redis-temp</constant>
+									.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									RedisPath
+								</td>
+								<td>
+									<emphasis>Cassandra</emphasis>
+									installation directory which by default is
+									retrieved from
+									<varname>REDIS_HOME</varname>
+									system environment
+									variable.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Port
+								</td>
+								<td>
+									By default port used is 6379. If port is changed in
+									<emphasis>Redis</emphasis>
+									configuration file, this port should be configured too here.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Configuration File
+								</td>
+								<td>
+									By default
+									<emphasis>Redis</emphasis>
+									can work with no configuration file, it uses default values,
+									but if we need to start
+									<emphasis>Redis</emphasis>
+									with an specific configuration file located in any directory
+									file path should be set.
+								</td>
+							</tr>
+						</table>
+					</para>
+				</section>
+				<section>
+					<title>Remote Lifecycle</title>
+					<para>
+						Configuring
+						<emphasis role="bold">remote</emphasis>
+						approach
+						does not require any special rule because you (or System
+						like
+						<application>Maven</application>
+						) is the responsible of starting and
+						stopping the server. This mode
+						is used in deployment tests where you
+						are testing your application
+						on real environment.
+					</para>
+				</section>
+			</section>
+
+			<section>
+				<title>Configuring Redis Connection</title>
+
+				<para>
+					Next step is configuring
+					<emphasis role="bold">Redis</emphasis>
+					rule in charge of maintaining
+					<emphasis>Redis</emphasis>
+					store into known state by inserting and deleting defined
+					datasets.
+					You must register
+					<classname>RedisRule</classname>
+					<emphasis>JUnit</emphasis>
+					rule class, which
+					requires a configuration parameter with
+					information like host,
+					port, or cluster name.
+				</para>
+
+				<para>To make developer's life easier and code more readable, a
+					fluent
+					interface can be used to create these configuration objects.
+					Three
+					different kind of configuration builders exist.
+				</para>
+				
+				<section>
+					<title>Embedded Connection</title>
+					<para>
+						The first one is for configuring an embedded connection to managed
+						<emphasis>Redis</emphasis>
+						.
+					</para>
+
+					<example xml:id="program.embedded_connection_redis_parameters">
+						<title>Redis with embedded configuration</title>
+
+						<programlisting language="java"><![CDATA[import static com.lordofthejars.nosqlunit.redis.RedisRule.RedisRuleBuilder.newRedisRule;
+						
+@Rule
+public RedisRule redisRule = newRedisRule().defaultEmbeddedRedis();
+						]]></programlisting>
+					</example>
+				</section>
+
+
+				<section>
+					<title>Managed Connection</title>
+					<para>
+						Configuring a connection to managed
+						<emphasis>Redis</emphasis>
+						.
+					</para>
+
+					<example xml:id="program.managed_connection_redis_parameters">
+						<title>Redis with managed configuration</title>
+
+						<programlisting language="java"><![CDATA[import static com.lordofthejars.nosqlunit.redis.ManagedRedisConfigurationBuilder.newManagedRedisConfiguration;
+						
+@Rule
+public RedisRule redisRule = new RedisRule(newManagedRedisConfiguration().build());
+						]]></programlisting>
+					</example>
+					<para>
+						Host and port parameters are already configured with default
+						parameters of managed lifecycle. If port is changed, this class
+						provides a method to set it.
+					</para>
+				</section>
+
+				<section>
+					<title>Remote Connection</title>
+					<para>
+						Configuring a connection to remote
+						<emphasis>Redis</emphasis>
+						.
+					</para>
+
+					<example xml:id="program.remote_connection_redis_parameters">
+						<title>Redis with remote configuration</title>
+
+						<programlisting language="java"><![CDATA[import static com.lordofthejars.nosqlunit.redis.RemoteRedisConfigurationBuilder.newRemoteRedisConfiguration;
+
+@Rule
+public RedisRule redisRule = new RedisRule(newRemoteRedisConfiguration().host("192.168.1.1").build());]]></programlisting>
+					</example>
+					<para>
+						Port parameter is already configured with default parameter
+						of managed lifecycle. If port is changed, this class provides a
+						method to set it. Note that host parameter must be specified in
+						this case.
+					</para>
+				</section>
+
+				<section>
+					<title>Shard Connection</title>
+					<para>Redis connection can also be configured as shard using
+						ShardedJedis capabilities.
+					</para>
+					<example xml:id="program.shard_connection_redis_parameters">
+						<title>Redis with remote configuration</title>
+
+						<programlisting language="java"><![CDATA[import static com.lordofthejars.nosqlunit.redis.RemoteRedisConfigurationBuilder.newRemoteRedisConfiguration;
+
+@Rule
+public RedisRule redisRule = new RedisRule(newShardedRedisConfiguration()
+				.shard(host("127.0.0.1"), port(ManagedRedis.DEFAULT_PORT))
+					.password("a")
+					.timeout(1000)
+					.weight(1000)
+				.shard(host("127.0.0.1"), port(ManagedRedis.DEFAULT_PORT + 1))
+					.password("b")
+					.timeout(3000)
+					.weight(3000)
+				.build());]]></programlisting>
+					</example>
+
+					<para>
+						Note that only
+						<methodparam>host</methodparam>
+						and
+						<methodparam>port</methodparam>
+						is mandatory, the other ones uses default values.
+					</para>
+
+					<para>
+						<itemizedlist>
+							<listitem>
+								<para>
+									<emphasis>password</emphasis>
+									:
+									In case repository is protected with password this attribute
+									is used as password. Default values is null.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									<emphasis>timeout</emphasis>
+									:
+									Timeout for shard. By default timeout is set to 2 seconds.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									<emphasis>weight</emphasis>
+									:
+									The weight of that shard over the other ones. By default is 1.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+
+				</section>
+
+			</section>
+
+			<section>
+				<title>Verifying Data</title>
+				<para>
+					<classname>@ShouldMatchDataSet</classname>
+					is also supported for
+					<emphasis>Redis</emphasis>
+					engine.
+				</para>
+			</section>
+
+			<section>
+				<title>Full Example</title>
+
+				<para>
+					To show how to use
+					<emphasis role="bold">NoSQLUnit</emphasis>
+					with
+					<emphasis>Redis</emphasis>
+					,
+					we are going to create a
+					very simple application.
+				</para>
+				<para>
+					<link linkend="program.book_redis_manager">BookManager</link>
+					is the business class responsible of inserting new books and
+					finding books by their title.
+				</para>
+				<example xml:id="program.book_redis_manager">
+					<title>Book manager with Redis</title>
+
+					<programlisting language="java"><![CDATA[public class BookManager {
+	
+	private static final String TITLE_FIELD_NAME = "title";
+	private static final String NUMBER_OF_PAGES = "numberOfPages";
+	
+	private Jedis jedis;
+	
+	public BookManager(Jedis jedis) {
+		this.jedis = jedis;
+	}
+	
+	public void insertBook(Book book) {
+		
+		Map<String, String> fields = new HashMap<String, String>();
+		
+		fields.put(TITLE_FIELD_NAME, book.getTitle());
+		fields.put(NUMBER_OF_PAGES, Integer.toString(book.getNumberOfPages()));
+		
+		jedis.hmset(book.getTitle(), fields);
+	}
+
+	public Book findBookByTitle(String title) {
+		
+		Map<String, String> fields = jedis.hgetAll(title);
+		return new Book(fields.get(TITLE_FIELD_NAME), Integer.parseInt(fields.get(NUMBER_OF_PAGES)));
+		
+	}
+	
+}]]></programlisting>
+				</example>
+
+				<para>
+					And now one integration test is written:
+				</para>
+
+				<example xml:id="program.book_redis_integration">
+					<title>Redis with managed configuration</title>
+
+					<programlisting language="java"><![CDATA[import static com.lordofthejars.nosqlunit.redis.RedisRule.RedisRuleBuilder.newRedisRule;
+import static com.lordofthejars.nosqlunit.redis.ManagedRedis.ManagedRedisRuleBuilder.newManagedRedisRule;
+
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import redis.clients.jedis.Jedis;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.demo.model.Book;
+import com.lordofthejars.nosqlunit.redis.ManagedRedis;
+import com.lordofthejars.nosqlunit.redis.RedisRule;
+
+public class WhenYouFindABook {
+
+	static {
+		System.setProperty("REDIS_HOME", "/opt/redis-2.4.16");
+	}
+
+	@ClassRule
+	public static ManagedRedis managedRedis = newManagedRedisRule().build();
+
+	@Rule
+	public RedisRule redisRule = newRedisRule().defaultManagedRedis();
+	
+	@Test
+	@UsingDataSet(locations="book.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+	public void book_should_be_returned_if_title_is_in_database() {
+		
+		BookManager bookManager = new BookManager(new Jedis("localhost"));
+		Book findBook = bookManager.findBookByTitle("The Hobbit");
+		
+		assertThat(findBook, is(new Book("The Hobbit", 293)));
+		
+	}
+
+}]]></programlisting>
+				</example>
+
+				<para>And dataset used is:
+				</para>
+				<example xml:id="program.expected_redis_file">
+					<title>book.json Redis file</title>
+
+					<programlisting language="json"><![CDATA[{
+"data":[	
+      		{"hash": [
+      					{
+      						"key":"The Hobbit",
+      						"values":[
+      							{"field":"title", "value":"The Hobbit"},
+      							{"field":"numberOfPages", "value":"293"}
+      						]
+      					}
+      				]
+      		}
+]
+}]]></programlisting>
+				</example>
+
+			</section>
+
+
+		</section>
+
+	</section>
+
+
+</chapter>

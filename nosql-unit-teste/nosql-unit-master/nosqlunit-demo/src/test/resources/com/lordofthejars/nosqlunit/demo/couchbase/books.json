@@ -1,0 +1,12 @@
+{
+    "data": [
+        {
+            "key": "Hobbit",
+            "document": {
+                "title": "The Hobbit",
+                "numberOfPages": 293
+            },
+            "expirationSecs": 100
+        }
+    ]
+}
