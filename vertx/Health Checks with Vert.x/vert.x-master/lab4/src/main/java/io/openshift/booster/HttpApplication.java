@@ -12,11 +12,45 @@ import io.vertx.ext.web.handler.StaticHandler;
 
 import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
 
+/**
+ * $ mvn clean install
+ * $ java -jar target/health-check-vertx-9-SNAPSHOT.jar 
+		fev 08, 2018 3:04:39 PM io.vertx.core.impl.launcher.commands.VertxIsolatedDeployer
+		INFORMAÇÕES: Succeeded in deploying verticle
+ * 
+ * $ curl -i http://localhost:8080/api/health/liveness
+		HTTP/1.1 200 OK
+		Content-Type: application/json;charset=UTF-8
+		Content-Length: 64
+
+		{"checks":[{"id":"server-online","status":"UP"}],"outcome":"UP"}
+ *
+ *$ curl -i http://localhost:8080/api/health/readiness
+		HTTP/1.1 200 OK
+		Content-Length: 2
+
+		OK
+ *
+ *$ curl -i http://localhost:8080/api/killme
+		HTTP/1.1 200 OK
+		Content-Length: 37
+
+		Stopping HTTP server, Bye bye world !
+ *
+ *$ curl -i http://localhost:8080/api/health/liveness
+		HTTP/1.1 503 Service Unavailable
+		Content-Type: application/json;charset=UTF-8
+		Content-Length: 68
+
+		{"checks":[{"id":"server-online","status":"DOWN"}],"outcome":"DOWN"}
+ *
+ */
 public class HttpApplication extends AbstractVerticle {
 
   private static final String template = "Hello, %s!";
 
   private boolean online = false;
+  @SuppressWarnings("unused")
   private HttpServer server;
 
   @Override
@@ -45,6 +79,8 @@ public class HttpApplication extends AbstractVerticle {
   private void killMe(RoutingContext rc) {
     rc.response().end("Stopping HTTP server, Bye bye world !");
     online = false;
+    //$ ~/mvn clean install -DskipTests=true
+    //server.close();
   }
 
   private void greeting(RoutingContext rc) {
