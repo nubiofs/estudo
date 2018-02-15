@@ -34,7 +34,7 @@ https://github.com/rhoar-enablement/vert.x/blob/master/lab4/docs/04_04_rhoar_ver
 
 	$ mvn eclipse:eclipse
 
-* Segundo exemplo:
+* Segundo exemplo [github/estudo/vertx/Health Checks with Vert.x/vertx-health-check-master]:
 
 Fontes:
 
