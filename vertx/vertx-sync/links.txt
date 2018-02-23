@@ -1,0 +1,32 @@
+
+https://github.com/mtatheonly/quasar-gradle-plugin
+https://stackoverflow.com/questions/37049295/how-to-configure-quasar-in-gradle
+https://github.com/puniverse/quasar-gradle-template/blob/master/gradle/agent.gradle
+https://discuss.gradle.org/t/how-to-configure-quasar-in-gradle/17467/5
+
+https://www.voxxed.com/2015/01/not-fathers-java-opinionated-guide-modern-java-development-part-1/
+
+
+==> https://github.com/mhstnsc/thread-test/blob/master/src/main/java/com/qnective/qtalkng/Sync.java
+
+quasar-core + vertx-sync + spring:
+==> https://github.com/aardelean/spring-vertx-sync/blob/master/build.gradle
+
+1) Exemplo 01:
+
+https://dzone.com/articles/vertx-and-fiber-perfect-synergy
+
+=> https://github.com/moxit0/RoomScheduler
+
+obs.:
+
+https://github.com/aokolnychyi/vertx-example
+https://github.com/aokolnychyi/vertx-example
+
+2) CompositeFuture e Future vertx (https://github.com/InfoSec812/vertx-by-example/blob/master/Exercise8/):
+
+https://github.com/InfoSec812/vertx-by-example/blob/master/Exercise8/Solution1.java
+
+==
+
+https://github.com/pesia/vertx-sync-examples/blob/master/src/main/java/server/vertx/BlockingHttpServer.java

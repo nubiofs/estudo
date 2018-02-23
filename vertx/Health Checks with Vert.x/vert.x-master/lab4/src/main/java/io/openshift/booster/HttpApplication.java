@@ -60,6 +60,8 @@ public class HttpApplication extends AbstractVerticle {
     HealthCheckHandler healthCheckHandler = HealthCheckHandler.create(vertx)
         .register("server-online", fut -> fut.complete(online ? Status.OK() : Status.KO()));
 
+    
+    
     router.get("/api/greeting").handler(this::greeting);
     router.get("/api/killme").handler(this::killMe);
     router.get("/api/health/readiness").handler(rc -> rc.response().end("OK"));
