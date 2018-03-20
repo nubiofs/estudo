@@ -1,0 +1,12 @@
+http://vertx.io/docs/guide-for-java-devs/
+
+http://vertx.io/docs/
+http://vertx.io/materials/
+
+http://escoffier.me/vertx-hol/
+
+http://tutorials.jenkov.com/vert.x/overview.html
+
+extras:
+
+http://tutorials.jenkov.com/java-concurrency/concurrency-models.html
