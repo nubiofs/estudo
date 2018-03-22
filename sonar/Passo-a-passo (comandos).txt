@@ -7,6 +7,8 @@ Fontes:
 
 Fonte:
 	https://hub.docker.com/_/sonarqube/
+	https://github.com/SonarSource/docker-sonarqube
+	https://github.com/SonarSource/docker-sonarqube/blob/master/7.0/Dockerfile
 
 $ docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 
@@ -48,19 +50,46 @@ mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.jdbc.url="jdbc:h2
 Fonte:
 
 	https://github.com/SonarSource/sonar-scanning-examples/tree/master/sonarqube-scanner-gradle
+	https://github.com/SonarSource/sq-com_example_java-gradle-travis
 	https://docs.sonarqube.org/display/SONARQUBE51/Analyzing+with+Gradle
 	https://plugins.gradle.org/plugin/org.sonarqube
 	https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Gradle
 	
+3.1) Exemplo 01
+
 $ cd github/estudo/sonar/sonar-scanning-examples-master/sonarqube-scanner-gradle
 
 $ gradle sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.verbose=true 
 
+ou
+
+$ ./gradlew sonarqube
 
 ==> http://localhost:9000/dashboard?id=sonarqube-scanner-gradle
 
+3.2) Exemplo 02
+
+$ cd /home/02963357460/github/estudo/sonar/sq-com_example_java-gradle-travis-master
+
+$ ./gradlew sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.verbose=true
+
+
+**********
 ** Extras:
+**********
 
 Obter arquivos de https://github.com/orangesignal/docker-sonarqube.git
 
 $ gradle sonarqube -Dsonar.host.url=http://sonar.mycompany.com -Dsonar.verbose=true
+
+--
+script:
+  - ./gradlew sonarqube
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'
+
