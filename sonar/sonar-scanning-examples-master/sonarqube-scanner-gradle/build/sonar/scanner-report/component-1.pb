@@ -1,0 +1,1 @@
+-Example of SonarQube Scanner for Gradle Usage :J1.0Rsonarqube-scanner-gradleb-Example of SonarQube Scanner for Gradle Usage

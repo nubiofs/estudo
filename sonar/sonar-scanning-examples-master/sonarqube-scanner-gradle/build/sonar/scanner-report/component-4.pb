@@ -1,0 +1,1 @@
+src/main/java :rsrc/main/java

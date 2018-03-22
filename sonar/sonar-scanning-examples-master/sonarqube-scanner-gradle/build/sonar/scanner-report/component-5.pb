@@ -1,0 +1,1 @@
+src/test/java :rsrc/test/java

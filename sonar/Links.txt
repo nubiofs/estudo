@@ -1,0 +1,31 @@
+
+=== Plugins
+
+https://github.com/gabrie-allaigre/sonar-gitlab-plugin
+https://gitlab.talanlabs.com/gabriel-allaigre/sonar-gitlab-plugin
+
+--> https://jitpack.io/p/gabrie-allaigre/sonar-gitlab-plugin
+
+https://github.com/Pablissimo/SonarTsPlugin
+
+==== EXTRA ESTUDO::
+
+--> https://tedvinke.wordpress.com/2016/03/17/3-steps-for-analyzing-a-gradle-project-with-sonarqube-using-docker/
+
+--> https://github.com/SonarSource/sonar-scanning-examples/tree/master/sonarqube-scanner-gradle
+
+https://hub.docker.com/r/orangesignal/sonar/
+https://github.com/orangesignal/docker-sonarqube/blob/master/example/Dockerfile
+
+https://plugins.gradle.org/plugin/org.sonarqube
+https://docs.sonarqube.org/display/SONARQUBE51/Analyzing+with+Gradle
+
+https://docs.sonarqube.org/display/SONARQUBE51/Installing+and+Configuring+Gradle+Sonar+Plugin
+
+https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Gradle
+
+https://github.com/SonarSource/sonar-scanner-gradle
+
++++++
+
+https://stackoverflow.com/questions/42935629/gitlab-integration-with-sonarqube
