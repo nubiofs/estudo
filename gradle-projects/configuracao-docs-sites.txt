@@ -88,6 +88,10 @@ Obs.:
 
 $ sdk install gradle
 
+ou
+
+$ sdk update gradle
+
 obs.: Ou criar o wrapper:
 
 	$ gradle wrapper --gradle-version 2.13

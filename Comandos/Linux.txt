@@ -2,6 +2,12 @@ https://www.ostechnix.com/create-animated-gif-ubuntu-16-04/
 https://github.com/fiji/fiji.github.io
 
 
+* Scheduling a shutdown run the command:
+
+$ sudo shutdown -P +90
+
+Obs.: use 'shutdown -c' to cancel.
+
 ** Novos tipos de terminais linux:
 
 https://rodrigocarran.wordpress.com/2017/05/30/15-melhores-emuladores-de-terminal-para-linux/

@@ -3,3 +3,51 @@
 https://angular.io/guide/architecture
 https://github.com/angular/angular-cli
 
+xxxxxxxxxxxxxxxx Extras
+
+- Json Server (https://github.com/typicode/json-server)
+
+https://medium.com/codingthesmartway-com-blog/create-a-rest-api-with-json-server-36da8680136d
+
+
+1) $ npm install -g json-server
+
+
+2) touche db.json << \
+
+{
+  "employees": [
+    {
+      "id": 1,
+      "first_name": "Sebastian",
+      "last_name": "Eschweiler",
+      "email": "sebastian@codingthesmartway.com"
+    },
+    {
+      "id": 2,
+      "first_name": "Steve",
+      "last_name": "Palmer",
+      "email": "steve@codingthesmartway.com"
+    },
+    {
+      "id": 3,
+      "first_name": "Ann",
+      "last_name": "Smith",
+      "email": "ann@codingthesmartway.com"
+    }
+  ]
+}
+
+
+3) $ json-server --watch db.json
+
+Now we can open URL http://localhost:3000/employees in the browser
+
+The following HTTP endpoints are created automatically by JSON server:
+
+GET    /employees
+GET    /employees/{id}
+POST   /employees
+PUT    /employees/{id}
+PATCH  /employees/{id}
+DELETE /employees/{id}
