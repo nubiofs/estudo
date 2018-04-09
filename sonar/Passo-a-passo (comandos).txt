@@ -33,7 +33,7 @@ $ docker container ls
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                                            NAMES
 3e2e7ca03483        sonarqube           "./bin/run.sh"      16 seconds ago      Up 15 seconds       0.0.0.0:9000->9000/tcp, 0.0.0.0:9092->9092/tcp   sonarqube
 
-obs.: "http://localhost:9000" By default you can login as admin with password admin
+obs.: "http://localhost:9000" By default you can login as "admin" with password "admin" (PARA CRIAR TOKEN_SONAR)!
 
 2) To analyse a project (com projeto Maven):
 
@@ -73,6 +73,13 @@ $ cd /home/02963357460/github/estudo/sonar/sq-com_example_java-gradle-travis-mas
 
 $ ./gradlew sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.verbose=true
 
+
+OBS.: COMANDO MAIS COMPLETO (OBTER TOKEN APÓS ACESSO A PÁGUINA DE LOGIN PARA "admin" "admin"):
+
+$ setenv TOKEN_SONAR=97af7ccecce5566be55b6a1b21f2f551da1782e0
+
+$ gradle sonarqube -Dsonar.host.url=http://localhost:9000/ -Dsonar.login=${TOKEN_SONAR} -Dsonar.jacoco.reportPaths=build/coverage-reports/jacoco-unit.exec \
+-Dsonar.verbose=true --stacktrace
 
 **********
 ** Extras:
