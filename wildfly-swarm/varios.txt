@@ -21,6 +21,10 @@ http://blog.caelum.com.br/micro-profile-javaee-com-wildfly-swarm/
 https://blog.dekstroza.io/microservices-and-jee-7/
 https://github.com/dekstroza/JEE7/tree/master/websockets-example
 
+https://github.com/oldpatricka/spring-boot-jdbi
+
+https://www.sitepoint.com/combining-spring-boot-and-jdbi/
+
 * Varios:
 
 http://editor.swagger.io/
@@ -29,10 +33,17 @@ http://viniciusaires.me/config-wildfly-prodution/
 
 https://dzone.com/articles/running-wildfly-swarm-microservices-in-docker
 
+https://dzone.com/articles/develop-a-microservice-with-forge-wildfly-swarm-an-1
+http://forge.jboss.org/addon/org.jboss.forge.addon:wildfly-swarm
+
+https://dzone.com/articles/how-to-build-microservices-with-java-ee-and-jbossf
+
 ==> https://github.com/thorntail/thorntail-examples/tree/master/docker/docker-jaxrs
 
 ==> https://github.com/spotify/dockerfile-maven
 	old - https://github.com/spotify/docker-maven-plugin/
+
+https://github.com/yamad/jaxrs-docker-example
 
 http://jdbi.org/#_best_practices
 https://github.com/jdbi/jdbi
@@ -40,6 +51,16 @@ https://github.com/opentable/otj-pg-embedded
 https://github.com/jdbi/jdbi/tree/master/testing/src/main/java/org/jdbi/v3/testing
 
 https://webpack.js.org/guides/getting-started/
+
+https://medium.com/@rafaelvicio/spring-boot-vs-wildfly-swarm-em-ambiente-java-enterprise-9f20fbb9211b
+
+https://github.com/wildfly-swarm-archive/wildfly-swarm-spring-boot
+
+http://ksoong.org/wildfly-swarm-spring-boot
+https://blog.akquinet.de/2017/01/12/the-lightweightness-of-microservices-comparing-spring-boot-wildly-swarm-and-haskell-snap/
+==> https://github.com/tnfink/microservice-lightweight-competion-
+
+https://github.com/daggerok/java-ee-examples
 
 * Comandos:
 
