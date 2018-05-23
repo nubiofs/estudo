@@ -55,3 +55,8 @@ DELETE /employees/{id}
  http://localhost:3000/employees?first_name=Sebastian
 
  http://localhost:3000/employees?q=codingthesmartway
+
+==> Extras links:
+
+https://material.angular.io/
+https://blog.angular-university.io/
