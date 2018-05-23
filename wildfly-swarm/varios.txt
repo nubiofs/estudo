@@ -1,0 +1,34 @@
+* Links:
+
+https://demoiselle.org/#
+https://github.com/demoiselle/framework
+https://github.com/demoiselle/example/tree/master/v3/cep
+https://hub.docker.com/r/demoiselleframework/cep/
+https://demoiselle.gitbooks.io/treinamento-v3/content/guia-rapido.html
+
+https://demoiselle.gitbooks.io/treinamento-v3/content/angular/webpack.html
+
+https://wildfly-swarm.gitbooks.io/wildfly-swarm-users-guide/content/
+http://wildfly-swarm.io/tutorial/sources/
+http://wildfly-swarm.io/generator/
+
+https://github.com/nubiofs/keycloak-pocs
+
+https://www.eventials.com/Globalcode/wildfly-swarm-criando-microservices-com-java-ee-7-stadium-quinta-george-gastaldi/
+https://pedrohosilva.wordpress.com/2017/12/30/rest-seguro-com-wildfly-swarm-e-keycloak/
+http://blog.caelum.com.br/micro-profile-javaee-com-wildfly-swarm/
+
+* Varios:
+
+http://editor.swagger.io/
+
+http://jdbi.org/#_best_practices
+https://github.com/jdbi/jdbi
+https://github.com/opentable/otj-pg-embedded
+https://github.com/jdbi/jdbi/tree/master/testing/src/main/java/org/jdbi/v3/testing
+
+https://webpack.js.org/guides/getting-started/
+
+* Comandos:
+
+java -jar -Xmx128m -Dswarm.bind.address=0.0.0.0 target/todo-swarm.jar
