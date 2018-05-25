@@ -7,8 +7,10 @@ import javax.annotation.PreDestroy;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.example.demo.rest.LoginEndpoint;
+
 
 //@RequestScoped
 //@Typed(AutenticacaoInterceptor.class)
@@ -37,9 +39,9 @@ public class AutenticacaoInterceptor implements Serializable {
 		IJWTAutenticator jwtAut = context.getMethod().getAnnotation(IJWTAutenticator.class);
 		System.out.println("Chamado AutenticacaoInterceptor (para o método: " + jwtAut.methodName() +" )");
 		
-//		for(Object param : context.getParameters()) {
-//			System.out.println("Param: " + param);
-//		}
+		for(Object param : context.getParameters()) {
+			System.out.println("Param: " + param);
+		}
 
 //		String usuario = (String) context.getContextData().get("usuario");
 //        if (usuario == null) {
@@ -50,7 +52,7 @@ public class AutenticacaoInterceptor implements Serializable {
 		Object retorno = null;
 		
 		Object[] param = context.getParameters();
-		if(param.length == 1) {
+		if(param.length == 3) {
 			String jwt = (String) param[0];
 			if(!jwt.contains("eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ")) {
 				//response.setStatus(Status.UNAUTHORIZED.ordinal());
@@ -59,8 +61,13 @@ public class AutenticacaoInterceptor implements Serializable {
 //				javax.ws.rs.core.Response.ResponseBuilder r = Response.status(Status.UNAUTHORIZED).entity("");
 //				r.build();
 				
+				HttpServletResponse response = (HttpServletResponse) param[1];
+				//System.out.println("Token Jwt não autenticado! " + );
+				response.addHeader("Resposta", "Token Jwt não autenticado! ");
+				HttpServletRequest request = (HttpServletRequest) param[2]; 
+				System.out.println("IP : " + request.getLocalAddr());
 				//response.setHeader("Cache-Control", ic.getMethod().getAnnotation(Cache.class).value());
-				throw new IllegalAccessException("Token Jwt não autenticado!");
+				//throw new IllegalAccessException("Token Jwt não autenticado!");
 			} else {
 				retorno = context.proceed();
 			}
@@ -96,9 +103,11 @@ public class AutenticacaoInterceptor implements Serializable {
     @PostConstruct
     public void ativa(InvocationContext context){
     	System.out.println("Ativando…");
-    	LoginEndpoint obj = (LoginEndpoint) context.getTarget();
-    	String ip = obj.getHttpServletRequest().getLocalAddr();
-        obj.getHttpServletResponse().addHeader("Retorno", "OK ativa! Para: " +ip);
+    	//LoginEndpoint obj = (LoginEndpoint) context.getTarget();
+    	//String ip = obj.getHttpServletRequest().getLocalAddr();
+    	//System.out.println("LocalAddr: "+ip);
+        //obj.getHttpServletResponse().addHeader("Retorno", "OK ativa! Para: " +ip);
+    	//obj.getHttpServletResponse().addHeader("Retorno", "OK ativa!");
     }
 
     @PreDestroy
