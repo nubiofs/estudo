@@ -18,6 +18,6 @@ import javax.interceptor.InterceptorBinding;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface IJWTAutenticator {
 	
-	@Nonbinding String methodName();
+	@Nonbinding String methodName() default "";
 
 }
