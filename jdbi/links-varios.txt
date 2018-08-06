@@ -1,0 +1,67 @@
+
+*  Does JDBI support: IBM DB2, Oracle DB, and EhCache? (https://github.com/jdbi/jdbi/issues/808)
+
+Here's some broad ideas for adding caching support.
+
+Introduce a config class to hold the CacheManager:
+
+public class EhCacheConfig implements JdbiConfig<EhCacheConfig> {
+  ...
+  public void setCacheManager(CacheManager cacheManager) { ... }
+  public Cache getCache(String name) { ... }
+}
+
+Inject the cache into your config class, while you set up Jdbi:
+
+CacheManager cacheManager = ...
+Jdbi jdbi = ...
+jdbi.getConfig(EhCacheConfig.class).setCacheManager(cacheManager);
+
+Introduce a SQL method decorating annotation:
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD})
+@SqlMethodDecoratingAnnotation(CachedDecorator.class)
+public @interface Cached {
+  String value(); // cache name
+}
+
+Implement the HandlerDecorator to attach caching behavior to that annotation:
+
+public class CachedDecorator implements HandlerDecorator {
+  Handler decoratorHandler(Handler base, Class<?> sqlObjectType, Method method) {
+    String cacheName = method.getAnnotation(Cached.class).value();
+
+    return (target, args, handle) -> {
+      Cache cache = handle.getConfig(EhCacheConfig.class).getCache(cacheName);
+
+      // munge the arguments into a cache key, somehow. Maybe a @CacheKey annotation?
+      String key = ...
+
+      Object value = cache.get(key);
+      if (value == null) {
+        value = base.invoke(target, args, handle);
+        cache.put(key, value);
+      }
+      return value;
+    };
+  }
+}
+
+Then, in your SQL object interface:
+
+public interface ProductDao {
+  @SqlQuery("select ... where ...")
+  @Cached
+  Product getById(long id)
+}
+
+References:
+
+    Handler interface - The basic plumbing of SQL Objects. When Jdbi synthesizes an implementation of your interfaces, this resolves to a Handle per interface method. When your SQL object method is invoked, it delegates to the Handle for that method.
+    HandlerDecorator interface - Decorates (wraps) a Handler in another Handler, which may add or modify the behavior of the original. In the case of caching: a cache hit may simply return the cached value without calling the delegate handle. A cache miss should call into the wrapped Handler, cache the result, and then return it.
+    @SqlMethodDecoratingAnnotation meta-annotation - Invent your own SQL Object annotations, and attach behavior to them.
+    HandlerDecorators config class - An alternative approach to meta-annotations. Decorators registered on this config class are consulted for every method of a SQL object, and may optionally decorate any of them on whatever basis you like.
+    Unit tests that give some basic examples of how to implement a decorator
+    Look at the @Transaction annotation for a non-toy example.
+

@@ -1,0 +1,13 @@
+* Tutoriais:
+
+https://java2blog.com/introduction-to-spring-framework/
+https://medium.com/quick-code/top-tutorials-to-learn-spring-framework-for-the-java-application-12db01d9c288
+https://spring.io/projects/spring-framework
+https://www.devmedia.com.br/guia/spring-framework/37806
+https://www.devmedia.com.br/aprenda-a-utilizar-o-spring-web-flow/33909
+https://github.com/spring-projects/spring-webflow-samples
+https://www.devmedia.com.br/como-integrar-sistemas-com-mensageria-e-spring/28883
+
+https://www.springbyexample.org/
+https://www.springbyexample.org/examples/core-concepts.html
+https://github.com/spring-by-example/spring-by-example
