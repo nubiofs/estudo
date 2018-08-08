@@ -1,0 +1,13 @@
+http://tutorials.jenkov.com/java-util-concurrent/threadpoolexecutor.html
+
+https://github.com/gustavoponce7/thread-pool-executor
+https://github.com/epam-mooc/threadpoolexecutor-demo
+https://github.com/callicoder/java-concurrency-examples/tree/master/java-executors-and-thread-pool
+
+https://github.com/callicoder/java-concurrency-examples
+
+https://gist.github.com/sanaulla123/3029344
+
+https://gist.github.com/gabhi/e519ea6ef984fcb1dac4
+
+https://github.com/ryanbrainard/java-concurrency-example
