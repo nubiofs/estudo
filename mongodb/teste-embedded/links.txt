@@ -1,0 +1,16 @@
+https://springframework.guru/spring-boot-with-embedded-mongodb/
+
+https://www.baeldung.com/spring-boot-embedded-mongodb
+https://dzone.com/articles/spring-boot-with-embedded-mongodb
+
+https://flapdoodle-oss.github.io/de.flapdoodle.embed.mongo/
+
+https://github.com/springframeworkguru/spring-boot-mongodb/tree/embeded_mongodb
+
+https://github.com/alexbt/sample-spring-boot-data-mongodb-embedded
+
+https://stackoverflow.com/questions/31568351/how-do-you-configure-embedded-mongdb-for-integration-testing-in-a-spring-boot-ap
+
+http://mvpjava.com/spring-boot-integration-testing/
+
+https://github.com/spring-projects/spring-data-examples/blob/master/mongodb/pom.xml
