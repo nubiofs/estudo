@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html data-code-prettify="" data-mobile-support="" data-search="">
+<head>
+<title>Hands on MongoDB 4.0 transactions with Spring Data</title>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no" id="Viewport" name="viewport" />
+<link rel="shortcut icon" type="image/x-icon" href="/img/favicon-ca31b78daf0dd9a106bbf3c6d87d4ec7.png" />
+<link href="https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/main-42b368f95d081092f9ba6b7560a93895.css" />
+<script src="/jspm_packages/system-eccc019329febb5a1b06bde008ca5614.js"></script>
+<script>
+    System.config({baseURL: "/581ea6c"});
+  </script>
+<script src="/config-5a675c9cddea3a5f55b71416e67d47d6.js"></script>
+<script>
+      System.import('app/main.js')
+  </script>
+<meta content="7qGntFPD9lWAVCtUu5U77v4l68PsTHf6xpzgjQv2j2M" name="google-site-verification" />
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KZM7GF6');</script>
+
+<link href="/css/blog-92993c3ec6808bded45b277c18d7d621.css" rel="stylesheet" type="text/css" />
+
+<meta content="summary" name="twitter:card" />
+<meta content="@springcentral" name="twitter:site" />
+<meta name="twitter:title" content="Hands on MongoDB 4.0 transactions with Spring Data" />
+<meta name="twitter:description" content="&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;With &lt;a href=&quot;https://www.mongodb.com/transactions&quot;&gt;MongoDB 4.0&lt;/a&gt;, ACID transactions have arrived in the &lt;code&gt;Document&lt;/code&gt; store, enforcing all-or-nothing execution and maintaining data integrity. So, let’s get straight to it by looking at both the synchronous and the reactive execution models.&lt;/p&gt; 
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;At the time of this writing, MongoDB multi-document transactions are supported across a single replica set and feel like the transactions you are probably familiar with from relational databases. Looking at the driver API, one feels immediately at home:&lt;/p&gt; 
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;try (ClientSession session = client.startSession()) {
+
+    session.startTransaction();
+
+    try {
+
+        collection.insertOne(session, documentOne);
+        collection.insertOne(session, documentTwo);
+
+        session.commitTransaction();
+
+    } catch (Exception e) {
+        session.abortTransaction();
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+" />
+<meta name="twitter:creator" content="@stroblchristoph" />
+<meta name="twitter:image:src" content="https://gravatar.com/avatar/eeacd6c45e867cb36eb05c9daa5cc2de?s=200" />
+
+<meta property="og:title" content="Hands on MongoDB 4.0 transactions with Spring Data" />
+<meta property="og:image" content="https://gravatar.com/avatar/eeacd6c45e867cb36eb05c9daa5cc2de?s=200" />
+<meta property="og:description" content="&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;With &lt;a href=&quot;https://www.mongodb.com/transactions&quot;&gt;MongoDB 4.0&lt;/a&gt;, ACID transactions have arrived in the &lt;code&gt;Document&lt;/code&gt; store, enforcing all-or-nothing execution and maintaining data integrity. So, let’s get straight to it by looking at both the synchronous and the reactive execution models.&lt;/p&gt; 
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;At the time of this writing, MongoDB multi-document transactions are supported across a single replica set and feel like the transactions you are probably familiar with from relational databases. Looking at the driver API, one feels immediately at home:&lt;/p&gt; 
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;try (ClientSession session = client.startSession()) {
+
+    session.startTransaction();
+
+    try {
+
+        collection.insertOne(session, documentOne);
+        collection.insertOne(session, documentTwo);
+
+        session.commitTransaction();
+
+    } catch (Exception e) {
+        session.abortTransaction();
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+" />
+<meta content="article" property="og:type" />
+<meta property="og:article:published_time" content="2018-06-28 08:00:00.0" />
+</head><body>
+
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-KZM7GF6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+
+<script type="text/javascript">
+    // Work around Google font rendering issues in webkit browsers on Windows 7
+    if (navigator.userAgent.indexOf("NT 6.1") != -1) {
+      document.body.style.WebkitTextStroke = "0.5px";
+    }
+  </script>
+<div class="viewport">
+<header class="navbar header--navbar desktop-only">
+<div class="navbar-inner">
+<div class="container-fluid">
+<div class="spring-logo--container">
+<a class="spring-logo" href="/"><span></span></a>
+</div>
+<ul class="nav pull-right">
+<li class="navbar-link">
+<a href="/projects">Projects</a>
+</li>
+<li class="navbar-link">
+<a href="/guides">Guides</a>
+</li>
+<li class="navbar-link active">
+<a href="/blog">Blog</a>
+</li>
+<li class="navbar-link nav-search js-nav-search">
+<a>
+<i class="icon-search navbar-search--icon js-search-input-open"></i>
+<span class="search-input-close js-search-input-close">
+<i class="icon-remove"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="search-dropdown--container js-search-dropdown">
+<div class="container-fluid">
+<div class="search-form--container">
+<form action="/search" class="form-inline form-search" method="get">
+<input class="search-query search-form--form js-search-input" name="q" placeholder="Search for documentation, guides, and posts..." type="text" value="" />
+<button class="search-form--submit" type="submit"><i class="icon-search"></i></button>
+</form>
+</div>
+</div>
+</div>
+</header>
+<div>
+<div class="mobile-navigation--wrapper mobile-only">
+<div class="navigation-drawer--container">
+<div class="mobile-search--container">
+<form action="/search" class="form-inline form-search" method="get">
+<button class="search-form--submit" type="submit"><i class="icon-search"></i></button>
+<input class="search-query search-form--form js-search-input" name="q" placeholder="Search..." type="text" value="" />
+</form>
+</div>
+<div class="navigation-item-list">
+<div class="navbar-link">
+<a href="/">
+Home
+<i class="icon-chevron-right pull-right"></i>
+</a>
+</div>
+<div class="navbar-link">
+<a href="/docs">
+Docs
+<i class="icon-chevron-right pull-right"></i>
+</a>
+</div>
+<div class="navbar-link">
+<a href="/guides">
+Guides
+<i class="icon-chevron-right pull-right"></i>
+</a>
+</div>
+<div class="navbar-link">
+<a href="/projects">
+Projects
+<i class="icon-chevron-right pull-right"></i>
+</a>
+</div>
+<div class="navbar-link active">
+<a href="/blog">
+Blog
+<i class="icon-chevron-right pull-right"></i>
+</a>
+</div>
+<div class="navbar-link">
+<a href="/questions">
+Questions
+<i class="icon-chevron-right pull-right"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="mobile-nav">
+<div class="nav-icon js-open-nav-drawer">
+<i class="icon-reorder"></i>
+</div>
+<div class="header-center-icon">
+<a href="/">
+<div class="icon icon-spring-logo-mobile"></div>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="header--container"></div>
+<div class="container-fluid"></div>
+<div></div>
+<div class="container-fluid">
+<div class="main-body--wrapper">
+<div class="row-fluid blog--wrapper">
+<article class="span8 mobile-left-pane" id="content">
+<header class="desktop-only">
+<div class="blog-category active content--title">
+<div>Engineering</div>
+</div>
+<div class="blog-category content--title">
+<div>Releases</div>
+</div>
+<div class="blog-category content--title">
+<div>News and Events</div>
+</div>
+</header>
+<div class="blog--container">
+<header>
+<h1 class="blog--title">Hands on MongoDB 4.0 transactions with Spring Data</h1>
+<div class="meta-data--container">
+<div class="meta-data--item desktop-only">
+<div class="meta-data--icon icon blog-icon engineering"></div>
+<a class="category">Engineering</a>
+</div>
+<div class="meta-data--item">
+<img class="meta-data--icon" src="https://gravatar.com/avatar/eeacd6c45e867cb36eb05c9daa5cc2de?s=20&amp;d=mm" />
+<a class="author" rel="author" href="/team/christophstrobl">Christoph Strobl</a>
+</div>
+<div class="meta-data--item">
+<div class="meta-data--icon icon blog-icon calendar"></div>
+<time class="date" pubdate="" datetime="2018-06-28 08:00:00.0">June 28, 2018</time>
+</div>
+<div class="meta-data--item">
+<div class="meta-data--icon icon blog-icon comments"></div>
+<a class="comments" data-disqus-identifier="3291" href="/blog/2018/06/28/hands-on-mongodb-4-0-transactions-with-spring-data#disqus_thread">
+</a></div>
+</div>
+</header>
+<div class="blog--post"><div class="paragraph">
+<p>With <a href="https://www.mongodb.com/transactions">MongoDB 4.0</a>, ACID transactions have arrived in the <code>Document</code> store, enforcing all-or-nothing execution and maintaining data integrity.
+So, let&#8217;s get straight to it by looking at both the synchronous and the reactive execution models.</p>
+</div>
+<div class="paragraph">
+<p>At the time of this writing, MongoDB multi-document transactions are supported across a single replica set and feel like the transactions you are probably familiar with from relational databases. Looking at the driver API, one feels immediately at home:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-java" data-lang="java">try (ClientSession session = client.startSession()) {
+
+    session.startTransaction();
+
+    try {
+
+        collection.insertOne(session, documentOne);
+        collection.insertOne(session, documentTwo);
+
+        session.commitTransaction();
+
+    } catch (Exception e) {
+        session.abortTransaction();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Logical sessions build the foundation for MongoDB&#8217;s <a href="https://docs.mongodb.com/manual/core/read-isolation-consistency-recency/#causal-consistency">causal consistency</a> and, of course, transactions, by helping coordinate operations across distributed nodes. Client sessions, obtainable from <code>client.startSession()</code>, should be short-lived and released once no longer needed. So make sure to <code>close()</code> them.</p>
+</div>
+<div class="paragraph">
+<p>On a lower protocol level, the above snippet translates into the following series of commands, where you can clearly spot the session (<code>lsid</code>) present in each of them. The <code>startTransaction</code> flag is sent along with the first command, denoting the transaction start. Once completed, the transaction is then committed by sending <code>commitTransaction</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-javascript" data-lang="javascript">{ insert: "col", ordered: true, $db: "db",
+  $clusterTime: { … },
+  lsid: { id: { $binary: { base64 : "I3M7Nj…", … } } },
+  txnNumber: 1,
+  startTransaction: true,
+  documents: [ { … } ] }
+
+{ insert: "col", ordered: true, $db: "db",
+  $clusterTime: { … },
+  lsid: { id: { $binary: { base64 : "I3M7Nj…", … } } },
+  txnNumber: 1,
+  autocommit: false,
+  documents: [ { …} ] }
+
+{ commitTransaction: 1,
+  $db: "admin",
+  $clusterTime: { … },
+  lsid: { id: { $binary: { base64 : "I3M7Nj…", … } } },
+  txnNumber: 1 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the upcoming Spring Data <a href="https://github.com/spring-projects/spring-data-commons/wiki/Release-Train-Lovelace">Lovelace</a> release, the MongoDB module is going to ship with dedicated support for both synchronous and reactive transactions.</p>
+</div>
+<div class="paragraph">
+<p>Starting with the synchronous part, you may already be familiar with <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#transaction">Spring Framework&#8217;s transaction support</a>. Therefore, the presence of a <code>MongoTransactionManager</code> is probably no surprise. The transaction manager itself is the entry point when it comes to annotation-based transaction support in the imperative world.</p>
+</div>
+<div class="paragraph">
+<p>Now, as MongoDB did not support transactions in earlier versions, you explicitly have to register the <code>MongoTransactionManager</code> in your <code>ApplicationContext</code>. When you do so, <code>MongoTemplate</code> starts participating in managed transactions. This is a key point that you need to remember. The following example shows how to configure the transaction manager:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-java" data-lang="java">@Configuration
+class Config extends AbstractMongoConfiguration {
+
+  @Bean
+  MongoTransactionManager transactionManager(MongoDbFactory dbFactory) {
+    return new MongoTransactionManager(dbFactory);
+  }
+}
+
+
+@Service
+class DocumentService {
+
+  private final MongoOperations operations;
+
+  DocumentService(MongoOperations operations) {
+    this.operations = operations;
+  }
+
+  @Transactional
+  void insertDocuments() {
+
+    operations.insert(documentOne);
+    operations.insert(documentTwo);
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pretty straightforward, isn&#8217;t it? Well, sort of. But there are some non-obvious drawbacks. <a href="https://docs.mongodb.com/manual/sharding/#sharded-cluster">Sharded cluster</a> environment support is expected for the next major release of MongoDB and errors when you try. Furthermore, as a MongoDB user, it&#8217;s likely that you are used to all the convenience it offers. Some of those features are not available inside a transaction, including pretty much all the meta commands, creating collections, indices, and the implicit collection creation when first using a collection. To avoid errors and frustration, please make sure to set up required structures up front. Also, some commands may behave a little different. <code>count</code> for example uses stashed collection statistics that can be inaccurate inside a transaction. The command errors and requires usage of an aggregation counting documents. The available drivers alread address this by offering an alternative <code>countDocuments</code> method utilizing the aggregation strategy.</p>
+</div>
+<div class="paragraph">
+<p>With that in mind, let&#8217;s move on to reactive usage.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://mongodb.github.io/mongo-java-driver-reactivestreams/">MongoDB ReactiveStreams driver</a> provides a reactive entry point to multi-document transactions. Piping the drivers native <code>Publisher</code> into <a href="https://projectreactor.io/">Reactor</a> types lets you express transactional usage, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-java" data-lang="java">Mono.from(client.startSession()).flatMap(session -&gt; {
+
+  session.startTransaction();
+
+  return Mono.from(collection.insertOne(session, documentOne))
+    .then(Mono.from(collection.insertOne(session, documentTwo)))
+    .onErrorResume(e -&gt; Mono.from(session.abortTransaction())
+      .then(Mono.error(e)))
+    .flatMap(val -&gt; Mono.from(session.commitTransaction())
+      .then(Mono.just(val)))
+    .doFinally(signal -&gt; session.close());
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We need to make sure the transaction terminates, either successfully or with a rollback. Therefore, <code>onErrorResume(…)</code> ensures the transaction rolls back upon failure as well as ensuring that the final <code>flatMap(…)</code> commits the transaction, both of which preserve the main flow result or error. And, as always, make sure to close the session (in the <code>doFinally(…)</code> block) when you don&#8217;t need it any more.</p>
+</div>
+<div class="paragraph">
+<p>Unlike the sync part, there is, at the time of this writing, no reactive transaction manager available that would let you annotate methods with <code>@Transactional</code> and let you get on with doing the things that simply work.</p>
+</div>
+<div class="paragraph">
+<p>Instead, you have access to a transaction closure through <code>ReactiveMongoTemplate.inTransaction(…)</code>. It takes care of all the required session, commit, and abort handling while maintaining the main flow result. The processing steps within the callback are executed inside a MongoDB transaction, while processing steps outside do not influence the transaction. This means that processing errors outside the closure do not lead to a transaction abort, as illustrated in the sample shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-java" data-lang="java">template.inTransaction().execute(action -&gt;
+
+    // All code in here runs inside the transaction
+    action.insert(documentOne).then(action.insert(documentTwo)
+
+  ).flatMap(val -&gt; {
+    // An exception here does not affect the transaction
+  });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Just in case you seek access to the <code>ClientSession</code> throughout the flow, it is available in the Reactor <code>Context</code> and you can obtain it from <code>ReactiveMongoContext.getSession()</code>.</p>
+</div>
+<div class="paragraph">
+<p>One last thing: we&#8217;d be more that happy if you give it a try and provide us with your feedback! So, check out the <a href="https://github.com/spring-projects/spring-data-examples">Spring Data Examples</a> where you can already find a dedicated <a href="https://github.com/spring-projects/spring-data-examples/tree/master/mongodb/transactions">project</a>.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p>If you want to learn more about Spring Data or the Spring eco-system in general, the upcoming <a href="https://springoneplatform.io/">SpringOne Platform</a> conference in Washington, D.C. is the perfect time and place to be. Checkout the <a href="https://springoneplatform.io/2018/sessions">sessions</a> and register!</p>
+</div></div>
+</div>
+<section id="disqus_thread"></section>
+<script type="text/javascript">
+      var disqus_shortname = 'spring-io';
+      var disqus_identifier = 3291;
+
+      (function(disqus_shortname, document) {
+        injectScript('//' + disqus_shortname + '.disqus.com/embed.js');
+        injectScript('//' + disqus_shortname + '.disqus.com/count.js');
+
+        function injectScript(url) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = url;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+        }
+
+      }(disqus_shortname, document));
+    </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a>
+<div class="mobile-only">
+<p><a href="/blog">
+<i class="icon-chevron-left"></i>
+Back
+</a></p>
+</div>
+</article>
+<aside class="span4 mobile-right-pane" id="sidebar">
+<div>
+<ul class="right-pane-widget--container secondary-nav with-icon">
+<li class="blog-category">
+<div class="icon blog-icon all-posts"></div>
+<a href="/blog">All Posts</a>
+<a class="pull-right" href="/blog.atom"><i class="icon-rss"></i></a>
+</li>
+<li class="blog-category active">
+<div class="icon blog-icon engineering"></div>
+<a href="/blog/category/engineering">Engineering</a>
+<a class="pull-right" href="/blog/category/engineering.atom"><i class="icon-rss"></i></a>
+</li>
+<li class="blog-category">
+<div class="icon blog-icon releases"></div>
+<a href="/blog/category/releases">Releases</a>
+<a class="pull-right" href="/blog/category/releases.atom"><i class="icon-rss"></i></a>
+</li>
+<li class="blog-category">
+<div class="icon blog-icon news-and-events"></div>
+<a href="/blog/category/news">News and Events</a>
+<a class="pull-right" href="/blog/category/news.atom"><i class="icon-rss"></i></a>
+</li>
+</ul>
+<ul class="social-btn--container">
+<a class="social-btn twitter" href="https://twitter.com/springcentral"></a>
+
+<a class="social-btn linkedin" href="https://www.linkedin.com/groups/Spring-Users-46964"></a>
+<a class="social-btn youtube" href="/videos"></a>
+</ul>
+<div id="blog-sidebar-newsletter">
+<p>Get updates from The Spring Team delivered to your inbox</p>
+<script src="https://app-sj05.marketo.com/js/forms2/js/forms2.min.js"></script>
+<form id="mktoForm_4723"></form>
+<script>
+        MktoForms2.loadForm("https://app-sj05.marketo.com", "625-IUJ-009", 4723, function(form){
+          form.onSuccess(function(values, followUpUrl) {
+            form.getFormElem().html("<p>Thank you!</p>");
+            return false;
+          });
+        });
+      </script>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<footer class="footer">
+<div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+<div class="navbar">
+<div class="container">
+<ul class="nav">
+<li><a href="/team">Team</a></li>
+<li><a href="/services">Services</a></li>
+<li><a href="/tools">Tools</a></li>
+<li><a href="https://store.spring.io">Store</a></li>
+<li><a href="/blog">Newsletter</a></li>
+</ul>
+</div>
+</div>
+&copy; <span>2018</span> <a href="https://www.pivotal.io/">Pivotal Software</a>, Inc. All Rights Reserved.
+<a href="https://pivotal.io/terms-of-use">Terms of Use</a> &bullet;
+<a href="https://pivotal.io/privacy-policy">Privacy</a> &bullet;
+<a href="/trademarks">Trademark Guidelines</a>
+<div id="teconsent" style="display:inline-block;"></div>
+</div>
+</div>
+</div>
+</footer>
+<div id="scrim"></div>
+<script async="async" crossorigin="" src="//consent.trustarc.com/notice?domain=spring.io&c=teconsent&js=nj&text=true&pcookie"></script>
+</div>
+</body></html>
