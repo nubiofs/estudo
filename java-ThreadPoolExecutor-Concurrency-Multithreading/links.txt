@@ -11,3 +11,23 @@ https://gist.github.com/sanaulla123/3029344
 https://gist.github.com/gabhi/e519ea6ef984fcb1dac4
 
 https://github.com/ryanbrainard/java-concurrency-example
+
+https://www.devmedia.com.br/threads-paralelizando-tarefas-com-os-diferentes-recursos-do-java/34309
+
+===== com spring batch:
+
+https://grokonez.com/spring-framework/spring-batch/use-spring-batch-late-binding-step-scope-job-scope
+
+https://github.com/youtix/spring-batch-multi-thread-example
+
+https://github.com/gkatzioura/egkatzioura.wordpress.com
+
+https://github.com/gkatzioura/egkatzioura.wordpress.com/tree/master/SpringThreading
+
+https://examples.javacodegeeks.com/enterprise-java/spring/batch/spring-batch-multithreading-example/
+
+https://dzone.com/articles/spring-and-threads-taskexecutor
+
+https://www.captechconsulting.com/blogs/spring-batch-multi-threaded-step
+
+https://bl.ocks.org/dsyer/753006
