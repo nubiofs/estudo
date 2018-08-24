@@ -1,0 +1,4 @@
+https://www.devmedia.com.br/spring-framework-controle-de-transacoes-usando-anotacoes/28916
+https://www.baeldung.com/transaction-configuration-with-jpa-and-spring
+
+https://gist.github.com/pcan/3b395ea6f125b3ce4fb29dc7833e65aa
