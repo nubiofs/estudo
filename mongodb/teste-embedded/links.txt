@@ -1,9 +1,14 @@
 https://springframework.guru/spring-boot-with-embedded-mongodb/
-
+https://springframework.guru/spring-boot-with-embedded-mongodb/
+https://www.baeldung.com/spring-boot-embedded-mongodb
 https://www.baeldung.com/spring-boot-embedded-mongodb
 https://dzone.com/articles/spring-boot-with-embedded-mongodb
 
+https://gist.github.com/meshuga/f15e575f5ba425ee758b
+
 https://flapdoodle-oss.github.io/de.flapdoodle.embed.mongo/
+https://flapdoodle-oss.github.io/de.flapdoodle.embed.mongo/
+https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo
 
 https://github.com/springframeworkguru/spring-boot-mongodb/tree/embeded_mongodb
 
@@ -14,3 +19,21 @@ https://stackoverflow.com/questions/31568351/how-do-you-configure-embedded-mongd
 http://mvpjava.com/spring-boot-integration-testing/
 
 https://github.com/spring-projects/spring-data-examples/blob/master/mongodb/pom.xml
+
+
+https://dzone.com/articles/spring-boot-with-embedded-mongodb
+
+https://github.com/alexbt/sample-spring-boot-data-mongodb-embedded/blob/master/pom.xml
+https://github.com/alexbt/sample-spring-boot-data-mongodb-embedded
+
+=========
+
+https://github.com/alexbt/sample-spring-boot-data-mongodb-embedded-multiple/blob/master/src/main/java/com/alexbt/mongodb/MongoConfiguration.java
+
+https://github.com/sourcemuse/GradleMongoPlugin
+https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo/blob/master/src/test/java/de/flapdoodle/embed/mongo/tests/MongodForTestsFactoryTest.java
+
+---
+
+http://mvpjava.com/spring-boot-integration-testing/
+https://blog.scottlogic.com/2016/11/22/spring-boot-and-mongodb.html
