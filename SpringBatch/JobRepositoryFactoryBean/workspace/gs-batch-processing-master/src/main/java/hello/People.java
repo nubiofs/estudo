@@ -2,14 +2,6 @@ package hello;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity(name="people")
 public class People implements Serializable{
 
 	/**
@@ -17,10 +9,6 @@ public class People implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name = "id", nullable = false)
 	private Integer id;
 
 	private String first_name;
@@ -50,6 +38,14 @@ public class People implements Serializable{
 		this.last_name = last_name;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
 	@Override
 	public String toString() {
 		return "firstName: " + first_name + ", lastName: " + last_name;

@@ -1,0 +1,205 @@
+https://github.com/lntgithub/springbatch_mongo
+
+https://github.com/vfouzdar/springbatch-mongoDao
+
+https://github.com/nmorel/spring-batch-extension-mongodb
+
+https://github.com/jbaruch/springbatch-over-mongodb
+
+https://stackoverflow.com/questions/47443680/using-mongodb-as-spring-batch-job-repository?rq=1
+
+============
+
+
+	/////////////////// TESTE
+
+	/*
+    @Primary
+    @Bean(name="ds2.datasource")
+    @ConfigurationProperties(prefix="ds2.datasource")
+    public DataSource dataSource(){
+        return DataSourceBuilder.create().build();
+    }
+	 */
+
+	/*
+    @Bean
+    public BasicDataSource dataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+          dataSource.setDriverClassName("org.h2.Driver");
+          dataSource.setUrl("jdbc:h2:mem:test");
+          dataSource.setUsername("sa");
+          dataSource.setPassword("");
+        return dataSource;
+    }
+	 */
+
+	/*
+    @Bean
+    public DataSource dataSource() {        
+
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        EmbeddedDatabase db = builder
+            .setType(EmbeddedDatabaseType.H2) 
+            .build();
+        return db;
+    }
+	 */
+	private DataSource ds;
+
+	private DataSource getDataSource() {
+		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		EmbeddedDatabase ds = builder
+				.setType(EmbeddedDatabaseType.H2) 
+				.build();
+		return ds;
+	}
+
+	@Bean
+	public JobRepository jobRepository() throws Exception {
+		/*
+		try {
+			MapJobRepositoryFactoryBean factoryBean = new MapJobRepositoryFactoryBean(new ResourcelessTransactionManager());
+			return factoryBean.getObject();
+		} catch (Exception e) {
+
+			return null;
+		}
+		 */
+
+		/*
+		 BasicDataSource dataSource = new BasicDataSource();
+         dataSource.setDriverClassName("org.h2.Driver");
+         dataSource.setUrl("jdbc:h2:mem:test");
+         dataSource.setUsername("sa");
+         dataSource.setPassword("");
+		 */
+
+		//        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		//        EmbeddedDatabase ds = builder
+		//            .setType(EmbeddedDatabaseType.H2) 
+		//            .build();
+
+		this.ds = getDataSource();
+		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
+
+		factory.setDataSource(this.ds);
+		factory.setTransactionManager(new DataSourceTransactionManager(this.ds));
+		factory.afterPropertiesSet();
+		return factory.getObject();
+
+	}
+
+	@Bean
+	public JobLauncher jobLauncher(JobRepository jobRepository) {
+		SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
+		//jobLauncher.setJobRepository(jobRepository);
+		try {
+			jobLauncher.setJobRepository(jobRepository());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//jobLauncher.setJobRepository(jobRepository().getJobRepository());
+		return jobLauncher;
+	}
+
+	@Bean
+	public JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(this.ds);
+	}
+
+
+	/////////////////////// TESTE
+
+
+===============
+
+
+
+
+ @Bean
+ public BatchConfigurer batchConfigurer(@Qualifier("embeddedDbForBatch") DataSource dataSource) {
+        return new DefaultBatchConfigurer(dataSource);
+}
+
+
+	@Bean
+	public JobRepository jobRepository() {
+		
+		//TESTE+
+		///org/springframework/batch/core/schema-h2.sql
+		//https://docs.spring.io/spring-batch/4.0.x/reference/html/index-single.html#metaDataSchemaOverview
+//		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
+//	    factory.setDataSource(dataSource);
+//	    factory.setTransactionManager(transactionManager);
+//	    factory.setIsolationLevelForCreate("ISOLATION_SERIALIZABLE");
+		//factory.setIsolationLevelForCreate("ISOLATION_REPEATABLE_READ");
+//	    factory.setTablePrefix("BATCH_");
+//	    factory.setMaxVarCharLength(1000);
+//	    return factory.getObject();
+		//
+		//
+//		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
+//	    factory.setDataSource(dataSource);
+//	    factory.setDatabaseType("db2");
+//	    factory.setTransactionManager(transactionManager);
+//	    return factory.getObject();
+		//TESTE-
+		
+		try {
+			MapJobRepositoryFactoryBean factoryBean = new MapJobRepositoryFactoryBean(new ResourcelessTransactionManager());
+			return factoryBean.getObject();
+		} catch (Exception e) {
+			log.error("[Processar Extratos - Error] Exception: {}, Msg: {}", e, e.getMessage());
+			return null;
+		}
+	}
+
+
+@Bean
+    public BasicDataSource dataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+          dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
+          dataSource.setUrl("jdbc:hsqldb:mem:testdb;sql.enforce_strict_size=true;hsqldb.tx=mvcc");
+          dataSource.setUsername("sa");
+          dataSource.setPassword("");
+        return dataSource;
+    } 
+
+
+- https://grokonez.com/java-integration/configure-multi-postgres-datasources-springboot
+
+3. Configure Datasource properties in application.properties file
+
+Open application.properties, configure as below:
+– Datasource properties for PostgreSQL db1
+#db1 datasource
+db1.datasource.url=jdbc:postgresql://localhost:5432/db1
+db1.datasource.username=edit_here
+db1.datasource.password=edit_here
+1
+2
+3
+4
+	
+#db1 datasource
+db1.datasource.url=jdbc:postgresql://localhost:5432/db1
+db1.datasource.username=edit_here
+db1.datasource.password=edit_here
+
+– Datasource properties for PostgreSQL db2:
+#db2 datasource
+db2.datasource.url=jdbc:postgresql://localhost:5432/db2
+db2.datasource.username=edit_here
+db2.datasource.password=edit_here
+1
+2
+3
+4
+	
+#db2 datasource
+db2.datasource.url=jdbc:postgresql://localhost:5432/db2
+db2.datasource.username=edit_here
+db2.datasource.password=edit_here
+

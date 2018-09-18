@@ -2,12 +2,17 @@ package hello;
 
 import javax.sql.DataSource;
 
+import org.postgresql.Driver;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.launch.support.SimpleJobLauncher;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
@@ -18,74 +23,207 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 @Configuration
 @EnableBatchProcessing
 public class BatchConfiguration {
 
-    @Autowired
-    public JobBuilderFactory jobBuilderFactory;
+	@Autowired
+	public JobBuilderFactory jobBuilderFactory;
 
-    @Autowired
-    public StepBuilderFactory stepBuilderFactory;
-    
-    /*
-    @Primary
-    @Bean(name="spring.datasource")
-    @ConfigurationProperties(prefix="spring.datasource")
-    public DataSource db1DataSource(){
-        return DataSourceBuilder.create().build();
-    }
-    */
-    
-    // tag::readerwriterprocessor[]
-    @Bean
-    public FlatFileItemReader<People> reader() {
-        return new FlatFileItemReaderBuilder<People>()
-            .name("peopleItemReader")
-            .resource(new ClassPathResource("sample-data.csv"))
-            .delimited()
-            .names(new String[]{"first_name", "last_name"})
-            .fieldSetMapper(new BeanWrapperFieldSetMapper<People>() {{
-                setTargetType(People.class);
-            }})
-            .build();
-    }
+	@Autowired
+	public StepBuilderFactory stepBuilderFactory;
 
-    @Bean
-    public PeopleItemProcessor processor() {
-        return new PeopleItemProcessor();
-    }
+	private DataSource dataSource;
 
-    @Bean
-    public JdbcBatchItemWriter<People> writer(DataSource dataSource) {
-        return new JdbcBatchItemWriterBuilder<People>()
-            .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-            .sql("INSERT INTO public.people (first_name, last_name) VALUES (:first_name, :last_name)")
-            .dataSource(dataSource)
-            .build();
-    }
-    // end::readerwriterprocessor[]
+	@Autowired
+	public DataSource dataSource() {
+		//$ docker run -it 1000kit/h2
+		//http://172.17.0.4:8181/login.jsp?jsessionid=9359a5513cf4c62a34a340ac486ae039
+		//OU:
+		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		this.dataSource = builder
+				.setType(EmbeddedDatabaseType.H2)
+				.addScript("schema-all.sql")
+				.build();
+		return this.dataSource;
+	}
 
-    // tag::jobstep[]
-    @Bean
-    public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-        return jobBuilderFactory.get("importUserJob")
-            .incrementer(new RunIdIncrementer())
-            .listener(listener)
-            .flow(step1)
-            .end()
-            .build();
-    }
 
-    @Bean
-    public Step step1(JdbcBatchItemWriter<People> writer) {
-        return stepBuilderFactory.get("step1")
-            .<People, People> chunk(10)
-            .reader(reader())
-            .processor(processor())
-            .writer(writer)
-            .build();
-    }
-    // end::jobstep[]
+	@Bean
+	public JobRepository jobRepository() throws Exception {
+
+		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
+		factory.setDataSource(springBatchDataSource());
+		factory.setTransactionManager(new DataSourceTransactionManager(springBatchDataSource()));
+		factory.afterPropertiesSet();
+		return factory.getObject();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Bean
+	public DataSource springBatchDataSource() throws ClassNotFoundException {
+		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+		//TODO FIXME Peguar dados via variaveis de ambiente:
+		dataSource.setPassword("passwd");
+		dataSource.setUrl("jdbc:postgresql://172.17.0.2:5432/testdb");
+		dataSource.setUsername("test");
+		//dataSource.setDriverClass(Driver.class);
+		dataSource.setDriverClass((Class<Driver>) Class.forName("org.postgresql.Driver"));
+		return dataSource;
+	}
+
+//	@Bean
+//	public JobLauncher jobLauncher(JobRepository jobRepository) throws Exception {
+//		SimpleJobLauncher launcher = new SimpleJobLauncher();
+//		launcher.setJobRepository(jobRepository);
+//		launcher.afterPropertiesSet();
+//		return launcher;
+//	}
+
+	@Bean
+	public JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(this.dataSource);
+	}
+
+	// tag::readerwriterprocessor[]
+	@Bean
+	public FlatFileItemReader<People> reader() {
+		return new FlatFileItemReaderBuilder<People>()
+				.name("peopleItemReader")
+				.resource(new ClassPathResource("sample-data.csv"))
+				.delimited()
+				.names(new String[]{"first_name", "last_name"})
+				.fieldSetMapper(new BeanWrapperFieldSetMapper<People>() {{
+					setTargetType(People.class);
+				}})
+				.build();
+	}
+
+	@Bean
+	public PeopleItemProcessor processor() {
+		return new PeopleItemProcessor();
+	}
+
+	@Bean
+	//... writer(@Qualifier("batchDataSource") DataSource dataSource){
+	//public JdbcBatchItemWriter<People> writer(DataSource dataSource) {
+	public JdbcBatchItemWriter<People> writer() {
+		return new JdbcBatchItemWriterBuilder<People>()
+				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
+				//.sql("INSERT INTO public.people (first_name, last_name) VALUES (:first_name, :last_name)")
+				.sql("INSERT INTO people (first_name, last_name) VALUES (:first_name, :last_name)")
+				.dataSource(this.dataSource)
+				.build();
+	}
+	// end::readerwriterprocessor[]
+
+	// tag::jobstep[]
+	@Bean
+	public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
+		return jobBuilderFactory.get("importUserJob")
+				.incrementer(new RunIdIncrementer())
+				.listener(listener)
+				.flow(step1)
+				.end()
+				.build();
+	}
+
+	@Bean
+	public Step step1(JdbcBatchItemWriter<People> writer) {
+		return stepBuilderFactory.get("step1")
+				.<People, People> chunk(10)
+				.reader(reader())
+				.processor(processor())
+				.writer(writer)
+				.build();
+	}
+	// end::jobstep[]
+
+	/*
+
+
+	  @Bean
+  @ConfigurationProperties(prefix = "spring.datasource")
+  public DataSource dataSource(){
+      //DataSource ds =new EmbeddedDatabaseBuilder().addScript("classpath:sql/schema.sql").addScript("classpath:testdb/data.sql").build();
+      DataSourceBuilder ds =  DataSourceBuilder.create();
+      logger.info("dataSource = " + ds);
+      return ds.build();
+
+  }
+
+	 //////////////
+
+	 //import org.h2.Driver;
+	 @Bean
+	public DataSource dataSource(){
+		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+		//dataSource.setDriver(Driver.load());
+		//dataSource.setUrl("jdbc:h2:~/test");
+		dataSource.setDriverClass(Driver.class);
+      dataSource.setUrl("jdbc:h2:mem:test;MODE=Oracle;");
+		dataSource.setUsername("sa");
+		dataSource.setPassword("");
+		return dataSource;
+	}
+
+	////////////////
+
+	@Bean
+	public DataSource dataSource(){
+	    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	    dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+	    dataSource.setUrl("your url");
+	    dataSource.setUsername( "username" );
+	    dataSource.setPassword( "password" );
+	    return dataSource;
+	}
+
+	///////////////
+
+
+  @Bean
+  public ResourcelessTransactionManager transactionManager() {
+      return new ResourcelessTransactionManager();
+  }
+
+  @Bean
+  public MapJobRepositoryFactoryBean mapJobRepositoryFactory(ResourcelessTransactionManager txManager)
+          throws Exception {
+      MapJobRepositoryFactoryBean factory = new MapJobRepositoryFactoryBean(txManager);
+      factory.afterPropertiesSet();
+      return factory;
+  }
+
+  @Bean
+  public JobRepository jobRepository(MapJobRepositoryFactoryBean factory) throws Exception {
+      return factory.getObject();
+  }
+
+  @Bean
+  public JobExplorer jobExplorer(MapJobRepositoryFactoryBean factory) {
+      return new SimpleJobExplorer(factory.getJobInstanceDao(), factory.getJobExecutionDao(),
+              factory.getStepExecutionDao(), factory.getExecutionContextDao());
+  }
+
+  @Bean
+  public SimpleJobLauncher jobLauncher(JobRepository jobRepository) throws Exception {
+      SimpleJobLauncher launcher = new SimpleJobLauncher();
+      launcher.setJobRepository(jobRepository);
+      launcher.afterPropertiesSet();
+      return launcher;
+  }
+
+
+	 */
+
+
+
 }

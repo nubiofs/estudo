@@ -1,11 +1,4 @@
-CREATE USER test;
-
-ALTER USER test WITH PASSWORD 'passwd';
-
-CREATE DATABASE testdb;
-
-GRANT ALL PRIVILEGES ON DATABASE testdb TO test;
-
+/*
 DROP TABLE IF EXISTS public.people;
 
 CREATE TABLE public.people  (
@@ -15,3 +8,12 @@ CREATE TABLE public.people  (
 );
 
 ALTER TABLE "public"."people" OWNER TO test;
+*/
+
+DROP TABLE people IF EXISTS;
+
+CREATE TABLE people  (
+    id BIGINT IDENTITY NOT NULL PRIMARY KEY,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20)
+);
