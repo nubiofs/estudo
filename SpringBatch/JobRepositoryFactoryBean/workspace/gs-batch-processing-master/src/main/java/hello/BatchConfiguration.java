@@ -1,5 +1,7 @@
 package hello;
 
+import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
 import org.postgresql.Driver;
@@ -33,66 +35,100 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 @EnableBatchProcessing
 public class BatchConfiguration {
 
+	private DataSource appDataSource;
+	private JdbcTemplate appJdbcTemplate;
+
 	@Autowired
 	public JobBuilderFactory jobBuilderFactory;
 
 	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
 
-	private DataSource dataSource;
-
 	@Autowired
-	public DataSource dataSource() {
-		//$ docker run -it 1000kit/h2
-		//http://172.17.0.4:8181/login.jsp?jsessionid=9359a5513cf4c62a34a340ac486ae039
-		//OU:
-		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		this.dataSource = builder
+	public DataSource appDataSource() {
+		
+		this.appDataSource = new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.H2)
 				.addScript("schema-all.sql")
 				.build();
-		return this.dataSource;
+		try {
+			System.out.println("URL = " + this.appDataSource.getConnection().getMetaData().getURL());
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+		return this.appDataSource;
+
 	}
 
+	@Autowired
+	public JdbcTemplate appJdbcTemplate() {
+		this.appJdbcTemplate = new JdbcTemplate(this.appDataSource);
+		return this.appJdbcTemplate;
+	}
 
 	@Bean
-	public JobRepository jobRepository() throws Exception {
+	public DataSource dataSource() {
+
+		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+
+		//TODO FIXME Peguar dados via variaveis de ambiente:
+		dataSource.setPassword("passwd");
+		dataSource.setUrl("jdbc:postgresql://172.17.0.2:5432/testdb");
+		dataSource.setUsername("test");
+		//ds.setDriverClass((Class<Driver>) Class.forName("org.postgresql.Driver"));
+		dataSource.setDriverClass(Driver.class);
+		
+		return dataSource;
+		
+	}
+
+	@Bean
+	public JobRepository jobRepository(DataSource dataSource) throws Exception {
 
 		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
-		factory.setDataSource(springBatchDataSource());
-		factory.setTransactionManager(new DataSourceTransactionManager(springBatchDataSource()));
+		factory.setDataSource(dataSource);
+		//factory.setDatabaseType(DatabaseType.POSTGRES.name());
+		factory.setTransactionManager(new DataSourceTransactionManager(dataSource));
 		factory.afterPropertiesSet();
 		return factory.getObject();
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Bean
-	public DataSource springBatchDataSource() throws ClassNotFoundException {
-		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-		//TODO FIXME Peguar dados via variaveis de ambiente:
-		dataSource.setPassword("passwd");
-		dataSource.setUrl("jdbc:postgresql://172.17.0.2:5432/testdb");
-		dataSource.setUsername("test");
-		//dataSource.setDriverClass(Driver.class);
-		dataSource.setDriverClass((Class<Driver>) Class.forName("org.postgresql.Driver"));
-		return dataSource;
+	public JobLauncher jobLauncher(JobRepository jobRepository) throws Exception {
+
+		SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
+		jobLauncher.setJobRepository(jobRepository);
+		jobLauncher.afterPropertiesSet();
+		return jobLauncher;
+
 	}
 
-//	@Bean
-//	public JobLauncher jobLauncher(JobRepository jobRepository) throws Exception {
-//		SimpleJobLauncher launcher = new SimpleJobLauncher();
-//		launcher.setJobRepository(jobRepository);
-//		launcher.afterPropertiesSet();
-//		return launcher;
-//	}
-
 	@Bean
-	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(this.dataSource);
+	public Job importUserJob(Step step1) {
+
+		JobCompletionNotificationListener listener = new JobCompletionNotificationListener(this.appJdbcTemplate);
+
+		return jobBuilderFactory.get("importUserJob")
+				.incrementer(new RunIdIncrementer())
+				.listener(listener)
+				.flow(step1)
+				.end()
+				.build();
+
 	}
 
-	// tag::readerwriterprocessor[]
+	@Bean
+	public Step step1(JdbcBatchItemWriter<People> writer) {
+		return stepBuilderFactory.get("step1")
+				.<People, People> chunk(10)
+				.reader(reader())
+				.processor(processor())
+				.writer(writer)
+				.build();
+	}
+
 	@Bean
 	public FlatFileItemReader<People> reader() {
 		return new FlatFileItemReaderBuilder<People>()
@@ -112,39 +148,15 @@ public class BatchConfiguration {
 	}
 
 	@Bean
-	//... writer(@Qualifier("batchDataSource") DataSource dataSource){
-	//public JdbcBatchItemWriter<People> writer(DataSource dataSource) {
 	public JdbcBatchItemWriter<People> writer() {
 		return new JdbcBatchItemWriterBuilder<People>()
 				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
 				//.sql("INSERT INTO public.people (first_name, last_name) VALUES (:first_name, :last_name)")
 				.sql("INSERT INTO people (first_name, last_name) VALUES (:first_name, :last_name)")
-				.dataSource(this.dataSource)
-				.build();
-	}
-	// end::readerwriterprocessor[]
-
-	// tag::jobstep[]
-	@Bean
-	public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-		return jobBuilderFactory.get("importUserJob")
-				.incrementer(new RunIdIncrementer())
-				.listener(listener)
-				.flow(step1)
-				.end()
+				.dataSource(this.appDataSource)
 				.build();
 	}
 
-	@Bean
-	public Step step1(JdbcBatchItemWriter<People> writer) {
-		return stepBuilderFactory.get("step1")
-				.<People, People> chunk(10)
-				.reader(reader())
-				.processor(processor())
-				.writer(writer)
-				.build();
-	}
-	// end::jobstep[]
 
 	/*
 
