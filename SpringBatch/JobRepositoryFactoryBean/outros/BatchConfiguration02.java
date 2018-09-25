@@ -8,10 +8,14 @@ import org.postgresql.Driver;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.JobRegistry;
+import org.springframework.batch.core.configuration.ListableJobLocator;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.support.JobFactoryRegistrationListener;
+import org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor;
 import org.springframework.batch.core.explore.JobExplorer;
+import org.springframework.batch.core.explore.support.JobExplorerFactoryBean;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
@@ -94,8 +98,6 @@ public class BatchConfiguration {
 		factory.setDataSource(dataSource);
 		//factory.setDatabaseType(DatabaseType.POSTGRES.name());
 		factory.setTransactionManager(new DataSourceTransactionManager(dataSource));
-		factory.setIsolationLevelForCreate("ISOLATION_DEFAULT");
-		//factory.setIsolationLevelForCreate("ISOLATION_SERIALIZABLE");
 		factory.afterPropertiesSet();
 		return factory.getObject();
 
@@ -110,8 +112,50 @@ public class BatchConfiguration {
 		return jobLauncher;
 
 	}
+	
+	@Bean
+	//@ConditionalOnMissingBean(JobExplorer.class)
+	public JobExplorer jobExplorer(DataSource dataSource) throws Exception {
+//		BatchConfigurer batchConfigurer = getBatchConfigurer();
+//		if (batchConfigurer != null) {
+//			return batchConfigurer.getJobExplorer();
+//		}
+		JobExplorerFactoryBean jobExplorerFactoryBean = new JobExplorerFactoryBean();
+		jobExplorerFactoryBean.setDataSource(dataSource);
+		jobExplorerFactoryBean.afterPropertiesSet();
+		return jobExplorerFactoryBean.getObject();
+	}
+	
+//	@Bean
+//	public JobRegistry jobRegistry(DataSource dataSource) throws Exception {
+//		JobRegistryBeanPostProcessor reg = new JobRegistryBeanPostProcessor();
+//		reg.afterPropertiesSet();
+//		JobFactoryRegistrationListener registry = new JobFactoryRegistrationListener();
+//		JobRepositoryFactoryBean jobRepositoryFactoryBean = new JobRepositoryFactoryBean();
+//		jobRepositoryFactoryBean.setDataSource(dataSource);
+//		jobRepositoryFactoryBean.afterPropertiesSet();
+//		return jobRepositoryFactoryBean.getObject();
+//	}
+	
+//	@Bean
+//	@ConditionalOnMissingBean(MapJobRegistry.class)
+//	public MapJobRegistry batchJobRegistry() {
+//		return new MapJobRegistry();
+//	}
+	
+	@Bean
+    //public JobOperator jobOperator(JobExplorer jobExplorer, JobLauncher jobLauncher, ListableJobLocator jobRegistry, JobRepository jobRepository) throws Exception {
+	public JobOperator jobOperator(JobExplorer jobExplorer, JobLauncher jobLauncher, JobRepository jobRepository) throws Exception {
+        SimpleJobOperator jobOperator = new SimpleJobOperator();
+        jobOperator.setJobExplorer(jobExplorer);
+        jobOperator.setJobLauncher(jobLauncher);
+        //jobOperator.setJobRegistry(jobRegistry);
+        jobOperator.setJobRepository(jobRepository);
+        jobOperator.afterPropertiesSet();
+        return jobOperator;
+	}
 
-	@Bean(name="importUserJob")
+	@Bean
 	public Job importUserJob(Step step1) {
 
 		JobCompletionNotificationListener listener = new JobCompletionNotificationListener(this.appJdbcTemplate);
@@ -163,37 +207,7 @@ public class BatchConfiguration {
 				.build();
 	}
 
-	@Autowired
-	private TaskletLoop taskletLoop;
-	
-	@Bean(name="jobTaskletLoop")
-	public Job jobTaskletLoop() throws Exception {//NOSONAR
-		return jobBuilderFactory.get("jobTaskletLoop")
-				.incrementer(new RunIdIncrementer())
-				.start(stepLoop())
-				.build();
-	}
 
-	@Bean
-	public Step stepLoop() {
-		return stepBuilderFactory.get("stepLoop")
-				.tasklet(taskletLoop)
-				.build();
-	}
-	
-	
-	//teste+
-//	@Bean
-//    public JobOperator jobOperator(JobExplorer jobExplorer, JobLauncher jobLauncher, JobRegistry jobRegistry, JobRepository jobRepository) {
-//        SimpleJobOperator jobOperator = new SimpleJobOperator();
-//        jobOperator.setJobExplorer(jobExplorer);
-//        jobOperator.setJobLauncher(jobLauncher);
-//        jobOperator.setJobRegistry(jobRegistry);
-//        jobOperator.setJobRepository(jobRepository);
-//        return jobOperator;
-//	}
-	//teste-
-	
 	/*
 
 

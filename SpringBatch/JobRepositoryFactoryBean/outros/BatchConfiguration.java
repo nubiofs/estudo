@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.postgresql.Driver;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -21,6 +22,7 @@ import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -31,133 +33,104 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 @Configuration
+@EnableBatchProcessing
 public class BatchConfiguration {
 
-//	@Autowired 
-//	private JobExplorer jobExplorer;
-
-	private DataSource dataSource;
+	private DataSource appDataSource;
+	private JdbcTemplate appJdbcTemplate;
 
 	@Autowired
-	public DataSource source() {
-		//$ docker run -it 1000kit/h2
-		//http://172.17.0.4:8181/login.jsp?jsessionid=9359a5513cf4c62a34a340ac486ae039
-		//OU:
-		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		this.dataSource = builder
+	public JobBuilderFactory jobBuilderFactory;
+
+	@Autowired
+	public StepBuilderFactory stepBuilderFactory;
+
+	@Autowired
+	public DataSource appDataSource() {
+		
+		this.appDataSource = new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.H2)
 				.addScript("schema-all.sql")
 				.build();
 		try {
-			System.out.println("URL = " + this.dataSource.getConnection().getMetaData().getURL());
+			System.out.println("URL = " + this.appDataSource.getConnection().getMetaData().getURL());
 		} catch (SQLException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
-		return this.dataSource;
 		
+		return this.appDataSource;
+
 	}
 
-	//@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
 	@Autowired
-	public JdbcTemplate jdbcTemplate() {
-		this.jdbcTemplate = new JdbcTemplate(this.dataSource);
-		//jdbcTemplate.setDataSource(dataSource);
-		return this.jdbcTemplate;
-//		JdbcTemplate jdbc = new JdbcTemplate();
-//		jdbc.setDataSource(this.dataSource);
-//		return jdbc;
+	public JdbcTemplate appJdbcTemplate() {
+		this.appJdbcTemplate = new JdbcTemplate(this.appDataSource);
+		return this.appJdbcTemplate;
 	}
 
-	@Bean
-	public JdbcTemplate template() {
-		return this.jdbcTemplate;
-	}
-
-
-	private SimpleDriverDataSource ds;
-	private JobRepository jobRepository;
-
-	@SuppressWarnings("unchecked")
-	@Autowired
-	public JobRepository repository() throws Exception {
-		
-		//SimpleDriverDataSource ds = new SimpleDriverDataSource();
-		ds = new SimpleDriverDataSource();
-		//TODO FIXME Peguar dados via variaveis de ambiente:
-		ds.setPassword("passwd");
-		ds.setUrl("jdbc:postgresql://172.17.0.2:5432/testdb");
-		ds.setUsername("test");
-		//dataSource.setDriverClass(Driver.class);
-		ds.setDriverClass((Class<Driver>) Class.forName("org.postgresql.Driver"));
-		//dataSource.setSchema("classpath:org/springframework/batch/core/schema-postgresql.sql");
-
-		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
-		factory.setDataSource(ds);
-		//factory.setDatabaseType(DatabaseType.POSTGRES.name());
-		factory.setTransactionManager(new DataSourceTransactionManager(ds));
-		factory.afterPropertiesSet();
-		//teste+
-		//return factory.getObject();
-		this.jobRepository = factory.getObject();
-		return this.jobRepository;
-		//teste-
-
-	}
-	
 	@Bean
 	public DataSource dataSource() {
-		return this.ds;
-	}
 
-	
-	@Bean
-	public JobRepository jobRepository() {
-		return this.jobRepository;
-	}
+		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 
-//	@SuppressWarnings("unchecked")
-//	@Bean
-//	public DataSource source() throws ClassNotFoundException {
-//		SimpleDriverDataSource ds = new SimpleDriverDataSource();
-//		//TODO FIXME Peguar dados via variaveis de ambiente:
-//		ds.setPassword("passwd");
-//		ds.setUrl("jdbc:postgresql://172.17.0.2:5432/testdb");
-//		ds.setUsername("test");
-//		//dataSource.setDriverClass(Driver.class);
-//		ds.setDriverClass((Class<Driver>) Class.forName("org.postgresql.Driver"));
-//		//dataSource.setSchema("classpath:org/springframework/batch/core/schema-postgresql.sql");
-//		return ds;
-//	}
-
-	/*
-	private JobLauncher jobLauncher;
-
-	//@Autowired
-	//public JobLauncher launcher(JobRepository jobRepository) throws Exception {
-	public JobLauncher launcher() throws Exception {
-		this.jobLauncher = new SimpleJobLauncher();
-		//((SimpleJobLauncher) this.jobLauncher).setJobRepository(jobRepository);
-		//((SimpleJobLauncher) this.jobLauncher).setJobRepository(this.jobRepository);
-		//((SimpleJobLauncher) this.jobLauncher).setJobRepository(jobRepository());
-		//((SimpleJobLauncher) this.jobLauncher).afterPropertiesSet();
-		return this.jobLauncher;
-	}
-	*/
-	
-	@Autowired
-	@Bean
-	public JobLauncher jobLauncher() throws Exception {
+		//TODO FIXME Peguar dados via variaveis de ambiente:
+		dataSource.setPassword("passwd");
+		dataSource.setUrl("jdbc:postgresql://172.17.0.2:5432/testdb");
+		dataSource.setUsername("test");
+		//ds.setDriverClass((Class<Driver>) Class.forName("org.postgresql.Driver"));
+		dataSource.setDriverClass(Driver.class);
 		
-		JobLauncher jobLauncher = new SimpleJobLauncher();
+		return dataSource;
 		
-		((SimpleJobLauncher) jobLauncher).setJobRepository(this.jobRepository);
-		((SimpleJobLauncher) jobLauncher).afterPropertiesSet();
+	}
+
+	@Bean
+	public JobRepository jobRepository(DataSource dataSource) throws Exception {
+
+		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
+		factory.setDataSource(dataSource);
+		//factory.setDatabaseType(DatabaseType.POSTGRES.name());
+		factory.setTransactionManager(new DataSourceTransactionManager(dataSource));
+		factory.afterPropertiesSet();
+		return factory.getObject();
+
+	}
+
+	@Bean
+	public JobLauncher jobLauncher(JobRepository jobRepository) throws Exception {
+
+		SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
+		jobLauncher.setJobRepository(jobRepository);
+		jobLauncher.afterPropertiesSet();
 		return jobLauncher;
+
+	}
+	
+	@Bean(name="importUserJob")
+	@Qualifier(value="importUserJob")
+	public Job importUserJob(Step step1) {
+
+		JobCompletionNotificationListener listener = new JobCompletionNotificationListener(this.appJdbcTemplate);
+
+		return jobBuilderFactory.get("importUserJob")
+				.incrementer(new RunIdIncrementer())
+				.listener(listener)
+				.flow(step1)
+				.end()
+				.build();
+
 	}
 
-	// tag::readerwriterprocessor[]
+	@Bean
+	public Step step1(JdbcBatchItemWriter<People> writer) {
+		return stepBuilderFactory.get("step1")
+				.<People, People> chunk(10)
+				.reader(reader())
+				.processor(processor())
+				.writer(writer)
+				.build();
+	}
+
 	@Bean
 	public FlatFileItemReader<People> reader() {
 		return new FlatFileItemReaderBuilder<People>()
@@ -176,66 +149,38 @@ public class BatchConfiguration {
 		return new PeopleItemProcessor();
 	}
 
-	private JdbcBatchItemWriter<People> writer;
 	@Bean
-	//... writer(@Qualifier("batchDataSource") DataSource dataSource){
-	//public JdbcBatchItemWriter<People> writer(DataSource dataSource) {
 	public JdbcBatchItemWriter<People> writer() {
-		this.writer = new JdbcBatchItemWriterBuilder<People>()
+		return new JdbcBatchItemWriterBuilder<People>()
 				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
 				//.sql("INSERT INTO public.people (first_name, last_name) VALUES (:first_name, :last_name)")
 				.sql("INSERT INTO people (first_name, last_name) VALUES (:first_name, :last_name)")
-				.dataSource(this.dataSource)
-				//.dataSource(source())
+				.dataSource(this.appDataSource)
 				.build();
-		return this.writer;
 	}
-	// end::readerwriterprocessor[]
 
-	// tag::jobstep[]
+	
+	////////////
 	
 	@Autowired
-	public JobBuilderFactory jobBuilderFactory;
-
-	private Job importUserJob;
-
-	@Bean
-	//public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-	public Job importUserJob(Step step1) {
-		JobCompletionNotificationListener listener = new JobCompletionNotificationListener(this.jdbcTemplate);
-		this.importUserJob = jobBuilderFactory.get("importUserJob")
+	private TaskletHealthCheck taskletHealthCheck;
+	
+	@Bean(name="jobHealthCheck")
+	@Qualifier(value="jobHealthCheck")
+	public Job jobHealthCheck() throws Exception {//NOSONAR
+		return jobBuilderFactory.get("jobHealthCheck")
 				.incrementer(new RunIdIncrementer())
-				.listener(listener)
-				.flow(step1)
-				.end()
+				.start(stepHealthCheck())
 				.build();
-		return this.importUserJob;
 	}
-
-	@Autowired
-	public StepBuilderFactory stepBuilderFactory;
 
 	@Bean
-	//public Step step1(JdbcBatchItemWriter<People> writer) {
-	public Step step1() {
-//		JdbcBatchItemWriter<People> writer = new JdbcBatchItemWriterBuilder<People>()
-//				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-//				//.sql("INSERT INTO public.people (first_name, last_name) VALUES (:first_name, :last_name)")
-//				.sql("INSERT INTO people (first_name, last_name) VALUES (:first_name, :last_name)")
-//				//.dataSource(source())
-//				.dataSource(this.dataSource)
-//				.build();
-		
-		
-		return stepBuilderFactory.get("step1")
-				.<People, People> chunk(10)
-				.reader(reader())
-				.processor(processor())
-				//.writer(writer)
-				.writer(this.writer)
+	public Step stepHealthCheck() {
+		return stepBuilderFactory.get("stepHealthCheck")
+				.tasklet(taskletHealthCheck)
 				.build();
 	}
-	// end::jobstep[]
+	
 
 	/*
 
@@ -314,7 +259,6 @@ public class BatchConfiguration {
 
 
 	 */
-
 
 
 }
