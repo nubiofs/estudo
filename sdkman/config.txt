@@ -1,4 +1,6 @@
 $ curl -s "https://get.sdkman.io" | bash
+
+"OU": $ curl -k -s "http://get.sdkman.io" | bash
                                                                		         
 Thanks for using...                                            		         
                                                                		         
@@ -73,4 +75,51 @@ Then issue the following command:
     sdk help
 
 Enjoy!!!
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://gradle.org/install/
+https://sdkman.io/usage
+https://medium.com/@czerwinb/how-to-install-a-specific-gradle-version-on-your-mac-beab35051ee8
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+~$ sdk upgrade gradle
+
+Upgrade:
+gradle (4.1, 4.4, 4.6 < 4.10.2)
+
+Upgrade candidate(s) and set latest version(s) as default? (Y/n): Y
+
+Downloading: gradle 4.10.2
+
+In progress...
+
+######################################################################## 100,0%
+
+Installing: gradle 4.10.2
+Done installing!
+
+
+Setting gradle 4.10.2 as default.
+
+~$ gradle version
+
+Welcome to Gradle 4.10.2!
+
+$ sdk list gradle
+
+~$ sdk rm gradle 4.10.2
+
+
+==> 
+
+$ sdk use gradle 4.6
+
+$ sdk default gradle 4.6
+
+
+Obs.: para remover: (retirar tudo em ".bashrc" e a pasta ~/.sdkman!!!):
+
+https://therealdanvega.com/blog/2015/10/14/uninstalling-gvm-or-sdk-man-on-mac-osx
 

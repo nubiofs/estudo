@@ -24,7 +24,13 @@ http://www.edivaldobrito.com.br/instalar-o-emulador-de-terminal-terminix/
 http://www.webupd8.org/2016/07/terminix-now-available-in-ppa-for.html
 https://gnunn1.github.io/tilix-web/#features
 
--- Instalação
+-- Instalação "https://www.edivaldobrito.com.br/instalar-o-emulador-de-terminal-terminix/"
+
+-> http://www.fascinatingcaptain.com/projects/do-more-in-the-linux-terminal-with-tilix/
+-> https://www.maketecheasier.com/customize-linux-terminal-pokemon-skins/
+-> https://github.com/storm119/Tilix-Themes
+-> https://itsfoss.com/tilix-terminal-emulator/
+
 
 $ sudo add-apt-repository ppa:webupd8team/terminix -y
 $ sudo apt update
