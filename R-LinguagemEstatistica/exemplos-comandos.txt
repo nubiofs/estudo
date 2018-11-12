@@ -1,0 +1,17 @@
+* Criando dados no formato csv:
+
+> one = c(1:5)
+
+> cat(paste(shQuote(one, type="cmd"), collapse=", "))
+"1", "2", "3", "4", "5"
+
+>  write.csv(matrix(as.character(one),nrow=1),row.names=FALSE, file = "teste.csv")
+## write.csv(matrix(as.character(one),nrow=1),row.names=FALSE)
+
+> my_data <- read.csv("teste.csv")
+
+"ou":
+
+> rs <- paste("\"",as.character(one),"\"",collapse=", ",sep="")
+
+> cat(rs)

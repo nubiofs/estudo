@@ -1,0 +1,87 @@
+-- REFERÊNCIAS:
+
+* Via docker:
+
+https://github.com/rocker-org/rocker-versioned/tree/master/rstudio
+https://github.com/rocker-org/rocker-versioned/blob/master/tidyverse/Dockerfile
+
+https://hub.docker.com/_/r-base/
+
+- help:
+https://www.rstudio.com/wp-content/uploads/2018/03/RStudio_Docker_3-9-2018.pdf
+https://ropenscilabs.github.io/r-docker-tutorial/02-Launching-Docker.html
+
+- Artigos:
+
+https://www.codeguru.com/csharp/csharp/cs_internet/using-r-with-docker-engine.html
+https://knausb.github.io/2017/06/running-r-in-docker/
+https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf
+
+* Tutoriais:
+
+https://ropenscilabs.github.io/r-docker-tutorial/
+https://github.com/ropenscilabs/r-docker-tutorial
+
+==========
+
+1) Instalação (R com RStudio para o Navegador):
+
+$ 
+docker run --rm \
+-p 127.0.0.1:8787:8787 \
+-e USER=eu \
+-e ROOT=TRUE \
+-e PASSWORD=1234 \
+-v $(pwd):/home/rstudio \
+rocker/rstudio
+
+//docker run --rm \
+//-p 127.0.0.1:8787:8787 \
+//-e DISABLE_AUTH=true \
+//-v $(pwd):/home/rstudio \
+//rocker/rstudio
+
+==> http://localhost:8787/
+
+Obs.: parar execução:
+
+$ docker container ls
+$ docker container stop 1914d1d1f0db
+
+"OU":
+
+2) Instalação (R com libs via dockerfile):
+
+Obs.: Em "https://github.com/rocker-org/rocker-versioned/tree/master/tidyverse" fazer download do arquivo "Dockerfile" e depois:
+
+$ docker build -t rocker/tidyverse .
+
+E depois da instalação:
+
+$ docker run .
+
+
+3) Instalação (terminal para R):
+
+$ docker run -ti --rm r-base
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+
