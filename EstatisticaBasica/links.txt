@@ -1,0 +1,26 @@
+* Estudo inicial:
+
+http://professorguru.com.br/estatistica/
+http://professorguru.com.br/estatistica/index.html
+
+http://www.portalaction.com.br/estatistica-basica
+http://www.portalaction.com.br/probabilidades
+
+** Temos:
+
+"Modelos Contínuos de Distribuições de Probabilidades"
+
+"Estatística Descritiva (tabelas de freqüências, média, moda, mediana, desvio padrão, etc) são bastante úteis"
+
+- distribuição uniforme:
+"http://leg.ufpr.br/~paulojus/CE223/ce223/ce223se13.html#x14-9000013.3"
+"http://professorguru.com.br/estatistica/distribuicoes-de-probabilidade/distribuicao-uniforme.html"
+
+"funções matemáticas" 
+"funções densidade de probabilidade"
+
+http://professorguru.com.br/estatistica/distribuicoes-de-probabilidade/distribuicoes--probabilidades-esperanca-.html
+-> http://professorguru.com.br/estatistica/distribuicoes-de-probabilidade/distribuicao-uniforme.html
+
+
+

@@ -15,3 +15,21 @@
 > rs <- paste("\"",as.character(one),"\"",collapse=", ",sep="")
 
 > cat(rs)
+
+
+## Distribuição Uniforme -> Uniforme Contínua (http://leg.ufpr.br/~paulojus/CE223/ce223/ce223se13.html#x14-9000013.3):
+
+# Portanto, o default é uma distribuição uniforme no intervalo [0, 1] e os argumentos opcionais são min e max. Por exemplo, para simular 5 valores de X ~ U(5, 20) usamos:
+
+# obs.: nafunção *unif() onde * é r -> "random" (aleatório): 
+
+> runif(5, min = 5, max = 20)
+
+> runif(10, min = 0, max = 1)
+
+> teste <- runif(50, min = 6, max = 18)
+
+> summary(teste)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  6.042  10.474  13.582  12.980  15.796  17.935 
+
