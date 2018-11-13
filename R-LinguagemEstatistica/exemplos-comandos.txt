@@ -33,3 +33,42 @@
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   6.042  10.474  13.582  12.980  15.796  17.935 
 
+> c("Hello", "World") %>% as.character(.)
+
+
+> library(help = "graphics")
+
+================
+
+- Exemplos de bases de dados:
+
+library(datasets)
+library(help = "datasets")
+data(cars)
+
+> cars %>% qplot(speed, dist, data = .)
+
+> cars %>% summary
+
+> str(cars)
+
+> p <- cars %>% qplot(speed, dist, data = .)
+
+> print(p)
+
+> cars %>% lm(dist ~ speed, data = .) %>% plot
+
+> cars %>% lines(dist ~ speed, data = ., col = "blue")
+
+> ?read.table
+
+> ?read.csv
+
+> (v <- 1+3)
+
+---
+
+> install.packages("mlbench")
+> library(mlbench)
+> library(help = "mlbench")
+

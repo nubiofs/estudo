@@ -8,3 +8,12 @@ https://cran.r-project.org/web/views/SpatioTemporal.html
 https://hub.docker.com/r/rocker/geospatial/
 https://github.com/rocker-org/geospatial
 
+===
+
+R Markdown
+Knitr
+
+magrittr
+ggplot2
+dplyr
+tidyr
