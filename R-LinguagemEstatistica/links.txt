@@ -87,3 +87,12 @@ Type 'q()' to quit R.
 
 > 
 
+
+==========================
+
+Observação: Quando ocorrer erro no Java (quando da instalação de pacote(s) do R no rstudio), fazer:
+
+$ sudo R CMD javareconf 
+
+
+
