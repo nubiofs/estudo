@@ -33,3 +33,34 @@
 8   8   16
 9   9   18
 10 10   20
+
+
+> v <- 1:10
+> append(v, seq(11, 20, 1))
+
+> is.na(c(NA, 2)
++ )
+
+> any(is.na(v))
+> all(!is.na(v))
+
+> x = c(3.0001,4.0009,5.002)
+> y = c(3,4,5)
+> identical(all.equal(x,y,tolerance=.001),TRUE)
+
+> values <- c(12,NA,19,15,12,17,14,NA,19)
+> values[!is.na(values)]
+[1] 12 19 15 12 17 14 19
+
+> values[is.na(values)]
+[1] NA NA
+
+> letters[1:5]
+[1] "a" "b" "c" "d" "e"
+
+> sample(letters[1:15])
+ [1] "d" "e" "f" "n" "j" "l" "c" "a" "m" "g" "i" "b" "h" "o" "k"
+
+> data()	
+> data("Titanic")
+> Titanic

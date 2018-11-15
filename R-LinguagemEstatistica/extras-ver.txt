@@ -8,6 +8,14 @@ https://cran.r-project.org/web/views/SpatioTemporal.html
 https://hub.docker.com/r/rocker/geospatial/
 https://github.com/rocker-org/geospatial
 
+* Varios:
+
+(Learn to visualize your data like an expert with these practical how-tos for presentation, analysis, and understanding):
+https://flowingdata.com/category/tutorials/
+
+(Data Analysis and Visualization in R for Ecologists)
+https://datacarpentry.org/R-ecology-lesson/
+
 ===
 
 R Markdown
@@ -17,3 +25,25 @@ magrittr
 ggplot2
 dplyr
 tidyr
+
+---------------
+(http://www.datasciencemadesimple.com/reading-writing-r/)
+
+- Read from PostGreSql in R:
+
+lets look how to read the data from PostGreSql
+	
+install.packages("RPostgreSQL")
+library(RPostgreSQL)
+## establish connection
+drv = dbDriver("PostgreSQL")
+con = dbConnect(drv, dbname="Databasename",host="x.xx.x.xx",port=xxxx,user="username",password="*****")
+##query from postgres
+df_postgres = dbGetQuery(con, "SELECT * from Table_Name where …")
+
+
+- Write to PostGresql in R
+
+install.packages("RPostgreSQL")
+library(RPostgreSQL)
+dbWriteTable(con, "New_Table", df_postgres)

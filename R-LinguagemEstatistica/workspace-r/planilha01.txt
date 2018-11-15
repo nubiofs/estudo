@@ -1,0 +1,7 @@
+X;Population;Income;Illiteracy;Life.Exp;Murder
+Alabama	3615	3624	2.1	69.05	15.1
+Alaska	365	6315	1.5	69.31	11.3
+Arizona	2212	4530	1.8	70.55	7.8
+Arkansas	2110	3378	1.9	70.66	10.1
+California	21198	5114	1.1	71.71	10.3
+Colorado	2541	4884	0.7	72.06	6.8
