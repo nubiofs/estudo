@@ -1,0 +1,41 @@
+* Anaconda3 (Jupyter apenas para Python via Docker):
+
+https://hub.docker.com/r/continuumio/anaconda3/
+
+docker run -i -t -p 8888:8888 continuumio/anaconda3 /bin/bash -c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter notebook --allow-root --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser"
+
+-> http://localhost:8888
+
+Obs.: Obter o token do comando acima (para informar no front-end), por exemplo em:
+
+http://(eae8692ddf78 or 127.0.0.1):8888/?token=3ecdb60a2385df0fd1608496d5d3cdd585896e43414ff2e6
+
+------------------------------------------------------------------------------------------------
+
+* Jupyter para as linguagens Python/R via Docker:
+
+https://hub.docker.com/r/heatonresearch/jupyter-python-r/
+
+$ sudo docker run -it --rm -p 8888:8888 -v $PWD:/root/mount/ heatonresearch/jupyter-python-r:latest
+
+-> http://localhost:8888
+
+Obs.: Obter o token do comando acima (para informar no front-end), por exemplo em:
+
+    Copy/paste this URL into your browser when you connect for the first time,
+    to login with a token:
+        http://(0c51a1ba133c or 127.0.0.1):8888/?token=664a0bebec2ef370edf17cf8a8f97301b548b7e16eca3be4
+
+
+obs.:
+
+http://docs.anaconda.com/anaconda/navigator/tutorials/r-lang/
+
+==============================
+==================== TESTE:
+
+#http://docs.anaconda.com/anaconda/navigator/install/
+
+#conda install anaconda-navigator
+
+#sudo docker run -i -t -p 9999:9999 continuumio/anaconda3 /bin/bash -c "/opt/conda/bin/conda install anaconda-navigator -y --quiet && mkdir /opt/navigator && /opt/conda/bin/anaconda-navigator --ip='*' --port=9999 --no-browser"

@@ -22,6 +22,8 @@ $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ub
 
 $ sudo apt-get update
 
+$ apt-cache policy docker-ce
+
 $ sudo apt-get install docker-ce
 
 $ sudo gpasswd -a 02963357460 docker

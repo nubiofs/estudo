@@ -1,0 +1,8 @@
+
+* Recursos varios (relacionados):
+https://hub.docker.com/r/heatonresearch/jupyter-python-r/
+https://github.com/jeffheaton/t81_558_deep_learning
+https://www.heatonresearch.com/aifh/
+https://sites.wustl.edu/jeffheaton/t81-558/
+
+https://towardsdatascience.com/docker-for-data-science-9c0ce73e8263

@@ -7,6 +7,8 @@ https://github.com/rocker-org/rocker-versioned/blob/master/tidyverse/Dockerfile
 
 https://hub.docker.com/_/r-base/
 
+https://hub.docker.com/r/civisanalytics/civis-jupyter-r/
+
 - help:
 https://www.rstudio.com/wp-content/uploads/2018/03/RStudio_Docker_3-9-2018.pdf
 https://ropenscilabs.github.io/r-docker-tutorial/02-Launching-Docker.html
