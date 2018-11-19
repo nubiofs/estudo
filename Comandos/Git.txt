@@ -146,5 +146,35 @@ $ git submoduel update
 $ git add .gitmodules sub/module/path
 $ git commit -m "Added in submodules for removed folders"
 
+===========================================
+
+Desabilitar verificação ssl do git
+
+
+$ git config --global http.sslverify false
+
+$ ssh-keygen -o -t rsa -C "your.email@example.com" -b 4096
+
+$ sudo apt-get install xclip
+
+$ xclip -sel clip < ~/.ssh/id_rsa.pub
+
+Obs.: copiar em "https://git.xpto/profile/keys
+
+$ cd git
+
+$ git clone git@git.xpto:user/project.git
+
+$ git status
+
+$ git diff
+
+$ git log
+
+//$ git add README.txt
+//$ git add .
+//$ git commit -m "Story 182: Fix benchmarks for speed"
+
+//$ git push origin master
 
 
