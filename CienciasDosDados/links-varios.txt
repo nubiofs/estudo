@@ -6,3 +6,53 @@ https://www.heatonresearch.com/aifh/
 https://sites.wustl.edu/jeffheaton/t81-558/
 
 https://towardsdatascience.com/docker-for-data-science-9c0ce73e8263
+
+
+https://cran.r-project.org/web/views/Spatial.html
+
+
+- Geoestatistica (esri):
+https://spatialstats.github.io/
+https://spatialstats.github.io/hands-on/
+https://spatialstats.github.io/presentations/
+https://spatialstats.github.io/resources/#integrating-arcgis-and-r
+
+--com R (e visualização dados geoespaciais):
+https://github.com/geocomPP
+https://github.com/geocomPP/sdv
+https://github.com/geocomPP/geocompr
+https://github.com/geocomPP/sdvwR
+
+--Geo com R (ebook "Geocomputation with R"):
+VER em "https://www.crcpress.com/Chapman--HallCRC-The-R-Series/book-series/CRCTHERSER"
+https://geocompr.robinlovelace.net/
+==> https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial
+
+--in ersi:
+https://r-arcgis.github.io/
+https://learn.arcgis.com/en/projects/analyze-crime-using-statistics-and-the-r-arcgis-bridge/
+
+--in qgis:
+https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/saga/geostatistics.html
+https://docs.qgis.org/2.8/en/docs/user_manual/processing_algs/saga/geostatistics.html
+
+"Understanding Spatial Statistics and Geostatistics":
+http://www.esri.com/news/arcwatch/0410/lauren-scott.html
+
+"What are the software packages for geostatistical analysis?":
+https://www.researchgate.net/post/What_are_the_software_packages_for_geostatistical_analysis
+
+"A Practical Guide to 
+Geostatistical Mapping" (ebook):
+http://spatial-analyst.net/book/system/files/Hengl_2009_GEOSTATe2c1w.pdf
+
+"Geostatistics & Open-source statistical computing" (Course materials):
+http://www.css.cornell.edu/faculty/dgr2/teach/degeostats.html
+
+"The Elements of
+Statistical Learning" (ebook):
+http://web.stanford.edu/~hastie/ElemStatLearn/
+
+"Introduction to geostatistics with R"
+https://qcbs.ca/wiki/geostatistics
+
