@@ -1,0 +1,23 @@
+
+
+https://github.com/timcera/spyder-desktop-ubuntu
+
+//$ docker build -t spyder-desktop-ubuntu .
+
+docker run --rm \
+-it \
+-v ${HOME}:/home/${USER_NAME} \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+-e DISPLAY=unix$DISPLAY \
+-e HHHOME=${HOME} \
+timcera/spyder-desktop-ubuntu:latest \
+sh -c "/start.sh"
+
+
+===========================================
+
+https://hub.docker.com/r/pmcguire/spyder/
+
+$ docker run --rm -it pmcguire/spyder
+
+
