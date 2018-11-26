@@ -1,0 +1,15 @@
+http://datasciencetoolbox.org/
+
+https://www.datascienceatthecommandline.com/
+https://www.datascienceatthecommandline.com/chapter-2-getting-started.html#overview-1
+
+https://github.com/jeroenjanssens/data-science-at-the-command-line
+
+https://github.com/datascienceworkshops
+
+https://hub.docker.com/r/datascienceworkshops/data-science-at-the-command-line/
+https://hub.docker.com/u/datascienceworkshops/
+
+---
+
+$ docker run --rm -it -v ${pwd}:/data datascienceworkshops/data-science-at-the-command-line
