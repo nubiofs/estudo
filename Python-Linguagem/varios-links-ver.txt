@@ -1,23 +1,124 @@
+https://hackr.io/tutorials/learn-python
+https://docs.python-guide.org/
+https://www.kdnuggets.com/2018/08/programming-best-practices-data-science.html
+-------------
+
+$ sudo apt-get install spyder3
+
+$ pip install --upgrade pip
+
+=============================================
+== virtualenv
+=============================================
+
+- https://virtualenv.pypa.io/en/latest/
+
+- https://github.com/pypa/virtualenv/
+- https://codeload.github.com/pypa/virtualenv/legacy.tar.gz/16.1.0
+
+"virtualenv is a tool to create isolated Python environments."
+
+1) Instalação:
+
+$ sudo apt-get install virtualenv
+$ virtualenv --python=python3.6 ds
+//$ virtualenv -p python3.6 diretorioTrabalho
+$ cd ds
+$ source bin/active
+$ pip install jupyter
+$ jupyter notebook
+
+$ pip install pandas
+$ pip install jupyterlab
+//https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html
+$ jupyter lab
+
+-- obs.: testes:
+
+//==> https://github.com/spyder-ide/spyder
+//$ sudo apt-get install spyder3
+//==> https://docs.spyder-ide.org/installation.html
+//==> "Run without installing":
+$ git clone https://github.com/spyder-ide/spyder.git
+$ cd spyder
+$ pip install -r requirements/requirements.txt
+
+--requirementes (https://docs.spyder-ide.org/installation.html#installing-with-pip-experts-only):
+PyQt5
+Qtconsole
+Rope
+Pyflakes
+Sphinx
+Pygments
+Pylint
+Pycodestyle
+Psutil
+Nbconvert
+Qtawesome
+Pickleshare
+PyZMQ
+QtPy
+Chardet
+Numpydoc
+Cloudpickle
+Matplotlib
+Pandas
+Numpy
+Sympy
+Scipy
+Cython
+
+$ python bootstrap.py
+
+---
+
+//https://stackoverflow.com/questions/30170468/how-to-run-spyder-in-virtual-environment
+//https://conda.io/docs/user-guide/tasks/manage-environments.html
+//$ pip install conda
 
 
-https://github.com/timcera/spyder-desktop-ubuntu
+"ou":
 
-//$ docker build -t spyder-desktop-ubuntu .
+$ curl --location --output virtualenv-16.1.0.tar.gz https://github.com/pypa/virtualenv/tarball/16.1.0
+$ tar xvfz virtualenv-16.1.0.tar.gz
+$ cd pypa-virtualenv-4ad2742
+//$ pip3 install virtualenv
+$ python src/virtualenv.py myVE
+//$ python src/virtualenv.py --python=python3.6 ds
+$ cd myVE
+//$ virtualenv -p python3.6 python3.6
+$ source bin/active
+$ pip install s3cmd
+$ pip install spyder
 
-docker run --rm \
--it \
--v ${HOME}:/home/${USER_NAME} \
--v /tmp/.X11-unix:/tmp/.X11-unix \
--e DISPLAY=unix$DISPLAY \
--e HHHOME=${HOME} \
-timcera/spyder-desktop-ubuntu:latest \
-sh -c "/start.sh"
+=========================
+== docker
+=========================
+
+https://github.com/bitnami/bitnami-docker-python
 
 
-===========================================
+$ docker run -it --name python bitnami/python
 
-https://hub.docker.com/r/pmcguire/spyder/
+- Running your Python script:
 
-$ docker run --rm -it pmcguire/spyder
+$ docker run -it --name python -v /path/to/app:/app bitnami/python \
+python script.py
+
+- Running a Python app with package dependencies:
+
+$ docker run --rm -v /path/to/app:/app bitnami/python pip install -r requirements.txt
+$ docker run -it --name python -v /path/to/app:/app bitnami/python python script.py
+
+
+-------------
+-- pipenv
+-------------
+https://pipenv.readthedocs.io/en/latest/
+
+$ pip install pipenv
+
+
+
 
 
