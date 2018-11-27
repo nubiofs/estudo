@@ -1,4 +1,18 @@
 
+https://www.paperspace.com/
+https://www.paperspace.com/ml
+https://blog.paperspace.com/intro-to-datascience/
+https://www.paperspace.com/pricing
+
+https://github.com/Paperspace/paperspace-python
+
+"The first cloud built for the future. Powering next-generation applications and cloud ML/AI pipelines."
+
+https://www.forbes.com/sites/janakirammsv/2018/03/21/paperspace-launches-gradient-a-serverless-artificial-intelligence-platform/#1da45fbe2ad8
+https://techcrunch.com/2018/03/21/paperspace-goes-serverless-to-simplify-ai-deployment-in-the-cloud/
+
+---------------------------------------------------------------------------------------------------------
+
 https://www.kdnuggets.com/2018/08/programming-best-practices-data-science.html
 
 * Recursos varios (relacionados):
