@@ -1,4 +1,6 @@
 
+https://www.kdnuggets.com/2018/08/programming-best-practices-data-science.html
+
 * Recursos varios (relacionados):
 https://hub.docker.com/r/heatonresearch/jupyter-python-r/
 https://github.com/jeffheaton/t81_558_deep_learning
