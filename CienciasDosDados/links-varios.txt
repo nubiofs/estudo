@@ -11,6 +11,22 @@ https://github.com/Paperspace/paperspace-python
 https://www.forbes.com/sites/janakirammsv/2018/03/21/paperspace-launches-gradient-a-serverless-artificial-intelligence-platform/#1da45fbe2ad8
 https://techcrunch.com/2018/03/21/paperspace-goes-serverless-to-simplify-ai-deployment-in-the-cloud/
 
+
+---------------------------------------------------------------------------------------------------------
+
+http://datasciencetoolbox.org/
+
+https://www.datascienceatthecommandline.com/
+https://github.com/jeroenjanssens/data-science-at-the-command-line
+
+-----------------
+
+https://live.osgeo.org/en/quickstart/R_quickstart.html
+https://live.osgeo.org/archive/10.5/en/overview/iris_overview.html
+
+https://scitools.org.uk/iris/docs/latest/index.html
+https://github.com/SciTools/iris
+
 ---------------------------------------------------------------------------------------------------------
 
 https://www.kdnuggets.com/2018/08/programming-best-practices-data-science.html

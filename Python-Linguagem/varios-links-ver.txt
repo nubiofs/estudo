@@ -2,6 +2,7 @@ https://hackr.io/tutorials/learn-python
 https://docs.python-guide.org/
 https://www.kdnuggets.com/2018/08/programming-best-practices-data-science.html
 -------------
+* Cloud para ML/AI (com python):
 
 https://www.paperspace.com/
 https://www.paperspace.com/pricing
@@ -10,7 +11,7 @@ https://www.paperspace.com/pricing
 
 -------------
 
-
+"https://docs.continuum.io/anaconda/install/linux/"
 $ sudo apt-get install spyder3
 
 $ pip install --upgrade pip
