@@ -3,6 +3,14 @@ https://docs.python-guide.org/
 https://www.kdnuggets.com/2018/08/programming-best-practices-data-science.html
 -------------
 
+https://www.paperspace.com/
+https://www.paperspace.com/pricing
+
+"The first cloud built for the future. Powering next-generation applications and cloud ML/AI pipelines."
+
+-------------
+
+
 $ sudo apt-get install spyder3
 
 $ pip install --upgrade pip
