@@ -1,0 +1,88 @@
+$ make
+
+$ 
+docker run -d --rm \
+-p 127.0.0.1:8787:8787 \
+-e USER=eu \
+-e ROOT=TRUE \
+-e PASSWORD=1234 \
+-v $(pwd):/home/rstudio \
+rocker/myverse:latest
+
+==> http://localhost:8787/
+
+$ docker ps
+$ docker exec -it db827ce21486 /bin/bash
+
+--> root@/# sudo apt-get update
+--> root@/# install2.r -s --error --deps TRUE ggplot2
+--> root@/# sudo apt-get install libgsl0-dev # install the package, in this case GSL
+
+Obs.: parar execução:
+
+$ docker container ls
+$ docker container stop db827ce21486
+
+
+===================
+
+"https://hub.docker.com/r/rocker/geospatial/"
+"https://hub.docker.com/r/rocker/geospatial/~/dockerfile/"
+
+rocker/geospatial
+
+- Dockerfile:
+
+FROM rocker/verse:latest 
+MAINTAINER "Carl Boettiger" cboettig@ropensci.org 
+RUN apt-get update \
+&& apt-get install -y --no-install-recommends \
+lbzip2 \
+libfftw3-dev \
+libgdal-dev \
+libgeos-dev \
+libgsl0-dev \
+libgl1-mesa-dev \
+libglu1-mesa-dev \
+libhdf4-alt-dev \
+libhdf5-dev \
+ libjq-dev \
+ liblwgeom-dev \
+ libproj-dev \
+ libprotobuf-dev \
+ libnetcdf-dev \
+ libsqlite3-dev \
+ libssl-dev \
+ libudunits2-dev \
+ netcdf-bin \
+ protobuf-compiler \
+ tk-dev \
+ unixodbc-dev \
+ && install2.r --error \
+ RColorBrewer \
+ RandomFields \
+ RNetCDF \
+ classInt \
+ deldir \
+ gstat \
+ hdf5r \
+ lidR \
+ mapdata \
+ maptools \
+ mapview \
+ ncdf4 \
+ proj4 \
+ raster \
+ rgdal \
+ rgeos \
+ rlas \
+ sf \
+ sp \
+ spacetime \
+ spatstat \
+ spdep \
+ tmap \
+ geoR \
+ geosphere \
+ ## from bioconductor 
+&& R -e "BiocManager::install('rhdf5')"
