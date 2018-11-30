@@ -1,3 +1,12 @@
+$ docker pull datascienceworkshops/data-science-at-the-command-line
+$ docker run --rm -it datascienceworkshops/data-science-at-the-command-line
+$ docker run --rm -it -v $(pwd):/data datascienceworkshops/data-science-at-the-command-line
+
+
+bash-4.4# git clone https://github.com/jeroenjanssens/data-science-at-the-command-line
+
+====================== OU:
+
 $ docker build -t jeroen:datascienceworkshops .
 
 $ docker images
