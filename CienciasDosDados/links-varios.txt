@@ -1,4 +1,5 @@
 
+
 https://www.paperspace.com/
 https://www.paperspace.com/ml
 https://blog.paperspace.com/intro-to-datascience/
@@ -12,6 +13,30 @@ https://www.forbes.com/sites/janakirammsv/2018/03/21/paperspace-launches-gradien
 https://techcrunch.com/2018/03/21/paperspace-goes-serverless-to-simplify-ai-deployment-in-the-cloud/
 
 
+--Big data and Social Science:
+https://bookdown.org/paul/big-data4/
+
+--Advanced Spatial Modeling with Stochastic Partial Differential Equations Using R and INLA:
+https://becarioprecario.bitbucket.io/spde-gitbook/
+
+
+--Introduction to Data Science
+https://rafalab.github.io/dsbook/
+
+--Population Health Data Science with R
+https://bookdown.org/taragonmd/phds/
+
+--An Introduction to Text Processing and Analysis with R
+https://m-clark.github.io/text-analysis-with-R/
+
+--Data Visualization with R
+https://rkabacoff.github.io/datavis/
+
+--Introducción a la Computación con GPUs usando R
+https://bookdown.org/content/1502/
+
+--
+https://m-clark.github.io/introduction-to-machine-learning/
 ---------------------------------------------------------------------------------------------------------
 
 http://datasciencetoolbox.org/
@@ -44,6 +69,7 @@ https://cran.r-project.org/web/views/Spatial.html
 
 
 - Geoestatistica (esri):
+https://geocompr.robinlovelace.net/
 https://spatialstats.github.io/
 https://spatialstats.github.io/hands-on/
 https://spatialstats.github.io/presentations/
