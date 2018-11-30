@@ -4,13 +4,27 @@ Fontes:
 	https://portainer.io/
 	https://github.com/portainer/portainer
 
+
+$ cd portainer
+
 $ docker volume create portainer_data
 
-$ docker run --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+$ docker run --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer --no-auth
+
+# mypassword is plaintext here
+//$ echo -n 12345home > ./portainer_password
+
+//$ docker run --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/portainer_password:/tmp/portainer_password portainer/portainer --admin-password-file /tmp/portainer_password
+
+//$ docker run --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer --admin-password '12345home'
 
 //$ docker run --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
 
-==> http://localhost:9000/#/init/admin
-==> http://localhost:9000/#/dashboard
+==> http://localhost:9000/
 
-Use the username admin and password tryportainer when prompted. 
+==> http://localhost:9000/#/auth
+==> http://localhost:9000/#/dashboard
+==> http://localhost:9000/#/init/admin
+
+
+
