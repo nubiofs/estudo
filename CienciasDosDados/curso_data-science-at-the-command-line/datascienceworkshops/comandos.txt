@@ -1,4 +1,4 @@
-$ docker build -t jeroen/datascienceworkshops .
+$ docker build -t jeroen:datascienceworkshops .
 
 $ docker images
 
@@ -9,6 +9,63 @@ REPOSITORY	TAG	IMAGE ID	CREATED		SIZE
 
 $ docker inspect 05719eff3e76
 
+1) Criar container com base na image:
+
+$ docker run --rm -i -t 05719eff3e76 /bin/bash
+
+'ou':
+
+$ docker run --rm -i -t jeroen:datascienceworkshops /bin/bash
+
+	obs.:
+	//# $ docker run -i -t image_name:tag_name /bin/bash
+
+2) Rodar bash para container já ativo:
+
+$ docker exec -it -v $(pwd):/root reverent_northcutt /bin/bash 
+
+'ou':
+
 $ docker exec -it -v $(pwd):/root 05719eff3e76 /bin/bash
+
+	obs.:	
+	//# $ docker exec -it container_id /bin/bash
+
+
+3) Copiando arquivos para container ativos:
+
+$ docker ps -a
+
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+437a96da7fda        05719eff3e76          "/bin/bash"              4 minutes ago       Up 4 minutes                                 frosty_kirch
+
+$ echo "Oi!" >> teste.txt
+
+$ docker cp teste.txt frosty_kirch:/teste.txt
+
+4) Cria nova imagem de um container ativo:
+
+$ docker commit frosty_kirch
+
+"ou"
+
+$ docker commit frosty_kirch 'NovoNomeDaTag'
+
+
+5) Tag uma imagem recem criada:
+
+$ docker tag 348473ksk novaImagem
+
+-------------------------------------------------------------------
+
+//$ docker run --rm -v $(pwd):/root reverent_northcutt
+//$ docker run --rm -v $(pwd):/root 05719eff3e76
+
+//#Em 'portainer' --> http://localhost:9000/#/containers/new:
+//-> Deploy the container para:
+//Name = 'teste'
+//image = 'jeroen:datascienceworkshops'
+
+
 
 

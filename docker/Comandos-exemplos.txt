@@ -53,6 +53,37 @@ $ docker run --rm -it sinter-valida-lote-rtd sh -c "make test-all"
 
 $ docker run --rm -it -e PATH_JAVA_SIGNER=/opt/sinter/build/config sinter-valida-lote-rtd sh -c "make test-all"
 
+
+	obs.:
+	//#Criar container com base na image:
+	//# $ docker run -i -t image_name:tag_name /bin/bash
+
+
+
+	//#Rodar bash para container já ativo:
+	//# $ docker exec -it container_id /bin/bash
+
+
+** Copiando arquivos para container ativos:
+
+$ docker ps -a
+
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+437a96da7fda        05719eff3e76          "/bin/bash"              4 minutes ago       Up 4 minutes                                 frosty_kirch
+
+$ echo "Oi!" >> teste.txt
+
+$ docker cp teste.txt frosty_kirch:/teste.txt
+
+
+*** Cria nova imagem de um container ativo:
+
+$ docker commit frosty_kirch
+
+
+===> https://blog.scalyr.com/2018/09/create-docker-image/
+
+
 ==> https://stackoverflow.com/questions/17665283/how-does-one-remove-an-image-in-docker
 
 $ docker images
