@@ -4,6 +4,13 @@ Fontes:
 	https://portainer.io/
 	https://github.com/portainer/portainer
 
-$ docker run --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+$ docker volume create portainer_data
 
+$ docker run --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+
+//$ docker run --rm -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+
+==> http://localhost:9000/#/init/admin
 ==> http://localhost:9000/#/dashboard
+
+Use the username admin and password tryportainer when prompted. 
