@@ -1,0 +1,14 @@
+$ docker build -t jeroen/datascienceworkshops .
+
+$ docker images
+
+REPOSITORY	TAG	IMAGE ID	CREATED		SIZE
+<nome>		<nome>	05719eff3e76	20 hours ago	2.31GB
+
+...
+
+$ docker inspect 05719eff3e76
+
+$ docker exec -it -v $(pwd):/root 05719eff3e76 /bin/bash
+
+
