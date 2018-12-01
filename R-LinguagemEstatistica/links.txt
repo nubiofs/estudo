@@ -35,6 +35,8 @@ http://leg.ufpr.br/~paulojus/CE223/ce223/ce223.html#ce223se17.html
 "https://github.com/rocker-org/rocker/wiki"
 "https://hub.docker.com/r/rocker/geospatial/"
 
+==> "https://www.rocker-project.org/"
+
 $ 
 docker run -d --rm \
 -p 127.0.0.1:8787:8787 \

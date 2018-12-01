@@ -1,0 +1,9 @@
+https://www.viaboxx.com/code/configuring-paperspace-ml-in-a-box-machine-to-run-a-deeplearning-showcase/
+
+https://www.altexsoft.com/blog/datascience/comparing-machine-learning-as-a-service-amazon-microsoft-azure-google-cloud-ai-ibm-watson/
+
+https://www.kdnuggets.com/2018/01/mlaas-amazon-microsoft-azure-google-cloud-ai.html
+
+https://jaxenter.com/top-5-machine-learning-service-providers-141275.html
+
+https://techbeacon.com/machine-learning-cloud-how-it-can-help-you-right-now
