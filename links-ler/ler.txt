@@ -1,3 +1,8 @@
+https://weeraman.com/put-that-gpu-to-good-use-with-python-e5a437168c01
+https://medium.com/datadriveninvestor/evaluating-plaidml-and-gpu-support-for-deep-learning-on-a-windows-10-notebook-13401c4ee617
+https://github.com/plaidml/plaidml
+https://keras.io/
+
 https://www.viaboxx.com/code/configuring-paperspace-ml-in-a-box-machine-to-run-a-deeplearning-showcase/
 
 https://www.altexsoft.com/blog/datascience/comparing-machine-learning-as-a-service-amazon-microsoft-azure-google-cloud-ai-ibm-watson/
