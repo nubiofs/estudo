@@ -34,13 +34,20 @@ $ virtualenv --python=python3.6 ds
 //$ virtualenv -p python3.6 diretorioTrabalho
 $ cd ds
 $ source bin/active
+
+-
 $ pip install jupyter
 $ jupyter notebook
 
-$ pip install pandas
-$ pip install jupyterlab
+- ou bem Melhor:
+//https://github.com/jupyterlab/jupyterlab
+//https://jupyterlab.readthedocs.io/en/stable/
 //https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html
+$ pip install pandas numpy
+$ python3 -m pip install jupyterlab
+"ou": $ pip install jupyterlab
 $ jupyter lab
+
 
 -- obs.: testes:
 
@@ -99,6 +106,45 @@ $ cd myVE
 $ source bin/active
 $ pip install s3cmd
 $ pip install spyder
+
+---Obs.: Experimentos
+
+// https://gist.github.com/simecek/019d87c55fec3839d95bbf8489dde61d#file-rmagic_example-ipynb
+$ pip install rpy2 pandas numpy pytz tzlocal warnings
+
+- rmagic_example-ipynb:
+
+In [1]: %load_ext rpy2.ipython
+
+In [2]: import warnings
+	warnings.filterwarnings('ignore')
+
+In [3]: %R require(ggplot2); require(tidyr)
+
+Out[3]:
+
+array([1], dtype=int32)
+
+In [4]: import numpy as np
+	import pandas as pd 
+	np.random.seed(42)
+	# Make a pandas DataFrame
+	df = pd.DataFrame(np.random.normal(0,1,size=(100, 3)), columns=list('ABC'))
+	df['C'] = df['C'] + 2
+
+In [5]: %%R -i df
+	df %>% 
+	  gather("Category", "X") %>%
+	  ggplot(aes(x = Category, y = X, fill = Category)) +
+	    geom_violin() +
+	    stat_summary(fun.y=mean, color='black', geom='point', size = 3) +
+	    labs(title = "Violin plot",
+	         subtitle = "Means indicated as black dots",
+	         captions = "Numbers generated in Numpy") +
+	    theme_bw()
+
+
+
 
 =========================
 == docker
