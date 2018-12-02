@@ -49,6 +49,18 @@ $ python3 -m pip install jupyterlab
 $ jupyter lab
 
 
+---Tentando colocar pluing/extensão para abrir paginas web:
+
+Obs.: https://github.com/canavandl/jupyterlab_sandbox
+"open site page in jupyter lab":
+
+$ sudo apt-get install nodejs npm
+$ git clone https://github.com/canavandl/jupyterlab_sandbox
+//$ pip install -e git+https://github.com/ekalinin/nodeenv.git#egg=nodeenv
+//pip install nodejs
+$ jupyter labextension install jupyterlab_sandbox
+$ 
+
 -- obs.: testes:
 
 //==> https://github.com/spyder-ide/spyder
