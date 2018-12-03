@@ -1,11 +1,20 @@
+-- Serviços em Nuvem para ML/DL:
 
+https://www.floydhub.com/
 
 https://www.paperspace.com/
 https://www.paperspace.com/ml
 https://blog.paperspace.com/intro-to-datascience/
 https://www.paperspace.com/pricing
-
 https://github.com/Paperspace/paperspace-python
+
+https://www.crestle.ai/
+
+https://colab.research.google.com/notebooks/welcome.ipynb
+
+https://www.sylabs.io/
+
+--
 
 "The first cloud built for the future. Powering next-generation applications and cloud ML/AI pipelines."
 
