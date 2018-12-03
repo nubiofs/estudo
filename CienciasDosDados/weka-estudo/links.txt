@@ -21,6 +21,19 @@ https://github.com/Waikato/wekaDeeplearning4j
 
 https://iaexpert.com.br/?s=weka
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ESTUDAR EXEMPLOR VER:
+
+http://minerandodados.com.br/index.php/2017/04/02/ciencia-dados-weka/
+https://marcosvperboni.wordpress.com/2013/02/15/mineracao-de-dados-na-pratica-com-weka-api/
+https://www.devmedia.com.br/mineracao-de-regras-de-associacao-com-a-ferramenta-de-data-mining-weka/20478
+
+--http://www.facom.ufu.br/~backes/pgc204/:
+http://www.facom.ufu.br/~backes/pgc204/Aula-UsandoWeka.pdf
+
+http://tede2.pucrs.br/tede2/bitstream/tede/3044/1/388093.pdf
+
+http://www.epamig.ufla.br/geosolos/publicacoes/teses/Monografia_Miguel%20Thiago%20Alvarenga.pdf
+
 
 =================== EXEMPLO UTILIZAÇÃO 'AUTO-WEKA'
 
