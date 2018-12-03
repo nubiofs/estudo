@@ -165,6 +165,9 @@ $ cd git
 
 $ git clone git@git.xpto:user/project.git
 
+- Ou para uma branch:
+$ git clone -b "me-ss1535764" git@git.s:s/project.git
+
 $ git status
 
 $ git diff
