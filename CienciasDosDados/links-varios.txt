@@ -8,6 +8,8 @@ https://blog.paperspace.com/intro-to-datascience/
 https://www.paperspace.com/pricing
 https://github.com/Paperspace/paperspace-python
 
+https://skymind.ai/
+
 https://www.crestle.ai/
 
 https://colab.research.google.com/notebooks/welcome.ipynb
