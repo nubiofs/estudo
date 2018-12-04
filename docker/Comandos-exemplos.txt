@@ -64,6 +64,16 @@ $ docker run --rm -it -e PATH_JAVA_SIGNER=/opt/sinter/build/config sinter-valida
 	//# $ docker exec -it container_id /bin/bash
 
 
+	obs.: Após instalações para comitar as mudandas na imagem fazer:
+
+	1) $ docker ps
+
+	CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+	a0186140275b        bd9edc1a85ed        "/bin/bash"         19 minutes ago      Up 19 minutes                           kind_rosalind
+
+	2) $ docker commit a0186140275b r-base
+
+
 ** Copiando arquivos para container ativos:
 
 $ docker ps -a
