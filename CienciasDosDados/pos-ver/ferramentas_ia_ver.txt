@@ -14,9 +14,11 @@ $ R
 
 "OU" (no container docker r-base):
 
-==> /# apt-get install -f gfortran libgmp3-dev libmpfr-dev
-==> /# install2.r HH
-//install.r HH
+$ docker run -ti --rm r-base /bin/bash
+
+ /# apt-get install -f gfortran libgmp3-dev libmpfr-dev
+ /# install2.r HH
+ //install.r HH
 
 obs.: Após instalações para comitar as mudandas na imagem fazer:
 
