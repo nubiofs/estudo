@@ -78,6 +78,35 @@ head(avocado_prices)
 
 # 3.a) Obtenha os parâmetros estatísticos da base com a função summary.
 summary(avocado_prices)
+dim(avocado_prices)
+
+# 3.b) Salve cada coluna da base de dados em uma variável distinta.
+colnames(avocado_prices)
+x = avocado_prices$X
+date = avocado_prices$Date
+averagePrice = avocado_prices$AveragePrice
+totalVolume = avocado_prices$Total.Volume
+x4046 = avocado_prices$X4046
+x4225 = avocado_prices$X4225
+x4770 = avocado_prices$X4770
+totalBags = avocado_prices$Total.Bags
+smallBags = avocado_prices$Small.Bags
+largeBags = avocado_prices$Large.Bags
+xLargeBags = avocado_prices$XLarge.Bags
+type = avocado_prices$type
+year = avocado_prices$year
+region = avocado_prices$region
+
+#3.c) Concatene e exporte os parâmetros type, year e region para um arquivo nomeado
+#“abacate.xlsx” (a ser criado pelo usuário)
+head(type)
+class(type)
+unique(type)
+
+install.packages(c("rJava", "xlsxjars", "xlsx"), dependencies = "TRUE")
+library("xlsx")
+
+
 
 #parei (Ferramentas em IA - Aula_17_11.pdf) página 50
 
