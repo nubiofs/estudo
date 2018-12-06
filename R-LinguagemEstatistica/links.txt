@@ -79,6 +79,13 @@ $ docker container stop 1914d1d1f0db
 
 "OU":
 
+** "OBSERVAÇÃO IMPORTANTE" (PARA INSTALAÇÃO NOVOS PACOTES E POSTERIOR UTILIZAÇÃO):
+
+	$ docker run --rm -it rocker/rstudio /bin/bash
+	$ docker ps -a
+	$ docker commit f6fbb0b54169 rocker/rstudio
+
+
 2) Instalação (R com libs via dockerfile):
 
 Obs.: Em "https://github.com/rocker-org/rocker-versioned/tree/master/tidyverse" fazer download do arquivo "Dockerfile" e depois:
@@ -117,9 +124,51 @@ Type 'q()' to quit R.
 
 ==========================
 
-Observação: Quando ocorrer erro no Java (quando da instalação de pacote(s) do R no rstudio), fazer:
+"Observação": Quando ocorrer erro no Java (quando da instalação de pacote(s) do R no rstudio), fazer:
 
-$ sudo R CMD javareconf 
+$ sudo R CMD javareconf
+
+"OU":
+
+/# sudo vim /etc/apt/sources.list.d/java-8-debian.list
+
+	deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main
+	deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main
+
+/# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
+
+/# sudo apt-get update
+/# sudo apt-get install oracle-java8-installer
+
+/# sudo R CMD javareconf 
+
+	Java interpreter : /usr/bin/java
+	Java version     : 1.8.0_191
+	Java home path   : /usr/lib/jvm/java-8-oracle/jre
+	Java compiler    : /usr/bin/javac
+	Java headers gen.: /usr/bin/javah
+	Java archive tool: /usr/bin/jar
+
+	trying to compile and link a JNI program 
+	detected JNI cpp flags    : -I$(JAVA_HOME)/../include -I$(JAVA_HOME)/../include/linux
+	detected JNI linker flags : -L$(JAVA_HOME)/lib/amd64/server -ljvm
+	gcc -I"/usr/local/lib/R/include" -DNDEBUG -I/usr/lib/jvm/java-8-oracle/jre/../include -I/usr/lib/jvm/java-8-oracle/jre/../include/linux  -I/usr/local/include   -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c conftest.c -o conftest.o
+	gcc -shared -L/usr/local/lib/R/lib -L/usr/local/lib -o conftest.so conftest.o -L/usr/lib/jvm/java-8-oracle/jre/lib/amd64/server -ljvm -L/usr/local/lib/R/lib -lR
+
+
+	JAVA_HOME        : /usr/lib/jvm/java-8-oracle/jre
+	Java library path: $(JAVA_HOME)/lib/amd64/server
+	JNI cpp flags    : -I$(JAVA_HOME)/../include -I$(JAVA_HOME)/../include/linux
+	JNI linker flags : -L$(JAVA_HOME)/lib/amd64/server -ljvm
+	Updating Java configuration in /usr/local/lib/R
+	Done.
+
+/# sudo apt-get install r-cran-rjava
+
+/# sudo apt-get install libicu-dev libbz2-dev
+
+/# sudo install2.r rJava
+
 
 
 
