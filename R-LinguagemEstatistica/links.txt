@@ -84,7 +84,10 @@ $ docker container stop 1914d1d1f0db
 	$ docker run -d --rm -p 127.0.0.1:8787:8787 -e USER=eu -e ROOT=TRUE -e PASSWORD=1234 -v $(pwd):/home/rstudio rocker/rstudio:3.5.1
 	//$ docker run --rm -it rocker/rstudio:3.5.1 /bin/bash
 	$ docker ps -a
-	$ docker commit 5af49fd8a823 rocker/rstudio:3.5.1
+		CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                      NAMES
+		138a5956ab40        rocker/rstudio:3.5.1   "/init"             10 minutes ago      Up 10 minutes       127.0.0.1:8787->8787/tcp   elastic_borg
+
+	$ docker commit 138a5956ab40 rocker/rstudio:3.5.1
 
 	obs.: Caso dê erro quando:
 	> install.packages(c("rJava", "xlsxjars", "xlsx"), dependencies = "TRUE")
@@ -175,6 +178,9 @@ $ sudo R CMD javareconf
 
 /# sudo install2.r rJava
 
+> R
+
+install.packages(c("xlsxjars", "xlsx"))
 
 
 
