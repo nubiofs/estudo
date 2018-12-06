@@ -11,8 +11,53 @@ base_aleatoria_2 = rnorm(70, 7, 1.5)
 (base_aleatoria_2)
 
 # 2.a) Calculo das Médias:
-(mean(base_aleatoria_1))
-(mean(base_aleatoria_2))
+media_base1 = mean(base_aleatoria_1)
+(media_base1)
+media_base2 = mean(base_aleatoria_2)
+(media_base2)
+
+# 2.b) Variância
+(var(base_aleatoria_1))
+(var(base_aleatoria_2))
+
+# 2.c) Desvio padrão
+desvio_padrao_base1 = sd(base_aleatoria_1)
+(desvio_padrao_base1)
+desvio_padrao_base2 = sd(base_aleatoria_2)
+(desvio_padrao_base2)
+
+# 2.d) Mediana
+(median(base_aleatoria_1))
+(median(base_aleatoria_2))
+
+# 2.e) Quartis
+(quantile(base_aleatoria_1))
+(quantile(base_aleatoria_2))
+
+# 2.f) Coeficiente de Dispersão
+coeficiente_dispersao_base1 = (desvio_padrao_base1/media_base1) * 100
+(coeficiente_dispersao_base1)
+coeficiente_dispersao_base2 = (desvio_padrao_base2/media_base2) * 100
+(coeficiente_dispersao_base2)
+
+# 2.g) Coeficiente de Correlação entre as duas bases 
+# (interprete, com um comentário simples, o resultado encontrado)
+coeficiente_correlacao_bases = cor(base_aleatoria_1, base_aleatoria_2)
+(coeficiente_correlacao_bases)
+if(coeficiente_correlacao_bases == 0) {
+  print("Bases sem correção.")
+} else if (coeficiente_correlacao_bases >= 0) {
+  print("Associação positiva. As bases são diretamente proporcionais.")
+} else {
+  print("Associação negativa. As bases são inversamente proporcionais.")
+}
+
+
+
+#parei (Ferramentas em IA - Aula_17_11.pdf) página 21
+
+#########################################################
+### teste +
 
 # Ou via, exemplo extra:
 # funcao_media = function(base_aleatoria) {
@@ -35,28 +80,7 @@ base_aleatoria_2 = rnorm(70, 7, 1.5)
 # (funcao_media(base_aleatoria_1))
 # (funcao_media(base_aleatoria_2))
 
-# 2.b) Variância
-(var(base_aleatoria_1))
-(var(base_aleatoria_2))
 
-# 2.c) Desvio padrão
-(sd(base_aleatoria_1))
-(sd(base_aleatoria_2))
-
-# 2.d) Mediana
-(median(base_aleatoria_1))
-(median(base_aleatoria_2))
-
-# 2.e) Quartis
-(quantile(base_aleatoria_1))
-(quantile(base_aleatoria_2))
-
-
-
-#parei (Ferramentas em IA - Aula_17_11.pdf) página 21
-
-#########################################################
-### teste +
 
 #
 # hist(base_aleatoria_2, 5, main = "Histograma da base aleatória 2, separado por faixas de 5", 
