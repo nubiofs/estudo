@@ -42,6 +42,25 @@ coeficiente_dispersao_base2 = (desvio_padrao_base2/media_base2) * 100
 
 # 2.g) Coeficiente de Correlação entre as duas bases 
 # (interprete, com um comentário simples, o resultado encontrado)
+#
+#Pre-condição:
+tryCatch({
+  library("memisc")  
+}, error = function(e) {
+  print(e)
+  install.packages("memisc")
+  library("memisc")
+})
+funcao_interpretacao = function(x){
+  cases(
+    (x >= 0.00 && x <= 0.19)      -> "Uma correlação bem fraca.",
+    (x >= 0.20 && x <= 0.39)      -> "Uma correlação fraca.",
+    (x >= 0.40 && x <= 0.69)      -> "Uma correlação moderada.",
+    (x >= 0.70 && x <= 0.89)      -> "Uma correlação forte.",
+    (x >= 0.90 && x <= 1.00)      -> "Uma correlação muito forte."
+  )
+}
+#Cálculo da correlação e apresentação proporcionalidade:
 coeficiente_correlacao_bases = cor(base_aleatoria_1, base_aleatoria_2)
 (coeficiente_correlacao_bases)
 if(coeficiente_correlacao_bases == 0) {
@@ -51,6 +70,12 @@ if(coeficiente_correlacao_bases == 0) {
 } else {
   print("Associação negativa. As bases são inversamente proporcionais.")
 }
+#Interpretacao da correlação
+suppressWarnings(print(funcao_interpretacao(abs(coeficiente_correlacao_bases))))
+
+#03) Para o dataset "avocado.csv -> Dados históricos sobre preços de abacate 
+#e volume de vendas em vários mercados dos EUA", faça o que se pede:
+
 
 
 
