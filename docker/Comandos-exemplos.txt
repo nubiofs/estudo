@@ -73,6 +73,12 @@ $ docker run --rm -it -e PATH_JAVA_SIGNER=/opt/sinter/build/config sinter-valida
 
 	2) $ docker commit a0186140275b r-base
 
+	exemplo:
+
+	$ docker run --rm -it rocker/rstudio /bin/bash
+	$ docker ps -a
+	$ docker commit f6fbb0b54169 rocker/rstudio
+
 
 ** Copiando arquivos para container ativos:
 
