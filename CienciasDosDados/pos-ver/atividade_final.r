@@ -3,10 +3,8 @@
 # 70 elementos entre os valores 5 e 10.
 # A segunda composta dos elementos de uma Distribuição Normal de média 7,00 e 
 # desvio padrão 1,50 composta por 70 elementos.
-
 base_aleatoria_1 = runif(70, 5, 10)
 (base_aleatoria_1)
-
 base_aleatoria_2 = rnorm(70, 7, 1.5)
 (base_aleatoria_2)
 
@@ -75,14 +73,24 @@ suppressWarnings(print(funcao_interpretacao(abs(coeficiente_correlacao_bases))))
 
 #03) Para o dataset "avocado.csv -> Dados históricos sobre preços de abacate 
 #e volume de vendas em vários mercados dos EUA", faça o que se pede:
+avocado_prices = read.csv(file = "avocado.csv", header = TRUE, sep = ",")
+head(avocado_prices)
 
+# 3.a) Obtenha os parâmetros estatísticos da base com a função summary.
+summary(avocado_prices)
 
-
-
-#parei (Ferramentas em IA - Aula_17_11.pdf) página 21
+#parei (Ferramentas em IA - Aula_17_11.pdf) página 50
 
 #########################################################
 ### teste +
+
+# tryCatch({
+#   library("ggplot2")  
+# }, error = function(e) {
+#   print(e)
+#   install.packages("ggplot2")
+#   library("ggplot2")
+# })
 
 # Ou via, exemplo extra:
 # funcao_media = function(base_aleatoria) {
