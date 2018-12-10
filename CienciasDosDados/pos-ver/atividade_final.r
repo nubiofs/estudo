@@ -40,36 +40,40 @@ coeficiente_dispersao_base2 = (desvio_padrao_base2/media_base2) * 100
 
 # 2.g) Coeficiente de Correlação entre as duas bases 
 # (interprete, com um comentário simples, o resultado encontrado)
+funcao_interpretacao_proporcionalidade = function(correlacao) {
+  
+  if(correlacao == 0) {
+    return("Bases/Parâmetros sem correção.")
+  } else if (correlacao >= 0) {
+    return("Associação positiva. As bases/parâmetros são diretamente proporcionais.")
+  } else {
+    return("Associação negativa. As bases/parâmetros são inversamente proporcionais.")
+  }
+  
+}
 #
-#Pre-condição:
-tryCatch({
-  library("memisc")  
-}, error = function(e) {
-  print(e)
-  install.packages("memisc")
-  library("memisc")
-})
-funcao_interpretacao = function(x){
-  cases(
-    (x >= 0.00 && x <= 0.19)      -> "Uma correlação bem fraca.",
-    (x >= 0.20 && x <= 0.39)      -> "Uma correlação fraca.",
-    (x >= 0.40 && x <= 0.69)      -> "Uma correlação moderada.",
-    (x >= 0.70 && x <= 0.89)      -> "Uma correlação forte.",
-    (x >= 0.90 && x <= 1.00)      -> "Uma correlação muito forte."
-  )
+funcao_interpretacao_correlacao = function(coeficiente){
+  
+    if (coeficiente >= 0.00 && coeficiente <= 0.19) {
+      return("Uma correlação bem fraca.")
+    } else if (coeficiente >= 0.20 && coeficiente <= 0.39) {
+      return("Uma correlação fraca.")
+    } else if (coeficiente >= 0.40 && coeficiente <= 0.69) {
+      return("Uma correlação moderada.")
+    } else if (coeficiente >= 0.70 && coeficiente <= 0.89) {
+      return("Uma correlação forte.")
+    } else if (coeficiente >= 0.90 && coeficiente <= 1.00) {
+      return("Uma correlação muito forte.")
+    }      
+
 }
 #Cálculo da correlação e apresentação proporcionalidade:
-coeficiente_correlacao_bases = cor(base_aleatoria_1, base_aleatoria_2)
+coeficiente_correlacao_bases = cor(base_aleatoria_1, base_aleatoria_2, use = "na.or.complete")
 (coeficiente_correlacao_bases)
-if(coeficiente_correlacao_bases == 0) {
-  print("Bases sem correção.")
-} else if (coeficiente_correlacao_bases >= 0) {
-  print("Associação positiva. As bases são diretamente proporcionais.")
-} else {
-  print("Associação negativa. As bases são inversamente proporcionais.")
-}
-#Interpretacao da correlação
-suppressWarnings(print(funcao_interpretacao(abs(coeficiente_correlacao_bases))))
+#Interpretacao da proporcionalidade:
+funcao_interpretacao_proporcionalidade(coeficiente_correlacao_bases)
+#Interpretacao da correlação:
+suppressWarnings(print(funcao_interpretacao_correlacao(abs(coeficiente_correlacao_bases))))
 
 #03) Para o dataset "avocado.csv -> Dados históricos sobre preços de abacate 
 #e volume de vendas em vários mercados dos EUA", faça o que se pede:
@@ -99,19 +103,75 @@ region = avocado_prices$region
 
 #3.c) Concatene e exporte os parâmetros type, year e region para um arquivo nomeado
 #“abacate.xlsx” (a ser criado pelo usuário)
-head(type)
-class(type)
-unique(type)
+abacate_df = data.frame(Type = type, Year = year, Region = region)
+write.xlsx(abacate_df, "abacate.xlsx")
 
-install.packages(c("rJava", "xlsxjars", "xlsx"), dependencies = "TRUE")
-library("xlsx")
+#3.d) Plote um gráfico de pontos dos parâmetros de total.bags (eixo X) por year (eixo Y).
+plot(x = totalBags, y = year, type = "p", 
+     xlim = c(min(totalBags), max(totalBags)), 
+     ylim = c(min(year), max(year)), 
+     main = "Gráfico de Pontos", 
+     xlab = "Total Bags", ylab = "Year", col="blue")
 
+#3.e) Plote um gráfico de barras para o parâmetro Averageprice.
+qtd_averagePrice = tapply(rep(1,18249), averagePrice, sum)
+barplot(qtd_averagePrice, xlab = "Average Price", ylab = "Frequência")
 
+#3.f) Plote um gráfico de pizza para o parâmetro year.
+qtd_year = tapply(rep(1,18249), year, sum)
+pie(qtd_year)
+
+#3.g) Plote histogramas distintos para os parâmetros Averageprice e year.
+hist(averagePrice, 10, main = "Histograma de Average Price", 
+     xlab = "Average Price", ylab = "Frequência")
+hist(year, 10, main = "Histograma de Year", 
+     xlab = "Year", ylab = "Frequência", freq = T)
+
+#3.h) Calcule a correlação entre os parâmetros Averageprice e year; 
+#Total.volume e Total.bags; e
+#Total.bags e year. Interprete cada resultado com um breve comentário
+correlacao_averageprice_year = cor(averagePrice, year, use = "na.or.complete")
+(correlacao_averageprice_year)
+funcao_interpretacao_proporcionalidade(correlacao_averageprice_year)
+suppressWarnings(print(funcao_interpretacao_correlacao(abs(correlacao_averageprice_year))))
+#
+correlacao_totalVolume_totalBags = cor(totalVolume, totalBags, use = "na.or.complete")
+(correlacao_totalVolume_totalBags)
+funcao_interpretacao_proporcionalidade(correlacao_totalVolume_totalBags)
+suppressWarnings(print(funcao_interpretacao_correlacao(abs(correlacao_totalVolume_totalBags))))
+#
+correlacao_totalBags_year = cor(totalBags, year, use = "na.or.complete")
+(correlacao_totalBags_year)
+funcao_interpretacao_proporcionalidade(correlacao_totalBags_year)
+suppressWarnings(print(funcao_interpretacao_correlacao(abs(correlacao_totalBags_year))))
+
+#4) Considere as seguintes matrizes e faça o que se pede.
+matrix_a = matrix(c(1,4,0,-6,-2,6,4,3,-3,4,0,1,2,-1,6,-5), ncol = 4, nrow = 4, byrow = TRUE) 
+View(matrix_a)
+matrix_b = matrix(c(5,-4,-1,5,1,3,0,1,0,-3,5,-2,8,-4,3,2), ncol = 4, nrow = 4, byrow = TRUE) 
+View(matrix_b) 
+#4.a) C = (AB)T Multiplicação Matricial, seguido de transposição
+AB = matrix_a %*% matrix_b
+C = t(AB)
+#4.b) d = det(A + 2B)
+d = det(matrix_a + (2 * matrix_b))
+#4.c) e = (A2 − 5B)34 Elemento da terceira linha e quarta coluna
+e = ((matrix_a %*% matrix_a) - (5 * matrix_b))[3, 4]
 
 #parei (Ferramentas em IA - Aula_17_11.pdf) página 50
 
 #########################################################
+#########################################################
 ### teste +
+
+#head(type)
+#class(type)
+#unique(type)
+
+#library("rJava")
+#library("xlsxjars")
+#library("xlsx")
+
 
 # tryCatch({
 #   library("ggplot2")  
@@ -120,6 +180,20 @@ library("xlsx")
 #   install.packages("ggplot2")
 #   library("ggplot2")
 # })
+
+#install.packages(c("rJava", "xlsxjars", "xlsx"), dependencies = "TRUE")
+#library("xlsx")
+
+#Pre-condição:
+# tryCatch({
+#   library("memisc")  
+# }, error = function(e) {
+#   print(e)
+#   install.packages("memisc")
+#   library("memisc")
+# })
+
+
 
 # Ou via, exemplo extra:
 # funcao_media = function(base_aleatoria) {
@@ -189,5 +263,6 @@ library("xlsx")
 
 ### teste - 
 #########################################################
+
 
 
