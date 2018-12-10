@@ -158,6 +158,31 @@ d = det(matrix_a + (2 * matrix_b))
 #4.c) e = (A2 − 5B)34 Elemento da terceira linha e quarta coluna
 e = ((matrix_a %*% matrix_a) - (5 * matrix_b))[3, 4]
 
+#5) Implemente uma função em R que calcule a soma dos 100 primeiros termos 
+#de f(x) = ex. A função é expressa na seguinte forma. 
+#Verifique sua função para x = −4 e x = 6.
+funcao_soma_100_termos = function(x) {
+  
+  soma = 0
+  
+  for(i in 0:99) {
+  #for(i in 0:1) {
+  #for(i in 0:2) {
+    soma = soma + (((x) ^ i) / (factorial(i)))
+  }
+  
+  return(soma)
+    
+} 
+funcao_soma_100_termos(-4)
+funcao_soma_100_termos(6)
+
+
+  
+  
+
+
+
 #parei (Ferramentas em IA - Aula_17_11.pdf) página 50
 
 #########################################################
