@@ -113,19 +113,27 @@ plot(x = totalBags, y = year, type = "p",
      main = "Gráfico de Pontos", 
      xlab = "Total Bags", ylab = "Year", col="blue")
 
+# TODO (TITULOS E ARQ .PDF)!!!
+
 # 3.e) Plote um gráfico de barras para o parâmetro Averageprice.
 qtd_averagePrice = tapply(rep(1, length(averagePrice)), averagePrice, sum)
 barplot(qtd_averagePrice, xlab = "Average Price", ylab = "Frequência")
 
+# TODO (TITULOS E ARQ .PDF)!!!
+
 # 3.f) Plote um gráfico de pizza para o parâmetro year.
 qtd_year = tapply(rep(1, length(year)), year, sum)
 pie(qtd_year)
+
+# TODO (TITULOS E ARQ .PDF)!!!
 
 # 3.g) Plote histogramas distintos para os parâmetros Averageprice e year.
 hist(averagePrice, 10, main = "Histograma de Average Price", 
      xlab = "Average Price", ylab = "Frequência")
 hist(year, 10, main = "Histograma de Year", 
      xlab = "Year", ylab = "Frequência", freq = T)
+
+# TODO (TITULOS E ARQ .PDF)!!!
 
 # 3.h) Calcule a correlação entre os parâmetros Averageprice e year; 
 #Total.volume e Total.bags; e
@@ -202,12 +210,54 @@ correlacao_item_quantidade = cor(itensVendidos$Item, itensVendidos$Quantidade, u
 funcao_interpretacao_proporcionalidade(correlacao_item_quantidade)
 suppressWarnings(print(funcao_interpretacao_correlacao(abs(correlacao_item_quantidade))))
 
-# 7) Calcule as probabilidades dos seguintes eventos. Para cada letra crie o espaço amostral e o
+# 7) Calcule as probabilidades dos seguintes eventos. 
+# Para cada letra crie o espaço amostral e o
 # evento desejado.
 # 7.a) Obter três caras, sem importar a ordem, nos 6 lançamentos de uma moeda justa.
+espaco_amostral_7a = tosscoin(6)
+(espaco_amostral_7a)
+evento_7a = subset(espaco_amostral_7a, isrep(espaco_amostral_7a, vals = "H", nrep = 3))
+(evento_7a)
+probabilidade_7a = nrow(evento_7a) / nrow(espaco_amostral_7a)
+(probabilidade_7a)
   
-  
+# 7.b) Obter quatro coroas, sem importar a ordem, no lançamento de 7 vezes de uma moeda
+# com p_cara = 0.75 e p_coroa= 0.25. Use a função iidspace para criar as probabilidades.
+espaco_amostral_7b = iidspace(c("H", "T"), ntrials = 7, probs = c(0.75, 0.25))
+(espaco_amostral_7b)
+evento_7b = subset(espaco_amostral_7b, isrep(espaco_amostral_7b, vals = "T", nrep = 4))
+(evento_7b)
+probabilidade_7b = nrow(evento_7b) / nrow(espaco_amostral_7b)
+(probabilidade_7b)
 
+# 7.c) Obter a soma do resultado do lançamento de 4 vezes de um dado com 8 faces maior que 23.
+s7.c = rolldie(4, nsides = 8, makespace = TRUE)
+(s7.c)
+espaco_amostral_7c = addrv(s7.c, U=X1+X2+X3+X4)
+head(espaco_amostral_7c)
+probabilidade_7c = Prob(espaco_amostral_7c, U > 23)
+(probabilidade_7c)
 
+# 7.d) Obter uma carta (qualquer naipe) de valor entre 5 e 9 na retirada de um baralho com os
+# coringas presentes.
+espaco_amostral_7d = cards(makespace = TRUE, jokers = TRUE)
+(espaco_amostral_7d)
+evento_7d = subset(espaco_amostral_7d, rank %in% 5:9)
+(evento_7d)
+Prob(evento_7d)
 
+# 7.e) Considere três lançamentos de um dado justo de seis faces. Evento A (valores iguais) e
+# B (soma dos valores menor ou igual a 12). Calcule P(A|B) e P(B|A).
+espaco_amostral_7e = rolldie(3, nsides = 6, makespace = TRUE)
+(espaco_amostral_7e)
+evento_a_7e = subset(espaco_amostral_7e, X1 == X2 & X2 == X3)
+(evento_a_7e)
+evento_b_7e = subset(espaco_amostral_7e, X1 + X2 + X3 <= 12)
+(evento_b_7e)
+Prob(evento_a_7e, given = evento_b_7e)
+Prob(evento_b_7e, given = evento_a_7e)
 
+# 8)
+
+data("cars")
+cars
