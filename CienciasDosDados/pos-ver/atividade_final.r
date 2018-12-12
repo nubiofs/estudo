@@ -53,8 +53,8 @@ funcao_interpretacao_proporcionalidade = function(correlacao) {
 }
 #
 funcao_interpretacao_correlacao = function(coeficiente){
-  
-    if (coeficiente >= 0.00 && coeficiente <= 0.19) {
+    
+  if (coeficiente >= 0.00 && coeficiente <= 0.19) {
       return("Uma correlação bem fraca.")
     } else if (coeficiente >= 0.20 && coeficiente <= 0.39) {
       return("Uma correlação fraca.")
@@ -75,7 +75,7 @@ funcao_interpretacao_proporcionalidade(coeficiente_correlacao_bases)
 #Interpretacao da correlação:
 suppressWarnings(print(funcao_interpretacao_correlacao(abs(coeficiente_correlacao_bases))))
 
-#03) Para o dataset "avocado.csv -> Dados históricos sobre preços de abacate 
+# 3) Para o dataset "avocado.csv -> Dados históricos sobre preços de abacate 
 #e volume de vendas em vários mercados dos EUA", faça o que se pede:
 avocado_prices = read.csv(file = "avocado.csv", header = TRUE, sep = ",")
 head(avocado_prices)
@@ -101,33 +101,33 @@ type = avocado_prices$type
 year = avocado_prices$year
 region = avocado_prices$region
 
-#3.c) Concatene e exporte os parâmetros type, year e region para um arquivo nomeado
+# 3.c) Concatene e exporte os parâmetros type, year e region para um arquivo nomeado
 #“abacate.xlsx” (a ser criado pelo usuário)
 abacate_df = data.frame(Type = type, Year = year, Region = region)
 write.xlsx(abacate_df, "abacate.xlsx")
 
-#3.d) Plote um gráfico de pontos dos parâmetros de total.bags (eixo X) por year (eixo Y).
+# 3.d) Plote um gráfico de pontos dos parâmetros de total.bags (eixo X) por year (eixo Y).
 plot(x = totalBags, y = year, type = "p", 
      xlim = c(min(totalBags), max(totalBags)), 
      ylim = c(min(year), max(year)), 
      main = "Gráfico de Pontos", 
      xlab = "Total Bags", ylab = "Year", col="blue")
 
-#3.e) Plote um gráfico de barras para o parâmetro Averageprice.
-qtd_averagePrice = tapply(rep(1,18249), averagePrice, sum)
+# 3.e) Plote um gráfico de barras para o parâmetro Averageprice.
+qtd_averagePrice = tapply(rep(1, length(averagePrice)), averagePrice, sum)
 barplot(qtd_averagePrice, xlab = "Average Price", ylab = "Frequência")
 
-#3.f) Plote um gráfico de pizza para o parâmetro year.
-qtd_year = tapply(rep(1,18249), year, sum)
+# 3.f) Plote um gráfico de pizza para o parâmetro year.
+qtd_year = tapply(rep(1, length(year)), year, sum)
 pie(qtd_year)
 
-#3.g) Plote histogramas distintos para os parâmetros Averageprice e year.
+# 3.g) Plote histogramas distintos para os parâmetros Averageprice e year.
 hist(averagePrice, 10, main = "Histograma de Average Price", 
      xlab = "Average Price", ylab = "Frequência")
 hist(year, 10, main = "Histograma de Year", 
      xlab = "Year", ylab = "Frequência", freq = T)
 
-#3.h) Calcule a correlação entre os parâmetros Averageprice e year; 
+# 3.h) Calcule a correlação entre os parâmetros Averageprice e year; 
 #Total.volume e Total.bags; e
 #Total.bags e year. Interprete cada resultado com um breve comentário
 correlacao_averageprice_year = cor(averagePrice, year, use = "na.or.complete")
@@ -145,20 +145,23 @@ correlacao_totalBags_year = cor(totalBags, year, use = "na.or.complete")
 funcao_interpretacao_proporcionalidade(correlacao_totalBags_year)
 suppressWarnings(print(funcao_interpretacao_correlacao(abs(correlacao_totalBags_year))))
 
-#4) Considere as seguintes matrizes e faça o que se pede.
+# 4) Considere as seguintes matrizes e faça o que se pede.
 matrix_a = matrix(c(1,4,0,-6,-2,6,4,3,-3,4,0,1,2,-1,6,-5), ncol = 4, nrow = 4, byrow = TRUE) 
 View(matrix_a)
 matrix_b = matrix(c(5,-4,-1,5,1,3,0,1,0,-3,5,-2,8,-4,3,2), ncol = 4, nrow = 4, byrow = TRUE) 
 View(matrix_b) 
-#4.a) C = (AB)T Multiplicação Matricial, seguido de transposição
+# 4.a) C = (AB)T Multiplicação Matricial, seguido de transposição
 AB = matrix_a %*% matrix_b
 C = t(AB)
-#4.b) d = det(A + 2B)
+(C)
+# 4.b) d = det(A + 2B)
 d = det(matrix_a + (2 * matrix_b))
-#4.c) e = (A2 − 5B)34 Elemento da terceira linha e quarta coluna
+(d)
+# 4.c) e = (A2 − 5B)34 Elemento da terceira linha e quarta coluna
 e = ((matrix_a %*% matrix_a) - (5 * matrix_b))[3, 4]
+(e)
 
-#5) Implemente uma função em R que calcule a soma dos 100 primeiros termos 
+# 5) Implemente uma função em R que calcule a soma dos 100 primeiros termos 
 #de f(x) = ex. A função é expressa na seguinte forma. 
 #Verifique sua função para x = −4 e x = 6.
 funcao_soma_100_termos = function(x) {
@@ -177,117 +180,34 @@ funcao_soma_100_termos = function(x) {
 funcao_soma_100_termos(-4)
 funcao_soma_100_termos(6)
 
+# 6) 
+itensVendidos = read.xlsx("restaurante.xlsx", 1)
+(itensVendidos)
+qtd_itens = itensVendidos$Quantidade
+(qtd_itens)
+# Média de Quantidade:
+mean(qtd_itens, na.rm = TRUE)
+# Mediana de Quantidade:
+median(sort(qtd_itens), na.rm = TRUE)
+# Moda de Quantidade:
+q = table(qtd_itens)
+q[q == max(q)]
+# Variância de Quantidade:
+var(qtd_itens, na.rm = TRUE)
+# Desvio Padrão de Quantidade:
+sd(qtd_itens, na.rm = TRUE)
+# Correlação entre Item e Quantidade:
+correlacao_item_quantidade = cor(itensVendidos$Item, itensVendidos$Quantidade, use = "na.or.complete")
+(correlacao_item_quantidade)
+funcao_interpretacao_proporcionalidade(correlacao_item_quantidade)
+suppressWarnings(print(funcao_interpretacao_correlacao(abs(correlacao_item_quantidade))))
 
+# 7) Calcule as probabilidades dos seguintes eventos. Para cada letra crie o espaço amostral e o
+# evento desejado.
+# 7.a) Obter três caras, sem importar a ordem, nos 6 lançamentos de uma moeda justa.
   
   
 
-
-
-#parei (Ferramentas em IA - Aula_17_11.pdf) página 50
-
-#########################################################
-#########################################################
-### teste +
-
-#head(type)
-#class(type)
-#unique(type)
-
-#library("rJava")
-#library("xlsxjars")
-#library("xlsx")
-
-
-# tryCatch({
-#   library("ggplot2")  
-# }, error = function(e) {
-#   print(e)
-#   install.packages("ggplot2")
-#   library("ggplot2")
-# })
-
-#install.packages(c("rJava", "xlsxjars", "xlsx"), dependencies = "TRUE")
-#library("xlsx")
-
-#Pre-condição:
-# tryCatch({
-#   library("memisc")  
-# }, error = function(e) {
-#   print(e)
-#   install.packages("memisc")
-#   library("memisc")
-# })
-
-
-
-# Ou via, exemplo extra:
-# funcao_media = function(base_aleatoria) {
-#   
-#   soma = lapply(list(base_aleatoria), sum)
-#   media = as.numeric(soma) / length(base_aleatoria)
-#   
-#   if (media ==  mean(base_aleatoria)) {#Se é igual ao resultado de 'mean'
-#     
-#     return(media)
-#     
-#   }
-#   else {
-#     
-#     return("Error!")
-#     
-#   }
-#   
-# }
-# (funcao_media(base_aleatoria_1))
-# (funcao_media(base_aleatoria_2))
-
-
-
-#
-# hist(base_aleatoria_2, 5, main = "Histograma da base aleatória 2, separado por faixas de 5", 
-#      xlab = "Valores até 70", ylab = "Frequência")
-
-#library("ggplot2")
-
-
-# sum(seq(1:5))
-# 
-# hist(pnorm(1.96, 0, 1), 5, main = "Histograma da base aleatória 2, separado por faixas de 5", 
-#      xlab = "Valores até 70", ylab = "Frequência")
-# 
-# dados = qnorm(seq(1:5), 7.5, 1)
-# hist(dados, 5, main = "Histograma da base aleatória 2, separado por faixas de 5", 
-#      xlab = "Valores até 70", ylab = "Frequência", xlim = c(1, 5))
-# 
-# pnorm(84, mean=72, sd=15.2, lower.tail=FALSE) 
-
-# https://www.r-bloggers.com/normal-distribution-functions/
-# http://www.r-tutor.com/elementary-statistics/probability-distributions/normal-distribution
-# http://www.portalaction.com.br/probabilidades/62-distribuicao-normal
-
-#===== calculo manual da variancia
-
-#vetorx = c(1.00, 2.00, 3.00, 4.00, 5.00, 6.00, 7.00)
-# vetorx = base_aleatoria_1
-# 
-# sub_media_2 = function(x) {
-#     
-#   y = (x - as.numeric(mean(vetorx)))
-#   return(y ^ 2) 
-#   
-# }
-# 
-# soma_total = 0
-# 
-# for(x in vetorx) {
-#   print(x)
-#   soma_total = soma_total + sub_media_2(x)
-# }
-# 
-# (soma_total/length(vetorx))
-
-### teste - 
-#########################################################
 
 
 
