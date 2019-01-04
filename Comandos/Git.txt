@@ -154,6 +154,8 @@ Desabilitar verificação ssl do git
 $ git config --global http.sslverify false
 
 $ ssh-keygen -o -t rsa -C "your.email@example.com" -b 4096
+ou
+$ ssh-keygen -o -t rsa -b 4096
 
 $ sudo apt-get install xclip
 
