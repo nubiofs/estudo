@@ -1,0 +1,39 @@
+https://github.com/strohne/Facepager
+
+""""""""""""""""""""""""""""
+""" Instalacação
+""""""""""""""""""""""""""""
+
+(https://github.com/strohne/Facepager/tree/python3/src#steps-to-runder-under-ubuntu-18041-lts):
+Open terminal in a directory of your choice and execute the commands indicated by the $ sign.
+
+//Install additional software:
+$ sudo apt install git
+$ sudo apt-get install python3-venv
+
+//Clone Facepager
+$ git clone -b python3 https://github.com/strohne/Facepager
+$ cd Facepager
+
+//Setup Python environment
+$ python3 -m venv .
+$ source bin/activate
+
+$ bin/pip3 install SQLAlchemy python-dateutil requests_oauthlib requests-toolbelt rauth lxml
+$ bin/pip3 install PySide2==5.11.1
+$ bin/pip3 install numpy pandas
+
+//Start Facepager
+$ cd src
+$ python3 Facepager.py
+
+""""""""""""""""""""""""""""
+""" Apenas Execução (após instalação do ambiente)
+""""""""""""""""""""""""""""
+
+$ cd ~/Downloads/Desenvolvimento/Facepager/
+$ source bin/activate
+$ python3 src/Facepager.py
+
+
+
