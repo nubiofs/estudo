@@ -15,4 +15,16 @@ https://netlytic.org/home/
 ================
 
 "app twitter"
-Desejo utilizar o api do Twitter para desenvolver os conhecimentos nessários para a disciplina da pós gradução (Inteligência Artificial com Enfoque em Ciencias dos Dados) a qual estou cursando. Com base no desenvolvimento de provas de testes os conhecimentos relacionados a Analise de Redes Sociais serão varidos para uma melhor analise e conhecimento de assuntos importantes e opniões expressas pela rede social.
+Desejo utilizar o api do Twitter para desenvolver os conhecimentos nessários para a disciplina da pós gradução (Inteligência Artificial com Enfoque em Ciencias dos Dados) a qual estou cursando. Com base no desenvolvimento de provas de testes os conhecimentos relacionados a Analise de Redes Sociais serão validados para uma melhor analise e conhecimento de assuntos importantes e opniões expressas pela rede social.
+
+"The core use case, intent"
+A intenção é criar um caso de uso simples para determinar os atores que mais escrevem sobre assuntos (tags) relacionados a Inteligencia Artificial (por exemplo, que mais retwitter a tag #AutoML). Assim, se eu não estiver seguindo esses atores eu possa começar a seguir.
+
+"analyze Tweets, Twitter users, or their content, share details about the analyses you plan to conduct and the methods or techniques"
+Dessa forma, serão analisados Tweets, Twitter users e seus conteúdos para saber que mais está falando sobre importantes assuntos sobre IA e Ciencia dos Dados.
+
+"involves Tweeting, Retweeting, or liking content, share how you will interact with Twitter users or their content"
+Após a obtenção de tais dados, serão gerados grafros num sistema para visualização e análises que determinarão quais os principais atores (hubs) na rede gerada. E se esses atores são centrais para a divulgação de conhecimento sobre o contexto estudado.
+
+
+ 
