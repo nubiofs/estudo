@@ -202,7 +202,7 @@ $ git log
 //$ git commit -m "Story 182: Fix benchmarks for speed"
 
 //$ git push origin master
-
+//git pull upstream master
 
 // git diff <sourcebranch> <targetbranch>
 
