@@ -147,21 +147,39 @@ $ git add .gitmodules sub/module/path
 $ git commit -m "Added in submodules for removed folders"
 
 ===========================================
+== Conectando git com ssh:
+===========================================
+
+--> https://help.github.com/articles/connecting-to-github-with-ssh/
 
 Desabilitar verificação ssl do git
 
-
 $ git config --global http.sslverify false
 
-$ ssh-keygen -o -t rsa -C "your.email@example.com" -b 4096
-ou
-$ ssh-keygen -o -t rsa -b 4096
+$ git config --list
+
+$ git config --global user.email "nubiofs@gmail.com"
+
+$ git config --global user.name "nubiofs"
+//colocar o cpf
+
+$ ls -al ~/.ssh
+
+$ ssh-keygen -o -t rsa -b 4096 -C "your.email@example.com" 
+//$ ssh-keygen -o -t rsa -b 4096
+//ssh-keygen -p
+
+$ eval "$(ssh-agent -s)"
+
+$ ssh-add ~/.ssh/id_rsa
 
 $ sudo apt-get install xclip
 
 $ xclip -sel clip < ~/.ssh/id_rsa.pub
 
 Obs.: copiar em "https://git.xpto/profile/keys
+
+$ ssh -T git@github.com
 
 $ cd git
 
@@ -176,10 +194,18 @@ $ git diff
 
 $ git log
 
+//git log --pretty=format:"%h - %an, %ar : %s"
+//git log --pretty=format:"%h %s" --graph
+
 //$ git add README.txt
 //$ git add .
 //$ git commit -m "Story 182: Fix benchmarks for speed"
 
 //$ git push origin master
+
+
+// git diff <sourcebranch> <targetbranch>
+
+===> https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
 
 
