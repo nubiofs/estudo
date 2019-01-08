@@ -186,6 +186,74 @@ https://pipenv.readthedocs.io/en/latest/
 $ pip install pipenv
 
 
+=============================================
+== docker miniconda
+=============================================
+
+https://hub.docker.com/r/continuumio/miniconda3
+
+$ docker pull continuumio/miniconda3
+
+$ docker run -i -t continuumio/miniconda3 /bin/bash
+
+$ docker run -i -t -p 8888:8888 continuumio/miniconda3 /bin/bash -c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser"
+
+=============================================
+== spyder in virtualenv
+=============================================
+
+$ sudo apt-get install spyder3
+
+//
+
+$ sudo apt-get install python3-dev
+
+$ virtualenv --python=python3.6 spyder
+
+$ cd spyder/
+
+$ source bin/activate
+
+$ pip install spyder-kernels
+//pip install spyder-kernels==1.*
+
+$ git clone https://github.com/spyder-ide/spyder.git
+
+$ cd spyder/
+
+$ pip install -r spyder.tx
+
+PyQt5 >=5.5
+Qtconsole >=4.2.0
+Rope >=0.9.4
+Jedi >=0.9.0
+Pyflakes
+Sphinx
+Pygments >=2.0
+Pylint
+Pycodestyle
+Psutil
+Nbconvert
+Qtawesome >=0.4.1
+Pickleshare
+PyZMQ
+QtPy >=1.2.0
+Chardet >=2.0.0
+Numpydoc
+Cloudpickle
+Matplotlib >=1.0
+Pandas >=0.13.1
+Numpy
+Sympy >=0.7.3
+Scipy
+Cython >=0.21
+
+$ python bootstrap.py
+
+
+
+
+
 
 
 

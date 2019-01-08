@@ -13,7 +13,7 @@ if x < 0:
 else:
 
 	r = math.sqrt(x)
-	x1 = (-b + r) / (2 * a)
+	x1 = (-b + r) / (2*a)
 	x2 = (-b - r) / (2*a)
 
 print("\n\nX' = %s \nX' = " % x1, x2)
