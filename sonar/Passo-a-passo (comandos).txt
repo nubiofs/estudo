@@ -12,6 +12,10 @@ Fonte:
 
 $ docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 
+$ docker run -d --name sonarqube -p 9000:9000 sonarqube
+
+==> http://localhost:9000
+
 obs.: 
 By default, the image will use an embedded H2 database that is not suited for production.
 Embedded database should be used for evaluation purpose only.
@@ -66,6 +70,16 @@ ou
 $ ./gradlew sonarqube
 
 ==> http://localhost:9000/dashboard?id=sonarqube-scanner-gradle
+
+Obs.: build.gradle:
+
+plugins {
+  id "org.sonarqube" version "2.6"
+}
+
+./gradlew sonarqube \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=01275058215cbc286fb95675402e7135b454941c
 
 3.2) Exemplo 02
 

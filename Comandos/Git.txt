@@ -159,9 +159,27 @@ $ git config --global http.sslverify false
 $ git config --list
 
 $ git config --global user.email "nubiofs@gmail.com"
+//git config --local user.email "nubiofs@gmail.com"
+//git config user.email "nubiofs@gmail.com"
+//cat ~/.gitconfig
+
 
 $ git config --global user.name "nubiofs"
+//git config --local user.name "nubiofs"
+//git config user.name "nubiofs"
 //colocar o cpf
+//cat .git/config
+
+obs.:
+
+	There are 3 levels of git config; project, global and system.
+
+    project: Project configs are only available for the current project and stored in .git/config in the project's directory.
+    global: Global configs are available for all projects for the current user and stored in ~/.gitconfig.
+    system: System configs are available for all the users/projects and stored in /etc/gitconfig.
+
+
+$ git config user.name
 
 $ ls -al ~/.ssh
 
