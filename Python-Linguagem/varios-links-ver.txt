@@ -177,13 +177,64 @@ python script.py
 $ docker run --rm -v /path/to/app:/app bitnami/python pip install -r requirements.txt
 $ docker run -it --name python -v /path/to/app:/app bitnami/python python script.py
 
+-------------
+-------------
+--- pipenv = (virtualenv + pip)
+-------------
+-------------
 
--------------
--- pipenv
--------------
 https://pipenv.readthedocs.io/en/latest/
 
 $ pip install pipenv
+
+$ mkdir testeDir
+
+$ cd testeDir/
+
+//To initialize a Python 3 virtual environment:
+$ pipenv --three
+
+$ ls
+
+$ pipenv install django
+
+$ pipenv install django-extensions --dev
+
+$ less Pipfile
+
+$ pipenv graph
+$ pip freeze
+
+//Ativa o "virtualenv" com:
+$ pipenv shell
+
+$ pipenv --where
+$ pipenv --py
+
+(testeDir) $ python --version
+(testeDir) $ pipenv --venv
+(testeDir) $ pip show django
+
+(testeDir) $ pipenv check
+
+//(testeDir) $ pipenv install
+
+Obs.: -> Valida/verificas os sequisitos nas seguintes linhas em Pipfile:
+	[requires]
+	python_version = '3.5'
+	platform_system = 'Linux'
+
+(testeDir) $ pipenv update
+
+//Ou caso não queira ativa o "virtualenv":
+$ pipenv run pip show django
+
+//Exemplo back-end em django:
+(testeDir) $ django-admin startproject myproject .
+(testeDir) $ python manage.py migrate
+(testeDir) $ python manage.py runserver
+
+--> http://127.0.0.1:8000/
 
 
 =============================================
