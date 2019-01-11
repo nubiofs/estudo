@@ -1,0 +1,31 @@
+
+-- (arduino descarga de bateria automotiva) (arduino 12v battery meter):
+
+https://www.instructables.com/id/Arduino-True-Battery-Capacity-Tester-Li-IonNiMH/
+https://www.instructables.com/id/Li-Ion-Battery-capacity-tester-Lithium-power-test/
+https://www.instructables.com/id/Arduino-Battery-Voltage-Indicator/
+
+http://labdegaragem.com/forum/topics/medir-status-da-bateria
+http://labdegaragem.com/forum/topics/programa-para-o-arduino-avisar-que-a-bateria-est-acabando
+
+https://autonomoushobbyist.wordpress.com/2011/02/24/arduino-battery-meter/
+
+(SISTEMA DE MONITORAMENTO PARA BATERIAS DO TIPO CHUMBO ÁCIDO):
+http://www.eletrica.ufpr.br/p/arquivostccs/258.pdf
+
+https://forum.arduino.cc/index.php?topic=255680.0
+https://forum.arduino.cc/index.php?topic=463993.0
+https://forum.arduino.cc/index.php?topic=505724.0
+
+
+https://www.instructables.com/id/DIY-Amp-Hour-Meter-Arduino/
+
+https://www.electroschematics.com/9351/arduino-digital-voltmeter/
+
+https://forum.mysensors.org/topic/3840/12v-solar-battery-monitor/2
+
+https://arduino.stackexchange.com/questions/44388/i-have-built-a-battery-level-indicator-and-have-tested-with-a-12v-battery-would
+
+https://pt.aliexpress.com/item/12-v-Quantidade-El-trica-4-4-LEDs-Indicador-De-Energia-Da-Bateria-M-dulo-De/32860506731.html
+
+https://www.ebay.com/p/12v-Electric-Power-Indicator-Battery-Detection-Module-for-Arduino/814063443
