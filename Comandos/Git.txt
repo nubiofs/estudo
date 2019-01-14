@@ -211,6 +211,8 @@ $ git status
 $ git diff
 
 $ git log
+$ git log --stat
+$ git show
 
 //git log --pretty=format:"%h - %an, %ar : %s"
 //git log --pretty=format:"%h %s" --graph
