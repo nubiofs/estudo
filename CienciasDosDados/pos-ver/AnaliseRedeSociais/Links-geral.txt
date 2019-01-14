@@ -55,3 +55,5 @@ https://github.com/kolaczyk/sand
 
 https://sites.google.com/a/umn.edu/social-network-analysis/home
 http://social-dynamics.org/twitter-network-data/
+
+http://insightee.com.br/blog/alguns-conceitos-basicos-para-entender-a-analise-de-redes-em-midias-sociais/
