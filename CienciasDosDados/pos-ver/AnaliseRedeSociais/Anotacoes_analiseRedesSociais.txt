@@ -1,0 +1,62 @@
+* Criar a rede usando Networkx:
+
+--> https://networkx.github.io
+--> https://github.com/networkx/networkx
+
+$ pip install network
+
+"ou (se já estiver o anaconda instalado)";
+
+$ conda install -c anaconda networkx
+
+================ exemplo da aula:
+==> https://www.datacamp.com/community/tutorials/social-network-analysis-python
+
+dojo:
+https://campus.datacamp.com/courses/network-analysis-in-python
+https://campus.datacamp.com/courses/network-analysis-in-python-part-1/introduction-to-networks?ex=1
+
+---------------
+
+- dataset:
+
+https://www.datacamp.com/community/tutorials/www.imdb.com
+https://snap.stanford.edu/data/egonets-Facebook.html
+
+G_fb = nx.read_edgelist('facebook_combined.txt', create_using = nx.Graph(), nodetype = int)
+
+pring(nx.info(G_fb))
+
+nx.draw_networkx(G_fb)
+
+#plt.show()
+
+## Nova tela
+highest_betweenness_centrality = sorted(betCent, key = betCent.get, reverse = True)[:5]
+print(highest_betweenness_centrality)
+
+==== varios
+
+https://www.analyticsvidhya.com/blog/2018/04/introduction-to-graph-theory-network-analysis-python-codes/
+https://www.python-course.eu/networkx.php
+
+https://towardsdatascience.com/getting-started-with-graph-analysis-in-python-with-pandas-and-networkx-5e2d2f82f18e
+https://towardsdatascience.com/catching-that-flight-visualizing-social-network-with-networkx-and-basemap-ce4a0d2eaea6
+
+https://github.com/FelixChop/MediumArticles/blob/master/Graph_analysis_Python.ipynb
+
+
+
+************ PARA PROXIMA AULA
+
+- Concluir o Curso (até o módulo free):
+https://campus.datacamp.com/courses/network-analysis-in-python-part-1/introduction-to-networks?ex=1
+
+- Em dupla estudar e fazer apresentação para ferramenta escolhida pelo professor
+
+- Grupo de 4 para escolha de rede para analise final do curso (descrever caracteristicas) 
+
+obs.: "G3" Grupo: Suedy, Eu, Marcelo e I  
+
+
+
