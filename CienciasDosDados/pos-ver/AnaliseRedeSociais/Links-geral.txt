@@ -34,9 +34,22 @@ http://www.weizmann.ac.il/mcb/UriAlon/download/collection-complex-networks
 
 https://dango.rocks/datasets/
 
+https://paulovasconcellos.com.br/os-7-melhores-sites-para-encontrar-datasets-para-projetos-de-data-science-8a53c3b48329
+
 -->
 
+https://www.kaggle.com/datasets
+
+https://github.com/fivethirtyeight/data
+https://data.fivethirtyeight.com/
+
+https://en.wikipedia.org/wiki/List_of_social_networking_websites
+
+https://homepages.dcc.ufmg.br/~fabricio/
+
 https://github.com/gephi/gephi/wiki/Datasets
+
+http://twitter.mpi-sws.org/
 
 
 ---
@@ -60,3 +73,16 @@ https://sites.google.com/a/umn.edu/social-network-analysis/home
 http://social-dynamics.org/twitter-network-data/
 
 http://insightee.com.br/blog/alguns-conceitos-basicos-para-entender-a-analise-de-redes-em-midias-sociais/
+
+
+*** ferramentas:
+
+https://pypi.org/project/python-linkedin-v2/
+
+https://ozgur.github.io/python-linkedin/
+
+https://medium.com/@marlessonsantana/como-criar-apps-e-obter-os-tokens-necess%C3%A1rios-para-coletar-dados-do-twitter-instagram-linkedin-e-8f36602ea92a
+
+https://aeroleads.com/blog/complete-guide-linkedin-api/
+
+https://www.ibpad.com.br/blog/comunicacao-digital/ferramentas-para-analise-de-redes-e-grafos-em-midias-sociais/
