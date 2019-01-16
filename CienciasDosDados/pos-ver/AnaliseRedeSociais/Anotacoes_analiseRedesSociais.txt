@@ -20,6 +20,7 @@ https://campus.datacamp.com/courses/network-analysis-in-python
 https://campus.datacamp.com/courses/network-analysis-in-python-part-1/introduction-to-networks?ex=1
 
 ---------------
+https://en.wikipedia.org/wiki/Graph_theory
 
 - dataset:
 
