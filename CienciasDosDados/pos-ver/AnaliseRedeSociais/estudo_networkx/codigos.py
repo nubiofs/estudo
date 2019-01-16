@@ -60,7 +60,28 @@ nx.degree(G_symmetric, 'Dev Anand') # 3
 
 # Clustering Coefficient ()
 nx.clustering(G_symmetric, 'Dev Anand') # 1
-
 nx.clustering(G_symmetric, 'Abhishek Bachchan') # 0,67
+nx.average_clustering(G_symmetric) # 0,87
 
-nx.average_clustering(G_symmetric)
+# Distance
+nx.shortest_path(G_symmetric, 'Dev Anand', 'Akshay Kumar')
+nx.shortest_path_length(G_symmetric, 'Dev Anand', 'Akshay Kumar')
+
+T = nx.bfs_tree(G_symmetric, 'Dev Anand')
+nx.draw_networkx(T)    
+plt.show()
+
+# Eccentricity
+nx.eccentricity(G_symmetric)
+nx.eccentricity(G_symmetric, 'Dev Anand')
+nx.eccentricity(G_symmetric, 'Abhishek Bachchan')
+
+# Degree Centrality
+nx.degree_centrality(G_symmetric)
+
+# Eigenvector Centrality
+nx.eigenvector_centrality(G_symmetric)
+
+# Betweenness Centrality
+nx.betweenness_centrality(G_symmetric)
+
