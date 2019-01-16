@@ -310,6 +310,50 @@ Cython >=0.21
 
 $ python bootstrap.py
 
+==================================
+=== vscode com jupyter notebook
+==================================
+-> https://www.linkedin.com/pulse/jupyter-notebook-visual-studio-code-bikash-sundaray/?utm_campaign=News&utm_medium=Community&utm_source=DataCamp.com
+-> https://code.visualstudio.com/docs/python/jupyter-support
+-> https://marketplace.visualstudio.com/items?itemName=donjayamanne.jupyter
+
+$ ~/vscode
+
+$ pipenv --three
+
+$ pipenv install networkx matplotlib ipython jupyter
+
+$ less Pipfile
+
+//Ativa o "virtualenv" com:
+$ pipenv shell
+
+Obs.: No vscode instalar os seguintes plugins:
+
+Python Extension Pack (Don Jayamanne)
+Jypyter (Don Jayamanne)
+VS Code Jupyter Notebook Previewer (jithurjacob)
+Jupyter Notebook Converter (Yigit Ozgumus)
+Jupyter-QTConsole (Andreas Klausen)
+
+==> Remember Run Cell will appear where you have written "#%%". So you can repeat "#%%" where ever you want.
+
+#%%
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show() 
+
+
+
+
+
+
+
+
 
 
 
