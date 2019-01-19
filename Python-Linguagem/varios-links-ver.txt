@@ -348,6 +348,52 @@ plt.plot(x, np.sin(x))
 plt.show() 
 
 
+==================================
+=== anaconda (ambiente virtual)
+==================================
+
+#Para verificar se o anaconda já está instalado
+$ which anaconda-navigator
+
+$ cd ~/anaconda3/envs
+
+$ conda env create -f environment.yml
+
+obs.: Exemplo de conteudo do arquivo "environment.yml":
+
+	name: nams  # Network Analysis Made Simple
+	channels:
+	- defaults
+	- conda-forge
+	- ericmjl
+	dependencies:
+	- python=3.6
+	- matplotlib
+	- networkx
+	- scipy
+	- numpy
+	- nxviz
+	- hiveplot
+	- jupyter
+	- jupyterlab
+	- ipykernel
+	- pandas
+	- rise
+	- python-louvain
+	- tqdm
+	- pip:
+	    - environment_kernels
+
+# $ wget https://raw.githubusercontent.com/ericmjl/conda-envs/master/nams.yml -O environment.yml
+# $ conda env update -f environment.yml
+
+$ conda activate nams
+#$ source activate nams
+"ou":
+$ anaconda-navigator
+
+$ conda deactivate
+
 
 
 

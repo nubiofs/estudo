@@ -1,3 +1,10 @@
+** tutoriais
+
+https://dev.to/vaidehijoshi/a-gentle-introduction-to-graph-theory
+https://jonchar.net/notebooks/MA-Exploratory-Analysis/
+
+https://github.com/ericmjl/Network-Analysis-Made-Simple
+
 ** social network analysis datasets:
 
 http://snap.stanford.edu/data/
