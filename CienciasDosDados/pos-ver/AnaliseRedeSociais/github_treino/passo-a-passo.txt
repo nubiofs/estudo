@@ -1,0 +1,28 @@
+# https://github.com/nubiofs/Network-Analysis-Made-Simple
+
+$ cd ~/anaconda3/envs
+
+$ conda env create -f environment.yml
+
+$ ~/anaconda3/envs/nams
+
+$ conda activate nams
+
+#source activate nams
+#conda install --name nams pylint
+
+$ git clone https://github.com/ericmjl/Network-Analysis-Made-Simple
+
+$ cd Network-Analysis-Made-Simple
+
+$ python checkenv.py
+
+$ mkdir estudo_exemplos && cd estudo_exemplos
+
+$ ~/anaconda3/envs/nams/estudo_exemplos$ code .
+
+#$ pip install -r requirements.txt
+
+$ jupyter notebook
+
+$ conda deactivate

@@ -391,6 +391,8 @@ $ conda activate nams
 #$ source activate nams
 "ou":
 $ anaconda-navigator
+"ou":
+$ code .
 
 $ conda deactivate
 
