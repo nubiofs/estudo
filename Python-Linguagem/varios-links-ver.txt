@@ -394,6 +394,27 @@ $ anaconda-navigator
 "ou":
 $ code .
 
+obs.: Instalando o kernel do R para o jupyter notebook:
+
+	$ conda install -c r r-essentials
+	ou:		
+	$ pip install rpy2
+
+$ conda install -c conda-forge autopep8
+
+obs.: Ou Usar essa configuração "conda config --add channels conda-forge" para:
+	$ conda install autopep8
+	$ conda search autopep8 --channel conda-forge
+	$ pip show autopep8
+	$ autopep8 --help
+	$ autopep8 --in-place --aggressive --aggressive <filename>
+	$ autopep8 --in-place --verbose teste.py
+	$ pycodestyle --quiet --statistics teste.py
+
+https://conda-forge.org/feedstocks/
+https://github.com/conda-forge/autopep8-feedstock
+https://pypi.org/project/autopep8/
+
 $ conda deactivate
 
 
