@@ -226,6 +226,15 @@ $ git show
 
 // git diff <sourcebranch> <targetbranch>
 
+# git : How to remove a big file wrongly committed
+# (I added a large file to a git repository (102Mb), commited and push and got an error due to size limit limitations on github):
+$ git filter-branch --tree-filter 'rm -rf path/to/your/file' HEAD
+	obs.: #git filter-branch -f --index-filter "git rm -rf --cached --ignore-unmatch FOLDERNAME" -- --all
+$ git push
+
+
+
+
 ===> https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
 
 
