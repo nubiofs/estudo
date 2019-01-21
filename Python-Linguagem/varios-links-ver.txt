@@ -359,7 +359,7 @@ $ cd ~/anaconda3/envs
 
 $ conda env create -f environment.yml
 
-obs.: Exemplo de conteudo do arquivo "environment.yml":
+obs.: Exemplos de conteudo do arquivo "environment.yml":
 
 	name: nams  # Network Analysis Made Simple
 	channels:
@@ -383,6 +383,23 @@ obs.: Exemplo de conteudo do arquivo "environment.yml":
 	- tqdm
 	- pip:
 	    - environment_kernels
+
+	"ou"
+
+	name: datascience
+	dependencies:
+	  - numpy
+	  - scipy
+	  - pandas
+	  - scikit-learn
+	  - scipy
+	  - jupyter
+	  - matplotlib
+	  - statsmodels
+	  - python=3.6
+	  - pip:
+	    - tensorflow
+	    - tensorflow-tensorboard
 
 # $ wget https://raw.githubusercontent.com/ericmjl/conda-envs/master/nams.yml -O environment.yml
 # $ conda env update -f environment.yml
