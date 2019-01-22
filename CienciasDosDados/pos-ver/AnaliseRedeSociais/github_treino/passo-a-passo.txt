@@ -1,5 +1,9 @@
 # https://github.com/nubiofs/Network-Analysis-Made-Simple
 
+--------------------------
+-- com anaconda e conda --
+--------------------------
+
 $ cd ~/anaconda3/envs
 
 $ conda env create -f environment.yml
@@ -26,3 +30,32 @@ $ ~/anaconda3/envs/nams/estudo_exemplos$ code .
 $ jupyter notebook
 
 $ conda deactivate
+
+----------------
+-- com pipenv --
+----------------
+
+$ mkdir ericmjl_nams
+
+$ cd ericmjl_nams/
+
+$ pipenv --three
+
+$ pipenv shell
+
+$ pipenv run pip install matplotlib networkx pandas hiveplot numpy jupyter nxviz scipy
+
+$ git clone https://github.com/ericmjl/Network-Analysis-Made-Simple
+
+$ cd Network-Analysis-Made-Simple
+
+$ pipenv run pip install jupyterlab
+
+$ pipenv run pip install -r requirements.txt
+
+$ python checkenv.py
+#obs.: $ sudo apt-get install ffmpeg
+
+$ jupyter lab
+
+
