@@ -1,4 +1,69 @@
 
+* download messages:
+
+==> *senior*
+==> freetext.usenetserver.com
+==> "soc.senior.health+fitness"
+
+obs.: (http://unison.sleonard.co.uk/index.php/4-user-guide/user-guide-sp-226)
+
+
+    -Newsgroup : enter a string to find the newsgroup name. Asterisks can be used as a wild card, represening any character. e.g. *football* will bring back the names of groups with "football" in it.
+    -Server : A drop down list of free NNTP servers. You can select any one of these, or enter the name of your own.
+    -Find groups : Clicking on this will search for groups whose name match the string in the "Newsgroup" field.
+    -Get Extras : clicking on this will also download the extra fields needed to give location and cross-posts.
+    -Date From : This will filter the messages downloaded, saving only those that are created on or after this date. Must be in YYYYMMDD format, e.g. 20070401
+    -Date To : This will filter the messages downloaded, saving only those that are created on or before this date. Must be in YYYYMMDD format, e.g. 20070430
+
+		 There a number of fields on this panel:
+
+		    Get Extras : Click on this will start a download of the extra information
+		    Filter : Click on this and the data shown will be filtered according to values set in the following fields. If no value is in a filter field, then all values are shown. Click again to remove filter.
+			Date From : Date in YYYYMMDD format (e.g. 20000502) - show messages created on or after this date
+			Date To : Date in YYYYMMDD format (e.g. 20010502) - show messages created on or before this date
+			Stats Panels - these list the number of messages posted for a given stat. They are also used for the filter.
+			    Countries : Lists countries ordered by number of messages. Only has meaningful values if the extra fields have been downloaded.
+			    Posters : Lists the posters ordered by number of messages they have written.
+			    Groups : Lists newsgroups, ordered by ones with mosts messages. 
+		    Refresh Data : Reloads data from the database to show in the GUI. 
+
+
+    -Download : Once a newsgroup is selected, clicking on this button will start the download, using whatever options have been selected earlier.
+    -Pause : Pauses the download. Pressing again will resume.
+
+		UNISoN was created to show social networks in UseNet messages. This is done in this panel. There are three networks that can be created, one of which must be selected to create the network:
+
+		    Thread creator vs Current poster : network of links from the author of a message, to the author of the first message in a thread.
+		    Previous poster vs current : (default) network of links from a message author to the author of the message they replied to.
+		    All thread posters to current : network from links of the author of the message to posters of all the messages it refers, i.e. to all the messages in the thread up to that point. 
+
+		There are three ways that the network is displayed, each in a separate tab:
+
+		    Graph : a preview graph is created, with each poster represented by a node, and links represented by arrows. Holding the mouse over a node will show the poster details. The display can be moved around by holding the mouse down. The scale can be changed with the mouse scroll button. If need be, the GUI can be expanded to see the graph more easily.
+		    Matrix : this shows a table representaion of the network.
+		    Pajek File Preview : this shows what the Pajek network file will look like when it is created. 
+
+
+    -Cancel : Cancels the download completely. Messages that have already been downloaded will still be saved. 
+
+
+* view the Downloading Messages:
+
+--> "View Saved Data" tab and click on the "Refresh Data" button.
+
+* Show the Social Network Data (Pajek preview panel):
+
+--> Click on the "Transform Data for Pajek" tab.
+
+* Save the Pajek Network File:
+
+--> The file can then be loaded into Pajek.
+
+
+
+===========================================================================
+
+
 De abril de 2006
 News group: *senior* “soc.senior.health+fitness”
 
