@@ -8,10 +8,162 @@ $ nmap -Pn localhost
 
 $ telnet news.mixmin.net 119
 
+(you can conduct an interactive session with an NNTP server by using Telnet to connect to it on port 119):
+
+	Trying 144.76.182.167...
+	Connected to fleegle.mixmin.net.
+	Escape character is '^]'.
+	200 news.mixmin.net InterNetNews NNRP server INN 2.7.0 (20170826 prerelease) ready (posting ok)
+	LIST
+	...
+	free.jail.hillary 0000000013 0000000001 y
+	free.hillary.clinton.uranium-sales 0000000018 0000000001 y
+	free.lie-counter.hillary-clinton 0000000000 0000000001 y
+	free.benghazi.hillary-clinton 0000000000 0000000001 y
+	alt.comp.lang.rust 0000000000 0000000001 y
+	.
+	QUIT
+	205 Bye!
+	Connection closed by foreign host.
+	
+obs.: LIST - Lists all newsgroups, their low and high article numbers, and their postability
+
 $ ping news.mixmin.net
 
 $ nmap -v localhost
 
 javaws unison.jnlp 
 javaws launch.jnlp 
+
+===================
+===Connection Refused
+===================
+
+(https://github.com/leonarduk/unison/wiki/Connection-Refused)
+
+####To avoid problems finding and downloading newsgroups, port 119 needs to be accessible. If this port is not accessible you'll see the follow error message:
+
+####Open port on Unix
+sudo iptables -A INPUT -p tcp --dport 119 -j ACCEPT
+sudo iptables -A OUTPUT-p tcp --dport 119 -j ACCEPT
+
+####If the issue still remains you can either configure your router to port forward port 119 Or change your internet connection.
+
+
+obs.: Outros exemplos:
+
+	$ iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
+	$ iptables -A INPUT -i eth0 -p tcp --dport 443 -j ACCEPT
+	$ iptables -F
+
+==================
+=== TELNET
+======================
+
+(https://www.itprotoday.com/windows-78/how-can-i-use-telnet-access-news-server)
+
+$ telnet msnews.microsoft.com 119
+
+	You'll be greeted with a prompt specifying the NNTP service version--for example,
+
+	200 NNTP Service 5.00.0984 Version: 5.0.2195.4386 Posting Allowed
+
+
+	You can use several commands to control the newsgroup Telnet session. The available commands include
+
+	    LIST--Displays a list of all newsgroups on the server. The output will show the group name, the last article ID, the first article ID, and an indicator to specify whether you can post to the newsgroup.
+	    GROUP --Moves to a particular group.
+	    HEAD
+	    --Displays the header of a specified article (if you don't specify an article ID, the command uses the current article and selects the first article in the group upon moving to a group).
+	    BODY
+	    --Displays the body of a specified article.
+	    ARTICLE
+	    --Displays the header and body of a specified article.
+	    NEXT--Moves to the next article.
+	    LAST--Moves to the previous article.
+	    HELP--Provides Help from the news server.
+	    POST--Posts a new article to the group. You must include the following information:
+
+	      post
+	      From: <your email address>
+	      Newsgroups: <newsgroup name (e.g., microsoft.test)>
+	      Subject: <subject>
+
+	      <message text>
+
+	      .
+
+	    You must enter a period (.) on a blank line to finish.
+	    QUIT--Exits the news server.
+
+
+============
+== iptables ==> "front-end" https://wiki.ubuntu.com/UncomplicatedFirewall ($ sudo apt-get install ufw)
+============
+(https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules)
+(https://stackoverflow.com/questions/10197405/how-can-i-remove-specific-rules-from-iptables)
+(https://upcloud.com/community/tutorials/configure-iptables-ubuntu/)
+(http://www.linuxandubuntu.com/home/best-easy-to-use-linux-firewalls)
+
+$ sudo iptables -nvL
+$ sudo iptables -S
+$ sudo iptables -L
+$ sudo iptables -L INPUT -v
+$ sudo iptables -L OUTPUT -v
+
+obs.:
+	Delete Rule by Specification
+
+	One of the ways to delete iptables rules is by rule specification. To do so, you can run the iptables command with the -D option followed by the rule specification. If you want to delete rules using this method, you can use the output of the rules list, iptables -S, for some help.
+
+	For example, if you want to delete the rule that drops invalid incoming packets (-A INPUT -m conntrack --ctstate INVALID -j DROP), you could run this command:
+
+	    sudo iptables -D INPUT -m conntrack --ctstate INVALID -j DROP
+
+	Note that the -A option, which is used to indicate the rule position at creation time, should be excluded here.
+
+
+$ sudo iptables -L --line-numbers
+"ou":
+$ iptables -L INPUT --line-numbers
+
+obs. 1: 
+
+	Chain INPUT (policy ACCEPT) 
+	    num  target prot opt source destination
+	    1    ACCEPT     udp  --  anywhere  anywhere             udp dpt:domain 
+	    2    ACCEPT     tcp  --  anywhere  anywhere             tcp dpt:domain 
+	    3    ACCEPT     udp  --  anywhere  anywhere             udp dpt:bootps 
+	    4    ACCEPT     tcp  --  anywhere  anywhere             tcp dpt:bootps
+
+	So if you would like to delete second rule :
+
+	$ iptables -D INPUT 2
+
+
+obs. 2:
+
+	This adds the line number to each rule row, indicated by the num header.
+
+	Once you know which rule you want to delete, note the chain and line number of the rule. Then run the iptables -D command followed by the chain and rule number.
+
+	For example, if we want to delete the input rule that drops invalid packets, we can see that it's rule 3 of the "INPUT" chain. So we should run this command:
+
+	$ sudo iptables -D INPUT 3
+
+	$ sudo iptables -F	
+
+- Saving and restoring rules:
+
+Now if you were to restart your cloud server all of these iptables configurations would be wiped. To prevent this, save the rules to a file.
+
+$ sudo iptables-save > /etc/iptables/rules.v4
+
+You can then simply restore the saved rules by reading the file you saved.
+
+# Overwrite the current rules
+$ sudo iptables-restore < /etc/iptables/rules.v4
+# Add the new rules keeping the current ones
+$ sudo iptables-restore -n < /etc/iptables/rules.v4
+
 
