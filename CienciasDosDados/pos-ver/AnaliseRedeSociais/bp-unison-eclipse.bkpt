@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<breakpoints>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/generated/DownloadNewsPanel.java" type="1"/>
+<marker charStart="4573" lineNumber="173" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="4573"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui.generated{DownloadNewsPanel.java[DownloadNewsPanel"/>
+<attrib name="charEnd" value="4593"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:DownloadNewsPanel [line: 173] - alert(String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.generated.DownloadNewsPanel"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/generated/DownloadNewsPanel.java" type="1"/>
+<marker charStart="5577" lineNumber="208" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="5577"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui.generated{DownloadNewsPanel.java[DownloadNewsPanel"/>
+<attrib name="charEnd" value="5647"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:DownloadNewsPanel [line: 208] - downloadButtonActionPerformed(ActionEvent)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.generated.DownloadNewsPanel"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/generated/DownloadNewsPanel.java" type="1"/>
+<marker charStart="5852" lineNumber="216" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="5852"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui.generated{DownloadNewsPanel.java[DownloadNewsPanel"/>
+<attrib name="charEnd" value="5930"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:DownloadNewsPanel [line: 216] - downloadButtonActionPerformed(ActionEvent)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.generated.DownloadNewsPanel"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/generated/DownloadNewsPanel.java" type="1"/>
+<marker charStart="6248" lineNumber="229" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="6248"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui.generated{DownloadNewsPanel.java[DownloadNewsPanel"/>
+<attrib name="charEnd" value="6320"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:DownloadNewsPanel [line: 229] - downloadButtonActionPerformed(ActionEvent)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.generated.DownloadNewsPanel"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/generated/DownloadNewsPanel.java" type="1"/>
+<marker charStart="6322" lineNumber="231" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="6322"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui.generated{DownloadNewsPanel.java[DownloadNewsPanel"/>
+<attrib name="charEnd" value="6344"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:DownloadNewsPanel [line: 231] - downloadButtonActionPerformed(ActionEvent)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.generated.DownloadNewsPanel"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/generated/DownloadNewsPanel.java" type="1"/>
+<marker charStart="6415" lineNumber="234" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="6415"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui.generated{DownloadNewsPanel.java[DownloadNewsPanel"/>
+<attrib name="charEnd" value="6484"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:DownloadNewsPanel [line: 234] - downloadButtonActionPerformed(ActionEvent)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.generated.DownloadNewsPanel"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/generated/DownloadNewsPanel.java" type="1"/>
+<marker charStart="6558" lineNumber="238" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="6558"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui.generated{DownloadNewsPanel.java[DownloadNewsPanel"/>
+<attrib name="charEnd" value="6617"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:DownloadNewsPanel [line: 238] - downloadButtonActionPerformed(ActionEvent)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.generated.DownloadNewsPanel"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/generated/DownloadNewsPanel.java" type="1"/>
+<marker charStart="7803" lineNumber="278" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="7803"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui.generated{DownloadNewsPanel.java[DownloadNewsPanel"/>
+<attrib name="charEnd" value="7889"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:DownloadNewsPanel [line: 278] - findButtonActionPerformed(ActionEvent)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.generated.DownloadNewsPanel"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/FullDownloadWorker.java" type="1"/>
+<marker charStart="3505" lineNumber="138" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="3505"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{FullDownloadWorker.java[FullDownloadWorker"/>
+<attrib name="charEnd" value="3531"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:FullDownloadWorker [line: 138] - construct()"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.FullDownloadWorker"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/FullDownloadWorker.java" type="1"/>
+<marker charStart="8232" lineNumber="315" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="8232"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{FullDownloadWorker.java[FullDownloadWorker"/>
+<attrib name="charEnd" value="8309"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:FullDownloadWorker [line: 315] - downloadFullMessage(DownloadRequest)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.FullDownloadWorker"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/FullDownloadWorker.java" type="1"/>
+<marker charStart="8886" lineNumber="340" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="8886"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{FullDownloadWorker.java[FullDownloadWorker"/>
+<attrib name="charEnd" value="8969"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:FullDownloadWorker [line: 340] - downloadHeader(DownloadRequest)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.FullDownloadWorker"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/HeaderDownloadWorker.java" type="1"/>
+<marker charStart="5406" lineNumber="240" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="5406"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{HeaderDownloadWorker.java[HeaderDownloadWorker"/>
+<attrib name="charEnd" value="5493"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:HeaderDownloadWorker [line: 240] - initialise(NewsGroupReader, int, int, String, String, UNISoNLogger, DownloadMode, Date, Date)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.HeaderDownloadWorker"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/HeaderDownloadWorker.java" type="1"/>
+<marker charStart="5772" lineNumber="251" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="5772"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{HeaderDownloadWorker.java[HeaderDownloadWorker"/>
+<attrib name="charEnd" value="5861"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="2"/>
+<attrib name="message" value="Line breakpoint:HeaderDownloadWorker [line: 251] - initialise(NewsGroupReader, int, int, String, String, UNISoNLogger, DownloadMode, Date, Date)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.HeaderDownloadWorker"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="9208" lineNumber="247" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="9208"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/\/home\/02963357460\/.m2\/repository\/commons-net\/commons-net\/3.5\/commons-net-3.5.jar&lt;org.apache.commons.net.nntp(NNTPClient.class[NNTPClient"/>
+<attrib name="charEnd" value="9281"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:NNTPClient [line: 247] - __readNewsgroupListing()"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.apache.commons.net.nntp.NNTPClient"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=unison/\/home\/02963357460\/.m2\/repository\/commons-net\/commons-net\/3.5\/commons-net-3.5.jar&lt;org.apache.commons.net.nntp(NNTPClient.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="10075" lineNumber="273" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="10075"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="= /&lt;{NNTPClient.java[NNTPClient"/>
+<attrib name="charEnd" value="10095"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:NNTPClient [line: 273] - NNTPClient"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.apache.commons.net.nntp.NNTPClient"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="1859" lineNumber="80" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="1859"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="1882"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 80] - connect(String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="2188" lineNumber="93" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="2188"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="2216"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 93] - connect(String, int)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="2652" lineNumber="114" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="2652"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="2733"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 114] - connect(String, int, String, String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="3930" lineNumber="157" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="3930"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="3993"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 157] - connectToNewsGroup(String, NewsGroup)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="4371" lineNumber="177" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="4371"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="4399"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 177] - connectToNewsGroup(String, String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="5359" lineNumber="226" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="5359"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="5387"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 226] - listNNTPNewsgroups(String, String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="5951" lineNumber="244" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="5951"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="5969"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 244] - listNNTPNewsgroups(String, String)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="6180" lineNumber="256" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="6180"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="6208"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 256] - reconnect()"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="6218" lineNumber="258" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="6218"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="6246"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 258] - reconnect()"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsClientImpl.java" type="1"/>
+<marker charStart="6285" lineNumber="261" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="6285"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsClientImpl.java[NewsClientImpl"/>
+<attrib name="charEnd" value="6318"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:NewsClientImpl [line: 261] - reconnect()"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsClientImpl"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/input/NewsGroupReader.java" type="1"/>
+<marker charStart="3183" lineNumber="160" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="3183"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.input{NewsGroupReader.java[NewsGroupReader"/>
+<attrib name="charEnd" value="3218"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:NewsGroupReader [line: 160] - showDownloadStatus()"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.input.NewsGroupReader"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="62117" lineNumber="1589" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="62117"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/\/home\/02963357460\/.sdkman\/candidates\/java\/8.0.191-oracle\/jre\/lib\/rt.jar&lt;java.net(Socket.class[Socket"/>
+<attrib name="charEnd" value="62153"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:Socket [line: 1589] - isConnected()"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="java.net.Socket"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=unison/\/home\/02963357460\/.sdkman\/candidates\/java\/8.0.191-oracle\/jre\/lib\/rt.jar&lt;java.net(Socket.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="7189" lineNumber="188" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="7189"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/\/home\/02963357460\/.m2\/repository\/commons-net\/commons-net\/3.5\/commons-net-3.5.jar&lt;org.apache.commons.net(SocketClient.class[SocketClient"/>
+<attrib name="charEnd" value="7265"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:SocketClient [line: 188] - connect(InetAddress, int)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.apache.commons.net.SocketClient"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=unison/\/home\/02963357460\/.m2\/repository\/commons-net\/commons-net\/3.5\/commons-net-3.5.jar&lt;org.apache.commons.net(SocketClient.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="13804" lineNumber="361" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="13804"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/\/home\/02963357460\/.m2\/repository\/commons-net\/commons-net\/3.5\/commons-net-3.5.jar&lt;org.apache.commons.net(SocketClient.class[SocketClient"/>
+<attrib name="charEnd" value="13829"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:SocketClient [line: 361] - isConnected()"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.apache.commons.net.SocketClient"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=unison/\/home\/02963357460\/.m2\/repository\/commons-net\/commons-net\/3.5\/commons-net-3.5.jar&lt;org.apache.commons.net(SocketClient.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/UNISoNController.java" type="1"/>
+<marker charStart="6927" lineNumber="302" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="6927"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison{UNISoNController.java[UNISoNController"/>
+<attrib name="charEnd" value="6998"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:UNISoNController [line: 302] - listNewsgroups(String, String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.UNISoNController"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/UNISoNController.java" type="1"/>
+<marker charStart="7525" lineNumber="325" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="7525"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison{UNISoNController.java[UNISoNController"/>
+<attrib name="charEnd" value="7569"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:UNISoNController [line: 325] - quickDownload(Set&lt;NNTPNewsGroup&gt;, Date, Date, UNISoNLogger, DownloadMode)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="2"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.UNISoNController"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/UNISoNController.java" type="1"/>
+<marker charStart="7747" lineNumber="330" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="7747"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison{UNISoNController.java[UNISoNController"/>
+<attrib name="charEnd" value="7825"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="2"/>
+<attrib name="message" value="Line breakpoint:UNISoNController [line: 330] - quickDownload(Set&lt;NNTPNewsGroup&gt;, Date, Date, UNISoNLogger, DownloadMode)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.UNISoNController"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/UNISoNController.java" type="1"/>
+<marker charStart="7981" lineNumber="335" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="7981"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison{UNISoNController.java[UNISoNController"/>
+<attrib name="charEnd" value="8005"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="message" value="Line breakpoint:UNISoNController [line: 335] - quickDownload(Set&lt;NNTPNewsGroup&gt;, Date, Date, UNISoNLogger, DownloadMode)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.UNISoNController"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/UNISoNController.java" type="1"/>
+<marker charStart="10473" lineNumber="444" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="10473"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison{UNISoNController.java[UNISoNController"/>
+<attrib name="charEnd" value="10517"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:UNISoNController [line: 444] - showErrorMessage(String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.UNISoNController"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/UNISoNGUI.java" type="1"/>
+<marker charStart="1189" lineNumber="58" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="1189"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui{UNISoNGUI.java[UNISoNGUI"/>
+<attrib name="charEnd" value="1246"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:UNISoNGUI [line: 58] - showAlert(String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.UNISoNGUI"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/UNISoNGUI.java" type="1"/>
+<marker charStart="1412" lineNumber="69" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="1412"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui{UNISoNGUI.java[UNISoNGUI"/>
+<attrib name="charEnd" value="1439"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:UNISoNGUI [line: 69] - showStatus(String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.UNISoNGUI"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/unison/src/main/java/uk/co/sleonard/unison/gui/generated/UNISoNTabbedFrame.java" type="1"/>
+<marker charStart="10151" lineNumber="300" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="charStart" value="10151"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=unison/src\/main\/java&lt;uk.co.sleonard.unison.gui.generated{UNISoNTabbedFrame.java[UNISoNTabbedFrame"/>
+<attrib name="charEnd" value="10198"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Line breakpoint:UNISoNTabbedFrame [line: 300] - showAlert(String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="1"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="uk.co.sleonard.unison.gui.generated.UNISoNTabbedFrame"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+</breakpoints>
