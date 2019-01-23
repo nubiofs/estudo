@@ -467,3 +467,9 @@ Obs.: Depois confirmar se a cópia foi ok com o comando:
 
 $ md5sum backup.tar
 
+
+======
+- Restart the network manager:
+
+$ sudo service network-manager restart
+
