@@ -1,0 +1,17 @@
+$ ~/mvn clean package -DskipTests
+
+$ java -jar unison-1.2.3-jar-with-dependencies.jar
+
+$ nmap -p 119 localhost
+
+$ nmap -Pn localhost
+
+$ telnet news.mixmin.net 119
+
+$ ping news.mixmin.net
+
+$ nmap -v localhost
+
+javaws unison.jnlp 
+javaws launch.jnlp 
+
