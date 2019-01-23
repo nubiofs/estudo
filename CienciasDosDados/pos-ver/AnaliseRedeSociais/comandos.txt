@@ -56,6 +56,28 @@ obs.: Outros exemplos:
 	$ iptables -A INPUT -i eth0 -p tcp --dport 443 -j ACCEPT
 	$ iptables -F
 
+================
+=== firewall
+================
+
+(https://linuxconfig.org/how-to-enable-disable-firewall-on-ubuntu-18-04-bionic-beaver-linux)
+
+
+$ sudo ufw status
+"ou"
+$ sudo ufw status verbose
+
+$ sudo ufw enable
+	Firewall is active and enabled on system startup
+
+$ sudo ufw disable
+	Firewall stopped and disabled on system startup
+
+
+
+
+
+
 ==================
 === TELNET
 ======================
