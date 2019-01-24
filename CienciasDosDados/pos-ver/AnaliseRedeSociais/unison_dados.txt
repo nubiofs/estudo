@@ -12,6 +12,8 @@ jdbc:hsqldb:file:src/main/resources/DB/projectDB
 jdbc:hsqldb:file:src/main/resources/DB/projectDB
 #jdbc:hsqldb:file:/home/clenubio/Temporario/unison-bd/projectDB
 
+
+ java -cp hsqldb.jar org.hsqldb.util.DatabaseManagerSwing
 ---------------------------------------------------
 
 * download messages:
