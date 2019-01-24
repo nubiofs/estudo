@@ -1,3 +1,18 @@
+* Configurações para a base de dados:
+
+- Localização da base:
+leonarduk-unison-5ee03e8/target/src/main/resources/DB
+
+para "" colocar CACHED
+
+- CREATE MEMORY TABLE:	
+jdbc:hsqldb:file:src/main/resources/DB/projectDB
+
+- CREATE CACHED TABLE  ("HSQL Database Engine Standalone"):
+jdbc:hsqldb:file:src/main/resources/DB/projectDB
+#jdbc:hsqldb:file:/home/clenubio/Temporario/unison-bd/projectDB
+
+---------------------------------------------------
 
 * download messages:
 
