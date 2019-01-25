@@ -198,6 +198,7 @@ $ xclip -sel clip < ~/.ssh/id_rsa.pub
 Obs.: copiar em "https://git.xpto/profile/keys
 
 $ ssh -T git@github.com
+Welcome to GitLab, ...
 
 $ cd git
 
