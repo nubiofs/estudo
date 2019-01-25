@@ -1,0 +1,21 @@
+sbt (Simple Build Tool) para Scala, Java  ...
+
+* links:
+
+https://github.com/sbt/sbt
+https://www.scala-sbt.org/
+
+http://xerial.org/blog/2014/03/24/sbt/
+
+* Instalação:
+
+$ sdk install sbt
+
+$ sbt package
+
+# plugin can be used to make a 'fat' jar that contains everything needed:
+$ sbt assembly 
+
+# Por exemplo, para rodar um projeto java com arquivo principal: 'build.sbt'
+$ sbt run
+

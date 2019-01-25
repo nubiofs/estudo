@@ -1,3 +1,9 @@
+* Egonet is a program for the collection and analysis of egocentric network data:
+
+https://en.wikipedia.org/wiki/EgoNet
+https://github.com/egonet/egonet
+https://sourceforge.net/projects/egonet/
+
 * Criar a rede usando Networkx:
 
 --> https://networkx.github.io
