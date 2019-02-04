@@ -1,0 +1,7 @@
+https://stackoverflow.com/questions/2148543/how-to-write-a-confusion-matrix-in-python
+
+https://www.python-course.eu/confusion_matrix.php
+
+https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
+
+
