@@ -107,3 +107,4 @@ result.groupby("manufacturer").agg({
 # tips.groupby('day').agg({'tip': np.mean, 'day': np.size})
 
 ################################
+# [w.upper() for w in text1]

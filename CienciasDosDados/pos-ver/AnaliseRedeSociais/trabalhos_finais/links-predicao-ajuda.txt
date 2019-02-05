@@ -118,6 +118,12 @@ https://stackoverflow.com/questions/5486337/how-to-remove-stop-words-using-nltk-
 https://pythonspot.com/nltk-stop-words/
 https://www.geeksforgeeks.org/removing-stop-words-nltk-python/
 
+'''
+from nltk.corpus import stopwords
+stopwords.words('english')
+'''
+
+
 (nltk.download()):
 https://gist.github.com/sebleier/554280
 
