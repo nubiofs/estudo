@@ -24,7 +24,24 @@ networkx_nodes = len(fn.nodes()) # Store the number of nodes
 pandas_nodes == networkx_nodes
 '''
 
+***************
+* Python tokenize
+***************
+
+==> https://machinelearningmastery.com/clean-text-machine-learning-python/
+(Split into Sentences)
+(Split into Words)
+(Filter out Stop Words)
+(Stem Words)
+
+
 '''
+from nltk.tokenize import word_tokenize
+text1 = "It's true that the chicken was the best bamboozler in the known multiverse."
+tokens = word_tokenize(text1)
+print(tokens)
+'''
+
 from spacy.en import English
 parser = English()
 print(parser)
@@ -57,16 +74,6 @@ nltk_tokens = nltk.word_tokenize(word_data)
 print (nltk_tokens)
 '''
 
-***************
-* Python tokenize
-***************
-
-'''
-from nltk.tokenize import word_tokenize
-text1 = "It's true that the chicken was the best bamboozler in the known multiverse."
-tokens = word_tokenize(text1)
-print(tokens)
-'''
 
 **********************************
 * Funções vizinhaça no networkX
