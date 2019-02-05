@@ -24,6 +24,49 @@ networkx_nodes = len(fn.nodes()) # Store the number of nodes
 pandas_nodes == networkx_nodes
 '''
 
+'''
+from spacy.en import English
+parser = English()
+print(parser)
+text1 = "I like statements that are both true and absurd."
+tokens = parser(text1)
+tokens = [token.orth_ for token in tokens if not token.orth_.isspace()]
+print(tokens)
+
+textu = "I'm Mr. O'Malley, and I love things, i.e., tacos etc."
+tokens = parser(textu)
+tokens = [token.orth_ for token in tokens if not token.orth_.isspace()]
+print(tokens)
+'''
+
+'''
+ from nltk.tokenize import TweetTokenizer
+ tknzr = TweetTokenizer()
+ s0 = "This is a cooool #dummysmiley: :-) :-P <3 and some arrows < > -> <--"
+ tknzr.tokenize(s0)
+['This', 'is', 'a', 'cooool', '#dummysmiley', ':', ':-)', ':-P', '<3', 'and', 'some', 'arrows', '<', '>', '->', '<--']
+
+ tokenizer.tokenize('Testing testing testing one two three'.split())
+['Testing', 'testing', 'testing', 'one', 'two', 'three']
+'''
+
+'''
+import nltk
+word_data = "It originated from the idea that there are readers who prefer learning new skills from the comforts of their drawing rooms"
+nltk_tokens = nltk.word_tokenize(word_data)
+print (nltk_tokens)
+'''
+
+***************
+* Python tokenize
+***************
+
+'''
+from nltk.tokenize import word_tokenize
+text1 = "It's true that the chicken was the best bamboozler in the known multiverse."
+tokens = word_tokenize(text1)
+print(tokens)
+'''
 
 **********************************
 * Funções vizinhaça no networkX
