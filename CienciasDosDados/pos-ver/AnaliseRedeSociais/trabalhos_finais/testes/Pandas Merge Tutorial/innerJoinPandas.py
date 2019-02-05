@@ -105,3 +105,5 @@ result.groupby("manufacturer").agg({
 # tips.groupby('sex').size()
 # tips.groupby('sex').count()
 # tips.groupby('day').agg({'tip': np.mean, 'day': np.size})
+
+################################
