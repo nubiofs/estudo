@@ -1,3 +1,128 @@
+*********************************
+* inner join (pandas):
+*********************************
+
+https://jakevdp.github.io/PythonDataScienceHandbook/03.07-merge-and-join.html
+
+https://www.shanelynn.ie/merge-join-dataframes-python-pandas-index-1/
+
+'''
+import pandas as pd
+# Load graphs
+test_01 = pd.read_csv("Test_01.ncol",sep=" ") # Load Net 1
+test_02 = pd.read_csv("Test_02.ncol",sep=" ") # Load Net 2
+pandas_intersect = pd.merge(test_01, test_02, how='inner', on=['i1', 'i2']) # Intersection by column
+pandas_nodes = len(set(pandas_intersect['i1'].tolist() + pandas_intersect['i2'].tolist())) # Store the number of nodes
+
+# Now test with NetworkX
+import networkx as nx
+n1 = nx.from_pandas_dataframe(test_01, source="i1", target="i2") # Transform net 1 in NetworkX Graph
+n2 = nx.from_pandas_dataframe(test_02, source="i1", target="i2") # Transform net 2 in NetworkX Graph
+fn = nx.intersection(n1,n2)  # NetworkX Intersection
+networkx_nodes = len(fn.nodes()) # Store the number of nodes
+# The number of nodes are different!!!
+pandas_nodes == networkx_nodes
+'''
+
+
+**********************************
+* Funções vizinhaça no networkX
+**********************************
+
+- https://stackoverflow.com/questions/32652149/combine-join-networkx-graphs
+
+compose(G1,G2)           - combine graphs identifying nodes common to both
+
+
+
+- (Nodes)
+
+https://networkx.github.io/documentation/stable/reference/generated/networkx.classes.function.all_neighbors.html#networkx.classes.function.all_neighbors:
+
+	all_neighbors(graph, node) 	Returns all of the neighbors of a node in the graph.
+
+- (Attributes)
+
+set_node_attributes(G, values[, name]) 	Sets node attributes from a given value or dictionary of values.
+get_node_attributes(G, name) 	Get node attributes from graph
+set_edge_attributes(G, values[, name]) 	Sets edge attributes from a given value or dictionary of values.
+get_edge_attributes(G, name) 	Get edge attributes from graph
+
+
+
+***************
+* stop words:
+***************
+
+https://countwordsfree.com/stopwords
+
+(#About 900 stopwords):
+https://stackoverflow.com/questions/5486337/how-to-remove-stop-words-using-nltk-or-python
+
+https://pythonspot.com/nltk-stop-words/
+https://www.geeksforgeeks.org/removing-stop-words-nltk-python/
+
+(nltk.download()):
+https://gist.github.com/sebleier/554280
+
+https://martinapugliese.github.io/english-stopwords/
+
+*********************************
+* Medidas para uso na predição:
+*********************************
+
+https://people.revoledu.com/kardi/tutorial/Similarity/Jaccard.html
+
+https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_similarity_score.html
+
+http://bugra.github.io/work/notes/2017-02-07/similarity-via-jaccard-index/
+
+https://www.researchgate.net/post/How_to_compute_similarity_score_of_one_text_with_many_other_text_using_Jaccard_Similarity
+
+https://stackoverflow.com/questions/37003272/how-to-compute-jaccard-similarity-from-a-pandas-dataframe
+'''
+import pandas as pd
+import numpy as np
+from sklearn.metrics import jaccard_similarity_score
+np.random.seed(0)
+df = pd.DataFrame(np.random.binomial(1, 0.5, size=(100, 5)), columns=list('ABCDE'))
+print(df.head())
+print(jaccard_similarity_score(df['A'], df['B']))
+'''
+
+https://dataconomy.com/2015/04/implementing-the-five-most-popular-similarity-measures-in-python/
+'''
+from math import*
+def jaccard_similarity(x,y):
+ intersection_cardinality = len(set.intersection(*[set(x), set(y)]))
+ union_cardinality = len(set.union(*[set(x), set(y)]))
+ return intersection_cardinality/float(union_cardinality)
+print jaccard_similarity([0,1,2,5,6],[0,2,3,5,7,9])
+'''
+
+https://stackoverflow.com/questions/46975929/how-can-i-calculate-the-jaccard-similarity-of-two-lists-containing-strings-in-py
+'''
+def jaccard(a, b):
+    c = a.intersection(b)
+    return float(len(c)) / (len(a) + len(b) - len(c))
+
+list1 = ['dog', 'cat', 'rat']
+list2 = ['dog', 'cat', 'mouse']
+# The intersection is ['dog', 'cat']
+# union is ['dog', 'cat', 'rat', 'mouse]
+words1 = set(list1)
+words2 = set(list2)
+jaccard(words1, words2)
+'''
+
+https://stackoverflow.com/questions/46427362/jaccard-similarity-for-texts-in-a-pandas-dataframe?noredirect=1&lq=1
+
+https://blogs.sap.com/2017/09/06/how-to-measure-report-similarity-using-python/
+
+******************************************************************
+* Matriz de confusão e métricas (acertos / erros):
+******************************************************************
+
 https://stackoverflow.com/questions/2148543/how-to-write-a-confusion-matrix-in-python
 
 https://www.python-course.eu/confusion_matrix.php
