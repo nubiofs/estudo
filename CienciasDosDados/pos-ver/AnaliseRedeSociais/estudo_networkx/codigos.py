@@ -1,5 +1,6 @@
 # https://www.datacamp.com/community/tutorials/social-network-analysis-python
 
+#%%
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -85,3 +86,6 @@ nx.eigenvector_centrality(G_symmetric)
 # Betweenness Centrality
 nx.betweenness_centrality(G_symmetric)
 
+
+
+#%%

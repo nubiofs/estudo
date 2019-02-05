@@ -4,7 +4,11 @@
 
 https://jakevdp.github.io/PythonDataScienceHandbook/03.07-merge-and-join.html
 
+--
+https://github.com/shanealynn/Pandas-Merge-Tutorial
 https://www.shanelynn.ie/merge-join-dataframes-python-pandas-index-1/
+http://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.merge.html
+--
 
 '''
 import pandas as pd
