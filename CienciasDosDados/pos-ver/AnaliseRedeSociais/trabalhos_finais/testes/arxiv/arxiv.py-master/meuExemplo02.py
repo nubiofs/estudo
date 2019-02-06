@@ -102,12 +102,14 @@ artigos_2016 = []
 for r in results:
   data_published = datetime.strptime(r.get('published'), '%Y-%m-%dT%H:%M:%SZ')
   if data_published.year == 2016:
-    artigos_2016.append((
-      r.get('id'), 
-      r.get('title'), 
-      r.get('authors'),
-      r.get('summary'),
-      data_published.year))
+    autores = r.get('authors')
+    if len(list(autores)) > 1:
+      artigos_2016.append((
+        r.get('id'), 
+        r.get('title'), 
+        autores,
+        r.get('summary'),
+        data_published.year))
     # Aqui seria o local para criar os nós do grafo.
     # Para cada autor em 'authors' (desse artigo específico) deve-se criar um nó 
     # (usando como 'label' o nome do autor e colocando [id, title, summary, year] como metadados do nó).
