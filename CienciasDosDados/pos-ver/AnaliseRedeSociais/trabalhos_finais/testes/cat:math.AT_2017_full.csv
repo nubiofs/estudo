@@ -1,0 +1,948 @@
+id@title@author@summary@published_year
+http://arxiv.org/abs/1701.00255v2@Multiplicative structure on Real Johnson-Wilson theory@Nitu Kitchloo@"We prove that the Real Johnson-Wilson theories ER(n) are homotopy associative
+and commutative ring spectra up to phantom maps. We further show that ER(n)
+represents an associatively and commutatively multiplicative cohomology theory
+on the category of (possibly non-compact) spaces."@2017
+http://arxiv.org/abs/1701.00255v2@Multiplicative structure on Real Johnson-Wilson theory@Vitaly Lorman@"We prove that the Real Johnson-Wilson theories ER(n) are homotopy associative
+and commutative ring spectra up to phantom maps. We further show that ER(n)
+represents an associatively and commutatively multiplicative cohomology theory
+on the category of (possibly non-compact) spaces."@2017
+http://arxiv.org/abs/1701.00255v2@Multiplicative structure on Real Johnson-Wilson theory@W. Stephen Wilson@"We prove that the Real Johnson-Wilson theories ER(n) are homotopy associative
+and commutative ring spectra up to phantom maps. We further show that ER(n)
+represents an associatively and commutatively multiplicative cohomology theory
+on the category of (possibly non-compact) spaces."@2017
+http://arxiv.org/abs/1701.00565v2@Persistent Path Homology of Directed Networks@Samir Chowdhury@"While standard persistent homology has been successful in extracting
+information from metric datasets, its applicability to more general data, e.g.
+directed networks, is hindered by its natural insensitivity to asymmetry. We
+study a construction of homology of digraphs due to Grigor'yan, Lin, Muranov
+and Yau, and extend this construction to the persistent framework. The result,
+which we call persistent path homology, can provide information about the
+digraph structure of a directed network at varying resolutions. Moreover, this
+method encodes a rich level of detail about the asymmetric structure of the
+input directed network. We test our method on both simulated and real-world
+directed networks and conjecture some of its characteristics."@2017
+http://arxiv.org/abs/1701.00565v2@Persistent Path Homology of Directed Networks@Facundo Mémoli@"While standard persistent homology has been successful in extracting
+information from metric datasets, its applicability to more general data, e.g.
+directed networks, is hindered by its natural insensitivity to asymmetry. We
+study a construction of homology of digraphs due to Grigor'yan, Lin, Muranov
+and Yau, and extend this construction to the persistent framework. The result,
+which we call persistent path homology, can provide information about the
+digraph structure of a directed network at varying resolutions. Moreover, this
+method encodes a rich level of detail about the asymmetric structure of the
+input directed network. We test our method on both simulated and real-world
+directed networks and conjecture some of its characteristics."@2017
+http://arxiv.org/abs/1701.00684v3@Blown-up intersection cohomology@David Chataur@"In previous works, we have introduced the blown-up intersection cohomology
+and used it to extend Sullivan's minimal models theory to the framework of
+pseudomanifolds, and to give a positive answer to a conjecture of M. Goresky
+and W. Pardon on Steenrod squares in intersection homology.
+  In this paper, we establish the main properties of this cohomology. One of
+its major feature is the existence of cap and cup products for any filtered
+space and any commutative ring of coefficients, at the cochain level. Moreover,
+we show that each stratified map induces an homomorphism between the blown-up
+intersection cohomologies, compatible with the cup and cap products. We prove
+also its topological invariance in the case of a pseudomanifold with no
+codimension one strata. Finally, we compare it with the intersection cohomology
+studied by G. Friedman and J.E. McClure.
+  A great part of our results involves general perversities, defined
+independently on each stratum, and a tame intersection homology adapted to
+large perversities."@2017
+http://arxiv.org/abs/1701.00684v3@Blown-up intersection cohomology@Martintxo Saralegi-Aranguren@"In previous works, we have introduced the blown-up intersection cohomology
+and used it to extend Sullivan's minimal models theory to the framework of
+pseudomanifolds, and to give a positive answer to a conjecture of M. Goresky
+and W. Pardon on Steenrod squares in intersection homology.
+  In this paper, we establish the main properties of this cohomology. One of
+its major feature is the existence of cap and cup products for any filtered
+space and any commutative ring of coefficients, at the cochain level. Moreover,
+we show that each stratified map induces an homomorphism between the blown-up
+intersection cohomologies, compatible with the cup and cap products. We prove
+also its topological invariance in the case of a pseudomanifold with no
+codimension one strata. Finally, we compare it with the intersection cohomology
+studied by G. Friedman and J.E. McClure.
+  A great part of our results involves general perversities, defined
+independently on each stratum, and a tame intersection homology adapted to
+large perversities."@2017
+http://arxiv.org/abs/1701.00684v3@Blown-up intersection cohomology@Daniel Tanré@"In previous works, we have introduced the blown-up intersection cohomology
+and used it to extend Sullivan's minimal models theory to the framework of
+pseudomanifolds, and to give a positive answer to a conjecture of M. Goresky
+and W. Pardon on Steenrod squares in intersection homology.
+  In this paper, we establish the main properties of this cohomology. One of
+its major feature is the existence of cap and cup products for any filtered
+space and any commutative ring of coefficients, at the cochain level. Moreover,
+we show that each stratified map induces an homomorphism between the blown-up
+intersection cohomologies, compatible with the cup and cap products. We prove
+also its topological invariance in the case of a pseudomanifold with no
+codimension one strata. Finally, we compare it with the intersection cohomology
+studied by G. Friedman and J.E. McClure.
+  A great part of our results involves general perversities, defined
+independently on each stratum, and a tame intersection homology adapted to
+large perversities."@2017
+http://arxiv.org/abs/1701.05803v1@On ${\rm mod}~p$ $A_p$-spaces@Jie Wu@"We prove a necessary condition for the existence of the $A_p$-structure on
+${\rm mod}~p$ spaces, and also derive a simple proof for the finiteness of the
+number of ${\rm mod}~p$ $A_p$-spaces of given rank. As a direct application, we
+compute a list of possible types of rank $3$ ${\rm mod}~3$ homotopy associative
+$H$-spaces."@2017
+http://arxiv.org/abs/1701.05845v1@Q-Topological Complexity@Lucile Vandembroucq@"By analogy with the invariant Q-category defined by Scheerer, Stanley and
+Tanr\'e, we introduce the notions of Q-sectional category and Q-topological
+complexity. We establish several properties of these invariants. We also obtain
+a formula for the behaviour of the sectional category with respect to a
+fibration which generalizes the classical formulas for Lusternik-Schnirelmann
+category and topological complexity."@2017
+http://arxiv.org/abs/1701.06459v1@"Dendroidal spaces, $Γ$-spaces and the special
+  Barratt-Priddy-Quillen theorem"@Pedro Boavida de Brito@"We study the covariant model structure on dendroidal spaces and establish
+direct relations to the homotopy theory of algebras over a simplicial operad as
+well as to the homotopy theory of special $\Gamma$-spaces. As an important tool
+in the latter comparison, we present a sharpening of the classical
+Barratt-Priddy-Quillen theorem."@2017
+http://arxiv.org/abs/1701.06987v2@The configuration category of a product@Pedro Boavida de Brito@"A construction related to the Boardman-Vogt tensor product of operads allows
+us to describe the configuration category of a product manifold $M\times N$ in
+terms of the configuration categories of the factors $M$ and $N$."@2017
+http://arxiv.org/abs/1701.06987v2@The configuration category of a product@Michael S. Weiss@"A construction related to the Boardman-Vogt tensor product of operads allows
+us to describe the configuration category of a product manifold $M\times N$ in
+terms of the configuration categories of the factors $M$ and $N$."@2017
+http://arxiv.org/abs/1702.00230v3@On the E2-term of the bo-Adams spectral sequence@Agnes Beaudry@"The E_1-term of the (2-local) bo-based Adams spectral sequence for the sphere
+spectrum decomposes into a direct sum of a v_1-periodic part, and a v_1-torsion
+part. Lellmann and Mahowald completely computed the d_1-differential on the
+v_1-periodic part, and the corresponding contribution to the E_2-term. The
+v_1-torsion part is harder to handle, but with the aid of a computer it was
+computed through the 20-stem by Davis. Such computer computations are limited
+by the exponential growth of v_1-torsion in the E_1-term. In this paper, we
+introduce a new method for computing the contribution of the v_1-torsion part
+to the E_2-term, whose input is the cohomology of the Steenrod algebra. We
+demonstrate the efficacy of our technique by computing the bo-Adams spectral
+sequence beyond the 40-stem."@2017
+http://arxiv.org/abs/1702.00230v3@On the E2-term of the bo-Adams spectral sequence@Prasit Bhattacharya@"The E_1-term of the (2-local) bo-based Adams spectral sequence for the sphere
+spectrum decomposes into a direct sum of a v_1-periodic part, and a v_1-torsion
+part. Lellmann and Mahowald completely computed the d_1-differential on the
+v_1-periodic part, and the corresponding contribution to the E_2-term. The
+v_1-torsion part is harder to handle, but with the aid of a computer it was
+computed through the 20-stem by Davis. Such computer computations are limited
+by the exponential growth of v_1-torsion in the E_1-term. In this paper, we
+introduce a new method for computing the contribution of the v_1-torsion part
+to the E_2-term, whose input is the cohomology of the Steenrod algebra. We
+demonstrate the efficacy of our technique by computing the bo-Adams spectral
+sequence beyond the 40-stem."@2017
+http://arxiv.org/abs/1702.01493v1@The stable Picard group of $\mathcal{A}(2)$@Prasit Bhattacharya@"Using a form of descent in the stable category of $\mathcal{A}(2)$-modules,
+we show that there are no exotic elements in the stable Picard group of
+$\mathcal{A}(2)$, \textit{i.e.} that the stable Picard group of
+$\mathcal{A}(2)$ is free on $2$ generators."@2017
+http://arxiv.org/abs/1702.01493v1@The stable Picard group of $\mathcal{A}(2)$@Nicolas Ricka@"Using a form of descent in the stable category of $\mathcal{A}(2)$-modules,
+we show that there are no exotic elements in the stable Picard group of
+$\mathcal{A}(2)$, \textit{i.e.} that the stable Picard group of
+$\mathcal{A}(2)$ is free on $2$ generators."@2017
+http://arxiv.org/abs/1702.03245v1@Inhabitants of interesting subsets of the Bousfield lattice@Birgit Richter@"The set of Bousfield classes has some important subsets such as the
+distributive lattice $\mathbf{DL}$ of all classes $\langle E\rangle$ which are
+smash idempotent and the complete Boolean algebra $\mathbf{cBA}$ of closed
+classes. We provide examples of spectra that are in $\mathbf{DL}$, but not in
+$\mathbf{cBA}$; in particular, for every prime $p$, the Bousfield class of the
+Eilenberg-MacLane spectrum $\langle
+H\mathbb{F}_p\rangle\in\mathbf{DL}{\setminus}\mathbf{cBA}$."@2017
+http://arxiv.org/abs/1702.03548v1@On h-Fibrations@Behrooz Mashayekhy@"In this paper, we study h-fibrations, a weak homotopical version of
+fibrations which have weak covering homotopy property. We present some
+homotopical analogue of the notions related to fibrations and characterize
+h-fibrations using them. Then we construct some new categories by h-fibrations
+and deduce some results in these categories such as the existence of products
+and coproducts."@2017
+http://arxiv.org/abs/1702.04397v2@"The infinity Quillen functor, Maurer-Cartan elements and DGL
+  realizations"@Urtzi Buijs@"We show an alternative construction of the cosimplicial free complete
+diferential graded Lie algebra
+$\mathfrak{L}_\bullet=\widehat{\mathbb{L}}(s^{-1}\Delta^\bullet)$ based on a
+new Lie bracket formulae for Lie polynomials on a general tensor algebra. Based
+on it,we prove that for any complete differential graded Lie algebra $L$, its
+geometrical realization $\langle
+L\rangle=\text{Hom}_{\text{cdgl}}(\mathfrak{L}_\bullet,L)$ is isomorphic to its
+nerve $\gamma_\bullet(L)$, a deformation retract of the Getzler-Hinich
+realization $\text{MC}(\mathscr{A}_\bullet\widehat{\otimes} L)$."@2017
+http://arxiv.org/abs/1702.04397v2@"The infinity Quillen functor, Maurer-Cartan elements and DGL
+  realizations"@Yves Félix@"We show an alternative construction of the cosimplicial free complete
+diferential graded Lie algebra
+$\mathfrak{L}_\bullet=\widehat{\mathbb{L}}(s^{-1}\Delta^\bullet)$ based on a
+new Lie bracket formulae for Lie polynomials on a general tensor algebra. Based
+on it,we prove that for any complete differential graded Lie algebra $L$, its
+geometrical realization $\langle
+L\rangle=\text{Hom}_{\text{cdgl}}(\mathfrak{L}_\bullet,L)$ is isomorphic to its
+nerve $\gamma_\bullet(L)$, a deformation retract of the Getzler-Hinich
+realization $\text{MC}(\mathscr{A}_\bullet\widehat{\otimes} L)$."@2017
+http://arxiv.org/abs/1702.04397v2@"The infinity Quillen functor, Maurer-Cartan elements and DGL
+  realizations"@Aniceto Murillo@"We show an alternative construction of the cosimplicial free complete
+diferential graded Lie algebra
+$\mathfrak{L}_\bullet=\widehat{\mathbb{L}}(s^{-1}\Delta^\bullet)$ based on a
+new Lie bracket formulae for Lie polynomials on a general tensor algebra. Based
+on it,we prove that for any complete differential graded Lie algebra $L$, its
+geometrical realization $\langle
+L\rangle=\text{Hom}_{\text{cdgl}}(\mathfrak{L}_\bullet,L)$ is isomorphic to its
+nerve $\gamma_\bullet(L)$, a deformation retract of the Getzler-Hinich
+realization $\text{MC}(\mathscr{A}_\bullet\widehat{\otimes} L)$."@2017
+http://arxiv.org/abs/1702.04397v2@"The infinity Quillen functor, Maurer-Cartan elements and DGL
+  realizations"@Daniel Tanré@"We show an alternative construction of the cosimplicial free complete
+diferential graded Lie algebra
+$\mathfrak{L}_\bullet=\widehat{\mathbb{L}}(s^{-1}\Delta^\bullet)$ based on a
+new Lie bracket formulae for Lie polynomials on a general tensor algebra. Based
+on it,we prove that for any complete differential graded Lie algebra $L$, its
+geometrical realization $\langle
+L\rangle=\text{Hom}_{\text{cdgl}}(\mathfrak{L}_\bullet,L)$ is isomorphic to its
+nerve $\gamma_\bullet(L)$, a deformation retract of the Getzler-Hinich
+realization $\text{MC}(\mathscr{A}_\bullet\widehat{\otimes} L)$."@2017
+http://arxiv.org/abs/1702.05350v4@Divisive cover@Morten Brun@"The aim of this paper is to present a method for computation of persistent
+homology that performs well at large filtration values. To this end we
+introduce the concept of filtered covers. We show that the persistent homology
+of a bounded metric space obtained from the \v{C}ech complex is the persistent
+homology of the filtered nerve of the filtered \v{C}ech cover. Given a
+parameter $\delta$ with $0 < \delta \le 1$ we introduce the concept of a
+$\delta$-filtered cover and show that its filtered nerve is interleaved with
+the \v{C}ech complex. Finally, we introduce a particular $\delta$-filtered
+cover, the divisive cover. The special feature of the divisive cover is that it
+is constructed top-down. If we disregard fine scale structure and $X$ is a
+finite subspace of euclidean space, then we obtain a filtered simplicial
+complex whose size is bounded by an upper bound independent of the cardinality
+of $X$. The time needed to compute this filtered simplicial complex depends
+linearly on the cardinality of $X$."@2017
+http://arxiv.org/abs/1702.06590v1@Motivic zeta functions and infinite cyclic covers@Laurentiu Maxim@"We associate with an infinite cyclic cover of a punctured neighborhood of a
+simple normal crossing divisor on a complex quasi-projective manifold (assuming
+certain finiteness conditions are satisfied) a rational function in $K_0({\rm
+Var}^{\hat \mu}_{\mathbb{C}})[\mathbb{L}^{-1}]$, which we call {\it motivic
+infinite cyclic zeta function}, and show its birational invariance. Our
+construction is a natural extension of the notion of {\it motivic infinite
+cyclic covers} introduced by the authors, and as such, it generalizes the
+Denef-Loeser motivic Milnor zeta function of a complex hypersurface singularity
+germ."@2017
+http://arxiv.org/abs/1702.07794v2@The Morita equivalence between parametrized spectra and module spectra@Cary Malkiewich@"We give a Quillen equivalence between May and Sigurdsson's model category of
+parametrized spectra over BG, and Mandell, May, Schwede, and Shipley's model
+category of modules over the orthogonal ring spectrum \Sigma^\infty_+ G, for
+each topological group G. More generally, for a topological category C we
+introduce an ""aggregate"" model structure on the category of diagrams of spectra
+indexed by C, and prove that it is Quillen equivalent to spectra over BC. This
+lifts several earlier results, and leads to a complete characterization of the
+dualizable parametrized spectra, answering a question of May and Sigurdsson."@2017
+http://arxiv.org/abs/1703.03960v1@"Simplicial James-Hopf map and decompositions of the unstable Adams
+  spectral sequence for suspensions"@Jie Wu@"We use combinatorial group theory methods to extend the definition of a
+classical James-Hopf invariant to a simplicial group setting. This allow us to
+realize certain coalgebra idempotents at sSet -level and obtain a functorial
+decomposition of the spectral sequence, associated with the lower p-central
+series filtration on the free simplicial group."@2017
+http://arxiv.org/abs/1703.04345v3@Mapping degrees between spherical $3$-manifolds@Peter Wong@"Let $D(M,N)$ be the set of integers that can be realized as the degree of a
+map between two closed connected orientable manifolds $M$ and $N$ of the same
+dimension. For closed $3$-manifolds with $S^3$-geometry $M$ and $N$, every such
+degree $deg f\equiv \overline{deg}\psi$ $(|\pi_1(N)|)$ where $0\le
+\overline{deg}\psi <|\pi_1(N)|$ and $\overline{deg}\psi$ only depends on the
+induced homomorphism $\psi=f_{\pi}$ on the fundamental group. In this paper, we
+calculate explicitly the set $\{\overline{deg}\psi\}$ when $\psi$ is surjective
+and then we show how to determine $\overline{deg}(\psi)$ for arbitrary
+homomorphisms. This leads to the determination of the set $D(M,N)$."@2017
+http://arxiv.org/abs/1703.06093v2@The homotopy theory of operad subcategories@Victor Turchin@"We study the subcategory of topological operads $P$ such that $P(0) = *$ (the
+category of unitary operads in our terminology). We use that this category
+inherits a model structure, like the category of all operads in topological
+spaces, and that the embedding functor of this subcategory of unitary operads
+into the category of all operads admits a left Quillen adjoint. We prove that
+the derived functor of this left Quillen adjoint functor induces a left inverse
+of the derived functor of our category embedding at the homotopy category
+level. We deduce from this result that the derived mapping spaces associated to
+our model category of unitary operads are homotopy equivalent to the standard
+derived operad mapping spaces, which we form in the model category of all
+operads in topological spaces. We prove that analogous statements hold for the
+subcategory of $k$-truncated unitary operads within the model category of all
+$k$-truncated operads, for any fixed arity bound $k\geq 1$, where a
+$k$-truncated operad denotes an operad that is defined up to arity $k$."@2017
+http://arxiv.org/abs/1703.06658v2@Samelson products in quasi-$p$-regular exceptional Lie groups@Sho Hasui@"There is a product decomposition of a compact connected Lie group $G$ at the
+prime $p$, called the mod $p$ decomposition, when $G$ has no $p$-torsion in
+homology. Then in studying the multiplicative structure of the $p$-localization
+of $G$, the Samelson products of the factor space inclusions of the mod $p$
+decomposition are fundamental. This paper determines (non-)triviality of these
+fundamental Samelson products in the $p$-localized exceptional Lie groups when
+the factor spaces are of rank $\le 2$, that is, $G$ is quasi-$p$-regular."@2017
+http://arxiv.org/abs/1703.06658v2@Samelson products in quasi-$p$-regular exceptional Lie groups@Daisuke Kishimoto@"There is a product decomposition of a compact connected Lie group $G$ at the
+prime $p$, called the mod $p$ decomposition, when $G$ has no $p$-torsion in
+homology. Then in studying the multiplicative structure of the $p$-localization
+of $G$, the Samelson products of the factor space inclusions of the mod $p$
+decomposition are fundamental. This paper determines (non-)triviality of these
+fundamental Samelson products in the $p$-localized exceptional Lie groups when
+the factor spaces are of rank $\le 2$, that is, $G$ is quasi-$p$-regular."@2017
+http://arxiv.org/abs/1703.06816v1@Mixed Hodge structures and formality of symmetric monoidal functors@Joana Cirici@"We use mixed Hodge theory to show that the functor of singular chains with
+rational coefficients is formal as a lax symmetric monoidal functor, when
+restricted to complex schemes whose weight filtration in cohomology satisfies a
+certain purity property. This has direct applications to the formality of
+operads or, more generally, of algebraic structures encoded by a colored
+operad. We also prove a dual statement, with applications to formality in the
+context of rational homotopy theory. In the general case of complex schemes
+with non-pure weight filtration, we relate the singular chains functor to a
+functor defined via the first term of the weight spectral sequence."@2017
+http://arxiv.org/abs/1703.10526v2@"A new formulation of the equivariant slice filtration with applications
+  to $C_p$-slices"@Carolyn Yarnall@"This paper provides a new way to understand the equivariant slice filtration.
+We give a new, readily checked condition for determining when a $G$-spectrum is
+slice $n$-connective. In particular, we show that a $G$-spectrum is slice
+greater than or equal to $n$ if and only if for all subgroups $H$, the
+$H$-geometric fixed points are $(n/|H|-1)$-connected. We use this to determine
+when smashing with a virtual representation sphere $S^V$ induces an equivalence
+between various slice categories. Using this, we give an explicit formula for
+the slices for an arbitrary $C_p$-spectrum and show how a very small number of
+functors determine all of the slices for $C_{p^n}$-spectra."@2017
+http://arxiv.org/abs/1704.01413v1@Fixed point sets of equivariant fiber-preserving maps@Peter Wong@"Given a selfmap $f:X\to X$ on a compact connected polyhedron $X$, H. Schirmer
+gave necessary and sufficient conditions for a nonempty closed subset $A$ to be
+the fixed point set of a map in the homotopy class of $f$. R. Brown and C.
+Soderlund extended Schirmer's result to the category of fiber bundles and
+fiber-preserving maps. The objective of this paper is to prove an equivariant
+analogue of Brown-Soderlund theorem result in the category of $G$-spaces and
+$G$-maps where $G$ is a finite group."@2017
+http://arxiv.org/abs/1704.02550v2@Coincidence Wecken property for nilmanifolds@Peter Wong@"Let $f,g:X\to Y$ be maps from a compact infra-nilmanifold $X$ to a compact
+nilmanifold $Y$ with $\dim X\ge \dim Y$. In this note, we show that a certain
+Wecken type property holds, i.e., if the Nielsen number $N(f,g)$ vanishes then
+$f$ and $g$ are deformable to be coincidence free. We also show that if $X$ is
+a connected finite complex $X$ and the Reidemeister coincidence number
+$R(f,g)=\infty$ then $f\sim f'$ so that $C(f',g)=\{x\in X \mid f'(x)=g(x)\}$ is
+empty."@2017
+http://arxiv.org/abs/1705.00151v2@Computing the Homology of Hypergraphs@Shiquan Ren@"Hypergraph is a topological model for networks. In order to study the
+topology of hypergraphs, the homology of the associated simplicial complexes
+and the embedded homology have been invented. In this paper, we give some
+algorithms to compute the homology of the associated simplicial complexes and
+the embedded homology of hypergraphs as well as some heuristics for efficient
+computations."@2017
+http://arxiv.org/abs/1705.00151v2@Computing the Homology of Hypergraphs@Stephane Bressan@"Hypergraph is a topological model for networks. In order to study the
+topology of hypergraphs, the homology of the associated simplicial complexes
+and the embedded homology have been invented. In this paper, we give some
+algorithms to compute the homology of the associated simplicial complexes and
+the embedded homology of hypergraphs as well as some heuristics for efficient
+computations."@2017
+http://arxiv.org/abs/1705.00151v2@Computing the Homology of Hypergraphs@Jie Wu@"Hypergraph is a topological model for networks. In order to study the
+topology of hypergraphs, the homology of the associated simplicial complexes
+and the embedded homology have been invented. In this paper, we give some
+algorithms to compute the homology of the associated simplicial complexes and
+the embedded homology of hypergraphs as well as some heuristics for efficient
+computations."@2017
+http://arxiv.org/abs/1705.00206v1@Adjointness of Suspension and Shape Path Functors@Tayyebe Nasri@"In this paper, we introduce a subcategory $\widetilde{Sh}_*$ of Sh$_*$ and
+obtain some results in this subcategory. First we show that there is a natural
+bijection $Sh (\Sigma (X, x), (Y,y))\cong Sh((X,x),Sh((I, \dot{I}),(Y,y)))$,
+for every $(Y,y)\in \widetilde{Sh}_*$ and $(X,x)\in Sh_*$. By this fact, we
+prove that for any pointed topological space $(X,x)$ in $\widetilde{Sh}_*$,
+$\check{\pi}_n^{top}(X,x)\cong \check{\pi}_{n-k}^{top}(Sh((S^k, *),(X,x)),
+e_x)$, for all $1\leq k \leq n-1$."@2017
+http://arxiv.org/abs/1705.00206v1@Adjointness of Suspension and Shape Path Functors@Behrooz Mashayekhy@"In this paper, we introduce a subcategory $\widetilde{Sh}_*$ of Sh$_*$ and
+obtain some results in this subcategory. First we show that there is a natural
+bijection $Sh (\Sigma (X, x), (Y,y))\cong Sh((X,x),Sh((I, \dot{I}),(Y,y)))$,
+for every $(Y,y)\in \widetilde{Sh}_*$ and $(X,x)\in Sh_*$. By this fact, we
+prove that for any pointed topological space $(X,x)$ in $\widetilde{Sh}_*$,
+$\check{\pi}_n^{top}(X,x)\cong \check{\pi}_{n-k}^{top}(Sh((S^k, *),(X,x)),
+e_x)$, for all $1\leq k \leq n-1$."@2017
+http://arxiv.org/abs/1705.00206v1@Adjointness of Suspension and Shape Path Functors@Hanieh Mirebrahimi@"In this paper, we introduce a subcategory $\widetilde{Sh}_*$ of Sh$_*$ and
+obtain some results in this subcategory. First we show that there is a natural
+bijection $Sh (\Sigma (X, x), (Y,y))\cong Sh((X,x),Sh((I, \dot{I}),(Y,y)))$,
+for every $(Y,y)\in \widetilde{Sh}_*$ and $(X,x)\in Sh_*$. By this fact, we
+prove that for any pointed topological space $(X,x)$ in $\widetilde{Sh}_*$,
+$\check{\pi}_n^{top}(X,x)\cong \check{\pi}_{n-k}^{top}(Sh((S^k, *),(X,x)),
+e_x)$, for all $1\leq k \leq n-1$."@2017
+http://arxiv.org/abs/1705.00800v1@Models for classifying spaces for $\mathbb{Z}\rtimes \mathbb{Z}$@Daniel Juan-Pineda@"We construct two models for the classifying space for the family of infinite
+cyclic subgroups of the fundamental group of the Klein bottle. These examples
+do not fit in general constructions previously done, for example, for
+hyperbolic groups."@2017
+http://arxiv.org/abs/1705.00800v1@Models for classifying spaces for $\mathbb{Z}\rtimes \mathbb{Z}$@Alejandra Trujillo-Negrete@"We construct two models for the classifying space for the family of infinite
+cyclic subgroups of the fundamental group of the Klein bottle. These examples
+do not fit in general constructions previously done, for example, for
+hyperbolic groups."@2017
+http://arxiv.org/abs/1705.02664v2@Anderson and Gorenstein duality@J. P. C. Greenlees@"The paper relates the Gorenstein duality statements studied by the first
+author to the Anderson duality statements studied by the second author, and
+explains how to use local cohomology and invariant theory to understand the
+numerology of shifts in simple cases."@2017
+http://arxiv.org/abs/1705.04791v2@"Generating functions for the universal Hall-Littlewood $P$- and
+  $Q$-functions"@Masaki Nakagawa@"Recently, P. Pragacz described the ordinary Hall-Littlewood $P$-polynomials
+by means of push-forwards (Gysin maps) from flag bundles in the ordinary
+cohomology theory. Together with L. Darondeau, he also gave push-forward
+formulas (Gysin formulas) for all flag bundles of types $A$, $B$, $C$ and $D$
+in the ordinary cohomology theory. In this paper, we introduce a generalization
+of the ordinary Hall-Littlewood $P$- and $Q$-polynomials, which we call the
+{\it universal $($factorial$)$ Hall-Littlewood $P$- and $Q$-functions}, and
+characterize them in terms of Gysin maps from flag bundles in the complex
+cobordism theory. We also generalize the (type $A$) push-forward formula due to
+Darondeau-Pragacz to the complex cobordism theory. As an application of our
+Gysin formulas in complex cobordism, we give generating functions for the
+universal Hall-Littlewood $P$- and $Q$-functions and their factorial analogues.
+Using our generating functions, classical determinantal and Pfaffian formulas
+for Schur $S$- and $Q$-polynomials, and their $K$-theoretic or factorial
+analogues can be obtained in a simple and unified manner."@2017
+http://arxiv.org/abs/1705.04791v2@"Generating functions for the universal Hall-Littlewood $P$- and
+  $Q$-functions"@Hiroshi Naruse@"Recently, P. Pragacz described the ordinary Hall-Littlewood $P$-polynomials
+by means of push-forwards (Gysin maps) from flag bundles in the ordinary
+cohomology theory. Together with L. Darondeau, he also gave push-forward
+formulas (Gysin formulas) for all flag bundles of types $A$, $B$, $C$ and $D$
+in the ordinary cohomology theory. In this paper, we introduce a generalization
+of the ordinary Hall-Littlewood $P$- and $Q$-polynomials, which we call the
+{\it universal $($factorial$)$ Hall-Littlewood $P$- and $Q$-functions}, and
+characterize them in terms of Gysin maps from flag bundles in the complex
+cobordism theory. We also generalize the (type $A$) push-forward formula due to
+Darondeau-Pragacz to the complex cobordism theory. As an application of our
+Gysin formulas in complex cobordism, we give generating functions for the
+universal Hall-Littlewood $P$- and $Q$-functions and their factorial analogues.
+Using our generating functions, classical determinantal and Pfaffian formulas
+for Schur $S$- and $Q$-polynomials, and their $K$-theoretic or factorial
+analogues can be obtained in a simple and unified manner."@2017
+http://arxiv.org/abs/1705.07036v1@Gross-Hopkins Duals of Higher Real K-theory Spectra@Agnes Beaudry@"We determine the Gross-Hopkins duals of certain higher real K-theory spectra.
+More specifically, let p be an odd prime, and consider the Morava E-theory
+spectrum of height n=p-1. It is known, in the expert circles, that for certain
+finite subgroups G of the Morava stabilizer group, the homotopy fixed point
+spectra E_n^{hG} are Gross-Hopkins self-dual up to a shift. In this paper, we
+determine the shift for those finite subgroups G which contain p-torsion. This
+generalizes previous results for n=2 and p=3."@2017
+http://arxiv.org/abs/1705.07036v1@Gross-Hopkins Duals of Higher Real K-theory Spectra@Vesna Stojanoska@"We determine the Gross-Hopkins duals of certain higher real K-theory spectra.
+More specifically, let p be an odd prime, and consider the Morava E-theory
+spectrum of height n=p-1. It is known, in the expert circles, that for certain
+finite subgroups G of the Morava stabilizer group, the homotopy fixed point
+spectra E_n^{hG} are Gross-Hopkins self-dual up to a shift. In this paper, we
+determine the shift for those finite subgroups G which contain p-torsion. This
+generalizes previous results for n=2 and p=3."@2017
+http://arxiv.org/abs/1705.10571v1@"A note on nontrivial intersection for selfmaps of complex Grassmann
+  manifolds"@Thais Monis@"Let $G(k,n)$ be the complex Grassmann manifold of $k$-planes in $\mathbb
+C^{k+n}$. In this note, we show that for $1<k<n$ and for any selfmap
+$f:G(k,n)\to G(k,n)$, there exists a $k$-plane $V^k\in G(k,n)$ such that
+$f(V^k)\cap V^k\ne \{0\}$."@2017
+http://arxiv.org/abs/1705.10571v1@"A note on nontrivial intersection for selfmaps of complex Grassmann
+  manifolds"@Peter Wong@"Let $G(k,n)$ be the complex Grassmann manifold of $k$-planes in $\mathbb
+C^{k+n}$. In this note, we show that for $1<k<n$ and for any selfmap
+$f:G(k,n)\to G(k,n)$, there exists a $k$-plane $V^k\in G(k,n)$ such that
+$f(V^k)\cap V^k\ne \{0\}$."@2017
+http://arxiv.org/abs/1706.02916v1@"Combinatorics of double loop suspensions, evaluation maps and Cohen
+  groups"@Jie Wu@"We reformulate Milgram's model of double loop suspension in terms of a
+preoperad of posets, each stage of which is the poset of all ordered partitions
+of a finite set. Using this model, we give a combinatorial model for the
+evaluation map and use it to study Cohen representation for the group of
+homotopy classes of maps between double loop suspensions. In particular, we
+recover Wu's shuffle relations and further provide a type of secondary
+relations in the Cohen groups using the classic Toda bracket."@2017
+http://arxiv.org/abs/1706.02917v1@Cancellation and homotopy rigidity of classic functors@Jie Wu@"We first show that simply connected co-$H$-spaces and connected $H$-spaces
+can be uniquely decomposed into prime factors in the homotopy category of
+pointed $p$-local spaces of finite type, which is used to develop a $p$-local
+version of Gray's correspondence between homotopy types of prime co-$H$-spaces
+and homotopy types of prime $H$-spaces, and the split fibration which connects
+them as well. Further, we use the unique decomposition theorem to study the
+homotopy rigidity problem for classic functors. Among others, we prove that
+$\Sigma \Omega$ and $\Omega$ are homotopy rigid on simply connected $p$-local
+co-$H$-spaces of finite type, and $\Omega\Sigma $ and $\Sigma$ are homotopy
+rigid on connected $p$-local $H$-spaces of finite type."@2017
+http://arxiv.org/abs/1706.02918v1@Exponential growth of homotopy groups of suspended finite complexes@Jie Wu@"We study the asymptotic behavior of the homotopy groups of simply connected
+finite $p$-local complexes, and define a space to be locally hyperbolic if its
+homotopy groups have exponential growth. Under some certain conditions related
+to the functorial decomposition of loop suspension, we prove that the suspended
+finite complexes are locally hyperbolic if suitable but accessible information
+of the homotopy groups is known. In particular, we prove that Moore spaces are
+locally hyperbolic, and other candidates are also given."@2017
+http://arxiv.org/abs/1706.04664v1@Cycle index sum for non-k-equal configurations@Victor Turchin@"We compute the cycle index sum of the symmetric group action on the homology
+of the configuration spaces of points in a Euclidean space with the condition
+that no $k$ of them are equal."@2017
+http://arxiv.org/abs/1706.04763v1@Cellular approximations of p-local compact groups@Alberto Gavira-Romero@"Let A be the classifying space of an abelian p-torsion group. We compute
+A-cellular approximations (in the sense of Chach\'olski and Farjoun) of
+classifying spaces of p-local compact groups, with special emphasis in the
+cases which arise from honest compact Lie groups."@2017
+http://arxiv.org/abs/1706.06170v2@Towards the $K(2)$-local homotopy groups of $Z$@Prasit Bhattacharya@"Recently we introduced a class $\widetilde{\mathcal{Z}}$ of $2$-local finite
+spectra and showed that all spectra $Z\in \widetilde{\mathcal{Z}}$ admit a
+$v_2$-self-map of periodicity $1$. The aim of this article is to compute the
+$K(2)$-local homotopy groups $\pi_*L_{K(2)}Z$ of all spectra $Z \in
+\widetilde{\mathcal{Z}}$ using a homotopy fixed point spectral sequence, and we
+give an almost complete computation. The incompleteness lies in the fact that
+we are unable to eliminate one family of $d_3$-differentials and a few
+potential hidden extensions, though we conjecture that all these differentials
+and hidden extensions are zero."@2017
+http://arxiv.org/abs/1706.06170v2@Towards the $K(2)$-local homotopy groups of $Z$@Philip Egger@"Recently we introduced a class $\widetilde{\mathcal{Z}}$ of $2$-local finite
+spectra and showed that all spectra $Z\in \widetilde{\mathcal{Z}}$ admit a
+$v_2$-self-map of periodicity $1$. The aim of this article is to compute the
+$K(2)$-local homotopy groups $\pi_*L_{K(2)}Z$ of all spectra $Z \in
+\widetilde{\mathcal{Z}}$ using a homotopy fixed point spectral sequence, and we
+give an almost complete computation. The incompleteness lies in the fact that
+we are unable to eliminate one family of $d_3$-differentials and a few
+potential hidden extensions, though we conjecture that all these differentials
+and hidden extensions are zero."@2017
+http://arxiv.org/abs/1706.07491v2@Topology of subvarieties of complex semi-abelian varieties@Yongqiang Liu@"We use the non-proper Morse theory of Palais-Smale to investigate the
+topology of smooth closed subvarieties of complex semi-abelian varieties, and
+that of their infinite cyclic covers. As main applications, we obtain the
+finite generation (except in the middle degree) of the corresponding integral
+Alexander modules, as well as the signed Euler characteristic property and
+generic vanishing for rank-one local systems on such subvarieties. Furthermore,
+we give a more conceptual (topological) interpretation of the signed Euler
+characteristic property in terms of vanishing of Novikov homology. As a
+byproduct, we prove a generic vanishing result for the $L^2$-Betti numbers of
+very affine manifolds. Our methods also recast June Huh's extension of
+Varchenko's conjecture to very affine manifolds, and provide a generalization
+of this result in the context of smooth closed subvarieties of semi-abelian
+varieties."@2017
+http://arxiv.org/abs/1706.07491v2@Topology of subvarieties of complex semi-abelian varieties@Laurentiu Maxim@"We use the non-proper Morse theory of Palais-Smale to investigate the
+topology of smooth closed subvarieties of complex semi-abelian varieties, and
+that of their infinite cyclic covers. As main applications, we obtain the
+finite generation (except in the middle degree) of the corresponding integral
+Alexander modules, as well as the signed Euler characteristic property and
+generic vanishing for rank-one local systems on such subvarieties. Furthermore,
+we give a more conceptual (topological) interpretation of the signed Euler
+characteristic property in terms of vanishing of Novikov homology. As a
+byproduct, we prove a generic vanishing result for the $L^2$-Betti numbers of
+very affine manifolds. Our methods also recast June Huh's extension of
+Varchenko's conjecture to very affine manifolds, and provide a generalization
+of this result in the context of smooth closed subvarieties of semi-abelian
+varieties."@2017
+http://arxiv.org/abs/1706.09157v2@Topological complexity of the work map@Aniceto Murillo@"We introduce the topological complexity of the work map associated to a robot
+system. In broad terms, this measures the complexity of any algorithm
+controlling, not just the motion of the configuration space of the given
+system, but the task for which the system has been designed. From a purely
+topological point of view, this is a homotopy invariant of a map which
+generalizes the classical topological complexity of a space."@2017
+http://arxiv.org/abs/1706.09157v2@Topological complexity of the work map@Jie Wu@"We introduce the topological complexity of the work map associated to a robot
+system. In broad terms, this measures the complexity of any algorithm
+controlling, not just the motion of the configuration space of the given
+system, but the task for which the system has been designed. From a purely
+topological point of view, this is a homotopy invariant of a map which
+generalizes the classical topological complexity of a space."@2017
+http://arxiv.org/abs/1706.09194v3@Lie models for nilpotent spaces@Yves Félix@"Let $(L,d)$ be a differential graded Lie algebra, where $L=L(V)$ is free as
+graded Lie algebra and $V=V_{\geq 0}$ is a finite type graded vector space. We
+prove that the injection of $(L,d)$ into its completion $(\widehat{L},d)$ is a
+quasi-isomorphism if and only if $H(L,d)$ is a finite type pronilpotent graded
+Lie algebra. As a consequence, we obtain an equivalence between graded Lie
+models for nilpotent spaces in rational homotopy theory."@2017
+http://arxiv.org/abs/1706.09194v3@Lie models for nilpotent spaces@Daniel Tanré@"Let $(L,d)$ be a differential graded Lie algebra, where $L=L(V)$ is free as
+graded Lie algebra and $V=V_{\geq 0}$ is a finite type graded vector space. We
+prove that the injection of $(L,d)$ into its completion $(\widehat{L},d)$ is a
+quasi-isomorphism if and only if $H(L,d)$ is a finite type pronilpotent graded
+Lie algebra. As a consequence, we obtain an equivalence between graded Lie
+models for nilpotent spaces in rational homotopy theory."@2017
+http://arxiv.org/abs/1707.00507v1@On a Van Kampen Theorem for Hawaiian Groups@Behrooz Mashayekhy@"The paper is devoted to study the $n$th Hawaiian group $\mathcal{H}_n$, $n
+\ge 1$, of the wedge sum of two spaces $(X,x_*) = (X_1, x_1) \vee (X_2, x_2)$.
+  Indeed, we are going to give some versions of the van Kampen theorem for
+Hawaiian groups of the wedge sum of spaces.
+  First, among some results on Hawaiian groups of semilocally strongly
+contractible spaces, we present a structure for the $n$th Hawaiian group of the
+wedge sum of CW-complexes.
+  Second, we give more informative structures for the $n$th Hawaiian group of
+the wedge sum $X$, when $X$ is semilocally $n$-simply connected at $x_*$.
+  Finally, as a consequence, by generalizing the well-known Griffiths space for
+dimension $n\geq 1$, we give some information about the structure of Hawaiian
+groups of Griffiths spaces at any points."@2017
+http://arxiv.org/abs/1707.00507v1@On a Van Kampen Theorem for Hawaiian Groups@Hanieh Mirebrahimi@"The paper is devoted to study the $n$th Hawaiian group $\mathcal{H}_n$, $n
+\ge 1$, of the wedge sum of two spaces $(X,x_*) = (X_1, x_1) \vee (X_2, x_2)$.
+  Indeed, we are going to give some versions of the van Kampen theorem for
+Hawaiian groups of the wedge sum of spaces.
+  First, among some results on Hawaiian groups of semilocally strongly
+contractible spaces, we present a structure for the $n$th Hawaiian group of the
+wedge sum of CW-complexes.
+  Second, we give more informative structures for the $n$th Hawaiian group of
+the wedge sum $X$, when $X$ is semilocally $n$-simply connected at $x_*$.
+  Finally, as a consequence, by generalizing the well-known Griffiths space for
+dimension $n\geq 1$, we give some information about the structure of Hawaiian
+groups of Griffiths spaces at any points."@2017
+http://arxiv.org/abs/1707.00507v1@On a Van Kampen Theorem for Hawaiian Groups@Hamid Torabi@"The paper is devoted to study the $n$th Hawaiian group $\mathcal{H}_n$, $n
+\ge 1$, of the wedge sum of two spaces $(X,x_*) = (X_1, x_1) \vee (X_2, x_2)$.
+  Indeed, we are going to give some versions of the van Kampen theorem for
+Hawaiian groups of the wedge sum of spaces.
+  First, among some results on Hawaiian groups of semilocally strongly
+contractible spaces, we present a structure for the $n$th Hawaiian group of the
+wedge sum of CW-complexes.
+  Second, we give more informative structures for the $n$th Hawaiian group of
+the wedge sum $X$, when $X$ is semilocally $n$-simply connected at $x_*$.
+  Finally, as a consequence, by generalizing the well-known Griffiths space for
+dimension $n\geq 1$, we give some information about the structure of Hawaiian
+groups of Griffiths spaces at any points."@2017
+http://arxiv.org/abs/1707.02130v3@Encoding Equivariant Commutativity via Operads@Javier J. Gutiérrez@"In this paper, we prove a conjecture of Blumberg and Hill regarding the
+existence of $N_\infty$-operads associated to given sequences $\mathcal{F} =
+(\mathcal{F}_n)_{n \in \mathbb{N}}$ of families of subgroups of $G\times
+\Sigma_n$. For every such sequence, we construct a model structure on the
+category of $G$-operads, and we use these model structures to define
+$E_\infty^{\mathcal{F}}$-operads, generalizing the notion of an
+$N_\infty$-operad, and to prove the Blumberg-Hill conjecture. We then explore
+questions of admissibility, rectification, and preservation under left
+Bousfield localization for these $E_\infty^{\mathcal{F}}$-operads, obtaining
+some new results as well for $N_\infty$-operads."@2017
+http://arxiv.org/abs/1707.02226v1@Genuine equivariant operads@Luis A. Pereira@"We build new algebraic structures, which we call genuine equivariant operads,
+which can be thought of as a hybrid between equivariant operads and coefficient
+systems. We then prove an Elmendorf-Piacenza type theorem stating that
+equivariant operads, with their graph model structure, are equivalent to
+genuine equivariant operads, with their projective model structure.
+  As an application, we build explicit models for the $N_{\infty}$-operads of
+Blumberg and Hill."@2017
+http://arxiv.org/abs/1707.02603v2@The homotopy type of spaces of rational curves on a toric variety@Andrzej Kozlowski@"Spaces of holomorphic maps from the Riemann sphere to various complex
+manifolds (holomorphic curves ) have played an important role in several area
+of mathematics. In a seminal paper G. Segal investigated the homotopy type of
+holomorphic curves on complex projective spaces and M. Guest on compact smooth
+toric varieties.. Recently Mostovoy and Villanueva, obtained a far reaching
+generalisation of these results, and in particular (for holomorphic curves)
+improved the stability dimension obtained by Guest. In this paper, we
+generalize their result to holomorphic curves, on certain non-compact smooth
+toric varieties."@2017
+http://arxiv.org/abs/1707.02603v2@The homotopy type of spaces of rational curves on a toric variety@Kohhei Yamaguchi@"Spaces of holomorphic maps from the Riemann sphere to various complex
+manifolds (holomorphic curves ) have played an important role in several area
+of mathematics. In a seminal paper G. Segal investigated the homotopy type of
+holomorphic curves on complex projective spaces and M. Guest on compact smooth
+toric varieties.. Recently Mostovoy and Villanueva, obtained a far reaching
+generalisation of these results, and in particular (for holomorphic curves)
+improved the stability dimension obtained by Guest. In this paper, we
+generalize their result to holomorphic curves, on certain non-compact smooth
+toric varieties."@2017
+http://arxiv.org/abs/1707.05986v1@Monadicity of the Bousfield-Kuhn functor@Gijs Heuts@"We consider the localization of the $\infty$-category of spaces at the
+$v_n$-periodic equivalences, the case $n=0$ being rational homotopy theory. We
+prove that this localization is for $n\geq 1$ equivalent to algebras over a
+certain monad on the $\infty$-category of $T(n)$-local spectra. This monad is
+built from the Bousfield--Kuhn functor."@2017
+http://arxiv.org/abs/1707.05986v1@Monadicity of the Bousfield-Kuhn functor@Akhil Mathew@"We consider the localization of the $\infty$-category of spaces at the
+$v_n$-periodic equivalences, the case $n=0$ being rational homotopy theory. We
+prove that this localization is for $n\geq 1$ equivalent to algebras over a
+certain monad on the $\infty$-category of $T(n)$-local spectra. This monad is
+built from the Bousfield--Kuhn functor."@2017
+http://arxiv.org/abs/1707.05986v1@Monadicity of the Bousfield-Kuhn functor@Lennart Meier@"We consider the localization of the $\infty$-category of spaces at the
+$v_n$-periodic equivalences, the case $n=0$ being rational homotopy theory. We
+prove that this localization is for $n\geq 1$ equivalent to algebras over a
+certain monad on the $\infty$-category of $T(n)$-local spectra. This monad is
+built from the Bousfield--Kuhn functor."@2017
+http://arxiv.org/abs/1707.09806v1@"Generic vanishing for semi-abelian varieties and integral Alexander
+  modules"@Yongqiang Liu@"We revisit generic vanishing results for perverse sheaves with any field
+coefficients on a complex semi-abelian variety, and indicate several
+topological applications. In particular, we obtain finiteness properties for
+the integral Alexander modules of complex algebraic varieties mapping to
+semi-abelian varieties. Similar results were recently derived by the authors by
+using Morse-theoretic arguments."@2017
+http://arxiv.org/abs/1707.09806v1@"Generic vanishing for semi-abelian varieties and integral Alexander
+  modules"@Laurentiu Maxim@"We revisit generic vanishing results for perverse sheaves with any field
+coefficients on a complex semi-abelian variety, and indicate several
+topological applications. In particular, we obtain finiteness properties for
+the integral Alexander modules of complex algebraic varieties mapping to
+semi-abelian varieties. Similar results were recently derived by the authors by
+using Morse-theoretic arguments."@2017
+http://arxiv.org/abs/1708.02203v3@Delooping the functor calculus tower@Victor Turchin@"We study a connection between mapping spaces of bimodules and of
+infinitesimal bimodules over an operad. As main application and motivation of
+our work, we produce an explicit delooping of the manifold calculus tower
+associated to the space of smooth maps $D^{m}\rightarrow D^{n}$ pf discs,
+$n\geq m$, avoiding any given multisingularity and coinciding with the standard
+inclusion near $\partial D^{m}$. In particular, we give a new proof of the
+delooping of the space of disc embeddings in terms of little discs operads maps
+with the advantage that it can be applied to more general mapping spaces."@2017
+http://arxiv.org/abs/1708.02606v1@On Topologized Fundamental Groups with Small Loop Transfer Viewpoints@Behrooz Mashayekhy@"In this paper, by introducing some kind of small loop transfer spaces at a
+point, we study the behavior of topologized fundamental groups with the
+compact-open topology and the whisker topology, $\pi_{1}^{qtop}(X,x_{0})$ and
+$\pi_{1}^{wh}(X,x_{0})$, respectively. In particular, we give necessary or
+sufficient conditions for coincidence and being topological group of these two
+topologized fundamental groups. Finally, we give some examples to show that the
+reverse of some of these implications do not hold, in general."@2017
+http://arxiv.org/abs/1708.02606v1@On Topologized Fundamental Groups with Small Loop Transfer Viewpoints@Hamid Torabi@"In this paper, by introducing some kind of small loop transfer spaces at a
+point, we study the behavior of topologized fundamental groups with the
+compact-open topology and the whisker topology, $\pi_{1}^{qtop}(X,x_{0})$ and
+$\pi_{1}^{wh}(X,x_{0})$, respectively. In particular, we give necessary or
+sufficient conditions for coincidence and being topological group of these two
+topologized fundamental groups. Finally, we give some examples to show that the
+reverse of some of these implications do not hold, in general."@2017
+http://arxiv.org/abs/1708.02606v1@On Topologized Fundamental Groups with Small Loop Transfer Viewpoints@Seyyed Zeynal Pashaei@"In this paper, by introducing some kind of small loop transfer spaces at a
+point, we study the behavior of topologized fundamental groups with the
+compact-open topology and the whisker topology, $\pi_{1}^{qtop}(X,x_{0})$ and
+$\pi_{1}^{wh}(X,x_{0})$, respectively. In particular, we give necessary or
+sufficient conditions for coincidence and being topological group of these two
+topologized fundamental groups. Finally, we give some examples to show that the
+reverse of some of these implications do not hold, in general."@2017
+http://arxiv.org/abs/1708.02606v1@On Topologized Fundamental Groups with Small Loop Transfer Viewpoints@Mehdi Abdullahi Rashid@"In this paper, by introducing some kind of small loop transfer spaces at a
+point, we study the behavior of topologized fundamental groups with the
+compact-open topology and the whisker topology, $\pi_{1}^{qtop}(X,x_{0})$ and
+$\pi_{1}^{wh}(X,x_{0})$, respectively. In particular, we give necessary or
+sufficient conditions for coincidence and being topological group of these two
+topologized fundamental groups. Finally, we give some examples to show that the
+reverse of some of these implications do not hold, in general."@2017
+http://arxiv.org/abs/1708.04509v1@The Capacity of Some Classes of Polyhedra@Mojtaba Mohareri@"K. Borsuk in 1979, in the Topological Conference in Moscow, introduced the
+concept of the capacity of a compactum. In this paper, we compute the capacity
+of the product of two spheres of the same or different dimensions and the
+capacity of lense spaces. Also, we present an upper bound for the capacity of a
+$\mathbb{Z}_n$-complex, i.e., a connected finite 2-dimensional CW-complex with
+finite cyclic fundamental group $\mathbb{Z}_n$."@2017
+http://arxiv.org/abs/1708.04509v1@The Capacity of Some Classes of Polyhedra@Behrooz Mashayekhy@"K. Borsuk in 1979, in the Topological Conference in Moscow, introduced the
+concept of the capacity of a compactum. In this paper, we compute the capacity
+of the product of two spheres of the same or different dimensions and the
+capacity of lense spaces. Also, we present an upper bound for the capacity of a
+$\mathbb{Z}_n$-complex, i.e., a connected finite 2-dimensional CW-complex with
+finite cyclic fundamental group $\mathbb{Z}_n$."@2017
+http://arxiv.org/abs/1708.04509v1@The Capacity of Some Classes of Polyhedra@Hanieh Mirebrahimi@"K. Borsuk in 1979, in the Topological Conference in Moscow, introduced the
+concept of the capacity of a compactum. In this paper, we compute the capacity
+of the product of two spheres of the same or different dimensions and the
+capacity of lense spaces. Also, we present an upper bound for the capacity of a
+$\mathbb{Z}_n$-complex, i.e., a connected finite 2-dimensional CW-complex with
+finite cyclic fundamental group $\mathbb{Z}_n$."@2017
+http://arxiv.org/abs/1708.05245v1@Rational homotopy theory via Sullivan models: a survey@Yves Félix@"This survey contains the main results in rational homotopy, from the
+beginning to the most recent ones. It makes the status of the art, gives a
+short presentation of some areas where rational homotopy has been used, and
+contains a lot of important open problems"@2017
+http://arxiv.org/abs/1708.06722v5@Weighted Persistent Homology@Shiquan Ren@"In this paper we develop the theory of weighted persistent homology. In 1990,
+Robert J. Dawson was the first to study in depth the homology of weighted
+simplicial complexes. We generalize the definitions of weighted simplicial
+complex and the homology of weighted simplicial complex to allow weights in an
+integral domain $R$. Then we study the resulting weighted persistent homology.
+We show that weighted persistent homology can tell apart filtrations that
+ordinary persistent homology does not distinguish. For example, if there is a
+point considered as special, weighted persistent homology can tell when a cycle
+containing the point is formed or has disappeared."@2017
+http://arxiv.org/abs/1708.06722v5@Weighted Persistent Homology@Jie Wu@"In this paper we develop the theory of weighted persistent homology. In 1990,
+Robert J. Dawson was the first to study in depth the homology of weighted
+simplicial complexes. We generalize the definitions of weighted simplicial
+complex and the homology of weighted simplicial complex to allow weights in an
+integral domain $R$. Then we study the resulting weighted persistent homology.
+We show that weighted persistent homology can tell apart filtrations that
+ordinary persistent homology does not distinguish. For example, if there is a
+point considered as special, weighted persistent homology can tell when a cycle
+containing the point is formed or has disappeared."@2017
+http://arxiv.org/abs/1708.06854v2@Detecting exotic spheres in low dimensions using coker J@Michael J. Hopkins@"Building off of the work of Kervaire and Milnor, and Hill, Hopkins, and
+Ravenel, Xu and Wang showed that the only odd dimensions n for which S^n has a
+unique differentiable structure are 1, 3, 5, and 61. We show that the only even
+dimensions below 140 for which S^n has a unique differentiable structure are 2,
+6, 12, 56, and perhaps 4."@2017
+http://arxiv.org/abs/1708.09003v1@"An algebraic model for rational naive-commutative equivariant ring
+  spectra"@J. P. C. Greenlees@"Equipping a non-equivariant topological E_\infty operad with the trivial
+G-action gives an operad in G-spaces. The algebra structure encoded by this
+operad in G-spectra is characterised homotopically by having no non-trivial
+multiplicative norms. Algebras over this operad are called naive-commutative
+ring G-spectra. In this paper we let G be a finite group and we show that
+commutative algebras in the algebraic model for rational G-spectra model the
+rational naive-commutative ring G-spectra."@2017
+http://arxiv.org/abs/1708.09003v1@"An algebraic model for rational naive-commutative equivariant ring
+  spectra"@Magdalena Kedziorek@"Equipping a non-equivariant topological E_\infty operad with the trivial
+G-action gives an operad in G-spaces. The algebra structure encoded by this
+operad in G-spectra is characterised homotopically by having no non-trivial
+multiplicative norms. Algebras over this operad are called naive-commutative
+ring G-spectra. In this paper we let G be a finite group and we show that
+commutative algebras in the algebraic model for rational G-spectra model the
+rational naive-commutative ring G-spectra."@2017
+http://arxiv.org/abs/1708.09568v1@"The cohomology of $C_2$-equivariant $A(1)$ and the homotopy of
+  $ko_{C_2}$"@Daniel C. Isaksen@"We compute the cohomology of the subalgebra $A^{C_2}(1)$ of the
+$C_2$-equivariant Steenrod algebra $A^{C_2}$. This serves as the input to the
+$C_2$-equivariant Adams spectral sequence converging to the $RO(C_2)$-graded
+homotopy groups of an equivariant spectrum $ko_{C_2}$. Our approach is to use
+simpler $\mathbb{C}$-motivic and $\mathbb{R}$-motivic calculations as stepping
+stones."@2017
+http://arxiv.org/abs/1709.00936v1@Higher structure in the unstable Adams spectral sequence@Samik Basu@"We describe a variant construction of the unstable Adams spectral the
+sequence for a space $Y$, associated to any free simplicial resolution of
+$H^*(Y;R)$ for $R=\mathbb{F}_p$ or $\mathbb{Q}$. We use this construction to
+describe the differentials and filtration in the spectral sequence in terms of
+appropriate systems of higher cohomology operations."@2017
+http://arxiv.org/abs/1709.00936v1@Higher structure in the unstable Adams spectral sequence@David Blanc@"We describe a variant construction of the unstable Adams spectral the
+sequence for a space $Y$, associated to any free simplicial resolution of
+$H^*(Y;R)$ for $R=\mathbb{F}_p$ or $\mathbb{Q}$. We use this construction to
+describe the differentials and filtration in the spectral sequence in terms of
+appropriate systems of higher cohomology operations."@2017
+http://arxiv.org/abs/1709.00936v1@Higher structure in the unstable Adams spectral sequence@Debasis Sen@"We describe a variant construction of the unstable Adams spectral the
+sequence for a space $Y$, associated to any free simplicial resolution of
+$H^*(Y;R)$ for $R=\mathbb{F}_p$ or $\mathbb{Q}$. We use this construction to
+describe the differentials and filtration in the spectral sequence in terms of
+appropriate systems of higher cohomology operations."@2017
+http://arxiv.org/abs/1710.00475v2@Relative phantom maps@Daisuke Kishimoto@"We define a map $f\colon X\to Y$ to be a phantom map relative to a map
+$\varphi\colon B\to Y$ if the restriction of $f$ to any finite dimensional
+skeleton of $X$ lifts to $B$ through $\varphi$, up to homotopy. There are two
+kinds of maps which are obviously relative phantom maps: (1) the composite of a
+map $X\to B$ with $\varphi$; (2) a usual phantom map $X\to Y$. A relative
+phantom map of type (1) is called trivial, and a relative phantom map out of a
+suspension which is a sum of (1) and (2) is called relatively trivial. We study
+the (relative) triviality of relative phantom maps from a suspension, and in
+particular, we give rational homotopy conditions for the (relative) triviality.
+We also give a rational homotopy condition for the triviality of relative
+phantom maps from a non-suspension to a finite Postnikov section."@2017
+http://arxiv.org/abs/1710.03333v1@"Estimates of covering type and the number of vertices of minimal
+  triangulations"@Dejan Govc@"The covering type of a space $X$ is defined as the minimal cardinality of a
+good cover of a space that is homotopy equivalent to $X$. We derive estimates
+for the covering type of $X$ in terms of other invariants of $X$, namely the
+ranks of the homology groups, the multiplicative structure of the cohomology
+ring and the Lusternik-Schnirelmann category of $X$. By relating the covering
+type to the number of vertices of minimal triangulations of complexes and
+combinatorial manifolds, we obtain, within a unified framework, several
+estimates which are either new or extensions of results that have been
+previously obtained by ad hoc combinatorial arguments. Moreover, our methods
+give results that are valid for entire homotopy classes of spaces."@2017
+http://arxiv.org/abs/1710.05093v2@Configuration spaces of products@Kathryn Hess@"We show that the configuration spaces of a product of parallelizable
+manifolds may be recovered from those of the factors as the Boardman-Vogt
+tensor product of right modules over the operads of little cubes of the
+appropriate dimension. We also discuss an analogue of this result for manifolds
+that are not necessarily parallelizable, which involves a new operad of skew
+little cubes."@2017
+http://arxiv.org/abs/1710.05093v2@Configuration spaces of products@Ben Knudsen@"We show that the configuration spaces of a product of parallelizable
+manifolds may be recovered from those of the factors as the Boardman-Vogt
+tensor product of right modules over the operads of little cubes of the
+appropriate dimension. We also discuss an analogue of this result for manifolds
+that are not necessarily parallelizable, which involves a new operad of skew
+little cubes."@2017
+http://arxiv.org/abs/1710.05326v1@"On the action of the Steenrod-Milnor operations on the invariants of the
+  general linear groups"@Nguyen Sum@"Let $p$ be an odd prime number. Denote by $GL_n = GL(n,\mathbb F_p)$ the
+general linear group over the prime field $\mathbb F_p$. Each subgroup of
+$GL_n$ acts on the algebra $P_n=E(x_1,\ldots,x_n)\otimes \mathbb
+F_p(y_1,\ldots,y_n)$ in the usual manner. We grade $P_n$ by assigning $\dim
+x_i=1$ and $\dim y_i=2.$ This algebra is a module over the mod $p$ Steenrod
+algebra $\mathcal A_p$. The purpose of the paper is to compute the action of
+the Steenrod-Milnor operations on the generators of $P_2^{GL_2}$. More
+precisely, we explicitly determine the action of $St^{(i,j)}$ on the Dickson
+invariants $Q_{2,0}$ and $Q_{2,1}$."@2017
+http://arxiv.org/abs/1710.06093v1@Results on the topology of generalized real Bott manifolds@Raisa Dsouza@"Generalized Bott manifolds (over $\mathbb C$ and $\mathbb R$) have been
+defined by Choi, Masuda and Suh. In this article we extend the results of
+arXiv:1609.05630 on the topology of real Bott manifolds to generalized real
+Bott manifolds. We give a presentation of the fundamental group, prove that it
+is solvable and give a characterization for it to be abelian. We further prove
+that these manifolds are aspherical only in the case of real Bott manifolds and
+compute the higher homotopy groups. Furthermore, using the presentation of the
+cohomology ring with $\mathbb Z_2$-coefficients, we derive a combinatorial
+characterization for orientablity and spin structure."@2017
+http://arxiv.org/abs/1711.02722v2@Lifting classes for the fixed point theory of $n$-valued maps@P. Christopher Staecker@"The theory of lifting classes of single-valued maps is extended to $n$-valued
+maps by replacing liftings to universal covering spaces by liftings with
+codomain an orbit configuration space, a structure recently introduced by
+Xicot\'encatl. An equivalence relation, that reduces to conjugation by covering
+transformations if $n = 1$, is defined on these liftings. The number of
+equivalence classes of liftings of an $n$-valued map $f$ is called the
+conjugacy class number and denoted $C(f)$. The fixed point classes of $f$ are
+the projections of fixed point sets of these liftings and are the same as those
+of Schirmer. We relate our liftings to liftings to the universal covering
+spaces and we show that in many cases they are the same. A twisted conjugacy
+relation is extended from single-valued to $n$-valued maps and the number of
+equivalence classes is called the Reidemeister number of $f$ and denoted
+$R(f)$, as in the single-valued theory. We prove that it is related to the
+conjugacy class number by the equation $C(f) = R(f)^n$. The Jiang subgroup is
+extended to $n$-valued maps as a subgroup of a semidirect product and used to
+find conditions under which the Nielsen number of an $n$-valued map equals its
+Reidemeister number."@2017
+http://arxiv.org/abs/1711.04983v1@Multiplication structure of the cohomology ring of real toric spaces@Suyoung Choi@"A real toric space is a topological space which admits a well-behaved
+$\mathbb{Z}_2^k$-action. Real moment-angle complexes and real toric varieties
+are typical examples of real toric spaces. A real toric space is determined by
+a pair of a simplicial complex $K$ and a characteristic matrix $\Lambda$.
+  In this paper, we provide an explicit $R$-cohomology ring formula of a real
+toric space in terms of $K$ and $\Lambda$, where $R$ is a commutative ring with
+unity in which $2$ is a unit. Interestingly, it has a natural $(\mathbb{Z}
+\oplus \operatorname*{row} \Lambda)$-grading. As corollaries, we compute the
+cohomology rings of (generalized) real Bott manifolds in terms of binary
+matroids, and we also provide a criterion for real toric spaces to be
+cohomology symplectic."@2017
+http://arxiv.org/abs/1711.04983v1@Multiplication structure of the cohomology ring of real toric spaces@Hanchul Park@"A real toric space is a topological space which admits a well-behaved
+$\mathbb{Z}_2^k$-action. Real moment-angle complexes and real toric varieties
+are typical examples of real toric spaces. A real toric space is determined by
+a pair of a simplicial complex $K$ and a characteristic matrix $\Lambda$.
+  In this paper, we provide an explicit $R$-cohomology ring formula of a real
+toric space in terms of $K$ and $\Lambda$, where $R$ is a commutative ring with
+unity in which $2$ is a unit. Interestingly, it has a natural $(\mathbb{Z}
+\oplus \operatorname*{row} \Lambda)$-grading. As corollaries, we compute the
+cohomology rings of (generalized) real Bott manifolds in terms of binary
+matroids, and we also provide a criterion for real toric spaces to be
+cohomology symplectic."@2017
+http://arxiv.org/abs/1711.06716v1@An Upper Bound for the Depth of Some Classes of Polyhedra@Mojtaba Mohareri@"K. Borsuk in the seventies introduced the notions of capacity and depth of
+compacta together with some relevant problems. In this paper, first, we
+introduce the concepts of the (strong) capacity and the (strong) depth of an
+object in an arbitrary category. Then in the category of groups, we compute the
+(strong) capacity and the (strong) depth of some well-known groups. Finally, we
+find an upper bound for the depth of some classes of finite polyhedra which
+generalizes a result of D. Kolodziejczyk in this subject."@2017
+http://arxiv.org/abs/1711.06716v1@An Upper Bound for the Depth of Some Classes of Polyhedra@Behrooz Mashayekhy@"K. Borsuk in the seventies introduced the notions of capacity and depth of
+compacta together with some relevant problems. In this paper, first, we
+introduce the concepts of the (strong) capacity and the (strong) depth of an
+object in an arbitrary category. Then in the category of groups, we compute the
+(strong) capacity and the (strong) depth of some well-known groups. Finally, we
+find an upper bound for the depth of some classes of finite polyhedra which
+generalizes a result of D. Kolodziejczyk in this subject."@2017
+http://arxiv.org/abs/1711.06716v1@An Upper Bound for the Depth of Some Classes of Polyhedra@Hanieh Mirebrahimi@"K. Borsuk in the seventies introduced the notions of capacity and depth of
+compacta together with some relevant problems. In this paper, first, we
+introduce the concepts of the (strong) capacity and the (strong) depth of an
+object in an arbitrary category. Then in the category of groups, we compute the
+(strong) capacity and the (strong) depth of some well-known groups. Finally, we
+find an upper bound for the depth of some classes of finite polyhedra which
+generalizes a result of D. Kolodziejczyk in this subject."@2017
+http://arxiv.org/abs/1711.09183v2@A symmetric monoidal and equivariant Segal infinite loop space machine@Mona Merling@"In [MMO] (arXiv:1704.03413), we reworked and generalized equivariant infinite
+loop space theory, which shows how to construct $G$-spectra from $G$-spaces
+with suitable structure. In this paper, we construct a new variant of the
+equivariant Segal machine that starts from the category $\scr{F}$ of finite
+sets rather than from the category ${\scr{F}}_G$ of finite $G$-sets and which
+is equivalent to the machine studied by Shimakawa and in [MMO]. In contrast to
+the machine in [MMO], the new machine gives a lax symmetric monoidal functor
+from the symmetric monoidal category of $\scr{F}$-$G$-spaces to the symmetric
+monoidal category of orthogonal $G$-spectra. We relate it multiplicatively to
+suspension $G$-spectra and to Eilenberg-MacLane $G$-spectra via lax symmetric
+monoidal functors from based $G$-spaces and from abelian groups to
+$\scr{F}$-$G$-spaces. Even non-equivariantly, this gives an appealing new
+variant of the Segal machine. This new variant makes the equivariant
+generalization of the theory essentially formal, hence is likely to be
+applicable in other contexts."@2017
+http://arxiv.org/abs/1711.09211v2@Computational Tools in Weighted Persistent Homology@Shiquan Ren@"In this paper, we study further properties and applications of weighted
+homology and persistent homology. We introduce the Mayer-Vietoris sequence and
+generalized Bockstein spectral sequence for weighted homology. For
+applications, we show an algorithm to construct a filtration of weighted
+simplicial complexes from a weighted network. We also prove a theorem that
+allows us to calculate the mod $p^2$ weighted persistent homology given some
+information on the mod $p$ weighted persistent homology."@2017
+http://arxiv.org/abs/1711.09211v2@Computational Tools in Weighted Persistent Homology@Jie Wu@"In this paper, we study further properties and applications of weighted
+homology and persistent homology. We introduce the Mayer-Vietoris sequence and
+generalized Bockstein spectral sequence for weighted homology. For
+applications, we show an algorithm to construct a filtration of weighted
+simplicial complexes from a weighted network. We also prove a theorem that
+allows us to calculate the mod $p^2$ weighted persistent homology given some
+information on the mod $p$ weighted persistent homology."@2017
+http://arxiv.org/abs/1711.09261v1@On Exact Sequences of the Rigid Fibrations@Tayyebe Nasri@"In 2002, Biss investigated on a kind of fibration which is called rigid
+covering fibration (we rename it by rigid fibration) with properties similar to
+covering spaces. In this paper, we obtain a relation between arbitrary
+topological spaces and its rigid fibrations. Using this relation we obtain a
+commutative diagram of homotopy groups and quasitopological homotopy groups and
+deduce some results in this field."@2017
+http://arxiv.org/abs/1711.09261v1@On Exact Sequences of the Rigid Fibrations@Behrooz Mashayekhy@"In 2002, Biss investigated on a kind of fibration which is called rigid
+covering fibration (we rename it by rigid fibration) with properties similar to
+covering spaces. In this paper, we obtain a relation between arbitrary
+topological spaces and its rigid fibrations. Using this relation we obtain a
+commutative diagram of homotopy groups and quasitopological homotopy groups and
+deduce some results in this field."@2017
+http://arxiv.org/abs/1711.10132v2@Bredon cohomology and robot motion planning@Mark Grant@"In this paper we study the topological invariant ${\sf {TC}}(X)$ reflecting
+the complexity of algorithms for autonomous robot motion. Here, $X$ stands for
+the configuration space of a system and ${\sf {TC}}(X)$ is, roughly, the
+minimal number of continuous rules which are needed to construct a motion
+planning algorithm in $X$. We focus on the case when the space $X$ is
+aspherical; then the number ${\sf TC}(X)$ depends only on the fundamental group
+$\pi=\pi_1(X)$ and we denote it ${\sf TC}(\pi)$. We prove that ${\sf TC}(\pi)$
+can be characterised as the smallest integer $k$ such that the canonical
+$\pi\times\pi$-equivariant map of classifying spaces $$E(\pi\times\pi) \to
+E_{\mathcal D}(\pi\times\pi)$$ can be equivariantly deformed into the
+$k$-dimensional skeleton of $E_{\mathcal D}(\pi\times\pi)$. The symbol
+$E(\pi\times\pi)$ denotes the classifying space for free actions and
+$E_{\mathcal D}(\pi\times\pi)$ denotes the classifying space for actions with
+isotropy in a certain family $\mathcal D$ of subgroups of $\pi\times\pi$. Using
+this result we show how one can estimate ${\sf TC}(\pi)$ in terms of the
+equivariant Bredon cohomology theory. We prove that ${\sf TC}(\pi) \le \max\{3,
+{\rm cd}_{\mathcal D}(\pi\times\pi)\},$ where ${\rm cd}_{\mathcal
+D}(\pi\times\pi)$ denotes the cohomological dimension of $\pi\times\pi$ with
+respect to the family of subgroups $\mathcal D$. We also introduce a Bredon
+cohomology refinement of the canonical class and prove its universality.
+Finally we show that for a large class of principal groups (which includes all
+torsion free hyperbolic groups as well as all torsion free nilpotent groups)
+the essential cohomology classes in the sense of Farber and Mescher are exactly
+the classes having Bredon cohomology extensions with respect to the family
+$\mathcal D$."@2017
+http://arxiv.org/abs/1712.00284v1@"On the cohomology ring and upper characteristic rank of Grassmannian of
+  oriented $3$-planes"@Prateep Chakraborty@"In this paper we study the mod $2$ cohomology ring of the Grasmannian
+$\widetilde{G}_{n,3}$ of oriented $3$-planes in $\mathbb{R}^n$. We determine
+the degrees of the indecomposable elements in the cohomology ring. We also
+obtain an almost complete description of the cohomology ring. This partial
+description allows us to provide lower and upper bounds on the cup length of
+$\widetilde{G}_{n,3}$. As another application, we show that the upper
+characteristic rank of $\widetilde{G}_{n,3}$ equals the characteristic rank of
+$\widetilde{\gamma}_{n,3}$, the oriented tautological bundle over
+$\widetilde{G}_{n,3}$."@2017
+http://arxiv.org/abs/1712.00696v1@New families of simplicial filtration functors@Samir Chowdhury@"The so called \v{C}ech and Vietoris-Rips simplicial filtrations are designed
+to capture information about the topological structure of metric datasets.
+These filtrations are two of the workhorses in the field of topological data
+analysis. They enjoy stability with respect to the Gromov-Hausdorff (GH)
+distance, and this stability property allows us to estimate the GH distance
+between finite metric space representations of the underlying datasets.
+  Via the concept of Gromov's curvature sets we construct a rich theoretical
+framework of valuation-induced stable filtration functors. This framework
+includes the \v{C}ech and Vietoris-Rips filtration functors as well as many
+novel filtration functors that capture diverse features present in datasets. We
+further explore the concept of basepoint filtrations functors and use it to
+provide a classification of the filtration functors that we identify."@2017
+http://arxiv.org/abs/1712.07068v3@Topological complexity of unordered configuration spaces of surfaces@David Recio-Mitter@"We determine the topological complexity of unordered configuration spaces on
+almost all punctured surfaces (both orientable and non-orientable). We also
+give improved bounds for the topological complexity of unordered configuration
+spaces on all aspherical closed surfaces, reducing it to three possible values.
+The main methods used in the proofs were developed in 2015 by Grant, Lupton and
+Oprea to give bounds for the topological complexity of aspherical spaces. As
+such this paper is also part of the current effort to study the topological
+complexity of aspherical spaces and it presents many further examples where
+these methods strongly improve upon the lower bounds given by zero-divisor
+cup-length."@2017
+http://arxiv.org/abs/1712.08182v3@Chromatic splitting for the $K(2)$-local sphere at $p=2$@Agnes Beaudry@"We calculate the homotopy type of $L_1L_{K(2)}S^0$ and $L_{K(1)}L_{K(2)}S^0$
+at the prime 2, where $L_{K(n)}$ is localization with respect to Morava
+$K$-theory and $L_1$ localization with respect to $2$-local $K$ theory. In
+$L_1L_{K(2)}S^0$ we find all the summands predicted by the Chromatic Splitting
+Conjecture, but we find some extra summands as well. An essential ingredient in
+our approach is the analysis of the continuous group cohomology
+$H^\ast(\mathbb{G}_2,E_0)$ where $\mathbb{G}_2$ is the Morava stabilizer group
+and $E_0 = \mathbb{W}[[u_1]]$ is the ring of functions on the height $2$
+Lubin-Tate space. We show that the inclusion of the constants $\mathbb{W} \to
+E_0$ induces an isomorphism on group cohomology, a radical simplification."@2017
+http://arxiv.org/abs/1712.08182v3@Chromatic splitting for the $K(2)$-local sphere at $p=2$@Paul G. Goerss@"We calculate the homotopy type of $L_1L_{K(2)}S^0$ and $L_{K(1)}L_{K(2)}S^0$
+at the prime 2, where $L_{K(n)}$ is localization with respect to Morava
+$K$-theory and $L_1$ localization with respect to $2$-local $K$ theory. In
+$L_1L_{K(2)}S^0$ we find all the summands predicted by the Chromatic Splitting
+Conjecture, but we find some extra summands as well. An essential ingredient in
+our approach is the analysis of the continuous group cohomology
+$H^\ast(\mathbb{G}_2,E_0)$ where $\mathbb{G}_2$ is the Morava stabilizer group
+and $E_0 = \mathbb{W}[[u_1]]$ is the ring of functions on the height $2$
+Lubin-Tate space. We show that the inclusion of the constants $\mathbb{W} \to
+E_0$ induces an isomorphism on group cohomology, a radical simplification."@2017
