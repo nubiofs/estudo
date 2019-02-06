@@ -1,4 +1,14 @@
-1)
+* Configuração para os subprojetos (sobre arxiv):
+
+/trabalhos_finais$ pipenv install
+
+ou
+
+/trabalhos_finais$ pipenv update
+
+----------------------------------------------------
+
+1) (diretorio: arxivscraper-master) "NÃO FUNCIONOU..."
 
 ==> https://github.com/mahdisadjadi/arxivscraper
 
@@ -19,7 +29,7 @@ Total number of records 39
 
 ===========
 
-2)
+2) (diretorio: arxiv.py-master) "ESTUDANDO / ANALISANDO / EXECULTADO TESTES OK..."
 
 ==> https://github.com/lukasschwab/arxiv.py
 
@@ -31,3 +41,16 @@ Total number of records 39
 $ ipython
 
 
+==========
+
+3) (diretorio: arxivpy-master)
+
+==> https://github.com/titipata/arxivpy
+
+
+$ pip install python-dateutil
+
+
+===========
+
+https://github.com/karpathy/arxiv-sanity-preserver
