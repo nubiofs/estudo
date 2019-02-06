@@ -108,13 +108,18 @@ for r in results:
       r.get('authors'),
       r.get('summary'),
       data_published.year))
+    # Aqui seria o local para criar os nós do grafo.
+    # Para cada autor em 'authors' (desse artigo específico) deve-se criar um nó 
+    # (usando como 'label' o nome do autor e colocando [id, title, summary, year] como metadados do nó).
+    # E também criar todas as arestas ligando (de forma não direcionada) 
+    # todos esses autores do mesmo artigo.
 
 print('Quantidades de artigos filtrados para o ano de 2016 = ', len(artigos_2016))
 
-df = pd.DataFrame(artigos_2016, 
+df_artigos_2016 = pd.DataFrame(artigos_2016, 
   columns=['id', 'title', 'authors', 'summary', 'published_year'])
 
-print(df.shape)
+print(df_artigos_2016.shape)
 
 autores_2016 = set()
 for art in artigos_2016:
@@ -123,7 +128,7 @@ for art in artigos_2016:
 
 print('Quantidades de autores = ', len(autores_2016))
 
-df.to_csv(
+df_artigos_2016.to_csv(
 	'cat:math.AT_2016_3000Titles.csv',
 	columns=['id', 'title', 'authors', 'summary', 'published_year'], 
  	encoding='utf-8', index=False, sep='@')
