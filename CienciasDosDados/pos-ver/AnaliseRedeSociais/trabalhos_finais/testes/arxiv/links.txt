@@ -1,3 +1,4 @@
+1)
 
 ==> https://github.com/mahdisadjadi/arxivscraper
 
@@ -18,5 +19,15 @@ Total number of records 39
 
 ===========
 
+2)
+
+==> https://github.com/lukasschwab/arxiv.py
+
+
+/arxiv.py-master$ pipenv run pip install arxiv
+
+/arxiv.py-master$ python setup.py install
+
+$ ipython
 
 
