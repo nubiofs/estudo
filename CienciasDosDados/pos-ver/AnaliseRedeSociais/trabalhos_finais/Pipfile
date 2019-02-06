@@ -8,6 +8,12 @@ verify_ssl = true
 [packages]
 pandas = "*"
 ipython = "*"
+arxivscraper = "*"
+arxiv = "*"
+feedparser = "*"
+datautil = "*"
+dateutil = "*"
+python-dateutil = "*"
 
 [requires]
 python_version = "3.7"
