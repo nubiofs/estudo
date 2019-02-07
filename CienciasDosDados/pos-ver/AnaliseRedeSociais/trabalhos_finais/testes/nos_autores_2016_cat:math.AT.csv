@@ -1,4 +1,58 @@
 author@id@title@summary@published_year
+David Chataur@http://arxiv.org/abs/1602.03009v2@Intersection Homology. General perversities and topological invariance@"Topological invariance of the intersection homology of a pseudomanifold
+without codimension one strata, proven by Goresky and MacPherson, is one of the
+main features of this homology. This property is true for strata codimension
+depending perversities with some growth conditions, verifying $\overline
+p(1)=\overline p(2)=0$. King reproves this invariance by associating an
+intrinsic pseudomanifold $X^*$ to any pseudomanifold $X$. His proof consists of
+an isomorphism between the associated intersection homologies
+$H^{\overline{p}}_{*}(X) \cong H^{\overline{p}}_{*}(X^*)$ for any perversity
+$\overline{p}$ with the same growth conditions verifying $\overline p(1)\geq
+0$.
+  In this work, we prove a certain topological invariance within the framework
+of strata depending perversities, $\overline{p}$, which corresponds to the
+classical topological invariance if $\overline{p}$ is a GM-perversity. We also
+extend it to the tame intersection homology, a variation of the intersection
+homology, particularly suited for ""large"" perversities, if there is no singular
+strata on $X$ becoming regular in $X^*$. In particular, under the above
+conditions, the intersection homology and the tame intersection homology are
+invariant under a refinement of the stratification."@2016
+Martintxo Saralegi-Aranguren@http://arxiv.org/abs/1602.03009v2@Intersection Homology. General perversities and topological invariance@"Topological invariance of the intersection homology of a pseudomanifold
+without codimension one strata, proven by Goresky and MacPherson, is one of the
+main features of this homology. This property is true for strata codimension
+depending perversities with some growth conditions, verifying $\overline
+p(1)=\overline p(2)=0$. King reproves this invariance by associating an
+intrinsic pseudomanifold $X^*$ to any pseudomanifold $X$. His proof consists of
+an isomorphism between the associated intersection homologies
+$H^{\overline{p}}_{*}(X) \cong H^{\overline{p}}_{*}(X^*)$ for any perversity
+$\overline{p}$ with the same growth conditions verifying $\overline p(1)\geq
+0$.
+  In this work, we prove a certain topological invariance within the framework
+of strata depending perversities, $\overline{p}$, which corresponds to the
+classical topological invariance if $\overline{p}$ is a GM-perversity. We also
+extend it to the tame intersection homology, a variation of the intersection
+homology, particularly suited for ""large"" perversities, if there is no singular
+strata on $X$ becoming regular in $X^*$. In particular, under the above
+conditions, the intersection homology and the tame intersection homology are
+invariant under a refinement of the stratification."@2016
+Daniel Tanré@http://arxiv.org/abs/1602.03009v2@Intersection Homology. General perversities and topological invariance@"Topological invariance of the intersection homology of a pseudomanifold
+without codimension one strata, proven by Goresky and MacPherson, is one of the
+main features of this homology. This property is true for strata codimension
+depending perversities with some growth conditions, verifying $\overline
+p(1)=\overline p(2)=0$. King reproves this invariance by associating an
+intrinsic pseudomanifold $X^*$ to any pseudomanifold $X$. His proof consists of
+an isomorphism between the associated intersection homologies
+$H^{\overline{p}}_{*}(X) \cong H^{\overline{p}}_{*}(X^*)$ for any perversity
+$\overline{p}$ with the same growth conditions verifying $\overline p(1)\geq
+0$.
+  In this work, we prove a certain topological invariance within the framework
+of strata depending perversities, $\overline{p}$, which corresponds to the
+classical topological invariance if $\overline{p}$ is a GM-perversity. We also
+extend it to the tame intersection homology, a variation of the intersection
+homology, particularly suited for ""large"" perversities, if there is no singular
+strata on $X$ becoming regular in $X^*$. In particular, under the above
+conditions, the intersection homology and the tame intersection homology are
+invariant under a refinement of the stratification."@2016
 Laurentiu Maxim@http://arxiv.org/abs/1602.04943v1@Twisted Novikov homology of complex hypersurface complements@"We study the twisted Novikov homology of the complement of a complex
 hypersurface in general position at infinity. We give a self-contained
 topological proof of the vanishing (except possibly in the middle degree) of
@@ -295,6 +349,39 @@ example of such spaces is a small cover, where a small cover is known as a
 topological analog of a real toric manifold. We compute the integral cohomology
 group of $Y$ by using the PL cell decomposition obtained from a shelling of
 $K$. In addition, we compute the Bockstein spectral sequence of $Y$ explicitly."@2016
+Xuezhi Zhao@http://arxiv.org/abs/1605.00739v1@The cohomology of S(n,k) relavent to Morava stablizer algebra@"In this paper we redefine an increasing filtration on the the Hopf algebra
+S(n,k), From which we get a spectral sequence called May spectral sequence. As
+an application we computed $H^{*,*}S(n,n)$ at prime 2, $H^{*,*}S(3,2)$ at prime
+3 and $H^{*,*}S(4,2)$ at prime $p\geqslant 5$"@2016
+Sho Hasui@http://arxiv.org/abs/1605.03522v1@$p$-local stable cohomological rigidity of quasitoric manifolds@"It is proved that if two quasitoric manifolds of dimension $\le 2p^2-4$ for a
+prime $p$ have isomorphic cohomology rings, then they have the same $p$-local
+stable homotopy type."@2016
+Daisuke Kishimoto@http://arxiv.org/abs/1605.03522v1@$p$-local stable cohomological rigidity of quasitoric manifolds@"It is proved that if two quasitoric manifolds of dimension $\le 2p^2-4$ for a
+prime $p$ have isomorphic cohomology rings, then they have the same $p$-local
+stable homotopy type."@2016
+Laurentiu Maxim@http://arxiv.org/abs/1605.06961v1@Twisted Alexander invariants of complex hypersurface complements@"We define and study twisted Alexander-type invariants of complex hypersurface
+complements. We investigate torsion properties for the twisted Alexander
+modules and extend classical local-to-global divisibility results to the
+twisted setting. In the process, we also study the splitting fields containing
+the roots of the corresponding twisted Alexander polynomials."@2016
+Nitu Kitchloo@http://arxiv.org/abs/1605.07401v2@The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$@"The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$ are
+computed along with the Atiyah-Hirzebruch spectral sequence for
+$ER(2)^*(\mathbb{C}P^\infty)$. This, along with other papers in this series,
+gives us the $ER(2)$-cohomology of all Eilenberg-MacLane spaces. Since $ER(2)$
+is $TMF_0(3)$ after a suitable completion, these computations also take care of
+that theory."@2016
+Vitaly Lorman@http://arxiv.org/abs/1605.07401v2@The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$@"The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$ are
+computed along with the Atiyah-Hirzebruch spectral sequence for
+$ER(2)^*(\mathbb{C}P^\infty)$. This, along with other papers in this series,
+gives us the $ER(2)$-cohomology of all Eilenberg-MacLane spaces. Since $ER(2)$
+is $TMF_0(3)$ after a suitable completion, these computations also take care of
+that theory."@2016
+W. Stephen Wilson@http://arxiv.org/abs/1605.07401v2@The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$@"The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$ are
+computed along with the Atiyah-Hirzebruch spectral sequence for
+$ER(2)^*(\mathbb{C}P^\infty)$. This, along with other papers in this series,
+gives us the $ER(2)$-cohomology of all Eilenberg-MacLane spaces. Since $ER(2)$
+is $TMF_0(3)$ after a suitable completion, these computations also take care of
+that theory."@2016
 Daniel Juan-Pineda@http://arxiv.org/abs/1606.00306v3@"On classifying spaces for the family of virtually cyclic subgroups in
   mapping class groups"@"We give a bound for the geometric dimension for the family of virtually
 cyclic groups in mapping class groups of a compact surface with punctures,
@@ -517,79 +604,6 @@ range $q\leq2p-1$. In addition, the equality ${\rm TC}(X)={\rm cat}(C_X)$ is
 proved in the (strict) metastable range $2p-1<q\leq3(p-1)$ under fairly mild
 conditions by making use of the Hopf invariant techniques recently developed by
 the authors in their study of the sectional category of arbitrary maps."@2016
-Akhil Mathew@http://arxiv.org/abs/1608.02063v2@A short proof of telescopic Tate vanishing@"We give a short proof of a theorem of Kuhn that Tate constructions for finite
-group actions vanish in telescopically localized stable homotopy theory. In
-particular, we observe that Kuhn's theorem is equivalent to the statement that
-the transfer $BC_{p+} \to S^0$ admits a section after telescopic localization,
-which in turn follows from the Kahn-Priddy theorem."@2016
-Samir Chowdhury@http://arxiv.org/abs/1608.05432v3@"A functorial Dowker theorem and persistent homology of asymmetric
-  networks"@"We study two methods for computing network features with topological
-underpinnings: the Rips and Dowker persistent homology diagrams. Our
-formulations work for general networks, which may be asymmetric and may have
-any real number as an edge weight. We study the sensitivity of Dowker
-persistence diagrams to asymmetry via numerous theoretical examples, including
-a family of highly asymmetric cycle networks that have interesting connections
-to the existing literature. In particular, we characterize the Dowker
-persistence diagrams arising from asymmetric cycle networks. We investigate the
-stability properties of both the Dowker and Rips persistence diagrams, and use
-these observations to run a classification task on a dataset comprising
-simulated hippocampal networks. Our theoretical and experimental results
-suggest that Dowker persistence diagrams are particularly suitable for studying
-asymmetric networks. As a stepping stone for our constructions, we prove a
-functorial generalization of a theorem of Dowker, after whom our constructions
-are named."@2016
-Facundo Mémoli@http://arxiv.org/abs/1608.05432v3@"A functorial Dowker theorem and persistent homology of asymmetric
-  networks"@"We study two methods for computing network features with topological
-underpinnings: the Rips and Dowker persistent homology diagrams. Our
-formulations work for general networks, which may be asymmetric and may have
-any real number as an edge weight. We study the sensitivity of Dowker
-persistence diagrams to asymmetry via numerous theoretical examples, including
-a family of highly asymmetric cycle networks that have interesting connections
-to the existing literature. In particular, we characterize the Dowker
-persistence diagrams arising from asymmetric cycle networks. We investigate the
-stability properties of both the Dowker and Rips persistence diagrams, and use
-these observations to run a classification task on a dataset comprising
-simulated hippocampal networks. Our theoretical and experimental results
-suggest that Dowker persistence diagrams are particularly suitable for studying
-asymmetric networks. As a stepping stone for our constructions, we prove a
-functorial generalization of a theorem of Dowker, after whom our constructions
-are named."@2016
-Prasit Bhattacharya@http://arxiv.org/abs/1608.06250v2@A class of $2$-local finite spectra which admit a $v_2^1$-self-map@"At the prime $2$, Behrens, Hill, Hopkins and Mahowald showed $M_2(1,4)$
-admits $32$-periodic $v_2$-self-map and more recently authors joint with
-Mahowald showed $A_1$ also admits $32$-periodic $v_2$-self-map. This leads to
-the question, whether there exists a finite $2$-local complex with periodicity
-less than $32$. This paper will answer the question by producing a class of
-finite $2$-local spectra $\widetilde{\mathcal{Z}}$ all of which admit
-$1$-periodic $v_2$-self-map."@2016
-Philip Egger@http://arxiv.org/abs/1608.06250v2@A class of $2$-local finite spectra which admit a $v_2^1$-self-map@"At the prime $2$, Behrens, Hill, Hopkins and Mahowald showed $M_2(1,4)$
-admits $32$-periodic $v_2$-self-map and more recently authors joint with
-Mahowald showed $A_1$ also admits $32$-periodic $v_2$-self-map. This leads to
-the question, whether there exists a finite $2$-local complex with periodicity
-less than $32$. This paper will answer the question by producing a class of
-finite $2$-local spectra $\widetilde{\mathcal{Z}}$ all of which admit
-$1$-periodic $v_2$-self-map."@2016
-Dejan Govc@http://arxiv.org/abs/1608.06956v3@An Approximate Nerve Theorem@"The Nerve Theorem relates the topological type of a suitably nice space with
-the nerve of a good cover of that space. It has many variants, such as to
-consider acyclic covers and numerous applications in topology including applied
-and computational topology. The goal of this paper is to relax the notion of a
-good cover to an approximately good cover, or more precisely, we introduce the
-notion of an $\varepsilon$-acyclic cover. We use persistent homology to make
-this rigorous and prove tight bounds between the persistent homology of a space
-endowed with a function and the persistent homology of the nerve of an
-$\varepsilon$-acyclic cover of the space. Using the Mayer-Vietoris spectral
-sequence, we upper bound how local non-acyclicity can affect the global
-homology. To prove the best possible bound we must introduce special cases of
-interleavings between persistence modules called left and right interleavings.
-Finally, we provide examples which achieve the bound proving the lower bound
-and tightness of the result."@2016
-Ben Knudsen@http://arxiv.org/abs/1608.07490v2@Betti numbers of configuration spaces of surfaces@"We give explicit formulas for the Betti numbers, both stable and unstable, of
-the unordered configuration spaces of an arbitrary surface of finite type."@2016
-Samik Basu@http://arxiv.org/abs/1608.08388v2@Generalized Thom spectra and their topological Hochschild homology@"We develop a theory of R-module Thom spectra for a commutative symmetric ring
-spectrum R and we analyze their multiplicative properties. As an interesting
-source of examples, we show that R-algebra Thom spectra associated to the
-special unitary groups can be described in terms of quotient constructions on
-R. We apply the general theory to obtain a description of the R-based
-topological Hochschild homology associated to an R-algebra Thom spectrum."@2016
 Victor Turchin@http://arxiv.org/abs/1609.00778v3@"Euler characteristics for spaces of string links and the modular
   envelope of $L_\infty$"@"We make calculations in graph homology which further understanding of the
 topology of spaces of string links, in particular calculating the Euler

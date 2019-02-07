@@ -11,26 +11,6 @@ W. Stephen Wilson@http://arxiv.org/abs/1701.00255v2@Multiplicative structure on 
 and commutative ring spectra up to phantom maps. We further show that ER(n)
 represents an associatively and commutatively multiplicative cohomology theory
 on the category of (possibly non-compact) spaces."@2017
-Samir Chowdhury@http://arxiv.org/abs/1701.00565v2@Persistent Path Homology of Directed Networks@"While standard persistent homology has been successful in extracting
-information from metric datasets, its applicability to more general data, e.g.
-directed networks, is hindered by its natural insensitivity to asymmetry. We
-study a construction of homology of digraphs due to Grigor'yan, Lin, Muranov
-and Yau, and extend this construction to the persistent framework. The result,
-which we call persistent path homology, can provide information about the
-digraph structure of a directed network at varying resolutions. Moreover, this
-method encodes a rich level of detail about the asymmetric structure of the
-input directed network. We test our method on both simulated and real-world
-directed networks and conjecture some of its characteristics."@2017
-Facundo Mémoli@http://arxiv.org/abs/1701.00565v2@Persistent Path Homology of Directed Networks@"While standard persistent homology has been successful in extracting
-information from metric datasets, its applicability to more general data, e.g.
-directed networks, is hindered by its natural insensitivity to asymmetry. We
-study a construction of homology of digraphs due to Grigor'yan, Lin, Muranov
-and Yau, and extend this construction to the persistent framework. The result,
-which we call persistent path homology, can provide information about the
-digraph structure of a directed network at varying resolutions. Moreover, this
-method encodes a rich level of detail about the asymmetric structure of the
-input directed network. We test our method on both simulated and real-world
-directed networks and conjecture some of its characteristics."@2017
 David Chataur@http://arxiv.org/abs/1701.00684v3@Blown-up intersection cohomology@"In previous works, we have introduced the blown-up intersection cohomology
 and used it to extend Sullivan's minimal models theory to the framework of
 pseudomanifolds, and to give a positive answer to a conjecture of M. Goresky
@@ -110,21 +90,6 @@ introduce a new method for computing the contribution of the v_1-torsion part
 to the E_2-term, whose input is the cohomology of the Steenrod algebra. We
 demonstrate the efficacy of our technique by computing the bo-Adams spectral
 sequence beyond the 40-stem."@2017
-Prasit Bhattacharya@http://arxiv.org/abs/1702.00230v3@On the E2-term of the bo-Adams spectral sequence@"The E_1-term of the (2-local) bo-based Adams spectral sequence for the sphere
-spectrum decomposes into a direct sum of a v_1-periodic part, and a v_1-torsion
-part. Lellmann and Mahowald completely computed the d_1-differential on the
-v_1-periodic part, and the corresponding contribution to the E_2-term. The
-v_1-torsion part is harder to handle, but with the aid of a computer it was
-computed through the 20-stem by Davis. Such computer computations are limited
-by the exponential growth of v_1-torsion in the E_1-term. In this paper, we
-introduce a new method for computing the contribution of the v_1-torsion part
-to the E_2-term, whose input is the cohomology of the Steenrod algebra. We
-demonstrate the efficacy of our technique by computing the bo-Adams spectral
-sequence beyond the 40-stem."@2017
-Prasit Bhattacharya@http://arxiv.org/abs/1702.01493v1@The stable Picard group of $\mathcal{A}(2)$@"Using a form of descent in the stable category of $\mathcal{A}(2)$-modules,
-we show that there are no exotic elements in the stable Picard group of
-$\mathcal{A}(2)$, \textit{i.e.} that the stable Picard group of
-$\mathcal{A}(2)$ is free on $2$ generators."@2017
 Nicolas Ricka@http://arxiv.org/abs/1702.01493v1@The stable Picard group of $\mathcal{A}(2)$@"Using a form of descent in the stable category of $\mathcal{A}(2)$-modules,
 we show that there are no exotic elements in the stable Picard group of
 $\mathcal{A}(2)$, \textit{i.e.} that the stable Picard group of
@@ -220,6 +185,15 @@ realize certain coalgebra idempotents at sSet -level and obtain a functorial
 decomposition of the spectral sequence, associated with the lower p-central
 series filtration on the free simplicial group."@2017
 Peter Wong@http://arxiv.org/abs/1703.04345v3@Mapping degrees between spherical $3$-manifolds@"Let $D(M,N)$ be the set of integers that can be realized as the degree of a
+map between two closed connected orientable manifolds $M$ and $N$ of the same
+dimension. For closed $3$-manifolds with $S^3$-geometry $M$ and $N$, every such
+degree $deg f\equiv \overline{deg}\psi$ $(|\pi_1(N)|)$ where $0\le
+\overline{deg}\psi <|\pi_1(N)|$ and $\overline{deg}\psi$ only depends on the
+induced homomorphism $\psi=f_{\pi}$ on the fundamental group. In this paper, we
+calculate explicitly the set $\{\overline{deg}\psi\}$ when $\psi$ is surjective
+and then we show how to determine $\overline{deg}(\psi)$ for arbitrary
+homomorphisms. This leads to the determination of the set $D(M,N)$."@2017
+Xuezhi Zhao@http://arxiv.org/abs/1703.04345v3@Mapping degrees between spherical $3$-manifolds@"Let $D(M,N)$ be the set of integers that can be realized as the degree of a
 map between two closed connected orientable manifolds $M$ and $N$ of the same
 dimension. For closed $3$-manifolds with $S^3$-geometry $M$ and $N$, every such
 degree $deg f\equiv \overline{deg}\psi$ $(|\pi_1(N)|)$ where $0\le
@@ -428,24 +402,6 @@ Alberto Gavira-Romero@http://arxiv.org/abs/1706.04763v1@Cellular approximations 
 A-cellular approximations (in the sense of Chach\'olski and Farjoun) of
 classifying spaces of p-local compact groups, with special emphasis in the
 cases which arise from honest compact Lie groups."@2017
-Prasit Bhattacharya@http://arxiv.org/abs/1706.06170v2@Towards the $K(2)$-local homotopy groups of $Z$@"Recently we introduced a class $\widetilde{\mathcal{Z}}$ of $2$-local finite
-spectra and showed that all spectra $Z\in \widetilde{\mathcal{Z}}$ admit a
-$v_2$-self-map of periodicity $1$. The aim of this article is to compute the
-$K(2)$-local homotopy groups $\pi_*L_{K(2)}Z$ of all spectra $Z \in
-\widetilde{\mathcal{Z}}$ using a homotopy fixed point spectral sequence, and we
-give an almost complete computation. The incompleteness lies in the fact that
-we are unable to eliminate one family of $d_3$-differentials and a few
-potential hidden extensions, though we conjecture that all these differentials
-and hidden extensions are zero."@2017
-Philip Egger@http://arxiv.org/abs/1706.06170v2@Towards the $K(2)$-local homotopy groups of $Z$@"Recently we introduced a class $\widetilde{\mathcal{Z}}$ of $2$-local finite
-spectra and showed that all spectra $Z\in \widetilde{\mathcal{Z}}$ admit a
-$v_2$-self-map of periodicity $1$. The aim of this article is to compute the
-$K(2)$-local homotopy groups $\pi_*L_{K(2)}Z$ of all spectra $Z \in
-\widetilde{\mathcal{Z}}$ using a homotopy fixed point spectral sequence, and we
-give an almost complete computation. The incompleteness lies in the fact that
-we are unable to eliminate one family of $d_3$-differentials and a few
-potential hidden extensions, though we conjecture that all these differentials
-and hidden extensions are zero."@2017
 Yongqiang Liu@http://arxiv.org/abs/1706.07491v2@Topology of subvarieties of complex semi-abelian varieties@"We use the non-proper Morse theory of Palais-Smale to investigate the
 topology of smooth closed subvarieties of complex semi-abelian varieties, and
 that of their infinite cyclic covers. As main applications, we obtain the
@@ -568,11 +524,6 @@ improved the stability dimension obtained by Guest. In this paper, we
 generalize their result to holomorphic curves, on certain non-compact smooth
 toric varieties."@2017
 Gijs Heuts@http://arxiv.org/abs/1707.05986v1@Monadicity of the Bousfield-Kuhn functor@"We consider the localization of the $\infty$-category of spaces at the
-$v_n$-periodic equivalences, the case $n=0$ being rational homotopy theory. We
-prove that this localization is for $n\geq 1$ equivalent to algebras over a
-certain monad on the $\infty$-category of $T(n)$-local spectra. This monad is
-built from the Bousfield--Kuhn functor."@2017
-Akhil Mathew@http://arxiv.org/abs/1707.05986v1@Monadicity of the Bousfield-Kuhn functor@"We consider the localization of the $\infty$-category of spaces at the
 $v_n$-periodic equivalences, the case $n=0$ being rational homotopy theory. We
 prove that this localization is for $n\geq 1$ equivalent to algebras over a
 certain monad on the $\infty$-category of $T(n)$-local spectra. This monad is
@@ -726,24 +677,7 @@ the (relative) triviality of relative phantom maps from a suspension, and in
 particular, we give rational homotopy conditions for the (relative) triviality.
 We also give a rational homotopy condition for the triviality of relative
 phantom maps from a non-suspension to a finite Postnikov section."@2017
-Dejan Govc@http://arxiv.org/abs/1710.03333v1@"Estimates of covering type and the number of vertices of minimal
-  triangulations"@"The covering type of a space $X$ is defined as the minimal cardinality of a
-good cover of a space that is homotopy equivalent to $X$. We derive estimates
-for the covering type of $X$ in terms of other invariants of $X$, namely the
-ranks of the homology groups, the multiplicative structure of the cohomology
-ring and the Lusternik-Schnirelmann category of $X$. By relating the covering
-type to the number of vertices of minimal triangulations of complexes and
-combinatorial manifolds, we obtain, within a unified framework, several
-estimates which are either new or extensions of results that have been
-previously obtained by ad hoc combinatorial arguments. Moreover, our methods
-give results that are valid for entire homotopy classes of spaces."@2017
 Kathryn Hess@http://arxiv.org/abs/1710.05093v2@Configuration spaces of products@"We show that the configuration spaces of a product of parallelizable
-manifolds may be recovered from those of the factors as the Boardman-Vogt
-tensor product of right modules over the operads of little cubes of the
-appropriate dimension. We also discuss an analogue of this result for manifolds
-that are not necessarily parallelizable, which involves a new operad of skew
-little cubes."@2017
-Ben Knudsen@http://arxiv.org/abs/1710.05093v2@Configuration spaces of products@"We show that the configuration spaces of a product of parallelizable
 manifolds may be recovered from those of the factors as the Boardman-Vogt
 tensor product of right modules over the operads of little cubes of the
 appropriate dimension. We also discuss an analogue of this result for manifolds
@@ -904,18 +838,6 @@ $\widetilde{G}_{n,3}$. As another application, we show that the upper
 characteristic rank of $\widetilde{G}_{n,3}$ equals the characteristic rank of
 $\widetilde{\gamma}_{n,3}$, the oriented tautological bundle over
 $\widetilde{G}_{n,3}$."@2017
-Samir Chowdhury@http://arxiv.org/abs/1712.00696v1@New families of simplicial filtration functors@"The so called \v{C}ech and Vietoris-Rips simplicial filtrations are designed
-to capture information about the topological structure of metric datasets.
-These filtrations are two of the workhorses in the field of topological data
-analysis. They enjoy stability with respect to the Gromov-Hausdorff (GH)
-distance, and this stability property allows us to estimate the GH distance
-between finite metric space representations of the underlying datasets.
-  Via the concept of Gromov's curvature sets we construct a rich theoretical
-framework of valuation-induced stable filtration functors. This framework
-includes the \v{C}ech and Vietoris-Rips filtration functors as well as many
-novel filtration functors that capture diverse features present in datasets. We
-further explore the concept of basepoint filtrations functors and use it to
-provide a classification of the filtration functors that we identify."@2017
 David Recio-Mitter@http://arxiv.org/abs/1712.07068v3@Topological complexity of unordered configuration spaces of surfaces@"We determine the topological complexity of unordered configuration spaces on
 almost all punctured surfaces (both orientable and non-orientable). We also
 give improved bounds for the topological complexity of unordered configuration
