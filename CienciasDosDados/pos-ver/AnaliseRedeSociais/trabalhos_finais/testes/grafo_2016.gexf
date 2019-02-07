@@ -1,0 +1,384 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema-instance">
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes class="edge" mode="static">
+      <attribute id="0" title="title" type="string" />
+      <attribute id="1" title="summary" type="string" />
+    </attributes>
+    <meta>
+      <creator>NetworkX 2.2</creator>
+      <lastmodified>07/02/2019</lastmodified>
+    </meta>
+    <nodes>
+      <node id="David Chataur" label="David Chataur" />
+      <node id="Martintxo Saralegi-Aranguren" label="Martintxo Saralegi-Aranguren" />
+      <node id="Daniel Tanré" label="Daniel Tanré" />
+      <node id="Laurentiu Maxim" label="Laurentiu Maxim" />
+      <node id="Suyoung Choi" label="Suyoung Choi" />
+      <node id="Hanchul Park" label="Hanchul Park" />
+      <node id="Mark Grant" label="Mark Grant" />
+      <node id="Luis A. Pereira" label="Luis A. Pereira" />
+      <node id="Javier J. Gutiérrez" label="Javier J. Gutiérrez" />
+      <node id="Thais Monis" label="Thais Monis" />
+      <node id="Peter Wong" label="Peter Wong" />
+      <node id="Behrooz Mashayekhy" label="Behrooz Mashayekhy" />
+      <node id="Hamid Torabi" label="Hamid Torabi" />
+      <node id="Mehdi Abdullahi Rashid" label="Mehdi Abdullahi Rashid" />
+      <node id="Seyyed Zeynal Pashaei" label="Seyyed Zeynal Pashaei" />
+      <node id="Michael J. Hopkins" label="Michael J. Hopkins" />
+      <node id="Cary Malkiewich" label="Cary Malkiewich" />
+      <node id="Alberto Gavira-Romero" label="Alberto Gavira-Romero" />
+      <node id="Nitu Kitchloo" label="Nitu Kitchloo" />
+      <node id="Vitaly Lorman" label="Vitaly Lorman" />
+      <node id="W. Stephen Wilson" label="W. Stephen Wilson" />
+      <node id="Daniel C. Isaksen" label="Daniel C. Isaksen" />
+      <node id="Masaki Nakagawa" label="Masaki Nakagawa" />
+      <node id="Hiroshi Naruse" label="Hiroshi Naruse" />
+      <node id="Hanieh Mirebrahimi" label="Hanieh Mirebrahimi" />
+      <node id="Tayyebe Nasri" label="Tayyebe Nasri" />
+      <node id="Urtzi Buijs" label="Urtzi Buijs" />
+      <node id="Aniceto Murillo" label="Aniceto Murillo" />
+      <node id="Birgit Richter" label="Birgit Richter" />
+      <node id="Morten Brun" label="Morten Brun" />
+      <node id="Xuezhi Zhao" label="Xuezhi Zhao" />
+      <node id="Sho Hasui" label="Sho Hasui" />
+      <node id="Daisuke Kishimoto" label="Daisuke Kishimoto" />
+      <node id="Daniel Juan-Pineda" label="Daniel Juan-Pineda" />
+      <node id="Alejandra Trujillo-Negrete" label="Alejandra Trujillo-Negrete" />
+      <node id="Nicolas Ricka" label="Nicolas Ricka" />
+      <node id="Yves Félix" label="Yves Félix" />
+      <node id="Nguyen Sum" label="Nguyen Sum" />
+      <node id="J. P. C. Greenlees" label="J. P. C. Greenlees" />
+      <node id="Lennart Meier" label="Lennart Meier" />
+      <node id="David Blanc" label="David Blanc" />
+      <node id="Debasis Sen" label="Debasis Sen" />
+      <node id="Pedro Boavida de Brito" label="Pedro Boavida de Brito" />
+      <node id="Michael S. Weiss" label="Michael S. Weiss" />
+      <node id="David Recio-Mitter" label="David Recio-Mitter" />
+      <node id="Yongqiang Liu" label="Yongqiang Liu" />
+      <node id="Mojtaba Mohareri" label="Mojtaba Mohareri" />
+      <node id="Lucile Vandembroucq" label="Lucile Vandembroucq" />
+      <node id="Victor Turchin" label="Victor Turchin" />
+      <node id="Raisa Dsouza" label="Raisa Dsouza" />
+      <node id="Carolyn Yarnall" label="Carolyn Yarnall" />
+      <node id="Joana Cirici" label="Joana Cirici" />
+      <node id="Paul G. Goerss" label="Paul G. Goerss" />
+      <node id="Stephane Bressan" label="Stephane Bressan" />
+      <node id="Shiquan Ren" label="Shiquan Ren" />
+      <node id="Jie Wu" label="Jie Wu" />
+      <node id="P. Christopher Staecker" label="P. Christopher Staecker" />
+      <node id="Agnes Beaudry" label="Agnes Beaudry" />
+      <node id="Kathryn Hess" label="Kathryn Hess" />
+      <node id="Magdalena Kedziorek" label="Magdalena Kedziorek" />
+      <node id="Mona Merling" label="Mona Merling" />
+      <node id="Vesna Stojanoska" label="Vesna Stojanoska" />
+      <node id="Prateep Chakraborty" label="Prateep Chakraborty" />
+      <node id="Samik Basu" label="Samik Basu" />
+      <node id="Gijs Heuts" label="Gijs Heuts" />
+      <node id="Andrzej Kozlowski" label="Andrzej Kozlowski" />
+      <node id="Kohhei Yamaguchi" label="Kohhei Yamaguchi" />
+    </nodes>
+    <edges>
+      <edge id="http://arxiv.org/abs/1603.08773v3" source="David Chataur" target="Martintxo Saralegi-Aranguren">
+        <attvalues>
+          <attvalue for="0" value="Poincaré duality with cap products in intersection homology" />
+          <attvalue for="1" value="For having a Poincar\'e duality via a cap product between the intersection&#10;homology of a paracompact oriented pseudomanifold and the cohomology given by&#10;the dual complex, G. Friedman and J. E. McClure need a coefficient field or an&#10;additional hypothesis on the torsion. In this work, by using the classical&#10;geometric process of blowing-up, adapted to a simplicial setting, we build a&#10;cochain complex which gives a Poincar\'e duality via a cap product with&#10;intersection homology, for any commutative ring of coefficients. We prove also&#10;the topological invariance of the blown-up intersection cohomology with compact&#10;supports in the case of a paracompact pseudomanifold with no codimension one&#10;strata.&#10;  This work is written with general perversities, defined on each stratum and&#10;not only in function of the codimension of strata. It contains also a tame&#10;intersection homology, suitable for large perversities." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1603.08773v3" source="David Chataur" target="Daniel Tanré">
+        <attvalues>
+          <attvalue for="0" value="Poincaré duality with cap products in intersection homology" />
+          <attvalue for="1" value="For having a Poincar\'e duality via a cap product between the intersection&#10;homology of a paracompact oriented pseudomanifold and the cohomology given by&#10;the dual complex, G. Friedman and J. E. McClure need a coefficient field or an&#10;additional hypothesis on the torsion. In this work, by using the classical&#10;geometric process of blowing-up, adapted to a simplicial setting, we build a&#10;cochain complex which gives a Poincar\'e duality via a cap product with&#10;intersection homology, for any commutative ring of coefficients. We prove also&#10;the topological invariance of the blown-up intersection cohomology with compact&#10;supports in the case of a paracompact pseudomanifold with no codimension one&#10;strata.&#10;  This work is written with general perversities, defined on each stratum and&#10;not only in function of the codimension of strata. It contains also a tame&#10;intersection homology, suitable for large perversities." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1603.08773v3" source="Martintxo Saralegi-Aranguren" target="Daniel Tanré">
+        <attvalues>
+          <attvalue for="0" value="Poincaré duality with cap products in intersection homology" />
+          <attvalue for="1" value="For having a Poincar\'e duality via a cap product between the intersection&#10;homology of a paracompact oriented pseudomanifold and the cohomology given by&#10;the dual complex, G. Friedman and J. E. McClure need a coefficient field or an&#10;additional hypothesis on the torsion. In this work, by using the classical&#10;geometric process of blowing-up, adapted to a simplicial setting, we build a&#10;cochain complex which gives a Poincar\'e duality via a cap product with&#10;intersection homology, for any commutative ring of coefficients. We prove also&#10;the topological invariance of the blown-up intersection cohomology with compact&#10;supports in the case of a paracompact pseudomanifold with no codimension one&#10;strata.&#10;  This work is written with general perversities, defined on each stratum and&#10;not only in function of the codimension of strata. It contains also a tame&#10;intersection homology, suitable for large perversities." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1606.08794v2" source="Daniel Tanré" target="Urtzi Buijs">
+        <attvalues>
+          <attvalue for="0" value="Maurer-Cartan elements in the Lie models of finite simplicial complexes" />
+          <attvalue for="1" value="In a previous work, we have associated a complete differential graded Lie&#10;algebra to any finite simplicial complex in a functorial way. Similarly, we&#10;have also a realization functor from the category of complete differential&#10;graded Lie algebras to the category of simplicial sets. We have already&#10;interpreted the homology of a Lie algebra in terms of homotopy groups of its&#10;realization. In this paper, we begin a dictionary between models and simplicial&#10;complexes by establishing a correspondence between the Deligne groupoid of the&#10;model and the connected components of the finite simplicial complex." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1606.08794v2" source="Daniel Tanré" target="Yves Félix">
+        <attvalues>
+          <attvalue for="0" value="Maurer-Cartan elements in the Lie models of finite simplicial complexes" />
+          <attvalue for="1" value="In a previous work, we have associated a complete differential graded Lie&#10;algebra to any finite simplicial complex in a functorial way. Similarly, we&#10;have also a realization functor from the category of complete differential&#10;graded Lie algebras to the category of simplicial sets. We have already&#10;interpreted the homology of a Lie algebra in terms of homotopy groups of its&#10;realization. In this paper, we begin a dictionary between models and simplicial&#10;complexes by establishing a correspondence between the Deligne groupoid of the&#10;model and the connected components of the finite simplicial complex." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1606.08794v2" source="Daniel Tanré" target="Aniceto Murillo">
+        <attvalues>
+          <attvalue for="0" value="Maurer-Cartan elements in the Lie models of finite simplicial complexes" />
+          <attvalue for="1" value="In a previous work, we have associated a complete differential graded Lie&#10;algebra to any finite simplicial complex in a functorial way. Similarly, we&#10;have also a realization functor from the category of complete differential&#10;graded Lie algebras to the category of simplicial sets. We have already&#10;interpreted the homology of a Lie algebra in terms of homotopy groups of its&#10;realization. In this paper, we begin a dictionary between models and simplicial&#10;complexes by establishing a correspondence between the Deligne groupoid of the&#10;model and the connected components of the finite simplicial complex." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1607.05521v1" source="Laurentiu Maxim" target="Yongqiang Liu">
+        <attvalues>
+          <attvalue for="0" value="Spectral pairs, Alexander modules, and boundary manifolds" />
+          <attvalue for="1" value="Let $f: \CN \rightarrow \C $ be a reduced polynomial map, with $D=f^{-1}(0)$,&#10;$\U=\CN \setminus D$ and boundary manifold $M=\partial \U$. Assume that $f$ is&#10;transversal at infinity and $D$ has only isolated singularities. Then the only&#10;interesting non-trivial Alexander modules of $\U$ and resp. $M$ appear in the&#10;middle degree $n$. We revisit the mixed Hodge structures on these Alexander&#10;modules and study their associated spectral pairs (or equivariant mixed Hodge&#10;numbers). We obtain upper bounds for the spectral pairs of the $n$-th Alexander&#10;module of $\U$, which can be viewed as a Hodge-theoretic refinement of&#10;Libgober's divisibility result for the corresponding Alexander polynomials. For&#10;the boundary manifold $M$, we show that the spectral pairs associated to the&#10;non-unipotent part of the $n$-th Alexander module of $M$ can be computed in&#10;terms of local contributions (coming from the singularities of $D$) and&#10;contributions from &quot;infinity&quot;." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1602.05406v2" source="Suyoung Choi" target="Hanchul Park">
+        <attvalues>
+          <attvalue for="0" value="The Betti numbers of real toric varieties associated to Weyl chambers of&#10;  type $B$" />
+          <attvalue for="1" value="We compute the (rational) Betti number of real toric varieties associated to&#10;Weyl chambers of type $B$. Furthermore, we show that their integral cohomology&#10;is $p$-torsion free for all odd primes $p$." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1607.04830v2" source="Mark Grant" target="David Recio-Mitter">
+        <attvalues>
+          <attvalue for="0" value="Topological complexity of subgroups of Artin's braid groups" />
+          <attvalue for="1" value="We consider the topological complexity of subgroups of Artin's braid group&#10;consisting of braids whose associated permutations lie in some specified&#10;subgroup of the symmetric group. We give upper and lower bounds for the&#10;topological complexity of such mixed braid groups. In particular we show that&#10;the topological complexity of any subgroup of the n-strand braid group which&#10;fixes any two strands is 2n-3, extending a result of Farber and Yuzvinsky in&#10;the pure braid case. In addition, we generalise our results to the setting of&#10;higher topological complexity." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1607.08858v1" source="Mark Grant" target="Lucile Vandembroucq">
+        <attvalues>
+          <attvalue for="0" value="Hopf invariants, topological complexity, and LS-category of the cofiber&#10;  of the diagonal map for two-cell complexes" />
+          <attvalue for="1" value="Let $X$ be a two-cell complex with attaching map $\alpha\colon S^q\to S^p$,&#10;and let $C_X$ be the cofiber of the diagonal inclusion $X\to X\times X$. It is&#10;shown that the topological complexity (${\rm TC}$) of $X$ agrees with the&#10;Lusternik-Schnirelmann category (${\rm cat}$) of $C_X$ in the (almost stable)&#10;range $q\leq2p-1$. In addition, the equality ${\rm TC}(X)={\rm cat}(C_X)$ is&#10;proved in the (strict) metastable range $2p-1&lt;q\leq3(p-1)$ under fairly mild&#10;conditions by making use of the Hopf invariant techniques recently developed by&#10;the authors in their study of the sectional category of arbitrary maps." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1602.06911v2" source="Thais Monis" target="Peter Wong">
+        <attvalues>
+          <attvalue for="0" value="Obstruction theory for coincidences of multiple maps" />
+          <attvalue for="1" value="Let $f_1,..., f_k:X\to N$ be maps from a complex $X$ to a compact manifold&#10;$N$, $k\ge 2$. In previous works \cite{BLM,MS}, a Lefschetz type theorem was&#10;established so that the non-vanishing of a Lefschetz type coincidence class&#10;$L(f_1,...,f_k)$ implies the existence of a coincidence $x\in X$ such that&#10;$f_1(x)=...=f_k(x)$. In this paper, we investigate the converse of the&#10;Lefschetz coincidence theorem for multiple maps. In particular, we study the&#10;obstruction to deforming the maps $f_1,...,f_k$ to be coincidence free. We&#10;construct an example of two maps $f_1,f_2:M\to T$ from a sympletic $4$-manifold&#10;$M$ to the $2$-torus $T$ such that $f_1$ and $f_2$ cannot be homotopic to&#10;coincidence free maps but for {\it any} $f:M\to T$, the maps $f_1,f_2,f$ are&#10;deformable to be coincidence free." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1607.07054v1" source="Behrooz Mashayekhy" target="Mojtaba Mohareri">
+        <attvalues>
+          <attvalue for="0" value="On the Capacity of Eilenberg-MacLane and Moore Spaces" />
+          <attvalue for="1" value="K. Borsuk in 1979, in the Topological Conference in Moscow, introduced the&#10;concept of the capacity of a compactum and asked some questions concerning&#10;properties of the capacity of compacta. In this paper, we give partial positive&#10;answers to three of these questions in some cases. In fact, by describing&#10;spaces homotopy dominated by Moore and Eilenberg-MacLane spaces, we obtain the&#10;capacity of a Moore space $M(A,n)$ and an Eilenberg-MacLane space $K(G,n)$.&#10;Also, we compute the capacity of the wedge sum of finitely many Moore spaces of&#10;different degrees and the capacity of the product of finitely many&#10;Eilenberg-MacLane spaces of different homotopy types. In particular, we give&#10;exact capacity of the wedge sum of finitely many spheres of the same or&#10;different dimensions." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1604.00969v1" source="Behrooz Mashayekhy" target="Hanieh Mirebrahimi">
+        <attvalues>
+          <attvalue for="0" value="Topological Coarse Shape Homotopy Groups" />
+          <attvalue for="1" value="Uchillo-Ibanez et al. introduced a topology on the sets of shape morphisms&#10;between arbitrary topological spaces in 1999. In this paper, applying a similar&#10;idea, we introduce a topology on the set of coarse shape morphisms $Sh^*(X,Y)$,&#10;for arbitrary topological spaces $X$ and $Y$. In particular, we can consider a&#10;topology on the coarse shape homotopy group of a topological space $(X,x)$,&#10;$Sh^*((S^k,*),(X,x))=\check{\pi}_k^{*}(X,x)$, which makes it a Hausdorff&#10;topological group. Moreover, we study some properties of these topological&#10;coarse shape homotopoy groups such as second countability, movability and in&#10;particullar, we prove that $\check{\pi}_k^{*^{top}}$ preserves finite product&#10;of compact Hausdorff spaces. Also, we show that for a pointed topological space&#10;$(X,x)$, $\check{\pi}_k^{top}(X,x)$ can be embedded in&#10;$\check{\pi}_k^{*^{top}}(X,x)$." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1602.07965v1" source="Behrooz Mashayekhy" target="Hamid Torabi">
+        <attvalues>
+          <attvalue for="0" value="On Subgroups of Topologized Fundamental Groups and Generalized Coverings" />
+          <attvalue for="1" value="In this paper, we are interested in study subgroups of topologized&#10;fundamental groups and their influences on generalized covering maps. More&#10;precisely, we find some relationships between generalized covering subgroups&#10;and the other famous subgroups of the fundamental group equipped with the&#10;compact-open topology and the whisker topology. Moreover, we present some&#10;conditions under which generalized coverings, semicoverings and coverings are&#10;equal." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1604.00969v1" source="Behrooz Mashayekhy" target="Tayyebe Nasri">
+        <attvalues>
+          <attvalue for="0" value="Topological Coarse Shape Homotopy Groups" />
+          <attvalue for="1" value="Uchillo-Ibanez et al. introduced a topology on the sets of shape morphisms&#10;between arbitrary topological spaces in 1999. In this paper, applying a similar&#10;idea, we introduce a topology on the set of coarse shape morphisms $Sh^*(X,Y)$,&#10;for arbitrary topological spaces $X$ and $Y$. In particular, we can consider a&#10;topology on the coarse shape homotopy group of a topological space $(X,x)$,&#10;$Sh^*((S^k,*),(X,x))=\check{\pi}_k^{*}(X,x)$, which makes it a Hausdorff&#10;topological group. Moreover, we study some properties of these topological&#10;coarse shape homotopoy groups such as second countability, movability and in&#10;particullar, we prove that $\check{\pi}_k^{*^{top}}$ preserves finite product&#10;of compact Hausdorff spaces. Also, we show that for a pointed topological space&#10;$(X,x)$, $\check{\pi}_k^{top}(X,x)$ can be embedded in&#10;$\check{\pi}_k^{*^{top}}(X,x)$." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1602.07965v1" source="Behrooz Mashayekhy" target="Mehdi Abdullahi Rashid">
+        <attvalues>
+          <attvalue for="0" value="On Subgroups of Topologized Fundamental Groups and Generalized Coverings" />
+          <attvalue for="1" value="In this paper, we are interested in study subgroups of topologized&#10;fundamental groups and their influences on generalized covering maps. More&#10;precisely, we find some relationships between generalized covering subgroups&#10;and the other famous subgroups of the fundamental group equipped with the&#10;compact-open topology and the whisker topology. Moreover, we present some&#10;conditions under which generalized coverings, semicoverings and coverings are&#10;equal." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1602.07965v1" source="Behrooz Mashayekhy" target="Seyyed Zeynal Pashaei">
+        <attvalues>
+          <attvalue for="0" value="On Subgroups of Topologized Fundamental Groups and Generalized Coverings" />
+          <attvalue for="1" value="In this paper, we are interested in study subgroups of topologized&#10;fundamental groups and their influences on generalized covering maps. More&#10;precisely, we find some relationships between generalized covering subgroups&#10;and the other famous subgroups of the fundamental group equipped with the&#10;compact-open topology and the whisker topology. Moreover, we present some&#10;conditions under which generalized coverings, semicoverings and coverings are&#10;equal." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1602.07965v1" source="Hamid Torabi" target="Mehdi Abdullahi Rashid">
+        <attvalues>
+          <attvalue for="0" value="On Subgroups of Topologized Fundamental Groups and Generalized Coverings" />
+          <attvalue for="1" value="In this paper, we are interested in study subgroups of topologized&#10;fundamental groups and their influences on generalized covering maps. More&#10;precisely, we find some relationships between generalized covering subgroups&#10;and the other famous subgroups of the fundamental group equipped with the&#10;compact-open topology and the whisker topology. Moreover, we present some&#10;conditions under which generalized coverings, semicoverings and coverings are&#10;equal." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1602.07965v1" source="Hamid Torabi" target="Seyyed Zeynal Pashaei">
+        <attvalues>
+          <attvalue for="0" value="On Subgroups of Topologized Fundamental Groups and Generalized Coverings" />
+          <attvalue for="1" value="In this paper, we are interested in study subgroups of topologized&#10;fundamental groups and their influences on generalized covering maps. More&#10;precisely, we find some relationships between generalized covering subgroups&#10;and the other famous subgroups of the fundamental group equipped with the&#10;compact-open topology and the whisker topology. Moreover, we present some&#10;conditions under which generalized coverings, semicoverings and coverings are&#10;equal." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1602.07965v1" source="Mehdi Abdullahi Rashid" target="Seyyed Zeynal Pashaei">
+        <attvalues>
+          <attvalue for="0" value="On Subgroups of Topologized Fundamental Groups and Generalized Coverings" />
+          <attvalue for="1" value="In this paper, we are interested in study subgroups of topologized&#10;fundamental groups and their influences on generalized covering maps. More&#10;precisely, we find some relationships between generalized covering subgroups&#10;and the other famous subgroups of the fundamental group equipped with the&#10;compact-open topology and the whisker topology. Moreover, we present some&#10;conditions under which generalized coverings, semicoverings and coverings are&#10;equal." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1605.07401v2" source="Nitu Kitchloo" target="Vitaly Lorman">
+        <attvalues>
+          <attvalue for="0" value="The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$" />
+          <attvalue for="1" value="The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$ are&#10;computed along with the Atiyah-Hirzebruch spectral sequence for&#10;$ER(2)^*(\mathbb{C}P^\infty)$. This, along with other papers in this series,&#10;gives us the $ER(2)$-cohomology of all Eilenberg-MacLane spaces. Since $ER(2)$&#10;is $TMF_0(3)$ after a suitable completion, these computations also take care of&#10;that theory." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1605.07401v2" source="Nitu Kitchloo" target="W. Stephen Wilson">
+        <attvalues>
+          <attvalue for="0" value="The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$" />
+          <attvalue for="1" value="The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$ are&#10;computed along with the Atiyah-Hirzebruch spectral sequence for&#10;$ER(2)^*(\mathbb{C}P^\infty)$. This, along with other papers in this series,&#10;gives us the $ER(2)$-cohomology of all Eilenberg-MacLane spaces. Since $ER(2)$&#10;is $TMF_0(3)$ after a suitable completion, these computations also take care of&#10;that theory." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1605.07401v2" source="Vitaly Lorman" target="W. Stephen Wilson">
+        <attvalues>
+          <attvalue for="0" value="The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$" />
+          <attvalue for="1" value="The $ER(2)$-cohomology of $B\mathbb{Z}/(2^q)$ and $\mathbb{C}P^n$ are&#10;computed along with the Atiyah-Hirzebruch spectral sequence for&#10;$ER(2)^*(\mathbb{C}P^\infty)$. This, along with other papers in this series,&#10;gives us the $ER(2)$-cohomology of all Eilenberg-MacLane spaces. Since $ER(2)$&#10;is $TMF_0(3)$ after a suitable completion, these computations also take care of&#10;that theory." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1606.05191v1" source="Daniel C. Isaksen" target="Nicolas Ricka">
+        <attvalues>
+          <attvalue for="0" value="The Picard group of motivic A(1)" />
+          <attvalue for="1" value="We show that the Picard group $Pic(A(1))$ of the stable category of modules&#10;over $\mathbb{C}$-motivic $A(1)$ is isomorphic to $\mathbb{Z}^4$. By&#10;comparison, the Picard group of classical $A(1)$ is $\mathbb{Z}^2 \oplus&#10;\mathbb{Z}/2$. One extra copy of $\mathbb{Z}$ arises from the motivic&#10;bigrading. The joker is a well-known exotic element of order $2$ in the Picard&#10;group of classical $A(1)$. The $\mathbb{C}$-motivic joker has infinite order." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1604.00451v3" source="Masaki Nakagawa" target="Hiroshi Naruse">
+        <attvalues>
+          <attvalue for="0" value="Universal Gysin formulas for the universal Hall-Littlewood functions" />
+          <attvalue for="1" value="It is known that the usual Schur $S$- and $P$-polynomials can be described&#10;via the Gysin homomorphisms for flag bundles in the ordinary cohomology theory.&#10;Recently, P. Pragacz generalized these Gysin formulas to the Hall-Littlewood&#10;polynomials. In this paper, we introduce a {\it universal} analogue of the&#10;Hall-Littlewood polynomials, which we call the {\it universal Hall-Littlewood&#10;functions}, and give Gysin formulas for various flag bundles in the complex&#10;cobordism theory. Furthermore, we give two kinds of the {\it universal}&#10;analogue of the schur polynomials, and some Gysin formulas for these functions&#10;are established." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1607.07054v1" source="Hanieh Mirebrahimi" target="Mojtaba Mohareri">
+        <attvalues>
+          <attvalue for="0" value="On the Capacity of Eilenberg-MacLane and Moore Spaces" />
+          <attvalue for="1" value="K. Borsuk in 1979, in the Topological Conference in Moscow, introduced the&#10;concept of the capacity of a compactum and asked some questions concerning&#10;properties of the capacity of compacta. In this paper, we give partial positive&#10;answers to three of these questions in some cases. In fact, by describing&#10;spaces homotopy dominated by Moore and Eilenberg-MacLane spaces, we obtain the&#10;capacity of a Moore space $M(A,n)$ and an Eilenberg-MacLane space $K(G,n)$.&#10;Also, we compute the capacity of the wedge sum of finitely many Moore spaces of&#10;different degrees and the capacity of the product of finitely many&#10;Eilenberg-MacLane spaces of different homotopy types. In particular, we give&#10;exact capacity of the wedge sum of finitely many spheres of the same or&#10;different dimensions." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1604.00969v1" source="Hanieh Mirebrahimi" target="Tayyebe Nasri">
+        <attvalues>
+          <attvalue for="0" value="Topological Coarse Shape Homotopy Groups" />
+          <attvalue for="1" value="Uchillo-Ibanez et al. introduced a topology on the sets of shape morphisms&#10;between arbitrary topological spaces in 1999. In this paper, applying a similar&#10;idea, we introduce a topology on the set of coarse shape morphisms $Sh^*(X,Y)$,&#10;for arbitrary topological spaces $X$ and $Y$. In particular, we can consider a&#10;topology on the coarse shape homotopy group of a topological space $(X,x)$,&#10;$Sh^*((S^k,*),(X,x))=\check{\pi}_k^{*}(X,x)$, which makes it a Hausdorff&#10;topological group. Moreover, we study some properties of these topological&#10;coarse shape homotopoy groups such as second countability, movability and in&#10;particullar, we prove that $\check{\pi}_k^{*^{top}}$ preserves finite product&#10;of compact Hausdorff spaces. Also, we show that for a pointed topological space&#10;$(X,x)$, $\check{\pi}_k^{top}(X,x)$ can be embedded in&#10;$\check{\pi}_k^{*^{top}}(X,x)$." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1606.08794v2" source="Urtzi Buijs" target="Yves Félix">
+        <attvalues>
+          <attvalue for="0" value="Maurer-Cartan elements in the Lie models of finite simplicial complexes" />
+          <attvalue for="1" value="In a previous work, we have associated a complete differential graded Lie&#10;algebra to any finite simplicial complex in a functorial way. Similarly, we&#10;have also a realization functor from the category of complete differential&#10;graded Lie algebras to the category of simplicial sets. We have already&#10;interpreted the homology of a Lie algebra in terms of homotopy groups of its&#10;realization. In this paper, we begin a dictionary between models and simplicial&#10;complexes by establishing a correspondence between the Deligne groupoid of the&#10;model and the connected components of the finite simplicial complex." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1604.01478v2" source="Urtzi Buijs" target="Aniceto Murillo">
+        <attvalues>
+          <attvalue for="0" value="Higher order Whitehead products and $L_\infty$ structures on the&#10;  homology of a DGL" />
+          <attvalue for="1" value="We detect higher order Whitehead products on the homology $H$ of a&#10;differential graded Lie algebra $L$ in terms of higher brackets in the&#10;transferred $L_\infty$ structure on $H$ via a given homotopy retraction of $L$&#10;onto $H$." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1610.02917v2" source="Urtzi Buijs" target="Joana Cirici">
+        <attvalues>
+          <attvalue for="0" value="Weight decompositions of Thom spaces of vector bundles in rational&#10;  homotopy theory" />
+          <attvalue for="1" value="Motivated by the theory of representability classes by submanifolds, we study&#10;the rational homotopy theory of Thom spaces of vector bundles. We first give a&#10;Thom isomorphism at the level of rational homotopy, extending work of&#10;Felix-Oprea-Tanr\'e by removing hypothesis of nilpotency of the base and&#10;orientability of the bundle. Then, we use the theory of weight decompositions&#10;in rational homotopy to give a criterion of representability of classes by&#10;submanifolds, generalising results of Papadima. Along the way, we study issues&#10;of formality and give formulas for Massey products of Thom spaces. Lastly, we&#10;link the theory of weight decompositions with mixed Hodge theory and apply our&#10;results to motivic Thom spaces." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1606.08794v2" source="Aniceto Murillo" target="Yves Félix">
+        <attvalues>
+          <attvalue for="0" value="Maurer-Cartan elements in the Lie models of finite simplicial complexes" />
+          <attvalue for="1" value="In a previous work, we have associated a complete differential graded Lie&#10;algebra to any finite simplicial complex in a functorial way. Similarly, we&#10;have also a realization functor from the category of complete differential&#10;graded Lie algebras to the category of simplicial sets. We have already&#10;interpreted the homology of a Lie algebra in terms of homotopy groups of its&#10;realization. In this paper, we begin a dictionary between models and simplicial&#10;complexes by establishing a correspondence between the Deligne groupoid of the&#10;model and the connected components of the finite simplicial complex." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1612.08816v5" source="Sho Hasui" target="Daisuke Kishimoto">
+        <attvalues>
+          <attvalue for="0" value="Higher homotopy commutativity in localized Lie groups and gauge groups" />
+          <attvalue for="1" value="The first aim of this paper is to study the $p$-local higher homotopy&#10;commutativity of Lie groups in the sense of Sugawara. The second aim is to&#10;apply this result to the $p$-local higher homotopy commutativity of gauge&#10;groups. Although the higher homotopy commutativity of Lie groups in the sense&#10;of Williams is already known, the higher homotopy commutativity in the sense of&#10;Sugawara is necessary for this application. The third aim is to resolve the&#10;$5$-local higher homotopy non-commutativity problem of the exceptional Lie&#10;group $\mathrm{G}_2$, which has been open for a long time." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1606.00306v3" source="Daniel Juan-Pineda" target="Alejandra Trujillo-Negrete">
+        <attvalues>
+          <attvalue for="0" value="On classifying spaces for the family of virtually cyclic subgroups in&#10;  mapping class groups" />
+          <attvalue for="1" value="We give a bound for the geometric dimension for the family of virtually&#10;cyclic groups in mapping class groups of a compact surface with punctures,&#10;possibly with nonempty boundary and negative Euler characteristic." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1607.02332v2" source="J. P. C. Greenlees" target="Lennart Meier">
+        <attvalues>
+          <attvalue for="0" value="Gorenstein duality for Real spectra" />
+          <attvalue for="1" value="Following Hu and Kriz, we study the $C_2$-spectra $BP\mathbb{R}\langle n&#10;\rangle$ and $E\mathbb{R}(n)$ that refine the usual truncated Brown-Peterson&#10;and the Johnson-Wilson spectra. In particular, we show that they satisfy&#10;Gorenstein duality with a representation grading shift and identify their&#10;Anderson duals. We also compute the associated local cohomology spectral&#10;sequence in the cases $n=1$ and $2$." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1607.02825v3" source="David Blanc" target="Debasis Sen">
+        <attvalues>
+          <attvalue for="0" value="Higher cohomology operations and R-completion" />
+          <attvalue for="1" value="Let $R=\mathbb{F}_p$ or a field of characteristic $0$. For each $R$-good&#10;topological space $Y$, we define a collection of higher cohomology operations&#10;which, together with the cohomology algebra $H^*(Y;R)$ suffice to determine $Y$&#10;up to $R$-completion. We also provide a similar collection of higher cohomology&#10;operations which determine when two maps $f_0,f_1: Z\to Y$ between $R$-good&#10;spaces(inducing the same algebraic homomorphism $H^*(Y;R)\to H^*(Z;R)$) are&#10;$R$-equivalent." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1607.03405v1" source="Pedro Boavida de Brito" target="Michael S. Weiss">
+        <attvalues>
+          <attvalue for="0" value="Topological embeddings of disks via configuration categories" />
+          <attvalue for="1" value="The functor that takes a manifold to its configuration category exhibits a&#10;type of full faithfulness in some cases." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1610.00890v5" source="Stephane Bressan" target="Shiquan Ren">
+        <attvalues>
+          <attvalue for="0" value="The Embedded Homology of Hypergraphs and Applications" />
+          <attvalue for="1" value="Hypergraphs are mathematical models for many problems in data sciences. In&#10;recent decades, the topological properties of hypergraphs have been studied and&#10;various kinds of (co)homologies have been constructed (cf. [3, 4, 12]). In this&#10;paper, generalising the usual homology of simplicial complexes, we define the&#10;embedded homology of hypergraphs as well as the persistent embedded homology of&#10;sequences of hypergraphs. As a generalisation of the Mayer-Vietoris sequence&#10;for the homology of simplicial complexes, we give a Mayer-Vietoris sequence for&#10;the embedded homology of hypergraphs. Moreover, as applications of the embedded&#10;homology, we study acyclic hypergraphs and construct some indices for the data&#10;analysis of hyper-networks." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1610.00890v5" source="Stephane Bressan" target="Jie Wu">
+        <attvalues>
+          <attvalue for="0" value="The Embedded Homology of Hypergraphs and Applications" />
+          <attvalue for="1" value="Hypergraphs are mathematical models for many problems in data sciences. In&#10;recent decades, the topological properties of hypergraphs have been studied and&#10;various kinds of (co)homologies have been constructed (cf. [3, 4, 12]). In this&#10;paper, generalising the usual homology of simplicial complexes, we define the&#10;embedded homology of hypergraphs as well as the persistent embedded homology of&#10;sequences of hypergraphs. As a generalisation of the Mayer-Vietoris sequence&#10;for the homology of simplicial complexes, we give a Mayer-Vietoris sequence for&#10;the embedded homology of hypergraphs. Moreover, as applications of the embedded&#10;homology, we study acyclic hypergraphs and construct some indices for the data&#10;analysis of hyper-networks." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1610.00890v5" source="Shiquan Ren" target="Jie Wu">
+        <attvalues>
+          <attvalue for="0" value="The Embedded Homology of Hypergraphs and Applications" />
+          <attvalue for="1" value="Hypergraphs are mathematical models for many problems in data sciences. In&#10;recent decades, the topological properties of hypergraphs have been studied and&#10;various kinds of (co)homologies have been constructed (cf. [3, 4, 12]). In this&#10;paper, generalising the usual homology of simplicial complexes, we define the&#10;embedded homology of hypergraphs as well as the persistent embedded homology of&#10;sequences of hypergraphs. As a generalisation of the Mayer-Vietoris sequence&#10;for the homology of simplicial complexes, we give a Mayer-Vietoris sequence for&#10;the embedded homology of hypergraphs. Moreover, as applications of the embedded&#10;homology, we study acyclic hypergraphs and construct some indices for the data&#10;analysis of hyper-networks." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Agnes Beaudry" target="Kathryn Hess">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Agnes Beaudry" target="Magdalena Kedziorek">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Agnes Beaudry" target="Mona Merling">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Agnes Beaudry" target="Vesna Stojanoska">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Kathryn Hess" target="Magdalena Kedziorek">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Kathryn Hess" target="Mona Merling">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Kathryn Hess" target="Vesna Stojanoska">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Magdalena Kedziorek" target="Mona Merling">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Magdalena Kedziorek" target="Vesna Stojanoska">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1611.00382v1" source="Mona Merling" target="Vesna Stojanoska">
+        <attvalues>
+          <attvalue for="0" value="Motivic Homotopical Galois Extensions" />
+          <attvalue for="1" value="We establish a formal framework for Rognes's homotopical Galois theory and&#10;adapt it to the context of motivic spaces and spectra. We discuss examples of&#10;Galois extensions between Eilenberg-MacLane motivic spectra and between the&#10;Hermitian and algebraic K-theory spectra." />
+        </attvalues>
+      </edge>
+      <edge id="http://arxiv.org/abs/1612.06793v1" source="Andrzej Kozlowski" target="Kohhei Yamaguchi">
+        <attvalues>
+          <attvalue for="0" value="The homotopy type of spaces of resultants of bounded multiplicity" />
+          <attvalue for="1" value="For positive integers $m,n, d\geq 1$ with $(m,n)\not= (1,1)$ and a field&#10;$\Bbb F$ with its algebraic closure $\overline{\Bbb F}$, let&#10;$\text{Poly}^{d,m}_n(\Bbb F)$ denote the space of all $m$-tuples&#10;$(f_1(z),\cdots ,f_m(z))\in \Bbb F [z]$ of monic polynomials of the same degree&#10;$d$ such that polynomials $f_1(z),\cdots ,f_m(z)$ have no common root in&#10;$\overline{\Bbb F}$ of multiplicity $\geq n$. These spaces were defined by Farb&#10;and Wolfson in \cite{FW} as generalizations of spaces first studied by Arnold,&#10;Vassiliev, Segal and others in different contexts. In \cite{FW} they obtained&#10;algebraic geometrical and arithmetic results about the topology of these&#10;spaces. In this paper we investigate the homotopy type of these spaces for the&#10;case $\Bbb F =\mathbb{C}$. Our results generalize those of \cite{FW} for $\Bbb&#10;F =\Bbb C$ and also results of G. Segal \cite{Se}, V. Vassiliev \cite{Va} and&#10;F.Cohen-R.Cohen-B.Mann-R.Milgram \cite{CCMM} for $m\geq 2$ and $n\geq 2$." />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>

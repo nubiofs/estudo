@@ -4,8 +4,44 @@ from datetime import datetime
 import networkx as nx
 import itertools
 
-#results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 10000)
-results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 1000)
+#results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 1000)
+'''
+run predicao_publicacao.versao2.py
+Quantidades de artigos baixados:  1000
+Quantidades de artigos filtrados para o ano de 2016 =  109
+Quantidades de artigos filtrados para o ano de 2017 =  164
+(104, 5)
+(107, 5)
+Name:
+Type: Graph
+Number of nodes: 67
+Number of edges: 50
+Average degree:   1.4925
+Name:
+Type: Graph
+Number of nodes: 67
+Number of edges: 44
+Average degree:   1.3134
+'''
+
+results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 10000)
+'''
+Quantidades de artigos baixados:  7938
+Quantidades de artigos filtrados para o ano de 2016 =  398
+Quantidades de artigos filtrados para o ano de 2017 =  498
+(420, 5)
+(475, 5)
+Name:
+Type: Graph
+Number of nodes: 284
+Number of edges: 200
+Average degree:   1.4085
+Name:
+Type: Graph
+Number of nodes: 284
+Number of edges: 216
+Average degree:   1.5211
+'''
 
 print('Quantidades de artigos baixados: ', len(list(results)))
 
@@ -70,7 +106,7 @@ def gerar_dataframe_autor_artigos(artigos):
 df_autor_artigos_2016 = gerar_dataframe_autor_artigos(artigos_2016)
 print(df_autor_artigos_2016.shape)
 df_autor_artigos_2016.to_csv(
-    'nos_autores_2016_cat:math.AT.csv',
+    'nos_autores_2016_cat:math.AT.V2.csv',
     # Mapeamento dos colunas (para importar no Gephi é obrigatorio ter: 'Id' e 'Label')
     # columns=['Id', 'Label', 'title', 'summary', 'published_year'], 
     columns=['author', 'id', 'title', 'summary', 'published_year'], 
@@ -79,7 +115,7 @@ df_autor_artigos_2016.to_csv(
 df_autor_artigos_2017 = gerar_dataframe_autor_artigos(artigos_2017)
 print(df_autor_artigos_2017.shape)
 df_autor_artigos_2017.to_csv(
-    'nos_autores_2017_cat:math.AT.csv',
+    'nos_autores_2017_cat:math.AT.V2.csv',
     # Mapeamento dos colunas (para importar no Gephi é obrigatorio ter: 'Id' e 'Label')
     # columns=['Id', 'Label', 'title', 'summary', 'published_year'], 
     columns=['author', 'id', 'title', 'summary', 'published_year'], 
@@ -114,38 +150,28 @@ def gerar_grafo(df_artigos):
 grafo_2016 = gerar_grafo(df_autor_artigos_2016)
 grafo_2017 = gerar_grafo(df_autor_artigos_2017)
 
-# list(grafo_2016.edges(data=True))[0]
-#grafo_2016.number_of_nodes() == grafo_2017.number_of_nodes()
+assert(grafo_2016.number_of_nodes() == grafo_2017.number_of_nodes()) 
+
+print(nx.info(grafo_2016))
+print(nx.info(grafo_2017))
+
 #grafo_2016.number_of_edges()
 #grafo_2017.number_of_edges()
-# list(grafo_2016.edges(data=True))[0]
+#list(grafo_2016.edges(data=True))[0]
 # --> 'http://arxiv.org/abs/1603.08773v3'
-# lista = [(v, u, d) for v, u, d in grafo_2016.edges(data=True) if d['id'] == 'http://arxiv.org/abs/1606.04233v2']
+#lista = [(v, u, d) for v, u, d in grafo_2016.edges(data=True) if d['id'] == 'http://arxiv.org/abs/1603.08773v3']
 # len(lista)
 
-# ===>
 # export your data into Gephi’s GEXF format:
-# nx.write_gexf(G, 'quaker_network.gexf')
+nx.write_gexf(grafo_2016, 'grafo_2016.V2.gexf')
 
 # fell_whitehead_path = nx.shortest_path(G, source="Margaret Fell", target="George Whitehead")
-
-'''
-for n in grafo.nodes():
-     print(n, grafo.node[n]['id'])
-'''
-
-#  [(n, v) for n, v, d in grafo.nodes(data=True) if n.d['id'] == v.d['id']]
-
-# print(nx.info(grafo))
 
 # nx.connected_components(G)
 #  G.neighbors(1)
 # nx.degree(G,2)
 # G[1][2].update({0: 5})
 # G.edges[1, 2].update({0: 5})
-
-# len(list(grafo_2016.nodes()))
-# list(grafo_2016.nodes(data=True))[0]
 
 # Mapeamento dos colunas (para importar no Gephi é obrigatorio ter): 
 # [Source,Target,Type,Weight]
