@@ -24,8 +24,9 @@ Number of edges: 44
 Average degree:   1.3134
 '''
 
-results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 10000)
+#results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 10000)
 '''
+#V2
 Quantidades de artigos baixados:  7938
 Quantidades de artigos filtrados para o ano de 2016 =  398
 Quantidades de artigos filtrados para o ano de 2017 =  498
@@ -41,6 +42,26 @@ Type: Graph
 Number of nodes: 284
 Number of edges: 216
 Average degree:   1.5211
+'''
+
+results = arxiv.query(search_query="cat:math.AT", start = 1, max_results = 10000)
+'''
+#V3
+Quantidades de artigos baixados:  9937
+Quantidades de artigos filtrados para o ano de 2016 =  416
+Quantidades de artigos filtrados para o ano de 2017 =  498
+(444, 5)
+(491, 5)
+Name:
+Type: Graph
+Number of nodes: 296
+Number of edges: 209
+Average degree:   1.4122
+Name:
+Type: Graph
+Number of nodes: 296
+Number of edges: 232
+Average degree:   1.5676
 '''
 
 print('Quantidades de artigos baixados: ', len(list(results)))
@@ -106,7 +127,7 @@ def gerar_dataframe_autor_artigos(artigos):
 df_autor_artigos_2016 = gerar_dataframe_autor_artigos(artigos_2016)
 print(df_autor_artigos_2016.shape)
 df_autor_artigos_2016.to_csv(
-    'nos_autores_2016_cat:math.AT.V2.csv',
+    'nos_autores_2016_cat:math.AT.V3.csv',
     # Mapeamento dos colunas (para importar no Gephi é obrigatorio ter: 'Id' e 'Label')
     # columns=['Id', 'Label', 'title', 'summary', 'published_year'], 
     columns=['author', 'id', 'title', 'summary', 'published_year'], 
@@ -115,7 +136,7 @@ df_autor_artigos_2016.to_csv(
 df_autor_artigos_2017 = gerar_dataframe_autor_artigos(artigos_2017)
 print(df_autor_artigos_2017.shape)
 df_autor_artigos_2017.to_csv(
-    'nos_autores_2017_cat:math.AT.V2.csv',
+    'nos_autores_2017_cat:math.AT.V3.csv',
     # Mapeamento dos colunas (para importar no Gephi é obrigatorio ter: 'Id' e 'Label')
     # columns=['Id', 'Label', 'title', 'summary', 'published_year'], 
     columns=['author', 'id', 'title', 'summary', 'published_year'], 
@@ -163,7 +184,7 @@ print(nx.info(grafo_2017))
 # len(lista)
 
 # export your data into Gephi’s GEXF format:
-nx.write_gexf(grafo_2016, 'grafo_2016.V2.gexf')
+nx.write_gexf(grafo_2016, 'grafo_2016.V3.gexf')
 
 # fell_whitehead_path = nx.shortest_path(G, source="Margaret Fell", target="George Whitehead")
 
