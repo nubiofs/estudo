@@ -246,13 +246,15 @@ for n0 in grafo_2016.nodes:
             assert(nx.shortest_path_length(grafo_2016, source=n1, target=n2) == 1)
             if nx.shortest_path_length(grafo_2016, source=n0, target=n2) == 2:
                 print('\t\t ({}) e ({}) tem distância igual a 2'.format(n0, n2))
-                lista_autores_predicao.append([n0, n2]) #Uma lista de listas
+                if not [n0, n2] in lista_autores_predicao:
+                    lista_autores_predicao.append([n0, n2]) #Uma lista de listas
 
-len(lista_autores_predicao)
-#assert(['Sarah Yeakel', 'Paul G. Goerss'] in lista_autores_predicao)
-#assert(nx.shortest_path_length(grafo_2016, source='Sarah Yeakel', target='Paul G. Goerss') == 2)
 for n1, n2 in lista_autores_predicao:
     assert(nx.shortest_path_length(grafo_2016, source=n1, target=n2) == 2)
+
+print('\nQuantidade de predições: {}'.format(len(lista_autores_predicao)))
+
+# VARIOS EXEMPLOS VER:
 
 '''
 # Obtem todos os nós vizinho do nó 'Kate Ponto':
@@ -260,7 +262,9 @@ for n in grafo_2016.neighbors('Kate Ponto'):
     print(n)
 '''
 
-# VARIOS EXEMPLOS VER:
+#assert(['Sarah Yeakel', 'Paul G. Goerss'] in lista_autores_predicao)
+#assert(nx.shortest_path_length(grafo_2016, source='Sarah Yeakel', target='Paul G. Goerss') == 2)
+
 # fell_whitehead_path = nx.shortest_path(G, source="Margaret Fell", target="George Whitehead")
 # nx.connected_components(G)
 # G.neighbors(1)
