@@ -219,6 +219,8 @@ for n0 in grafo_2016.nodes:
                 if not [n0, n2] in lista_autores_predicao:
                     lista_autores_predicao.append([n0, n2]) #Uma lista de listas
 
+print('\nQuantidade de possiveis predições: {}'.format(len(lista_autores_predicao)))
+
 def get_autores(artigos):
     autores = set()
     for artigo in artigos:
@@ -233,17 +235,16 @@ for n1, n2 in lista_autores_predicao:
     #assert(nx.shortest_path_length(grafo_2016, source=n1, target=n2) == 2)
     # (apenas se o nó 'autor' estive publicado nos dois anos seguidos)
     # Colocar o calculo para ver se predição "(sim - VP) ou (não - VN)" aqui:
-    grafo_2016.add_edge(n1, n2, id_link = '?', title = 'title', summary = 'summary', Weight = 6)
+    if n1 in autores_validos and n2 in autores_validos:
+        grafo_2016.add_edge(n1, n2, id_link = '?', title = 'title', summary = 'summary', Weight = 6)
     
-print('\nQuantidade de predições: {}'.format(len(lista_autores_predicao)))
-
 print('\nInformações dos grafos (depois da adição das arresta de predição): \n')
 print('- grafo 2016: \n', nx.info(grafo_2016))
 print('- grafo 2017: \n', nx.info(grafo_2017))
 
 # export your data into Gephi’s GEXF format:
-nx.write_gexf(grafo_2016, 'grafo_2016.V6.a.gexf')
-nx.write_gexf(grafo_2017, 'grafo_2017.V6.a.gexf')
+nx.write_gexf(grafo_2016, 'grafo_2016.V6.b.gexf')
+nx.write_gexf(grafo_2017, 'grafo_2017.V6.b.gexf')
 
 # VARIOS EXEMPLOS VER:
 
