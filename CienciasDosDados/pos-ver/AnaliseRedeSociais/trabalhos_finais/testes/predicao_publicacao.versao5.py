@@ -233,7 +233,7 @@ for n1, n2 in lista_autores_predicao:
     #assert(nx.shortest_path_length(grafo_2016, source=n1, target=n2) == 2)
     # (apenas se o nó 'autor' estive publicado nos dois anos seguidos)
     # Colocar o calculo para ver se predição "(sim - VP) ou (não - VN)" aqui:
-    grafo_2016.add_edge(n1, n2, id_link = 'i', title = 'title', summary = 'summary', Weight = 6)
+    grafo_2016.add_edge(n1, n2, id_link = '?', title = 'title', summary = 'summary', Weight = 6)
     
 print('\nQuantidade de predições: {}'.format(len(lista_autores_predicao)))
 
