@@ -1,0 +1,39 @@
+Quantidades de artigos baixados:  9941
+
+Quantidades de artigos filtrados, com mais de um autor, para o ano de 2016 =  416
+Quantidades de artigos filtrados, com mais de um autor, para o ano de 2017 =  498
+
+df_autor_artigos_2016.shape:  (1065, 5)
+df_autor_artigos_2017.shape:  (1278, 5)
+
+Informações dos grafos (antes da adição das arresta de predição): 
+
+- grafo 2016: 
+ Name: 
+Type: Graph
+Number of nodes: 819
+Number of edges: 884
+Average degree:   2.1587
+- grafo 2017: 
+ Name: 
+Type: Graph
+Number of nodes: 956
+Number of edges: 1055
+Average degree:   2.2071
+
+Quantidade de possiveis predições: 1074
+
+Informações dos grafos (depois da adição das arresta de predição): 
+
+- grafo 2016: 
+ Name: 
+Type: Graph
+Number of nodes: 819
+Number of edges: 1012
+Average degree:   2.4713
+- grafo 2017: 
+ Name: 
+Type: Graph
+Number of nodes: 956
+Number of edges: 1055
+Average degree:   2.2071
