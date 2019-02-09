@@ -174,8 +174,6 @@ for n1 in grafo_2016.nodes:
                 if not [n1, n3] in lista_autores_predicao_em_2016_para_2017:
                     lista_autores_predicao_em_2016_para_2017.append([n1, n3]) #Uma lista de listas
 
-print('\nQuantidade de possiveis predições: {}'.format(len(lista_autores_predicao_em_2016_para_2017)))
-
 # Calculo para ver se predição "(sim - VP / FP) ou (não - VN / FN)":
 def calculo_coeficiente_predicao(n1, n2):
     return True
@@ -183,7 +181,6 @@ def calculo_coeficiente_predicao(n1, n2):
 # Adiciona aresta para n1 e n2 (no grafo do ano 2016), apenas se os nós 'autor' 
 # tiverem publicado nos dois anos seguidos (2016 e 2017) e tiverem calculo de 
 # coeficiente predição suficiente:
-quantidade_predicoes = 0
 for n1, n2 in lista_autores_predicao_em_2016_para_2017:
     if n1 in autores_validos and n2 in autores_validos:
         
@@ -193,9 +190,6 @@ for n1, n2 in lista_autores_predicao_em_2016_para_2017:
         # O valor '?' para o atributo id_link serve pra informar que é uma predição de publicação para 2017.
         # O valor '6' para o atributo Weight serve pra diferenciar no gráfico que é uma aresta de predição
         grafo_2016.add_edge(n1, n2, id_link = '?', title = 'title', summary = 'summary', Weight = 6)
-        quantidade_predicoes = quantidade_predicoes + 1
-
-print('Quantidade de predições: {}'.format(quantidade_predicoes))
 
 print('\nInformações dos grafos (depois da adição das arresta de predição): \n')
 print('- grafo 2016: \n', nx.info(grafo_2016))
