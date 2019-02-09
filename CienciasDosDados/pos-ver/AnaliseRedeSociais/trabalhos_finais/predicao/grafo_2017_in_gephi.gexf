@@ -8,7 +8,7 @@
       <attribute id="4" title="Weight" type="long" />
     </attributes>
     <attributes class="node" mode="static">
-      <attribute id="0" title="ids_links" type="string" />
+      <attribute id="0" title="summary_concat" type="string" />
     </attributes>
     <meta>
       <creator>NetworkX 2.2</creator>

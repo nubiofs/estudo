@@ -131,8 +131,8 @@ def gerar_grafo(df_artigos):
         title = list(set(df['title']))
         summary = list(set(df['summary']))
         for a1, a2 in itertools.combinations(lista_autores, 2):
-            G.add_node(a1, ids_links = list())
-            G.add_node(a2, ids_links = list())
+            G.add_node(a1, summary_concat = list())
+            G.add_node(a2, summary_concat = list())
             G.add_edge(a1, a2, id_link = i, title = title[0], summary = summary[0], Weight = 3)        
 
     return G
@@ -147,29 +147,29 @@ print('\nInformações dos grafos (antes da adição das arresta de predição):
 print('- grafo 2016: \n', nx.info(grafo_2016))
 print('- grafo 2017: \n', nx.info(grafo_2017))
 
-def adicionar_ids_links_para_autores(grafo, n1, n2):
+def adicionar_summary_concat_para_autores(grafo, n1, n2):
 
     dd = grafo.get_edge_data(n1, n2)
-    id_link = dd.get('id_link')
-    if not id_link in grafo.node[n1]['ids_links']:
-        grafo.node[n1]['ids_links'].append(id_link)
+    summary = dd.get('summary')
+    if not summary in grafo.node[n1]['summary_concat']:
+        grafo.node[n1]['summary_concat'].append(summary)
 
-    if not id_link in grafo.node[n2]['ids_links']:
-        grafo.node[n2]['ids_links'].append(id_link)
+    if not summary in grafo.node[n2]['summary_concat']:
+        grafo.node[n2]['summary_concat'].append(summary)
 
 lista_autores_predicao_em_2016_para_2017 = []
 # Obter todos os nós 'autores' que, com base no valor '2' da distância entre eles, podem 
 # ser preditos em 2016 (ou seja, que podem ou não publicar em conjunto no ano de 2017).
-# Obs.: Também será adicionado nos nós 'autores' vizinhos o atributo 'ids_links' da 
+# Obs.: Também será adicionado nos nós 'autores' vizinhos o atributo 'summary_concat' da 
 # concatenação de todos os identificadores únicos dos artigos que o autor participa. 
 for n1 in grafo_2016.nodes:
     # Faz todo o rastreamento de vizinhos dos vizinhos a apartir do nó 'n1'
     for n2 in grafo_2016.neighbors(n1):
         assert(nx.shortest_path_length(grafo_2016, source=n1, target=n2) == 1)
-        adicionar_ids_links_para_autores(grafo_2016, n1, n2)
+        adicionar_summary_concat_para_autores(grafo_2016, n1, n2)
         for n3 in grafo_2016.neighbors(n2):
             assert(nx.shortest_path_length(grafo_2016, source=n2, target=n3) == 1)
-            adicionar_ids_links_para_autores(grafo_2016, n2, n3)
+            adicionar_summary_concat_para_autores(grafo_2016, n2, n3)
             if nx.shortest_path_length(grafo_2016, source=n1, target=n3) == 2:
                 if not [n1, n3] in lista_autores_predicao_em_2016_para_2017:
                     lista_autores_predicao_em_2016_para_2017.append([n1, n3]) #Uma lista de listas
@@ -198,8 +198,8 @@ print('- grafo 2017: \n', nx.info(grafo_2017))
 # export your data into Gephi’s GEXF format:
 
 for n, d in grafo_2016.nodes(data=True):
-    lista = grafo_2016.node[n]['ids_links']
-    grafo_2016.node[n]['ids_links'] = '#'.join(lista)
+    lista = grafo_2016.node[n]['summary_concat']
+    grafo_2016.node[n]['summary_concat'] = '[$-#-$]'.join(lista)
 
 nx.write_gexf(grafo_2016, 'grafo_2016_in_gephi.gexf')
 nx.write_gexf(grafo_2017, 'grafo_2017_in_gephi.gexf')
