@@ -15,6 +15,7 @@ datautil = "*"
 dateutil = "*"
 python-dateutil = "*"
 networkx = "*"
+nltk = "*"
 
 [requires]
 python_version = "3.7"
