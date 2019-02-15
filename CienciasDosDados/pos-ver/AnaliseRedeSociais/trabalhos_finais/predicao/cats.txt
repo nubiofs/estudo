@@ -1,0 +1,5 @@
+https://arxiv.org/archive/math
+
+* math.AT - Algebraic Topology
+* math.NT - Number Theory 
+* math.AG - Algebraic Geometry 
