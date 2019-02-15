@@ -20,7 +20,7 @@ def obter_autores_artigos_from_arxiv(from_arxiv):
 
     if from_arxiv:
 
-        results = arxiv.query(search_query="cat:astro-ph.GA", max_results = 10000)
+        results = arxiv.query(search_query="cat:astro-ph.GA", max_results = 5000)
         print('\nQuantidades de artigos baixados: ', len(list(results)))
 
         artigos_2014 = []
