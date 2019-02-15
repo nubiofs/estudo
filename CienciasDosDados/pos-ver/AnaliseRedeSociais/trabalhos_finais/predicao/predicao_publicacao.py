@@ -8,30 +8,16 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
 # Downloads necessarios, apenas uma vez, para os processos de Tokenize e Stop Words:
-#nltk.download('punkt')
-#nltk.download()
 # Use the NLTK Downloader to obtain the resource
 # Downloading package punkt to ~/nltk_data...
+#nltk.download('punkt')
+#nltk.download()
 
 def obter_autores_artigos_from_arxiv(from_arxiv):
 
-    autores_validos = []
     df_autor_artigos_2016 = []
     df_autor_artigos_2017 = []
 
-    # Obter apenas autores que tenham alguma publicação nos dois anos
-    def get_autores_validos(artigo1, artigo2):
-        autores1 = set()
-        for artigo in artigo1:
-            for autor in artigo[0]:
-                autores1.add(autor)
-        autores2 = set()
-        for artigo in artigo2:
-            for autor in artigo[0]:
-                autores2.add(autor)
-
-        return autores1.intersection(autores2)
-    
     if from_arxiv:
 
         #results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 500)
@@ -99,8 +85,6 @@ def obter_autores_artigos_from_arxiv(from_arxiv):
             columns=['author', 'id', 'title', 'summary', 'published_year'], 
             encoding='utf-8', index=False, sep='@')
 
-        autores_validos = get_autores_validos(artigos_2016, artigos_2017)
-
     else: # from_csv já gerado
 
         df_autor_artigos_2016 = pd.read_csv(
@@ -111,24 +95,16 @@ def obter_autores_artigos_from_arxiv(from_arxiv):
             'registros_autores_artigos_2017_cat:math.AT.csv',
             encoding='utf-8', sep='@')
 
-        lista1 = set()
-        for i, row in df_autor_artigos_2016.iterrows():
-            lista1.add(row['author'])
-        
-        lista2 = set()
-        for i, row in df_autor_artigos_2017.iterrows():
-            lista2.add(row['author'])
+    return df_autor_artigos_2016, df_autor_artigos_2017 
 
-        autores_validos = lista1.intersection(lista2)
-        
-    return autores_validos, df_autor_artigos_2016, df_autor_artigos_2017 
-
+#
 # Construindo o grafo não direcionado com nós para CADA AUTOR dos artigos.
 # Para cada autor em 'authors' (de um artigo específico) deve-se criar um nó 
 # (usando como 'label' o nome do autor) e para as arestas que ligam os autores do artigo
 # (coloca-se os metadados [id_link, title, summary, Weight]).
 # Obs.: O valor '3', para o atributo Weight das arestas, significa o relacionamento de 
 # publicação num mesmo artigo no ano. 
+#
 def gerar_grafo(df_artigos):
     
     G = nx.Graph()
@@ -146,15 +122,14 @@ def gerar_grafo(df_artigos):
 
     return G
 
-#autores_validos, df_2016, df_2017 = obter_autores_artigos_from_arxiv(True)
-autores_validos, df_2016, df_2017 = obter_autores_artigos_from_arxiv(False)
+#df_2016, df_2017 = obter_autores_artigos_from_arxiv(True)
+df_2016, df_2017 = obter_autores_artigos_from_arxiv(False)
 
 grafo_2016 = gerar_grafo(df_2016)
 grafo_2017 = gerar_grafo(df_2017)
 
-print('\nInformações dos grafos (antes da adição das arresta de predição): \n')
+print('\nInformações do grafo (antes da adição das arresta de predição): ')
 print('- grafo 2016: \n', nx.info(grafo_2016))
-print('- grafo 2017: \n', nx.info(grafo_2017))
 
 def adicionar_summary_tokenize_stop_word_para_autores(grafo, n1, n2):
 
@@ -169,24 +144,31 @@ def adicionar_summary_tokenize_stop_word_para_autores(grafo, n1, n2):
         if not s in grafo.node[n2]['summary_tokenize_stop_word']:
             grafo.node[n2]['summary_tokenize_stop_word'].append(s)
 
-lista_autores_predicao_em_2016_para_2017 = []
+#
 # Obter todos os nós 'autores' que, com base no valor '2' da distância entre eles, podem 
 # ser preditos em 2016 (ou seja, que podem ou não publicar em conjunto no ano de 2017).
 # Obs.: Também será adicionado nos nós 'autores' vizinhos o atributo 'summary_tokenize_stop_word' da 
 # concatenação de todos os identificadores únicos dos artigos que o autor participa. 
+#
+lista_autores_predicao_em_2016_para_2017 = []
 for n1 in grafo_2016.nodes:
-    # Faz todo o rastreamento de vizinhos dos vizinhos a apartir do nó 'n1'
-    for n2 in grafo_2016.neighbors(n1):
-        assert(nx.shortest_path_length(grafo_2016, source=n1, target=n2) == 1)
-        adicionar_summary_tokenize_stop_word_para_autores(grafo_2016, n1, n2)
-        for n3 in grafo_2016.neighbors(n2):
-            assert(nx.shortest_path_length(grafo_2016, source=n2, target=n3) == 1)
-            adicionar_summary_tokenize_stop_word_para_autores(grafo_2016, n2, n3)
-            if nx.shortest_path_length(grafo_2016, source=n1, target=n3) == 2:
-                if not [n1, n3] in lista_autores_predicao_em_2016_para_2017:
-                    lista_autores_predicao_em_2016_para_2017.append([n1, n3]) #Uma lista de listas
+    # Obter apenas autores que tenham alguma publicação nos dois anos
+    if grafo_2017.has_node(n1): 
+        # Faz todo o rastreamento de vizinhos dos vizinhos a apartir do nó 'n1'
+        for n2 in grafo_2016.neighbors(n1):
+            assert(nx.shortest_path_length(grafo_2016, source=n1, target=n2) == 1)
+            adicionar_summary_tokenize_stop_word_para_autores(grafo_2016, n1, n2)
+            for n3 in grafo_2016.neighbors(n2):
+                # Obter apenas autores que tenham alguma publicação nos dois anos
+                if grafo_2017.has_node(n3): 
+                    assert(nx.shortest_path_length(grafo_2016, source=n2, target=n3) == 1)
+                    adicionar_summary_tokenize_stop_word_para_autores(grafo_2016, n2, n3)
+                    if (nx.shortest_path_length(grafo_2016, source=n1, target=n3) == 2) and (not [n1, n3] in lista_autores_predicao_em_2016_para_2017):
+                        lista_autores_predicao_em_2016_para_2017.append([n1, n3]) #Uma lista de listas
 
+#
 # Calculo para ver se predição "(sim - VP / FP) ou (não - VN / FN)":
+#
 def calculo_coeficiente_predicao(n1, n2):
 
     def jaccard(a, b):
@@ -198,33 +180,76 @@ def calculo_coeficiente_predicao(n1, n2):
 
     return jaccard(words1, words2)
 
+#
 # Adiciona aresta para n1 e n2 (no grafo do ano 2016), apenas se os nós 'autor' 
 # tiverem publicado nos dois anos seguidos (2016 e 2017) e tiverem calculo de 
 # coeficiente predição suficiente:
+#
 for n1, n2 in lista_autores_predicao_em_2016_para_2017:
 
-    if n1 in autores_validos and n2 in autores_validos:
-        
-        id_link = ''
+    id_link = ''
 
-        if calculo_coeficiente_predicao(n1, n2) >= 0.1:
-            id_link = 'YES?'
-        else:
-            id_link = 'NO?'
+    if calculo_coeficiente_predicao(n1, n2) >= 0.1:
+        id_link = 'YES?'
+    else:
+        id_link = 'NO?'
 
-        # Obs.:
-        # O valor 'YES? / NO?' para o atributo id_link serve pra informar que é uma predição de publicação para 2017.
-        # O valor '6' para o atributo Weight serve pra diferenciar no gráfico que é uma aresta de predição
-        grafo_2016.add_edge(n1, n2, id_link = id_link, title = 'title', summary = 'summary', Weight = 6)
+    # Obs.:
+    # O valor 'YES? / NO?' para o atributo id_link serve pra informar que é uma predição de publicação para 2017.
+    # O valor '6' para o atributo Weight serve pra diferenciar no gráfico que é uma aresta de predição
+    grafo_2016.add_edge(n1, n2, id_link = id_link, title = 'title', summary = 'summary', Weight = 6)
 
-
-# Calculo da matriz de confusão:
-
-print('\nInformações dos grafos (depois da adição das arresta de predição): \n')
+print('\nInformações do grafo (depois da adição das arresta de predição): ')
 print('- grafo 2016: \n', nx.info(grafo_2016))
-print('- grafo 2017: \n', nx.info(grafo_2017))
+quantidade_total_arestas_predicao_2016 = len(list([(u, v) for u, v, d in grafo_2016.edges(data=True) if d['Weight'] == 6]))
+print('Quantidade arestas preditivas adicionadas para 2016: ', quantidade_total_arestas_predicao_2016)
 
+#
+# Calculos da matriz de confusão:
+#
+print("\n* Matriz de confusão: ")
+lista_aresta_predicao_yes_2016 = list([(u, v) for u, v, d in grafo_2016.edges(data=True) if (d['Weight'] == 6) and (d['id_link'] == 'YES?')])
+quantidade_arestas_predicao_yes_2016 = len(lista_aresta_predicao_yes_2016)
+print('\tQuantidade arestas predição YES para 2016: ', quantidade_arestas_predicao_yes_2016)
+quantidade_arestas_predicao_yes_2016_acertos = 0
+quantidade_arestas_predicao_yes_2016_erros = 0
+for u, v in lista_aresta_predicao_yes_2016:
+    if grafo_2017.has_edge(u, v):
+        quantidade_arestas_predicao_yes_2016_acertos = quantidade_arestas_predicao_yes_2016_acertos + 1
+    else:
+        quantidade_arestas_predicao_yes_2016_erros = quantidade_arestas_predicao_yes_2016_erros + 1
+print('\t\tQuantidade acertos para predição yes: ', quantidade_arestas_predicao_yes_2016_acertos)
+print('\t\tQuantidade erros para predição yes: ', quantidade_arestas_predicao_yes_2016_erros)
+quantidade_verdadeiro_positivo = quantidade_arestas_predicao_yes_2016_acertos / quantidade_arestas_predicao_yes_2016
+quantidade_falso_positivo = quantidade_arestas_predicao_yes_2016_erros / quantidade_arestas_predicao_yes_2016
+print('\tPercentual acertos para verdadeiro positivo: ', quantidade_verdadeiro_positivo)
+print('\tPercentual acertos para falso positivo: ', quantidade_falso_positivo)
+
+lista_aresta_predicao_no_2016 = list([(u, v) for u, v, d in grafo_2016.edges(data=True) if (d['Weight'] == 6) and (d['id_link'] == 'NO?')])
+quantidade_arestas_predicao_no_2016 = len(lista_aresta_predicao_no_2016)
+print('\n\tQuantidade arestas predição NO para 2016: ', quantidade_arestas_predicao_no_2016)
+quantidade_arestas_predicao_no_2016_acertos = 0
+quantidade_arestas_predicao_no_2016_erros = 0
+for u, v in lista_aresta_predicao_no_2016:
+    if not grafo_2017.has_edge(u, v):
+        quantidade_arestas_predicao_no_2016_acertos = quantidade_arestas_predicao_no_2016_acertos + 1
+    else:
+        quantidade_arestas_predicao_no_2016_erros = quantidade_arestas_predicao_no_2016_erros + 1
+print('\t\tQuantidade acertos para predição no: ', quantidade_arestas_predicao_no_2016_acertos)
+print('\t\tQuantidade erros para predição no: ', quantidade_arestas_predicao_no_2016_erros)
+quantidade_verdadeiro_negativo = quantidade_arestas_predicao_no_2016_acertos / quantidade_arestas_predicao_no_2016
+quantidade_falso_negativo = quantidade_arestas_predicao_no_2016_erros / quantidade_arestas_predicao_no_2016
+print('\tPercentual acertos para verdadeiro negativo: ', quantidade_verdadeiro_negativo)
+print('\tPercentual acertos para false negativo: ', quantidade_falso_negativo)
+
+print('\nPercentual de acertos final: ', 
+    (quantidade_arestas_predicao_yes_2016_acertos + quantidade_arestas_predicao_no_2016_acertos) / quantidade_total_arestas_predicao_2016)
+print('Percentual de erros final: ', 
+    (quantidade_arestas_predicao_yes_2016_erros + quantidade_arestas_predicao_no_2016_erros) / quantidade_total_arestas_predicao_2016)
+
+#
 # export your data into Gephi’s GEXF format:
+#
 for n, d in grafo_2016.nodes(data=True):
     lista = grafo_2016.node[n]['summary_tokenize_stop_word']
     #Transformar para uma concatenção das stop_word (pois o gephi não lê 'lista de lista')

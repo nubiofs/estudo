@@ -2,187 +2,232 @@ import arxiv # https://github.com/lukasschwab/arxiv.py
 import pandas as pd
 from datetime import datetime
 import networkx as nx
+import itertools
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 
-#results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 10000)
-results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 1000)
+# Downloads necessarios, apenas uma vez, para os processos de Tokenize e Stop Words:
+#nltk.download('punkt')
+#nltk.download()
+# Use the NLTK Downloader to obtain the resource
+# Downloading package punkt to ~/nltk_data...
 
-print('Quantidades de artigos baixados: ', len(list(results)))
+def obter_autores_artigos_from_arxiv(from_arxiv):
 
-artigos_2016 = []
-artigos_2017 = []
-for r in results:
-    autores = r.get('authors')
-    if len(list(autores)) > 1:
-        id = r.get('id')
-        title = r.get('title')
-        summary = r.get('summary')
-        data_published = datetime.strptime(r.get('published'), '%Y-%m-%dT%H:%M:%SZ')
-        if data_published.year == 2016:
-            artigos_2016.append((
-                autores,
-                id, 
-                title, 
-                summary,
-                data_published.year))
-        elif data_published.year == 2017:
-            artigos_2017.append((
-                autores,
-                id, 
-                title, 
-                summary,
-                data_published.year))
+    autores_validos = []
+    df_autor_artigos_2016 = []
+    df_autor_artigos_2017 = []
 
-print('Quantidades de artigos filtrados para o ano de 2016 = ', len(artigos_2016))
-print('Quantidades de artigos filtrados para o ano de 2017 = ', len(artigos_2017))
+    # Obter apenas autores que tenham alguma publicação nos dois anos
+    def get_autores_validos(artigo1, artigo2):
+        autores1 = set()
+        for artigo in artigo1:
+            for autor in artigo[0]:
+                autores1.add(autor)
+        autores2 = set()
+        for artigo in artigo2:
+            for autor in artigo[0]:
+                autores2.add(autor)
 
-def get_autores(artigos):
-    autores = set()
-    for artigo in artigos:
-        for autor in artigo[0]:
-            autores.add(autor)
-    return autores
+        return autores1.intersection(autores2)
+    
+    if from_arxiv:
 
-# Apenas autores que tenham alguma publicação nos dois anos
-autores_validos = get_autores(artigos_2016).intersection(get_autores(artigos_2017))
+        #results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 500)
+        results = arxiv.query(search_query="cat:math.AT", max_results = 10000)
+        print('\nQuantidades de artigos baixados: ', len(list(results)))
 
-def gerar_nos(artigos):
-    nos = []
-    for artigo in artigos:
-        for autor in artigo[0]:
-            if autor in autores_validos:
-                no = [
-                    autor, # 'author'
-                    artigo[1], # 'id'
-                    artigo[2], # 'title'
-                    artigo[3], # 'summary'
-                    artigo[4]] # 'published_year'
-                nos.append(no)
-    return nos
+        artigos_2016 = []
+        artigos_2017 = []
+        for r in results:
+            autores = r.get('authors')
+            if len(list(autores)) > 1:
+                id = r.get('id')
+                title = r.get('title')
+                summary = r.get('summary')
+                data_published = datetime.strptime(r.get('published'), '%Y-%m-%dT%H:%M:%SZ')
+                if data_published.year == 2016:
+                    artigos_2016.append((
+                        autores,
+                        id, 
+                        title, 
+                        summary,
+                        data_published.year))
+                elif data_published.year == 2017:
+                    artigos_2017.append((
+                        autores,
+                        id, 
+                        title, 
+                        summary,
+                        data_published.year))
 
-def gerar_dataframes_nos(artigos_2016, artigos_2017):
+        print('\nQuantidades de artigos filtrados, com mais de um autor, para o ano de 2016 = ', len(artigos_2016))
+        print('Quantidades de artigos filtrados, com mais de um autor, para o ano de 2017 = ', len(artigos_2017))
 
-    df1 = pd.DataFrame(gerar_nos(artigos_2016), columns=['author', 'id', 'title', 'summary', 'published_year'])
-    df2 = pd.DataFrame(gerar_nos(artigos_2017), columns=['author', 'id', 'title', 'summary', 'published_year'])
-    return df1, df2
+        # Gerar dataFrame para todos os registros de um dado artigo e seus respectivos autores
+        def gerar_dataframe_autor_artigos(artigos):
 
-df_nos_autores_2016, df_nos_autores_2017 = gerar_dataframes_nos(artigos_2016, artigos_2017)
+            # registros de artigo com autores
+            registros = []
+            for artigo in artigos:
+                for autor in artigo[0]:
+                    registro = [
+                        autor, # 'author'
+                        artigo[1], # 'id'
+                        artigo[2], # 'title'
+                        artigo[3], # 'summary'
+                        artigo[4]] # 'published_year'
+                    registros.append(registro)
 
-print(df_nos_autores_2016.shape)
-print(df_nos_autores_2017.shape)
+            df = pd.DataFrame(
+                registros, columns=['author', 'id', 'title', 'summary', 'published_year'])
 
-df_nos_autores_2016.to_csv(
-    'nos_autores_2016_cat:math.AT.csv',
-    # Mapeamento dos colunas (para importar no Gephi é obrigatorio ter: 'Id' e 'Label')
-    # columns=['Id', 'Label', 'title', 'summary', 'published_year'], 
-    columns=['author', 'id', 'title', 'summary', 'published_year'], 
-    encoding='utf-8', index=False, sep='@')
+            return df
 
+        df_autor_artigos_2016 = gerar_dataframe_autor_artigos(artigos_2016)
+        print('\ndf_autor_artigos_2016.shape: ', df_autor_artigos_2016.shape)
+        df_autor_artigos_2016.to_csv(
+            'registros_autores_artigos_2016_cat:math.AT.csv',
+            columns=['author', 'id', 'title', 'summary', 'published_year'], 
+            encoding='utf-8', index=False, sep='@')
 
-df_nos_autores_2017.to_csv(
-    'nos_autores_2017_cat:math.AT.csv',
-    # Mapeamento dos colunas (para importar no Gephi é obrigatorio ter: 'Id' e 'Label')
-    # columns=['Id', 'Label', 'title', 'summary', 'published_year'], 
-    columns=['author', 'id', 'title', 'summary', 'published_year'], 
-    encoding='utf-8', index=False, sep='@')
+        df_autor_artigos_2017 = gerar_dataframe_autor_artigos(artigos_2017)
+        print('df_autor_artigos_2017.shape: ', df_autor_artigos_2017.shape)
+        df_autor_artigos_2017.to_csv(
+            'registros_autores_artigos_2017_cat:math.AT.csv',
+            columns=['author', 'id', 'title', 'summary', 'published_year'], 
+            encoding='utf-8', index=False, sep='@')
 
-# Aqui seria o local para criar os nós do grafo.
-# Para cada autor em 'authors' (desse artigo específico) deve-se criar um nó 
-# (usando como 'label' o nome do autor e colocando [id, title, summary, year] como metadados do nó).
-# E também criar todas as arestas ligando (de forma não direcionada) 
-# todos esses autores do mesmo artigo.
-'''
-def gerar_grafos(df_artigos):
-    # G = nx.from_pandas_edgelist(df_artigos, 'author', 'author', ['id', 'title', 'summary', 'published_year'])
-    G = nx.from_pandas_edgelist(df = df_artigos, source = 'author', target = 'author', edge_attr = ['id', 'title', 'summary', 'published_year'])
-    return G
+        autores_validos = get_autores_validos(artigos_2016, artigos_2017)
 
-G = gerar_grafos(df_nos_autores_2016)
-'''
+    else: # from_csv já gerado
 
-# teste+
-# Construindo o grafo
-def gerar_nos_grafo(df_artigos):
+        df_autor_artigos_2016 = pd.read_csv(
+            'registros_autores_artigos_2016_cat:math.AT.csv',
+            encoding='utf-8', sep='@')
+
+        df_autor_artigos_2017 = pd.read_csv(
+            'registros_autores_artigos_2017_cat:math.AT.csv',
+            encoding='utf-8', sep='@')
+
+        lista1 = set()
+        for i, row in df_autor_artigos_2016.iterrows():
+            lista1.add(row['author'])
+        
+        lista2 = set()
+        for i, row in df_autor_artigos_2017.iterrows():
+            lista2.add(row['author'])
+
+        autores_validos = lista1.intersection(lista2)
+        
+    return autores_validos, df_autor_artigos_2016, df_autor_artigos_2017 
+
+# Construindo o grafo não direcionado com nós para CADA AUTOR dos artigos.
+# Para cada autor em 'authors' (de um artigo específico) deve-se criar um nó 
+# (usando como 'label' o nome do autor) e para as arestas que ligam os autores do artigo
+# (coloca-se os metadados [id_link, title, summary, Weight]).
+# Obs.: O valor '3', para o atributo Weight das arestas, significa o relacionamento de 
+# publicação num mesmo artigo no ano. 
+def gerar_grafo(df_artigos):
+    
     G = nx.Graph()
-    for row in df_artigos.iterrows():
-        G.add_node(
-            row[1]['author'], 
-            id = row[1]['id'], 
-            title = row[1]['title'], 
-            summary = row[1]['summary'], 
-            published_year = row[1]['published_year'])
+
+    #Adiciona as arestas com os nós
+    for i in set(df_artigos.id):
+        df = df_artigos[df_artigos['id'] == i]
+        lista_autores = list(df['author'])
+        title = list(set(df['title']))
+        summary = list(set(df['summary']))
+        for a1, a2 in itertools.combinations(lista_autores, 2):
+            G.add_node(a1, summary_tokenize_stop_word = list())
+            G.add_node(a2, summary_tokenize_stop_word = list())
+            G.add_edge(a1, a2, id_link = i, title = title[0], summary = summary[0], Weight = 3)        
+
     return G
-#G_2016.add_edge(n1, n2, weight=row[1]['Weight'])
-grafo_2016 = gerar_nos_grafo(df_nos_autores_2016)
 
-# https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html
-for name, group in df_artigos_2016.groupby(['id', 'author']):
-    print(name)
-'''
-('http://arxiv.org/abs/1612.06793v1', 'Andrzej Kozlowski')
-('http://arxiv.org/abs/1612.06793v1', 'Kohhei Yamaguchi')
-('http://arxiv.org/abs/1612.07142v1', 'Daniel Tanré')
-('http://arxiv.org/abs/1612.08816v5', 'Daisuke Kishimoto')
-('http://arxiv.org/abs/1612.08816v5', 'Sho Hasui')
-'''
+#autores_validos, df_2016, df_2017 = obter_autores_artigos_from_arxiv(True)
+autores_validos, df_2016, df_2017 = obter_autores_artigos_from_arxiv(False)
 
-# https://www.shanelynn.ie/summarising-aggregation-and-grouping-data-in-python-pandas/
-# list(df_artigos_2016[df_artigos_2016['id'] == 'http://arxiv.org/abs/1612.08816v5']['author'])
+grafo_2016 = gerar_grafo(df_2016)
+grafo_2017 = gerar_grafo(df_2017)
 
-# df_artigos_2016.groupby(['id']).groups['http://arxiv.org/abs/1612.08816v5']
-# df_artigos_2016[df_artigos_2016['id'] == 'http://arxiv.org/abs/1612.08816v5'].groupby('author')
-'''
-gp = df_artigos_2016.groupby('id')
-for _, group in gp:
-    print(group['author'])
-'''
+print('\nInformações dos grafos (antes da adição das arresta de predição): \n')
+print('- grafo 2016: \n', nx.info(grafo_2016))
+print('- grafo 2017: \n', nx.info(grafo_2017))
 
-# g1 = df1.groupby( [ "Name", "City"] ).count()
+def adicionar_summary_tokenize_stop_word_para_autores(grafo, n1, n2):
 
-'''
-# https://www.tutorialspoint.com/python_pandas/python_pandas_groupby.htm
-grouped = df.groupby('Year')
-print grouped.get_group(2014)
-'''
-# df_artigos_2016.groupby('id').groups
+    dd = grafo.get_edge_data(n1, n2)
+    summary = dd.get('summary')
+    stop_words = set(stopwords.words('english'))
+    tokens = word_tokenize(summary)
+    filtered_sentence = [w for w in tokens if (not w in stop_words) and (w.isalpha())]
+    for s in filtered_sentence:
+        if not s in grafo.node[n1]['summary_tokenize_stop_word']:
+            grafo.node[n1]['summary_tokenize_stop_word'].append(s)
+        if not s in grafo.node[n2]['summary_tokenize_stop_word']:
+            grafo.node[n2]['summary_tokenize_stop_word'].append(s)
 
-# ===>
+lista_autores_predicao_em_2016_para_2017 = []
+# Obter todos os nós 'autores' que, com base no valor '2' da distância entre eles, podem 
+# ser preditos em 2016 (ou seja, que podem ou não publicar em conjunto no ano de 2017).
+# Obs.: Também será adicionado nos nós 'autores' vizinhos o atributo 'summary_tokenize_stop_word' da 
+# concatenação de todos os identificadores únicos dos artigos que o autor participa. 
+for n1 in grafo_2016.nodes:
+    # Faz todo o rastreamento de vizinhos dos vizinhos a apartir do nó 'n1'
+    for n2 in grafo_2016.neighbors(n1):
+        assert(nx.shortest_path_length(grafo_2016, source=n1, target=n2) == 1)
+        adicionar_summary_tokenize_stop_word_para_autores(grafo_2016, n1, n2)
+        for n3 in grafo_2016.neighbors(n2):
+            assert(nx.shortest_path_length(grafo_2016, source=n2, target=n3) == 1)
+            adicionar_summary_tokenize_stop_word_para_autores(grafo_2016, n2, n3)
+            if nx.shortest_path_length(grafo_2016, source=n1, target=n3) == 2:
+                if not [n1, n3] in lista_autores_predicao_em_2016_para_2017:
+                    lista_autores_predicao_em_2016_para_2017.append([n1, n3]) #Uma lista de listas
+
+# Calculo para ver se predição "(sim - VP / FP) ou (não - VN / FN)":
+def calculo_coeficiente_predicao(n1, n2):
+
+    def jaccard(a, b):
+        c = a.intersection(b)
+        return float(len(c)) / (len(a) + len(b) - len(c))
+
+    words1 = set(grafo_2016.node[n1]['summary_tokenize_stop_word'])
+    words2 = set(grafo_2016.node[n2]['summary_tokenize_stop_word'])
+
+    return jaccard(words1, words2)
+
+# Adiciona aresta para n1 e n2 (no grafo do ano 2016), apenas se os nós 'autor' 
+# tiverem publicado nos dois anos seguidos (2016 e 2017) e tiverem calculo de 
+# coeficiente predição suficiente:
+for n1, n2 in lista_autores_predicao_em_2016_para_2017:
+
+    if n1 in autores_validos and n2 in autores_validos:
+        
+        id_link = ''
+
+        if calculo_coeficiente_predicao(n1, n2) >= 0.1:
+            id_link = 'YES?'
+        else:
+            id_link = 'NO?'
+
+        # Obs.:
+        # O valor 'YES? / NO?' para o atributo id_link serve pra informar que é uma predição de publicação para 2017.
+        # O valor '6' para o atributo Weight serve pra diferenciar no gráfico que é uma aresta de predição
+        grafo_2016.add_edge(n1, n2, id_link = id_link, title = 'title', summary = 'summary', Weight = 6)
+
+
+# Calculo da matriz de confusão:
+
+print('\nInformações dos grafos (depois da adição das arresta de predição): \n')
+print('- grafo 2016: \n', nx.info(grafo_2016))
+print('- grafo 2017: \n', nx.info(grafo_2017))
+
 # export your data into Gephi’s GEXF format:
-# nx.write_gexf(G, 'quaker_network.gexf')
-
-# fell_whitehead_path = nx.shortest_path(G, source="Margaret Fell", target="George Whitehead")
-
-'''
-for n in grafo.nodes():
-     print(n, grafo.node[n]['id'])
-'''
-
-#  [(n, v) for n, v, d in grafo.nodes(data=True) if n.d['id'] == v.d['id']]
-
-# [grafo.add_edge(u, v, d) for u, v, d in grafo.edges(data=True) if d['weight'] == 6]
-
-# teste-
-
-# print(nx.info(grafo))
-
-# nx.connected_components(G)
-#  G.neighbors(1)
-# nx.degree(G,2)
-# G[1][2].update({0: 5})
-# G.edges[1, 2].update({0: 5})
-
-# len(list(grafo_2016.nodes()))
-# list(grafo_2016.nodes(data=True))[0]
-# df_artigos_2016[df_artigos_2016['author'] == 'Laurentiu Maxim']
-'''
-http://arxiv.org/abs/1602.04943v1
-http://arxiv.org/abs/1607.05521v1 
-'''
-
-
-# Mapeamento dos colunas (para importar no Gephi é obrigatorio ter): 
-# [Source,Target,Type,Weight]
-# Onde:
-# Source = 'Id' (author)
-# Target = 'Id' (author)
-# Type = undirected
-# Weight = 1 "sem peso"
+for n, d in grafo_2016.nodes(data=True):
+    lista = grafo_2016.node[n]['summary_tokenize_stop_word']
+    #Transformar para uma concatenção das stop_word (pois o gephi não lê 'lista de lista')
+    grafo_2016.node[n]['summary_tokenize_stop_word'] = '[#]'.join(lista)
+nx.write_gexf(grafo_2016, 'grafo_2016_in_gephi.gexf')
+nx.write_gexf(grafo_2017, 'grafo_2017_in_gephi.gexf')
