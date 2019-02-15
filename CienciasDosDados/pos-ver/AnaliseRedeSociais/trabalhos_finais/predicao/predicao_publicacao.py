@@ -218,8 +218,8 @@ for u, v in lista_aresta_predicao_yes_2016:
         quantidade_arestas_predicao_yes_2016_acertos = quantidade_arestas_predicao_yes_2016_acertos + 1
     else:
         quantidade_arestas_predicao_yes_2016_erros = quantidade_arestas_predicao_yes_2016_erros + 1
-print('\t\tQuantidade acertos para predição yes: ', quantidade_arestas_predicao_yes_2016_acertos)
-print('\t\tQuantidade erros para predição yes: ', quantidade_arestas_predicao_yes_2016_erros)
+print('\t\tQuantidade acertos para predição yes (Verdadeiro Positivo): ', quantidade_arestas_predicao_yes_2016_acertos)
+print('\t\tQuantidade erros para predição yes (Falso Positivo): ', quantidade_arestas_predicao_yes_2016_erros)
 quantidade_verdadeiro_positivo = quantidade_arestas_predicao_yes_2016_acertos / quantidade_arestas_predicao_yes_2016
 quantidade_falso_positivo = quantidade_arestas_predicao_yes_2016_erros / quantidade_arestas_predicao_yes_2016
 print('\tPercentual acertos para verdadeiro positivo: ', quantidade_verdadeiro_positivo)
@@ -235,8 +235,8 @@ for u, v in lista_aresta_predicao_no_2016:
         quantidade_arestas_predicao_no_2016_acertos = quantidade_arestas_predicao_no_2016_acertos + 1
     else:
         quantidade_arestas_predicao_no_2016_erros = quantidade_arestas_predicao_no_2016_erros + 1
-print('\t\tQuantidade acertos para predição no: ', quantidade_arestas_predicao_no_2016_acertos)
-print('\t\tQuantidade erros para predição no: ', quantidade_arestas_predicao_no_2016_erros)
+print('\t\tQuantidade acertos para predição no (Verdadeiro Negativo): ', quantidade_arestas_predicao_no_2016_acertos)
+print('\t\tQuantidade erros para predição no (Falso Negativo): ', quantidade_arestas_predicao_no_2016_erros)
 quantidade_verdadeiro_negativo = quantidade_arestas_predicao_no_2016_acertos / quantidade_arestas_predicao_no_2016
 quantidade_falso_negativo = quantidade_arestas_predicao_no_2016_erros / quantidade_arestas_predicao_no_2016
 print('\tPercentual acertos para verdadeiro negativo: ', quantidade_verdadeiro_negativo)
