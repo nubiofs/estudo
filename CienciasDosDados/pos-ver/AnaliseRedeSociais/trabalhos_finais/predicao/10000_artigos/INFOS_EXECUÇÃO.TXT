@@ -1,0 +1,40 @@
+Quantidades de artigos baixados:  9941
+
+Quantidades de artigos filtrados, com mais de um autor, para o ano de 2016 =  416
+Quantidades de artigos filtrados, com mais de um autor, para o ano de 2017 =  498
+
+df_autor_artigos_2016.shape:  (1065, 5)
+df_autor_artigos_2017.shape:  (1278, 5)
+
+Informações do grafo (antes da adição das arresta de predição):
+- grafo 2016:
+ Name:
+Type: Graph
+Number of nodes: 819
+Number of edges: 884
+Average degree:   2.1587
+
+Informações do grafo (depois da adição das arresta de predição):
+- grafo 2016:
+ Name:
+Type: Graph
+Number of nodes: 819
+Number of edges: 1012
+Average degree:   2.4713
+Quantidade arestas preditivas adicionadas para 2016:  128
+
+* Matriz de confusão:
+        Quantidade arestas predição YES para 2016:  24
+                Quantidade acertos para predição yes (Verdadeiro Positivo):  1
+                Quantidade erros para predição yes (Falso Positivo):  23
+        Percentual acertos para verdadeiro positivo:  0.041666666666666664
+        Percentual acertos para falso positivo:  0.9583333333333334
+
+        Quantidade arestas predição NO para 2016:  104
+                Quantidade acertos para predição no (Verdadeiro Negativo):  101
+                Quantidade erros para predição no (Falso Negativo):  3
+        Percentual acertos para verdadeiro negativo:  0.9711538461538461
+        Percentual acertos para false negativo:  0.028846153846153848
+
+Percentual de acertos final:  0.796875
+Percentual de erros final:  0.203125
