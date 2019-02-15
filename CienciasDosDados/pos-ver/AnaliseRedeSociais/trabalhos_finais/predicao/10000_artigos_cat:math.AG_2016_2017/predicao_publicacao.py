@@ -73,25 +73,25 @@ def obter_autores_artigos_from_arxiv(from_arxiv):
         df_autor_artigos_2016 = gerar_dataframe_autor_artigos(artigos_2016)
         print('\ndf_autor_artigos_2016.shape: ', df_autor_artigos_2016.shape)
         df_autor_artigos_2016.to_csv(
-            'registros_autores_artigos_2016_cat:math.AT.csv',
+            'registros_autores_artigos_2016_cat:math.AG.csv',
             columns=['author', 'id', 'title', 'summary', 'published_year'], 
             encoding='utf-8', index=False, sep='@')
 
         df_autor_artigos_2017 = gerar_dataframe_autor_artigos(artigos_2017)
         print('df_autor_artigos_2017.shape: ', df_autor_artigos_2017.shape)
         df_autor_artigos_2017.to_csv(
-            'registros_autores_artigos_2017_cat:math.AT.csv',
+            'registros_autores_artigos_2017_cat:math.AG.csv',
             columns=['author', 'id', 'title', 'summary', 'published_year'], 
             encoding='utf-8', index=False, sep='@')
 
     else: # from_csv já gerado
 
         df_autor_artigos_2016 = pd.read_csv(
-            'registros_autores_artigos_2016_cat:math.AT.csv',
+            'registros_autores_artigos_2016_cat:math.AG.csv',
             encoding='utf-8', sep='@')
 
         df_autor_artigos_2017 = pd.read_csv(
-            'registros_autores_artigos_2017_cat:math.AT.csv',
+            'registros_autores_artigos_2017_cat:math.AG.csv',
             encoding='utf-8', sep='@')
 
     return df_autor_artigos_2016, df_autor_artigos_2017 
