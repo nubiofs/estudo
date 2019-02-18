@@ -121,8 +121,8 @@ def gerar_grafo(df_artigos):
 
     return G
 
-df_2011, df_2012 = obter_autores_artigos_from_arxiv(True)
-#df_2011, df_2012 = obter_autores_artigos_from_arxiv(False)
+#df_2011, df_2012 = obter_autores_artigos_from_arxiv(True)
+df_2011, df_2012 = obter_autores_artigos_from_arxiv(False)
 
 grafo_2011 = gerar_grafo(df_2011)
 grafo_2012 = gerar_grafo(df_2012)
