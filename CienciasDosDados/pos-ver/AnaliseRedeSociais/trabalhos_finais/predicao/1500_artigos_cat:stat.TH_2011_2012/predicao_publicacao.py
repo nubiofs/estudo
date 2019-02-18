@@ -130,11 +130,11 @@ grafo_2012 = gerar_grafo(df_2012)
 print('\nInformações do grafo (antes da adição das arresta de predição): ')
 print('- grafo 2011: \n', nx.info(grafo_2011))
 
+stop_words = set(stopwords.words('english'))
 def adicionar_summary_tokenize_stop_word_para_autores(grafo, n1, n2):
 
     dd = grafo.get_edge_data(n1, n2)
     summary = dd.get('summary')
-    stop_words = set(stopwords.words('english'))
     tokens = word_tokenize(summary)
     filtered_sentence = [w for w in tokens if (not w in stop_words) and (w.isalpha())]
     for s in filtered_sentence:
@@ -162,8 +162,9 @@ for n1 in grafo_2011.nodes:
                 if grafo_2012.has_node(n3): 
                     assert(nx.shortest_path_length(grafo_2011, source=n2, target=n3) == 1)
                     adicionar_summary_tokenize_stop_word_para_autores(grafo_2011, n2, n3)
-                    if (nx.shortest_path_length(grafo_2011, source=n1, target=n3) == 2) and (not [n1, n3] in lista_autores_predicao_em_2011_para_2012):
+                    if (not [n1, n3] in lista_autores_predicao_em_2011_para_2012) and (nx.shortest_path_length(grafo_2011, source=n1, target=n3) == 2):
                         lista_autores_predicao_em_2011_para_2012.append([n1, n3]) #Uma lista de listas
+                        print('.')
 
 #
 # Calculo para ver se predição "(sim - VP / FP) ou (não - VN / FN)":
