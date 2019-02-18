@@ -1,8 +1,6 @@
 https://arxiv.org/archive/math
 
 * math.AT - Algebraic Topology
-* math.NT - Number Theory 
-* math.AG - Algebraic Geometry
 
 =============================
 
@@ -12,6 +10,6 @@ https://arxiv.org/archive/astro-ph
 
 =============================
 
-https://arxiv.org/archive/econ
+https://arxiv.org/archive/stat
 
-* econ.TH - Theoretical Economics
+* stat.TH - Statistics Theory
