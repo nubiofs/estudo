@@ -9,3 +9,9 @@ https://arxiv.org/archive/math
 https://arxiv.org/archive/astro-ph
 
 * astro-ph.GA - Astrophysics of Galaxies
+
+=============================
+
+https://arxiv.org/archive/econ
+
+* econ.TH - Theoretical Economics

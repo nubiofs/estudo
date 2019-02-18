@@ -20,7 +20,7 @@ def obter_autores_artigos_from_arxiv(from_arxiv):
 
     if from_arxiv:
 
-        results = arxiv.query(search_query="cat:math.AT", start = 2000, max_results = 500)
+        results = arxiv.query(search_query="cat:econ.TH", start = 2000, max_results = 500)
         print('\nQuantidades de artigos baixados: ', len(list(results)))
 
         artigos_2016 = []
@@ -73,25 +73,25 @@ def obter_autores_artigos_from_arxiv(from_arxiv):
         df_autor_artigos_2016 = gerar_dataframe_autor_artigos(artigos_2016)
         print('\ndf_autor_artigos_2016.shape: ', df_autor_artigos_2016.shape)
         df_autor_artigos_2016.to_csv(
-            'registros_autores_artigos_2016_cat:math.AT.csv',
+            'registros_autores_artigos_2016_cat:econ.TH.csv',
             columns=['author', 'id', 'title', 'summary', 'published_year'], 
             encoding='utf-8', index=False, sep='@')
 
         df_autor_artigos_2017 = gerar_dataframe_autor_artigos(artigos_2017)
         print('df_autor_artigos_2017.shape: ', df_autor_artigos_2017.shape)
         df_autor_artigos_2017.to_csv(
-            'registros_autores_artigos_2017_cat:math.AT.csv',
+            'registros_autores_artigos_2017_cat:econ.TH.csv',
             columns=['author', 'id', 'title', 'summary', 'published_year'], 
             encoding='utf-8', index=False, sep='@')
 
     else: # from_csv já gerado
 
         df_autor_artigos_2016 = pd.read_csv(
-            'registros_autores_artigos_2016_cat:math.AT.csv',
+            'registros_autores_artigos_2016_cat:econ.TH.csv',
             encoding='utf-8', sep='@')
 
         df_autor_artigos_2017 = pd.read_csv(
-            'registros_autores_artigos_2017_cat:math.AT.csv',
+            'registros_autores_artigos_2017_cat:econ.TH.csv',
             encoding='utf-8', sep='@')
 
     return df_autor_artigos_2016, df_autor_artigos_2017 
