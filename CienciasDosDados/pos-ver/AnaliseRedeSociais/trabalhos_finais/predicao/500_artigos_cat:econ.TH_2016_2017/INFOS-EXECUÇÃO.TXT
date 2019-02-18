@@ -1,0 +1,40 @@
+Quantidades de artigos baixados:  1500
+
+Quantidades de artigos filtrados, com mais de um autor, para o ano de 2011 =  279
+Quantidades de artigos filtrados, com mais de um autor, para o ano de 2012 =  384
+
+df_autor_artigos_2011.shape:  (706, 5)
+df_autor_artigos_2012.shape:  (974, 5)
+
+Informações do grafo (antes da adição das arresta de predição):
+- grafo 2011:
+ Name:
+Type: Graph
+Number of nodes: 562
+Number of edges: 557
+Average degree:   1.9822
+
+Informações do grafo (depois da adição das arresta de predição):
+- grafo 2011:
+ Name:
+Type: Graph
+Number of nodes: 562
+Number of edges: 593
+Average degree:   2.1103
+Quantidade arestas preditivas adicionadas para 2011:  36
+
+* Matriz de confusão:
+        Quantidade arestas predição YES para 2011:  11
+                Quantidade acertos para predição yes (Verdadeiro Positivo):  0
+                Quantidade erros para predição yes (Falso Positivo):  11
+        Percentual acertos para verdadeiro positivo:  0.0
+        Percentual acertos para falso positivo:  1.0
+
+        Quantidade arestas predição NO para 2011:  25
+                Quantidade acertos para predição no (Verdadeiro Negativo):  24
+                Quantidade erros para predição no (Falso Negativo):  1
+        Percentual acertos para verdadeiro negativo:  0.96
+        Percentual acertos para false negativo:  0.04
+
+Percentual de acertos final:  0.6666666666666666
+Percentual de erros final:  0.3333333333333333
