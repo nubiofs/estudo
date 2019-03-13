@@ -8,5 +8,8 @@ $ mkdir openCV_testes/ && cd openCV_testes
 
 $ pipenv --python 3.7
 
-$ pipenv install opencv-contrib-python 
-//$ pipenv run pip install opencv-contrib-python 
+$ pipenv run pip install opencv-contrib-python 
+//$ pipenv install opencv-contrib-python 
+
+$ pipenv run pip show opencv-contrib-python
+
