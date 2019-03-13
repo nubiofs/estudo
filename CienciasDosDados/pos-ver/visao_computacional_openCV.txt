@@ -1,0 +1,12 @@
+* Instalação:
+
+$ sudo apt-get install python-opencv
+
+"ou" [num ambiente virtual para python] (if you need both main and contrib modules):
+
+$ mkdir openCV_testes/ && cd openCV_testes
+
+$ pipenv --python 3.7
+
+$ pipenv install opencv-contrib-python 
+//$ pipenv run pip install opencv-contrib-python 
