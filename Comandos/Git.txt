@@ -238,4 +238,10 @@ $ git push
 
 ===> https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
 
+https://stackoverflow.com/questions/28192623/create-patch-or-diff-file-from-git-repository-and-apply-it-to-another-different
+
+$ git format-patch -k --stdout HEAD^ >> file.path
+
+$ git am -3 -k file.patch
