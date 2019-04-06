@@ -1,5 +1,7 @@
 * Instalação:
 
+1) openCV:
+
 $ sudo apt-get install python-opencv
 
 "ou" [num ambiente virtual para python] (if you need both main and contrib modules):
@@ -12,4 +14,10 @@ $ pipenv run pip install opencv-contrib-python
 //$ pipenv install opencv-contrib-python 
 
 $ pipenv run pip show opencv-contrib-python
+
+2) Dlib:
+
+$ sudo apt-get install cmake
+$ pipenv install dlib
+
 
