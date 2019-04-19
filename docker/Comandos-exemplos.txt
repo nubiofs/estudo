@@ -87,6 +87,8 @@ $ docker ps -a
 CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
 437a96da7fda        05719eff3e76          "/bin/bash"              4 minutes ago       Up 4 minutes                                 frosty_kirch
 
+# docker container logs bec81724b049
+
 $ echo "Oi!" >> teste.txt
 
 $ docker cp teste.txt frosty_kirch:/teste.txt
@@ -110,6 +112,8 @@ $ docker rmi -f 084faf6b4c2b
 
 $ docker container ls
 
+# docker container logs bec81724b049
+
 $ docker exec -it sinter-jboss /bin/sh
 
 obs.: run a command in a RUNNING CONTAINER using "docker exec [OPTIONS] CONTAINER COMMAND [ARG...]"
@@ -131,7 +135,7 @@ obs.: run a command in a RUNNING CONTAINER using "docker exec [OPTIONS] CONTAINE
 ---
 
 $ docker logs -tf 7e3a5288c91a
-
+# docker container logs -tf bec81724b049
 $ docker inspect 7e3a5288c91a
 
 root@ubuntu:~$ docker ps; # Lista os containers em execução
