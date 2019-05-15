@@ -1,0 +1,1 @@
+"use strict";$(document).ready(function(){"undefined"!=typeof hljs&&$("pre code").each(function(t,n){hljs.highlightBlock(n)}),$("a").each(function(t,n){var e=$(n).attr("href");"string"==typeof e&&-1===e.indexOf(window.location.origin)&&-1==="/.#".indexOf(e[0])&&$(n).attr("target","_blank")})});

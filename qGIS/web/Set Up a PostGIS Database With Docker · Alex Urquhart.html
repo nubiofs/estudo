@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html><head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="generator" content="Hugo 0.48">
+
+    
+    <meta name="theme-color" content="#2d4054">
+    
+
+    <meta property="og:title" content="Set Up a PostGIS Database With Docker">
+
+    
+    <meta property="og:locale" content="en_US">
+    
+
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-10-29">
+    
+    <meta name="twitter:card" content="summary">
+
+    <meta property="og:url" content="https://alexurquhart.com/post/set-up-postgis-with-docker/">
+    <meta property="og:site_name" content="Alex Urquhart">
+
+    
+    <meta name="description" content="Setting up a PostGIS database is easy! We will use Docker, a popular containerization platform to install and set up a PostGIS database, then connect to it using QGIS and ArcGIS Pro.">
+    <meta property="og:description" content="Setting up a PostGIS database is easy! We will use Docker, a popular containerization platform to install and set up a PostGIS database, then connect to it using QGIS and ArcGIS Pro.">
+    
+    
+    
+    <meta property="og:tags" content="postgis">
+    
+    <meta property="og:tags" content="docker">
+    
+    <meta property="og:tags" content="windows">
+    
+    <meta property="og:tags" content="linux">
+    
+    <meta property="og:tags" content="postgresql">
+    
+    <meta property="og:tags" content="qgis">
+    
+    <meta property="og:tags" content="arcgis">
+    
+
+    
+    <meta name="twitter:creator" content="@alexanderurq">
+    
+
+    
+    <meta name="twitter:site" content="@alexanderurq">
+    
+
+    
+        
+            <meta property="og:image" content="https://alexurquhart.com//img/postgis-docker/arcpro-roads.png">
+        
+    
+
+    
+
+    <title>Set Up a PostGIS Database With Docker · Alex Urquhart</title>
+
+    
+
+    <link rel="stylesheet" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/font-awesome.css">
+    <link rel="stylesheet" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/lightbox.css">
+    <link rel="stylesheet" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/pure-min.css">
+    
+    
+    <link rel="stylesheet" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/grids-responsive-min.css">
+    
+    <link rel="stylesheet" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/hugo-geo.css">
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/default.css">
+    
+
+    <link rel="icon" href="https://alexurquhart.com/favicon.ico">
+<script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/sdk_002.js" async="" crossorigin="anonymous"></script><script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/cbgapi.loaded_1" async=""></script><script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/cbgapi.loaded_0" async=""></script><script id="facebook-jssdk" src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/sdk.js"></script><script async="" src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/embed.js" data-timestamp="1557944954642"></script><link rel="prefetch" as="style" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/a_data_002/lounge.css"><link rel="prefetch" as="script" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/a_data_002/common.js"><link rel="prefetch" as="script" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/a_data_002/lounge.js"><link rel="prefetch" as="script" href="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/a_data_002/config.js"><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#1d3c78;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}</style></head>
+<body>
+    <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div><div><iframe name="fb_xdm_frame_https" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" style="border: medium none;" src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/d_vbiawPdxB.html" frameborder="0"></iframe></div></div></div>
+    <div class="hg-container pure-g">
+        <div class="hg-mobile-nav pure-u-1">
+    <div class="hg-site-title">
+        Alex Urquhart
+    </div>
+    <div class="hg-mobile-links">
+        
+            <a class="hg-sidenav-link" href="https://alexurquhart.com/">Blog</a>
+        
+            <a class="hg-sidenav-link" href="https://alexurquhart.com/about/">About Me</a>
+        
+    </div>
+</div>
+        <div class="hg-sidenav pure-u-1 pure-u-md-1-5">
+    <div class="hg-sidenav-content">
+        <div class="hg-site-title hg-sidenav-item">
+            <a href="https://alexurquhart.com/">Alex Urquhart</a>
+        </div>
+        
+        <div class="hg-site-subtitle hg-sidenav-item">
+            Geomatics Professional
+        </div>
+         
+
+        
+        <div class="hg-social hg-sidenav-item">
+            
+                <a href="mailto:alexurquhart@gmail.com" target="_blank"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+            
+                <a href="https://www.github.com/alexurquhart" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+            
+                <a href="https://www.linkedin.com/in/alex-urquhart-65979695" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            
+                <a href="https://twitter.com/alexanderurq" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            
+        </div>
+        <div class="hg-sidenav-links hg-sidenav-item">
+            
+                <a class="hg-sidenav-link" href="https://alexurquhart.com/">Blog</a>
+            
+                <a class="hg-sidenav-link" href="https://alexurquhart.com/about/">About Me</a>
+            
+        </div>
+    </div>
+</div>
+
+        
+<div class="hg-body-container pure-u-1 pure-u-md-3-5">
+    <div class="hg-body">
+
+        <main>
+            <header>
+                <h1>Set Up a PostGIS Database With Docker</h1>
+                <p class="hg-post-date hg-muted">
+                    Published on: 29 October 2017
+                </p>
+                <p class="hg-tag-list hg-muted">
+                    
+    Tags:
+    
+    
+        <a href="https://alexurquhart.com/tags/postgis"><span class="hg-tag">postgis</span></a>
+    
+        <a href="https://alexurquhart.com/tags/docker"><span class="hg-tag">docker</span></a>
+    
+        <a href="https://alexurquhart.com/tags/windows"><span class="hg-tag">windows</span></a>
+    
+        <a href="https://alexurquhart.com/tags/linux"><span class="hg-tag">linux</span></a>
+    
+        <a href="https://alexurquhart.com/tags/postgresql"><span class="hg-tag">postgresql</span></a>
+    
+        <a href="https://alexurquhart.com/tags/qgis"><span class="hg-tag">qgis</span></a>
+    
+        <a href="https://alexurquhart.com/tags/arcgis"><span class="hg-tag">arcgis</span></a>
+    
+
+                </p>
+                
+                    
+<div class="hg-share-buttons">
+    
+
+    
+    <div class="hg-share-btn">
+        <a href="mailto:?body=https%3A%2F%2Falexurquhart.com%2Fpost%2Fset-up-postgis-with-docker%2F&amp;subject=Set+Up+a+PostGIS+Database+With+Docker" target="_blank">
+            <div class="hg-custom-btn">
+                <i class="fa fa-envelope fa-1"></i>
+            </div>
+        </a>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="hg-share-btn">
+        <a href="#" onclick="window.print()">
+            <div class="hg-custom-btn">
+                <i class="fa fa-print fa-1"></i>
+            </div>
+        </a>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="hg-share-btn">
+        <a href="https://alexurquhart.com/index.xml" type="application/rss+xml" target="_blank">
+            <div class="hg-custom-btn hg-rss">
+                <i class="fa fa-rss fa-1"></i>
+            </div>
+        </a>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="hg-share-btn">
+        <div class="fb-share-button fb_iframe_widget" data-href="https://alexurquhart.com/post/set-up-postgis-with-docker/" data-layout="button" fb-xfbml-state="parsed" fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;href=https%3A%2F%2Falexurquhart.com%2Fpost%2Fset-up-postgis-with-docker%2F&amp;layout=button&amp;locale=en_US&amp;sdk=joey"><span style="vertical-align: top; width: 0px; height: 0px; overflow: hidden;"><iframe name="f1fcd29c811a9f2" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" title="fb:share_button Facebook Social Plugin" style="border: medium none; visibility: hidden; width: 0px; height: 0px;" src="https://www.facebook.com/v2.8/plugins/share_button.php?app_id=&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2Fd_vbiawPdxB.js%3Fversion%3D44%23cb%3Dfab116cd02ecf8%26domain%3Dalexurquhart.com%26origin%3Dhttps%253A%252F%252Falexurquhart.com%252Ff348c2a0d6617%26relation%3Dparent.parent&amp;container_width=0&amp;href=https%3A%2F%2Falexurquhart.com%2Fpost%2Fset-up-postgis-with-docker%2F&amp;layout=button&amp;locale=en_US&amp;sdk=joey" width="1000px" height="1000px" frameborder="0"></iframe></span></div>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="hg-share-btn">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://alexurquhart.com/post/set-up-postgis-with-docker/" data-show-count="false" target="_blank">Tweet</a>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="hg-share-btn">
+        <script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/in.js" type="text/javascript"> lang: en_US</script>
+        <script type="IN/Share" data-url="https://alexurquhart.com/post/set-up-postgis-with-docker/"></script>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="hg-share-btn">
+        <script type="text/javascript">
+            reddit_url = 'https:\/\/alexurquhart.com\/post\/set-up-postgis-with-docker\/';
+            reddit_title = 'Set Up a PostGIS Database With Docker';
+            reddit_newwindow='1';
+        </script>
+        <script type="text/javascript" src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/button1.js"></script><iframe src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/button1.html" scrolling="no" width="120" height="22" frameborder="0"></iframe>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="hg-share-btn">
+        <div style="position: absolute; width: 450px; left: -10000px;" id="___plus_0"><iframe ng-non-bindable="" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position:absolute;top:-10000px;width:450px;margin:0px;border-style:none" tabindex="0" vspace="0" id="I0_1557944954740" name="I0_1557944954740" src="https://apis.google.com/se/0/_/+1/sharebutton?plusShare=true&amp;usegapi=1&amp;action=share&amp;annotation=bubble&amp;origin=https%3A%2F%2Falexurquhart.com&amp;url=https%3A%2F%2Falexurquhart.com%2Fpost%2Fset-up-postgis-with-docker%2F&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en_US.BW4NrCun1rw.O%2Fam%3DwQE%2Fd%3D1%2Frs%3DAGLTcCO_Nud4aUV_1gfzBmUi0OLzCy3b5w%2Fm%3D__features__#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1557944954740&amp;_gfid=I0_1557944954740&amp;parent=https%3A%2F%2Falexurquhart.com&amp;pfname=&amp;rpctoken=18062150" data-gapiattached="true" width="100%" frameborder="0"></iframe></div><div class="g-plus" data-action="share" data-annotation="bubble" data-gapiscan="true" data-onload="true" data-gapistub="true"></div>
+    </div>
+    
+
+    
+
+    
+</div>
+                
+            </header>
+            <article>
+                <div class="hidden-mobile">
+                    
+<div class="hg-toc">
+    <h5>Table of Contents</h5>
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#why-postgis">Why PostGIS?</a></li>
+<li><a href="#why-docker">Why Docker?</a></li>
+<li><a href="#install-docker-toolbox">Install Docker Toolbox</a></li>
+<li><a href="#running-a-docker-container">Running a Docker Container</a>
+<ul>
+<li><a href="#listing-running-containers">Listing running containers</a></li>
+<li><a href="#stopping-deleting-the-container">Stopping &amp; Deleting The Container</a></li>
+</ul></li>
+<li><a href="#running-postgis">Running PostGIS</a>
+<ul>
+<li><a href="#persisting-your-data">Persisting Your Data</a></li>
+<li><a href="#creating-the-database-container">Creating the Database Container</a></li>
+</ul></li>
+<li><a href="#connecting-in-qgis">Connecting In QGIS</a>
+<ul>
+<li><a href="#creating-or-importing-geometry">Creating Or Importing Geometry</a></li>
+</ul></li>
+<li><a href="#connecting-in-arcgis-pro">Connecting In ArcGIS Pro</a>
+<ul>
+<li><a href="#creating-a-new-database-connection">Creating A New Database Connection</a></li>
+<li><a href="#creating-a-new-schema">Creating A New Schema</a></li>
+<li><a href="#viewing-data">Viewing Data</a></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</nav>
+</div>
+
+                </div>
+                
+
+<p>For GIS users who haven’t heard of <a href="http://postgis.net/" target="_blank">PostGIS</a>:</p>
+
+<blockquote>
+<p>PostGIS is a spatial database extender for <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a> object-relational database. It adds support for geographic objects allowing location queries to be run in SQL.</p>
+</blockquote>
+
+<p>In this tutorial post we’ll cover how to install and run a PostGIS database on Windows using <a href="https://www.docker.com/" target="_blank">Docker</a>, a popular containerization platform. We’ll then connect to the database and use it in both QGIS and ArcGIS Pro.</p>
+
+<h1 id="why-postgis">Why PostGIS?</h1>
+
+
+<figure style="
+    min-width: 25%;
+    max-width: 250px;
+    float: right;
+    ">
+    
+        <img src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/postgis-logo.png" class="pure-img hg-thumbnail " alt="PostGIS logo">
+    
+    
+</figure>
+
+<p>If, up until this point in time you have only used flat-files to 
+store your spatial data, such as shapefiles, file geodatabases, or 
+SpatiaLite databases you might not know what the use case would be for 
+using software like PostGIS. In short, PostgreSQL (or postgres, for 
+short) is a <em>database server</em>, meaning it is a program that accepts connections from one or more <em>clients</em>, and allows them to interact with the data the server manages. PostGIS is an <em>extension</em>
+ that is installed on top of PostgreSQL and gives the database server 
+the means to store and manipulate spatial data, as well as perform 
+spatial calculations and analysis. PostGIS can perform spatial 
+operations on <strong>both</strong> vector and raster data.</p>
+
+<p>A more comprehensive comparison of PostGIS vs flat-file databases can be found <a href="https://geosymp.com/postgis-vs-spatialite/" target="_blank">here</a>.</p>
+
+<h1 id="why-docker">Why Docker?</h1>
+
+
+<figure style="
+    min-width: 25%;
+    max-width: 250px;
+    float: right;
+    ">
+    
+        <img src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/Logo-Docker.svg" class="pure-img hg-thumbnail " alt="Docker logo">
+    
+    
+</figure>
+
+<p><a href="https://www.docker.com/" target="_blank">Docker</a> is a 
+beast, it can be a bit intimidating for new users who aren’t familiar 
+with the command-line, but it provides you with a means to build and run
+ software in a very consistent and controlled way by building upon a 
+technology called <a href="https://unix.stackexchange.com/questions/254956/what-is-the-difference-between-docker-lxd-and-lxc" target="_blank">LXC containers</a>.</p>
+
+<p>What does that mean for the average GIS’er? It means that you can 
+download and run software like Postgres + PostGIS on any machine with 
+minimal configuration very quickly. For anyone who has tried to install 
+Postgres + PostGIS on Windows before that’s kind of a big deal, because 
+it can be a <strong>giant pain in the ass</strong>. That’s not to say 
+that using Docker can’t be frustrating, but I’ve found it to be very 
+quick and intuitive once I got the hang of it.</p>
+
+<h1 id="install-docker-toolbox">Install Docker Toolbox</h1>
+
+<p>Now, I wish this step could be as easy as saying “go here and 
+download installer X”, but unfortunately it’s not that simple. Docker, 
+being an enterprise-grade containerization software has many different 
+versions you can install, depending on your host operating system.</p>
+
+<p><strong><a href="https://www.docker.com/docker-windows" target="_blank">Docker for Windows</a></strong> requires Windows 10 with <a href="https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v" target="_blank">Hyper-V</a>
+ virtualization enabled, which is only available on Windows 10 
+Professional or Enterprise 64 bit versions. I will not be using this 
+software in this tutorial, and can’t confirm that the steps will be the 
+same, although the will most likely be very similar.</p>
+
+<p><strong><a href="https://www.docker.com/products/docker-toolbox" target="_blank">Docker Toolbox</a></strong> is available for other versions of Windows as well as Mac, and is the version I will be using for this tutorial. It uses <a href="https://www.virtualbox.org/" target="_blank">VirtualBox</a> to run your containers in conjunction with Docker.</p>
+
+<p>After you have downloaded and installed Docker Toolbox, you should now be able to launch the <strong>Docker Quickstart Terminal</strong> from the Windows start menu.</p>
+
+<h1 id="running-a-docker-container">Running a Docker Container</h1>
+
+
+<figure>
+    
+    <a href="https://alexurquhart.com/img/postgis-docker/quickstart.png" data-title="Note the IP address in the welcome text at the top." data-lightbox="/img/postgis-docker/quickstart.png">
+    
+        <img src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/quickstart.png" class="
+                
+                pure-img
+                " alt="Screenshot of the Docker quickstart terminal.">
+    </a>
+    
+    <figcaption>
+        Note the IP address in the welcome text at the top.
+    </figcaption>
+    
+</figure>
+
+<p>When you installed Docker Toolbox, it installed and configured a 
+Linux virtual machine on VirtualBox, where your containers will actually
+ run. Lets test out our installation by running a container running the <a href="https://www.nginx.com/" target="_blank">NGINX</a>
+ web server. This will not only prove that our container is running, but
+ that we can access it through the network abstrations created by 
+VirtualBox and Docker.</p>
+
+<p>In the terminal, type the following command:</p>
+
+<pre><code class="language-bash hljs">docker run --name=nginx -d -p 80:80 nginx
+</code></pre>
+
+<p>Lets disect this command bit by bit:</p>
+
+<ul>
+<li><p><code>docker run</code> is the command to tell Docker you want to run a container. There are loads of other commands, simply type <code>docker</code> to see them all. We’ll cover some other commands shortly.</p></li>
+
+<li><p><code>--name=nginx</code> Specifies the name of the container 
+we’re about to create. When working with Docker you can refer to a 
+container either by its name, or its ID, which is a random alpha-numeric
+ string. If you don’t specify a name, it will be generated out of two 
+randomly selected words separated by an underscore.</p></li>
+
+<li><p><code>-d</code> tells Docker to run this container in a detached state (i.e. in the background)</p></li>
+
+<li><p><code>-p 80:80</code> tells Docker to map the host’s port 80 to 
+the containers port 80. This is important, as containers will not 
+automatically expose their ports to the outside. As we’re running a web 
+server, which serves HTTP requests over port 80, this command allows 
+requests from outside the container to reach the web server. We’ll 
+expose a port in a similar way when we run our PostgreSQL database 
+later.</p></li>
+
+<li><p><code>nginx</code> is the container we would like to run. Docker includes the ability to pull containers from <a href="https://hub.docker.com/explore/" target="_blank">Docker Hub</a>, which is a site with a collection of official and user-generated containers that are ready to use.</p></li>
+</ul>
+
+<p>After you’ve ran the command you should get an output similar to this:</p>
+
+<pre><code class="hljs cs">$ docker run --name=nginx -d -p <span class="hljs-number">80</span>:<span class="hljs-number">80</span> nginx
+Unable to find image <span class="hljs-string">'nginx:latest'</span> locally
+latest: Pulling <span class="hljs-keyword">from</span> library/nginx
+bc95e04b23c0: Pull complete
+aee0c172e58a: Pull complete
+c2a5d8ccfabc: Pull complete
+Digest: sha256:adea4f68096fded167603ba6663ed615a80e090da68eb3c9e2508c15c8368401
+Status: Downloaded newer image <span class="hljs-keyword">for</span> nginx:latest
+<span class="hljs-number">1743234776</span>d03e8a39cd851324e68f93919d0ba13672d6a7d60b80c4558ee90f
+</code></pre>
+
+<p>Docker downloads the necessary images in order to run the NGINX container, then creates a new container called <code>nginx</code>.
+ The last line is the container ID. As mentioned in the welcome text 
+when you started the terminal, the containers will be running on a VM 
+with a specific IP address, in my case it is <strong>192.168.99.100</strong> (yours may be different, it might be worthwhile to check).</p>
+
+<p>Another way to get the IP address of your Docker VM is to run the command:</p>
+
+<pre><code class="hljs">docker-machine ip
+</code></pre>
+
+<p>In your web browser, navigate to the IP address of your Docker VM. 
+You should see the NGINX welcome screen, which demonstrates that the 
+container is running and serving requests on the port we exposed.</p>
+
+
+<figure>
+    
+    <a href="https://alexurquhart.com/img/postgis-docker/nginx.png" data-title="Navigate to the IP." data-lightbox="/img/postgis-docker/nginx.png">
+    
+        <img src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/nginx.png" class="
+                
+                pure-img
+                " alt="Screenshot of the nginx welcome screen.">
+    </a>
+    
+    <figcaption>
+        Navigate to the IP.
+    </figcaption>
+    
+</figure>
+
+<h2 id="listing-running-containers">Listing running containers</h2>
+
+<p>With Docker you can have many containers running at the same time. To list them you can use the command <code>docker ps</code>. It should output something similar to this:</p>
+
+<pre><code class="language-bash hljs">$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+99fa53dffb90        nginx               <span class="hljs-string">"nginx -g 'daemon ..."</span>   5 minutes ago       Up 2 minutes        0.0.0.0:80-&gt;80/tcp   nginx
+</code></pre>
+
+<h2 id="stopping-deleting-the-container">Stopping &amp; Deleting The Container</h2>
+
+<p>To stop and remove the NGINX container you use the <code>docker stop</code> and <code>docker rm</code> command. Containers must be stopped before they can be removed.</p>
+
+<p>Run the command:</p>
+
+<pre><code class="language-bash hljs">$ docker stop nginx
+</code></pre>
+
+<p>It will then print the name of the container that was stopped. Next, if you run <code>docker ps</code> again you will see that the <code>nginx</code>
+ container is no longer running. If you’d like to list all containers, 
+including the ones that have stopped, you can run the command <code>docker ps -a</code> to include stopped containers. It should output something similar to the following. Note the <code>STATUS</code> field to see when the container exited:</p>
+
+<pre><code class="language-bash hljs">$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                          PORTS               NAMES
+99fa53dffb90        nginx               <span class="hljs-string">"nginx -g 'daemon ..."</span>   9 minutes ago       Exited (0) About a minute ago                       nginx
+</code></pre>
+
+<p>Lastly, you can delete the stopped container by using the <code>docker rm</code> command. It will print the name of the container after it has been deleted.</p>
+
+<pre><code class="language-bash hljs">docker rm nginx
+</code></pre>
+
+<h1 id="running-postgis">Running PostGIS</h1>
+
+<p>Congratulations! You’ve ran and managed your first Docker container! The next step is to get our spatial database running.</p>
+
+<p>One of the advantages of Docker I mentioned before is the ability to 
+leverage both official and community built containers to get your 
+software running quickly no matter what machine you’re running it on. If
+ you look through <a href="https://hub.docker.com/explore/" target="_blank">Docker Hub</a>
+ there are a few PostGIS containers available for you to use. For this 
+example I will be using the Dockerfile (a set of instructions used to 
+create a finished container) provided by the <a href="https://hub.docker.com/r/kartoza/postgis/" target="_blank"><code>kartoza/postgis</code></a> repository.</p>
+
+<h2 id="persisting-your-data">Persisting Your Data</h2>
+
+<p>Before we create the database we need to think about how our database
+ info will be stored within Docker. Normally when you create a Docker 
+container, you are not meant to be able to enter the containers 
+filesystem to copy or modify data. This means that unless we specify 
+what’s called a <em>volume</em> in Docker, our database data will be 
+saved inside the container, making it difficult or impossible to perform
+ backups or upgrades to the database software without losing all your 
+data.</p>
+
+<p>What we’re going to do is create a <em>volume container</em> that will be used to persist PostgreSQL database files outside of the the container that runs the database process:</p>
+
+<pre><code class="language-bash hljs">docker volume create pg_data
+</code></pre>
+
+<p>If you wish to read more about using volumes with Docker you can read the documentation <a href="https://docs.docker.com/engine/admin/volumes/volumes/" target="_blank">here</a>.</p>
+
+<h2 id="creating-the-database-container">Creating the Database Container</h2>
+
+<p>Next we’ll use <code>docker run</code> to create the PostGIS container:</p>
+
+<pre><code class="language-bash hljs">docker run --name=postgis -d -e POSTGRES_USER=alex -e POSTGRES_PASS=password -e POSTGRES_DBNAME=gis -e ALLOW_IP_RANGE=0.0.0.0/0 -p 5432:5432 -v pg_data:/var/lib/postgresql --restart=always kartoza/postgis:9.6-2.4
+</code></pre>
+
+<p>Lets break down this command part-by-part. More examples of how you can run this container can be found on <a href="https://hub.docker.com/r/kartoza/postgis/" target="_blank">Docker Hub</a></p>
+
+<ul>
+<li><code>docker run --name=postgis</code> tells Docker our new container will be named <code>postgis</code></li>
+<li><code>-d</code> run the container in the background (detached mode)</li>
+<li><code>-e POSTGRES_USER=alex</code> the <code>-e</code>flag sets an 
+environment variable inside the container. This one is used to configure
+ name of a login role in PostgreSQL that will have superuser (admin) 
+priviliges in the database. You can rename this to whatever you want.</li>
+<li><code>-e POSTGRES_PASS=password</code> sets an environment variable that will set the password of the login role to `password. You can set this to whatever you want.</li>
+<li><code>-e POSTGRES_DBNAME=gis</code> much like you can guess, the environment variable tells the container to create a new database on the server with the name <code>gis</code>. After the database is created then the PostGIS extension will be enabled on it.</li>
+<li><code>-e ALLOW_IP_RANGE=0.0.0.0/0</code> tells the container to 
+configure PostgreSQL to accept connections from anyone. If you did not 
+set this then the database would only accept connections from addresses 
+using the Docker networking subnet.</li>
+<li><code>-p 5432:5432</code> maps the port 5432 on the host VM to port 
+5432 on the container. This is required because the database server 
+listens for connections on port 5432 by default.</li>
+<li><code>-v pg_data:/var/lib/postgresql</code> tells the container filesystem to mount the <code>pg_data</code> volume we just created to the path <code>/var/lib/postgresql</code>. This means that any data that the container saves or creates in that directory will instead be saved in the <code>pg_data</code> volume.</li>
+<li><code>--restart=always</code> creates a <a href="https://docs.docker.com/engine/admin/start-containers-automatically/" target="_blank">restart policy</a>
+ for your container. Now your container will start every time the Docker
+ virtual machine starts. If this was not set, you would have to manually
+ start the container every time the VM booted up with <code>docker start postgis</code></li>
+<li><code>kartoza/postgis:9.6-2.4</code> tells Docker to pull the <code>kartoza/postgis</code>
+ repository from Docker Hub, using PostgreSQL version 9.6 and PostGIS 
+version 2.4. You can see other versions that are available on <a href="https://hub.docker.com/r/kartoza/postgis/tags/" target="_blank">Docker Hub</a></li>
+</ul>
+
+<p>That command is definitely a mouthful. Once the images have 
+downloaded you should then see that the container has started by using <code>docker ps</code>:</p>
+
+<pre><code class="language-bash hljs">CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS                    NAMES
+748ba3fabd31        kartoza/postgis:9.6-2.4   <span class="hljs-string">"/bin/sh -c /start..."</span>   About an hour ago   Up About an hour    0.0.0.0:5432-&gt;5432/tcp   postgis
+</code></pre>
+
+<p>If you want to see log output from your container you can do so by using <code>docker logs</code></p>
+
+<pre><code class="hljs cpp">$ docker logs postgis
+
+PostgreSQL stand-alone backend <span class="hljs-number">9.6</span><span class="hljs-number">.5</span>
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">41.256</span> UTC [<span class="hljs-number">24</span>] LOG:  could not bind IPv6 socket: Cannot assign requested address
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">41.256</span> UTC [<span class="hljs-number">24</span>] HINT:  Is another postmaster already running on port <span class="hljs-number">5432</span>? If not, wait a few seconds and retry.
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">41.256</span> UTC [<span class="hljs-number">24</span>] WARNING:  could not create listen socket <span class="hljs-keyword">for</span> <span class="hljs-string">"::1"</span>
+backend&gt; backend&gt; postgres ready
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">41.277</span> UTC [<span class="hljs-number">27</span>] LOG:  database system was shut down at <span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">41</span> UTC
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">41.278</span> UTC [<span class="hljs-number">28</span>] [unknown]@[unknown] LOG:  incomplete startup packet
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">41.279</span> UTC [<span class="hljs-number">27</span>] LOG:  MultiXact member wraparound protections are now enabled
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">41.285</span> UTC [<span class="hljs-number">24</span>] LOG:  database system is ready to accept connections
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">41.285</span> UTC [<span class="hljs-number">32</span>] LOG:  autovacuum launcher started
+Postgis is missing, installing now
+Creating <span class="hljs-keyword">template</span> postgis
+Enabling template_postgis as a <span class="hljs-keyword">template</span>
+UPDATE <span class="hljs-number">1</span>
+Loading postgis extension
+CREATE EXTENSION
+Enabling hstore in the <span class="hljs-keyword">template</span>
+CREATE EXTENSION
+Enabling topology in the <span class="hljs-keyword">template</span>
+CREATE EXTENSION
+                                 List of databases
+       Name       |  Owner   | Encoding | Collate |  Ctype  |   Access privileges
+------------------+----------+----------+---------+---------+-----------------------
+ gis              | alex     | UTF8     | C.UTF-<span class="hljs-number">8</span> | C.UTF-<span class="hljs-number">8</span> |
+ postgres         | postgres | UTF8     | C.UTF-<span class="hljs-number">8</span> | C.UTF-<span class="hljs-number">8</span> |
+ template0        | postgres | UTF8     | C.UTF-<span class="hljs-number">8</span> | C.UTF-<span class="hljs-number">8</span> | =c/postgres          +
+                  |          |          |         |         | postgres=CTc/postgres
+ template1        | postgres | UTF8     | C.UTF-<span class="hljs-number">8</span> | C.UTF-<span class="hljs-number">8</span> | =c/postgres          +
+                  |          |          |         |         | postgres=CTc/postgres
+ template_postgis | postgres | UTF8     | C.UTF-<span class="hljs-number">8</span> | C.UTF-<span class="hljs-number">8</span> |
+(<span class="hljs-number">5</span> rows)
+
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">43.514</span> UTC [<span class="hljs-number">24</span>] LOG:  received smart shutdown request
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">43.514</span> UTC [<span class="hljs-number">32</span>] LOG:  autovacuum launcher shutting down
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">43.517</span> UTC [<span class="hljs-number">29</span>] LOG:  shutting down
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">43.524</span> UTC [<span class="hljs-number">24</span>] LOG:  database system is shut down
+Postgres initialisation process completed .... restarting in foreground
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">43.564</span> UTC [<span class="hljs-number">126</span>] LOG:  database system was shut down at <span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">43</span> UTC
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">43.566</span> UTC [<span class="hljs-number">126</span>] LOG:  MultiXact member wraparound protections are now enabled
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">43.568</span> UTC [<span class="hljs-number">123</span>] LOG:  database system is ready to accept connections
+<span class="hljs-number">2017</span>-<span class="hljs-number">10</span>-<span class="hljs-number">29</span> <span class="hljs-number">19</span>:<span class="hljs-number">10</span>:<span class="hljs-number">43.568</span> UTC [<span class="hljs-number">130</span>] LOG:  autovacuum launcher started
+</code></pre>
+
+<h1 id="connecting-in-qgis">Connecting In QGIS</h1>
+
+<p>You should now be able to add the connection to PostGIS in the 
+browser panel in QGIS. Right click the PostgreSQL icon and click “Create
+ New Connection”, and enter the database connection parameters you used 
+in the <code>docker run command</code>. The “Host” parameter will the the IP of your Docker VM (you can get it by running <code>docker-machine ip</code> in the terminal window)</p>
+
+
+<figure>
+    
+    <a href="https://alexurquhart.com/img/postgis-docker/qgis-connection.png" data-title="" data-lightbox="/img/postgis-docker/qgis-connection.png">
+    
+        <img src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/qgis-connection.png" class="
+                
+                pure-img
+                ">
+    </a>
+    
+</figure>
+
+<h2 id="creating-or-importing-geometry">Creating Or Importing Geometry</h2>
+
+<p>QGIS has a <a href="https://docs.qgis.org/2.8/en/docs/user_manual/processing_algs/qgis/database/importintopostgis.html" target="_blank">geo algorithm</a> called “Import into PostGIS” that can load layers from various sources into your PostGIS database.</p>
+
+<p>You can also use the <a href="https://docs.qgis.org/2.0/en/docs/training_manual/databases/db_manager.html" target="_blank">DB Manager</a>
+ plugin to create new database schemas, as well as import and export 
+files from the database. In the screenshot below I have loaded an 
+extract from OpenStreetMap of roads in the Ottawa area.</p>
+
+
+<figure>
+    
+    <a href="https://alexurquhart.com/img/postgis-docker/qgis-roads.png" data-title="" data-lightbox="/img/postgis-docker/qgis-roads.png">
+    
+        <img src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/qgis-roads.png" class="
+                
+                responsive
+                " alt="Screenshot of QGIS depicting roads in the Ottawa area.">
+    </a>
+    
+</figure>
+
+
+<figure style="
+    min-width: 25%;
+    max-width: 250px;
+    float: right;
+    ">
+    
+    <a href="https://alexurquhart.com/img/postgis-docker/arcpro-connect.png" data-title="">
+    
+        <img src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/arcpro-connect.png" class="pure-img hg-thumbnail " alt="Screenshot of the Catalog pane in ArcGIS Pro">
+    
+    </a>
+    
+    
+</figure>
+
+<h1 id="connecting-in-arcgis-pro">Connecting In ArcGIS Pro</h1>
+
+<p>You can also perform visualization and analysis on your data in 
+ArcGIS Desktop. There are, however, some limitations on what kinds of 
+operations you can perform. During my limited testing using ArcGIS Pro 
+2.0 I was not able to perform feature editing, or data management tasks 
+such as modifying tables (adding/dropping fields, etc). I was able to 
+load and visualize the data, as well as run geoprocessing tools on the 
+data. I was able to export the geometry to a file geodatabase, as well 
+as delete entire tables. I think this is either a licensing issue, or I 
+have to install some extra shared libraries into PostgreSQL in order to 
+use the ST_Geometry type.</p>
+
+<h2 id="creating-a-new-database-connection">Creating A New Database Connection</h2>
+
+<p>Connecting to your database is as simple as adding a new database 
+connection in either ArcCatalog, or in the Catalog pane in ArcGIS Pro. 
+You can use the same credentials and connection information you used in 
+the environment variables when you created the container. The “Host” 
+parameter is set to the IP of your Docker VM (you can get it by running <code>docker-machine ip</code> in the terminal window, if you don’t have it).</p>
+
+<h2 id="creating-a-new-schema">Creating A New Schema</h2>
+
+<p>When I first tried to view the road data I had loaded into the 
+database in ArcGIS Pro, I was unable to find it in the catalog pane. I 
+later discovered this is because by default ArcGIS looks into a <a href="https://www.postgresql.org/docs/9.6/static/ddl-schemas.html" target="_blank">database schema</a> with the same name as the currently connected database user. In my case the login name for PostgreSQL is <code>alex</code>, so ArcPro is looking for tables in the schema <code>alex</code>.
+ Creating a new schema is easyily accomplished using the DB Manager 
+plugin in QGIS, however if you don’t have QGIS installed on your machine
+ you can run a SQL query using Docker to create it.</p>
+
+<p>To create a new schema in your PostGIS database, run the following command in the quickstart terminal. Make sure to replace the <code>&lt;PASSWORD&gt;</code>, <code>&lt;DBNAME&gt;</code> and <code>&lt;USERNAME&gt;</code> parameters with the ones you used when you created the container.</p>
+
+<pre><code class="language-bash hljs">docker <span class="hljs-built_in">exec</span> -it postgis /bin/bash -c <span class="hljs-string">"PGPASSWORD=&lt;PASSWORD&gt; psql -d &lt;DBNAME&gt; -U &lt;USERNAME&gt; -h localhost -c \"create schema &lt;USERNAME&gt;;\""</span>
+</code></pre>
+
+<p>What this command does is execute a command inside the <code>postgis</code> container. In this case, it is executing a SQL command using <code>psql</code>, a command-line PostgreSQL client that will create the schema you need.</p>
+
+<h2 id="viewing-data">Viewing Data</h2>
+
+<p>In this state utilizing ArcGIS with PostGIS is kind of a chicken and 
+the egg type of situation, as I was not able to create new data in the 
+database, although I was able to view and analyze already existing data.
+ After the new schema was created, and a roads shapefile was imported 
+into that schema using QGIS, I was then able to successfully bring the 
+data in and view it in ArcGIS Pro</p>
+
+
+<figure>
+    
+    <a href="https://alexurquhart.com/img/postgis-docker/arcpro-roads.png" data-title="Notice the layer is named with the database name, schema name, then the table name." data-lightbox="/img/postgis-docker/arcpro-roads.png">
+    
+        <img src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/arcpro-roads.png" class="
+                
+                responsive
+                " alt="Screenshot of QGIS depicting roads in the Ottawa area.">
+    </a>
+    
+    <figcaption>
+        Notice the layer is named with the database name, schema name, then the table name.
+    </figcaption>
+    
+</figure>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this over-arching tutorial we went over the basics of how to use a
+ spatial database server, and how to deploy one using Docker. There’s a 
+lot more you can accomplish using container-based software in your 
+projects, and I hope to write about them later. Some things I have been 
+experimenting with is deploying Geoserver alongside PostGIS using 
+Docker. I’m also interested in exploring if there’s an easy way to gain 
+more functionality on the Esri side of the house, as well as seeing if I
+ can get volume mount-points outside of the VirtualBox VM and into the 
+host OS.</p>
+
+            </article>
+        </main>
+
+        
+<div class="pure-g hg-bottom-nav">
+    <div class="pure-u-9-24">
+        
+        <a href="https://alexurquhart.com/post/es6-react-with-arcgis-wabde/">
+            Previous: Developing Widgets for ArcGIS Web AppBuilder (Developer Edition) using ES6 and React + Redux
+        </a>
+        
+    </div>
+    <div class="pure-u-6-24">
+        <a href="https://alexurquhart.com/">
+            Home
+        </a>
+    </div>
+    <div class="pure-u-9-24">
+        
+        <a href="https://alexurquhart.com/post/ssh-tunnel-command/">
+            Next: SSH Port Forwarding Made Easy
+        </a>
+        
+    </div>
+</div>
+
+        
+            <div id="disqus_thread"><iframe id="dsq-app9268" name="dsq-app9268" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border: medium none !important; overflow: hidden !important; height: 1721px !important;" src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/a.html" horizontalscrolling="no" verticalscrolling="no" width="100%" frameborder="0"></iframe></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "alexurquhart" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+        
+    </div>
+
+    <div class="hg-footer pure-g">
+    <div class="hg-footer-socials pure-u-1">
+        <span>Contact:</span>
+        
+        <a href="mailto:alexurquhart@gmail.com" target="_blank">E-Mail</a>
+        
+        <a href="https://www.github.com/alexurquhart" target="_blank">GitHub</a>
+        
+        <a href="https://www.linkedin.com/in/alex-urquhart-65979695" target="_blank">LinkedIn</a>
+        
+        <a href="https://twitter.com/alexanderurq" target="_blank">Twitter</a>
+        
+    </div>
+    
+    <div class="pure-u-1">
+        Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/alexurquhart/hugo-geo" target="_blank">hugo-geo</a> theme
+    </div>
+    
+    
+    <div class="pure-u-1">
+        © Alex Urquhart 2018
+    </div>
+    
+    
+</div> 
+
+</div>
+<div class="hg-sidebar pure-u-1 pure-u-md-1-5">
+    
+
+    <div class="hg-sidebar-item">
+        <a class="pure-button hg-block-btn" href="https://alexurquhart.com/">
+            <i class="fa fa-home"></i>
+            Home
+        </a>
+    </div>
+
+    
+    <div class="hg-sidebar-item">
+        
+<div class="hg-toc">
+    <h5>Table of Contents</h5>
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#why-postgis">Why PostGIS?</a></li>
+<li><a href="#why-docker">Why Docker?</a></li>
+<li><a href="#install-docker-toolbox">Install Docker Toolbox</a></li>
+<li><a href="#running-a-docker-container">Running a Docker Container</a>
+<ul>
+<li><a href="#listing-running-containers">Listing running containers</a></li>
+<li><a href="#stopping-deleting-the-container">Stopping &amp; Deleting The Container</a></li>
+</ul></li>
+<li><a href="#running-postgis">Running PostGIS</a>
+<ul>
+<li><a href="#persisting-your-data">Persisting Your Data</a></li>
+<li><a href="#creating-the-database-container">Creating the Database Container</a></li>
+</ul></li>
+<li><a href="#connecting-in-qgis">Connecting In QGIS</a>
+<ul>
+<li><a href="#creating-or-importing-geometry">Creating Or Importing Geometry</a></li>
+</ul></li>
+<li><a href="#connecting-in-arcgis-pro">Connecting In ArcGIS Pro</a>
+<ul>
+<li><a href="#creating-a-new-database-connection">Creating A New Database Connection</a></li>
+<li><a href="#creating-a-new-schema">Creating A New Schema</a></li>
+<li><a href="#viewing-data">Viewing Data</a></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</nav>
+</div>
+
+    </div>
+    
+
+    
+    <div class="hg-sidebar-item">
+        <a class="twitter-timeline" data-height="800" href="https://twitter.com/alexanderurq" target="_blank">Tweets by alexanderurq</a>
+    </div>
+    
+
+    
+        
+        <div class="hg-sidebar-item">
+            
+                <a href="https://www.vultr.com/?ref=7237378" target="_blank"><img src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/badge_onwhite.svg" class="responsive pure-img"></a>
+            
+        </div>
+        
+    
+</div>
+
+
+    </div>
+
+    <script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/jquery.js"></script>
+    <script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/lightbox.js"></script>
+
+    
+    <script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/highlight.js"></script>
+    
+
+    
+    <script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/bash.js"></script>
+    
+
+    
+    
+    <script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/hugo-geo.js"></script>
+
+    
+<script async="" src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/widgets.js" charset="utf-8"></script>
+
+
+    
+
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <script src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/platform.js" async="" defer="defer" gapi_processed="true"></script>
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-29172866-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async="" src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/analytics.js"></script>
+
+
+<div id="lightboxOverlay" class="lightboxOverlay" style="display: none;"></div><div id="lightbox" class="lightbox" style="display: none;"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="><div class="lb-nav"><a class="lb-prev" href="" target="_blank"></a><a class="lb-next" href="" target="_blank"></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div><iframe name="oauth2relay618192114" id="oauth2relay618192114" src="Set%20Up%20a%20PostGIS%20Database%20With%20Docker%20%C2%B7%20Alex%20Urquhart_files/postmessageRelay.html" style="width: 1px; height: 1px; position: absolute; top: -100px;" tabindex="-1" aria-hidden="true"></iframe><iframe style="display: none;"></iframe></body></html>

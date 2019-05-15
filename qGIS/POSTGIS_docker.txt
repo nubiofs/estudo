@@ -1,0 +1,25 @@
+//https://hub.docker.com/r/kartoza/postgis/
+//https://github.com/kartoza/docker-postgis
+//https://alexurquhart.com/post/set-up-postgis-with-docker/
+//https://github.com/kartoza/docker-pg-backup
+//https://hub.docker.com/r/kartoza/pg-backup/
+
+$ mkdir -p ~/postgres_data & chmod 777 ~/postgres
+
+$ docker run --name=postgis -d -e POSTGRES_USER=alex -e POSTGRES_PASS=password -e POSTGRES_DBNAME=gis -e ALLOW_IP_RANGE=0.0.0.0/0 -p 5432:5432 -v $HOME/postgres_data:/var/lib/postgresql --restart=always kartoza/postgis:9.6-2.4
+//$ sudo docker run --name "postgis" -p 25432:5432 -d -t kartoza/postgis
+
+$ psql -h localhost -U docker -p 25432 -l
+Note: Default postgresql user is 'docker' with password 'docker'.
+
+obs.:
+	
+	https://github.com/kartoza/docker-postgis/blob/develop/env-data.sh
+	
+		POSTGRES_USER=docker
+		POSTGRES_PASS=docker
+		POSTGRES_DBNAME=gis	
+	
+	Logon Postgis: docker docker
+	
+	-e POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology # You can pass as many extensions as you need.
