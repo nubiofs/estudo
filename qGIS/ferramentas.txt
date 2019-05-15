@@ -1,0 +1,132 @@
+* shp2pgsql:
+
+	The loader is called shp2pgsql and converts ESRI Shape files into SQL suitable for loading in PostGIS/PostgreSQL. 
+
+* jackson-datatype-jts
+
+* https://react-leaflet.js.org/
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://github.com/3liz/QuickOSM
+https://wiki.openstreetmap.org/wiki/Pt:Overpass_API
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://github.com/tomchadwin/qgis2web
+https://plugins.qgis.org/plugins/qgis2web/
+https://github.com/tomchadwin/qgis2web/wiki
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://github.com/enricofer/go2mapillary
+
+https://plugins.qgis.org/plugins/
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+(machine learning) in "https://plugins.qgis.org/search/?q=machine+learning":
+
+https://github.com/jjenkner/ClusterPoints
+http://jjenkner.com/ClusterPoints/
+
+==>> https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/index.html
+(https://docs.qgis.org/testing/pdf/en/
+
+
+--> http://pratyushkar.com/files/JOG15.pdf
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://gis.stackexchange.com/questions/113799/how-to-read-a-shapefile-in-python
+https://macwright.org/2012/10/31/gis-with-python-shapely-fiona.html
+
+https://pypi.org/project/Fiona/1.4.2/
+https://github.com/Toblerity/Fiona
+
+https://pypi.org/project/pyproj/
+https://pypi.org/project/pyshp/
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+*** Maps layers in QGIS 3:
+
+https://wiki.openstreetmap.org/wiki/Tile_servers
+https://wiki.openstreetmap.org/wiki/Servers/tile
+
+https://www.spatialbias.com/2018/02/qgis-3.0-xyz-tile-layers/
+https://www.instrutorgis.com.br/qgis3-imagens-de-satelite-gratuitas/
+
+(https://geogeek.xyz/how-to-add-google-maps-layers-in-qgis-3.html)
+(https://www.geodose.com/2018/03/how-to-add-google-maps-layer-QGIS-3.html)
+(https://gis.stackexchange.com/questions/20191/adding-basemaps-from-google-or-bing-in-qgis)
+
+Google Maps: https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}
+Google Maps: https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}
+Google Maps: https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}
+
+Google Satellite: http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}
+Google Satellite Hybrid: https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}
+Google Satellite: https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}
+Google Satellite: https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}
+Google Satellite: http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}
+Google Satellite: http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}
+Google Satellite Hybrid: https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}
+
+Google Terrain: https://mt1.google.com/vt/lyrs=t&x={x}&y={y}&z={z}
+Google Terrain: https://mt1.google.com/vt/lyrs=t&x={x}&y={y}&z={z}
+Google Terrain: https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}
+Google Terrain: http://mt0.google.com/vt/lyrs=p&hl=en&x={x}&y={y}&z={z}
+Google Terrain: http://mt0.google.com/vt/lyrs=t&hl=en&x={x}&y={y}&z={z}
+
+Google Roads: https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}
+Google Roads: https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}
+Google Roads: https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}
+Google Roads: http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}  
+
+Google Altered roadmap: http://mt0.google.com/vt/lyrs=r&hl=en&x={x}&y={y}&z={z} 
+
+Google Hybrid: https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}
+Google Hybrid: http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}
+
+Google Streets: https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}
+
+(OpenStreetMap)
+OSM Mapnik
+http://tile.openstreetmap.org/{z}/{x}/{y}.png
+
+(Bing Aerial)
+http://ecn.t3.tiles.virtualearth.net/tiles/a{q}.jpeg?g=1
+
+(Map tiles by Carto)
+(Carto Positron)
+https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
+
+Conexões WMS/WMTS disponíveis
+
+========Imagens de Satélite=====================
+
+Google Satellite
+https://mt1.google.com/vt/lyrs%3Ds%26x%3D{x}%26y%3D{y}%26z%3D{z}
+
+Bing Satellite
+http://ecn.t3.tiles.virtualearth.net/tiles/a{q}.jpeg?g%3D0%26dir%3Ddir_n'
+
+ESRI Satellite
+https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
+
+========Base de Arruamento=====================
+
+Bing Maps
+http://ecn.dynamic.t0.tiles.virtualearth.net/comp/CompositionHandler/{q}?mkt%3Den-us%26it%3DG,VE,BX,L,LA%26shading%3Dhill
+
+Google Maps
+https://mt1.google.com/vt/lyrs%3Dm%26x%3D{x}%26y%3D{y}%26z%3D{z}
+
+OpenStreetMap
+http://tile.openstreetmap.org/{z}/{x}/{y}.png
+
+ESRI Standard
+https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}
+
+
