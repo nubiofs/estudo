@@ -1,0 +1,5 @@
+https://github.com/fegyi001/mangol
+http://188.166.116.137/mangol/#/demo-home
+
+https://fegyi001.github.io/mangol/
+https://fegyi001.github.io/mangol/modules/MeasureModule.html

@@ -1,7 +1,7 @@
 //https://hub.docker.com/r/oscarfonts/geoserver
 //https://github.com/oscarfonts/docker-geoserver/blob/master/aws/README.md
 
-docker run --rm -d -p 8080:8080 -v ${PWD}:/var/local/geoserver --name=gs oscarfonts/geoserver
+$ docker run --rm -d -p 8080:8080 -v ${PWD}:/var/local/geoserver --name=gs oscarfonts/geoserver
 
 LogonGeoserver: admin geoserver
 
