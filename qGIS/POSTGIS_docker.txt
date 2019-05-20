@@ -24,3 +24,78 @@ obs.:
 	Logon Postgis: docker docker
 	
 	-e POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology # You can pass as many extensions as you need.
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://gist.github.com/clhenrick/ebc8dc779fb6f5ee6a88
+https://gist.github.com/clhenrick/ebc8dc779fb6f5ee6a88#importing-spatial-data-to-postgis
+https://gist.github.com/clhenrick/ebc8dc779fb6f5ee6a88#exporting-spatial-data-from-postgis
+
+(Importing Spatial Data to PostGIS)
+* Using shp2pgsql
+
+    Do:
+    shp2pgsql -I -s 4326 nyc-pediacities-hoods-v3-edit.shp noise.hoods > noise.sql
+    Or for using the geography data type do:
+    shp2pgsql -G -I nyc-pediacities-hoods-v3-edit.shp noise.nyc-pediacities-hoods-v3-edit_geographic > nyc_pediacities-hoods-v3-edit.sql
+
+    Do:
+    psql -d nyc_noise -f noise.sql
+    Or for the geography type above:
+    psql -d nyc_noise -f nyc_pediacities-hoods-v3-edit.sql
+
+* Using osm2pgsql
+
+To import an OpenStreetMap extract in PBF format do:
+osm2pgsql -H localhost --hstore-all -d nyc_from_osm ~/Downloads/newyorkcity.osm.pbf
+Using ogr2ogr
+
+Example importing a GeoJSON file into a database called nyc_pluto:
+
+ogr2ogr -f PostgreSQL \
+PG:"host='localhost' user='chrislhenrick' port='5432' \
+dbname='nyc_pluto' password=''" \
+bk_map_pluto_4326.json -nln bk_pluto
+
+(Exporting Spatial Data from PostGIS)
+
+The two main tools used to export spatial data with more complex geometries from Postgres/PostGIS than points are pgsql2shp and ogr2ogr.
+Using pgsql2shp
+
+pgsql2shp is a tool that comes installed with PostGIS that allows for exporting data from a PostGIS database to a shapefile format. To use it you need to specify a file path to the output shapefile (just stating the basename with no extension will output in the current working directory), a host name (usually this is localhost), a user name, a password for the user, a database name, and an SQL query.
+
+pgsql2shp -f <path to output shapefile> -h <hostname> -u <username> -P <password> databasename "<query>"
+
+A sample export of a shapefile called my_data from a database called my_db looks like this:
+
+pgsql2shp -f my_data -h localhost -u clhenrick -P 'mypassword' my_db "SELECT * FROM my_data "
+
+Using ogr2ogr
+
+Note: You may need to set the GDAL_DATA path if you git this error:
+
+ERROR 4: Unable to open EPSG support file gcs.csv.
+Try setting the GDAL_DATA environment variable to point to the
+directory containing EPSG csv files.
+
+If on Linux / Mac OS do this: export GDAL_DATA=/usr/local/share/gdal
+If on Windows do this: C:\> set GDAL_DATA=C:\GDAL\data
+
+To Export
+
+Data
+Use ogr2ogr as follows to export a table (in this case a table called dob_jobs_2014) to a GeoJSON file (in this case a file called dob_jobs_2014_geocoded.geojson):
+
+ogr2ogr -f GeoJSON -t_srs EPSG:4326 dob_jobs_2014_geocoded.geojson \
+PG:"host='localhost' dbname='dob_jobs' user='chrislhenrick' password='' port='5432'" \
+-sql "SELECT bbl, house, streetname, borough, jobtype, jobstatus, existheight, proposedheight, \
+existoccupancy, proposedoccupany, horizontalenlrgmt, verticalenlrgmt, ownerbusinessname, \
+ownerhousestreet, ownercitystatezip, ownerphone, jobdescription, geom \
+FROM dob_jobs_2014 WHERE geom IS NOT NULL"
+
+    note: you must select the column containing the geometry (usually geom or wkb_geometry) for your exported layer to have geometry data.
+
+Other Methods of Interacting With Postgres/PostGIS
+
+to do...

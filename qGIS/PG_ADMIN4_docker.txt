@@ -1,0 +1,29 @@
+- (Inicialização do pgAdmin4):
+ 		"https://hub.docker.com/r/dpage/pgadmin4/"
+ 
+$ 
+docker run -p 80:80 \
+-e "PGADMIN_DEFAULT_EMAIL=user@domain.com" \
+-e "PGADMIN_DEFAULT_PASSWORD=SuperSecret" \
+-d dpage/pgadmin4
+
+		* No navegador -> http://172.17.0.5/login?next=%2F
+
+		Obs.: ver o ip do container do pgadmin4 via:
+			
+			$ docker container ls
+			
+			$ docker container inspect 24ebe8a3fdkjsdk
+		
+		* Para acessar o postgreSQL (via front-end do pgadmin4):
+
+			# EMAIL=user@domain.com
+			# PASSWORD=SuperSecret
+			#
+			# Host: 172.17.0.4 
+			# Port: 5432
+			# Maintenance database: postgres
+			# Username: test
+			# password: passwd
+		
+		Obs.: Para ver o ip do container do PostgreSQL, por exemplo "172.17.0.4", ver via "docker container inspect 24ebe8a3fdkjsdk".
