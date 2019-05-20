@@ -6,6 +6,14 @@ $ xhost +
 
 $ mkdir workspace && cd workspace
 
+$ docker run --rm -it --name qgis \
+-v /tmp/.X11-unix:/tmp/.X11-unix  \
+-v ${PWD}:/root/workspace \
+-e DISPLAY=unix$DISPLAY \
+qgis/qgis:latest qgis
+
+"ou" com rede local:
+
 $ docker run --rm --net=host -it --name qgis \
 -v /tmp/.X11-unix:/tmp/.X11-unix  \
 -v ${PWD}:/root/workspace \
