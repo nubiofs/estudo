@@ -5,6 +5,39 @@ $ docker run --rm -d -p 8080:8080 -v ${PWD}:/var/local/geoserver --name=gs oscar
 
 LogonGeoserver: admin geoserver
 
+//tomcat:
+==> localhost:8080 
+
+==> localhost:8080/geoserver
+==> http://localhost:8080/geoserver/web/
+
+obs.:
+	$ docker ps
+	$ docker exec -it -u 0 13388846d193 /bin/bash
+
+Diretorio de dados 	/var/local/geoserver
+
+		root@07653e0c1620:/usr/local/tomcat# cd bin
+		root@ad5864fa5ecb:/usr/local/tomcat/bin# ./shutdown.sh 
+
+			shutdown
+			This runs catalina stop and shuts down Tomcat.
+
+			startup
+			This runs catalina start and starts up Tomcat.
+
+		root@ad5864fa5ecb:/usr/local/tomcat/bin# ./catalina.sh stop
+
+		root@ad5864fa5ecb:/usr/local/tomcat/bin# ./catalina.sh start
+		
+		root@ad5864fa5ecb:/usr/local/tomcat/bin# env | grep CATALINA_OPTS
+
+		root@ad5864fa5ecb:/usr/local/tomcat/bin# cd ../../geoserver && pwd
+
+
+-Dfile.encoding=UTF8 -Duser.timezone=GMT -Djavax.servlet.request.encoding=UTF-8
+
+
 ===========================================================================================================================
 
 //https://hub.docker.com/r/kartoza/geoserver
