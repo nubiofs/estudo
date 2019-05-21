@@ -1,0 +1,5 @@
+https://github.com/sacridini/Awesome-Geospatial
+
+https://github.com/RoboDonut/awesome-spatial/blob/master/README.md
+
+https://github.com/sshuair/awesome-gis
