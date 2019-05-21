@@ -1,10 +1,19 @@
 https://github.com/edmarmoretti/i3geo
-
 https://hub.docker.com/r/i3geo/i3geo
 
 $ docker run -i -t -p 80:8080 --rm i3geo/i3geo
 
 ==> http://localhost/i3geo
+
+obs.: Para mudar a senha do "i3geomaster":
+
+$ docker ps
+
+$ docker exec -i -t -u 0 b9eb3dee2b44 /bin/bash
+
+root@b9eb3dee2b44:/var/www/i3geo# apt-get update
+root@b9eb3dee2b44:/var/www/i3geo# apt-get install nano
+root@b9eb3dee2b44:/var/www/i3geo# nano ms_configura.php
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
