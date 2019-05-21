@@ -1,0 +1,13 @@
+https://github.com/edmarmoretti/i3geo
+
+https://hub.docker.com/r/i3geo/i3geo
+
+$ docker run -i -t -p 80:8080 --rm i3geo/i3geo
+
+==> http://localhost/i3geo
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+mkdir i3geo
+cd i3geo
+git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/i3geo.git .

@@ -6,6 +6,22 @@
 
 * https://react-leaflet.js.org/
 
+zzzzzzzzzzzzzzzzzzzzzzzzzzz
+
+https://github.com/sdeleuze/geospatial-messenger
+(Geospatial messenger application written with Spring Boot + Kotlin + PostgreSQL :
+
+https://spring.io/blog/2016/03/20/a-geospatial-messenger-with-kotlin-spring-boot-and-postgresql
+
+\\\\\\\\\\\\\\\\\\\\\\\
+
+https://github.com/UDST/osmnet
+(Tools for the extraction of OpenStreetMap street network data https://udst.github.io/osmnet/index.html)
+
+https://github.com/UDST/urbanaccess
+
+https://github.com/UDST/urbansim
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 https://github.com/3liz/QuickOSM
