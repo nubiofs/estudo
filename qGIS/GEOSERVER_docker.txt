@@ -221,3 +221,26 @@ $ docker run --rm -d -p 8080:8080 -v ${PWD}:/geoserver --name=gs_wildsong geoser
 LogonGeoserver: admin geoserver
 
 
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCc
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+https://github.com/jbilander/HowTos/wiki/How-to-setup-Tomcat-9-on-Java-OpenJDK-11-and-Apache-proxy_ajp-on-Ubuntu-18.04-LTS
+
+root@zeus:/opt/tomcat# vi conf/tomcat-users.xml
+
+	Put the following inside the tomcat-users tag, replace with your prefered username and password
+
+	<role rolename="manager-gui"/>
+	<user username="tomcat" password="s3cret" roles="manager-gui"/>
+
+Start Tomcat:
+
+root@zeus:/opt/tomcat# systemctl start tomcat
+
+root@zeus:/opt/tomcat# systemctl --no-pager status tomcat
+
+==> http://localhost:8080/manager
+
+ProxyPass "/manager" "ajp://127.0.0.1:8009/manager"
+
+
