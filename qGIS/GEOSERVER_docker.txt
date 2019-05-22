@@ -1,6 +1,91 @@
 //https://hub.docker.com/r/oscarfonts/geoserver
 //https://github.com/oscarfonts/docker-geoserver/blob/master/aws/README.md
 
+* Configuração:
+
+$ git clone https://github.com/oscarfonts/docker-geoserver/
+
+$ cd docker-geoserver/2.15.1/
+
+--> Colocar em "docker-geoserver/2.15.1/Dockerfile": 
+	
+...
+	ENV LANG en_US.utf8
+...
+	# GeoServer
+	&& mv -f data/ ${GEOSERVER_DATA_DIR} \
+...
+	# Tomcat environment
+	ENV CATALINA_OPTS "-server -Djava.awt.headless=true \
+		-Xms768m -Xmx1560m -XX:+UseConcMarkSweepGC -XX:NewSize=48m \
+		-Duser.language=en -Duser.region=US -Dfile.encoding=UTF-8 \
+		-Djavax.servlet.request.encoding=UTF-8 \
+		-DGEOSERVER_DATA_DIR=${GEOSERVER_DATA_DIR}"
+
+$ docker build -t oscarfonts/geoserver .
+
+...
+
+Archive:  geoserver.war
+   creating: META-INF/
+  inflating: META-INF/MANIFEST.MF    
+   creating: data/
+   creating: data/layergroups/
+   creating: data/www/
+
+   creating: data/demo/
+   creating: data/user_projections/
+   creating: data/data/
+   creating: data/data/shapefiles/
+   creating: data/data/taz_shapes/
+   creating: data/data/sf/
+   creating: data/data/nyc/
+   creating: data/plugIns/
+   creating: data/workspaces/
+
+ inflating: index.html              
+  inflating: data/global.xml         
+  inflating: data/layergroups/spearfish.xml  
+
+  inflating: data/www/openlayers/readme.txt  
+  inflating: data/www/openlayers/ol-demo.cfg  
+  inflating: data/www/openlayers/OpenLayers.js  
+  inflating: data/www/ol-demo.html  
+
+ inflating: data/demo/WFS_mathGetFeature.xml  
+  inflating: data/demo/WFS_getFeatureFidFilter.url  
+  inflating: data/user_projections/epsg.properties  
+  inflating: data/wms.xml            
+  inflating: data/data/shapefiles/states.shx  
+  inflating: data/data/shapefiles/states.prj  
+  inflating: data/data/shapefiles/states.shp  
+  inflating: data/data/shapefiles/states.dbf  
+  inflating: data/data/taz_shapes/tasmania_cities.prj  
+  inflating: data/data/taz_shapes/tasmania_roads.dbf  
+  inflating: data/data/taz_shapes/tasmania_roads.shp  
+
+...
+
+extracting: WEB-INF/lib/gt-tile-client-21.1.jar  
+  inflating: WEB-INF/dispatcher-servlet.xml  
+  inflating: WEB-INF/web.xml         
+   creating: META-INF/maven/
+   creating: META-INF/maven/org.geoserver.web/
+   creating: META-INF/maven/org.geoserver.web/gs-web-app/
+  inflating: META-INF/maven/org.geoserver.web/gs-web-app/pom.xml  
+  inflating: META-INF/maven/org.geoserver.web/gs-web-app/pom.properties 
+
+...
+
+
+/docker-geoserver/2.15.1$ docker images
+REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
+oscarfonts/geoserver   latest              8bd57108fa85        18 seconds ago      618MB
+
+* Execução:
+
+$ cd ../../ && mkdir workspace && cd workspace
+
 $ docker run --rm -d -p 8080:8080 -v ${PWD}:/var/local/geoserver --name=gs oscarfonts/geoserver
 
 LogonGeoserver: admin geoserver
@@ -37,7 +122,7 @@ Diretorio de dados 	/var/local/geoserver
 
 -Dfile.encoding=UTF8 -Duser.timezone=GMT -Djavax.servlet.request.encoding=UTF-8
 
-
+===========================================================================================================================
 ===========================================================================================================================
 
 //https://hub.docker.com/r/kartoza/geoserver
