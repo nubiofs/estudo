@@ -1,0 +1,83 @@
+https://github.com/docker-library/openjdk
+https://github.com/docker-library/openjdk/tree/master/11/jre/slim
+
+https://sourceforge.net/projects/geoserver/files/GeoServer/2.15.1/
+https://sourceforge.net/projects/geoserver/files/GeoServer/2.15.1/geoserver-2.15.1-bin.zip/download
+
+$ git clone https://github.com/docker-library/openjdk
+
+$ cd openjdk/11/jre/slim/
+
+--> Alterando/incluindo "Dockerfile" para incluir:
+
+	RUN apt-get update && apt-get install -y --no-install-recommends \
+			bzip2 \
+			wget \
+			unzip \
+			xz-utils \
+		&& rm -rf /var/lib/apt/lists/*
+
+	ENV GEOSERVER_VERSION 2.15.1
+	ENV GEOSERVER_INSTALL_DIR /usr/local/geoserver
+
+	RUN mkdir ${GEOSERVER_INSTALL_DIR} \
+		&& cd ${GEOSERVER_INSTALL_DIR} \
+		&& wget http://sourceforge.net/projects/geoserver/files/GeoServer/${GEOSERVER_VERSION}/geoserver-${GEOSERVER_VERSION}-bin.zip \
+		&& unzip geoserver-${GEOSERVER_VERSION}-bin.zip
+		#&& cd geoserver-${GEOSERVER_VERSION} \
+
+	VOLUME ${GEOSERVER_DATA_DIR}
+
+	WORKDIR ${GEOSERVER_INSTALL_DIR}
+
+	CMD [${GEOSERVER_INSTALL_DIR}/bin/startup.sh]
+
+	EXPOSE 8080
+
+$ docker build -t jetty_java11_geoserver .
+
+$ docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+jetty_java11_geoserver   latest              961e87c3d45d        27 seconds ago      491MB
+
+** Execução:
+
+$ cd ../../../../workspace/ && rm -rf *
+
+$ docker run --rm -it -u 0 -p 8080:8080 -v ${PWD}:/usr/local/geoserver --name=gs_dev jetty_java11_geoserver /bin/bash
+#$ docker run --rm -d -p 8080:8080 -v ${PWD}:/usr/local/geoserver --name=gs_dev jetty_java11_geoserver
+
+obs.:
+	$ docker ps
+	$ docker exec -it -u 0 13388846d193 /bin/bash
+
+	# cd /usr/local/geoserver/
+	# wget http://sourceforge.net/projects/geoserver/files/GeoServer/${GEOSERVER_VERSION}/geoserver-${GEOSERVER_VERSION}-bin.zip
+	# unzip geoserver-2.15.1-bin.zip 
+	# cd geoserver-2.15.1/bin
+	# ./startup.sh
+
+	$ docker ps -a
+
+	190ded84c943        jetty_java11_geoserver   "/bin/bash"              13 minutes ago      Up 13 minutes                 0.0.0.0:8080->8080/tcp   gs_dev
+	06280e660e1c        jetty_java11_geoserver   "/bin/bash"              13 minutes ago      Exited (127) 13 minutes ago                            lucid_ishizaka
+
+	$ docker commit 06280e660e1c lucid_ishizaka
+	$ docker commit 190ded84c943 gs_dev
+
+	
+
+LogonGeoserver: admin geoserver
+
+//tomcat:
+==> localhost:8080 
+
+==> localhost:8080/geoserver
+==> http://localhost:8080/geoserver/web/
+
+
+
+
+
+
+

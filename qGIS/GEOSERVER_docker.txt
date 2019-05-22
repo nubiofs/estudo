@@ -1,3 +1,59 @@
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+/////////// (kartoza/geoserver)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+//https://hub.docker.com/r/kartoza/geoserver
+https://github.com/kartoza/docker-geoserver
+
+* Configuração:
+
+$ git clone https://github.com/kartoza/docker-geoserver
+
+$ mv docker-geoserver docker-geoserver_kartoza
+
+$ cd docker-geoserver_kartoza
+
+--> Alterar em "Dockerfile": 
+
+	ARG IMAGE_VERSION=9-jre11
+	ARG GS_VERSION=2.15.1
+
+	ARG WAR_URL=http://sourceforge.net/projects/geoserver/files/GeoServer/${GS_VERSION}/geoserver-${GS_VERSION}-war.zip
+
+	&& ln -s /usr/lib/jvm/java-11-openjdk-amd64 /usr/lib/jvm/default-java \
+
+$ docker build -t kartoza/geoserver .
+#$ docker build --build-arg INITIAL_MEMORY=2GB -t kartoza/geoserver .
+
+$ docker images
+REPOSITORY             TAG                 IMAGE ID            CREATED              SIZE
+kartoza/geoserver      latest              10cfda4cb31f        About a minute ago   681MB
+
+** Execução:
+
+$ cd ../ && mkdir workspace && cd workspace
+
+$ docker run --rm -d -p 8080:8080 -v ${PWD}:/opt/geoserver/data_dir --name=gs_kartoza kartoza/geoserver
+#$ docker run --name "geoserver"  -e GEOSERVER_ADMIN_PASSWORD='myawesomegeoserver' -p 8080:8080 -d -t kartoza/geoserver
+#$ docker run -d -v ${PWD}:/opt/geoserver/data_dir kartoza/geoserver
+
+LogonGeoserver: admin geoserver
+
+//tomcat:
+==> localhost:8080 
+
+==> localhost:8080/geoserver
+==> http://localhost:8080/geoserver/web/
+
+obs.:
+	$ docker ps
+	$ docker exec -it -u 0 13388846d193 /bin/bash
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+/////////// (oscarfonts/geoserver)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 //https://hub.docker.com/r/oscarfonts/geoserver
 //https://github.com/oscarfonts/docker-geoserver/blob/master/aws/README.md
 
@@ -5,9 +61,11 @@
 
 $ git clone https://github.com/oscarfonts/docker-geoserver/
 
-$ cd docker-geoserver/2.15.1/
+$ mv docker-geoserver/ docker-geoserver_oscarfonts
 
---> Colocar em "docker-geoserver/2.15.1/Dockerfile": 
+$ cd docker-geoserver_oscarfonts/2.15.1/
+
+--> Colocar em "docker-geoserver_oscarfonts/2.15.1/Dockerfile": 
 	
 ...
 	ENV LANG en_US.utf8
@@ -78,7 +136,7 @@ extracting: WEB-INF/lib/gt-tile-client-21.1.jar
 ...
 
 
-/docker-geoserver/2.15.1$ docker images
+/docker-geoserver_oscarfonts/2.15.1$ docker images
 REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
 oscarfonts/geoserver   latest              8bd57108fa85        18 seconds ago      618MB
 
@@ -122,11 +180,44 @@ Diretorio de dados 	/var/local/geoserver
 
 -Dfile.encoding=UTF8 -Duser.timezone=GMT -Djavax.servlet.request.encoding=UTF-8
 
-===========================================================================================================================
-===========================================================================================================================
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+/////////// (wildsong/geoserver)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-//https://hub.docker.com/r/kartoza/geoserver
+https://github.com/Wildsong/docker-geoserver
+https://hub.docker.com/r/wildsong/geoserver
 
-$ docker run --name "geoserver"  -e GEOSERVER_ADMIN_PASSWORD='myawesomegeoserver' -p 8080:8080 -d -t kartoza/geoserver
-$ docker run --name "geoserver"  --link postgis:postgis -p 8080:8080 -d -t kartoza/geoserver
-$ docker run -d -v $HOME/geoserver_data:/opt/geoserver/data_dir kartoza/geoserver
+https://github.com/Wildsong/geoserver-compose
+
+$ git clone https://github.com/Wildsong/docker-geoserver
+
+$ mv docker-geoserver/ docker-geoserver_wildsong && cd docker-geoserver_wildsong
+
+--> Alterar "Dockerfile":
+
+	RUN mkdir /tmp/gs && cd /tmp/gs && wget http://sourceforge.net/projects/geoserver/files/GeoServer/${GEOSERVER_VERSION}/geoserver-${GEOSERVER_VERSION}-war.zip
+
+	RUN mkdir /tmp/wc && cd /tmp/wc && wget http://sourceforge.net/projects/geowebcache/files/geowebcache/${GEOWEBCACHE_VERSION}/geowebcache-${GEOWEBCACHE_VERSION}-war.zip
+
+	WORKDIR ${CATALINA_HOME}/webapps
+
+	RUN cd /tmp/gs && unzip -o geoserver-${GEOSERVER_VERSION}-war.zip \
+		&& cd /tmp/wc && unzip -o geowebcache-${GEOWEBCACHE_VERSION}-war.zip
+
+	# These folders have to exist for the deployment to be happy.
+	RUN mkdir ${GEOSERVER_DATA_DIR} && mkdir ${GEOWEBCACHE_DATA_DIR} \
+		&& mv /tmp/gs/geoserver.war ${GEOSERVER_DATA_DIR} \
+		&& mv /tmp/wc/geowebcache.war ${GEOWEBCACHE_DATA_DIR} \
+		&& cd ${GEOSERVER_DATA_DIR} && unzip geoserver.war \
+		&& cd ${GEOWEBCACHE_DATA_DIR} && unzip geowebcache.war
+
+$ docker build -t geoserver .
+
+$ docker run --rm -d -p 8080:8080 -v ${PWD}:/geoserver --name=gs_wildsong geoserver
+#docker run -it --name geoserver_build -v geoserver_data:/geoserver geoserver
+
+LogonGeoserver: admin geoserver
+
+
