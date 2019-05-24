@@ -33,6 +33,12 @@ obs.:
 
 In qGIS ("Create a New WMS/WMTS Connection")
 
+(para wms)
+==> URL = http://172.17.0.5:8080/geoserver/wms?
+
+E
+
+(para wmts)
 ==> URL = http://172.17.0.5:8080/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
 
 
