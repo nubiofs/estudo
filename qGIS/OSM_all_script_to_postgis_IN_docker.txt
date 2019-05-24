@@ -1,0 +1,39 @@
+https://github.com/kartoza/docker-osm
+
+https://hub.docker.com/r/kartoza/docker-osm
+https://kartoza.com/en/blog/creating-a-live-topic-specific-mirror-of-openstreetmap-in-postgis/
+
+https://github.com/kartoza/docker-osm-examples/
+https://github.com/kartoza/docker-osm-examples/archive/master.zip
+https://github.com/kartoza/QGISTrainingWorkshop/tree/master/OSM
+https://github.com/kartoza/QGISTrainingWorkshop
+
+https://drive.google.com/file/d/1qpKnMIZXW710VzgVrf3FTnxOKyTG6pQl/view
+
+https://github.com/kartoza/docker-pg-backup
+
+* Build and run
+
+Now build the docker images needed to run the application:
+
+$ docker-compose build
+$ docker-compose up
+
+In production you should daemonize the services when bringing them up:
+
+$ docker-compose up -d
+
+
+obs.: Ver task em (https://github.com/kartoza/docker-osm/blob/develop/Makefile)
+
+
+---
+
+Tags (3)
+
+    osmupdate-latest 106 MB
+    imposm-latest 424 MB
+    osmenrich-latest 365 MB
+
+docker build -t osmupdate .
+docker run -v $('pwd')import-queue/:/home/import-queue -v $('pwd')base-pbf/:/home/base-pbf -v $('pwd')import-done/:/home/import-done -d osmupdate

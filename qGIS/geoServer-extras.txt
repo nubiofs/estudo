@@ -1,0 +1,5 @@
+http://www.fernandoquadro.com.br/html/2007/09/05/formatos-de-saida-do-geoserver/
+
+https://www.geo-solutions.it/technologies/geoserver/
+
+https://www.slideshare.net/geosolutions/geoserver-in-production-we-do-it-here-is-how-foss4g-2016

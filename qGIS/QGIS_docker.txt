@@ -42,3 +42,8 @@ E
 ==> URL = http://172.17.0.5:8080/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
 
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://github.com/kartoza/docker-qgis-desktop
+
