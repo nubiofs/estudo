@@ -21,3 +21,18 @@ $ docker run --rm --net=host -it --name qgis \
 qgis/qgis:latest qgis
 
 This code snippet will launch QGIS inside a container and display the application on your screen.
+
+
+
+obs.:
+
+	$ docker ps
+	$ docker exec -it -u 0 13388846d193 /bin/bash
+	$ wget http://172.17.0.5:8080/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
+
+
+In qGIS ("Create a New WMS/WMTS Connection")
+
+==> URL = http://172.17.0.5:8080/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
+
+

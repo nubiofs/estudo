@@ -6,8 +6,12 @@
 
 $ mkdir -p ~/postgres_data & chmod 777 ~/postgres
 
-$ docker run --name=postgis -d -e POSTGRES_USER=alex -e POSTGRES_PASS=password -e POSTGRES_DBNAME=gis -e ALLOW_IP_RANGE=0.0.0.0/0 -p 5432:5432 -v ${PWD}:/var/lib/postgresql --restart=always kartoza/postgis:9.6-2.4
+$ docker run --rm --name=postgis -d -e POSTGRES_USER=alex -e POSTGRES_PASS=password -e POSTGRES_DBNAME=gis -e ALLOW_IP_RANGE=0.0.0.0/0 -p 5432:5432 -v ${PWD}:/var/lib/postgresql kartoza/postgis:9.6-2.4
+
+//$ docker run --name=postgis -d -e POSTGRES_USER=alex -e POSTGRES_PASS=password -e POSTGRES_DBNAME=gis -e ALLOW_IP_RANGE=0.0.0.0/0 -p 5432:5432 -v ${PWD}:/var/lib/postgresql --restart=always kartoza/postgis:9.6-2.4
+
 //$ docker run --name=postgis -d -e POSTGRES_USER=alex -e POSTGRES_PASS=password -e POSTGRES_DBNAME=gis -e ALLOW_IP_RANGE=0.0.0.0/0 -p 5432:5432 -v $HOME/postgres_data:/var/lib/postgresql --restart=always kartoza/postgis:9.6-2.4
+
 //$ sudo docker run --name "postgis" -p 25432:5432 -d -t kartoza/postgis
 
 $ psql -h localhost -U docker -p 25432 -l

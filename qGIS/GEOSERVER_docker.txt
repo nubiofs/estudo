@@ -50,6 +50,19 @@ obs.:
 	$ docker ps
 	$ docker exec -it -u 0 13388846d193 /bin/bash
 
+
+Obs.:
+
+(Configuração Global)
+Habilitar serviços globais: OK
+
+(Lista de reglas de acceso a los servicios)
+
+Serviço: wms
+Método: *
+Roloes: *
+
+
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 /////////// (oscarfonts/geoserver)
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
