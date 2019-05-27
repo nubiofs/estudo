@@ -1,0 +1,204 @@
+http://geonode.org/gallery/
+https://github.com/GeoNode/geonode/wiki/Community-Resources
+
+https://pypi.org/project/GeoNode/
+
+https://hub.docker.com/u/geonode
+
+https://github.com/GeoNode/geonode-docker
+https://github.com/GeoNode/geonode/tree/master/docs/tutorials/install_and_admin/running_docker
+
+https://github.com/geosolutions-it/geonode-docker
+https://github.com/geosolutions-it/geonode-project
+https://github.com/geosolutions-it/geonode
+https://github.com/geosolutions-it/geonode-generic
+https://github.com/geosolutions-it/geonode-demo
+https://github.com/geosolutions-it/geonode-ubos
+https://github.com/geosolutions-it/geonode-mapstore-client
+https://github.com/geosolutions-it/geonode-restore-docker
+https://github.com/geosolutions-it/geonode-backup-docker
+https://github.com/geosolutions-it/nginx-geonode
+https://github.com/geosolutions-it/geonode-summit-2018
+
+(https://github.com/geosolutions-it/geonode-project):
+==> http://geonode.org/dev-workshop/#/
+
+https://github.com/kartoza/geonode
+https://github.com/kartoza/geonode-docker
+https://github.com/kartoza/geonode-generic
+https://github.com/kartoza/geonode_custom_theme
+https://github.com/kartoza/geonode-ubuntu-ansible
+
+==> https://github.com/geosolutions-it/data-docker
+
+http://docs.geonode.org/en/master/tutorials/users/index.html
+http://docs.geonode.org/en/master/tutorials/devel/index.html
+http://docs.geonode.org/en/master/tutorials/install_and_admin/running_docker/index.html
+
+https://live.osgeo.org/en/quickstart/geonode_quickstart.html
+
+https://training.geonode.geo-solutions.it/
+
+https://github.com/ppasq/wfp-geonode
+https://github.com/ppasq/sy-template
+
+======================================================
+== from (https://github.com/GeoNode/geonode-docker) ==
+======================================================
+
+
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+zz Docker compose			   zz
+zz (http://geonode.org/dev-workshop/#/2/1) zz
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+
+make up # ===> docker-compose up -d and all environment variables
+
+make sync:up # ===> Apply migration and all needed fixtures to work with
+
+docker-compose exec django django-admin.py migrate --noinput
+docker-compose exec django django-admin.py loaddata sample_admin
+docker-compose exec django django-admin.py loaddata geonode/base/fixtures/default_oauth_apps_docker.json
+docker-compose exec django django-admin.py loaddata geonode/base/fixtures/initial_data.json
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xx Python VirtualEnv  + django development server xx
+xx (https://github.com/GeoNode/geonode) 	  xx
+xx http://geonode.org/dev-workshop/#/2/3	  xx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+* Requirements:
+
+    virtualenv + virtualenvwrapper
+    git
+    Java Virtual Machine
+    $ sudo apt-get install zlib1g-dev libxml2-dev libxslt1-dev libgdal-dev gdal-bin
+    $ export CPLUS_INCLUDE_PATH=/usr/include/gdal && export C_INCLUDE_PATH=/usr/include/gdal
+
+$ mkvirtualenv my_geonode
+$ git clone -b 2.8.0 --single-branch https://github.com/GeoNode/geonode
+$ pip install -r geonode/requirements.txt && pip install -e geonode
+$ pip install gdal
+$ cd geonode && paver setup
+$ python manage.py migrate
+$ python manage.py createsuperuser (there must be a superuser named 'admin' when in dev mode)
+$ python manage.py loaddata geonode/base/fixtures/initial_data.json
+$ python manage.py loaddata geonode/base/fixtures/default_oauth_apps.json
+$ paver start_geoserver && python manage.py runserver
+
+
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc (Customize your GeoNode with the geonode-project) cc
+cc http://geonode.org/dev-workshop/#/3/2	     cc
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+	The geonode-project(https://github.com/GeoNode/geonode-project) is the preferred way to customize GeoNode
+	A note on inheritance in python/django
+	Django use the same approach, for example templates and apps are first searched locally and, if found, the others with 
+	the same name are not executed.
+	The GeoNode-project is a django project template that takes advantage of this behavior to use GeoNode as a library and 
+	add its own customized templates and apps.
+
+- Let's create our own geonode-project
+Make sure to run it just outside the geonode folder as we will keep them completely separate
+
+$ django-admin.py startproject my_geonode --template=https://github.com/GeoNode/geonode-project/archive/master.zip -e py,rst,json,yml,ini,env,sample -n Dockerfile my_geonode
+
+Now make sure to have your virtualenv enabled and run:
+
+$ pip install -e my_geonode
+
+- How to run it in development mode
+
+A normal GeoNode dev mode installation can be run by 'paver start' Paver will start geoserver run the django development server. In our case we want to run django with 'my_geonode' settings so we need to run geoserver and django separately.
+
+    $ DJANGO_SETTINGS_MODULE=my_geonode.local_settings paver start
+
+You can wrap this in a simple executable .sh script
+Access geonode at http://localhost:8000
+
+- Folders structure
+
+The final container folder should have two main subfolder:
+
+    geonode, which contains the GeoNode source code and will never be modified
+    my_geonode, which contains our custom geonode-project where we'll add apps, settings and templates
+
+- Create your own django app
+
+In this chapter we will create and setup the skeleton of our custom app using the django facilities. The app will add a geocollections functionality to our GeoNode.
+The Gecollections app allows to present, in a single page, resources and users grouped by a GeoNode Group.
+We can assign arbitrary resources to a Geocollection, a Group and a name that will be also used to build a dedicated URL.
+
+Let's make sure to be in my_geonode folder to execute the commands in the following slide
+
+- Create the django app
+
+Django gives us an handy command to create apps. We already used startproject to create our geonode-project, now we can use startapp to create the app.
+
+python manage.py startapp geocollections
+
+This will create a folder named geocollections that contains empty models and views.
+
+We need to add the new app to the INSTALLED_APPS of our project. in my_geonode/settings.py line 93 change:
+
+INSTALLED_APPS += (PROJECT_NAME,) to INSTALLED_APPS += (PROJECT_NAME, 'geocollections',)
+Add a custom model
+
+In this chapter we will add a custom model and related logic:
+
+    Add a new model
+    Add urls and views
+    Add admin panel
+    Add the template
+
+The Geocollections model
+
+
+from django.db import models
+
+from geonode.base.models import ResourceBase
+from geonode.groups.models import GroupProfile
+
+
+class Geocollection(models.Model):
+    """
+    A collection is a set of resources linked to a GeoNode group
+    """
+    group = models.ForeignKey(GroupProfile, related_name='group_collections')
+    resources = models.ManyToManyField(ResourceBase, related_name='resource_collections')
+    name = models.CharField(max_length=128, unique=True)
+    slug = models.SlugField(max_length=128, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+Permissions and APIs
+
+In this chapter we will add some more advanced logic like permissions and APIs.
+
+The permissions in GeoNode are managed with django-guardian, a library which allow to set object level permissions (django has table level authorization).
+
+The APIs are implemented through django-tastypie.
+
+    Permissions on who can view the geocollection
+    How to add templated and js to embed a permission ui in our geocollection detail page
+    API to serve json serialized searchable endpoint
+
+7.2
+Create the django app Django gives us an handy command to create apps. We already used startproject to create our geonode-project, now we can use startapp to create the app. python manage.py startapp geocollections This will create a folder named geocollections that contains empty models and views. We need to add the new app to the INSTALLED_APPS of our project. in my_geonode/settings.py line 93 change: INSTALLED_APPS += (PROJECT_NAME,) to INSTALLED_APPS += (PROJECT_NAME, 'geocollections',) 
+
+- Add a third party app to your GeoNode
+
+In this chapter we are going to ad an third party Django app named:
+
+    Wagtail https://wagtail.io/, a full CMS for Django
+    Puput https://github.com/APSL/puput, a Django blog based on Wagtail.
+
+Install wagtail and puput
+
+pip install wagtail
+pip install puput
+
+
+

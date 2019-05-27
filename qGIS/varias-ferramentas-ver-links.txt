@@ -3,3 +3,19 @@ https://github.com/sacridini/Awesome-Geospatial
 https://github.com/RoboDonut/awesome-spatial/blob/master/README.md
 
 https://github.com/sshuair/awesome-gis
+
+(config geoserver REST api "python plataform")
+==> https://github.com/geosolutions-it/gsconfig
+==> https://github.com/geosolutions-it/gsconfig
+
+(MapProxy is an open source proxy for geospatial data. It caches, accelerates and transforms data from existing map services 
+and serves any desktop or web GIS client)
+https://github.com/mapproxy/mapproxy
+
+https://github.com/kartoza/geosafe
+https://github.com/kartoza/docker-geosafe
+
+https://github.com/frafra/is-osm-uptodate
+
+http://geogig.org/docs/start/installation.html
+https://github.com/kartoza/docker-geogig
