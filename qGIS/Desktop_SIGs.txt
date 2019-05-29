@@ -1,0 +1,10 @@
+- open sources:
+qGIS - plugins in Python / C++
+openJUMP - plugins in Java /Python
+gvSIG - plugins in Python
+GRASS - plugins in Python
+uDig
+SAGA
+
+- proprietários:
+ArcGIS - plugins in Python

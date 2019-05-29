@@ -42,6 +42,83 @@ https://training.geonode.geo-solutions.it/
 https://github.com/ppasq/wfp-geonode
 https://github.com/ppasq/sy-template
 
+
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+vv from (http://docs.geonode.org/en/master/tutorials/install_and_admin/running_docker/setup_docker_compose.html) vv
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+http://docs.geonode.org/en/master/tutorials/devel/index.html
+
+$ docker-compose --version
+
+$ git clone https://github.com/GeoNode/geonode.git
+
+$ cd geonode
+
+$ docker-compose -f docker-compose.yml -f docker-compose.override.localhost.yml up --build
+
+Creating network "geonode_default" with the default driver
+Creating volume "geonode-statics" with default driver
+Creating volume "geonode-gsdatadir" with default driver
+Creating volume "geonode-dbdata" with default driver
+Creating volume "geonode-dbbackups" with default driver
+Creating volume "geonode-rabbitmq" with default driver
+...
+Status: Downloaded newer image for elasticsearch:2.4.1
+Status: Downloaded newer image for geonode/postgis:10
+Status: Downloaded newer image for rabbitmq:latest
+Building celery
+Status: Downloaded newer image for geonode/geonode:latest
+Status: Downloaded newer image for geonode/geoserver_data:2.14.x
+Status: Downloaded newer image for geonode/geoserver:2.14.x
+Status: Downloaded newer image for geonode/nginx:geoserver
+...
+Creating rabbitmq4geonode      ... done
+Creating db4geonode            ... done
+Creating elasticsearch4geonode ... done
+Creating gsconf4geonode        ... done
+Creating geoserver4geonode     ... done
+Creating celery4geonode        ... done
+Creating django4geonode        ... done
+Creating nginx4geonode         ... done
+Attaching to elasticsearch4geonode, rabbitmq4geonode, gsconf4geonode, db4geonode, geoserver4geonode, django4geonode, celery4geonode, nginx4geonode
+...
+rabbitmq4geonode |  home dir       : /var/lib/rabbitmq
+rabbitmq4geonode |  config file(s) : /etc/rabbitmq/rabbitmq.conf
+...
+django4geonode   | SITEURL=http://localhost:80/
+django4geonode   | GEOSERVER_PUBLIC_LOCATION=http://localhost:80/gs/
+...
+elasticsearch4geonode | [2019-05-28 17:14:58,747][INFO ][env                      ] [Mastermind] using [1] data paths, mounts [[/usr/share/elasticsearch/data (/dev/sda1)]], net usable_space [181.1gb], net total_space [434.7gb], spins? [possibly], types [ext4]
+elasticsearch4geonode | [2019-05-28 17:14:59,685][INFO ][transport                ] [Mastermind] publish_address {172.18.0.3:9300}, bound_addresses {0.0.0.0:9300}
+elasticsearch4geonode | [2019-05-28 17:15:02,714][INFO ][http                     ] [Mastermind] publish_address {172.18.0.3:9200}, bound_addresses {0.0.0.0:9200}
+...
+geoserver4geonode | 28-May-2019 17:15:05.987 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-8-openjdk-amd64/jre
+...
+geoserver4geonode | 28-May-2019 17:15:05.987 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /usr/local/tomcat
+db4geonode       | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/geonode.sh
+django4geonode   | Copying '/usr/src/app/geonode/static/package.json'
+celery4geonode   | Copying '/usr/local/lib/python2.7/site-packages/geoexplorer/static/geoexplorer/externals/GeoExt/resources/css/layerlegend.css'
+celery4geonode   | Copying '/usr/local/lib/python2.7/site-packages/leaflet/static/leaflet/Control.MiniMap.js'
+celery4geonode   | Copying '/usr/src/app/geonode/monitoring/static/monitoring/bundle.js'
+celery4geonode   | Copying '/usr/src/app/geonode/monitoring/static/monitoring/bundle.js.map'
+...
+
+$ docker ps
+
+==> localhost
+
+admin
+admin
+
+obs.:
+	docker-compose.override.localhost.yml contains environment variables to allow you run the instances on localhost. 
+	You can use this file as template in order to run on other public addresses.
+
+
+
+
+
 ======================================================
 == from (https://github.com/GeoNode/geonode-docker) ==
 ======================================================

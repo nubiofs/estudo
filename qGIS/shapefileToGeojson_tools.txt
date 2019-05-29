@@ -1,0 +1,181 @@
+
+http://geojson.io/#map=2/20.0/0.0
+
+https://github.com/Toblerity/Fiona
+https://fiona.readthedocs.io/en/latest/manual.html
+https://github.com/Toblerity/Fiona/blob/master/docs/cli.rst
+https://fiona.readthedocs.io/en/latest/
+
+https://gdal.org/programs/ogr2ogr.html
+https://pcjericks.github.io/py-gdalogr-cookbook/vector_layers.html
+
+https://esri.github.io/arcgis-python-api/apidoc/html/arcgis.geometry.html
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://gis.stackexchange.com/questions/73768/converting-geojson-to-python-objects
+
+'''
+import json
+
+with open('test.json') as f:
+    data = json.load(f)
+
+for feature in data['features']:
+    print feature['geometry']['type']
+    print feature['geometry']['coordinates']
+'''
+
+'''
+# https://github.com/karimbahgat/PyGeoj
+# https://karimbahgat.github.io/PyGeoj/
+import pygeoj
+testfile = pygeoj.load("test.geojson")
+for feature in testfile:
+    print feature.geometry.type
+    print feature.geometry.coordinates
+
+obs.:
+
+	Basic information about the geojson file can then be extracted, such as:
+
+	len(testfile) # the number of features
+	testfile.bbox # the bounding box region of the entire file
+	testfile.crs # the coordinate reference system
+	testfile.all_attributes # retrieves the combined set of all feature attributes
+	testfile.common_attributes # retrieves only those field attributes that are common to all features
+
+	Individual features can be accessed by their index in the features list:
+
+	testfile[3]
+	# or
+	testfile.get_feature(3)
+
+	Or by iterating through all of them:
+
+	for feature in testfile:
+	    # do something
+
+	A feature can be inspected in various ways:
+
+	feature.properties
+	feature.geometry.type
+	feature.geometry.coordinates
+	feature.geometry.bbox
+
+'''
+
+'''
+with open(json_file, 'r') as data_file:
+    data = json.load(data_file)
+    for feature in data['features']:
+        for geometry in feature['geometry']['geometries']:
+            if geometry['type'] == "Polygon":
+                polygon = geometry['coordinates']
+'''
+
+
+There are many geospatial Python modules that can convert GeoJSON to shapefiles (and the reverse):
+
+    Fiona
+    PySAL
+    Pyshp 1.7 and up
+    GDAL/OGR
+    PyQGIS with the new API
+    python-geojson
+
+- see Python Geo_interface applications:
+==> (https://github.com/mlaloux/Python-geo_interface-applications)
+
+with Fiona:
+
+    >>> import fiona   
+    >>> f = fiona.open('point.shp')  
+    >>> f.next()  
+    {'geometry': {'type': 'Point', 'coordinates': (161821.09375, 79076.0703125)}, 'id': '0', 'properties': {u'DIP_DIR': 120, u'STRATI_TYP': 1, u'DIP': 30}}
+    >>> f.next()['geometry']['coordinates']  
+    (161485.09375, 79272.34375)  
+    >>> f.next()['properties']['DIP']  
+    55  
+
+###with PyQGIS API2:
+
+    layer = qgis.utils.iface.activeLayer()  
+    def records(layer):  
+        fields = layer.pendingFields()   
+        field_names = [field.name() for field in fields]   
+        for elem in layer.getFeatures():  
+              geom= elem.geometry()  
+              atr = dict(zip(field_names, elem.attributes()))  
+              yield dict(geometry=geom.exportToGeoJSON(),properties=atr)  
+              
+    c = records(layer) 
+    c.next() 
+    {'geometry': {'type': 'Point', 'coordinates': (161821.09375, 79076.0703125)}, 'id': '0', 'properties': {u'DIP_DIR': 120, u'STRATI_TYP': 1, u'DIP': 30}}
+
+###with PyShp:
+
+    def records(filename):  
+        # generator 
+        reader = shapefile.Reader(filename)  
+        fields = reader.fields[1:]  
+        field_names = [field[0] for field in fields]  
+        for sr in reader.shapeRecords():  
+            geom = sr.shape.__geo_interface__  
+            atr = dict(zip(field_names, sr.record))  
+            yield dict(geometry=geom,properties=atr)    
+        
+
+    >>> import shapefile
+    >>> a = records('point.shp')
+    >>> a.next()
+    {'geometry': {'type': 'Point', 'coordinates': (161821.09375, 79076.0703125)}, 'properties': {'DIP_DIR': 120, 'STRATI_TYP': 1, 'DIP': 30}}
+    >>> a.next()['geometry']['coordinates']
+    (161485.09375, 79272.34375)
+    >>> a.next()['properties']['DIP']
+    55
+    
+
+###with osgeo.ogr
+
+    def records(file):  
+        # generator 
+        reader = ogr.Open(file)
+        layer = reader.GetLayer(0)
+        for i in range(layer.GetFeatureCount()):
+            feature = layer.GetFeature(i)
+            yield json.loads(feature.ExportToJson())
+            
+    >>> from osgeo import ogr
+    >>> a = records('point.shp')
+    >>> a.next()
+    {'geometry': {'type': 'Point', 'coordinates': (161821.09375, 79076.0703125)}, 'properties': {'DIP_DIR': 120, 'STRATI_TYP': 1, 'DIP': 30}}
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+PyQGIS:
+
+layer = iface.mapCanvas().currentLayer()
+features = layer.getFeatures()
+
+for feature in features:
+    geom = feature.geometry()
+    print geom.exportToGeoJSON()
+
+    # check if feature geometry is multipart
+    if geom.isMultipart():
+        new_features = []
+        temp_feature = QgsFeature(feature)
+
+        # set the geometry of each part
+        for part in geom.asGeometryCollection ():
+            temp_feature.setGeometry(part)
+            new_features.append(QgsFeature(temp_feature)) 
+
+for feature in new_features:
+    print feature.geometry().exportToWkt()
+    print feature.geometry().exportToGeoJSON()
+
+

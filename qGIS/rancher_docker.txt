@@ -1,0 +1,64 @@
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc http://docs.geonode.org/en/master/tutorials/install_and_admin/running_docker/setup_rancher.html#deploy-geonode-as-stack-on-rancher cc
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+
+
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xx https://github.com/kartoza/kartoza-rancher-catalogue xx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+$ mkdir /mysql && cd /mysql
+$ docker run -d -v ${PWD}:/var/lib/mysql --restart=unless-stopped -p 8080:8080 rancher/server
+
+i) Admin "Local"
+
+iI) Admin -> Access Control
+
+admin
+batman
+
+iii) add a host to the environment:
+
+infrastructure -> Hosts
+
+Copy, paste, and run the command below to register the host with Rancher:
+ 
+"$ docker run -e CATTLE_AGENT_IP="127.0.0.1"  --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/rancher:/var/lib/rancher rancher/agent:v1.2.11 http://localhost:8080/v1/scripts/C853DE94319C1A5597BB:1546214400000:C3IhKEDLrdEMeSf5Xl3dq2zVfo"
+
+
+
+
+
+
+ii) Admin -> Settings menu to add our Rancher catalogue using this URL:
+(Specify the develop branch for in-development recipes)
+
+
+Add Catalog -> "kartoza-rancher-catalogue" & "https://github.com/kartoza/kartoza-rancher-catalogue"
+
+
+
+
+
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+https://rancher.com/quick-start/
+
+$ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
+
+--> http://<IP_DO_SERVIDOR>:8080
+-> admin
+-> batman
+
+obs.:
+
+Clique no menú Admin >> Access Control
+
+	utilizar a autenticação local.
+
