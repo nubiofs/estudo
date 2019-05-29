@@ -1,0 +1,166 @@
+https://docs.qgis.org/3.4/pdf/pt_BR/
+https://qgis.org/pyqgis/3.6/
+https://qgis.org/api/
+https://plugins.qgis.org/
+https://docs.qgis.org/3.7/C/docs/user_manual/plugins/python_console.html
+https://docs.qgis.org/testing/en/docs/user_manual/plugins/python_console.html
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+(https://docs.qgis.org/3.4/pdf/pt_BR/QGIS-3.4-PyQGISDeveloperCookbook-pt_BR.pdf)
+
+qGIS -> Plugins → Python Console menu:
+Plugins ‣ Python Console (Ctrl+Alt+P).
+
+# For interaction with the QGIS environment,  there is a iface variable,  which is an instance of QgisInterface.  
+# This interface allows access to the map canvas, menus, toolbars and other parts of the QGIS application.
+'''
+from qgis.core import *
+import qgis.utils
+# The 'qgis.gui' module brings various GUI components
+'''
+>>> layer = qgis.utils.iface.activeLayer()
+>>> # name = layer.id()
+>>> mc = qgis.utils.iface.mapCanvas()
+>>> current = mc.currentLayer()
+>>> name = current.name()
+>>> value = layer.featureCount()
+>>> qgis.utils.iface.mapCanvas().setSelectionColor( QColor("red") )
+>>> if value == 1:
+...	currentLayer.select(0)
+>>> qgis.utils.iface.messageBar().pushMessage("The layer '{}' featureCount is {}!".format(name, value))
+>>> currentLayer.removeSelection()
+
+# currentLayer.sourceCrs().toWkt()
+# currentLayer.sourceCrs().authid()
+# 
+#
+# dir(currentLayer.getFeatures())
+# dir(currentLayer)
+# print(currentLayer.source())
+# print(currentLayer.featureCount())
+# dir(currentLayer.fields())
+# print(currentLayer.fields().names())
+# lista = currentLayer.fields().toList()
+# print(lista)
+# lista[0].length()
+# lista[0].name()
+# dir(currentLayer.sourceCrs())
+# currentLayer.sourceCrs().srsid()
+##
+# if currentLayer is None:
+	raise QgsProcessingException(self.invalidSourceError(parameters, self.INPUT))
+# Update the progress bar:
+# feedback.setProgress(int(current * total))
+
+# obtain the layer tree of the top-level group in the project
+layerTree = qgis.utils.iface.layerTreeCanvasBridge().rootGroup()
+layerTree.isVisible()
+layerTree.layerOrder()[0].id()
+
+for field in currentLayer.fields():
+	print(field.name(), field.typeName())
+
+for f in currentLayer.getFeatures():
+	#print(f['name'])
+	print(f.geometry())
+	print(f.attributes()) # lista com os valores para cada tipo de atributo
+	print(f.geometry().type()) # QgsWkbTypes.PointGeometry, QgsWkbTypes.LineGeometry, QgsWkbTypes.PolygonGeometry, 
+	if QgsWkbTypes.isSingleType(f.geometry().wkbType()):
+		print( ... # f.geometry().asPoint(), f.geometry().asPolyline(), f.geometry().asPolygon()
+		print("singleType")
+	else:
+		print( ... # f.geometry().asMultiPoint(), f.geometry().asMultiPolyline(), f.geometry().asMultiPolygon()
+		# for "Polygon" -> f.geometry().area()
+
+
+OBS.:
+
+gPnt.wkbType() == QgsWkbTypes.Point
+# output: True
+gLine.wkbType() == QgsWkbTypes.LineString
+# output: True
+gPolygon.wkbType() == QgsWkbTypes.Polygon
+# output: True
+gPolygon.wkbType() == QgsWkbTypes.MultiPolygon
+# output: False
+
+
+
+qgis.utils.iface.mapCanvas().setSelectionColor( QColor("red") )
+
+res = layer.dataProvider().addAttributes([QgsField("mytext", QVariant.String), QgsField("myint", QVariant.Int)])
+
+attrs = { 0 : "hello", 1 : 123 }
+# fid = 100 (ID of the feature we will modify):
+layer.dataProvider().changeAttributeValues({ fid : attrs })
+
+# update an attribute with given field index (int) to a given value
+layer.changeAttributeValue(fid, fieldIndex, value)
+# add new field
+layer.addAttribute(QgsField("mytext", QVariant.String))
+
+feat.setAttributes([0, 'hello'])
+feat.setAttribute('name', 'hello')
+
+
+====> layer.updateFields()
+
+
+from qgis.PyQt.QtCore import QVariant
+# create layer
+vl = QgsVectorLayer("Point", "temporary_points", "memory")
+pr = vl.dataProvider()
+# add fields
+pr.addAttributes([QgsField("name", QVariant.String),
+	QgsField("age",  QVariant.Int),
+	QgsField("size", QVariant.Double)])
+vl.updateFields() # tell the vector layer to fetch changes from the provider
+
+# add a feature
+fet = QgsFeature()
+fet.setGeometry(QgsGeometry.fromPointXY(QgsPointXY(10,10)))
+fet.setAttributes(["Johny", 2, 0.3])
+pr.addFeatures([fet])
+# update layer's extent when new features have been added
+# because change of extent in provider is not propagated to the layer
+vl.updateExtents()
+
+# show some stats
+print("fields:", len(pr.fields()))
+print("features:", pr.featureCount())
+e = vl.extent()
+print("extent:", e.xMinimum(), e.yMinimum(), e.xMaximum(), e.yMaximum())
+
+
+** (PARA GUI VER): PAGINA 36 (Chapter 5. Usando Camadas Vetor) DE "https://docs.qgis.org/3.4/pdf/pt_BR/QGIS-3.4-PyQGISDeveloperCookbook-pt_BR.pdf":
+
+from qgis.gui import
+QgsRendererWidget, QgsColorButton
+class RandomRendererWidget(QgsRendererWidget):
+
+
+...
+
+
+obs.:
+
+1)
+
+>>> exec(open('/root/workspace/estudo-001.py'.encode('utf-8')).read())
+
+Ctrl+Shift+Space to view the command history: double-clicking a row will execute the command.
+
+2)
+
+Every time QGIS starts, the user’s Python home directory
+•  Linux:
+.local/share/QGIS/QGIS3
+
+# startup.py
+# PYQGIS_STARTUP # environment variable to an existing Python file "startup.py"
+
+>>> QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)
+['/root/.local/share/QGIS/QGIS3', '/usr/local/share/QGIS/QGIS3', '/usr/share/QGIS/QGIS3']
+
+
+==> /root/.local/share/QGIS/QGIS3/profiles/default/processing/scripts
+
