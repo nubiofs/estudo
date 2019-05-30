@@ -1,0 +1,77 @@
+i.mce-i-icon {
+    font: 400 20px/1 dashicons;
+    padding: 0;
+    vertical-align: top;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-left: -2px;
+    padding-right: 2px
+}
+
+ul.wcb-button li {
+    list-style-type:none !important;
+    margin:0;
+}
+
+.cb-common li:before {
+    font-family: dashicons;
+    font-size: 22px;
+    line-height: 1;
+    padding-right: 10px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.check-button li:before {
+    content: "\f147";
+    color: #2ab300;
+    font-size: 26px !important;
+}
+
+.cross-button li:before{
+    content: "\f158";
+    color: red;
+}
+
+.plus-button li:before {
+    content: "\f132";
+    color: #0079ff;
+}
+
+.circle-plus-button li:before {
+    content: "\f502";
+    color: #0079ff;
+}
+
+.circle-cross-button li:before {
+    content: "\f153";
+    color: red;
+}
+
+.star-button li:before {
+    content: "\f155";
+    color: #F2B827;
+}
+
+.warning-button li:before {
+    content: "\f534";
+    color: red;
+}
+
+.idea-button li:before {
+    content: "\f339";
+    color: #ffd129;
+}
+
+.arrow-button li:before {
+    content: "\f139";
+    color: #0079ff;    
+    font-size: 32px !important;
+}
+
+.arrow-alt-button li:before {
+    content: "\f344";
+    color: #0079ff;
+}
+

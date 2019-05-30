@@ -1,0 +1,39 @@
+/* bs help block */
+div.help {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#rating {
+    margin: 1em 0;
+}
+
+.fieldWrapper input, .fieldWrapper textarea {
+    width: 406px;
+}
+
+#id_tags__tagautosuggest {
+    width: inherit;
+}
+
+div.tag_cloud {
+    text-align: center;
+}
+
+div.tag_cloud a {
+   margin: 4px;
+}
+
+.white, .white a {
+  color: #fff;
+}
+
+.olwidgetEditableLayerSwitcher .container {
+    width: inherit !important;
+}
+
+img.plugin-icon {
+    max-width: inherit;
+}
+
+.required label:after { content:" *"; color: red; }

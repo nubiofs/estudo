@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html class="ua-gecko ua-gecko-52 ua-gecko-52-0 ua-firefox ua-firefox-52 ua-firefox-52-0 ua-desktop ua-desktop-linux js applicationcache geolocation history postmessage websockets localstorage sessionstorage no-websqldatabase webworkers hashchange audio canvas canvastext video webgl cssgradients multiplebgs opacity rgba inlinesvg hsla supports svgclippaths smil no-touchevents fontface generatedcontent textshadow indexeddb indexeddb-deletedatabase cssanimations backgroundsize borderimage borderradius boxshadow flexbox no-cssreflections csstransforms csstransforms3d csstransitions" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" data-useragent="Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0" style="overflow-y: auto;" lang="en-GB"><head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Editing vector layers in QGIS</title>
+
+<!-- All in One SEO Pack 2.11 by Michael Torbert of Semper Fi Web Design[354,430] -->
+<link rel="author" href="https://plus.google.com/+TYCGISTraining">
+<meta name="description" content="Various vector layers and tables (OGR, SpatiaLite, PostGIS, MSSQL Spatial or Oracle Spatial) can be edited in QGIS. Before you start a editing session in QGIS, make sure you set the right snapping options.This will optimize the editing process of the layers.">
+
+<meta name="keywords" content="qgis,vector,editing,snap,tolerance,advanced,trace,tracing,limit,split">
+
+<link rel="canonical" href="https://www.giscourse.com/editing-vector-layers-in-qgis/">
+<meta property="og:title" content="Editing vector layers in QGIS">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://www.giscourse.com/editing-vector-layers-in-qgis/">
+<meta property="og:image" content="https://www.giscourse.com/wp-content/uploads/2018/06/13-1024x561.png">
+<meta property="og:site_name" content="GIS Course  |  TYC GIS Training">
+<meta property="fb:admins" content="892660810764676">
+<meta property="og:description" content="Various vector layers and tables (OGR, SpatiaLite, PostGIS, MSSQL Spatial or Oracle Spatial) can be edited in QGIS. Before you start a editing session in QGIS, make sure you set the right snapping options.This will optimize the editing process of the layers.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Editing vector layers in QGIS">
+<meta name="twitter:description" content="Various vector layers and tables (OGR, SpatiaLite, PostGIS, MSSQL Spatial or Oracle Spatial) can be edited in QGIS. Before you start a editing session in QGIS, make sure you set the right snapping options.This will optimize the editing process of the layers.">
+<meta name="twitter:image" content="https://www.giscourse.com/wp-content/uploads/2018/06/13-1024x561.png">
+<meta itemprop="image" content="https://www.giscourse.com/wp-content/uploads/2018/06/13-1024x561.png">
+			<script type="text/javascript">
+				window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+				ga('create', 'UA-59438999-1', 'auto');
+				// Plugins
+				
+				ga('send', 'pageview');
+			</script>
+			<script async="" src="Editing%20vector%20layers%20in%20QGIS_arquivos/analytics.js"></script>
+			<!-- /all in one seo pack -->
+<link rel="dns-prefetch" href="https://www.giscourse.com/">
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="GIS Course  |  TYC GIS Training » Feed" href="https://www.giscourse.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="GIS Course  |  TYC GIS Training » Comments Feed" href="https://www.giscourse.com/comments/feed/">
+			<link rel="shortcut icon" href="https://www.giscourse.com/wp-content/uploads/2017/07/flavicon-01.png" type="image/x-icon">
+					<!-- For iPad Retina display -->
+			<link rel="apple-touch-icon-precomposed" sizes="144x144" href="">
+		<link rel="alternate" type="application/rss+xml" title="GIS Course  |  TYC GIS Training » Editing vector layers in QGIS Comments Feed" href="https://www.giscourse.com/editing-vector-layers-in-qgis/feed/">
+
+		<meta property="og:title" content="Editing vector layers in QGIS">
+		<meta property="og:type" content="article">
+		<meta property="og:url" content="https://www.giscourse.com/editing-vector-layers-in-qgis/">
+		<meta property="og:site_name" content="GIS Course  |  TYC GIS Training">
+		<meta property="og:description" content="For this exercise please use QGIS version 2.18.
+Various vector layers and tables (OGR, SpatiaLite, PostGIS, MSSQL Spatial or Oracle Spatial) can be edited in QGIS.&nbsp; Before you start a editing session in QGIS, make sure you set the right snapping options (Snapping Tolerance and Search Radius). In QGIS you can find">
+
+									<meta property="og:image" content="https://www.giscourse.com/wp-content/uploads/2018/06/13.png">
+							<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.giscourse.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.6.14"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="Editing%20vector%20layers%20in%20QGIS_arquivos/wp-emoji-release.js" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<style type="text/css">
+	.tablepress thead th div { float:left; }
+</style><link rel="stylesheet" id="jquery.bxslider-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/jquery.css" type="text/css" media="all">
+<link rel="stylesheet" id="Axl_Testimonials_Widget-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/testimonials-widget.css" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/dashicons.css" type="text/css" media="all">
+<link rel="stylesheet" id="wcb-css-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-postratings-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/postratings-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="avada-stylesheet-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/style_003.css" type="text/css" media="all">
+<link rel="stylesheet" id="child-style-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/style_002.css" type="text/css" media="all">
+<!--[if lte IE 9]>
+<link rel='stylesheet' id='avada-shortcodes-css'  href='https://www.giscourse.com/wp-content/themes/Avada/shortcodes.css?ver=5.0.5' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="fontawesome-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/font-awesome.css" type="text/css" media="all">
+<!--[if lte IE 9]>
+<link rel='stylesheet' id='avada-IE-fontawesome-css'  href='https://www.giscourse.com/wp-content/themes/Avada/assets/fonts/fontawesome/font-awesome.css?ver=5.0.5' type='text/css' media='all' />
+<![endif]-->
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='avada-IE8-css'  href='https://www.giscourse.com/wp-content/themes/Avada/assets/css/ie8.css?ver=5.0.5' type='text/css' media='all' />
+<![endif]-->
+<!--[if IE]>
+<link rel='stylesheet' id='avada-IE-css'  href='https://www.giscourse.com/wp-content/themes/Avada/assets/css/ie.css?ver=5.0.5' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="avada-iLightbox-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/ilightbox.css" type="text/css" media="all">
+<link rel="stylesheet" id="avada-animations-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/animations.css" type="text/css" media="all">
+<link rel="stylesheet" id="avada-woocommerce-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/woocommerce.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/font-awesome_003.css" type="text/css" media="all">
+<link rel="stylesheet" id="amarkal-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/amarkal.css" type="text/css" media="all">
+<link rel="stylesheet" id="select2-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/select2.css" type="text/css" media="all">
+<link rel="stylesheet" id="mivhak-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/mivhak.css" type="text/css" media="all">
+<link rel="stylesheet" id="tablepress-default-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/tablepress-combined.css" type="text/css" media="all">
+<link rel="stylesheet" id="fusion-builder-shortcodes-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/fusion-shortcodes.css" type="text/css" media="all">
+<link rel="stylesheet" id="avada-dynamic-css-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/avada-16377.css" type="text/css" media="all">
+<link rel="stylesheet" id="footable-core-min-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/footable.css" type="text/css" media="all">
+<link rel="stylesheet" id="sccss_style-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/a.css" type="text/css" media="all">
+<link rel="stylesheet" id="avada_google_fonts-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/css.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var SDT_DATA = {"ajaxurl":"https:\/\/www.giscourse.com\/wp-admin\/admin-ajax.php","siteUrl":"https:\/\/www.giscourse.com\/","pluginsUrl":"https:\/\/www.giscourse.com\/wp-content\/plugins","isAdmin":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/jquery_003.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/jquery-migrate.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/ga-scroll-events.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/editing-vector-layers-in-qgis\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View Basket","cart_url":"https:\/\/www.giscourse.com\/cart\/","is_cart":"","cart_redirect_after_add":"yes"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/add-to-cart.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/woocommerce-add-to-cart.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.giscourse.com/wp-content/themes/Avada/assets/js/html5shiv.js?ver=5.0.5'></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.giscourse.com/wp-content/themes/Avada/assets/js/excanvas.js?ver=5.0.5'></script>
+<![endif]-->
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/footable.js"></script>
+<link rel="https://api.w.org/" href="https://www.giscourse.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.giscourse.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.giscourse.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.6.14">
+<meta name="generator" content="WooCommerce 2.6.13">
+<link rel="shortlink" href="https://www.giscourse.com/?p=16377">
+<link rel="alternate" type="application/json+oembed" href="https://www.giscourse.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.giscourse.com%2Fediting-vector-layers-in-qgis%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.giscourse.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.giscourse.com%2Fediting-vector-layers-in-qgis%2F&amp;format=xml">
+<style type="text/css">
+	#category-posts-2-internal .cat-post-item img {max-width: initial; max-height: initial; margin: initial;}
+#category-posts-2-internal .cat-post-author {margin-bottom: 0;}
+#category-posts-2-internal .cat-post-thumbnail {margin: 5px 10px 5px 0;}
+#category-posts-2-internal .cat-post-item:before {content: ""; clear: both;}
+#category-posts-2-internal .cat-post-title {font-size: 15px;}
+#category-posts-2-internal .cat-post-current .cat-post-title {font-weight: bold; text-transform: uppercase;}
+#category-posts-2-internal .cat-post-date {font-size: 14px; line-height: 18px; font-style: italic; margin-bottom: 5px;}
+#category-posts-2-internal .cat-post-comment-num {font-size: 14px; line-height: 18px;}
+#category-posts-2-internal .cat-post-item {border-bottom: 1px solid #ccc;	list-style: none; list-style-type: none; margin: 3px 0;	padding: 3px 0;}
+#category-posts-2-internal .cat-post-item:last-child {border-bottom: none;}
+#category-posts-2-internal .cat-post-item:after {content: ""; display: table;	clear: both;}
+#category-posts-2-internal p {margin:5px 0 0 0}
+#category-posts-2-internal li > div {margin:5px 0 0 0; clear:both;}
+#category-posts-2-internal .dashicons {vertical-align:middle;}
+#category-posts-2-internal .cat-post-crop {overflow: hidden; display:inline-block}
+#category-posts-2-internal .cat-post-item img {margin: initial;}
+#category-posts-2-internal .cat-post-thumbnail {float:left;}
+</style>
+	<meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress.">
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://www.giscourse.com/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><!--[if IE  8]><link rel="stylesheet" type="text/css" href="https://www.giscourse.com/wp-content/plugins/js_composer/assets/css/vc-ie8.min.css" media="screen"><![endif]--><script type="text/javascript">/* FooTable init code */
+
+var $FOOTABLE = $FOOTABLE || {};
+(function( $FOOTABLE, $, undefined ) {
+
+	jQuery.fn.attrAppendWithComma=function(a,b){var c;return this.each(function(){c=$(this),void 0!==c.attr(a)&&""!=c.attr(a)?c.attr(a,c.attr(a)+","+b):c.attr(a,b)})};jQuery.fn.footableAttr=function(a,b){return this.each(function(){var c=$(this);c.data("auto-columns")!==!1&&(c.find("thead th:gt("+a+")").attrAppendWithComma("data-hide","tablet"),c.find("thead th:gt("+b+")").attrAppendWithComma("data-hide","phone"))})},jQuery.fn.footableFilter=function(a){return this.each(function(){var b=$(this);b.data("filter")||b.data("filter")===!1||b.data("filter-text-only","true").before('<div class="footable-filter-container"><input placeholder="'+a+'" style="float:right" type="text" class="footable-filter" /></div>')})},jQuery.fn.footablePager=function(){return this.each(function(){var a=$(this);if(a.data("page")!==!1){var b=$('<tfoot class="hide-if-no-paging"><tr><td><div class="pagination pagination-centered"></div></td></tr></tfoot>');b.find("td").attr("colspan",a.find("thead th").length),a.find("tbody:last").after(b)}})};
+
+	$FOOTABLE.init = function() {
+		$(".footable, .tablepress")
+			.footableAttr(3,1)
+			.footable( { breakpoints: { phone: 320, tablet: 768 } });
+
+	};
+}( $FOOTABLE, jQuery ));
+
+jQuery(function($) {
+	$FOOTABLE.init();
+});
+</script><link rel="icon" href="https://www.giscourse.com/wp-content/uploads/2017/07/cropped-flavicon-01-32x32.png" sizes="32x32">
+<link rel="icon" href="https://www.giscourse.com/wp-content/uploads/2017/07/cropped-flavicon-01-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://www.giscourse.com/wp-content/uploads/2017/07/cropped-flavicon-01-180x180.png">
+<meta name="msapplication-TileImage" content="https://www.giscourse.com/wp-content/uploads/2017/07/cropped-flavicon-01-270x270.png">
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
+	
+	<script type="text/javascript">
+		var doc = document.documentElement;
+		doc.setAttribute('data-useragent', navigator.userAgent);
+	</script>
+
+	
+	<meta name="google-site-verification" content="yWJtxgCCObktstm2Zwd8Sz-EPAkt5LmRBnFA2opcOAM"><script src="Editing%20vector%20layers%20in%20QGIS_arquivos/yl11qakouqi9tbvcgyunkfy4ulvx5qj5.js"></script>
+<style id="ace_editor.css">.ace_editor {position: relative;overflow: hidden;font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;direction: ltr;}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;cursor: text;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;min-width: 100%;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;white-space: pre!important;}.ace_text-input.ace_composition {background: inherit;color: inherit;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;word-wrap: normal;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid;transform: translatez(0);}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-webkit-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_editor.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-webkit-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-webkit-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}.ace_br1 {border-top-left-radius    : 3px;}.ace_br2 {border-top-right-radius   : 3px;}.ace_br3 {border-top-left-radius    : 3px; border-top-right-radius:    3px;}.ace_br4 {border-bottom-right-radius: 3px;}.ace_br5 {border-top-left-radius    : 3px; border-bottom-right-radius: 3px;}.ace_br6 {border-top-right-radius   : 3px; border-bottom-right-radius: 3px;}.ace_br7 {border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px;}.ace_br8 {border-bottom-left-radius : 3px;}.ace_br9 {border-top-left-radius    : 3px; border-bottom-left-radius:  3px;}.ace_br10{border-top-right-radius   : 3px; border-bottom-left-radius:  3px;}.ace_br11{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-left-radius:  3px;}.ace_br12{border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br13{border-top-left-radius    : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br14{border-top-right-radius   : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br15{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;}
+/*# sourceURL=ace/css/ace_editor.css */</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}
+/*# sourceURL=ace/css/ace-tm */</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+<body class="single single-post postid-16377 single-format-standard wpb-js-composer js-comp-ver-4.12.1 vc_responsive fusion-body no-tablet-sticky-header no-mobile-sticky-header no-mobile-slidingbar no-mobile-totop mobile-logo-pos-left layout-wide-mode has-sidebar fusion-top-header menu-text-align-center fusion-woo-product-design-classic mobile-menu-design-modern fusion-image-hovers fusion-show-pagination-text do-animate">
+	<!--		-->
+	<div id="wrapper" class="" style="">
+		<div id="home" style="position:relative;top:1px;"></div>
+				
+		
+			<header class="fusion-header-wrapper fusion-is-sticky">
+				<div class="fusion-header-v1 fusion-logo-left fusion-sticky-menu- fusion-sticky-logo- fusion-mobile-logo- fusion-mobile-menu-design-modern ">
+					<div class="fusion-header-sticky-height" style="height: 65px; overflow: visible; display: block;"></div>
+<div class="fusion-header fusion-sticky-shadow" style="height: 65px; overflow: visible; top: 0px;">
+	<div class="fusion-row" style="padding-top: 0px; padding-bottom: 0px;">
+		
+<div class="fusion-logo" data-margin-top="0px" data-margin-bottom="0px" data-margin-left="0px" data-margin-right="0px" style="margin-top: 5px; margin-bottom: 5px;">
+				<a class="fusion-logo-link" href="https://www.giscourse.com/">
+						<img src="Editing%20vector%20layers%20in%20QGIS_arquivos/logo-tyc-gis-training-gis-course.png" alt="GIS Course  |  TYC GIS Training" class="fusion-logo-1x fusion-standard-logo" data-logo-height="69" data-logo-width="352" style="height: 55px;" height="69" width="352">
+
+							<img src="Editing%20vector%20layers%20in%20QGIS_arquivos/logo-tyc-gis-training-gis-course.png" alt="GIS Course  |  TYC GIS Training" class="fusion-standard-logo fusion-logo-2x" height="69" width="352">
+			
+			<!-- mobile logo -->
+			
+			<!-- sticky header logo -->
+					</a>
+		</div>		<nav class="fusion-main-menu"><ul id="menu-menu-cursos-gis" class="fusion-menu"><li id="menu-item-13606" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-13606 fusion-dropdown-menu"><a href="https://www.giscourse.com/" aria-haspopup="true" style="line-height: 62px; height: 62px;"><span class="menu-text">COURSES</span></a><ul class="sub-menu"><li id="menu-item-15481" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-15481 fusion-dropdown-submenu"><a href="https://www.giscourse.com/web-development/" aria-haspopup="true"><span class="">Web Development</span></a><ul class="sub-menu"><li id="menu-item-15448" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15448"><a href="https://www.giscourse.com/web-development/web-gis-developer-specialist-online-gis-training/"><span class="">WEB GIS Developer Specialist</span></a></li><li id="menu-item-15386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15386"><a href="https://www.giscourse.com/web-development/using-python-with-arcgis-beginner-level-online-gis-training/"><span class="">Python with ArcGIS I</span></a></li><li id="menu-item-15385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15385"><a href="https://www.giscourse.com/web-development/using-python-with-arcgis-advanced-level-online-gis-training/"><span class="">Python with ArcGIS II</span></a></li><li id="menu-item-15404" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15404"><a href="https://www.giscourse.com/web-development/web-gis-applications-using-arcgis-server-api-3-x-for-javascript-online-gis-training/"><span class="">API for JavaScript 3.x</span></a></li><li id="menu-item-15403" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15403"><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-arcgis-server-api-4-x-for-javascript-online-gis-training/"><span class="">API for JavaScript 4.x</span></a></li><li id="menu-item-15402" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15402"><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-arcgis-api-for-javascript-and-arcgis-server-online-gis-training/"><span class="">JavaScript Specialyst</span></a></li><li id="menu-item-15376" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15376"><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-esri-products-carto-mapbox-google-maps-online-gis-training/"><span class="">Using ESRI products, Carto, Mapbox and Google Maps</span></a></li><li id="menu-item-15440" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15440"><a href="https://www.giscourse.com/web-development/arcgis-arcobjects-and-visual-studio-online-gis-training/"><span class="">ArcGIS ArcObjects and Visual Studio</span></a></li><li id="menu-item-15439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15439"><a href="https://www.giscourse.com/web-development/html5-for-gis-developers-online-gis-training/"><span class="">HTML5 for GIS Developers</span></a></li><li id="menu-item-15438" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15438"><a href="https://www.giscourse.com/web-development/introduction-in-programming-using-google-maps-api-online-gis-training/"><span class="">Programming using Google Maps API</span></a></li><li id="menu-item-15369" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15369"><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-open-layers-and-leaflet-online-gis-training/"><span class="">Using Open Layers and Leaflet</span></a></li><li id="menu-item-15436" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15436"><a href="https://www.giscourse.com/web-development/using-python-with-qgis-online-gis-training/"><span class="">Using Python with QGIS</span></a></li><li id="menu-item-15437" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15437"><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-qgis-and-opengeo-suite-online-gis-training/"><span class="">QGIS and OpenGeo Suite</span></a></li><li id="menu-item-15449" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15449"><a href="https://www.giscourse.com/web-development/qgis-plugin-development-with-python-online-gis-training/"><span class="">QGIS with Python</span></a></li></ul></li><li id="menu-item-15272" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-15272 fusion-dropdown-submenu"><a href="https://www.giscourse.com/arcgis-10-courses/" aria-haspopup="true"><span class="">ArcGIS 10</span></a><ul class="sub-menu"><li id="menu-item-5380" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5380"><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-beginner-level-online-gis-training/"><span class="">Beginner Level</span></a></li><li id="menu-item-16458" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16458"><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-advanced-level-online-gis-training/"><span class="">Advanced Level</span></a></li><li id="menu-item-5382" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5382"><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-from-beginner-to-advanced-level-online-gis-training/"><span class="">Specialist</span></a></li><li id="menu-item-5379" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5379"><a href="https://www.giscourse.com/arcgis-10-courses/digital-mapping-with-arcgis-10-and-autocad-map-3d-online-gis-training/"><span class="">Digital Mapping and Autocad Map 3D</span></a></li><li id="menu-item-5384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5384"><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-applied-to-environmental-management-online-gis-training/"><span class="">Environmental Management</span></a></li><li id="menu-item-5383" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5383"><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-applied-to-geology-and-mining-online-gis-training/"><span class="">Geology and Mining</span></a></li><li id="menu-item-5385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5385"><a href="https://www.giscourse.com/arcgis-10-courses/network-analyst-specialist-online-gis-training/"><span class="">Network Analyst</span></a></li><li id="menu-item-5352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5352"><a href="https://www.giscourse.com/arcgis-10-courses/hecras-and-arcgis-10-course-for-hydraulic-modelling-georas-online-gis-training/"><span class="">HecRAS y GeoRAS</span></a></li></ul></li><li id="menu-item-15192" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-15192 fusion-dropdown-submenu"><a href="https://www.giscourse.com/arcgis-pro-courses/" aria-haspopup="true"><span class="">ArcGIS PRO</span></a><ul class="sub-menu"><li id="menu-item-11461" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11461"><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-beginner-level-online-gis-training/"><span class="">Beginner Level</span></a></li><li id="menu-item-11460" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11460"><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-advanced-level-online-gis-training/"><span class="">Advanced Level</span></a></li><li id="menu-item-11462" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11462"><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-from-beginner-to-advanced-level-online-gis-training/"><span class="">Specialist</span></a></li><li id="menu-item-11459" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11459"><a href="https://www.giscourse.com/arcgis-pro-courses/digital-mapping-with-arcgis-pro-and-autocad-map-3d-course-online-gis-training/"><span class="">and Autocad Map 3D</span></a></li><li id="menu-item-11458" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11458"><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-applied-to-environmental-management-online-gis-training/"><span class="">Environmental Management</span></a></li><li id="menu-item-11457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11457"><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-applied-to-geology-and-mining-online-gis-training/"><span class="">Geology and Mining</span></a></li><li id="menu-item-11775" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11775"><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-how-to-use-network-analyst-extension-online-gis-training/"><span class="">Network Analyst</span></a></li></ul></li><li id="menu-item-15273" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-15273 fusion-dropdown-submenu"><a href="https://www.giscourse.com/qgis-courses/" aria-haspopup="true"><span class="">QGIS</span></a><ul class="sub-menu"><li id="menu-item-15274" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15274"><a href="https://www.giscourse.com/qgis-courses/qgis-course-beginner-level-online-gis-training/"><span class="">Beginner level</span></a></li><li id="menu-item-15344" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15344"><a href="https://www.giscourse.com/qgis-courses/qgis-course-advanced-level-online-gis-training/"><span class="">Advanced level</span></a></li><li id="menu-item-15343" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15343"><a href="https://www.giscourse.com/qgis-courses/qgis-course-beginner-to-advanced-level-online-gis-training/"><span class="">Specialist – Beginner to Advanced</span></a></li><li id="menu-item-15341" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15341"><a href="https://www.giscourse.com/qgis-courses/qgis-course-route-analysis-online-gis-training/"><span class="">Route Analysis – finding the shortest path</span></a></li><li id="menu-item-15342" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15342"><a href="https://www.giscourse.com/qgis-courses/qgis-course-environmental-management-online-gis-training/"><span class="">Applied in Environmental Management</span></a></li></ul></li></ul></li><li id="menu-item-2379" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2379 fusion-dropdown-menu"><a href="https://www.giscourse.com/about-us/" aria-haspopup="true" style="line-height: 62px; height: 62px;"><span class="menu-text">ABOUT US</span></a><ul class="sub-menu"><li id="menu-item-2393" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2393 fusion-dropdown-submenu"><a href="https://www.giscourse.com/about-us/facilities/"><span class="">FACILITIES</span></a></li><li id="menu-item-4067" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4067 fusion-dropdown-submenu"><a href="https://www.giscourse.com/about-us/accreditations/"><span class="">ACREDITATIONS</span></a></li><li id="menu-item-4706" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4706 fusion-dropdown-submenu"><a href="https://www.giscourse.com/about-us/training-agreements/"><span class="">TRAINING AGREEMENTS</span></a></li><li id="menu-item-2391" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2391 fusion-dropdown-submenu"><a href="https://www.giscourse.com/about-us/students-and-companies/" aria-haspopup="true"><span class="">STUDENTS AND COMPANIES</span></a><ul class="sub-menu"><li id="menu-item-10935" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10935"><a href="https://www.giscourse.com/about-us/students-and-companies/students-final-projects/"><span class="">Student Works</span></a></li></ul></li><li id="menu-item-15105" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-15105 fusion-dropdown-submenu"><a href="http://tycgis.com/formacion" aria-haspopup="true"><span class="">TYC GIS Training Group</span></a><ul class="sub-menu"><li id="menu-item-15106" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15106"><a href="http://cursoscady3d.com/"><span class="">Cursos CAD y 3D</span></a></li><li id="menu-item-15107" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15107"><a href="http://cursosteledeteccion.com/"><span class="">Cursos Teledetección</span></a></li><li id="menu-item-15108" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15108"><a href="http://www.cursosgis.com/"><span class="">Cursos GIS</span></a></li></ul></li></ul></li><li id="menu-item-4304" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4304"><a href="https://www.giscourse.com/category/empleo/" style="line-height: 62px; height: 62px;"><span class="menu-text">JOBS</span></a></li><li id="menu-item-4318" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-4318"><a href="https://www.giscourse.com/category/blog/" style="line-height: 62px; height: 62px;"><span class="menu-text">BLOG</span></a></li><li id="menu-item-4005" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4005"><a href="https://www.giscourse.com/contact-us/" style="line-height: 62px; height: 62px;"><span class="menu-text">CONTACT</span></a></li><li class="fusion-custom-menu-item fusion-menu-cart fusion-main-menu-cart"><a class="fusion-main-menu-icon" href="https://www.giscourse.com/cart/" style="line-height: 62px; height: 62px;"><span class="menu-text"></span></a></li><li class="fusion-custom-menu-item fusion-main-menu-search fusion-last-menu-item"><a class="fusion-main-menu-icon" style="line-height: 62px; height: 62px;"></a><div class="fusion-custom-menu-item-contents" style="display: none;"><form role="search" class="searchform" method="get" action="https://www.giscourse.com/">
+	<div class="search-table">
+		<div class="search-field">
+			<input name="s" class="s" placeholder="Search ..." type="text">
+		</div>
+		<div class="search-button">
+			<input class="searchsubmit" value="" type="submit">
+		</div>
+	</div>
+</form>
+</div></li></ul></nav>			<div class="fusion-mobile-menu-icons">
+							<a href="#" class="fusion-icon fusion-icon-bars"></a>
+		
+		
+					<a href="https://www.giscourse.com/cart/" class="fusion-icon fusion-icon-shopping-cart"></a>
+			</div>
+
+
+<nav class="fusion-mobile-nav-holder" style="display: none;"><ul id="menu-menu-cursos-gis" class="fusion-menu"><li id="mobile-menu-item-13606" class="fusion-mobile-nav-item" style=""><span href="#" aria-haspopup="true" class="fusion-open-submenu"></span><a href="https://www.giscourse.com/"><span class="menu-text">COURSES</span></a><ul class="sub-menu" style="display: none;"><li id="mobile-menu-item-15481" class="fusion-mobile-nav-item" style=""><span href="#" aria-haspopup="true" class="fusion-open-submenu"></span><a href="https://www.giscourse.com/web-development/"><span class="">Web Development</span></a><ul class="sub-menu" style="display: none;"><li id="mobile-menu-item-15448" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/web-gis-developer-specialist-online-gis-training/"><span class="">WEB GIS Developer Specialist</span></a></li><li id="mobile-menu-item-15386" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/using-python-with-arcgis-beginner-level-online-gis-training/"><span class="">Python with ArcGIS I</span></a></li><li id="mobile-menu-item-15385" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/using-python-with-arcgis-advanced-level-online-gis-training/"><span class="">Python with ArcGIS II</span></a></li><li id="mobile-menu-item-15404" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/web-gis-applications-using-arcgis-server-api-3-x-for-javascript-online-gis-training/"><span class="">API for JavaScript 3.x</span></a></li><li id="mobile-menu-item-15403" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-arcgis-server-api-4-x-for-javascript-online-gis-training/"><span class="">API for JavaScript 4.x</span></a></li><li id="mobile-menu-item-15402" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-arcgis-api-for-javascript-and-arcgis-server-online-gis-training/"><span class="">JavaScript Specialyst</span></a></li><li id="mobile-menu-item-15376" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-esri-products-carto-mapbox-google-maps-online-gis-training/"><span class="">Using ESRI products, Carto, Mapbox and Google Maps</span></a></li><li id="mobile-menu-item-15440" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/arcgis-arcobjects-and-visual-studio-online-gis-training/"><span class="">ArcGIS ArcObjects and Visual Studio</span></a></li><li id="mobile-menu-item-15439" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/html5-for-gis-developers-online-gis-training/"><span class="">HTML5 for GIS Developers</span></a></li><li id="mobile-menu-item-15438" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/introduction-in-programming-using-google-maps-api-online-gis-training/"><span class="">Programming using Google Maps API</span></a></li><li id="mobile-menu-item-15369" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-open-layers-and-leaflet-online-gis-training/"><span class="">Using Open Layers and Leaflet</span></a></li><li id="mobile-menu-item-15436" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/using-python-with-qgis-online-gis-training/"><span class="">Using Python with QGIS</span></a></li><li id="mobile-menu-item-15437" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/web-based-gis-applications-using-qgis-and-opengeo-suite-online-gis-training/"><span class="">QGIS and OpenGeo Suite</span></a></li><li id="mobile-menu-item-15449" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/web-development/qgis-plugin-development-with-python-online-gis-training/"><span class="">QGIS with Python</span></a></li></ul></li><li id="mobile-menu-item-15272" class="fusion-mobile-nav-item" style=""><span href="#" aria-haspopup="true" class="fusion-open-submenu"></span><a href="https://www.giscourse.com/arcgis-10-courses/"><span class="">ArcGIS 10</span></a><ul class="sub-menu" style="display: none;"><li id="mobile-menu-item-5380" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-beginner-level-online-gis-training/"><span class="">Beginner Level</span></a></li><li id="mobile-menu-item-16458" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-advanced-level-online-gis-training/"><span class="">Advanced Level</span></a></li><li id="mobile-menu-item-5382" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-from-beginner-to-advanced-level-online-gis-training/"><span class="">Specialist</span></a></li><li id="mobile-menu-item-5379" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-10-courses/digital-mapping-with-arcgis-10-and-autocad-map-3d-online-gis-training/"><span class="">Digital Mapping and Autocad Map 3D</span></a></li><li id="mobile-menu-item-5384" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-applied-to-environmental-management-online-gis-training/"><span class="">Environmental Management</span></a></li><li id="mobile-menu-item-5383" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-10-courses/arcgis-course-applied-to-geology-and-mining-online-gis-training/"><span class="">Geology and Mining</span></a></li><li id="mobile-menu-item-5385" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-10-courses/network-analyst-specialist-online-gis-training/"><span class="">Network Analyst</span></a></li><li id="mobile-menu-item-5352" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-10-courses/hecras-and-arcgis-10-course-for-hydraulic-modelling-georas-online-gis-training/"><span class="">HecRAS y GeoRAS</span></a></li></ul></li><li id="mobile-menu-item-15192" class="fusion-mobile-nav-item" style=""><span href="#" aria-haspopup="true" class="fusion-open-submenu"></span><a href="https://www.giscourse.com/arcgis-pro-courses/"><span class="">ArcGIS PRO</span></a><ul class="sub-menu" style="display: none;"><li id="mobile-menu-item-11461" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-beginner-level-online-gis-training/"><span class="">Beginner Level</span></a></li><li id="mobile-menu-item-11460" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-advanced-level-online-gis-training/"><span class="">Advanced Level</span></a></li><li id="mobile-menu-item-11462" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-from-beginner-to-advanced-level-online-gis-training/"><span class="">Specialist</span></a></li><li id="mobile-menu-item-11459" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-pro-courses/digital-mapping-with-arcgis-pro-and-autocad-map-3d-course-online-gis-training/"><span class="">and Autocad Map 3D</span></a></li><li id="mobile-menu-item-11458" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-applied-to-environmental-management-online-gis-training/"><span class="">Environmental Management</span></a></li><li id="mobile-menu-item-11457" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-applied-to-geology-and-mining-online-gis-training/"><span class="">Geology and Mining</span></a></li><li id="mobile-menu-item-11775" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/arcgis-pro-courses/arcgis-pro-course-how-to-use-network-analyst-extension-online-gis-training/"><span class="">Network Analyst</span></a></li></ul></li><li id="mobile-menu-item-15273" class="fusion-mobile-nav-item" style=""><span href="#" aria-haspopup="true" class="fusion-open-submenu"></span><a href="https://www.giscourse.com/qgis-courses/"><span class="">QGIS</span></a><ul class="sub-menu" style="display: none;"><li id="mobile-menu-item-15274" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/qgis-courses/qgis-course-beginner-level-online-gis-training/"><span class="">Beginner level</span></a></li><li id="mobile-menu-item-15344" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/qgis-courses/qgis-course-advanced-level-online-gis-training/"><span class="">Advanced level</span></a></li><li id="mobile-menu-item-15343" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/qgis-courses/qgis-course-beginner-to-advanced-level-online-gis-training/"><span class="">Specialist – Beginner to Advanced</span></a></li><li id="mobile-menu-item-15341" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/qgis-courses/qgis-course-route-analysis-online-gis-training/"><span class="">Route Analysis – finding the shortest path</span></a></li><li id="mobile-menu-item-15342" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/qgis-courses/qgis-course-environmental-management-online-gis-training/"><span class="">Applied in Environmental Management</span></a></li></ul></li></ul></li><li id="mobile-menu-item-2379" class="fusion-mobile-nav-item" style=""><span href="#" aria-haspopup="true" class="fusion-open-submenu"></span><a href="https://www.giscourse.com/about-us/"><span class="menu-text">ABOUT US</span></a><ul class="sub-menu" style="display: none;"><li id="mobile-menu-item-2393" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/about-us/facilities/"><span class="">FACILITIES</span></a></li><li id="mobile-menu-item-4067" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/about-us/accreditations/"><span class="">ACREDITATIONS</span></a></li><li id="mobile-menu-item-4706" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/about-us/training-agreements/"><span class="">TRAINING AGREEMENTS</span></a></li><li id="mobile-menu-item-2391" class="fusion-mobile-nav-item" style=""><span href="#" aria-haspopup="true" class="fusion-open-submenu"></span><a href="https://www.giscourse.com/about-us/students-and-companies/"><span class="">STUDENTS AND COMPANIES</span></a><ul class="sub-menu" style="display: none;"><li id="mobile-menu-item-10935" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/about-us/students-and-companies/students-final-projects/"><span class="">Student Works</span></a></li></ul></li><li id="mobile-menu-item-15105" class="fusion-mobile-nav-item" style=""><span href="#" aria-haspopup="true" class="fusion-open-submenu"></span><a href="http://tycgis.com/formacion"><span class="">TYC GIS Training Group</span></a><ul class="sub-menu" style="display: none;"><li id="mobile-menu-item-15106" class="fusion-mobile-nav-item" style=""><a href="http://cursoscady3d.com/"><span class="">Cursos CAD y 3D</span></a></li><li id="mobile-menu-item-15107" class="fusion-mobile-nav-item" style=""><a href="http://cursosteledeteccion.com/"><span class="">Cursos Teledetección</span></a></li><li id="mobile-menu-item-15108" class="fusion-mobile-nav-item" style=""><a href="http://www.cursosgis.com/"><span class="">Cursos GIS</span></a></li></ul></li></ul></li><li id="mobile-menu-item-4304" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/category/empleo/"><span class="menu-text">JOBS</span></a></li><li id="mobile-menu-item-4318" class="fusion-mobile-nav-item fusion-mobile-current-nav-item" style=""><a href="https://www.giscourse.com/category/blog/"><span class="menu-text">BLOG</span></a></li><li id="mobile-menu-item-4005" class="fusion-mobile-nav-item" style=""><a href="https://www.giscourse.com/contact-us/"><span class="menu-text">CONTACT</span></a></li></ul></nav>
+
+	</div>
+</div>
+				</div>
+				<div class="fusion-clearfix"></div>
+			</header>
+					
+		<div id="sliders-container">
+					</div>
+				
+					<div class="fusion-page-title-bar fusion-page-title-bar-breadcrumbs fusion-page-title-bar-left">
+	<div class="fusion-page-title-row">
+		<div class="fusion-page-title-wrapper">
+			<div class="fusion-page-title-captions">
+
+																			<h1 class="entry-title" data-fontsize="18" data-lineheight="25">Editing vector layers in QGIS</h1>
+
+									
+				
+			</div>
+
+												<div class="fusion-page-title-secondary"><div class="fusion-breadcrumbs"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="https://www.giscourse.com/"><span itemprop="title">Home</span></a></span><span class="fusion-breadcrumb-sep">/</span><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="https://www.giscourse.com/category/blog/"><span itemprop="title">BLOG</span></a></span><span class="fusion-breadcrumb-sep">/</span><span class="breadcrumb-leaf">Editing vector layers in QGIS</span></div></div>
+							
+		</div>
+	</div>
+</div>
+		
+		
+		
+						<div id="main" class="clearfix " style="">
+			<div class="fusion-row" style="">
+
+<div id="content" style="float: left;">
+
+			<div class="single-navigation clearfix">
+			<a href="https://www.giscourse.com/free-land-cover-data-from-corine-land-cover-programme/" rel="prev">Previous</a>			<a href="https://www.giscourse.com/simple-route-analysis-with-pgrouting-and-qgis/" rel="next">Next</a>		</div>
+	
+			<article id="post-16377" class="post post-16377 type-post status-publish format-standard has-post-thumbnail hentry category-blog">
+						
+										
+							<h2 class="entry-title fusion-post-title" data-fontsize="18" data-lineheight="27">Editing vector layers in QGIS</h2>						<div class="post-content">
+				<p style="text-align: justify;">For this exercise please use QGIS version 2.18.</p>
+<p style="text-align: justify;">Various vector layers and tables (OGR, 
+SpatiaLite, PostGIS, MSSQL Spatial or Oracle Spatial) can be edited in 
+QGIS.&nbsp; Before you start a editing session in QGIS, make sure you 
+set the right snapping options (<strong>Snapping Tolerance and Search Radius</strong>). In QGIS you can find these options in<strong> Settings &gt; Options &gt; Digitizing </strong>or in<strong> Settings &gt; Snapping Options.</strong>&nbsp;This will&nbsp;optimize the editing process of the layers.</p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16378" src="Editing%20vector%20layers%20in%20QGIS_arquivos/3-300x253.png" alt="3" srcset="https://www.giscourse.com/wp-content/uploads/2018/03/3-120x101.png 120w, https://www.giscourse.com/wp-content/uploads/2018/03/3-200x169.png 200w, https://www.giscourse.com/wp-content/uploads/2018/03/3-300x253.png 300w, https://www.giscourse.com/wp-content/uploads/2018/03/3-400x337.png 400w, https://www.giscourse.com/wp-content/uploads/2018/03/3-500x421.png 500w, https://www.giscourse.com/wp-content/uploads/2018/03/3-600x506.png 600w, https://www.giscourse.com/wp-content/uploads/2018/03/3-768x647.png 768w, https://www.giscourse.com/wp-content/uploads/2018/03/3-800x674.png 800w, https://www.giscourse.com/wp-content/uploads/2018/03/3-1024x863.png 1024w, https://www.giscourse.com/wp-content/uploads/2018/03/3-1200x1011.png 1200w, https://www.giscourse.com/wp-content/uploads/2018/03/3.png 2781w" sizes="(max-width: 700px) 100vw, 700px" height="590" width="700"></p>
+<p style="text-align: justify;">Make sure you check the<strong> Default snap mode to &gt; Vertex and segment.</strong></p>
+<p style="text-align: justify;">For<strong> Default snapping tolerance </strong>and<strong> Search radius for vertex edits </strong>select
+ a value and from the drop down menu set the values to map units. After 
+you set these parameters you can proceed with your edit process.</p>
+<p style="text-align: justify;">In order to start editing a vector layer the next steps are recommended:</p>
+<ul style="text-align: justify;">
+<li>Select the vector you wish to edit by clicking it.</li>
+<li>Go to Toggle Editing and start a new edit session.</li>
+</ul>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16379" src="Editing%20vector%20layers%20in%20QGIS_arquivos/4-300x176.png" alt="4" srcset="https://www.giscourse.com/wp-content/uploads/2018/03/4-120x70.png 120w, https://www.giscourse.com/wp-content/uploads/2018/03/4-200x117.png 200w, https://www.giscourse.com/wp-content/uploads/2018/03/4-300x176.png 300w, https://www.giscourse.com/wp-content/uploads/2018/03/4-400x234.png 400w, https://www.giscourse.com/wp-content/uploads/2018/03/4-500x293.png 500w, https://www.giscourse.com/wp-content/uploads/2018/03/4-600x351.png 600w, https://www.giscourse.com/wp-content/uploads/2018/03/4-768x450.png 768w, https://www.giscourse.com/wp-content/uploads/2018/03/4-800x468.png 800w, https://www.giscourse.com/wp-content/uploads/2018/03/4.png 871w" sizes="(max-width: 700px) 100vw, 700px" height="410" width="700"></p>
+<ul style="text-align: justify;">
+<li>Activate the Advanced Digitizing toolbar. <strong>Go to View &gt; Toolbars &gt;&nbsp;Advanced Digitizing Toolbar. </strong>The new toolbar is opened.</li>
+</ul>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16381" src="Editing%20vector%20layers%20in%20QGIS_arquivos/6-233x300.png" alt="6" srcset="https://www.giscourse.com/wp-content/uploads/2018/03/6-120x155.png 120w, https://www.giscourse.com/wp-content/uploads/2018/03/6-200x258.png 200w, https://www.giscourse.com/wp-content/uploads/2018/03/6-233x300.png 233w, https://www.giscourse.com/wp-content/uploads/2018/03/6-400x516.png 400w, https://www.giscourse.com/wp-content/uploads/2018/03/6-500x645.png 500w, https://www.giscourse.com/wp-content/uploads/2018/03/6.png 584w" sizes="(max-width: 400px) 100vw, 400px" height="516" width="400"></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16382 size-large" src="Editing%20vector%20layers%20in%20QGIS_arquivos/7-1024x68.png" alt="7" srcset="https://www.giscourse.com/wp-content/uploads/2018/03/7-120x8.png 120w, https://www.giscourse.com/wp-content/uploads/2018/03/7-200x13.png 200w, https://www.giscourse.com/wp-content/uploads/2018/03/7-300x20.png 300w, https://www.giscourse.com/wp-content/uploads/2018/03/7-400x26.png 400w, https://www.giscourse.com/wp-content/uploads/2018/03/7-500x33.png 500w, https://www.giscourse.com/wp-content/uploads/2018/03/7-600x40.png 600w, https://www.giscourse.com/wp-content/uploads/2018/03/7-768x51.png 768w, https://www.giscourse.com/wp-content/uploads/2018/03/7-800x53.png 800w, https://www.giscourse.com/wp-content/uploads/2018/03/7-1024x68.png 1024w, https://www.giscourse.com/wp-content/uploads/2018/03/7.png 1077w" sizes="(max-width: 1024px) 100vw, 1024px" height="68" width="1024"></p>
+<p style="text-align: justify;">Using the basic editing tools you can perform operations like:</p>
+<table id="table-editing" class="docutils" style="height: 341px;" border="1" width="739">
+<colgroup>
+<col width="24%">
+<col width="28%">
+<col width="21%">
+<col width="27%"></colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">Icon</th>
+<th class="head">Purpose</th>
+<th class="head">Icon</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionAllEdits.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionAllEdits.png" alt="allEdits"></a></td>
+<td>Current edits</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionToggleEditing.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionToggleEditing.png" alt="toggleEditing"></a></td>
+<td>Toggle editing</td>
+</tr>
+<tr class="row-odd">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionCapturePoint.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionCapturePoint.png" alt="capturePoint"></a></td>
+<td>Add Feature: Capture Point</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionCaptureLine.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionCaptureLine.png" alt="captureLine"></a></td>
+<td>Add Feature: Capture Line</td>
+</tr>
+<tr class="row-even">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionCapturePolygon.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionCapturePolygon.png" alt="capturePolygon"></a></td>
+<td>Add Feature: Capture Polygon</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionMoveFeature.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionMoveFeature.png" alt="moveFeature"></a></td>
+<td>Move Feature</td>
+</tr>
+<tr class="row-odd">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionCircularStringCurvePoint.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionCircularStringCurvePoint.png" alt="circularStringCurvePoint"></a></td>
+<td>Add Circular String</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionCircularStringRadius.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionCircularStringRadius.png" alt="circularStringRadius"></a></td>
+<td>Add Circular String By Radius</td>
+</tr>
+<tr class="row-even">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionNodeTool.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionNodeTool.png" alt="nodeTool"></a></td>
+<td>Vertex tool</td>
+<td></td>
+<td>Delete Selected</td>
+</tr>
+<tr class="row-odd">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionEditCut.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionEditCut.png" alt="editCut"></a></td>
+<td>Cut Features</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionEditCopy.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionEditCopy.png" alt="editCopy"></a></td>
+<td>Copy Features</td>
+</tr>
+<tr class="row-even">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionEditPaste.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionEditPaste.png" alt="editPaste"></a></td>
+<td>Paste Features</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionSaveEdits.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionSaveEdits.png" alt="saveEdits"></a></td>
+<td>Save layer edits</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: justify;">The Advanced digitizing and editing tools enhance the capabilities of QGIS performing operations lik</p>
+<table id="table-advanced-editing" class="docutils" style="height: 443px;" border="1" width="896">
+<colgroup>
+<col width="23%">
+<col width="35%">
+<col width="21%">
+<col width="21%"></colgroup>
+<thead valign="bottom">
+<tr class="row-odd">
+<th class="head">Icon</th>
+<th class="head">Purpose</th>
+<th class="head">Icon</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/cad.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/cad.png" alt="cad"></a></td>
+<td>Enable Advanced Digitizing Tools</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionTracing.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionTracing.png" alt="tracing"></a></td>
+<td>Enable Tracing</td>
+</tr>
+<tr class="row-odd">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionUndo.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionUndo.png" alt="undo"></a></td>
+<td>Undo</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionRedo.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionRedo.png" alt="redo"></a></td>
+<td>Redo</td>
+</tr>
+<tr class="row-even">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionRotateFeature.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionRotateFeature.png" alt="rotateFeature"></a></td>
+<td>Rotate Feature(s)</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionSimplify.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionSimplify.png" alt="simplifyFeatures"></a></td>
+<td>Simplify Feature</td>
+</tr>
+<tr class="row-odd">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionAddRing.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionAddRing.png" alt="addRing"></a></td>
+<td>Add Ring</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionAddPart.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionAddPart.png" alt="addPart"></a></td>
+<td>Add Part</td>
+</tr>
+<tr class="row-even">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionFillRing.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionFillRing.png" alt="fillRing"></a></td>
+<td>Fill Ring</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionDeleteRing.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionDeleteRing.png" alt="deleteRing"></a></td>
+<td>Delete Ring</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionDeletePart.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionDeletePart.png" alt="deletePart"></a></td>
+<td>Delete Part</td>
+</tr>
+<tr class="row-even">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionOffsetCurve.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionOffsetCurve.png" alt="offsetCurve"></a></td>
+<td>Offset Curve</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionReshape.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionReshape.png" alt="reshape"></a></td>
+<td>Reshape Features</td>
+</tr>
+<tr class="row-odd">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionSplitParts.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionSplitParts.png" alt="splitParts"></a></td>
+<td>Split Parts</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionSplitFeatures.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionSplitFeatures.png" alt="splitFeatures"></a></td>
+<td>Split Features</td>
+</tr>
+<tr class="row-even">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionMergeFeatureAttributes.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionMergeFeatureAttributes.png" alt="mergeFeatAttributes"></a></td>
+<td>Merge Attributes of Selected Features</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionMergeFeatures.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionMergeFeatures.png" alt="mergeFeatures"></a></td>
+<td>Merge Selected Features</td>
+</tr>
+<tr class="row-odd">
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionRotatePointSymbols.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionRotatePointSymbols.png" alt="rotatePointSymbols"></a></td>
+<td>Rotate Point Symbols</td>
+<td><a class="reference internal" href="https://docs.qgis.org/testing/en/_images/mActionOffsetPointSymbols.png" data-caption=""><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/mActionOffsetPointSymbols.png" alt="offsetPointSymbols"></a></td>
+<td>Offset Point Symbols</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: justify;">Lets try a few of these tools and see how they work.</p>
+<p style="text-align: justify;">For example if we want to split an 
+polygon (in our case an area represented by a protected area), after a 
+certain limit (a administrative unit limit) we will proceed and use the 
+Split Features tool along with Trace tool. The polygon will be split in 3
+ parts according to the next image.</p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16626 size-full" src="Editing%20vector%20layers%20in%20QGIS_arquivos/8.png" alt="8" srcset="https://www.giscourse.com/wp-content/uploads/2018/06/8-120x7.png 120w, https://www.giscourse.com/wp-content/uploads/2018/06/8-200x12.png 200w, https://www.giscourse.com/wp-content/uploads/2018/06/8-300x18.png 300w, https://www.giscourse.com/wp-content/uploads/2018/06/8-400x24.png 400w, https://www.giscourse.com/wp-content/uploads/2018/06/8-500x31.png 500w, https://www.giscourse.com/wp-content/uploads/2018/06/8-600x37.png 600w, https://www.giscourse.com/wp-content/uploads/2018/06/8.png 606w" sizes="(max-width: 606px) 100vw, 606px" height="37" width="606"></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16625" src="Editing%20vector%20layers%20in%20QGIS_arquivos/7-300x177.png" alt="7" srcset="https://www.giscourse.com/wp-content/uploads/2018/06/7-120x71.png 120w, https://www.giscourse.com/wp-content/uploads/2018/06/7-200x118.png 200w, https://www.giscourse.com/wp-content/uploads/2018/06/7-300x177.png 300w, https://www.giscourse.com/wp-content/uploads/2018/06/7-400x237.png 400w, https://www.giscourse.com/wp-content/uploads/2018/06/7-500x296.png 500w, https://www.giscourse.com/wp-content/uploads/2018/06/7-600x355.png 600w, https://www.giscourse.com/wp-content/uploads/2018/06/7-768x454.png 768w, https://www.giscourse.com/wp-content/uploads/2018/06/7-800x473.png 800w, https://www.giscourse.com/wp-content/uploads/2018/06/7-1024x606.png 1024w, https://www.giscourse.com/wp-content/uploads/2018/06/7.png 1114w" sizes="(max-width: 700px) 100vw, 700px" height="414" width="700"></p>
+<p style="text-align: justify;">Clicking on the Trace and 
+Split&nbsp;Features buttons and having the snapping tolerance set we can
+ proceed and split the polygon according to the administrative limits.</p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16627" src="Editing%20vector%20layers%20in%20QGIS_arquivos/9-300x161.png" alt="9" srcset="https://www.giscourse.com/wp-content/uploads/2018/06/9-120x65.png 120w, https://www.giscourse.com/wp-content/uploads/2018/06/9-200x108.png 200w, https://www.giscourse.com/wp-content/uploads/2018/06/9-300x161.png 300w, https://www.giscourse.com/wp-content/uploads/2018/06/9-400x215.png 400w, https://www.giscourse.com/wp-content/uploads/2018/06/9-500x269.png 500w, https://www.giscourse.com/wp-content/uploads/2018/06/9-600x323.png 600w, https://www.giscourse.com/wp-content/uploads/2018/06/9-768x413.png 768w, https://www.giscourse.com/wp-content/uploads/2018/06/9-800x430.png 800w, https://www.giscourse.com/wp-content/uploads/2018/06/9-1024x550.png 1024w, https://www.giscourse.com/wp-content/uploads/2018/06/9-1200x645.png 1200w, https://www.giscourse.com/wp-content/uploads/2018/06/9.png 1600w" sizes="(max-width: 700px) 100vw, 700px" height="376" width="700"></p>
+<p style="text-align: justify;">With the trace tool activated follow the administrative unit limit.</p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16628" src="Editing%20vector%20layers%20in%20QGIS_arquivos/10-300x174.png" alt="10" srcset="https://www.giscourse.com/wp-content/uploads/2018/06/10-120x70.png 120w, https://www.giscourse.com/wp-content/uploads/2018/06/10-200x116.png 200w, https://www.giscourse.com/wp-content/uploads/2018/06/10-300x174.png 300w, https://www.giscourse.com/wp-content/uploads/2018/06/10-400x232.png 400w, https://www.giscourse.com/wp-content/uploads/2018/06/10-500x291.png 500w, https://www.giscourse.com/wp-content/uploads/2018/06/10-600x349.png 600w, https://www.giscourse.com/wp-content/uploads/2018/06/10-768x446.png 768w, https://www.giscourse.com/wp-content/uploads/2018/06/10-800x465.png 800w, https://www.giscourse.com/wp-content/uploads/2018/06/10-1024x595.png 1024w, https://www.giscourse.com/wp-content/uploads/2018/06/10.png 1117w" sizes="(max-width: 700px) 100vw, 700px" height="407" width="700"></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16629" src="Editing%20vector%20layers%20in%20QGIS_arquivos/11-300x175.png" alt="11" srcset="https://www.giscourse.com/wp-content/uploads/2018/06/11-120x70.png 120w, https://www.giscourse.com/wp-content/uploads/2018/06/11-200x117.png 200w, https://www.giscourse.com/wp-content/uploads/2018/06/11-300x175.png 300w, https://www.giscourse.com/wp-content/uploads/2018/06/11-400x233.png 400w, https://www.giscourse.com/wp-content/uploads/2018/06/11-500x292.png 500w, https://www.giscourse.com/wp-content/uploads/2018/06/11-600x350.png 600w, https://www.giscourse.com/wp-content/uploads/2018/06/11-768x448.png 768w, https://www.giscourse.com/wp-content/uploads/2018/06/11-800x467.png 800w, https://www.giscourse.com/wp-content/uploads/2018/06/11-1024x598.png 1024w, https://www.giscourse.com/wp-content/uploads/2018/06/11.png 1112w" sizes="(max-width: 700px) 100vw, 700px" height="409" width="700"></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16630" src="Editing%20vector%20layers%20in%20QGIS_arquivos/12-300x175.png" alt="12" srcset="https://www.giscourse.com/wp-content/uploads/2018/06/12-120x70.png 120w, https://www.giscourse.com/wp-content/uploads/2018/06/12-200x116.png 200w, https://www.giscourse.com/wp-content/uploads/2018/06/12-300x175.png 300w, https://www.giscourse.com/wp-content/uploads/2018/06/12-400x233.png 400w, https://www.giscourse.com/wp-content/uploads/2018/06/12-500x291.png 500w, https://www.giscourse.com/wp-content/uploads/2018/06/12-600x349.png 600w, https://www.giscourse.com/wp-content/uploads/2018/06/12-768x447.png 768w, https://www.giscourse.com/wp-content/uploads/2018/06/12-800x465.png 800w, https://www.giscourse.com/wp-content/uploads/2018/06/12-1024x596.png 1024w, https://www.giscourse.com/wp-content/uploads/2018/06/12.png 1114w" sizes="(max-width: 700px) 100vw, 700px" height="407" width="700"></p>
+<p style="text-align: justify;"><img class="aligncenter wp-image-16631" src="Editing%20vector%20layers%20in%20QGIS_arquivos/13-300x164.png" alt="13" srcset="https://www.giscourse.com/wp-content/uploads/2018/06/13-120x66.png 120w, https://www.giscourse.com/wp-content/uploads/2018/06/13-200x110.png 200w, https://www.giscourse.com/wp-content/uploads/2018/06/13-300x164.png 300w, https://www.giscourse.com/wp-content/uploads/2018/06/13-400x219.png 400w, https://www.giscourse.com/wp-content/uploads/2018/06/13-500x274.png 500w, https://www.giscourse.com/wp-content/uploads/2018/06/13-600x329.png 600w, https://www.giscourse.com/wp-content/uploads/2018/06/13-768x421.png 768w, https://www.giscourse.com/wp-content/uploads/2018/06/13-800x438.png 800w, https://www.giscourse.com/wp-content/uploads/2018/06/13-1024x561.png 1024w, https://www.giscourse.com/wp-content/uploads/2018/06/13.png 1179w" sizes="(max-width: 700px) 100vw, 700px" height="384" width="700"></p>
+<p style="text-align: justify;">At the end you should have three separated polygons. Each polygon was split according to the administrative area.</p>
+<p style="text-align: center;">Quality training taught by professionals</p>
+<h2 style="text-align: center;" data-fontsize="19" data-lineheight="28">RECOMMENDED COURSE</h2>
+<p><a href="https://www.giscourse.com/qgis-courses/qgis-course-advanced-level-online-gis-training/" class="fusion-no-lightbox"><img class="aligncenter wp-image-16327" src="Editing%20vector%20layers%20in%20QGIS_arquivos/QGIS-Adavanced-Level-300x157.jpg" alt="QGIS Adavanced Level" srcset="https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level-120x63.jpg 120w, https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level-200x105.jpg 200w, https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level-300x157.jpg 300w, https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level-400x209.jpg 400w, https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level-500x261.jpg 500w, https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level-600x314.jpg 600w, https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level-768x401.jpg 768w, https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level-800x418.jpg 800w, https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level-1024x535.jpg 1024w, https://www.giscourse.com/wp-content/uploads/2017/12/QGIS-Adavanced-Level.jpg 1200w" sizes="(max-width: 500px) 100vw, 500px" height="261" width="500"></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+							</div>
+
+							<div class="fusion-meta-info"><div class="fusion-meta-info-wrapper">By <span class="vcard"><span class="fn"><a href="https://www.giscourse.com/author/catalin/" title="Posts by Catalin Cimpianu" rel="author">Catalin Cimpianu</a></span></span><span class="fusion-inline-sep">|</span>
+	
+	
+			<span class="updated" style="display:none;">
+			2018-06-19T10:21:20+00:00		</span>
+	
+<span>June 19th, 2018</span><span class="fusion-inline-sep">|</span><a href="https://www.giscourse.com/category/blog/" rel="category tag">BLOG</a><span class="fusion-inline-sep">|</span><span class="fusion-comments"><a href="https://www.giscourse.com/editing-vector-layers-in-qgis/#respond">0 Comments</a></span></div></div>							<div class="fusion-sharing-box fusion-single-sharing-box share-box">
+				<h4 data-fontsize="13" data-lineheight="19">Share This Story, Choose Your Platform!</h4>
+				<div class="fusion-social-networks"><div class="fusion-social-networks-wrapper"><a class="fusion-social-network-icon fusion-tooltip fusion-facebook fusion-icon-facebook" style="color:#bebdbd;" href="http://www.facebook.com/sharer.php?m2w&amp;s=100&amp;p[url]=https://www.giscourse.com/editing-vector-layers-in-qgis/&amp;p[images][0]=https://www.giscourse.com/wp-content/uploads/2018/06/13.png&amp;p[title]=Editing%20vector%20layers%20in%20QGIS" target="_blank" rel="noopener noreferrer" data-placement="top" data-title="Facebook" data-toggle="tooltip" title="" data-original-title="Facebook"><span class="screen-reader-text">Facebook</span></a><a class="fusion-social-network-icon fusion-tooltip fusion-twitter fusion-icon-twitter" style="color:#bebdbd;" href="https://twitter.com/share?text=Editing%20vector%20layers%20in%20QGIS&amp;url=https%3A%2F%2Fwww.giscourse.com%2Fediting-vector-layers-in-qgis%2F" target="_blank" rel="noopener noreferrer" data-placement="top" data-title="Twitter" data-toggle="tooltip" title="" data-original-title="Twitter"><span class="screen-reader-text">Twitter</span></a><a class="fusion-social-network-icon fusion-tooltip fusion-linkedin fusion-icon-linkedin" style="color:#bebdbd;" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.giscourse.com/editing-vector-layers-in-qgis/&amp;title=Editing%20vector%20layers%20in%20QGIS&amp;summary=For%20this%20exercise%20please%20use%20QGIS%20version%202.18.%0D%0AVarious%20vector%20layers%20and%20tables%20%28OGR%2C%20SpatiaLite%2C%20PostGIS%2C%20MSSQL%20Spatial%20or%20Oracle%20Spatial%29%20can%20be%20edited%20in%20QGIS.%C2%A0%20Before%20you%20start%20a%20editing%20session%20in%20QGIS%2C%20make%20sure%20you%20set%20the%20right%20snapping%20options%20%28Snapping%20Tolerance%20and%20Search%20Radius%29.%20In%20QGIS%20you%20can%20find" target="_blank" rel="noopener noreferrer" data-placement="top" data-title="Linkedin" data-toggle="tooltip" title="" data-original-title="Linkedin"><span class="screen-reader-text">Linkedin</span></a><a class="fusion-social-network-icon fusion-tooltip fusion-reddit fusion-icon-reddit" style="color:#bebdbd;" href="http://reddit.com/submit?url=https://www.giscourse.com/editing-vector-layers-in-qgis/&amp;title=Editing%20vector%20layers%20in%20QGIS" target="_blank" rel="noopener noreferrer" data-placement="top" data-title="Reddit" data-toggle="tooltip" title="" data-original-title="Reddit"><span class="screen-reader-text">Reddit</span></a><a class="fusion-social-network-icon fusion-tooltip fusion-tumblr fusion-icon-tumblr" style="color:#bebdbd;" href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fwww.giscourse.com%2Fediting-vector-layers-in-qgis%2F&amp;name=Editing%20vector%20layers%20in%20QGIS&amp;description=For%20this%20exercise%20please%20use%20QGIS%20version%202.18.%0D%0AVarious%20vector%20layers%20and%20tables%20%28OGR%2C%20SpatiaLite%2C%20PostGIS%2C%20MSSQL%20Spatial%20or%20Oracle%20Spatial%29%20can%20be%20edited%20in%20QGIS.%C2%A0%20Before%20you%20start%20a%20editing%20session%20in%20QGIS%2C%20make%20sure%20you%20set%20the%20right%20snapping%20options%20%28Snapping%20Tolerance%20and%20Search%20Radius%29.%20In%20QGIS%20you%20can%20find" target="_blank" rel="noopener noreferrer" data-placement="top" data-title="Tumblr" data-toggle="tooltip" title="" data-original-title="Tumblr"><span class="screen-reader-text">Tumblr</span></a><a class="fusion-social-network-icon fusion-tooltip fusion-googleplus fusion-icon-googleplus" style="color:#bebdbd;" href="https://plus.google.com/share?url=https://www.giscourse.com/editing-vector-layers-in-qgis/" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" rel="noopener noreferrer" data-placement="top" data-title="Google+" data-toggle="tooltip" title="" data-original-title="Google+"><span class="screen-reader-text">Google+</span></a><a class="fusion-social-network-icon fusion-tooltip fusion-pinterest fusion-icon-pinterest" style="color:#bebdbd;" href="http://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.giscourse.com%2Fediting-vector-layers-in-qgis%2F&amp;description=For%20this%20exercise%20please%20use%20QGIS%20version%202.18.%0D%0AVarious%20vector%20layers%20and%20tables%20%28OGR%2C%20SpatiaLite%2C%20PostGIS%2C%20MSSQL%20Spatial%20or%20Oracle%20Spatial%29%20can%20be%20edited%20in%20QGIS.%C2%A0%20Before%20you%20start%20a%20editing%20session%20in%20QGIS%2C%20make%20sure%20you%20set%20the%20right%20snapping%20options%20%28Snapping%20Tolerance%20and%20Search%20Radius%29.%20In%20QGIS%20you%20can%20find&amp;media=https%3A%2F%2Fwww.giscourse.com%2Fwp-content%2Fuploads%2F2018%2F06%2F13.png" target="_blank" rel="noopener noreferrer" data-placement="top" data-title="Pinterest" data-toggle="tooltip" title="" data-original-title="Pinterest"><span class="screen-reader-text">Pinterest</span></a><a class="fusion-social-network-icon fusion-tooltip fusion-vk fusion-icon-vk" style="color:#bebdbd;" href="http://vkontakte.ru/share.php?url=https%3A%2F%2Fwww.giscourse.com%2Fediting-vector-layers-in-qgis%2F&amp;title=Editing%20vector%20layers%20in%20QGIS&amp;description=For%20this%20exercise%20please%20use%20QGIS%20version%202.18.%0D%0AVarious%20vector%20layers%20and%20tables%20%28OGR%2C%20SpatiaLite%2C%20PostGIS%2C%20MSSQL%20Spatial%20or%20Oracle%20Spatial%29%20can%20be%20edited%20in%20QGIS.%C2%A0%20Before%20you%20start%20a%20editing%20session%20in%20QGIS%2C%20make%20sure%20you%20set%20the%20right%20snapping%20options%20%28Snapping%20Tolerance%20and%20Search%20Radius%29.%20In%20QGIS%20you%20can%20find" target="_blank" rel="noopener noreferrer" data-placement="top" data-title="Vk" data-toggle="tooltip" title="" data-original-title="Vk"><span class="screen-reader-text">Vk</span></a><a class="fusion-social-network-icon fusion-tooltip fusion-mail fusion-icon-mail fusion-last-social-icon" style="color:#bebdbd;" href="mailto:?subject=Editing%20vector%20layers%20in%20QGIS&amp;body=https://www.giscourse.com/editing-vector-layers-in-qgis/" target="_self" rel="noopener noreferrer" data-placement="top" data-title="Email" data-toggle="tooltip" title="" data-original-title="Email"><span class="screen-reader-text">Email</span></a><div class="fusion-clearfix"></div></div></div>			</div>
+												<div class="about-author">
+												<div class="fusion-title fusion-title-size-three sep-double" style="margin-top:0px;margin-bottom:31px;"><h3 class="title-heading-left" data-fontsize="18" data-lineheight="27">About the Author: 						<a href="https://www.giscourse.com/author/catalin/" title="Posts by Catalin Cimpianu" rel="author">Catalin Cimpianu</a>						</h3><div class="title-sep-container"><div class="title-sep sep-double"></div></div></div>						<div class="about-author-container">
+							<div class="avatar">
+								<img alt="" src="Editing%20vector%20layers%20in%20QGIS_arquivos/7b54e2d1f39935ed0894c33c35675dcb.png" srcset="https://secure.gravatar.com/avatar/7b54e2d1f39935ed0894c33c35675dcb?s=144&amp;d=mm&amp;r=g 2x" class="avatar avatar-72 photo" height="72" width="72">							</div>
+							<div class="description">
+								Currently PhD Student - Remote Sensing and GIS applied in 
+hydrology, BSc in Geography and MSc in Geomatics at "Alexandru Ioan 
+Cuza" University from Iasi, Romania. Experience in using different 
+geospatial software products (ENVI, ArcGIS, QGIS), data collection, 
+spatial analysis, manipulation of geographical information, map 
+creation.							</div>
+						</div>
+					</div>
+								<div class="related-posts single-related-posts">
+	<div class="fusion-title fusion-title-size-three sep-double" style="margin-top:0px;margin-bottom:31px;"><h3 class="title-heading-left" data-fontsize="18" data-lineheight="27">Related Posts</h3><div class="title-sep-container"><div class="title-sep sep-double"></div></div></div>
+	
+	
+	
+	
+				<div class="fusion-carousel" data-imagesize="fixed" data-metacontent="no" data-autoplay="no" data-touchscroll="no" data-columns="5" data-itemmargin="44px" data-itemwidth="180" data-scrollitems="">
+		<div class="fusion-carousel-positioner" style="margin-left: -44px;">
+			<div class="fusion-carousel-wrapper" style="display: block; text-align: start; float: none; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 808px; height: 121px; margin: 0px; overflow: hidden;"><ul class="fusion-carousel-holder" style="text-align: left; float: none; position: absolute; top: auto; right: auto; bottom: auto; left: 0px; margin: 0px; width: 2828px; height: 121px; line-height: 121px;">
+													<li class="fusion-carousel-item" style="margin-left: 44px; width: 158px;">
+						<div class="fusion-carousel-item-wrapper" style="visibility: inherit;">
+							
+<div class="fusion-image-wrapper fusion-image-size-fixed" aria-haspopup="true">
+
+	
+			<img src="Editing%20vector%20layers%20in%20QGIS_arquivos/image834-1-500x383.png" srcset="https://www.giscourse.com/wp-content/uploads/2019/01/image834-1-500x383.png 1x, https://www.giscourse.com/wp-content/uploads/2019/01/image834-1-500x383@2x.png 2x" alt="Download OpenStreetMap data using QuickOSM plugin in QGIS 3.4 Madeira" height="383" width="500">
+
+
+		<div class="fusion-rollover">
+	<div class="fusion-rollover-content">
+
+														<a class="fusion-rollover-link" href="https://www.giscourse.com/download-openstreetmap-data-using-quickosm-plugin-in-qgis-3-4-madeira/">Permalink</a>
+			
+														
+								
+													<div class="fusion-rollover-sep"></div>
+				
+																		<a class="fusion-rollover-gallery" href="https://www.giscourse.com/wp-content/uploads/2019/01/image834-1.png" data-id="16788" data-rel="iLightbox[gallery]" data-title="image834" data-caption="">
+						Gallery					</a>
+														
+										
+								
+												<h4 class="fusion-rollover-title" data-fontsize="13" data-lineheight="19">
+					<a href="https://www.giscourse.com/download-openstreetmap-data-using-quickosm-plugin-in-qgis-3-4-madeira/">
+						Download OpenStreetMap data using QuickOSM plugin in QGIS 3.4 Madeira					</a>
+				</h4>
+			
+								
+								<span class="cart-loading">
+				<a href="https://www.giscourse.com/cart/">
+					<i class="fusion-icon-spinner"></i>
+					<div class="view-cart">View Cart</div>
+				</a>
+			</span>
+		
+			</div>
+</div>
+
+	
+</div>
+
+
+													</div><!-- fusion-carousel-item-wrapper -->
+					</li>
+									<li class="fusion-carousel-item" style="margin-left: 44px; width: 158px;">
+						<div class="fusion-carousel-item-wrapper" style="visibility: inherit;">
+							
+<div class="fusion-image-wrapper fusion-image-size-fixed" aria-haspopup="true">
+
+	
+			<img src="Editing%20vector%20layers%20in%20QGIS_arquivos/front-500x383.png" srcset="https://www.giscourse.com/wp-content/uploads/2019/01/front-500x383.png 1x, https://www.giscourse.com/wp-content/uploads/2019/01/front-500x383@2x.png 2x" alt="Install QGIS through OSGeo4W" height="383" width="500">
+
+
+		<div class="fusion-rollover">
+	<div class="fusion-rollover-content">
+
+														<a class="fusion-rollover-link" href="https://www.giscourse.com/install-qgis-through-osgeo4w/">Permalink</a>
+			
+														
+								
+													<div class="fusion-rollover-sep"></div>
+				
+																		<a class="fusion-rollover-gallery" href="https://www.giscourse.com/wp-content/uploads/2019/01/front.png" data-id="16761" data-rel="iLightbox[gallery]" data-title="front" data-caption="">
+						Gallery					</a>
+														
+										
+								
+												<h4 class="fusion-rollover-title" data-fontsize="13" data-lineheight="19">
+					<a href="https://www.giscourse.com/install-qgis-through-osgeo4w/">
+						Install QGIS through OSGeo4W					</a>
+				</h4>
+			
+								
+								<span class="cart-loading">
+				<a href="https://www.giscourse.com/cart/">
+					<i class="fusion-icon-spinner"></i>
+					<div class="view-cart">View Cart</div>
+				</a>
+			</span>
+		
+			</div>
+</div>
+
+	
+</div>
+
+
+													</div><!-- fusion-carousel-item-wrapper -->
+					</li>
+									<li class="fusion-carousel-item" style="margin-left: 44px; width: 158px;">
+						<div class="fusion-carousel-item-wrapper" style="visibility: inherit;">
+							
+<div class="fusion-image-wrapper fusion-image-size-fixed" aria-haspopup="true">
+
+	
+			<img src="Editing%20vector%20layers%20in%20QGIS_arquivos/frontcover2-500x383.png" srcset="https://www.giscourse.com/wp-content/uploads/2018/10/frontcover2-500x383.png 1x, https://www.giscourse.com/wp-content/uploads/2018/10/frontcover2-500x383@2x.png 2x" alt="Editing DEM pixels values in QGIS using Serval Plugin" height="383" width="500">
+
+
+		<div class="fusion-rollover">
+	<div class="fusion-rollover-content">
+
+														<a class="fusion-rollover-link" href="https://www.giscourse.com/editing-dem-pixels-values-in-qgis-using-serval-plugin/">Permalink</a>
+			
+														
+								
+													<div class="fusion-rollover-sep"></div>
+				
+																		<a class="fusion-rollover-gallery" href="https://www.giscourse.com/wp-content/uploads/2018/10/frontcover2.png" data-id="16711" data-rel="iLightbox[gallery]" data-title="frontcover2" data-caption="">
+						Gallery					</a>
+														
+										
+								
+												<h4 class="fusion-rollover-title" data-fontsize="13" data-lineheight="19">
+					<a href="https://www.giscourse.com/editing-dem-pixels-values-in-qgis-using-serval-plugin/">
+						Editing DEM pixels values in QGIS using Serval Plugin					</a>
+				</h4>
+			
+								
+								<span class="cart-loading">
+				<a href="https://www.giscourse.com/cart/">
+					<i class="fusion-icon-spinner"></i>
+					<div class="view-cart">View Cart</div>
+				</a>
+			</span>
+		
+			</div>
+</div>
+
+	
+</div>
+
+
+													</div><!-- fusion-carousel-item-wrapper -->
+					</li>
+									<li class="fusion-carousel-item" style="margin-left: 44px; width: 158px;">
+						<div class="fusion-carousel-item-wrapper" style="visibility: inherit;">
+							
+<div class="fusion-image-wrapper fusion-image-size-fixed" aria-haspopup="true">
+
+	
+			<img src="Editing%20vector%20layers%20in%20QGIS_arquivos/5-500x383.png" srcset="https://www.giscourse.com/wp-content/uploads/2018/06/5-500x383.png 1x, https://www.giscourse.com/wp-content/uploads/2018/06/5-500x383@2x.png 2x" alt="Simple route analysis with pgRouting and QGIS" height="383" width="500">
+
+
+		<div class="fusion-rollover">
+	<div class="fusion-rollover-content">
+
+														<a class="fusion-rollover-link" href="https://www.giscourse.com/simple-route-analysis-with-pgrouting-and-qgis/">Permalink</a>
+			
+														
+								
+													<div class="fusion-rollover-sep"></div>
+				
+																		<a class="fusion-rollover-gallery" href="https://www.giscourse.com/wp-content/uploads/2018/06/5.png" data-id="16635" data-rel="iLightbox[gallery]" data-title="5" data-caption="">
+						Gallery					</a>
+														
+										
+								
+												<h4 class="fusion-rollover-title" data-fontsize="13" data-lineheight="19">
+					<a href="https://www.giscourse.com/simple-route-analysis-with-pgrouting-and-qgis/">
+						Simple route analysis with pgRouting and QGIS					</a>
+				</h4>
+			
+								
+								<span class="cart-loading">
+				<a href="https://www.giscourse.com/cart/">
+					<i class="fusion-icon-spinner"></i>
+					<div class="view-cart">View Cart</div>
+				</a>
+			</span>
+		
+			</div>
+</div>
+
+	
+</div>
+
+
+													</div><!-- fusion-carousel-item-wrapper -->
+					</li>
+									<li class="fusion-carousel-item" style="margin-left: 44px; width: 158px;">
+						<div class="fusion-carousel-item-wrapper" style="visibility: inherit;">
+							
+<div class="fusion-image-wrapper fusion-image-size-fixed" aria-haspopup="true">
+
+	
+			<img src="Editing%20vector%20layers%20in%20QGIS_arquivos/5corinedownload-500x383.png" srcset="https://www.giscourse.com/wp-content/uploads/2018/04/5corinedownload-500x383.png 1x, https://www.giscourse.com/wp-content/uploads/2018/04/5corinedownload-500x383@2x.png 2x" alt="Free land cover data from Corine Land Cover programme" height="383" width="500">
+
+
+		<div class="fusion-rollover">
+	<div class="fusion-rollover-content">
+
+														<a class="fusion-rollover-link" href="https://www.giscourse.com/free-land-cover-data-from-corine-land-cover-programme/">Permalink</a>
+			
+														
+								
+													<div class="fusion-rollover-sep"></div>
+				
+																		<a class="fusion-rollover-gallery" href="https://www.giscourse.com/wp-content/uploads/2018/04/5corinedownload.png" data-id="16527" data-rel="iLightbox[gallery]" data-title="5corinedownload" data-caption="">
+						Gallery					</a>
+														
+										
+								
+												<h4 class="fusion-rollover-title" data-fontsize="13" data-lineheight="19">
+					<a href="https://www.giscourse.com/free-land-cover-data-from-corine-land-cover-programme/">
+						Free land cover data from Corine Land Cover programme					</a>
+				</h4>
+			
+								
+								<span class="cart-loading">
+				<a href="https://www.giscourse.com/cart/">
+					<i class="fusion-icon-spinner"></i>
+					<div class="view-cart">View Cart</div>
+				</a>
+			</span>
+		
+			</div>
+</div>
+
+	
+</div>
+
+
+													</div><!-- fusion-carousel-item-wrapper -->
+					</li>
+							</ul></div><!-- fusion-carousel-holder -->
+										<div class="fusion-carousel-nav" style="visibility: inherit;">
+					<span class="fusion-nav-prev" style="margin-left: 44px; display: block;"></span>
+					<span class="fusion-nav-next" style="display: block; left: 778px;"></span>
+				</div>
+			
+		</div><!-- fusion-carousel-positioner -->
+	</div><!-- fusion-carousel -->
+</div><!-- related-posts -->
+
+
+														
+
+
+
+	
+					<div id="respond" class="comment-respond">
+			<div class="fusion-title title fusion-title-size-three sep-double" style="margin-top:0px;margin-bottom:31px;"><h3 id="reply-title" class="comment-reply-title title-heading-left" data-fontsize="18" data-lineheight="28">Leave A Comment <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://www.giscourse.com/editing-vector-layers-in-qgis/#respond" style="display:none;">Cancel reply</a></small></h3><div class="title-sep-container"><div class="title-sep sep-double "></div></div></div>				<form action="https://www.giscourse.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<div id="comment-textarea"><label class="screen-reader-text" for="comment">Comment</label><textarea name="comment" id="comment" cols="45" rows="8" aria-required="true" required="required" tabindex="0" class="textarea-comment" placeholder="Comment..." style="max-width: 767px;"></textarea></div><div id="comment-input"><input id="author" name="author" placeholder="Name (required)" size="30" aria-required="true" required="required" type="text">
+<input id="email" name="email" placeholder="Email (required)" size="30" aria-describedby="email-notes" aria-required="true" required="required" type="email">
+<input id="url" name="url" placeholder="Website" size="30" type="url"></div>
+<p class="form-submit"><input name="submit" id="comment-submit" class="fusion-button fusion-button-default" value="Post Comment" type="submit"> <input name="comment_post_ID" value="16377" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+</p><p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="068ef13f91" type="hidden"></p><p style="display: none;"></p>				<input id="ak_js" name="ak_js" value="1559241939912" type="hidden"></form>
+					</div><!-- #respond -->
+		
+									</article>
+		</div>
+<div id="sidebar" class="sidebar fusion-widget-area fusion-content-widget-area" style="float: right;">
+						
+			<div id="text-3" class="widget widget_text">			<div class="textwidget"><p><a href="http://tycgis.com/formacion/" target="_blank"><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/qgis-bronze-sponsor-200.png" alt=""></a></p>
+</div>
+		</div><div id="social_links-widget-5" class="widget social_links"><div class="heading"><h4 class="widget-title" data-fontsize="13" data-lineheight="19">Follow us</h4></div>
+		<div class="fusion-social-networks">
+
+			<div class="fusion-social-networks-wrapper">
+								
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-facebook fusion-icon-facebook" href="https://www.facebook.com/Giscourse.comTYCGIS/" data-placement="top" data-title="Facebook" data-toggle="tooltip" data-original-title="Facebook" title="" target="_self" style="font-size:25px;color:#5ca0c3;"></a>
+					
+										
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-twitter fusion-icon-twitter" href="https://twitter.com/tycgis_English" data-placement="top" data-title="Twitter" data-toggle="tooltip" data-original-title="Twitter" title="" target="_self" style="font-size:25px;color:#5ca0c3;"></a>
+					
+										
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-youtube fusion-icon-youtube" href="https://www.youtube.com/user/TYCGISFormacion" data-placement="top" data-title="Youtube" data-toggle="tooltip" data-original-title="Youtube" title="" target="_self" style="font-size:25px;color:#5ca0c3;"></a>
+					
+										
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-instagram fusion-icon-instagram" href="https://www.instagram.com/tycgis/?hl=es" data-placement="top" data-title="Instagram" data-toggle="tooltip" data-original-title="Instagram" title="" target="_self" style="font-size:25px;color:#5ca0c3;"></a>
+					
+										
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-googleplus fusion-icon-googleplus" href="https://plus.google.com/u/2/+TYCGISFormaci%C3%B3n" data-placement="top" data-title="Google+" data-toggle="tooltip" data-original-title="Google+" title="" target="_self" style="font-size:25px;color:#5ca0c3;"></a>
+					
+										
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-linkedin fusion-icon-linkedin" href="https://www.linkedin.com/company/grupo-tyc-gis-formaci%C3%B3n?trk=top_nav_home" data-placement="top" data-title="Linkedin" data-toggle="tooltip" data-original-title="Linkedin" title="" target="_self" style="font-size:25px;color:#5ca0c3;"></a>
+					
+										
+				
+			</div>
+		</div>
+
+		</div><div id="easy-opt-in-widget-3" class="widget easy-opt-in-widget"><style type="text/css" class="fca-eoi-style">.fca_eoi_form{ margin: auto; } .fca_eoi_form p { width: auto; } #fca_eoi_form_4619 input{ max-width: 9999px; }#fca_eoi_form_4619 .fca_eoi_form_input_element::-webkit-input-placeholder {opacity:0.6;color:#7f7f7f;}#fca_eoi_form_4619 .fca_eoi_form_input_element::-moz-placeholder {opacity:0.6;color:#7f7f7f;}#fca_eoi_form_4619 .fca_eoi_form_input_element:-ms-input-placeholder {opacity:0.6;color:#7f7f7f;}#fca_eoi_form_4619 .fca_eoi_form_input_element:-moz-placeholder {opacity:0.6;color:#7f7f7f;}#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_submit_button_wrapper:hover, #fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_submit_button_wrapper input:hover {background-color:#2a80ea !important;}#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget {max-width:100%;}#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_name_field_wrapper {max-width:100%;}#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_email_field_wrapper {max-width:100%;}#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_submit_button_wrapper {max-width:100%;}div.fca_eoi_form_text_element,input.fca_eoi_form_input_element,input.fca_eoi_form_button_element{display:block;margin:0;padding:0;line-height:normal;font-size:14px;letter-spacing:normal;word-spacing:normal;text-indent:0;text-shadow:none;text-decoration:none;text-transform:none;white-space:normal;width:inherit;height:inherit;background-image:none;border:none;border-radius:0;box-shadow:none;box-sizing:border-box;transition:none;outline:none;-webkit-transition:none;-webkit-appearance:none;-moz-appearance:none;color:#000;font-family:"Open Sans", sans-serif;font-weight:normal;transition:background 350ms linear;}div.fca_eoi_form_text_element{text-align:center;}div.fca_eoi_layout_headline_copy_wrapper{font-weight:bold;}div.fca_eoi_featherlight .featherlight-close-icon{background:rgba(255, 255, 255, 0);}div.fca_eoi_layout_1,form.fca_eoi_layout_1{display:inline-block;box-sizing:border-box;}div.fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_field_wrapper,form.fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_field_wrapper{width:100%;}div.fca_eoi_layout_1 .fca_eoi_progress,form.fca_eoi_layout_1 .fca_eoi_progress{margin-left:32px;margin-right:32px;height:24px;position:relative;background:#d8d8d8;border-radius:3px;box-shadow:1px 1px 2px 0 rgba(0, 0, 0, 0.5);margin-bottom:32px;}div.fca_eoi_layout_1 .fca_eoi_progress span,form.fca_eoi_layout_1 .fca_eoi_progress span{text-align:right;width:55%;display:block;height:100%;border-top-right-radius:3px;border-bottom-right-radius:3px;border-top-left-radius:3px;border-bottom-left-radius:3px;background-color:#eab868;background-image:linear-gradient(center bottom, #2bc253 37%, #54f054 69%);position:relative;overflow:hidden;}div.fca_eoi_layout_1 .fca_eoi_progress span:before,form.fca_eoi_layout_1 .fca_eoi_progress span:before{content:'';position:absolute;top:0;left:0;bottom:0;right:0;background-image:linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);z-index:1;background-size:50px 50px;animation:move 2s linear infinite;border-top-right-radius:8px;border-bottom-right-radius:8px;border-top-left-radius:20px;border-bottom-left-radius:20px;overflow:hidden;}div.fca_eoi_layout_1 .fca_eoi_progress span:after,form.fca_eoi_layout_1 .fca_eoi_progress span:after{content:'50%';vertical-align:top;position:relative;top:5px;color:white;font-size:14px;line-height:14px;font-weight:bold;letter-spacing:1px;}div.fca_eoi_layout_1 img.fca_eoi_image,form.fca_eoi_layout_1 img.fca_eoi_image{max-width:100%;}div.fca_eoi_layout_1 div.fca_eoi_image_wrapper.placeholder,form.fca_eoi_layout_1 div.fca_eoi_image_wrapper.placeholder{text-align:center;white-space:pre;border:1px dashed #979797;font-size:12px;line-height:14px;color:#979797;}div.fca_eoi_layout_1 div.fca_eoi_layout_content_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_content_wrapper{margin:20px;}div.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper{border:solid 1px transparent;border-radius:3px;margin-bottom:10px;position:relative;}div.fca_eoi_layout_1 div.fca_eoi_layout_name_field_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_name_field_wrapper,div.fca_eoi_layout_1 div.fca_eoi_layout_email_field_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_email_field_wrapper{width:100%;display:inline-block;}div.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper input,form.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper input,div.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper input:focus,form.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper input:focus{border:none !important;width:100%;height:auto;font-size:16px;line-height:1.2em;padding:7px 0;outline:none;background:none !important;box-shadow:none;}div.fca_eoi_layout_1 div.fca_eoi_layout_submit_button_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_submit_button_wrapper{clear:both;transition:background 350ms linear, border-color 350ms linear;margin-left:auto;margin-right:auto;}div.fca_eoi_layout_1 div.fca_eoi_layout_fatcatapps_link_wrapper a,form.fca_eoi_layout_1 div.fca_eoi_layout_fatcatapps_link_wrapper a{display:block;margin:10px 0 0;font-size:12px;}div.fca_eoi_layout_1 div.fca_eoi_form_text_element ul,form.fca_eoi_layout_1 div.fca_eoi_form_text_element ul{list-style:inside;padding:0;margin:14px 0;}@media (min-width:1px) and (max-width:450px),(min-height:1px) and (max-height:450px){div.fca_eoi_layout_1 div.fca_eoi_layout_content_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_content_wrapper{margin:8px 13px;}div.fca_eoi_layout_1 div.fca_eoi_layout_fatcatapps_link_wrapper a,form.fca_eoi_layout_1 div.fca_eoi_layout_fatcatapps_link_wrapper a{margin:0;}div.fca_eoi_layout_1 div.fca_eoi_form_text_element.fca_eoi_layout_headline_copy_wrapper,form.fca_eoi_layout_1 div.fca_eoi_form_text_element.fca_eoi_layout_headline_copy_wrapper{margin-bottom:5px;}}@media (min-width:1px) and (max-width:768px){div.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper{width:100%;}}div.fca_eoi_layout_1 div.fca_eoi_layout_headline_copy_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_headline_copy_wrapper{margin-bottom:10px;}div.fca_eoi_layout_1 div.fca_eoi_layout_inputs_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_inputs_wrapper{border-top:1px solid #dbdbdb;border-bottom:1px solid #dbdbdb;padding:20px 0;margin:20px 0;}@media (min-width:1px) and (max-width:450px),(min-height:1px) and (max-height:450px){div.fca_eoi_layout_1 div.fca_eoi_layout_inputs_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_inputs_wrapper{padding:8px 0;}}@media (min-width:1px) and (max-width:320px),(min-height:1px) and (max-height:320px){div.fca_eoi_layout_1 div.fca_eoi_layout_inputs_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_inputs_wrapper{padding:0;border:none;}}@media (min-width:1px) and (max-width:450px),(min-height:1px) and (max-height:450px){div.fca_eoi_layout_1 div.fca_eoi_layout_inputs_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_inputs_wrapper{margin:8px 0;}}div.fca_eoi_layout_1 div.fca_eoi_layout_field_inner,form.fca_eoi_layout_1 div.fca_eoi_layout_field_inner{margin:0 5px 0 2em;}div.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper i.fa,form.fca_eoi_layout_1 div.fca_eoi_layout_field_wrapper i.fa{position:absolute;top:0;left:10px;height:50%;width:auto;transform:translateY(50%);-webkit-transform:translateY(50%);}div.fca_eoi_layout_1 div.fca_eoi_layout_submit_button_wrapper input,form.fca_eoi_layout_1 div.fca_eoi_layout_submit_button_wrapper input{border:1px solid #eec22b;box-shadow:0 1px 1px rgba(255, 255, 255, .9) inset;font-weight:bold;margin:0;min-height:40px;width:100%;white-space:normal;background:none;background:-moz-linear-gradient(top, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.45) 48%, rgba(255, 255, 255, 0) 52%, rgba(255, 255, 255, 0) 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.35)), color-stop(48%, rgba(255, 255, 255, 0.45)), color-stop(52%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(255, 255, 255, 0)));background:-webkit-linear-gradient(top, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.45) 48%, rgba(255, 255, 255, 0) 52%, rgba(255, 255, 255, 0) 100%);background:-o-linear-gradient(top, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.45) 48%, rgba(255, 255, 255, 0) 52%, rgba(255, 255, 255, 0) 100%);background:-ms-linear-gradient(top, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.45) 48%, rgba(255, 255, 255, 0) 52%, rgba(255, 255, 255, 0) 100%);background:linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.45) 48%, rgba(255, 255, 255, 0) 52%, rgba(255, 255, 255, 0) 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#59ffffff', endColorstr='#00ffffff', GradientType=0);}@media (min-width:1px) and (max-width:450px),(min-height:1px) and (max-height:450px){div.fca_eoi_layout_1 div.fca_eoi_layout_headline_copy_wrapper,form.fca_eoi_layout_1 div.fca_eoi_layout_headline_copy_wrapper{margin-bottom:0;}}#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget {	background-color: #ffffff !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget {	border-color: #D2D2D2 !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_headline_copy_wrapper div {	font-size: 25px !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_headline_copy_wrapper div {	color: #2b6b98 !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_description_copy_wrapper p, .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_description_copy_wrapper div {	font-size: 14px !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_description_copy_wrapper p, .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_description_copy_wrapper div {	color: #6d6d6d !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_name_field_wrapper, .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_name_field_wrapper input {	font-size: 14px !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_name_field_wrapper, .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_name_field_wrapper input {	color: #7f7f7f !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_name_field_wrapper, .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_name_field_wrapper input {	background-color: #f5f5f5 !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_name_field_wrapper {	border-color: #cccccc !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_email_field_wrapper, .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_email_field_wrapper input {	font-size: 14px !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_email_field_wrapper, .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_email_field_wrapper input {	color: #7f7f7f !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_email_field_wrapper, .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_email_field_wrapper input {	background-color: #f5f5f5 !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_email_field_wrapper {	border-color: #cccccc !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_submit_button_wrapper input {	font-size: 14px !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_submit_button_wrapper input {	color: #ffffff !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_submit_button_wrapper input {	background-color: #1eacff !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_submit_button_wrapper input {	border-color: #110026 !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_privacy_copy_wrapper div {	font-size: 14px !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_privacy_copy_wrapper div {	color: #8f8f8f !important; }#fca_eoi_form_4619 .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_fatcatapps_link_wrapper a, .fca_eoi_layout_1.fca_eoi_layout_widget div.fca_eoi_layout_fatcatapps_link_wrapper a:hover {	color: #baa34e !important; }</style><div class="fca_eoi_form_wrapper fca_eoi_layout_widget_wrapper fca_eoi_layout_1_wrapper"><div id="fca_eoi_form_4619" class="fca_eoi_form_content"><form method="post" action="#" class="fca_eoi_form fca_eoi_layout_1 fca_eoi_layout_widget " data-fca_eoi_list_id="4571e79462" data-fca_eoi_push_page="" data-fca_eoi_success_cookie_duration="365" data-fca_eoi_thank_you_page="Thanks!" data-fca_eoi_thank_you_mode="ajax" data-fca_eoi_sub_msg="Procesing suscription" novalidate=""><input id="fca_eoi_form_id" name="fca_eoi_form_id" value="4619" type="hidden">
+  <div class="fca_eoi_layout_content_wrapper">
+    <div class="fca_eoi_layout_headline_copy_wrapper fca_eoi_form_text_element">
+  <div>SUBSCRIBE TO OUR NEWSLETTER</div>
+</div>
+<div class="fca_eoi_layout_description_copy_wrapper fca_eoi_form_text_element">
+  <div><h2 data-fontsize="16" data-lineheight="25">Get the latest news from the Blog, Training and job offers from TYC Employment</h2>
+<em>Important: By subscribing you accept our data protection policy in 
+accordance with the provisions of the General Data Protection 
+Regulations (RGPD) of the LOPD 2018 <a href="https://drive.google.com/file/d/1Yc3oU6vO_nSqjvFWXcgZ7oSQBTHLBiqh/view" target="_blank">Legal Notice</a> | <a href="https://drive.google.com/file/d/1IBSfnZGXkNkc1Iz_P8jOolr_dq2P44mR/view" target="_blank">Data Protection</a></em></div>
+</div>
+<div class="fca_eoi_layout_inputs_wrapper fca_eoi_layout_inputs_wrapper">
+  
+  <div class="fca_eoi_layout_name_field_wrapper fca_eoi_layout_field_wrapper" data-fca-eoi-fieldset-id="name_field">
+    <i class="fa fa-user"></i>
+    <div class="fca_eoi_layout_name_field_inner fca_eoi_layout_field_inner">
+      <input class="fca_eoi_form_input_element" name="name" placeholder="Name" type="text">
+    </div>
+  </div>
+  <div class="fca_eoi_layout_email_field_wrapper fca_eoi_layout_field_wrapper" data-fca-eoi-fieldset-id="email_field">
+    <i class="fa fa-envelope"></i>
+    <div class="fca_eoi_layout_email_field_inner fca_eoi_layout_field_inner">
+      <input class="fca_eoi_form_input_element" name="email" placeholder="Email" type="email">
+    </div>
+  </div>
+  <div class="fca_eoi_layout_submit_button_wrapper"><input class="fca_eoi_form_button_element" value="SUBSCRIBE NOW" type="submit"></div>
+</div>
+<div class="fca_eoi_layout_privacy_copy_wrapper fca_eoi_form_text_element" data-fca-eoi-fieldset-id="privacy">
+  <div>
+Before subscribing check our data protection policy | <a href="https://drive.google.com/open?id=1Yc3oU6vO_nSqjvFWXcgZ7oSQBTHLBiqh"> Legal Notice </a> | <a href="https://drive.google.com/open?id=1IBSfnZGXkNkc1Iz_P8jOolr_dq2P44mR"> Data protection </a></div>
+</div>
+
+  </div>
+<input name="fca_eoi" value="1" type="hidden">
+			<input name="fca_eoi_error_texts_email" class="fca_eoi_error_texts_email" value="Incorrect email format.
+Example: &quot;name@gmail.com&quot;." type="hidden">
+			<input name="fca_eoi_error_texts_required" class="fca_eoi_error_texts_required" value="Please, complete it to continue" type="hidden"></form></div></div>
+</div><div id="tag_cloud-2" class="widget widget_tag_cloud"><div class="heading"><h4 class="widget-title" data-fontsize="13" data-lineheight="19">Tags</h4></div><div class="tagcloud"><a href="https://www.giscourse.com/tag/job/" class="tag-link-730 tag-link-position-1" title="1 topic">job</a></div>
+</div>	</div>
+
+				</div>  <!-- fusion-row -->
+			</div>  <!-- #main -->
+			
+			
+			
+			
+										
+				<div class="fusion-footer">
+
+																
+						<footer class="fusion-footer-widget-area fusion-widget-area">
+							<div class="fusion-row">
+								<div class="fusion-columns fusion-columns-4 fusion-widget-area">
+									
+																																							<div class="fusion-column col-lg-3 col-md-3 col-sm-3">
+												<div id="text-2" class="fusion-footer-widget-column widget widget_text">			<div class="textwidget"><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/tyc-gis-footer-03.png">
+GisCourse.com belongs to the TYC GIS Group, a consulting firm 
+specialized in advising and technical training with GIS Software 
+applications (ArcGis, GvSIG, QGIS, Globalmapper, etc.). Our 
+multidisciplinary team with extensive experience in the sector allows us
+ to offer the best training in geomatic-related matters.
+
+<a href="http://tycgis.com/formacion/" target="_blank"><img src="Editing%20vector%20layers%20in%20QGIS_arquivos/qgis-bronze-sponsor-200.png" alt=""></a></div>
+		<div style="clear:both;"></div></div>																																				</div>
+																																								<div class="fusion-column col-lg-3 col-md-3 col-sm-3">
+												<div id="contact_info-widget-3" class="fusion-footer-widget-column widget contact_info"><h4 class="widget-title" data-fontsize="13" data-lineheight="19">TYC GIS SPAIN – MADRID</h4>
+		<div class="contact-info-container">
+							<p class="address">Fuencarral St. 158, Mezzanine, Office 16-17 28010 MADRID</p>
+			
+							<p class="phone">Phone: +34 910 325 482</p>
+			
+			
+			
+							<p class="email">Email: <a href="mailto:training@tycgis.com">training@tycgis.com</a></p>
+			
+							<p class="web">Web: <a href="http://tycgis.com/formacion/">www.tycgis.com</a></p>
+					</div>
+		<div style="clear:both;"></div></div><div id="contact_info-widget-6" class="fusion-footer-widget-column widget contact_info"><h4 class="widget-title" data-fontsize="13" data-lineheight="19">TYC GIS SPAIN – MALAGA</h4>
+		<div class="contact-info-container">
+							<p class="address">Ave. Pintor Joaquin Sorolla 137, 1ºD P.C. 29017 MALAGA</p>
+			
+							<p class="phone">Phone: +34 951 082 319</p>
+			
+			
+			
+			
+					</div>
+		<div style="clear:both;"></div></div>																																				</div>
+																																								<div class="fusion-column col-lg-3 col-md-3 col-sm-3">
+												<div id="contact_info-widget-4" class="fusion-footer-widget-column widget contact_info"><h4 class="widget-title" data-fontsize="13" data-lineheight="19">TYC GIS AMÉRICA – PANAMÁ</h4>
+		<div class="contact-info-container">
+							<p class="address"> Eusebio A. Morales St.– El Cangrejo PH Neo Plaza Office 215</p>
+			
+			
+			
+			
+			
+					</div>
+		<div style="clear:both;"></div></div><div id="contact_info-widget-5" class="fusion-footer-widget-column widget contact_info"><h4 class="widget-title" data-fontsize="13" data-lineheight="19">TYC GIS MEXICO – CUERNAVACA</h4>
+		<div class="contact-info-container">
+							<p class="address">Tequesquitengo 4, Fracc. Cuaunáhuac P.C. 62450, Cuernavaca, Morelos.</p>
+			
+			
+			
+			
+			
+					</div>
+		<div style="clear:both;"></div></div><div id="contact_info-widget-7" class="fusion-footer-widget-column widget contact_info"><h4 class="widget-title" data-fontsize="13" data-lineheight="19">TYC GIS COSTA RICA – CARTAGO</h4>
+		<div class="contact-info-container">
+							<p class="address">González Angulo II Etapa</p>
+			
+							<p class="phone">Phone: +506 86 68 32 18</p>
+			
+			
+			
+			
+					</div>
+		<div style="clear:both;"></div></div>																																				</div>
+																																								<div class="fusion-column fusion-column-last col-lg-3 col-md-3 col-sm-3">
+												<div id="category-posts-2" class="fusion-footer-widget-column widget cat-post-widget"><h4 class="widget-title" data-fontsize="13" data-lineheight="19">Recent posts</h4><ul id="category-posts-2-internal" class="category-posts-internal">
+<li class="cat-post-item"><div><a class="cat-post-title" href="https://www.giscourse.com/download-openstreetmap-data-using-quickosm-plugin-in-qgis-3-4-madeira/" rel="bookmark">Download OpenStreetMap data using QuickOSM plugin in QGIS 3.4 Madeira</a></div></li><li class="cat-post-item"><div><a class="cat-post-title" href="https://www.giscourse.com/install-qgis-through-osgeo4w/" rel="bookmark">Install QGIS through OSGeo4W</a></div></li><li class="cat-post-item"><div><a class="cat-post-title" href="https://www.giscourse.com/editing-dem-pixels-values-in-qgis-using-serval-plugin/" rel="bookmark">Editing DEM pixels values in QGIS using Serval Plugin</a></div></li></ul>
+<div style="clear:both;"></div></div><div id="social_links-widget-3" class="fusion-footer-widget-column widget social_links"><h4 class="widget-title" data-fontsize="13" data-lineheight="19">Follow Us</h4>
+		<div class="fusion-social-networks boxed-icons">
+
+			<div class="fusion-social-networks-wrapper">
+								
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-facebook fusion-icon-facebook" href="https://www.facebook.com/tycgisformacion/" data-placement="top" data-title="Facebook" data-toggle="tooltip" data-original-title="Facebook" title="" target="_self" style="border-radius:2px;padding:8px;font-size:16px;color:#ffffff;background-color:#5ca0c3;border-color:#5ca0c3;"></a>
+					
+										
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-twitter fusion-icon-twitter" href="https://twitter.com/tycgis?lang=es" data-placement="top" data-title="Twitter" data-toggle="tooltip" data-original-title="Twitter" title="" target="_self" style="border-radius:2px;padding:8px;font-size:16px;color:#ffffff;background-color:#5ca0c3;border-color:#5ca0c3;"></a>
+					
+										
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-youtube fusion-icon-youtube" href="https://www.youtube.com/user/TYCGISFormacion" data-placement="top" data-title="Youtube" data-toggle="tooltip" data-original-title="Youtube" title="" target="_self" style="border-radius:2px;padding:8px;font-size:16px;color:#ffffff;background-color:#5ca0c3;border-color:#5ca0c3;"></a>
+					
+										
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-googleplus fusion-icon-googleplus" href="https://plus.google.com/u/2/+TYCGISFormaci%C3%B3n" data-placement="top" data-title="Google+" data-toggle="tooltip" data-original-title="Google+" title="" target="_self" style="border-radius:2px;padding:8px;font-size:16px;color:#ffffff;background-color:#5ca0c3;border-color:#5ca0c3;"></a>
+					
+										
+																										<a class="fusion-social-network-icon fusion-tooltip fusion-linkedin fusion-icon-linkedin" href="https://www.linkedin.com/company/trabajos-y-clases-gis" data-placement="top" data-title="Linkedin" data-toggle="tooltip" data-original-title="Linkedin" title="" target="_self" style="border-radius:2px;padding:8px;font-size:16px;color:#ffffff;background-color:#5ca0c3;border-color:#5ca0c3;"></a>
+					
+										
+				
+			</div>
+		</div>
+
+		<div style="clear:both;"></div></div>																																				</div>
+																																																									
+									<div class="fusion-clearfix"></div>
+								</div> <!-- fusion-columns -->
+							</div> <!-- fusion-row -->
+						</footer> <!-- fusion-footer-widget-area -->
+					
+																
+						<footer id="footer" class="fusion-footer-copyright-area fusion-footer-copyright-center">
+							<div class="fusion-row">
+								<div class="fusion-copyright-content">
+
+											<div class="fusion-copyright-notice" style="padding-bottom: 0px;">
+			<div>Copyright 2018 - TYC GIS Soluciones S.L. | All Rights Reserved | <a href="https://drive.google.com/open?id=1Yc3oU6vO_nSqjvFWXcgZ7oSQBTHLBiqh"> Legal Warning </a> | <a href="https://drive.google.com/open?id=1IBSfnZGXkNkc1Iz_P8jOolr_dq2P44mR"> Data Protection </a></div>
+		</div>
+					<div class="fusion-social-links-footer" style="display: none;">
+							</div>
+		
+								</div> <!-- fusion-fusion-copyright-content -->
+							</div> <!-- fusion-row -->
+						</footer> <!-- #footer -->
+									</div> <!-- fusion-footer -->
+					</div> <!-- wrapper -->
+
+				
+		<a class="fusion-one-page-text-link fusion-page-load-link"></a>
+
+		<!-- W3TC-include-js-head -->
+
+				<div style="display:none">
+			<div id="fca_eoi_lightbox_4616"><style type="text/css" class="fca-eoi-style">.fca_eoi_form{ margin: auto; } .fca_eoi_form p { width: auto; } #fca_eoi_form_4616 input{ max-width: 9999px; }#fca_eoi_form_4616 .fca_eoi_form_input_element::-webkit-input-placeholder {opacity:0.6;color:#777777;}#fca_eoi_form_4616 .fca_eoi_form_input_element::-moz-placeholder {opacity:0.6;color:#777777;}#fca_eoi_form_4616 .fca_eoi_form_input_element:-ms-input-placeholder {opacity:0.6;color:#777777;}#fca_eoi_form_4616 .fca_eoi_form_input_element:-moz-placeholder {opacity:0.6;color:#777777;}#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_submit_button_wrapper:hover, #fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_submit_button_wrapper input:hover {background-color:#0060ba !important;}#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup {max-width:100%;}#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_name_field_wrapper {max-width:49%;}#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_email_field_wrapper {max-width:49%;}#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_submit_button_wrapper {max-width:100%;}div.fca_eoi_form_text_element,input.fca_eoi_form_input_element,input.fca_eoi_form_button_element{display:block;margin:0;padding:0;line-height:normal;font-size:14px;letter-spacing:normal;word-spacing:normal;text-indent:0;text-shadow:none;text-decoration:none;text-transform:none;white-space:normal;width:inherit;height:inherit;background-image:none;border:none;border-radius:0;box-shadow:none;box-sizing:border-box;transition:none;outline:none;-webkit-transition:none;-webkit-appearance:none;-moz-appearance:none;color:#000;font-family:"Open Sans", sans-serif;font-weight:normal;transition:background 350ms linear;}div.fca_eoi_form_text_element{text-align:center;}div.fca_eoi_layout_headline_copy_wrapper{font-weight:bold;}div.fca_eoi_featherlight .featherlight-close-icon{background:rgba(255, 255, 255, 0);}div.fca_eoi_layout_5,form.fca_eoi_layout_5{display:inline-block;box-sizing:border-box;}div.fca_eoi_layout_5.fca_eoi_layout_widget div.fca_eoi_layout_field_wrapper,form.fca_eoi_layout_5.fca_eoi_layout_widget div.fca_eoi_layout_field_wrapper{width:100%;}div.fca_eoi_layout_5 .fca_eoi_progress,form.fca_eoi_layout_5 .fca_eoi_progress{margin-left:32px;margin-right:32px;height:24px;position:relative;background:#d8d8d8;border-radius:3px;box-shadow:1px 1px 2px 0 rgba(0, 0, 0, 0.5);margin-bottom:32px;}div.fca_eoi_layout_5 .fca_eoi_progress span,form.fca_eoi_layout_5 .fca_eoi_progress span{text-align:right;width:55%;display:block;height:100%;border-top-right-radius:3px;border-bottom-right-radius:3px;border-top-left-radius:3px;border-bottom-left-radius:3px;background-color:#eab868;background-image:linear-gradient(center bottom, #2bc253 37%, #54f054 69%);position:relative;overflow:hidden;}div.fca_eoi_layout_5 .fca_eoi_progress span:before,form.fca_eoi_layout_5 .fca_eoi_progress span:before{content:'';position:absolute;top:0;left:0;bottom:0;right:0;background-image:linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);z-index:1;background-size:50px 50px;animation:move 2s linear infinite;border-top-right-radius:8px;border-bottom-right-radius:8px;border-top-left-radius:20px;border-bottom-left-radius:20px;overflow:hidden;}div.fca_eoi_layout_5 .fca_eoi_progress span:after,form.fca_eoi_layout_5 .fca_eoi_progress span:after{content:'50%';vertical-align:top;position:relative;top:5px;color:white;font-size:14px;line-height:14px;font-weight:bold;letter-spacing:1px;}div.fca_eoi_layout_5 img.fca_eoi_image,form.fca_eoi_layout_5 img.fca_eoi_image{max-width:100%;}div.fca_eoi_layout_5 div.fca_eoi_image_wrapper.placeholder,form.fca_eoi_layout_5 div.fca_eoi_image_wrapper.placeholder{text-align:center;white-space:pre;border:1px dashed #979797;font-size:12px;line-height:14px;color:#979797;}div.fca_eoi_layout_5 div.fca_eoi_layout_content_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_content_wrapper{margin:20px;}div.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper{border:solid 1px transparent;border-radius:3px;margin-bottom:10px;position:relative;}div.fca_eoi_layout_5 div.fca_eoi_layout_name_field_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_name_field_wrapper,div.fca_eoi_layout_5 div.fca_eoi_layout_email_field_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_email_field_wrapper{width:100%;display:inline-block;}div.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper input,form.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper input,div.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper input:focus,form.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper input:focus{border:none !important;width:100%;height:auto;font-size:16px;line-height:1.2em;padding:7px 0;outline:none;background:none !important;box-shadow:none;}div.fca_eoi_layout_5 div.fca_eoi_layout_submit_button_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_submit_button_wrapper{clear:both;transition:background 350ms linear, border-color 350ms linear;margin-left:auto;margin-right:auto;}div.fca_eoi_layout_5 div.fca_eoi_layout_fatcatapps_link_wrapper a,form.fca_eoi_layout_5 div.fca_eoi_layout_fatcatapps_link_wrapper a{display:block;margin:10px 0 0;font-size:12px;}div.fca_eoi_layout_5 div.fca_eoi_form_text_element ul,form.fca_eoi_layout_5 div.fca_eoi_form_text_element ul{list-style:inside;padding:0;margin:14px 0;}@media (min-width:1px) and (max-width:450px),(min-height:1px) and (max-height:450px){div.fca_eoi_layout_5 div.fca_eoi_layout_content_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_content_wrapper{margin:8px 13px;}div.fca_eoi_layout_5 div.fca_eoi_layout_fatcatapps_link_wrapper a,form.fca_eoi_layout_5 div.fca_eoi_layout_fatcatapps_link_wrapper a{margin:0;}div.fca_eoi_layout_5 div.fca_eoi_form_text_element.fca_eoi_layout_headline_copy_wrapper,form.fca_eoi_layout_5 div.fca_eoi_form_text_element.fca_eoi_layout_headline_copy_wrapper{margin-bottom:5px;}}@media (min-width:1px) and (max-width:768px){div.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper{width:100%;}}div.fca_eoi_layout_5 div.fca_eoi_layout_headline_copy_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_headline_copy_wrapper{margin-bottom:20px;}@media (min-width:1px) and (max-width:450px),(min-height:1px) and (max-height:450px){div.fca_eoi_layout_5 div.fca_eoi_layout_headline_copy_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_headline_copy_wrapper{margin-bottom:0;}}div.fca_eoi_layout_5 div.fca_eoi_layout_inputs_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_inputs_wrapper{margin:20px 0;}@media (min-width:1px) and (max-width:450px),(min-height:1px) and (max-height:450px){div.fca_eoi_layout_5 div.fca_eoi_layout_inputs_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_inputs_wrapper{margin:8px 0;}}div.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_field_wrapper{border-radius:5px;}div.fca_eoi_layout_5 div.fca_eoi_layout_field_inner,form.fca_eoi_layout_5 div.fca_eoi_layout_field_inner{margin:0 10px 0 5px;}div.fca_eoi_layout_5 div.fca_eoi_layout_submit_button_wrapper,form.fca_eoi_layout_5 div.fca_eoi_layout_submit_button_wrapper{border-bottom:solid 4px transparent;border-radius:5px;padding:0 !important;text-align:center;width:100%;}div.fca_eoi_layout_5 div.fca_eoi_layout_submit_button_wrapper input,form.fca_eoi_layout_5 div.fca_eoi_layout_submit_button_wrapper input{border:0 !important;border-radius:5px;font-weight:bold;margin:0;height:2.8em;padding:0;text-shadow:0 0 2px black;white-space:normal;width:100%;}#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup {	background-color: #ffffff !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup {	border-color: #cccccc !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_headline_copy_wrapper div {	font-size: 36px !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_headline_copy_wrapper div {	color: #5ca0c3 !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_description_copy_wrapper p, .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_description_copy_wrapper div {	font-size: 14px !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_description_copy_wrapper p, .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_description_copy_wrapper div {	color: #000000 !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_name_field_wrapper, .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_name_field_wrapper input {	font-size: 18px !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_name_field_wrapper, .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_name_field_wrapper input {	color: #777777 !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_name_field_wrapper, .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_name_field_wrapper input {	background-color: #ffffff !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_name_field_wrapper {	border-color: #cccccc !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_email_field_wrapper, .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_email_field_wrapper input {	font-size: 18px !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_email_field_wrapper, .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_email_field_wrapper input {	color: #777777 !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_email_field_wrapper, .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_email_field_wrapper input {	background-color: #ffffff !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_email_field_wrapper {	border-color: #cccccc !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_submit_button_wrapper input {	font-size: 18px !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_submit_button_wrapper input {	color: #ffffff !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_submit_button_wrapper input {	background-color: #5ca0c3 !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_submit_button_wrapper  {	background-color: #d1d1d1 !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_privacy_copy_wrapper div {	font-size: 14px !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_privacy_copy_wrapper div {	color: #8f8f8f !important; }#fca_eoi_form_4616 .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_fatcatapps_link_wrapper a, .fca_eoi_layout_5.fca_eoi_layout_popup div.fca_eoi_layout_fatcatapps_link_wrapper a:hover {	color: #8f8f8f !important; }</style><div id="fca_eoi_form_4616" class="fca_eoi_form_content"><form method="post" action="#" class="fca_eoi_form fca_eoi_layout_5 fca_eoi_layout_popup " data-fca_eoi_list_id="9a0261432d" data-fca_eoi_push_page="" data-fca_eoi_success_cookie_duration="365" data-fca_eoi_thank_you_page="Thanks!" data-fca_eoi_thank_you_mode="ajax" data-fca_eoi_sub_msg="Procesing suscription" novalidate=""><input id="fca_eoi_form_id" name="fca_eoi_form_id" value="4616" type="hidden">
+  <div class="fca_eoi_layout_content_wrapper">
+    <div class="fca_eoi_layout_headline_copy_wrapper fca_eoi_form_text_element">
+  <div>SUBSCRIBE TO OUR NEWSLETTERS</div>
+</div>
+<div class="fca_eoi_layout_description_copy_wrapper fca_eoi_form_text_element">
+  <div><h2 data-fontsize="21" data-lineheight="30">Get the latest news from the Blog, Training and job offers from TYC.</h2>
+<em>Important Employment: By subscribing, you accept our data protection
+ policy in accordance with the provisions of the General Data Protection
+ Regulations (RGPD). <a href="https://drive.google.com/file/d/1Yc3oU6vO_nSqjvFWXcgZ7oSQBTHLBiqh/view" target="_blank">Legal Notice</a> | <a href="https://drive.google.com/file/d/1IBSfnZGXkNkc1Iz_P8jOolr_dq2P44mR/view" target="_blank">Data Protection</a></em></div>
+</div>
+<div class="fca_eoi_layout_inputs_wrapper fca_eoi_layout_inputs_wrapper">
+  <div class="fca_eoi_layout_name_field_wrapper fca_eoi_layout_field_wrapper" data-fca-eoi-fieldset-id="name_field">
+    <div class="fca_eoi_layout_name_field_inner fca_eoi_layout_field_inner">
+      <input class="fca_eoi_form_input_element" name="name" placeholder="Name" type="text">
+    </div>
+  </div>
+  <div class="fca_eoi_layout_email_field_wrapper fca_eoi_layout_field_wrapper" data-fca-eoi-fieldset-id="email_field">
+    <div class="fca_eoi_layout_email_field_inner fca_eoi_layout_field_inner">
+      <input class="fca_eoi_form_input_element" name="email" placeholder="Email" type="email">
+    </div>
+  </div>
+  <div class="fca_eoi_layout_submit_button_wrapper"><input class="fca_eoi_form_button_element" value="SUBSCRIBE NOW" type="submit"></div>
+</div>
+<div class="fca_eoi_layout_privacy_copy_wrapper fca_eoi_form_text_element" data-fca-eoi-fieldset-id="privacy">
+  <div>
+Before subscribing check our data protection policy | <a href="https://drive.google.com/open?id=1Yc3oU6vO_nSqjvFWXcgZ7oSQBTHLBiqh"> Legal Notice </a> | <a href="https://drive.google.com/open?id=1IBSfnZGXkNkc1Iz_P8jOolr_dq2P44mR"> Data protection </a></div>
+</div>
+
+  </div>
+<input name="fca_eoi" value="1" type="hidden">
+			<input name="fca_eoi_error_texts_email" class="fca_eoi_error_texts_email" value="Incorrect email format.
+Example: &quot;name@gmail.com&quot;." type="hidden">
+			<input name="fca_eoi_error_texts_required" class="fca_eoi_error_texts_required" value="Please, complete it to continue" type="hidden"></form></div>
+</div>
+		</div>
+		<link rel="stylesheet" id="fca-eoi-font-awesome-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/font-awesome_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="fca_eoi_tooltipster_css-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/tooltipster.css" type="text/css" media="all">
+<link rel="stylesheet" id="fca_eoi_tooltipster_theme_css-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/tooltipster-borderless.css" type="text/css" media="all">
+<link rel="stylesheet" id="fca_eoi_featherlight_css-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/featherlight.css" type="text/css" media="all">
+<link rel="stylesheet" id="fca-eoi-common-css-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/style-new.css" type="text/css" media="all">
+<link rel="stylesheet" id="fca_eoi_tooltipster_borderless-css" href="Editing%20vector%20layers%20in%20QGIS_arquivos/tooltipster-borderless.css" type="text/css" media="all">
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/pagecount.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/jquery_002.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/editing-vector-layers-in-qgis\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/woocommerce.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/jquery.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/editing-vector-layers-in-qgis\/?wc-ajax=%%endpoint%%","fragment_name":"wc_fragments"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/cart-fragments.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var ratingsL10n = {"plugin_url":"https:\/\/www.giscourse.com\/wp-content\/plugins\/wp-postratings","ajax_url":"https:\/\/www.giscourse.com\/wp-admin\/admin-ajax.php","text_wait":"Please rate only 1 item at a time.","image":"stars_crystal","image_ext":"gif","max":"5","show_loading":"1","show_fading":"1","custom":"0"};
+var ratings_mouseover_image=new Image();ratings_mouseover_image.src="https://www.giscourse.com/wp-content/plugins/wp-postratings/images/stars_crystal/rating_over.gif";;
+/* ]]> */
+</script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/postratings-js.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/comment-reply.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var toTopscreenReaderText = {"label":"Go to Top"};
+var avadaVars = {"admin_ajax":"https:\/\/www.giscourse.com\/wp-admin\/admin-ajax.php","admin_ajax_nonce":"2d4fabc049","protocol":"1","theme_url":"https:\/\/www.giscourse.com\/wp-content\/themes\/Avada","dropdown_goto":"Go to...","mobile_nav_cart":"Shopping Cart","page_smoothHeight":"false","flex_smoothHeight":"false","language_flag":"","infinite_blog_finished_msg":"<em>All posts displayed.<\/em>","infinite_finished_msg":"<em>All items displayed.<\/em>","infinite_blog_text":"<em>Loading the next set of posts...<\/em>","portfolio_loading_text":"<em>Loading Portfolio Items...<\/em>","faqs_loading_text":"<em>Loading FAQ Items...<\/em>","order_actions":"Details","avada_rev_styles":"1","avada_styles_dropdowns":"1","blog_grid_column_spacing":"40","blog_pagination_type":"Pagination","carousel_speed":"2500","counter_box_speed":"1000","content_break_point":"800","disable_mobile_animate_css":"0","disable_mobile_image_hovers":"1","portfolio_pagination_type":"Pagination","form_bg_color":"#ffffff","header_transparency":"0","header_padding_bottom":"0px","header_padding_top":"0px","header_position":"Top","header_sticky":"1","header_sticky_tablet":"0","header_sticky_mobile":"0","header_sticky_type2_layout":"menu_only","sticky_header_shrinkage":"1","is_responsive":"1","is_ssl":"true","isotope_type":"masonry","layout_mode":"wide","lightbox_animation_speed":"Normal","lightbox_arrows":"1","lightbox_autoplay":"0","lightbox_behavior":"all","lightbox_desc":"1","lightbox_deeplinking":"1","lightbox_gallery":"1","lightbox_opacity":"0.90","lightbox_path":"vertical","lightbox_post_images":"1","lightbox_skin":"metro-white","lightbox_slideshow_speed":"5000","lightbox_social":"1","lightbox_title":"1","lightbox_video_height":"720","lightbox_video_width":"1280","logo_alignment":"Left","logo_margin_bottom":"0px","logo_margin_top":"0px","megamenu_max_width":"1100","mobile_menu_design":"modern","nav_height":"83","nav_highlight_border":"3","page_title_fading":"0","pagination_video_slide":"0","related_posts_speed":"2500","submenu_slideout":"1","side_header_break_point":"800","sidenav_behavior":"Hover","site_width":"1100px","slider_position":"below","slideshow_autoplay":"1","slideshow_speed":"7000","smooth_scrolling":"0","status_lightbox":"1","status_totop_mobile":"0","status_vimeo":"1","status_yt":"1","testimonials_speed":"4000","tfes_animation":"sides","tfes_autoplay":"1","tfes_interval":"3000","tfes_speed":"800","tfes_width":"150","title_style_type":"double","title_margin_top":"0px","title_margin_bottom":"31px","typography_responsive":"0","typography_sensitivity":"0.6","typography_factor":"1.5","woocommerce_shop_page_columns":"4","woocommerce_checkout_error":"Not all fields have been filled in correctly.","side_header_width":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/main.js" async=""></script> 
+<!--[if IE 9]>
+<script type='text/javascript' src='https://www.giscourse.com/wp-content/themes/Avada/assets/js/avada-ie9.js?ver=5.0.5'></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.giscourse.com/wp-content/themes/Avada/assets/js/respond.js?ver=5.0.5'></script>
+<![endif]-->
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/select2.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/ace.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var mivhak_settings = {"line_numbers":"1","auto_assign":"","show_meta":"1","min_lines":"1","default_lang":"","font_size":"12","theme":"eclipse","version":"1.3.6","lang_list":{"abap":"ABAP","abc":"ABC","actionscript":"ActionScript","ada":"Ada","apache_conf":"ApacheConf","applescript":"AppleScript","asciidoc":"AsciiDoc","assembly_x86":"Assembly x86","autohotkey":"AutoHotkey","batchfile":"Batch File","c9search":"c9search","c_cpp":"C\/C++","cirru":"cirru","clojure":"Clojure","cobol":"COBOL","coffee":"CoffeeScript","coldfusion":"ColdFusion","csharp":"C#","css":"CSS","curly":"Curly","d":"D","dart":"Dart","diff":"diff","django":"Django","dockerfile":"Dockerfile","dot":"DOT","eiffel":"Eiffel","ejs":"EJS","elixir":"Elixir","elm":"Elm","erlang":"Erlang","forth":"Forth","ftl":"FTL","gcode":"G-Code","gherkin":"Gherkin","gitignore":"gitignore","glsl":"GLSL","gobstones":"gobstones","golang":"Go","groovy":"Groovy","haml":"Haml","handlebars":"Handlebars","haskell":"Haskell","haxe":"Haxe","html":"HTML","html_elixir":"HTML Elixir","html_ruby":"HTML Ruby","ini":"INI","io":"io","jack":"JACK","jade":"Jade","java":"Java","javascript":"JavaScript","json":"JSON","jsoniq":"JSONiq","jsp":"JSP","jsx":"JSX","julia":"Julia","latex":"LaTex","lean":"Lean","less":"Less","liquid":"Liquid","lisp":"Lisp","livescript":"LiveScript","logiql":"LogiQL","lsl":"LSL","lua":"Lua","luapage":"Luapage","lucene":"Lucene","makefile":"Makefile","markdown":"Markdown","mask":"Mask","matlab":"MATLAB","maze":"Maze","mel":"MEL","mipsassembler":"MIPS Assembler","mushcode":"MUSHCode","mysql":"MySQL","nix":"nix","nsis":"NSIS","objectivec":"Objective-C","ocaml":"OCaml","pascal":"Pascal","perl":"Perl","pgsql":"pgSQL","php":"PHP","plain_text":"Plain Text","powershell":"PowerShell","praat":"Praat","prolog":"Prolog","properties":"Properties","protobuf":"Protocol Bufffers","python":"Python","r":"R","razor":"Razor","rdoc":"RDoc","rhtml":"rhtml","rst":"reStructuredText","ruby":"Ruby","rust":"Rust","sass":"Sass","scad":"SCAD","scala":"Scala","scheme":"Scheme","scss":"SCSS","sh":"sh","sjs":"SJS","smarty":"Smarty","snippets":"Snippets","soy_template":"Soy Template","space":"Space","sql":"SQL","sqlserver":"SQLServer","stylus":"Stylus","svg":"SVG","swift":"Swift","swig":"Swig","tcl":"Tcl","tex":"Tex","text":"Text","textile":"Textile","toml":"Toml","twig":"Twig","typescript":"TypeScript","vala":"Vala","vbscript":"VBScript","velocity":"Velocity","verilog":"Verilog","vhdl":"VHDL","wollok":"Wollok","xml":"XML","xquery":"XQuery","yaml":"YAML"},"i18n":["line","lines","Copy this code to clipboard","Open this code in a new window","Wrap lines","Show code","About"]};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/mivhak.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/wp-embed.js"></script>
+<script async="async" type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/form.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/tooltipster.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/featherlight.js"></script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/jstz.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var fcaEoiScriptData = {"ajax_url":"https:\/\/www.giscourse.com\/wp-admin\/admin-ajax.php","nonce":"75c676522b","gdpr_checkbox":"","consent_headline":"","consent_msg":""};
+var fcaEoiScriptData = {"ajax_url":"https:\/\/www.giscourse.com\/wp-admin\/admin-ajax.php","nonce":"75c676522b","gdpr_checkbox":"","consent_headline":"","consent_msg":""};
+var fcaEoiScriptData = {"ajax_url":"https:\/\/www.giscourse.com\/wp-admin\/admin-ajax.php","nonce":"75c676522b","gdpr_checkbox":"","consent_headline":"","consent_msg":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/script.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var fcaEoiTargetingData = {"ajax_url":"https:\/\/www.giscourse.com\/wp-admin\/admin-ajax.php","nonce":"1c6c9be377","popups":{"4616":{"show_every":"month","devices":"desktop","success_duration":"365","conditions":[{"parameter":"scrolled_percent","value":"10"}],"live":true}}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Editing%20vector%20layers%20in%20QGIS_arquivos/targeting.js"></script>
+        <script>if( typeof QTags !== 'undefined' ){QTags.addButton( 'pre', 'pre', '<pre>', '</pre>\n', 'p', '', 105 );}</script>
+    
+    <!-- BEGIN: wpflow ga events array -->
+    <script>
+
+                jQuery(document).ready(function() {
+                    if(typeof scroll_events == 'undefined') {
+                        return;
+                    }
+                    scroll_events.bind_events( {
+                        universal: 1,
+                        gtm:0,
+                        gst:0,
+
+                        scroll_elements: [],
+                        click_elements: [{'select':'.send','category':'clic-tlf','action':'clic','label':'910 325 482','bounce':'false','evalue':''},{'select':'.whatss','category':'clic-tlf','action':'clic','label':'635 619 882','bounce':'false','evalue':''},{'select':'.malaga','category':'clic-tlf','action':'clic','label':'951 082 319','bounce':'false','evalue':''},{'select':'.info','category':'clic-email','action':'clic','label':'info@tycgis.com','bounce':'true','evalue':''},{'select':'.formacion','category':'clic-email','action':'clic','label':'formacion@tycgis.com','bounce':'false','evalue':''}],
+                    });
+                });
+
+    </script>
+    <!-- END: wpflow ga events array -->
+			
+
+<div class="to-top-container"><a href="#" id="toTop" style="display: inline;"><span id="toTopHover"></span><span class="screen-reader-text">Go to Top</span></a></div><iframe id="tidio-chat-code" style="display: none;" title="Tidio Chat code"></iframe><div id="tidio-chat"><iframe title="Tidio Chat" style="display: block; border: medium none; position: fixed; width: 112px; height: 140px; opacity: 1; left: 0px; right: auto; bottom: 0px; top: auto; background: transparent none repeat scroll 0% 0%; margin: 0px; max-height: 100vh; max-width: 100vw; transform: translateY(0px); transition: none 0s ease 0s ; visibility: visible; z-index: 999999999 ! important;" id="tidio-chat-iframe" srcdoc=""></iframe></div></body></html>

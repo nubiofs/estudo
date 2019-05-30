@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+	<head>
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+						 
+		<title>Configurando o GeoServer via REST API &#8211; Blog do Fernando Quadro</title>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//secure.gravatar.com' />
+<link rel='dns-prefetch' href='//platform-api.sharethis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Blog do Fernando Quadro &raquo; Feed" href="http://www.fernandoquadro.com.br/html/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Blog do Fernando Quadro &raquo; Comments Feed" href="http://www.fernandoquadro.com.br/html/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Blog do Fernando Quadro &raquo; Configurando o GeoServer via REST API Comments Feed" href="http://www.fernandoquadro.com.br/html/2016/01/15/configurando-o-geoserver-via-rest-api/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.fernandoquadro.com.br\/html\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.0.4"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wp-block-library-css'  href='https://c0.wp.com/c/5.0.4/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wpcf-css'  href='http://www.fernandoquadro.com.br/html/wp-content/plugins/wp-contact-form/wpcf.css?ver=20110218' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='https://c0.wp.com/p/jetpack/7.3.1/_inc/social-logos/social-logos.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://c0.wp.com/p/jetpack/7.3.1/css/jetpack.css' type='text/css' media='all' />
+<link rel='stylesheet' id='baskerville_googleFonts-css'  href='//fonts.googleapis.com/css?family=Roboto+Slab%3A400%2C700%7CRoboto%3A400%2C400italic%2C700%2C700italic%2C300%7CPacifico%3A400&#038;ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='baskerville_style-css'  href='http://www.fernandoquadro.com.br/html/wp-content/themes/baskerville/style.css?ver=1.0' type='text/css' media='all' />
+<script type='text/javascript' src='https://c0.wp.com/c/5.0.4/wp-includes/js/jquery/jquery.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.0.4/wp-includes/js/jquery/jquery-migrate.min.js'></script>
+<script type='text/javascript' src='http://www.fernandoquadro.com.br/html/wp-content/themes/baskerville/js/imagesloaded.pkgd.js?ver=1'></script>
+<script type='text/javascript' src='http://www.fernandoquadro.com.br/html/wp-content/themes/baskerville/js/flexslider.min.js?ver=1'></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#product=ga'></script>
+<link rel='https://api.w.org/' href='http://www.fernandoquadro.com.br/html/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.fernandoquadro.com.br/html/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.fernandoquadro.com.br/html/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Arquitetura GIS Híbrida' href='http://www.fernandoquadro.com.br/html/2016/01/14/arquitetura-gis-hibrida/' />
+<link rel='next' title='Mapa: Portal de dados abertos ao redor do mundo' href='http://www.fernandoquadro.com.br/html/2016/01/18/mapa-portal-de-dados-abertos-ao-redor-do-mundo/' />
+<meta name="generator" content="WordPress 5.0.4" />
+<link rel="canonical" href="http://www.fernandoquadro.com.br/html/2016/01/15/configurando-o-geoserver-via-rest-api/" />
+<link rel='shortlink' href='https://wp.me/pg6MA-1dr' />
+<link rel="alternate" type="application/json+oembed" href="http://www.fernandoquadro.com.br/html/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.fernandoquadro.com.br%2Fhtml%2F2016%2F01%2F15%2Fconfigurando-o-geoserver-via-rest-api%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.fernandoquadro.com.br/html/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.fernandoquadro.com.br%2Fhtml%2F2016%2F01%2F15%2Fconfigurando-o-geoserver-via-rest-api%2F&#038;format=xml" />
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "http://www.fernandoquadro.com.br/html/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.6.4';
+	window._wp_rp_post_id = '4677';
+	window._wp_rp_num_rel_posts = '5';
+	window._wp_rp_thumbnails = true;
+	window._wp_rp_post_title = 'Configurando+o+GeoServer+via+REST+API';
+	window._wp_rp_post_tags = ['gis', 'geoserver', 'rest+api', 'gis', 'geoserver', 'ela', 'uma', 'uri', 'de', 'na', 'store', 'state', 'acm', 'da', 'foi', 'opera', 'como', 'pasta', 'api', 'sem'];
+	window._wp_rp_promoted_content = true;
+</script>
+<link rel="stylesheet" href="http://www.fernandoquadro.com.br/html/wp-content/plugins/wordpress-23-related-posts-plugin/static/themes/vertical-m.css?version=3.6.4" />
+<style data-context="foundation-flickity-css">/*! Flickity v2.0.2
+http://flickity.metafizzy.co
+---------------------------------------------- */.flickity-enabled{position:relative}.flickity-enabled:focus{outline:0}.flickity-viewport{overflow:hidden;position:relative;height:100%}.flickity-slider{position:absolute;width:100%;height:100%}.flickity-enabled.is-draggable{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.flickity-enabled.is-draggable .flickity-viewport{cursor:move;cursor:-webkit-grab;cursor:grab}.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down{cursor:-webkit-grabbing;cursor:grabbing}.flickity-prev-next-button{position:absolute;top:50%;width:44px;height:44px;border:none;border-radius:50%;background:#fff;background:hsla(0,0%,100%,.75);cursor:pointer;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.flickity-prev-next-button:hover{background:#fff}.flickity-prev-next-button:focus{outline:0;box-shadow:0 0 0 5px #09f}.flickity-prev-next-button:active{opacity:.6}.flickity-prev-next-button.previous{left:10px}.flickity-prev-next-button.next{right:10px}.flickity-rtl .flickity-prev-next-button.previous{left:auto;right:10px}.flickity-rtl .flickity-prev-next-button.next{right:auto;left:10px}.flickity-prev-next-button:disabled{opacity:.3;cursor:auto}.flickity-prev-next-button svg{position:absolute;left:20%;top:20%;width:60%;height:60%}.flickity-prev-next-button .arrow{fill:#333}.flickity-page-dots{position:absolute;width:100%;bottom:-25px;padding:0;margin:0;list-style:none;text-align:center;line-height:1}.flickity-rtl .flickity-page-dots{direction:rtl}.flickity-page-dots .dot{display:inline-block;width:10px;height:10px;margin:0 8px;background:#333;border-radius:50%;opacity:.25;cursor:pointer}.flickity-page-dots .dot.is-selected{opacity:1}</style><style data-context="foundation-slideout-css">.slideout-menu{position:fixed;left:0;top:0;bottom:0;right:auto;z-index:0;width:256px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:none}.slideout-menu.pushit-right{left:auto;right:0}.slideout-panel{position:relative;z-index:1;will-change:transform}.slideout-open,.slideout-open .slideout-panel,.slideout-open body{overflow:hidden}.slideout-open .slideout-menu{display:block}.pushit{display:none}</style>
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<link rel='dns-prefetch' href='//i0.wp.com'/>
+<link rel='dns-prefetch' href='//i1.wp.com'/>
+<link rel='dns-prefetch' href='//i2.wp.com'/>
+<link rel='dns-prefetch' href='//c0.wp.com'/>
+<style type='text/css'>img#wpstats{display:none}</style>		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+					<style type="text/css">
+				/* If html does not have either class, do not show lazy loaded images. */
+				html:not( .jetpack-lazy-images-js-enabled ):not( .js ) .jetpack-lazy-image {
+					display: none;
+				}
+			</style>
+			<script>
+				document.documentElement.classList.add(
+					'jetpack-lazy-images-js-enabled'
+				);
+			</script>
+		
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Configurando o GeoServer via REST API" />
+<meta property="og:url" content="http://www.fernandoquadro.com.br/html/2016/01/15/configurando-o-geoserver-via-rest-api/" />
+<meta property="og:description" content="O GeoServer fornece uma interface RESTful através da qual podemos configurar uma instância usando chamadas HTTP simples. Usando a interface REST, podemos configurar o GeoServer sem a necessidade de…" />
+<meta property="article:published_time" content="2016-01-15T16:14:05+00:00" />
+<meta property="article:modified_time" content="2018-09-25T14:18:06+00:00" />
+<meta property="og:site_name" content="Blog do Fernando Quadro" />
+<meta property="og:image" content="https://i0.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?fit=980%2C327" />
+<meta property="og:image:width" content="980" />
+<meta property="og:image:height" content="327" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:text:title" content="Configurando o GeoServer via REST API" />
+<meta name="twitter:image" content="https://i0.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?fit=980%2C327&#038;w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="icon" href="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2010/09/GeoServer_MARK.png?fit=32%2C32" sizes="32x32" />
+<link rel="icon" href="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2010/09/GeoServer_MARK.png?fit=150%2C150" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2010/09/GeoServer_MARK.png?fit=150%2C150" />
+<meta name="msapplication-TileImage" content="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2010/09/GeoServer_MARK.png?fit=150%2C150" />
+<style>.ios7.web-app-mode.has-fixed header{ background-color: rgba(45,53,63,.88);}</style>	
+	</head>
+	
+	<body class="post-template-default single single-post postid-4677 single-format-standard has-featured-image single single-post">
+
+		
+			
+		<div class="header section small-padding bg-dark bg-image" style="background-image: url( http://www.fernandoquadro.com.br/html/wp-content/uploads/2016/03/cropped-DSC_0254.jpg );">
+		
+			<div class="cover"></div>
+			
+			<div class="header-search-block bg-graphite hidden">
+			
+				<form method="get" class="searchform" action="http://www.fernandoquadro.com.br/html/">
+	<input type="search" value="" placeholder="Search form" name="s" class="s" /> 
+	<input type="submit" class="searchsubmit" value="Search">
+</form>			
+			</div><!-- .header-search-block -->
+					
+			<div class="header-inner section-inner">
+			
+												
+					<h1 class="blog-title">
+						<a href="http://www.fernandoquadro.com.br/html" title="Blog do Fernando Quadro &mdash; Geotecnologias livres e afins..." rel="home">Blog do Fernando Quadro</a>
+					</h1>
+					
+										
+						<h3 class="blog-description">Geotecnologias livres e afins...</h3>
+						
+															
+											
+			</div><!-- .header-inner -->
+						
+		</div><!-- .header -->
+		
+		<div class="navigation section no-padding bg-dark">
+		
+			<div class="navigation-inner section-inner">
+			
+				<div class="nav-toggle fleft hidden">
+					
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<div class="bar"></div>
+					
+					<div class="clear"></div>
+					
+				</div>
+						
+				<ul class="main-menu">
+				
+					<li class="page_item page-item-2"><a href="http://www.fernandoquadro.com.br/html/about/">Sobre</a></li>
+<li class="page_item page-item-501"><a href="http://www.fernandoquadro.com.br/html/geoserver/">GeoServer</a></li>
+<li class="page_item page-item-1772"><a href="http://www.fernandoquadro.com.br/html/openlayers/">OpenLayers</a></li>
+<li class="page_item page-item-3563"><a href="http://www.fernandoquadro.com.br/html/postgis/">PostGIS</a></li>
+<li class="page_item page-item-8100"><a href="http://www.fernandoquadro.com.br/html/leaflet/">Leaflet</a></li>
+<li class="page_item page-item-2875"><a href="http://www.fernandoquadro.com.br/html/publicacoes/">Publicações</a></li>
+<li class="page_item page-item-1315"><a href="http://www.fernandoquadro.com.br/html/sitemap/">Sitemap</a></li>
+<li class="page_item page-item-236"><a href="http://www.fernandoquadro.com.br/html/contato/">Contato</a></li>
+											
+				 </ul><!-- .main-menu -->
+				 
+				 <a class="search-toggle fright" href="#"></a>
+				 
+				 <div class="clear"></div>
+				 
+			</div><!-- .navigation-inner -->
+			
+		</div><!-- .navigation -->
+		
+		<div class="mobile-navigation section bg-graphite no-padding hidden">
+					
+			<ul class="mobile-menu">
+			
+				<li class="page_item page-item-2"><a href="http://www.fernandoquadro.com.br/html/about/">Sobre</a></li>
+<li class="page_item page-item-501"><a href="http://www.fernandoquadro.com.br/html/geoserver/">GeoServer</a></li>
+<li class="page_item page-item-1772"><a href="http://www.fernandoquadro.com.br/html/openlayers/">OpenLayers</a></li>
+<li class="page_item page-item-3563"><a href="http://www.fernandoquadro.com.br/html/postgis/">PostGIS</a></li>
+<li class="page_item page-item-8100"><a href="http://www.fernandoquadro.com.br/html/leaflet/">Leaflet</a></li>
+<li class="page_item page-item-2875"><a href="http://www.fernandoquadro.com.br/html/publicacoes/">Publicações</a></li>
+<li class="page_item page-item-1315"><a href="http://www.fernandoquadro.com.br/html/sitemap/">Sitemap</a></li>
+<li class="page_item page-item-236"><a href="http://www.fernandoquadro.com.br/html/contato/">Contato</a></li>
+										
+			 </ul><!-- .main-menu -->
+		
+		</div><!-- .mobile-navigation -->
+<div class="wrapper section medium-padding">
+										
+	<div class="section-inner">
+	
+		<div class="content fleft">
+												        
+									
+				<div id="post-4677" class="post-4677 post type-post status-publish format-standard has-post-thumbnail hentry category-geoserver category-gis tag-geoserver tag-gis tag-rest-api">
+
+									
+					<div class="post-header">
+
+												
+						    <h1 class="post-title"><a href="http://www.fernandoquadro.com.br/html/2016/01/15/configurando-o-geoserver-via-rest-api/" rel="bookmark" title="Configurando o GeoServer via REST API">Configurando o GeoServer via REST API</a></h1>
+
+											    
+					</div><!-- .post-header -->
+					
+										
+						<div class="featured-media">
+						
+							<img width="945" height="315" src="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?fit=945%2C315" class="attachment-post-image size-post-image wp-post-image jetpack-lazy-image" alt="" data-attachment-id="5674" data-permalink="http://www.fernandoquadro.com.br/html/2016/01/15/configurando-o-geoserver-via-rest-api/rest_api/" data-orig-file="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?fit=980%2C327" data-orig-size="980,327" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Rest_API" data-image-description="" data-medium-file="https://i0.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?fit=300%2C100" data-large-file="https://i0.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?fit=676%2C226" data-lazy-srcset="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?w=980 980w, https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?resize=300%2C100 300w, https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?resize=768%2C256 768w, https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?resize=945%2C315 945w, https://i0.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?resize=600%2C200 600w" data-lazy-sizes="(max-width: 945px) 100vw, 945px" data-lazy-src="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/01/Rest_API.png?fit=945%2C315&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />									
+						</div><!-- .featured-media -->
+					
+																			                                    	    
+					<div class="post-content">
+						
+						<p>O GeoServer fornece uma interface RESTful através da qual podemos configurar uma instância usando chamadas HTTP simples. Usando a interface REST, podemos configurar o GeoServer sem a necessidade de usar a interface de administração Web.</p>
+<p>Para realizar as operações utilizaremos o <a href="http://curl.haxx.se/">cURL</a> (uma ferramenta de linha de comando para executar solicitações HTTP e transferência de arquivos), porém elas podem ser adaptadas para qualquer ferramenta ou biblioteca HTTP.</p>
+<p>Para este exemplo, baixei o <a href="http://curl.haxx.se/download.html">cURL (curl.exe)</a>, e o coloquei na pasta C:\Util\curl, assim como o arquivo zip com o shape (roads.zip) e o arquivo sld (roads_style.sld).</p>
+<p><strong>1. Adição de novo workspace</strong></p>
+<p>Para iniciar, vou criar um workspace com o nome &#8220;acme&#8221;. Para isso vou executar o comando abaixo na linha de comando através do cURL:</p>
+<pre>
+curl&nbsp;-v&nbsp;-u&nbsp;admin:geoserver&nbsp;-XPOST&nbsp;-H&nbsp;"Content-type:&nbsp;text/xml"
+&nbsp;&nbsp;-d&nbsp;"&lt;workspace&gt;&lt;name&gt;acme&lt;/name&gt;&lt;/workspace&gt;"
+&nbsp;&nbsp;http://localhost:8080/geoserver/rest/workspaces
+</pre>
+<p>Se for executado corretamento, você deverá receber a seguinte mensagem:</p>
+<pre>
+&lt;&nbsp;HTTP/1.1&nbsp;201&nbsp;Created
+...
+&lt;&nbsp;Location:&nbsp;http://localhost:8080/geoserver/rest/workspaces/acme
+</pre>
+<p>Para verificar o que foi criado no GeoServer você pode executar o seguinte comando:</p>
+<pre>
+curl&nbsp;-v&nbsp;-u&nbsp;admin:geoserver&nbsp;-XGET&nbsp;-H&nbsp;"Accept:&nbsp;text/xml"
+&nbsp;&nbsp;http://localhost:8080/geoserver/rest/workspaces/acme
+</pre>
+<p><strong>2. Adição de um shapefile</strong></p>
+<p>Neste passo, iremos criar um novo store a partir de um arquivo shapefile.</p>
+<p>Para o exemplo é necessário o arquivo states.zip para criar um novo store com o nome de states.</p>
+<pre>
+curl&nbsp;-v&nbsp;-u&nbsp;admin:geoserver&nbsp;-XPUT&nbsp;-H&nbsp;"Content-type:&nbsp;application/zip"
+&nbsp;&nbsp;--data-binary&nbsp;@roads.zip
+&nbsp;&nbsp;http://localhost:8080/geoserver/rest/workspaces/acme/datastores/roads/file.shp
+</pre>
+<p>O identificador states na URI refere-se ao nome da store a ser criada. Para criar com outro nome, a URI seria http://localhost:8080/geoserver/rest/workspaces/acme/datastores/outronome/file.shp</p>
+<p>Se for executado corretamento, você deverá receber a seguinte mensagem:</p>
+<pre>
+< HTTP/1.1 201 Created
+</pre>
+<p>Para verificar o que foi criado no GeoServer você pode executar o seguinte comando:</p>
+<pre>
+curl&nbsp;-v&nbsp;-u&nbsp;admin:geoserver&nbsp;-XGET
+&nbsp;&nbsp;http://localhost:8080/geoserver/rest/workspaces/acme/datastores/roads.xml
+</pre>
+<p>Quando um shapefile é adicionado, automaticamente é criada uma featureType. A informação desta featureType, pode ser obtida através do seguinte comando:</p>
+<pre>
+curl&nbsp;-v&nbsp;-u&nbsp;admin:geoserver&nbsp;-XGET
+&nbsp;&nbsp;http://localhost:8080/geoserver/rest/workspaces/acme/datastores/roads/featuretypes/roads.xml
+</pre>
+<p><strong>3. Adição de um estilo</strong></p>
+<p>Primeiro vamos criar a estrutura do novo estilo: </p>
+<pre>
+curl&nbsp;-v&nbsp;-u&nbsp;admin:geoserver&nbsp;-XPOST&nbsp;-H&nbsp;"Content-type:&nbsp;text/xml"
+&nbsp;&nbsp;-d&nbsp;"&lt;style&gt;&lt;name&gt;roads_style&lt;/name&gt;&lt;filename&gt;roads.sld&lt;/filename&gt;&lt;/style&gt;"
+&nbsp;&nbsp;http://localhost:8080/geoserver/rest/styles
+</pre>
+<p>Se for executado corretamento, você deverá receber a seguinte mensagem:</p>
+<pre>
+< HTTP/1.1 201 Created
+</pre>
+<p>Agora que a estrutura já está criada, vamos fazer o upload do arquivo SLD:</p>
+<pre>
+curl&nbsp;-v&nbsp;-u&nbsp;admin:geoserver&nbsp;-XPUT&nbsp;-H&nbsp;"Content-type:&nbsp;application/vnd.ogc.sld+xml"
+&nbsp;&nbsp;-d&nbsp;@roads.sld&nbsp;http://localhost:8080/geoserver/rest/styles/roads_style
+</pre>
+<p>Se for executado corretamento, você deverá receber a seguinte mensagem:</p>
+<pre>
+< HTTP/1.1 200 OK
+</pre>
+<p><strong>4. Vinculando um estilo a uma camada</strong></p>
+<p>Para finalizar vamos vincular a camada ao estilo que foi criado:</p>
+<pre>
+curl&nbsp;-v&nbsp;-u&nbsp;admin:geoserver&nbsp;-XPUT&nbsp;-H&nbsp;"Content-type:&nbsp;text/xml"
+&nbsp;&nbsp;-d&nbsp;"&lt;layer&gt;&lt;defaultStyle&gt;&lt;name&gt;roads_style&lt;/name&gt;&lt;/defaultStyle&gt;&lt;/layer&gt;"
+&nbsp;&nbsp;http://localhost:8080/geoserver/rest/layers/acme:roads
+</pre>
+<p>Se for executado corretamento, você deverá receber a seguinte mensagem:</p>
+<pre>
+< HTTP/1.1 200 OK
+</pre>
+<p><strong>Parabéns!</strong> Agora você já tem sua layer publicada no GeoServer.</p>
+<p><strong>5. Apagando uma camada</strong></p>
+<p>Caso você queira apagar a configuração de alguma camada, você pode fazer utilizando o comando abaixo, mas lembre que se sua fonte de dados (store) for shapefile, este comando desfaz apenas a configuração da camada, e não exclui o shapefile na pasta de dados do GeoServer.</p>
+<pre>
+curl&nbsp;-u&nbsp;admin:geoserver&nbsp;-XDELETE&nbsp;http://localhost:8080/geoserver/rest/layers/acme:roads
+</pre>
+<p>Fonte: <a href="http://docs.geoserver.org/latest/en/user/rest/examples/curl.html" target="_blank">GeoServer Documentation - cURL</a></p>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Veja também...</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-7417" data-post-type="none" ><a href="http://www.fernandoquadro.com.br/html/2018/10/03/como-realizar-backup-no-geoserver-parte-3/" class="wp_rp_thumbnail"><img src="https://i0.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2018/09/pexels-photo-1148820.jpg?resize=150%2C150" alt="Como realizar backup no GeoServer &#8211; Parte 3" width="150" height="150" data-recalc-dims="1" data-lazy-src="https://i0.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2018/09/pexels-photo-1148820.jpg?resize=150%2C150&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img src="https://i0.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2018/09/pexels-photo-1148820.jpg?resize=150%2C150" alt="Como realizar backup no GeoServer &#8211; Parte 3" width="150" height="150" data-recalc-dims="1" /></noscript></a><a href="http://www.fernandoquadro.com.br/html/2018/10/03/como-realizar-backup-no-geoserver-parte-3/" class="wp_rp_title">Como realizar backup no GeoServer &#8211; Parte 3</a></li><li data-position="1" data-poid="in-6086" data-post-type="none" ><a href="http://www.fernandoquadro.com.br/html/2016/07/21/problema-na-internacionalizacao-do-geoserver/" class="wp_rp_thumbnail"><img src="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/07/brazil_1000.jpg?resize=150%2C150" alt="Problema na internacionalização do GeoServer" width="150" height="150" data-recalc-dims="1" data-lazy-src="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/07/brazil_1000.jpg?resize=150%2C150&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img src="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/07/brazil_1000.jpg?resize=150%2C150" alt="Problema na internacionalização do GeoServer" width="150" height="150" data-recalc-dims="1" /></noscript></a><a href="http://www.fernandoquadro.com.br/html/2016/07/21/problema-na-internacionalizacao-do-geoserver/" class="wp_rp_title">Problema na internacionalização do GeoServer</a></li><li data-position="2" data-poid="in-8128" data-post-type="none" ><a href="http://www.fernandoquadro.com.br/html/2019/04/10/usando-a-api-rest-do-geoserver-com-python/" class="wp_rp_thumbnail"><img src="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2019/04/Python_GeoServer_Rest.png?resize=150%2C150" alt="Usando a API REST do GeoServer com Python" width="150" height="150" data-recalc-dims="1" data-lazy-src="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2019/04/Python_GeoServer_Rest.png?resize=150%2C150&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img src="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2019/04/Python_GeoServer_Rest.png?resize=150%2C150" alt="Usando a API REST do GeoServer com Python" width="150" height="150" data-recalc-dims="1" /></noscript></a><a href="http://www.fernandoquadro.com.br/html/2019/04/10/usando-a-api-rest-do-geoserver-com-python/" class="wp_rp_title">Usando a API REST do GeoServer com Python</a></li><li data-position="3" data-poid="in-6620" data-post-type="none" ><a href="http://www.fernandoquadro.com.br/html/2017/05/15/nova-turma-do-curso-online-de-geoserver/" class="wp_rp_thumbnail"><img src="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2017/01/geoserver_featured.jpg?resize=150%2C150" alt="Nova turma do Curso Online de GeoServer" width="150" height="150" data-recalc-dims="1" data-lazy-src="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2017/01/geoserver_featured.jpg?resize=150%2C150&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img src="https://i1.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2017/01/geoserver_featured.jpg?resize=150%2C150" alt="Nova turma do Curso Online de GeoServer" width="150" height="150" data-recalc-dims="1" /></noscript></a><a href="http://www.fernandoquadro.com.br/html/2017/05/15/nova-turma-do-curso-online-de-geoserver/" class="wp_rp_title">Nova turma do Curso Online de GeoServer</a></li><li data-position="4" data-poid="in-6243" data-post-type="none" ><a href="http://www.fernandoquadro.com.br/html/2016/09/02/melhoria-na-rotulagem-de-poligonos-no-geoserver/" class="wp_rp_thumbnail"><img src="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/09/paint.jpg?resize=150%2C150" alt="Melhoria na rotulagem de polígonos no GeoServer" width="150" height="150" data-recalc-dims="1" data-lazy-src="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/09/paint.jpg?resize=150%2C150&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img src="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/09/paint.jpg?resize=150%2C150" alt="Melhoria na rotulagem de polígonos no GeoServer" width="150" height="150" data-recalc-dims="1" /></noscript></a><a href="http://www.fernandoquadro.com.br/html/2016/09/02/melhoria-na-rotulagem-de-poligonos-no-geoserver/" class="wp_rp_title">Melhoria na rotulagem de polígonos no GeoServer</a></li></ul></div></div>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-4677" class="share-twitter sd-button share-icon no-text" href="http://www.fernandoquadro.com.br/html/2016/01/15/configurando-o-geoserver-via-rest-api/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-4677" class="share-facebook sd-button share-icon no-text" href="http://www.fernandoquadro.com.br/html/2016/01/15/configurando-o-geoserver-via-rest-api/?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div>						
+						<div class="clear"></div>
+									        
+					</div><!-- .post-content -->
+					            					
+					<div class="post-meta-container">
+						
+						<div class="post-author">
+						
+							<div class="post-author-content">
+							
+								<h4>Fernando Quadro</h4>
+								
+								<p>Fernando Silveira de Quadro é analista de sistemas e consultor em geotecnologias livres, formado em Ciência da Computação e pós-graduado (MBA) em Gerenciamento de Projetos pela Universidade do Vale do Itajaí (UNIVALI).</p>
+<p>Possui vasta experiência em SIG (Sistema de Informação Geográfica) com ênfase em software livre.</p>
+								
+								<div class="author-links">
+									
+									<a class="author-link-posts" title="Author archive" href="http://www.fernandoquadro.com.br/html/author/admin/">Author archive</a>
+									
+																		
+										<a class="author-link-website" title="Author website" href="http://geocursos.com.br">Author website</a>
+										
+																		
+										<a class="author-link-twitter" title="@fernandoquadro on Twitter" href="http://www.twitter.com/fernandoquadro">@fernandoquadro on Twitter</a>
+										
+																		
+								</div><!-- .author-links -->
+							
+							</div><!-- .post-author-content -->
+						
+						</div><!-- .post-author -->
+						
+						<div class="post-meta">
+						
+							<p class="post-date">January 15, 2016</p>
+							
+														
+							<p class="post-categories"><a href="http://www.fernandoquadro.com.br/html/category/geoserver/" rel="category tag">GeoServer</a>, <a href="http://www.fernandoquadro.com.br/html/category/gis/" rel="category tag">GIS</a></p>
+							
+														
+								<p class="post-tags"><a href="http://www.fernandoquadro.com.br/html/tag/geoserver/" rel="tag">GeoServer</a>, <a href="http://www.fernandoquadro.com.br/html/tag/gis/" rel="tag">GIS</a>, <a href="http://www.fernandoquadro.com.br/html/tag/rest-api/" rel="tag">Rest API</a></p>
+							
+														
+							<div class="clear"></div>
+							
+							<div class="post-nav">
+							
+																
+									<a class="post-nav-prev" title="Previous post: Arquitetura GIS Híbrida" href="http://www.fernandoquadro.com.br/html/2016/01/14/arquitetura-gis-hibrida/">Previous post</a>
+							
+																	
+									<a class="post-nav-next" title="Next post: Mapa: Portal de dados abertos ao redor do mundo" href="http://www.fernandoquadro.com.br/html/2016/01/18/mapa-portal-de-dados-abertos-ao-redor-do-mundo/">Next post</a>
+							
+																
+																	
+								<div class="clear"></div>
+							
+							</div>
+						
+						</div><!-- .post-meta -->
+						
+						<div class="clear"></div>
+							
+					</div><!-- .post-meta-container -->
+																		
+					
+<div id="disqus_thread"></div>
+												                        
+						
+			</div><!-- .post -->
+		
+		</div><!-- .content -->
+		
+		
+	<div class="sidebar fright" role="complementary">
+	
+		<div class="widget widget_text"><div class="widget-content"><h3 class="widget-title">Redes sociais</h3>			<div class="textwidget"><center>
+<img id="Image-Maps-Com-image-maps-2016-04-01-111159" src="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/04/24.jpg?resize=328%2C77" data-lazy-src="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/04/24.jpg?resize=328%2C77&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img id="Image-Maps-Com-image-maps-2016-04-01-111159" src="https://i2.wp.com/www.fernandoquadro.com.br/html/wp-content/uploads/2016/04/24.jpg?resize=328%2C77" " border="0" width="328" height="77" orgWidth="328" orgHeight="77" usemap="#image-maps-2016-04-01-111159" alt="" data-recalc-dims="1" /></noscript>
+<map name="image-maps-2016-04-01-111159" id="ImageMapsCom-image-maps-2016-04-01-111159">
+<area id="twitter" alt="twitter" title="twitter" href="http://twitter.com/fernandoquadro" shape="rect" coords="5,1,77,75" style="outline:none;" target="_blank"     />
+<area id="facebook" alt="facebook" title="facebook" href="https://www.facebook.com/fernandoquadro" shape="rect" coords="85,2,157,76" style="outline:none;" target="_blank"     />
+<area id="linkedin" alt="linkedin" title="linkedin" href="https://br.linkedin.com/in/fernandoquadro" shape="rect" coords="166,3,238,77" style="outline:none;" target="_blank"     />
+<area id="google plus" alt="google plus" title="google plus" href="https://plus.google.com/u/0/+FernandoQuadro82/" shape="rect" coords="NaN,NaN,NaN,NaN" style="outline:none;" target="_blank"     />
+<area shape="rect" coords="326,75,328,77" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />
+</map>
+</center></div>
+		</div><div class="clear"></div></div><div class="widget_text widget widget_custom_html"><div class="widget_text widget-content"><h3 class="widget-title">Curta a GEOCURSOS</h3><div class="textwidget custom-html-widget"><iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fgeocursosbr%2F&tabs&width=340&height=214&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId" width="270" height="230" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div></div><div class="clear"></div></div><div class="widget widget_calendar"><div class="widget-content"><h3 class="widget-title">Calendário</h3><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar">
+	<caption>January 2016</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="Monday">M</th>
+		<th scope="col" title="Tuesday">T</th>
+		<th scope="col" title="Wednesday">W</th>
+		<th scope="col" title="Thursday">T</th>
+		<th scope="col" title="Friday">F</th>
+		<th scope="col" title="Saturday">S</th>
+		<th scope="col" title="Sunday">S</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="http://www.fernandoquadro.com.br/html/2014/03/">&laquo; Mar</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next"><a href="http://www.fernandoquadro.com.br/html/2016/02/">Feb &raquo;</a></td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr>
+		<td colspan="4" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td>
+	</tr>
+	<tr>
+		<td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+	</tr>
+	<tr>
+		<td>11</td><td>12</td><td>13</td><td><a href="http://www.fernandoquadro.com.br/html/2016/01/14/" aria-label="Posts published on January 14, 2016">14</a></td><td><a href="http://www.fernandoquadro.com.br/html/2016/01/15/" aria-label="Posts published on January 15, 2016">15</a></td><td>16</td><td>17</td>
+	</tr>
+	<tr>
+		<td><a href="http://www.fernandoquadro.com.br/html/2016/01/18/" aria-label="Posts published on January 18, 2016">18</a></td><td><a href="http://www.fernandoquadro.com.br/html/2016/01/19/" aria-label="Posts published on January 19, 2016">19</a></td><td><a href="http://www.fernandoquadro.com.br/html/2016/01/20/" aria-label="Posts published on January 20, 2016">20</a></td><td>21</td><td><a href="http://www.fernandoquadro.com.br/html/2016/01/22/" aria-label="Posts published on January 22, 2016">22</a></td><td>23</td><td>24</td>
+	</tr>
+	<tr>
+		<td>25</td><td>26</td><td><a href="http://www.fernandoquadro.com.br/html/2016/01/27/" aria-label="Posts published on January 27, 2016">27</a></td><td>28</td><td>29</td><td>30</td><td>31</td>
+	</tr>
+	</tbody>
+	</table></div></div><div class="clear"></div></div>		<div class="widget widget_recent_entries"><div class="widget-content">		<h3 class="widget-title">Posts recentes</h3>		<ul>
+											<li>
+					<a href="http://www.fernandoquadro.com.br/html/2019/05/29/5-cursos-de-data-science-de-graca/">5 Cursos de Data Science de graça</a>
+									</li>
+											<li>
+					<a href="http://www.fernandoquadro.com.br/html/2019/05/27/o-que-vem-por-ai-postgis-3-0/">O que vem por aí: PostGIS 3.0</a>
+									</li>
+											<li>
+					<a href="http://www.fernandoquadro.com.br/html/2019/05/23/curso-dba-postgis-turma-6/">Curso DBA PostGIS – Turma 6</a>
+									</li>
+											<li>
+					<a href="http://www.fernandoquadro.com.br/html/2019/05/16/como-utilizar-o-cluster-marker-no-leaflet/">Como utilizar o Cluster Marker no Leaflet</a>
+									</li>
+											<li>
+					<a href="http://www.fernandoquadro.com.br/html/2019/05/14/9-cursos-online-de-python-de-graca/">9 Cursos Online de Python de graça</a>
+									</li>
+					</ul>
+		</div><div class="clear"></div></div><div class="widget widget_recent_comments"><div class="widget-content"><h3 class="widget-title">Comentários recentes</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/acessando-o-pycsw-com-o-qgis/' rel='external nofollow' class='url'>Acessando o pycsw com o @QGIS &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/11/20/acessando-o-pycsw-com-o-qgis/comment-page-1/#comment-9960">Acessando o pycsw com o QGIS</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/bigdata-spatial-com-geomesa/' rel='external nofollow' class='url'>#BigData Spatial com #GeoMesa &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/24/big-data-spatial-com-geomesa/comment-page-1/#comment-9958">Big Data Spatial com GeoMesa</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/analise-de-performance-de-big-data-com-postgis-e-arcgis/' rel='external nofollow' class='url'>Análise de performance de Big Data com #PostGIS e #ArcGIS &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/22/analise-de-performance-de-big-data-entre-postgis-e-arcgis/comment-page-1/#comment-9957">Análise de performance de Big Data com PostGIS e ArcGIS</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/community-modules-do-geoserver/' rel='external nofollow' class='url'>Community Modules do #GeoServer &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/18/community-modules-do-geoserver/comment-page-1/#comment-9956">Community Modules do GeoServer</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/usando-a-extensao-pgraster-do-geoserver/' rel='external nofollow' class='url'>Usando a extensão PGRaster do GeoServer &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/15/usando-a-extensao-pgraster-do-geoserver/comment-page-1/#comment-9955">Usando a extensão PGRaster do GeoServer</a></li></ul></div><div class="clear"></div></div>		
+	</div><!-- .sidebar -->
+
+		
+		<div class="clear"></div>
+		
+	</div><!-- .section-inner -->
+
+</div><!-- .wrapper -->
+		
+<div class="footer section medium-padding bg-graphite">
+
+		
+		<div class="section-inner row">
+		
+						
+				<div class="column column-1 one-third">
+				
+					<div class="widgets">
+			
+						<div class="widget widget_links"><div class="widget-content"><h3 class="widget-title">Blogroll</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.andersonmedeiros.com">Anderson Medeiros</a></li>
+<li><a href="http://blog.geoserver.org">Blog do GeoServer</a></li>
+<li><a href="http://br-linux.org">BR-Linux</a></li>
+<li><a href="http://edmarmoretti.blogspot.com/">Edmar Moretti</a></li>
+<li><a href="https://geoind.wordpress.com/">Geo Independência</a></li>
+<li><a href="http://www.geoluislopes.com/" target="_blank">GeoLuísLopes</a></li>
+<li><a href="http://geosaber.blogspot.com">GeoSaber</a></li>
+<li><a href="http://tech.groups.yahoo.com/group/geoserver">GeoServer BR</a></li>
+<li><a href="https://gismobrasil.com/" rel="friend" target="_blank">GISMO Brasil</a></li>
+<li><a href="http://blog.gvsig.org">gvSIG Blog</a></li>
+<li><a href="http://geo.ideaplus.com.br/">iDea Plus Geo</a></li>
+<li><a href="http://geotecnologias.wordpress.com/">Luís Sadeck</a></li>
+<li><a href="http://murilocardoso.com/">Murilo Cardoso</a></li>
+<li><a href="http://narceliodesa.com/">Narcélio de Sá</a></li>
+<li><a href="http://planet.osgeo.org" title="Planet OSGeo" target="_blank">Planet OSGeo</a></li>
+<li><a href="http://planetasig.viasig.com/">Planeta SIG</a></li>
+<li><a href="http://qgisbrasil.org/">QGIS Brasil</a></li>
+
+	</ul>
+</div><div class="clear"></div></div>
+											
+					</div>
+					
+				</div><!-- .column-1 -->
+				
+							
+						
+				<div class="column column-2 one-third">
+				
+					<div class="widgets">
+			
+						<div class="widget widget_recent_comments"><div class="widget-content"><h3 class="widget-title">Comentários</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/acessando-o-pycsw-com-o-qgis/' rel='external nofollow' class='url'>Acessando o pycsw com o @QGIS &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/11/20/acessando-o-pycsw-com-o-qgis/comment-page-1/#comment-9960">Acessando o pycsw com o QGIS</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/bigdata-spatial-com-geomesa/' rel='external nofollow' class='url'>#BigData Spatial com #GeoMesa &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/24/big-data-spatial-com-geomesa/comment-page-1/#comment-9958">Big Data Spatial com GeoMesa</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/analise-de-performance-de-big-data-com-postgis-e-arcgis/' rel='external nofollow' class='url'>Análise de performance de Big Data com #PostGIS e #ArcGIS &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/22/analise-de-performance-de-big-data-entre-postgis-e-arcgis/comment-page-1/#comment-9957">Análise de performance de Big Data com PostGIS e ArcGIS</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/community-modules-do-geoserver/' rel='external nofollow' class='url'>Community Modules do #GeoServer &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/18/community-modules-do-geoserver/comment-page-1/#comment-9956">Community Modules do GeoServer</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/usando-a-extensao-pgraster-do-geoserver/' rel='external nofollow' class='url'>Usando a extensão PGRaster do GeoServer &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/15/usando-a-extensao-pgraster-do-geoserver/comment-page-1/#comment-9955">Usando a extensão PGRaster do GeoServer</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/como-realizar-backup-no-geoserver-parte-3/' rel='external nofollow' class='url'>Como realizar backup no GeoServer – Parte 3 &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/03/como-realizar-backup-no-geoserver-parte-3/comment-page-1/#comment-9954">Como realizar backup no GeoServer &#8211; Parte 3</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/como-realizar-backup-no-geoserver-parte-2/' rel='external nofollow' class='url'>Como realizar backup no GeoServer – Parte 2 &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/02/como-realizar-backup-no-geoserver-parte-2/comment-page-1/#comment-9953">Como realizar backup no GeoServer &#8211; Parte 2</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://geone.ws/como-realizar-backup-no-geoserver-parte-1/' rel='external nofollow' class='url'>Como realizar backup no GeoServer – Parte 1 &#8211; GeoNe.ws</a></span> on <a href="http://www.fernandoquadro.com.br/html/2018/10/01/como-realizar-backup-no-geoserver-parte-1/comment-page-1/#comment-9952">Como realizar backup no GeoServer &#8211; Parte 1</a></li></ul></div><div class="clear"></div></div>											
+					</div><!-- .widgets -->
+					
+				</div><!-- .column-2 -->
+				
+											
+						
+				<div class="column column-3 one-third">
+			
+					<div class="widgets">
+			
+						<div class="widget_text widget widget_custom_html"><div class="widget_text widget-content"><h3 class="widget-title">Curta o Blog no Facebook</h3><div class="textwidget custom-html-widget"><iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fblogdofernandoquadro%2F&tabs&width=340&height=214&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId" width="340" height="214" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div></div><div class="clear"></div></div><div class="widget_text widget widget_custom_html"><div class="widget_text widget-content"><h3 class="widget-title">GEOCURSOS NO FACEBOOK</h3><div class="textwidget custom-html-widget"><iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fgeocursosbr%2F&tabs&width=340&height=214&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId" width="340" height="214" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div></div><div class="clear"></div></div>											
+					</div><!-- .widgets -->
+					
+				</div>
+				
+			<!-- .footer-c -->
+			
+			<div class="clear"></div>
+		
+		</div><!-- .section-inner -->
+
+	
+</div><!-- .footer -->
+
+<div class="credits section bg-dark small-padding">
+
+	<div class="credits-inner section-inner">
+
+		<p class="credits-left fleft">
+		
+			&copy; 2019 <a href="http://www.fernandoquadro.com.br/html" title="Blog do Fernando Quadro">Blog do Fernando Quadro</a><span> &mdash; Powered by <a href="http://www.wordpress.org">WordPress</a></span>
+		
+		</p>
+		
+		<p class="credits-right fright">
+			
+			<span>Theme by <a href="https://www.andersnoren.se">Anders Noren</a> &mdash; </span><a class="tothetop" title="To the top" href="#">Up &uarr;</a>
+			
+		</p>
+		
+		<div class="clear"></div>
+	
+	</div><!-- .credits-inner -->
+	
+</div><!-- .credits -->
+
+
+	<!-- Google Maps Plugin (begin) -->
+	<!-- http://avi.alkalay.net/2006/11/google-maps-plugin-for-wordpress.html -->
+
+	<!-- Google Maps API -->
+	<script type="text/javascript"
+		src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAAFN06e29S_Ncz0FhUJZtyPhRGKRea0LSk5jWJGNzJj-dp0WZb4RSmYILmhbA16hE-TfqEfSa_1nWcyg">
+	</script>
+
+	<!-- Google Maps Plugin logic -->
+	<script type="text/javascript" src="http://www.fernandoquadro.com.br/html/wp-content/plugins/google-maps-advanced/googlemapsPlugin.js"></script>
+
+	<!-- Google Maps Plugin initialization -->
+	<script type="text/javascript">
+		//<![CDATA[
+
+		MapPluginInit(
+			/* Default map width  */          500,
+			/* Default map height */          300,
+			/* Use rel instad of title? */    false);
+
+		//]]>
+	</script>
+
+	<!-- Google Maps Plugin SEO -->
+	<noscript>
+		<link href="http://avi.alkalay.net/2006/11/google-maps-plugin-for-wordpress.html" rel="uses" type="text/html"/>
+	</noscript>
+	<!-- Google Maps Plugin (end) -->
+<!-- Powered by WPtouch: 4.3.37 -->	<div style="display:none">
+	</div>
+<script>
+    jQuery(document).ready(function () {
+		jQuery.post('http://www.fernandoquadro.com.br/html?ga_action=googleanalytics_get_script', {action: 'googleanalytics_get_script'}, function(response) {
+			var s = document.createElement("script");
+			s.type = "text/javascript";
+			s.innerHTML = response;
+			jQuery("head").append(s);
+		});
+    });
+</script>
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/www.fernandoquadro.com.br\/html\/2016\/01\/15\/configurando-o-geoserver-via-rest-api\/":4677};
+	</script>
+				<script type='text/javascript' src='https://c0.wp.com/p/jetpack/7.3.1/_inc/build/photon/photon.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"fernandoquadro"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.fernandoquadro.com.br/html/wp-content/plugins/disqus-comment-system/public/js/comment_count.js?ver=3.0.17'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.17"},"disqusIdentifier":"4677 http:\/\/www.fernandoquadro.com.br\/html\/?p=4677","disqusShortname":"fernandoquadro","disqusTitle":"Configurando o GeoServer via REST API","disqusUrl":"http:\/\/www.fernandoquadro.com.br\/html\/2016\/01\/15\/configurando-o-geoserver-via-rest-api\/","postId":"4677"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.fernandoquadro.com.br/html/wp-content/plugins/disqus-comment-system/public/js/comment_embed.js?ver=3.0.17'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201922'></script>
+<script type='text/javascript' src='https://secure.gravatar.com/js/gprofiles.js?ver=2019Mayaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://c0.wp.com/p/jetpack/7.3.1/modules/wpgroho.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.0.4/wp-includes/js/imagesloaded.min.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.0.4/wp-includes/js/masonry.min.js'></script>
+<script type='text/javascript' src='http://www.fernandoquadro.com.br/html/wp-content/themes/baskerville/js/global.js?ver=5.0.4'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.0.4/wp-includes/js/comment-reply.min.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/p/jetpack/7.3.1/_inc/build/lazy-images/js/lazy-images.min.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.0.4/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://c0.wp.com/p/jetpack/7.3.1/_inc/build/sharedaddy/sharing.min.js'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+</script>
+<script type='text/javascript' src='https://stats.wp.com/e-201922.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:7.3.1',blog:'3839324',post:'4677',tz:'-3',srv:'www.fernandoquadro.com.br'} ]);
+	_stq.push([ 'clickTrackerInit', '3839324', '4677' ]);
+</script>
+
+</body>
+</html>

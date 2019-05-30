@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>REST — GeoServer 2.14.x User Manual</title>
+  <link rel="stylesheet" href="REST%20%E2%80%94%20GeoServer%202.14.x%20User%20Manual_arquivos/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="REST%20%E2%80%94%20GeoServer%202.14.x%20User%20Manual_arquivos/print.css" type="text/css" media="print"> 
+  <!--[if IE]>
+  <link rel="stylesheet" href="../_static/blueprint/ie.css" type="text/css" media="screen, projection" />
+  <![endif]-->
+  <link rel="stylesheet" href="REST%20%E2%80%94%20GeoServer%202.14.x%20User%20Manual_arquivos/default.css" type="text/css">
+  <link rel="stylesheet" href="REST%20%E2%80%94%20GeoServer%202.14.x%20User%20Manual_arquivos/pygments.css" type="text/css">
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.13-SNAPSHOT',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html'
+    };
+  </script>
+  <script type="text/javascript" src="REST%20%E2%80%94%20GeoServer%202.14.x%20User%20Manual_arquivos/jquery.js"></script>
+  <script type="text/javascript" src="REST%20%E2%80%94%20GeoServer%202.14.x%20User%20Manual_arquivos/doctools.js"></script>
+  <script type="text/javascript" src="REST%20%E2%80%94%20GeoServer%202.14.x%20User%20Manual_arquivos/searchtools.js"></script>
+  <script type="text/javascript" src="REST%20%E2%80%94%20GeoServer%202.14.x%20User%20Manual_arquivos/searchindex.js"></script>
+  <link rel="shortcut icon" href="https://docs.geoserver.org/stable/en/user/_static/geoserver.ico">
+      <link rel="search" title="Search" href="https://docs.geoserver.org/stable/en/user/search.html">
+      <link rel="top" title="GeoServer 2.14.x User Manual" href="https://docs.geoserver.org/stable/en/user/index.html">
+      <link rel="next" title="About" href="https://docs.geoserver.org/stable/en/user/rest/about.html">
+      <link rel="prev" title="Make cluster nodes identifiable from the GUI" href="https://docs.geoserver.org/stable/en/user/production/identify.html">
+</head>
+<body class="rest/index">
+  <div id="header" class="selfclear">
+    <div class="wrap selfclear">
+      <div id="logo"><a href="https://docs.geoserver.org/stable/en/user/index.html">GeoServer 2.14.x User Manual</a></div>
+      <ul id="top-nav">
+        <li class="first"><a href="http://geoserver.org/about">About</a></li>
+        <li><a href="http://blog.geoserver.org/">Blog</a></li>
+        <li><a href="http://geoserver.org/download">Download</a></li>
+        <!--<li><a href="../index.html">Documentation</a></li>-->
+      </ul>
+        <form id="quick-search" action="../search.html" method="get">
+          <fieldset>
+            <input name="check_keywords" value="yes" type="hidden">
+            <input name="area" value="default" type="hidden">
+            <input id="quick-search-query" name="q" accesskey="q" size="25" value="Search Documentation…" tabindex="3" onblur="if(this.value=='') this.value='Search Documentation…';" onfocus="if(this.value=='Search Documentation…') this.value='';" type="text">
+            <input id="quick-search-submit" value="Search" src="REST%20%E2%80%94%20GeoServer%202.14.x%20User%20Manual_arquivos/search_icon_green.png" type="image">
+          </fieldset>
+        </form>
+    </div><!-- /.wrap -->
+  </div><!-- /#header -->
+  <div id="main">
+    <div class="wrap selfclear">
+      <div id="content-left" class="content-border"></div>
+      <div id="content">
+<ul id="breadcrumbs">
+  
+  <li><a href="https://docs.geoserver.org/stable/en/user/index.html">GeoServer 2.14.x User Manual</a> »</li>
+  <li>REST</li>
+</ul>
+<ul id="relatedlinks" class="selfclear">
+  <li class="first">
+    <a href="https://docs.geoserver.org/stable/en/user/py-modindex.html" title="Python Module Index" accesskey="">modules</a></li>
+  <li>
+    <a href="https://docs.geoserver.org/stable/en/user/rest/about.html" title="About" accesskey="N">next</a>|</li>
+  <li>
+    <a href="https://docs.geoserver.org/stable/en/user/production/identify.html" title="Make cluster nodes identifiable from the GUI" accesskey="P">previous</a>|</li>
+</ul>
+        
+  <div class="section" id="rest">
+<span id="id1"></span><h1>REST<a class="headerlink" href="#rest" title="Permalink to this headline">¶</a></h1>
+<p>GeoServer provides a <a class="reference external" href="http://en.wikipedia.org/wiki/Representational_state_transfer">RESTful</a>
+ interface through which clients can retrieve information about an 
+instance and make configuration changes. Using the REST interface’s 
+simple HTTP calls, clients can configure GeoServer without needing to 
+use the <a class="reference internal" href="https://docs.geoserver.org/stable/en/user/webadmin/index.html#web-admin"><span class="std std-ref">Web administration interface</span></a>.</p>
+<p>REST is an acronym for “<a class="reference external" href="http://en.wikipedia.org/wiki/Representational_state_transfer">REpresentational State Transfer</a>”.
+ REST adopts a fixed set of operations on named resources, where the 
+representation of each resource is the same for retrieving and setting 
+information. In other words, you can retrieve (read) data in an XML 
+format and also send data back to the server in similar XML format in 
+order to set (write) changes to the system.</p>
+<p>Operations on resources are implemented with the standard primitives 
+of HTTP:  GET to read; and PUT, POST, and DELETE to write changes. Each 
+resource is represented as a URL, such as <code class="docutils literal notranslate"><span class="pre">http://GEOSERVER_HOME/rest/workspaces/topp</span></code>.</p>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p>The following links provide direct access to the GeoServer REST API 
+documentation, including definitions and examples of each endpoint:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/manifests.yaml">/about/manifests</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/datastores.yaml">/datastores</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/coverages.yaml">/coverages</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/coveragestores.yaml">/coveragestores</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/featuretypes.yaml">/featuretypes</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/fonts.yaml">/fonts</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/layergroups.yaml">/layergroups</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/layers.yaml">/layers</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/monitoring.yaml">/monitoring</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/namespaces.yaml">/namespaces</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/owsservices.yaml">/services/wms|wfs|wcs/settings</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/reload.yaml">/reload</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/resource.yaml">/resource</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/security.yaml">/security</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/settings.yaml">/settings</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/structuredcoverages.yaml">/structuredcoverages</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/styles.yaml">/styles</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/templates.yaml">/templates</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/transforms.yaml">/transforms</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/wmslayers.yaml">/wmslayers</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/wmsstores.yaml">/wmsstores</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/wmtslayers.yaml">/wmtslayers</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/wmtsstores.yaml">/wmtsstores</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/workspaces.yaml">/workspaces</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/usergroup.yaml">/usergroup</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/roles.yaml">/roles</a></li>
+<li>GeoWebCache:<ul>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcblobstores.yaml">/blobstores</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcbounds.yaml">/bounds</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcdiskquota.yaml">/diskquota</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcfilterupdate.yaml">/filterupdate</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcglobal.yaml">/global</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcgridsets.yaml">/gridsets</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcindex.yaml">/index</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwclayers.yaml">/layers</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcmasstruncate.yaml">/masstruncate</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcmemorycachestatistics.yaml">/statistics</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcreload.yaml">/reload</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/gwcseed.yaml">/seed</a></li>
+</ul>
+</li>
+<li>Importer extension:<ul>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/importer.yaml">/imports</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/importerTasks.yaml">/imports (tasks)</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/importerTransforms.yaml">/imports (transforms)</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/importerData.yaml">/imports (data)</a></li>
+</ul>
+</li>
+<li>Monitor extension:<ul>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/monitoring.yaml">/monitor</a></li>
+</ul>
+</li>
+<li>XSLT extension:<ul>
+<li><a class="reference external" href="http://docs.geoserver.org/latest/en/api/#/latest/en/api/1.0.0/transforms.yaml">/services/wfs/transforms</a></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also view the original <a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/api/index.html#rest-api"><span class="std std-ref">REST configuration API reference</span></a> section.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>This section contains a number of examples which illustrate some of 
+the most common uses of the REST API. They are grouped by endpoint.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/fonts.html">Fonts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/layergroups.html">Layer groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/layers.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/styles.html">Styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/workspaces.html">Workspaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/stores.html">Stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/imagemosaic.html">Uploading a new image mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/imagemosaic.html#updating-an-image-mosaic-contents">Updating an image mosaic contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/imagemosaic.html#listing-image-mosaic-details">Listing image mosaic details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/imagemosaic.html#removing-image-mosaic-granules">Removing image mosaic granules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/imagemosaic.html#uploading-an-empty-mosaic">Uploading an empty mosaic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/appschema.html">Uploading an app-schema mapping file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/appschema.html#listing-app-schema-store-details">Listing app-schema store details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/appschema.html#uploading-a-new-app-schema-mapping-configuration-file">Uploading a new app-schema mapping configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.org/stable/en/user/rest/appschema.html#uploading-multiple-app-schema-mapping-files">Uploading multiple app-schema mapping files</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+      <div class="selfclear pagination-nav">
+          <div class="leftwise"><strong>Previous</strong>: <a href="https://docs.geoserver.org/stable/en/user/production/identify.html" title="previous chapter">Make cluster nodes identifiable from the GUI</a></div>
+          <div class="rightwise"><strong>Next</strong>: <a href="https://docs.geoserver.org/stable/en/user/rest/about.html" title="next chapter">About</a></div>
+      </div>
+      </div><!-- /#content> -->
+      <div id="content-right" class="content-border"></div>
+  <div id="sidebar" class="contrast">
+      <div id="toc" class="section">
+        <h3 class="pngfix">Table Of Contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">REST</a><ul>
+<li><a class="reference internal" href="#api">API</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <div class="section-footer"></div>
+      </div>
+        <div class="section">
+          <h3>Continue Reading</h3>
+          <ul>
+            <li>Previous: <a href="https://docs.geoserver.org/stable/en/user/production/identify.html" title="previous chapter">Make cluster nodes identifiable from the GUI</a></li>
+            <li>Next: <a href="https://docs.geoserver.org/stable/en/user/rest/about.html" title="next chapter">About</a></li>
+          </ul>
+        </div>
+        <div class="section">
+        <h3>This Page</h3>
+        <ul class="this-page-menu">
+          <li><a href="https://docs.geoserver.org/stable/en/user/_sources/rest/index.rst.txt">Show Source</a></li>
+        </ul>
+        </div>
+  </div><!-- /#sidebar -->
+  </div><!-- /.wrap> -->
+</div><!-- /#main -->
+<div id="footer">
+  <div class="wrap">
+    © Copyright 2017, Open Source Geospatial Foundation. License <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution</a>.
+    Last updated on May 17, 2019.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div><!-- /.wrap> -->
+</div><!-- /#footer -->
+  
+</body></html>
