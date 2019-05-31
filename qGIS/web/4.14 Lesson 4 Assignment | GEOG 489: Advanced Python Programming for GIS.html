@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html dir="ltr" class="js" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Drupal 7 (http://drupal.org)">
+<link rel="canonical" href="https://www.e-education.psu.edu/geog489/node/2360">
+<link rel="shortlink" href="https://www.e-education.psu.edu/geog489/node/2360">
+<link rel="prev" href="https://www.e-education.psu.edu/geog489/node/2363">
+<link rel="up" href="https://www.e-education.psu.edu/geog489/l4.html">
+<link rel="next" href="https://www.e-education.psu.edu/geog489/l6.html">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>4.14 Lesson 4 Assignment | GEOG 489: Advanced Python Programming for GIS</title>  
+  <style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.base.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.menus.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.messages.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.theme.css?psbola");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/book/book.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/field/theme/field.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/node/node.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/quiz/quiz.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/search/search.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/user/user.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/extlink/extlink.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/views/css/views.css?psbola");
+</style>
+<link type="text/css" rel="stylesheet" href="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/css.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/css_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/css_002.css" media="all">
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/hidden_nodes/hidden_nodes.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/ctools/css/ctools.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shCore.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shThemeDefault.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/taxonomy_access/taxonomy_access.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/print_ui/css/print_ui.theme.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/responsive_menus/styles/responsive_menus_simple/css/responsive_menus_simple.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/superfish/css/superfish.css?psbola");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/alpha-reset.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/alpha-mobile.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/alpha-alpha.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/formalize.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-text.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-branding.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-menu.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-forms.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-visuals.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/global.css?psbola");
+</style>
+
+<!--[if (lt IE 9)&(!IEMobile)]>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default-normal.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/grid/alpha_default/normal/alpha-default-normal-12.css?psbola");
+</style>
+<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<style type="text/css" media="all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default-narrow.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/grid/alpha_default/narrow/alpha-default-narrow-12.css?psbola");
+</style>
+<!--<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<style type="text/css" media="all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default-normal.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/grid/alpha_default/normal/alpha-default-normal-12.css?psbola");
+</style>
+<!--<![endif]-->
+  <script async="" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/analytics.js"></script><script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery-extend-3.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery_003.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/drupal.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shCore.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushBash.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushJScript.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushJson.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushPhp.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushPython.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushVb.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/extlink.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/printable_links.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/toggler.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/responsive_menus_simple.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/googleanalytics.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-24504751-35", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery_002.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/sfsmallscreen.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/supposition.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/superfish.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/supersubs.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/superfish_002.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/lti.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/h5p-resizer.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery_004.js"></script>
+<script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/omega-mediaqueries.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/geog489\/","pathPrefix":"","ajaxPageState":{"theme":"gis","theme_token":"wWOp5-yiTIdV6ZoLWkFL4ECeY5H71YLRiQlX3_z8SEM","js":{"sites\/all\/modules\/syntaxhighlighter\/syntaxhighlighter.min.js":1,"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.7\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shCore.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushBash.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJScript.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJson.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPhp.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPowerShell.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPython.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushVb.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_js_libraries\/printable_links\/printable_links.js":1,"sites\/all\/modules\/custom_js_libraries\/toggler\/toggler.js":1,"sites\/all\/modules\/responsive_menus\/styles\/responsive_menus_simple\/js\/responsive_menus_simple.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/libraries\/superfish\/jquery.hoverIntent.minified.js":1,"sites\/all\/libraries\/superfish\/sfsmallscreen.js":1,"sites\/all\/libraries\/superfish\/supposition.js":1,"sites\/all\/libraries\/superfish\/superfish.js":1,"sites\/all\/libraries\/superfish\/supersubs.js":1,"sites\/all\/modules\/superfish\/superfish.js":1,"sites\/all\/themes\/gis\/lti.js":1,"sites\/all\/themes\/gis\/..\/..\/modules\/h5p\/library\/js\/h5p-resizer.js":1,"sites\/all\/themes\/omega\/omega\/js\/jquery.formalize.js":1,"sites\/all\/themes\/omega\/omega\/js\/omega-mediaqueries.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/book\/book.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"sites\/all\/modules\/quiz\/quiz.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/extlink\/extlink.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"https:\/\/fonts.googleapis.com\/css?family=Inconsolata:regular,700\u0026subset=latin-ext":1,"https:\/\/fonts.googleapis.com\/css?family=Open+Sans:300,regular,600,700\u0026subset=latin-ext":1,"https:\/\/fonts.googleapis.com\/css?family=PT+Serif\u0026subset=latin-ext":1,"sites\/all\/modules\/hidden_nodes\/hidden_nodes.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/styles\/shCore.css":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/styles\/shThemeDefault.css":1,"sites\/all\/modules\/taxonomy_access\/taxonomy_access.css":1,"sites\/all\/modules\/print\/print_ui\/css\/print_ui.theme.css":1,"sites\/all\/modules\/responsive_menus\/styles\/responsive_menus_simple\/css\/responsive_menus_simple.css":1,"sites\/all\/libraries\/superfish\/css\/superfish.css":1,"sites\/all\/themes\/gis\/print.css":1,"public:\/\/google_fonts.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-reset.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-mobile.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-alpha.css":1,"sites\/all\/themes\/omega\/omega\/css\/formalize.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-text.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-branding.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-menu.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-forms.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-visuals.css":1,"sites\/all\/themes\/gis\/css\/global.css":1,"ie::normal::sites\/all\/themes\/gis\/css\/gis-alpha-default.css":1,"ie::normal::sites\/all\/themes\/gis\/css\/gis-alpha-default-normal.css":1,"ie::normal::sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/normal\/alpha-default-normal-12.css":1,"narrow::sites\/all\/themes\/gis\/css\/gis-alpha-default.css":1,"narrow::sites\/all\/themes\/gis\/css\/gis-alpha-default-narrow.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/narrow\/alpha-default-narrow-12.css":1,"normal::sites\/all\/themes\/gis\/css\/gis-alpha-default.css":1,"normal::sites\/all\/themes\/gis\/css\/gis-alpha-default-normal.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/normal\/alpha-default-normal-12.css":1}},"responsive_menus":[{"toggler_text":"\u2630 Menu","selectors":["#main-menu","#superfish-1"],"media_size":"720","media_unit":"px","absolute":"1","remove_attributes":"1","responsive_menus_style":"responsive_menus_simple"}],"extlink":{"extTarget":"_blank","extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":0,"extExclude":"","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":0,"extAlertText":"This link will take you to an external web site.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"superfish":{"1":{"id":"1","sf":{"delay":"0","animation":{"opacity":"show","height":"show"},"speed":"\u0027fast\u0027","autoArrows":false,"dropShadows":false,"disableHI":false},"plugins":{"smallscreen":{"mode":"window_width","addSelected":false,"menuClasses":false,"hyperlinkClasses":false,"title":"Main menu"},"supposition":true,"bgiframe":false,"supersubs":{"minWidth":"12","maxWidth":"27","extraWidth":1}}}},"urlIsAjaxTrusted":{"\/geog489\/node\/2360":true},"omega":{"layouts":{"primary":"normal","order":["narrow","normal"],"queries":{"narrow":"all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)","normal":"all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)"}}}});
+//--><!]]>
+</script>
+  <!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body class="html not-front not-logged-in page-node page-node- page-node-2360 node-type-book context-node responsive-menus-load-processed omega-mediaqueries-processed responsive-layout-normal"><div id="omega-media-query-dummy"><style media="all">#omega-media-query-dummy { position: relative; z-index: -1; }</style><!--[if (lt IE 9)&(!IEMobile)]><style media="all">#omega-media-query-dummy { z-index: 1; }</style><![endif]--><style media="all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)">#omega-media-query-dummy { z-index: 0; }</style><style media="all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)">#omega-media-query-dummy { z-index: 1; }</style></div>
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div class="page clearfix" id="page">
+      <header id="section-header" class="section section-header">
+  <div id="zone-branding-wrapper" class="zone-wrapper zone-branding-wrapper clearfix">  
+  <div id="zone-branding" class="zone zone-branding clearfix container-12">
+    <div class="grid-12 region region-branding" id="region-branding">
+  <div class="region-inner region-branding-inner">
+        <div class="block block-block block-7 block-block-7 odd block-without-title" id="block-block-7">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div class="course-title-container">
+	<table><tbody><tr><td><span class="course-title">GEOG 489</span><br><span class="course-name"> Advanced Python Programming for GIS</span></td>
+			</tr></tbody></table></div>
+
+<p><a href="http://www.geog.psu.edu/" id="dept" class="ext" target="_blank" rel="noopener noreferrer"><span class="hidden">Geography Department</span></a> <a href="http://www.psu.edu/" id="psu" class="ext" target="_blank" rel="noopener noreferrer"><span class="hidden">Penn State</span></a></p>
+    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div><div id="zone-menu-wrapper" class="zone-wrapper zone-menu-wrapper clearfix">  
+  <div id="zone-menu" class="zone zone-menu clearfix container-12">
+    <div class="grid-12 region region-menu" id="region-menu">
+  <div class="region-inner region-menu-inner">
+        <div class="block block-superfish block-1 block-superfish-1 odd block-without-title" id="block-superfish-1">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div data-mediasize="720" class="responsive-menus responsive-menus-0-1 absolute"><span class="toggler">☰ Menu</span><ul id="superfish-1" class="menu sf-menu sf-main-menu sf-horizontal sf-style-none sf-total-items-5 sf-parent-items-1 sf-single-items-4 responsive-menus-simple superfish-processed sf-js-enabled"><li id="menu-2069-1" class="first odd sf-item-1 sf-depth-1 sf-no-children"><a href="https://www.e-education.psu.edu/geog489/home.html" class="sf-depth-1">Home</a></li><li id="menu-2077-1" class="middle even sf-item-2 sf-depth-1 sf-no-children"><a href="https://www.e-education.psu.edu/geog489/syllabus" class="sf-depth-1">Syllabus</a></li><li id="menu-2079-1" class="middle odd sf-item-3 sf-depth-1 sf-no-children"><a href="https://www.e-education.psu.edu/geog489/node/1405" class="sf-depth-1">Lessons</a></li><li id="menu-2081-1" class="middle even sf-item-4 sf-depth-1 sf-total-children-4 sf-parent-children-0 sf-single-children-4 menuparent"><a href="https://www.e-education.psu.edu/geog489/node/2148" class="sf-depth-1 menuparent">Resources</a><ul id="rm-no-id-1" class="rm-no-class sf-hidden" style="float: none; width: 16em;"><li id="menu-2083-1" class="first odd sf-item-1 sf-depth-2 sf-no-children" style=""><a href="https://www.e-education.psu.edu/geog489/node/2057" class="sf-depth-2" style="">Instructor Information</a></li><li id="menu-2084-1" class="middle even sf-item-2 sf-depth-2 sf-no-children" style=""><a href="https://gis.e-education.psu.edu/" class="sf-depth-2 ext" target="_blank" rel="noopener noreferrer" style="">Program Home Page</a></li><li id="menu-2085-1" class="middle odd sf-item-3 sf-depth-2 sf-no-children" style=""><a href="http://guides.libraries.psu.edu/onlinestudentlibraryguide" class="sf-depth-2 ext" target="_blank" rel="noopener noreferrer" style="">Library Resources</a></li><li id="menu-2086-1" class="last even sf-item-4 sf-depth-2 sf-no-children" style=""><a href="https://www.e-education.psu.edu/geog489/node/2060" class="sf-depth-2" style="">Getting Help</a></li></ul></li><li id="menu-2082-1" class="last odd sf-item-5 sf-depth-1 sf-no-children"><a href="https://www.e-education.psu.edu/geog489/login" class="sf-depth-1">Login</a></li></ul></div>    </div>
+  </div>
+</div>  </div>
+</div>
+  </div>
+</div></header>    
+      <section id="section-content" class="section section-content">
+  <div id="zone-content-wrapper" class="zone-wrapper zone-content-wrapper clearfix">  
+  <div id="zone-content" class="zone zone-content clearfix container-12">    
+        
+        <div class="grid-9 region region-content" id="region-content">
+  <div class="region-inner region-content-inner">
+    <a id="main-content"></a>
+                <h1 class="title" id="page-title">4.14 Lesson 4 Assignment</h1>
+                        <div class="block block-system block-main block-system-main odd block-without-title" id="block-system-main">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <article class="node node-book node-published node-not-promoted node-not-sticky author-mrs110 odd clearfix" id="node-book-2360">
+            
+  
+  <div class="content clearfix">
+    <span class="print-link"><span class="print_html"><a href="https://www.e-education.psu.edu/geog489/print/book/export/html/2360" title="Display a printer-friendly version of this page." class="print-page" rel="nofollow"><img class="print-icon print-icon-margin" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/print_icon.png" alt="Print" title="Print" width="16px" height="16px">Print</a></span></span><div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>In
+ this final homework assignment, the task is to create a QGIS based 
+program, simpler than the Bus Track Analyzer&nbsp;from the lesson 
+walkthrough but also involving the definition of a class hierarchy and 
+static class functions to identify instances of the classes in the input
+ data. While it is an option to submit a QGIS plugin rather than a 
+standalone tool for over&amp;above points, this is not a requirement 
+and, therefore, it is not needed that you have worked through Section 
+4.11 and 4.12 in detail.&nbsp;The main code for the tool you are going 
+to implement will include a class hierarchy with classes for different 
+types of waterbodies (streams, rivers, lakes, ponds, etc.) and the 
+tool's&nbsp;purpose will be to&nbsp;create two new data sets from a JSON
+ data export from OpenStreetMap (OSM).</p>
+
+<p>The situation is the following: You are working on a hydrology 
+related project. As part of the project you frequently need detailed and
+ up-to-date vector data of the waterbodies in different areas and one 
+source you have been using to obtain this data is OpenStreetMap. To get 
+the data you are using the <a href="https://wiki.openstreetmap.org/wiki/Overpass_API" class="ext" target="_blank" rel="noopener noreferrer">Overpass API<span class="ext" aria-label="(link is external)"></span></a> running queries like the following</p>
+
+<pre class="brush: &lt;inserttype&gt;">https://www.overpass-api.de/api/interpreter?data=[out:json];(way["natural"="water"](40.038844,-79.006452,41.497860,-76.291359);way["waterway"]
+(40.038844,-79.006452,41.497860,-76.291359););(._;&gt;;);out%20body; 
+</pre>
+
+<p>to obtain all OSM “way” elements (more on ways and the OSM data model in a moment) with certain water related tags.</p>
+
+<p>An overpass query like this will return a JSON document listing all 
+the way entities with the required tags and their nodes with 
+coordinates. Nodes are point features with lat / lon coordinates and 
+ways are polyline or polygon features whose geometry is defined 
+via&nbsp;lists of nodes. If you are not familiar with the OSM concepts 
+of nodes, ways, and relations, please take a moment to read <a href="https://www.mapbox.com/mapping/osm-data-model/" class="ext" target="_blank" rel="noopener noreferrer">“The OpenStreetMap data model."<span class="ext" aria-label="(link is external)"></span></a></p>
+
+<p>The only data you will need for this project is the <a href="https://psu.box.com/s/dhfsfszcndacjw6oibihq1j2zbo3lhy7" class="ext" target="_blank" rel="noopener noreferrer">JSON input file<span class="ext" aria-label="(link is external)"></span></a>
+ we will be using. Download it and extract it to a new folder, then open
+ it in a text editor. You will see that the JSON code in the file starts
+ with some meta information about the file and then has an attribute 
+called “elements” that contains a list of all OSM node elements followed
+ by all OSM way elements (you have to scroll down to the end to see the 
+way elements because there are many more nodes than ways in the query 
+result).</p>
+
+<p>All node definitions in the “elements” list have the following structure:</p>
+
+<pre class="brush: &lt;inserttype&gt;">{ 
+  "type": "node", 
+  "id": 25446505,
+  "lat": 40.2585099,
+  "lon": -77.0521733 
+},</pre>
+
+<p>The “type” attribute makes it clear that this JSON element describes 
+an OSM node, the “id” attribute is a unique identifier for the node, and
+ the other two attributes are the latitude and longitude coordinates.</p>
+
+<p>All way definitions in the “elements” list have the following structure:</p>
+
+<pre class="brush: &lt;inserttype&gt;">{ 
+  "type": "way", 
+  "id": 550714146, 
+  "nodes": [ 
+    5318993708, 
+    5318993707, 
+    5318993706, 
+    ... 
+    5318993708 
+  ], 
+  "tags": { 
+    "name": "Wilmore Lake", 
+    "natural": "water",
+    "water": "reservoir" 
+  } 
+}, </pre>
+
+<p>The attribute “type” signals that this JSON element describes an OSM 
+way feature, “id” contains a unique ID for this way, and then the 
+“nodes” attribute contains a list of node IDs. If the IDs of the first 
+and last nodes in this list are identical (like in this case), this 
+means that this is a closed way describing an areal polygon geometry, 
+rather than a linear polyline geometry. To later create QGIS geometries 
+for the different waterbodies, you will have to take the node list of a 
+way, look up the corresponding nodes based on their IDs, and take their 
+coordinates to create the polygon or polyline feature from.</p>
+
+<p>In addition, the JSON elements for ways typically (but not always!) 
+contain a “tags” attribute that stores the OSM tags for this way. Often 
+(but not always!), ways will have a “name” tag like in this case that 
+you will use to get the name of the feature. In this example, the way 
+also has the two tags “natural” with the value “water” assigned and 
+“water” with the value “pond” assigned. The way in which waterbodies are
+ tagged in OSM has been criticized occasionally and suggestions for 
+improvements have been made. Right now, waterbody typically either have 
+been tagged with the <a href="https://wiki.openstreetmap.org/wiki/Key:waterway" class="ext" target="_blank" rel="noopener noreferrer">key “waterway”<span class="ext" aria-label="(link is external)"></span></a>
+ with the assigned value being a particular type like “stream” or 
+“river”, or with the combination of the key “natural” being assigned the
+ value “water” and the key “water” being assigned a specialized type 
+like “lake” or “pond”. Luckily, you don’t have to worry too much about 
+the inconsistencies and disadvantages of the OSM tagging for waterbodies
+ because you will below be given concrete rules how to identify the 
+different types of waterbodies we are interested in.</p>
+
+<p>In lesson 2, we already talked about JSON code and that it can be 
+turned into a nested Python data structure that consists of lists and 
+dictionaries. In lesson 2, we got the JSON from web requests and we 
+therefore used the <em>requests </em>module for working with the JSON code. In the context of this assignment, it makes more sense to use the <em>json</em><em> </em>module
+ from the standard library to work with the provided JSON file. You can 
+simply load the JSON file and create a Python data structure from the 
+content using the following code:</p>
+
+<div><div id="highlighter_142440" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">json </code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="python plain">with </code><code class="python functions">open</code><code class="python plain">(filename, encoding </code><code class="python keyword">=</code> <code class="python string">"utf8"</code><code class="python plain">) as </code><code class="python functions">file</code><code class="python plain">: </code></div><div class="line number4 index3 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">data </code><code class="python keyword">=</code> <code class="python plain">json.load(</code><code class="python functions">file</code><code class="python plain">)</code></div></div></td></tr></tbody></table></div></div>
+
+<p>After this, you can, for instance, use the expression&nbsp;<span style="font-family:Courier New,Courier,monospace;">data["elements"]</span>
+ to get a list with the content that is stored in the top-level 
+“elements” attribute. To get the first element from that list which will
+ be the description of a OSM node, you'd use <span style="font-family:Courier New,Courier,monospace;">data["elements"][0] </span>and <span style="font-family:Courier New,Courier,monospace;">data["elements"][0]["id"]&nbsp;</span>refers to the ID of that node, while&nbsp;<span style="font-family:Courier New,Courier,monospace;">data["elements"][0]["type"]</span>will return the string 'node' providing a way to check what kind of OSM element you are dealing with. The page <a href="http://xmodulo.com/how-to-parse-json-string-in-python.html" class="ext" target="_blank" rel="noopener noreferrer">“How-to-parse-json-string-in-python”<span class="ext" aria-label="(link is external)"></span></a>
+ contains an example of how to access elements at different levels in 
+the JSON structure that might be helpful here. If you have any questions
+ about handling JSON code while working on this assignment, please ask 
+them on the forums.</p>
+
+<h3>Your task</h3>
+
+<p>Implement a QGIS based&nbsp;tool with a GUI&nbsp;that allows the user
+ to select an input .json file on disk. When the user presses a button, 
+the tool reads in all the node and way information from the json file 
+into two dictionaries that allow for accessing the different node and 
+way entities by their ID. That means that if you, for instance, after 
+this step&nbsp;would query the node dictionary for the node with id 
+25446505 using the expression <span style="font-family:Courier New,Courier,monospace;">nodes[25446505]</span>,
+ you get back the Python dictionary&nbsp;{'type': 'node', 'id': 
+25446505, 'lat': 40.2585099, 'lon': -77.0521733} describing this node. 
+Similarly, if you'd use the expression <span style="font-family:Courier New,Courier,monospace;">ways[550714146]</span> for the ways dictionary, you get back a dictionary describing the OSM way with ID&nbsp;550714146, i.e.,<span style="font-family:Courier New,Courier,monospace;">&nbsp;{'type':
+ 'way', 'id': 550714146, 'nodes': [5318993708, 5318993707, 
+...],&nbsp;'tags': {'name': 'Wilmore Lake', 'natural': 'water', 'water':
+ 'reservoir'}} .</span></p>
+
+<p>Next,&nbsp;the program should&nbsp;loop through all the way entities 
+and create objects of the six different waterbody classes River, Stream,
+ Canal, Lake, Pond, and Reservoir depending on how the ways are tagged. 
+The first three of these classes are for linear features that will be 
+represented by polylines later on. The other three are for areal 
+features that will be represented by polygons. Your tool should produce 
+two new vector data sets in the GeoPackage format, one with all linear 
+features and one with all areal features that look like shown in 
+the&nbsp;image&nbsp;below when added to QGIS.</p>
+
+<div class="img-center"><img alt="screenshot of plug in layer with areal features" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/Assgn_layers_by_QGISplugin_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Data sets produced by the QGIS tool to be developed in this assignment</div>
+</div>
+
+<div class="img-center"><img alt="screenshot of plug in layer with linerafeatures" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/Assgn_layers_QGISplugin_zoom_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Data sets&nbsp;produced by the QGIS tool to be developed in this assignment (zoomed-in view)</div>
+</div>
+
+<div class="img-center"><img alt="screenshot of example linear features table with name, type, and length" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/Assgn_attrib_table_a.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Attribute table&nbsp;of the created data set&nbsp;with linear&nbsp;waterbody features</div>
+</div>
+
+<div class="img-center"><img alt="screenshot of example areal features table with name, type, and area" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/Assgn_attrib_table_b.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Attribute table&nbsp;of the created data set with&nbsp;areal waterbody features&nbsp;</div>
+</div>
+
+<h3>Details</h3>
+
+<h5>Waterbody class hierarchy:</h5>
+
+<p>The classes for the different waterbody types should be arranged in a
+ class hierarchy that looks as in the image below (similar to the bus 
+event hierarchy from the lesson walkthroughs, see also Section 4.7 
+again). You will have to write definitions for all these 9 classes and 
+make sure to define the different instance variables, methods, and 
+static class functions&nbsp;at the most suitable locations within the 
+hierarchy.</p>
+
+<div class="img-center"><img alt="Flowchart begins @ waterbody divides into Linear (splits into stream, river, canal) &amp; Areal (splits into lake, pond, reservoir) . " src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/waterbody_hierarchy_0.jpg" style="width: 750px; height: 238px;"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Waterbody class hierarchy</div>
+</div>
+
+<p>Here are a few requirements on the class hierarchy:</p>
+
+<ul><li>The entire class hierarchy should be defined in its own file, similar to the bus_events.py file in the lesson walkthroughs.</li>
+	<li>Each waterbody object should have an instance variable called <em>name</em>
+ for storing the name of this waterbody, e.g., 'Wilmore Lake'. If there 
+is no “name” tag in the JSON code, the name should be set to “unknown”.</li>
+	<li>Each waterbody object should have an instance variable called <em>geometry</em>
+ for storing the geometry of the waterbody as a qgis QgsGeometry object.
+ You will have to create this geometry from the node lists of a way 
+using&nbsp;either the&nbsp;<em>fromPolylineXY(…) </em>or <em>fromPolygonXY(…)</em>
+ function&nbsp;defined in the QgsGeometry class depending on whether we 
+are dealing with a linear or areal waterbody&nbsp;(see examples from the
+ lesson content, e.g. Section 4.10.2.4). Both functions take lists of 
+QgsPointXY objects as input.</li>
+	<li>Each object of a linear waterbody class should have an instance variable called <em>length</em> for storing its length in meters, while each object of an areal waterbody class should have an instance variable called <em>area</em>
+ for storing its area in square meters. The values for these instance 
+variables can be computed using the approach shown under “Hint 2” below 
+once the geometry object has been created from the nodes.</li>
+	<li>There should be a static class function (see Section 4.8)&nbsp;<em>fromOSMWay(way, allNodes) </em>for
+ all waterbody classes that takes the Python data structure for a single
+ OSM way and the dictionaries of all OSM node elements read from the 
+input file. The function then checks the tags of the given way element 
+to see whether this element describes a waterbody of the given class and
+ if so creates and returns a corresponding object of that class. For 
+example: If <em>fromOSMWay(way, allNodes)</em> is called for class 
+River, the implementation of this function in class River needs to check
+ whether the tags match the rules for the River class (see below). If 
+yes, it will then create a polyline geometry from the node ID list 
+included in the way element by looking up the coordinates for each node 
+in the <em>allNodes</em> dictionary. Then it will create an object of 
+class River with the created geometry and, if available, name extracted 
+from the “name” tag of the way. If the tags do not match the rule for 
+River, the function simply returns None signaling that no object was 
+created. Overall this function should work and be used similarly to the <em>detect(…) </em>class functions of the bus event classes from the lesson walkthroughs.</li>
+	<li>There should be a method <em>toQgsFeature(self)</em> for all 
+waterbody objects that creates and returns a QgsFeature object from the 
+object it is invoked for. The returned QgsFeature object can then be 
+added to one of the output GeoPackage files. When called for an object 
+of a linear waterbody class, the created feature should have the 
+polyline geometry of that object and at least the attributes NAME, TYPE,
+ and LENGTH as shown in the image of the linear attribute table above. 
+When called for an areal waterbody class, the created feature should 
+have the polygon geometry of that object and at least the attributes 
+NAME, TYPE, and AREA (see&nbsp;the image with the areal attribute table 
+above).</li>
+</ul><p>Again, try to organize this class hierarchy as cleanly as 
+possible, meaning you should avoid repeated code. For instance, the 
+instructions for turning a node list into a polyline geometry should 
+only appear once in your code.</p>
+
+<div class="box-activity-required">
+	<h5>Tag rules for different waterbodies</h5>
+
+	<p>We already mentioned that we are providing the tag rules for the six
+ bottom-level classes in the hierarchy that should be used for checking 
+whether a given&nbsp;OSM way describes an instance of that class. You 
+simply will have to turn these into Python code in the different 
+versions of the&nbsp;<em>fromOSMWay(way, allNodes) </em>static class function in your class hierarchy. Here are the rules:</p>
+
+	<p><strong>Stream</strong>: The way has the <strong>“tags”</strong> attribute and among the tags is the key <strong>“waterway”</strong> with the value <strong>“stream”</strong> assigned.</p>
+
+	<p><strong>River</strong>: The way has the <strong>“tags”</strong> attribute and among the tags is the key <strong>“waterway”</strong> with the value <strong>“river”</strong> assigned.</p>
+
+	<p><strong>Canal</strong>: The way has the <strong>“tags”</strong> attribute and among the tags is the key <strong>“waterway”</strong> with the value <strong>“canal”</strong> assigned.</p>
+
+	<p><strong>Lake</strong>: The way has the <strong>“tags”</strong> attribute and among the tags there is both, the key <strong>“natural”</strong> with the value <strong>“water”</strong> assigned and&nbsp;the key <strong>“water”</strong> with the value <strong>“lake”</strong> assigned.</p>
+
+	<p><strong>Pond</strong>: The way has the <strong>“tags”</strong> attribute and among the tags there is both, the key <strong>“natural”</strong> with the value <strong>“water”</strong> assigned and the key <strong>“water”</strong> with the value <strong>“pond”</strong> assigned.</p>
+
+	<p><strong>Reservoir</strong>: The way has the <strong>“tags”</strong> attribute and among the tags&nbsp;there is both, the key <strong>“natural”</strong> with the value <strong>“water”</strong> assigned and the key <strong>“water”</strong> with the value <strong>“reservoir”</strong> assigned.</p>
+
+	<p>Right now, the rules for all three linear classes are the same 
+except for the specific value that needs to be assigned to the 
+“waterway” key. Similarly, the rules for all three areal classes are the
+ same except for the specific value that needs to be assigned to the 
+“water” key. However, since these rules may change, the logic for 
+checking the respective conditions should be implemented in the <em>fromOSMWay(way, allNodes)</em> class function for each of these six classes.</p>
+</div>
+
+<h5>Creation of output GeoPackage files:</h5>
+
+<p>You saw examples of how to create&nbsp;new layers and write them to 
+GeoPackage&nbsp;files with qgis in Section 4.5.3 and the lesson 
+walkthrough code from Section 4.10 (main.py and bus_track_analyzer.py). 
+So once you have&nbsp;gone through the list of way elements in the input
+ data and created waterbody objects of the different classes via 
+the&nbsp;<em>fromOSMWay(...) </em>static class functions<em>, </em>creating the features by calling the<em>&nbsp;toQgsFeature()</em>
+ method of ech waterbody object and producing the output files should be
+ relatively easy and just require a couple lines of code. You will have 
+to make sure to use the right&nbsp;geometry type and CRS when creating 
+the layers with&nbsp;<em>qgis.core.QgsVectorLayer(...)</em> though.</p>
+
+<h5>GUI:</h5>
+
+<p>As in the Lesson 2 assignment, you are again free to design the GUI 
+for your tool yourself. The GUI will be relatively&nbsp;simple 
+but&nbsp;it should look professionally and we are providing a minimal 
+list of elements that need to be included:</p>
+
+<ul><li>A combination of a line edit widget and tool button that opens a
+ file dialog for allowing the user to select the input JSON file.</li>
+	<li>Similar combinations of widgets for picking the names of the two output GeoPackage files.</li>
+	<li>A button that starts the&nbsp;process of reading the data, going 
+through the way elements and creating the waterbody objects, creating 
+the two new GeoPackage output files&nbsp;and populating them with the 
+QgsFeature objects created from the waterbody objects.</li>
+	<li><strong>Optional for over&amp;above points</strong>: A QWidget for 
+displaying information about how many features of the six different 
+classes have been created as shown in the image below using drawing 
+operations as explained in Section 4.9.1 and used in the lesson 
+walkthrough. A basic version of this widget would just display the names
+ and numbers here. Showing bars whose width indicates the relative 
+percentages of the different waterbody types is an option&nbsp;for more 
+over&amp;above points. The class for this widget should be defined in 
+its own file, similar to the class BusTrackerWidget in the lesson 
+walkthrough.</li>
+</ul><div class="img-center"><img alt="Linear features river, stream, canal &amp; areal features, lake pond and reservoir with bars indicating quantity and actual # written beside it" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/QWidget.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">QWidget displaying the results of the feature creation process (optional for over&amp;above points).&nbsp;</div>
+</div>
+
+<p>Overall, the main.py file and the general file organization of the 
+walkthrough code in Section 4.10 provide&nbsp;a good template for this 
+assignment but no worries, this assignment is significantly simpler and 
+requires much less code. Below you can find some more hints on some of 
+the steps involved.</p>
+
+<h5>Class hierarchy template file:</h5>
+
+<p>If you think you have a good grasp on the fundamentals of 
+object-oriented programming in Python, we recommend that you challenge 
+yourself and try to&nbsp;develop your own&nbsp;solution for this 
+assignment from scratch. However, for the case that you feel a bit 
+overwhelmed by the task of having to implement the class hierarchy 
+yourself, we are here providing a<a href="https://www.e-education.psu.edu/geog489/sites/www.e-education.psu.edu.geog489/files/downloads/waterbodies_template.zip"> draft file for the waterbody class hierarchy</a>&nbsp;that
+ contains templates for the definitions of the classes from the leftmost
+ branch of the hierarchy, so the classes Waterbody, LinearWaterbody and 
+Stream, and that you can use as a starting point. Your&nbsp;first task 
+will then be to understand the definitions and comments,&nbsp;and then 
+add the missing parts needed to complete the definition of the Stream 
+class such as the code for testing whether the tag rules for Streams are
+ satisfied, for producing the polyline geometry, and for creating a 
+QgsFeature.</p>
+
+<p>You can then test your implementation by writing a main program that reads in the data from the JSON input file, calls the<em> fromOSMWay(...) </em>function
+ of the Stream class for each way element, and collects the Stream 
+objects produced from this. You can then&nbsp;either print out the 
+information (name, length) from the instance variables of the Stream 
+objects to see whether the output makes sense or you immediately go one 
+step further and write the code for producing a GeoPackage file with the
+ QgsFeature objects produced from calling the&nbsp;<em>toQgsFeature() </em>method of each Stream object.</p>
+
+<p>Once you have this working for the Stream class, you can start to add
+ the other classes from the hierarchy. You will see that these need to 
+be defined very similarly to the LinearWaterbody and Stream classes, so 
+you will only have to make smaller modifications and extensions. Once 
+the full hierarchy is working and you are able to produce the correct 
+GeoPackage files, the final part will be to produce and incorporate the 
+GUI.</p>
+
+<p>As a last comment, if you want to make changes to the existing code 
+in the template file, that is absolutely ok; please don't treat it as 
+something that you have to use in exactly this way. There are many 
+possible ways how this assignment can be solved and this&nbsp;draft 
+follows one particular approach. However, the&nbsp;<em>fromOSMWay(way, allNodes) </em>static class function and&nbsp;<em>toQgsFeature()</em> method need to appear in the class definitions with exactly the given&nbsp;paramters, so this is something you should <em>not </em>change.</p>
+
+<h5>Hint 1</h5>
+
+<p>In the lesson walkthrough, we had a list with the names of all bus 
+event classes that we were looking for in the data. We then used a 
+for-loop to go through that list and call the <em>detect(…)</em> class 
+function for each class in the list. In this assignment, it may make 
+more sense to have two separate lists: one&nbsp;for the class names of 
+the&nbsp;linear waterbody classes and one for the names of 
+the&nbsp;areal waterbody classes. That is because you probably would 
+want to store the objects of both groups in separate lists since they 
+need to be added to two different QGIS layers.</p>
+
+<h5>Hint 2</h5>
+
+<p>When we have a QgsGeometry object in variable geometry, we can 
+calculate its length/area with the help of an object of the qgis 
+QgsDistanceArea class. We first set up a QgsDistanceArea object suitable
+ for WGS84 coordinates:</p>
+
+<div><div id="highlighter_811455" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">qda </code><code class="python keyword">=</code> <code class="python plain">qgis.core.QgsDistanceArea()</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="python plain">qda.setEllipsoid(</code><code class="python string">'WGS84'</code><code class="python plain">)</code></div></div></td></tr></tbody></table></div></div>
+
+<p>Then we calculate the length or area (depending on whether the geometry is a polyline or polygon) with:</p>
+
+<div><div id="highlighter_529860" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">length </code><code class="python keyword">=</code> <code class="python plain">qda.measureLength(geometry)</code></div></div></td></tr></tbody></table></div></div>
+
+<p>or</p>
+
+<div><div id="highlighter_680551" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">area </code><code class="python keyword">=</code> <code class="python plain">qda.measureArea(geometry)</code></div></div></td></tr></tbody></table></div></div>
+
+<p>Finally, we convert the area or length number into the measurement unit we want, e.g. with</p>
+
+<div><div id="highlighter_948821" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">lengthMeters </code><code class="python keyword">=</code> <code class="python plain">qda.convertLengthMeasurement(length, qgis.core.QgsUnitTypes.DistanceMeters)</code></div></div></td></tr></tbody></table></div></div>
+
+<p>or</p>
+
+<div><div id="highlighter_247183" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">areaSquareMeters </code><code class="python keyword">=</code> <code class="python plain">qda.convertAreaMeasurement(area, qgis.core.QgsUnitTypes.AreaSquareMeters)</code></div></div></td></tr></tbody></table></div></div>
+
+<h3>Grading Criteria</h3>
+
+<p>The criteria your code submission will be graded on will include how 
+elegant your code is and how well you designed the class hierarchy as 
+well as how well designed the GUI of your tool is. Successful completion
+ of the above requirements and the write-up discussed below is 
+sufficient to earn 90% of the credit on this project. The remaining 10% 
+is reserved for "over and above" efforts which could include, but are 
+not limited to, the following (the last two options are significantly 
+more&nbsp;difficult and require more work&nbsp;than the first two, so 
+more o&amp;a points&nbsp;will be awarded for these):</p>
+
+<ul><li>Look through the JSON for some other types of waterbodies 
+(linear or areal ones) that appear there. Pick one and add it to your 
+tool by adding a corresponding class to the waterbody class hierarchy 
+and changing the code so that ways of that class are detected as well.</li>
+	<li>Add some code to your tool that first sorts all linear waterbody 
+objects by decreasing length and all areal waterbody objects by 
+decreasing area before adding the objects to the data set. As a result, 
+the order should be as shown in the attribute table images above without
+ first having to sort the rows in QGIS. For this, you should overwrite 
+the &lt; operator by defining the <em>__lt__(self, otherObject)</em> 
+method (for “less than”) for these classes so that it compares the 
+lengths/areas of the two involved objects. You can then simply use the 
+list method <em>sort(…)</em> for a list with all linear/areal objects to do the sorting.</li>
+	<li>Add the information display widget showing numbers of objects 
+created for the different classes using QPainter methods to the GUI of 
+your program as described above. The advanced version with&nbsp;bar 
+chart as shown in the image above is sufficient to earn full o&amp;a 
+points if done well.</li>
+	<li>Turn the standalone tool into a QGIS plugin that adds the produced 
+data sets as new layers to the project currently open in QGIS using a 
+dock widget&nbsp;as in Section 4.12 (this option alone will give full 
+o&amp;a points if done well).</li>
+</ul><h3>Write-up</h3>
+
+<p>Produce a 400-word write-up on how the assignment went for 
+you; reflect on and briefly discuss the issues and challenges you 
+encountered and what you learned from the assignment. Please also 
+briefly  mention  what you did for "over and above" points in the 
+write-up.</p>
+
+<div class="box-activity-required">
+	<h4>Deliverable</h4>
+
+	<p>Submit a single .zip file to the corresponding drop box on Canvas; the zip file should contain:</p>
+
+	<ul><li>The folder with the entire code for your tool</li>
+		<li>Your 400-word write-up</li>
+	</ul></div>
+</div></div></div>  <div id="book-navigation-1405" class="book-navigation">
+    
+        <div class="page-links clearfix">
+
+
+
+              <a href="https://www.e-education.psu.edu/geog489/node/2363" class="page-previous" title="Go to previous page">‹ 4.13.1 Lesson 4 Practice Exercise Solution and Explanation</a>
+      
+              <a href="https://www.e-education.psu.edu/geog489/l4.html" class="page-up" title="Go to parent page">up</a>
+      
+
+
+              <a href="https://www.e-education.psu.edu/geog489/l6.html" class="page-next" title="Go to next page">Term Project  ›</a>
+      
+
+    </div>
+    
+  </div>
+  </div>
+  
+  <div class="clearfix">
+          <nav class="links node-links clearfix"></nav>
+    
+      </div>
+</article>    </div>
+  </div>
+</div>      </div>
+</div><aside class="grid-3 region region-sidebar-first" id="region-sidebar-first">
+  <div class="region-inner region-sidebar-first-inner">
+    <div class="block block-block block-6 block-block-6 odd block-without-title" id="block-block-6">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div id="coursetitleright"><span class="coursenumber">GEOG 489:</span> <span class="coursetitle"> Advanced Python Programming for GIS</span></div>
+    </div>
+  </div>
+</div><div class="block block-search block-form block-search-form even block-without-title" id="block-search-form">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <form action="/geog489/node/2360" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input title="Enter the terms you wish to search for." id="edit-search-block-form--2" name="search_block_form" size="15" maxlength="128" class="form-text" type="text">
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input id="edit-submit" name="op" value="Search" class="form-submit" type="submit"></div><input name="form_build_id" value="form-90_YYBjG3e-2wt5ISSzXH7SjoyaaEH-RTMdAmP52w-k" type="hidden">
+<input name="form_id" value="search_block_form" type="hidden">
+</div>
+</div></form>    </div>
+  </div>
+</div><section class="block block-menu-block block-4 block-menu-block-4 odd" id="block-menu-block-4">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Lessons</h2>
+            
+    <div class="content clearfix">
+      <div class="menu-block-wrapper menu-block-4 menu-name-book-toc-1405 parent-mlid-244 menu-level-1">
+  <ul class="menu"><li class="first collapsed menu-mlid-289"><a href="https://www.e-education.psu.edu/geog489/l1.html">Lesson 1 Python 3, ArcGIS Pro &amp; Multiprocessing</a></li>
+<li class="collapsed menu-mlid-280"><a href="https://www.e-education.psu.edu/geog489/l2.html">Lesson 2 GUI Development with PyQt5 and Package Management</a></li>
+<li class="collapsed menu-mlid-271"><a href="https://www.e-education.psu.edu/geog489/l3.html">Lesson 3 Python Geo and Data Science Packages &amp; Jupyter Notebooks</a></li>
+<li class="leaf menu-mlid-2981"><a href="https://www.e-education.psu.edu/geog489/node/2362">Final Project Proposal Assignment</a></li>
+<li class="expanded active-trail menu-mlid-260"><a href="https://www.e-education.psu.edu/geog489/l4.html" class="active-trail">Lesson 4 Object-Oriented Programming in Python and QGIS Development</a><ul class="menu"><li class="first leaf menu-mlid-266"><a href="https://www.e-education.psu.edu/geog489/l4_p2.html">4.1 Overview and Checklist</a></li>
+<li class="collapsed menu-mlid-2971"><a href="https://www.e-education.psu.edu/geog489/node/2349">4.2 Collections and Sorting</a></li>
+<li class="leaf menu-mlid-268"><a href="https://www.e-education.psu.edu/geog489/l4_p3.html">4.3 Open source desktop GIS software</a></li>
+<li class="collapsed menu-mlid-263"><a href="https://www.e-education.psu.edu/geog489/l4_p4.html">4.4 QGIS: A Brief Overview</a></li>
+<li class="collapsed menu-mlid-262"><a href="https://www.e-education.psu.edu/geog489/l4_p5.html">4.5 The QGIS Scripting Interface and Python API</a></li>
+<li class="collapsed menu-mlid-264"><a href="https://www.e-education.psu.edu/geog489/l4_p6.html">4.6 Object-Oriented Programming in Python</a></li>
+<li class="collapsed menu-mlid-261"><a href="https://www.e-education.psu.edu/geog489/l4_p7.html">4.7 Inheritance, Class Hierarchies and Polymorphism</a></li>
+<li class="leaf menu-mlid-2980"><a href="https://www.e-education.psu.edu/geog489/node/2361">4.8 Class Attributes and Static Class Functions</a></li>
+<li class="collapsed menu-mlid-2930"><a href="https://www.e-education.psu.edu/geog489/node/2306">4.9 Inheritance in GUI Programming</a></li>
+<li class="collapsed menu-mlid-267"><a href="https://www.e-education.psu.edu/geog489/l4_p8.html">4.10 Walkthrough I: A Bus Track Analyzer for GPS Data of Dublin Buses</a></li>
+<li class="collapsed menu-mlid-269"><a href="https://www.e-education.psu.edu/geog489/l4_p9.html">4.11 Optional: Writing QGIS Plugins</a></li>
+<li class="collapsed menu-mlid-2940"><a href="https://www.e-education.psu.edu/geog489/node/2316">4.12 Optional: Turning the Bus Event Analyzer into a QGIS Plugin</a></li>
+<li class="collapsed menu-mlid-2954"><a href="https://www.e-education.psu.edu/geog489/node/2330">4.13 Lesson 4 Practice Exercise</a></li>
+<li class="last leaf active-trail active menu-mlid-2979"><a href="https://www.e-education.psu.edu/geog489/node/2360" class="active-trail active">4.14 Lesson 4 Assignment</a></li>
+</ul></li>
+<li class="last leaf menu-mlid-245"><a href="https://www.e-education.psu.edu/geog489/l6.html">Term Project </a></li>
+</ul></div>
+    </div>
+  </div>
+</section><section class="block block-user block-online block-user-online even" id="block-user-online">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Who's online</h2>
+            
+    <div class="content clearfix">
+      <p>There are currently 0 users online.</p>    </div>
+  </div>
+</section>  </div>
+</aside>  </div>
+</div></section>    
+  
+      <footer id="section-footer" class="section section-footer">
+  <div id="zone-course-footer-wrapper" class="zone-wrapper zone-course-footer-wrapper clearfix">  
+  <div id="zone-course-footer" class="zone zone-course-footer clearfix container-12">
+    <div class="grid-12 region region-footer-first" id="region-footer-first">
+  <div class="region-inner region-footer-first-inner">
+    <div class="block block-block block-3 block-block-3 odd block-without-title" id="block-block-3">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <p>Authors and/or Instructors: James O'Brien, John A. Dutton 
+e-Education Institute, College of Earth and Mineral Sciences, The 
+Pennsylvania State University</p>
+<p>Jan Oliver Wallgrün, John A. Dutton e-Education Institute, College of
+ Earth and Mineral Sciences, The Pennsylvania State University</p>
+<p>Jim Detwiler, John A. Dutton e-Education Institute, College of Earth and Mineral Sciences, The Pennsylvania State University</p>
+<p>Andrew Murdoch, John A. Dutton e-Education Institute, College of Earth and Mineral Sciences, The Pennsylvania State University</p>
+<p></p><p>This courseware module is part of Penn State's College of Earth and Mineral Sciences' <a href="http://open.ems.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">OER Initiative<span class="ext" aria-label="(link is external)"></span></a>.</p>
+
+<p>Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="ext" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License<span class="ext" aria-label="(link is external)"></span></a>.</p>
+
+<p>The College of Earth and Mineral Sciences is committed to making its 
+websites accessible to all users, and welcomes comments or suggestions 
+on access improvements. Please send comments or suggestions on 
+accessibility to the <a href="mailto:editor@e-education.psu.edu?subject=Question/Feedback%20for%20GEOG%20489" class="mailto">site editor<span class="mailto" aria-label="(link sends e-mail)"></span></a>. The site editor may also be contacted with questions or comments about this Open Educational Resource.</p>
+
+    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div><div id="zone-dutton-footer-wrapper" class="zone-wrapper zone-dutton-footer-wrapper clearfix">  
+  <div id="zone-dutton-footer" class="zone zone-dutton-footer clearfix container-12">
+    <div class="grid-12 region region-footer-second" id="region-footer-second">
+  <div class="region-inner region-footer-second-inner">
+    <div class="block block-block block-4 block-block-4 odd block-without-title" id="block-block-4">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <p></p><div class="clearfix" id="dutton_footer">
+	<div class="col1"><a href="http://www.e-education.psu.edu/"><img alt="John A. Dutton e-Education Institute" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/dutton_logo_revised.png"></a>
+		<p>The John A. Dutton e-Education Institute is the learning design unit of the <a href="http://www.ems.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">College of Earth and Mineral Sciences<span class="ext" aria-label="(link is external)"></span></a> at <a href="http://www.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">The Pennsylvania State University<span class="ext" aria-label="(link is external)"></span></a>.</p>
+	</div>
+
+	<div class="col2">
+		<h3>Navigation</h3>
+
+		<ul><li><a href="http://www.e-education.psu.edu/">Home</a></li>
+			<li><a href="http://www.e-education.psu.edu/news">News</a></li>
+			<li><a href="http://www.e-education.psu.edu/about">About</a></li>
+			<li><a href="http://www.e-education.psu.edu/contact">Contact Us</a></li>
+			<li><a href="http://www.e-education.psu.edu/node/4">Programs and Courses</a></li>
+			<li><a href="http://www.e-education.psu.edu/node/3">People</a></li>
+			<li><a href="http://www.e-education.psu.edu/node/5">Resources</a></li>
+			<li><a href="http://www.e-education.psu.edu/node/6">Services</a></li>
+			<li><a href="https://www.e-education.psu.edu/geog489/user">Login</a></li>
+		</ul></div>
+
+	<div class="col3">
+		<h3>EMS</h3>
+
+		<ul><li><a href="http://www.ems.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">College of Earth and Mineral Sciences<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.eme.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Energy and Mineral Engineering<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.geog.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Geography<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.geosc.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Geosciences<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.matse.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Materials Science and Engineering<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.met.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Meteorology and Atmospheric Science<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.eesi.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Earth and Environmental Systems Institute<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.energy.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Energy Institute<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.iee.psu.edu/ingar" class="ext" target="_blank" rel="noopener noreferrer">Institute for National Gas Research<span class="ext" aria-label="(link is external)"></span></a></li>
+		</ul></div>
+
+	<div class="col4">
+		<h3>Programs</h3>
+
+		<ul><li><a href="http://gis.e-education.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Online Geospatial Education Programs<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://ress.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">iMPS in Renewable Energy and Sustainability Policy Program Office<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://esp.e-education.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">BA in Energy and Sustainability Policy Program Office<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://earth.e-education.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">M.Ed. in Earth Sciences Program Office<span class="ext" aria-label="(link is external)"></span></a></li>
+		</ul></div>
+
+	<div class="col5">
+		<h3>Related Links</h3>
+
+		<ul><li><a href="https://www.yammer.com/psu.edu/#/threads/inGroup?type=in_group&amp;feedId=1099225" class="ext" target="_blank" rel="noopener noreferrer">Dutton Community Yammer Group<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://dlc.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Penn State Digital Learning Cooperative<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.worldcampus.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Penn State World Campus<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="https://weblearning.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Web Learning @ Penn State<span class="ext" aria-label="(link is external)"></span></a></li>
+		</ul></div>
+</div>
+
+<p></p>
+<style id="8777" type="text/css">
+<!--/*--><![CDATA[/* ><!--*/
+
+<!--/*--><![CDATA[/* ><!--*/
+@namespace url(http://www.w3.org/1999/xhtml);
+
+/*--><!]]]]><![CDATA[>*/
+
+/*--><!]]>*/
+</style><style id="3179" type="text/css">
+<!--/*--><![CDATA[/* ><!--*/
+
+<!--/*--><![CDATA[/* ><!--*/
+@namespace url(http://www.w3.org/1999/xhtml);
+
+/*--><!]]]]><![CDATA[>*/
+
+/*--><!]]>*/
+</style><style id="8727" type="text/css">
+<!--/*--><![CDATA[/* ><!--*/
+
+<!--/*--><![CDATA[/* ><!--*/
+@namespace url(http://www.w3.org/1999/xhtml);
+
+/*--><!]]]]><![CDATA[>*/
+
+/*--><!]]>*/
+</style>    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div><div id="zone-penn-state-footer-wrapper" class="zone-wrapper zone-penn-state-footer-wrapper clearfix">  
+  <div id="zone-penn-state-footer" class="zone zone-penn-state-footer clearfix container-12">
+    <div class="grid-12 region region-footer-third" id="region-footer-third">
+  <div class="region-inner region-footer-third-inner">
+    <div class="block block-block block-5 block-block-5 odd block-without-title" id="block-block-5">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <p></p><div class="clearfix" id="psu_footer">
+	<div class="col1"><a href="http://www.psu.edu/" target="_blank" rel="noopener noreferrer"><img alt="Penn State home page" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/psu_logo.png" style="width: 135px; height: 61px;"></a></div>
+
+	<div class="col2">
+		<p><a href="https://goo.gl/maps/9SC1XJVPTqD2" class="ext" target="_blank" rel="noopener noreferrer">2217 Earth and Engineering Sciences Building, University Park, Pennsylvania 16802<span class="ext" aria-label="(link is external)"></span></a><br><a href="http://www.psu.edu/contact-us" class="ext" target="_blank" rel="noopener noreferrer">Contact Us<span class="ext" aria-label="(link is external)"></span></a></p>
+	</div>
+
+	<div class="col3">
+		<p><a href="http://www.psu.edu/web-privacy-statement" class="ext" target="_blank" rel="noopener noreferrer">Privacy &amp; Legal Statements<span class="ext" aria-label="(link is external)"></span></a> | <a href="http://www.psu.edu/copyright-information" class="ext" target="_blank" rel="noopener noreferrer">Copyright Information<span class="ext" aria-label="(link is external)"></span></a><br>
+			The Pennsylvania State University © 2018</p>
+	</div>
+</div>
+
+    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div></footer>  </div>  <script type="text/javascript" src="4.14%20Lesson%204%20Assignment%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/syntaxhighlighter.js"></script>
+
+
+</body></html>

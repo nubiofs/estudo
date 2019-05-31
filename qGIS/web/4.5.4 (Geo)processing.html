@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr" class="js"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Drupal 7 (http://drupal.org)">
+    <!-- base href="https://www.e-education.psu.edu/geog489/node/2299" -->
+    <title>4.5.4 (Geo)processing</title>
+    <script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/jquery.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/jquery-extend-3.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/jquery_002.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/drupal.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/shCore.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/shBrushBash.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/shBrushJScript.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/shBrushJson.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/shBrushPhp.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/shBrushPython.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/shBrushVb.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/printable_links.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/toggler.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/lti.js"></script>
+<script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/h5p-resizer.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/geog489\/","pathPrefix":"","ajaxPageState":{"theme":"gis","theme_token":"iSB2E1_M--UbbPiZT_cJD4S-_EW-NaQkzU8wEMhDIiI","js":{"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.7\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shCore.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushBash.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJScript.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJson.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPhp.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPowerShell.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPython.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushVb.js":1,"sites\/all\/modules\/custom_js_libraries\/printable_links\/printable_links.js":1,"sites\/all\/modules\/custom_js_libraries\/toggler\/toggler.js":1,"sites\/all\/themes\/gis\/lti.js":1,"sites\/all\/themes\/gis\/..\/..\/modules\/h5p\/library\/js\/h5p-resizer.js":1}}});
+//--><!]]>
+</script>
+        <meta name="robots" content="noindex, nofollow">        <style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.base.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.menus.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.messages.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.theme.css?psbola");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/book/book.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/field/theme/field.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/node/node.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/quiz/quiz.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/search/search.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/user/user.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/extlink/extlink.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/views/css/views.css?psbola");
+</style>
+<link type="text/css" rel="stylesheet" href="4.5.4%20%28Geo%29processing_arquivos/css_002.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.5.4%20%28Geo%29processing_arquivos/css_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.5.4%20%28Geo%29processing_arquivos/css.css" media="all">
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/hidden_nodes/hidden_nodes.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/ctools/css/ctools.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shCore.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shThemeDefault.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/taxonomy_access/taxonomy_access.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/print_ui/css/print_ui.theme.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/css/print.css?psbola");
+</style>
+  </head>
+  <body>
+            <div class="print-site_name">Published on <em class="placeholder">GEOG 489: Advanced Python Programming for GIS</em> (<a href="https://www.e-education.psu.edu/geog489">https://www.e-education.psu.edu/geog489</a>)</div>
+    <p>
+    </p><div class="print-breadcrumb"><a href="https://www.e-education.psu.edu/geog489/home.html">Home</a> &gt; <a href="https://www.e-education.psu.edu/geog489/node/1405">GEOG 489</a> &gt; <a href="https://www.e-education.psu.edu/geog489/l4.html">Lesson 4 Object-Oriented Programming in Python and QGIS Development</a> &gt; <a href="https://www.e-education.psu.edu/geog489/l4_p5.html">4.5 The QGIS Scripting Interface and Python API</a> &gt; 4.5.4 (Geo)processing</div>
+    <hr class="print-hr">
+        <div class="print-content"><div id="node-2299" class="section-4">
+  <h1 class="book-heading">4.5.4 (Geo)processing</h1>
+  <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>QGIS
+ has a toolbox system and visual workflow building component somewhat 
+similar to ArcGIS and its Model Builder. It is called the <a href="https://docs.qgis.org/testing/en/docs/user_manual/processing/index.html">QGIS processing framework </a> <span class="print-footnote">[1]</span>and
+ comes in the form of a plugin called Processing that is installed by 
+default. You can access it via the Processing menu in the main menu bar.
+ All algorithms from the processing framework are available in Python 
+via a QGIS module called <em>processing</em>. They can be combined to 
+solve larger analysis tasks in Python and can also be used in 
+combination with the other qgis methods discussed in the previous 
+sections.</p>
+
+<p>We can get a list of all processing algorithms currently registered with QGIS with the command <em>QgsApplication.processingRegistry().algorithms()</em>. Each processing object in the returned list has an identifying name that you can get via its <em>id()</em>
+ method. The following command, which you can try out in the QGIS Python
+ console, uses this approach to print the names of all algorithms that 
+contain the word “clip”:</p>
+
+<div><div id="highlighter_775034" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">[x.</code><code class="python functions">id</code><code class="python plain">() </code><code class="python keyword">for</code> <code class="python plain">x </code><code class="python keyword">in</code> <code class="python plain">QgsApplication.processingRegistry().algorithms() </code><code class="python keyword">if</code> <code class="python string">"clip"</code> <code class="python keyword">in</code> <code class="python plain">x.</code><code class="python functions">id</code><code class="python plain">()] </code></div></div></td></tr></tbody></table></div></div>
+
+<pre class="brush: &lt;inserttype&gt;">Output: 
+
+['gdal:cliprasterbyextent', 'gdal:cliprasterbymasklayer','gdal:clipvectorbyextent', 'gdal:clipvectorbypolygon', 'native:clip', 'saga:clippointswithpolygons', 'saga:cliprasterwithpolygon', 'saga:polygonclipping'] 
+</pre>
+
+<p>As you can see, there are processing versions of algorithms coming 
+from different sources, e.g. natively built into QGIS vs. algorithms 
+based on GDAL. The function <em>algorithmHelp(…) </em>allows you to get some documentation on an&nbsp;algorithm and its parameters. Try it out with the following command:</p>
+
+<div><div id="highlighter_640923" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">processing.algorithmHelp(</code><code class="python string">"native:clip"</code><code class="python plain">)</code></div></div></td></tr></tbody></table></div></div>
+
+<p>To run a processing algorithm, you have to use the <em>run(…)</em> 
+function and provide two parameters: the id of the algorithm and a 
+dictionary that contains the parameters for the algorithm as key-value 
+pairs. <em>run(…)</em> returns a dictionary with all output parameters 
+of the algorithm. The following example illustrates how processing 
+algorithms can be used to solve the task of clipping a points of 
+interest shapefile to the area of El Salvador, reusing the two data sets
+ from homework assignment 2 (Section 2.10). This example is intended to 
+be run as a standalone program again and most of the code is required to
+ set up the QGIS environment needed including initializing the 
+Processing environment.</p>
+
+<p>The start of the script looks like in the example from the previous section:</p>
+
+<div><div id="highlighter_968503" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">os,sys </code></div><div class="line number2 index1 alt1"><code class="python keyword">import</code> <code class="python plain">qgis </code></div><div class="line number3 index2 alt2"><code class="python keyword">import</code> <code class="python plain">qgis.core</code></div><div class="line number4 index3 alt1"><code class="python keyword">from</code> <code class="python plain">PyQt5.QtWidgets </code><code class="python keyword">import</code> <code class="python plain">QApplication </code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="python plain">app </code><code class="python keyword">=</code> <code class="python plain">QApplication(sys.argv) </code></div><div class="line number7 index6 alt2">&nbsp;</div><div class="line number8 index7 alt1"><code class="python plain">qgis_prefix </code><code class="python keyword">=</code> <code class="python plain">os.getenv(</code><code class="python string">"QGIS_PREFIX_PATH"</code><code class="python plain">)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code></div><div class="line number9 index8 alt2"><code class="python plain">qgis.core.QgsApplication.setPrefixPath(qgis_prefix, </code><code class="python color1">True</code><code class="python plain">) </code></div><div class="line number10 index9 alt1"><code class="python plain">qgs </code><code class="python keyword">=</code> <code class="python plain">qgis.core.QgsApplication([], </code><code class="python color1">False</code><code class="python plain">)</code></div><div class="line number11 index10 alt2"><code class="python plain">qgs.initQgis()</code></div></div></td></tr></tbody></table></div></div>
+
+<p>After, creating the QGIS environment, we can now initialize the 
+processing framework. To be able to import the processing module we have
+ to make sure that the plugins folder is part of the system path; we do 
+this directly from our code. After importing processing, we have to 
+initialize the Processing environment and we also add the native QGIS 
+algorithms to the processing algorithm registry.</p>
+
+<div><div id="highlighter_951450" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">sys.path.append(r</code><code class="python string">"C:\OSGeo4W64\apps\qgis\python\plugins"</code><code class="python plain">) </code></div><div class="line number2 index1 alt1"><code class="python keyword">import</code> <code class="python plain">processing </code></div><div class="line number3 index2 alt2"><code class="python keyword">from</code> <code class="python plain">processing.core.Processing </code><code class="python keyword">import</code> <code class="python plain">Processing </code></div><div class="line number4 index3 alt1"><code class="python plain">Processing.initialize() </code></div><div class="line number5 index4 alt2"><code class="python plain">qgis.core.QgsApplication.processingRegistry().addProvider(qgis.analysis.QgsNativeAlgorithms())</code></div></div></td></tr></tbody></table></div></div>
+
+<p>Next, we create input variables for all files involved, including the
+ output files we will produce, one with the selected country and one 
+with only the POIs in that country. We also set up input variables for 
+the name of the country and the field that contains the country names.</p>
+
+<div><div id="highlighter_192337" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">poiFile </code><code class="python keyword">=</code> <code class="python plain">r</code><code class="python string">'C:\489\L2\assignment\OSMpoints.shp'</code></div><div class="line number2 index1 alt1"><code class="python plain">countryFile </code><code class="python keyword">=</code> <code class="python plain">r</code><code class="python string">'C:\489\L2\assignment\countries.shp'</code></div><div class="line number3 index2 alt2"><code class="python plain">pointOutputFile </code><code class="python keyword">=</code> <code class="python plain">r</code><code class="python string">'C:\489\L2\assignment\pointsInCountry.shp'</code></div><div class="line number4 index3 alt1"><code class="python plain">countryOutputFile </code><code class="python keyword">=</code> <code class="python plain">r</code><code class="python string">'C:\489\L2\assignment\singleCountry.shp'</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="python plain">nameField </code><code class="python keyword">=</code> <code class="python string">"NAME"</code></div><div class="line number7 index6 alt2"><code class="python plain">countryName </code><code class="python keyword">=</code> <code class="python string">"El Salvador"</code></div></div></td></tr></tbody></table></div></div>
+
+<p>Now comes the part in which we actually run algorithms from the 
+processing framework. First, we use the qgis:extractbyattribute 
+algorithm to create a new shapefile with only those features from the 
+country data set that satisfy a particular attribute query. In the 
+dictionary with the input parameters for the algorithm, we specify the 
+name of the input file (“INPUT”), the name of the query field (“FIELD”),
+ the comparison operator for the query (0 here stands for “equal”), and 
+the value to which we are comparing (“VALUE”). Since the output will be 
+written to a new shapefile, we don’t really need the output dictionary 
+that we get back from calling <em>run(…)</em> but the print statement shows how this dictionary in this case contains the name of the output file under the key “OUTPUT”.</p>
+
+<div><div id="highlighter_126693" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">output </code><code class="python keyword">=</code> <code class="python plain">processing.run(</code><code class="python string">"qgis:extractbyattribute"</code><code class="python plain">, { </code><code class="python string">"INPUT"</code><code class="python plain">: countryFile, </code><code class="python string">"FIELD"</code><code class="python plain">: nameField, </code><code class="python string">"OPERATOR"</code><code class="python plain">: </code><code class="python value">0</code><code class="python plain">, </code><code class="python string">"VALUE"</code><code class="python plain">: countryName, </code><code class="python string">"OUTPUT"</code><code class="python plain">: countryOutputFile&nbsp; }) </code></div><div class="line number2 index1 alt1"><code class="python functions">print</code><code class="python plain">(output[</code><code class="python string">'OUTPUT'</code><code class="python plain">])</code></div></div></td></tr></tbody></table></div></div>
+
+<p>To perform the clip operation with the new shapefile from the 
+previous step, we use the “native:clip” algorithm. The input paramters 
+are the input file (“INPUT”), the clip file (“OVERLAY”), and the output 
+file (“OUTPUT”). Again, we are just printing out the content stored 
+under the “OUTPUT” key in the returned dictionary. Finally, we exit the 
+QGIS environment.</p>
+
+<div><div id="highlighter_694487" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">output </code><code class="python keyword">=</code> <code class="python plain">processing.run(</code><code class="python string">"native:clip"</code><code class="python plain">, { </code><code class="python string">"INPUT"</code><code class="python plain">: poiFile, </code><code class="python string">"OVERLAY"</code><code class="python plain">: countryOutputFile, </code><code class="python string">"OUTPUT"</code><code class="python plain">: pointOutputFile }) </code></div><div class="line number2 index1 alt1"><code class="python functions">print</code><code class="python plain">(output[</code><code class="python string">'OUTPUT'</code><code class="python plain">]) </code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="python plain">qgs.exitQgis()</code></div></div></td></tr></tbody></table></div></div>
+
+<p>Below is how the resulting two layers should look when shown in QGIS in combination with the original country layer.</p>
+
+<div class="img-center"><img alt="screenshot of a single country with many points in the country marked" src="4.5.4%20%28Geo%29processing_arquivos/clipped_points.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.16 Output files produced by&nbsp;the previous Python code</div>
+</div>
+
+<p>In this section, we showed you how to perform common GIS operations 
+with the QGIS Python API. Once again we have to say that we are only 
+scratching the surface here; the API is much more complex and powerful, 
+and there is hardly anything you cannot do with it. What we have shown 
+you will be sufficient to understand the code from the two walkthroughs 
+of this lesson but if you want more, below are some links to further 
+examples. Keep in mind though that since QGIS 3 is still so new, most 
+examples on the web have been written for QGIS 2.x. While many things 
+still work in the same way in QGIS 3, you may run into situations where 
+an example won’t work and needs to be adapted to be compatible with QGIS
+ 3.</p>
+
+<ul><li><a href="https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/">PyQGIS Developer Cookbook</a> <span class="print-footnote">[2]</span></li>
+	<li><a href="http://www.qgistutorials.com/en/index.html">QGIS Tutorial and Tips (Section on Python Scripting (PyQGIS))</a> <span class="print-footnote">[3]</span></li>
+	<li><a href="https://howtoinqgis.wordpress.com/">"How To" in QGIS</a> <span class="print-footnote">[4]</span></li>
+</ul></div></div></div>  </div>
+</div>
+    <div class="print-footer">
+</div>
+    <hr class="print-hr">
+          <div class="print-source_url">
+        <strong>Source URL:</strong> https://www.e-education.psu.edu/geog489/node/2299      </div>
+        <div class="print-links"><p><strong>Links</strong><br>[1] https://docs.qgis.org/testing/en/docs/user_manual/processing/index.html<br>
+[2] https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/<br>
+[3] http://www.qgistutorials.com/en/index.html<br>
+[4] https://howtoinqgis.wordpress.com/<br>
+</p></div>
+    <script type="text/javascript" src="4.5.4%20%28Geo%29processing_arquivos/syntaxhighlighter.js"></script>
+  
+
+</body></html>

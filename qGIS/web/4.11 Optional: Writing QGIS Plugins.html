@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr" class="js"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Drupal 7 (http://drupal.org)">
+    <!-- base href="https://www.e-education.psu.edu/geog489/l4_p9.html" -->
+    <title>4.11 Optional: Writing QGIS Plugins</title>
+    <script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/jquery.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/jquery-extend-3.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/jquery_002.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/drupal.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/shCore.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/shBrushBash.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/shBrushJScript.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/shBrushJson.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/shBrushPhp.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/shBrushPython.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/shBrushVb.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/printable_links.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/toggler.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/lti.js"></script>
+<script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/h5p-resizer.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/geog489\/","pathPrefix":"","ajaxPageState":{"theme":"gis","theme_token":"9_0PvsidRZJPo_nnAseiMRhNIMOaZaxKehZ7PL1Rguw","js":{"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.7\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shCore.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushBash.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJScript.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJson.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPhp.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPowerShell.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPython.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushVb.js":1,"sites\/all\/modules\/custom_js_libraries\/printable_links\/printable_links.js":1,"sites\/all\/modules\/custom_js_libraries\/toggler\/toggler.js":1,"sites\/all\/themes\/gis\/lti.js":1,"sites\/all\/themes\/gis\/..\/..\/modules\/h5p\/library\/js\/h5p-resizer.js":1}}});
+//--><!]]>
+</script>
+        <meta name="robots" content="noindex, nofollow">        <style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.base.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.menus.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.messages.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.theme.css?psbola");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/book/book.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/field/theme/field.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/node/node.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/quiz/quiz.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/search/search.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/user/user.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/extlink/extlink.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/views/css/views.css?psbola");
+</style>
+<link type="text/css" rel="stylesheet" href="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/css_002.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/css_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/css.css" media="all">
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/hidden_nodes/hidden_nodes.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/ctools/css/ctools.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shCore.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shThemeDefault.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/taxonomy_access/taxonomy_access.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/print_ui/css/print_ui.theme.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/css/print.css?psbola");
+</style>
+  </head>
+  <body>
+            <div class="print-site_name">Published on <em class="placeholder">GEOG 489: Advanced Python Programming for GIS</em> (<a href="https://www.e-education.psu.edu/geog489">https://www.e-education.psu.edu/geog489</a>)</div>
+    <p>
+    </p><div class="print-breadcrumb"><a href="https://www.e-education.psu.edu/geog489/home.html">Home</a> &gt; <a href="https://www.e-education.psu.edu/geog489/node/1405">GEOG 489</a> &gt; <a href="https://www.e-education.psu.edu/geog489/l4.html">Lesson 4 Object-Oriented Programming in Python and QGIS Development</a> &gt; 4.11 Optional: Writing QGIS Plugins</div>
+    <hr class="print-hr">
+        <div class="print-content"><div id="node-2071" class="section-3">
+  <h1 class="book-heading">4.11 Optional: Writing QGIS Plugins</h1>
+  <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p><em>In
+ this section and the next, we are going to demonstrate how to create 
+plugins for QGIS&nbsp;and then turn the Bus Track Analyzer code from the
+ previous walkthrough into a plugin that adds new layers to the current 
+QGIS project and displays the analysis progress live on the map 
+canvas.&nbsp;However, if this lesson has been your first contact with 
+writing classes and your head is swimming a bit with all the new 
+concepts introduced or you are simply running out of time, we suggest 
+that you just briefly skim through these sections and then watch the 
+video from Section 4.12.7 showing the final Bus Track Analyzer for QGIS 
+plugin. While creating&nbsp;a QGIS plugin yourself is one option that 
+would give you full over&amp;above points in this lesson's homework 
+assignment, the content of these two sections is not required for the 
+assignment and the quiz. You can always come back to these sections if 
+you have time left at the end of the lesson or after the end of the 
+class.</em></p>
+
+<p>In Section 4.5, you already got an idea of how to write Python code 
+that uses the qgis package, and we also made use of this in the 
+walkthrough from the previous section to produce the final output data 
+sets. In this section, we will teach you how to create plugins for QGIS 
+that show up in the plugin manager and can be integrated into the main 
+QGIS GUI.</p>
+
+<p>Instead of programming QGIS plugins from scratch, we will use the 
+Plugin Builder 3 plugin to create the main files needed for us, and then
+ we will&nbsp;modify and complement these to implement the functionality
+ of our plugin. In this section, we will show you the general workflow 
+of creating a plugin using a simple “Random number generator” plugin 
+with only very little actual functionality. In the walkthrough that 
+follows in the next section, we will then apply this approach to create a
+ plugin version of our Bus Track Analyzer tool from the first 
+walkthrough of the lesson.</p>
+</div></div></div>  <div id="node-2357" class="section-4">
+  <h1 class="book-heading">4.11.1 Creating a Plugin Template with Plugin Builder 3</h1>
+  <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>The
+ plugin builder 3 plugin should already be installed in your QGIS 
+version. If not, please go back to Section 4.4.1 and follow the 
+installation instructions there. Now run the plugin by going Plugins 
+-&gt; Plugin Builder in the main menu.</p>
+
+<p>To create a template for your plugin, you have to work through the 
+dialog boxes of Plugin Builder and fill out the information there. 
+Clicking the “Help” button will open a local .html page with detailed 
+information on the purpose and meaning of the different fields. We fill 
+out the first page as shown in the figure below. Here is a brief 
+overview:</p>
+
+<ul><li>Class name: This is the name of the main class for our plugin. It needs to be a valid Python class name.</li>
+	<li>Plugin name: This is the name of the plugin in readable form. In 
+contrast to the class name, it can contain spaces and other special 
+characters.</li>
+	<li>Description: A short description of what the plugin is for.</li>
+	<li>Module name: The name of the .py file that will contain the main 
+class for your plugin. Typically, the class name written with 
+underscores rather than in CamelCase is used here.</li>
+	<li>Version number &amp; Minimum QGIS version: These are used to 
+specify a version number for your plugin and the minimum QGIS version 
+required to run it.</li>
+	<li>Author/Company &amp; Email address: Here you provide information 
+about the author of the plugin that will be used to create the copyright
+ information at the beginning of the different files. We have no 
+intentation of publishing this plugin, so we just use “489” here.</li>
+</ul><div class="img-center"><img alt="screenshot of qgis plugin builder first dialog window" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/pluginbuilder_1stpage.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.29 Filling out the first dialog page of Plugin Builder</div>
+</div>
+
+<p>On the next page, you can enter a longer description of your plugin. 
+Since this is just a toy example, we don’t bother with this here and 
+leave the text as it is.</p>
+
+<p>On the next page, you can choose between different kinds of templates
+ for your plugin, e.g. a simple dialog box or a dock widget, meaning an 
+actual panel that can be docked and moved inside the QGIS GUI like the 
+other panels, e.g. the Layers panel. We here will go with the dialog 
+option. In&nbsp;the next section, we will then use the dock widget 
+option. With the “Text for the menu item” option, we specify which text 
+should show up in the menu for our plugin in the main menu bar. With the
+ “Menu” option we pick in which menu of the menu bar this entry should 
+be located. We will fill out this page as shown below:</p>
+
+<div class="img-center"><img alt="screenshot of plugin builder template selection: tool button with dialog" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/pluginbuilder_3rdpage.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.30 Picking the template for our plugin</div>
+</div>
+
+<p>The checkboxes on the next page allow for determining which files 
+Plugin Builder is going to create. It’s ok to leave all options checked.</p>
+
+<p>The next page is specifying information that is relevant if you plan 
+to publish your plugin, e.g. on Github. Since we are not planning this, 
+we just leave the page unchanged.</p>
+
+<p>On the last page, we can determine in which folder the new folder 
+with the files for our plugin will be created. By default this is the 
+default plugin folder of our QGIS installation, meaning the plugin will 
+immediately be listed in QGIS when we start it next. If instead of the 
+path, you just see a dot (.), please browse to the plugins folder 
+yourself, replacing the part directly after "C:/Users/" with your 
+Windows user name.&nbsp;It is possible that the “AppData” folder in your
+ user’s home directory is not visible in which case you will have to 
+change your settings to show hidden files.</p>
+
+<div class="img-center"><img alt="screenshot of plugin builder with a selected location for creation and the generate button" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/pluginbuilder_lastpage_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.31 Final dialog page of Plugin Builder for picking the path where the folder for the plugin will be created</div>
+</div>
+
+<p>We now click the “Generate” button and Plugin Builder will then 
+create the folder and different files for our plugin. It will also show 
+us a summary page like in the figure below with some valuable 
+information about where the plugin has been created and what the next 
+steps should be. Even though we won’t be following these exactly, it’s a
+ good idea to take a screenshot of this information or&nbsp;note down 
+where the&nbsp;folder for our plugin&nbsp;is located. You may also 
+want&nbsp;to add the plugins folder under “Quick access” in your Windows
+ File Explorer since we will need to access it quite a lot in the 
+remainder of this lesson.</p>
+
+<div class="img-center"><img alt="screenshot of plugin builder results, location and last steps shown after you create a plugin" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/pluginbuilder_summary_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.32 Plugin Builder summary page after creating the new plugin</div>
+</div>
+
+<p>If we now open the new folder “randomnumbergenerator” in the QGIS 
+default plugin folder, you will see the following file structure:</p>
+
+<div class="img-center"><img alt="screenshot of plugin folder" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/pluginbuilder_files_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.33 Content of the folder created by Plugin Builder for our new&nbsp;plugin&nbsp;</div>
+</div>
+
+<p>In this introduction to QGIS plugin development, we won’t go into the
+ details of features like internationalization and test code generation,
+ so you can ignore the different subfolders and also some of the files 
+in the main folder. The important files are:</p>
+
+<ul><li><strong>random_number_generator.py</strong>: This file defines 
+the main class RandomNumberGenerator for our plugin. If you look at the 
+code that Plugin Builder 3 generated for this class, you will see that 
+this class has to define a number of methods to interact with QGIS and 
+its plugin interface. One central method is the method <em>run()</em> that in this case here shows our dialog box stored in instance variable <em>self.dlg</em>.
+ If we wanted some code to be executed only if the dialog box is 
+accepted (e.g. closed with the Ok button), then we would put that code 
+here after the “if result:” line.</li>
+	<li><strong>random_number_generator_dialog.py</strong>: This is the 
+class that defines the main GUI widget for our plugin derived from 
+QDialog. We will talk about this class in more detail in a moment 
+because this is the class that we are going to modify to implement what 
+needs to happen when the user interacts with the GUI of our plugin.</li>
+	<li><strong>random_number_generator_dialog_base.ui</strong>: This is 
+the class in which the GUI for our dialog box is defined. We will modify
+ it in QT Designer in a moment to adapt the GUI for our purposes.</li>
+	<li><strong>__init__.py</strong>: A file with this name needs to be 
+contained in the main folder of each plugin and it lets QGIS know about 
+the plugin. QGIS calls the <em class="gr-progress">classFactory</em><em>(…) </em>function defined in this file to create an object of the main class of the plugin (class RandomNumberGenerator in this case).</li>
+	<li><strong>metadata.txt</strong>: This file contains most of the info about our plugin that we entered into Plugin Builder.</li>
+</ul><p>When you now restart QGIS and open the plugin manager under 
+Plugins -&gt; Manage and Install Plugins… , the Random Number Generator 
+plugin should appear in the list of installed plugins but it still needs
+ to be activated. However, if we try to activate it now, we will get an 
+error message that no module called “randomnumbergenerator.resources” 
+can be found. This is a file that we have to generate ourselves by 
+compiling the file called resources.qrc located in our plugin folder 
+with the pyrcc5 tool. The resources file contains information about all 
+additional GUI related resources needed for our plugin, like additional 
+icons for example.</p>
+
+<p>Usually, you would edit the .qrc file first, e.g. in QT Designer, and
+ then compile it. But we don’t need any additional resources for this 
+project, so we just compile it directly with the following command in 
+the OSGeo4W shell after first running the commands "py3_env" and 
+"qt5_env" and moving to our plugin folder with the cd command.</p>
+
+<pre>pyrcc5 resources.qrc –o resources.py
+</pre>
+
+<div class="img-center"><img alt="Decorative image. See text surrounding image." src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/compilercc5_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.34 Commands for compiling the resource.qrc file in the OSGeo4W shell</div>
+</div>
+
+<p>After running this command, we can now activate the plugin by clicking on the checkbox:<img alt="plugin activation checkbox" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/pluginactivation.jpg"></p>
+
+<p>There will now be a submenu called “Random Number Generator” with an entry with the same name in the Plugins menu:</p>
+<img alt="Random Number Generator submenu" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/pluginentry.jpg"><p></p>
+
+<p>In addition, a toolbar with a single button has been added for our 
+plugin to the toolbar section at the top. Since we didn’t make any 
+changes, the default button&nbsp;<img alt="default button" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/defaultbutton.jpg"> is used. Either clicking the menu entry or the button will open the dialog box for our plugin:</p>
+
+<div class="img-center"><img alt="screenshot of blank random number generator window with okay and cancel tabs" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/emptyplugin.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.35 Empty dialog box appearing after starting the new plugin in QGIS</div>
+</div>
+
+<p>Currently, the dialog box only contains the default elements, namely 
+two buttons for accepting and rejecting the dialog. We are now going to 
+change the GUI of the dialog box and add the random number generation 
+functionality</p>
+</div></div></div>  </div>
+<div id="node-2358" class="section-4">
+  <h1 class="book-heading">4.11.2 Modifying the Plugin GUI and Adding Functionality</h1>
+  <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>The
+ file random_number_generator_dialog.py defines the class 
+RandomNumberGeneratorDialog derived from QDialog. This is the widget 
+class for our dialog box. The GUI itself is defined in the .ui file 
+random_number_generator_dialog_base.ui. In contrast to first compiling 
+the .ui file into a Python .py file and then using the Python code 
+resulting from this to set up the GUI, this class uses the previously 
+briefly mentioned approach of directly reading in the .ui file. That 
+means to change the GUI, all we have to do is modify the .ui file in QT 
+Designer, no compilation needed.</p>
+
+<p>We open random_number_generator_dialog_base.ui with QT Designer and make the following small changes:</p>
+
+<ul><li>We delete the button box with the Ok and cancel buttons.</li>
+	<li>The layout of the dialog box is changed to a vertical layout.</li>
+	<li>We add a push button and a label to the dialog box with vertical spacers in between.</li>
+	<li>The button text is set to “Press here to generate random number between 1 and 100”.</li>
+	<li>The label text is set to “The number is:” and its horizontal alignment property is changed to be horizontally&nbsp;centered.</li>
+</ul><p>The image below shows the produced layout in QT Designer.</p>
+
+<div class="img-center"><img alt="screenshot of layout and object inspector" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/random_in_designer_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.36 Creating the GUI for our plugin in QT Designer</div>
+</div>
+
+<p>After saving the form, we want to see whether we now get the new 
+version of the GUI in QGIS as well. However, for this to happen, the 
+plugin needs to be reloaded. For this, we use the Plugin Reloader plugin
+ that we also installed at the beginning of the lesson. We pick the 
+Plugins -&gt; Plugin Reloader -&gt; Configure option. Then we pick our 
+randomnumbergenerator plugin from the list and press Ok.</p>
+
+<div class="img-center"><img alt="screenshot of reloader with select plugin and ok options" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/plugin_reloader.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.37 Configuring Plugin Reloader to reload the code for our plugin</div>
+</div>
+
+<p>Now we just have to go Plugins -&gt; Plugin Reloader -&gt; Reload: 
+randomnumbergenerator, whenever we want to reload the plugin after 
+making some changes. After doing so and starting our plugin again, it 
+should show up like this in QGIS:</p>
+
+<div class="img-center"><img alt="screenshot of plugin with layout in popup window" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/newgui_in_qgis.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.38 Running the plugin in QGIS now shows the dialog box with the GUI we just created</div>
+</div>
+
+<p>Now we just have to implement the functionality for our plugin, which
+ for this toy example is extremely simple. We just need to write some 
+code for rolling a random number between 1 and 100 and updating&nbsp;the
+ text of the label accordingly when the button is pressed. We implement 
+this in the definition of our class RandomNumberGeneratorDialog in file 
+random_number_generator_dialog.py. The changes we make are the 
+following:</p>
+
+<ul><li>In the line where the os module is imported, we also import the random module from the Python standard library.</li>
+	<li>We add a new method to the class definition with the event handler code:
+		<div><div id="highlighter_517973" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">def</code> <code class="python plain">generateNewNumber(</code><code class="python color1">self</code><code class="python plain">): </code></div><div class="line number2 index1 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">r </code><code class="python keyword">=</code> <code class="python plain">random.randint(</code><code class="python value">1</code><code class="python plain">,</code><code class="python value">100</code><code class="python plain">) </code></div><div class="line number3 index2 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python color1">self</code><code class="python plain">.label.setText(</code><code class="python string">"The number is: "</code> <code class="python keyword">+</code> <code class="python functions">str</code><code class="python plain">(r))</code></div></div></td></tr></tbody></table></div></div>
+	</li>
+	<li>Finally, we connect the button to this new method by adding the following line at the end of the <em>__init__()</em> method:
+		<div><div id="highlighter_691288" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python color1">self</code><code class="python plain">.pushButton.clicked.connect(</code><code class="python color1">self</code><code class="python plain">.generateNewNumber)</code></div></div></td></tr></tbody></table></div></div>
+	</li>
+</ul><p>Below is the entire code part of random_number_generator_dialog.py after making these changes:</p>
+
+<div><div id="highlighter_622309" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">os, random </code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="python keyword">from</code> <code class="python plain">PyQt5 </code><code class="python keyword">import</code> <code class="python plain">uic </code></div><div class="line number4 index3 alt1"><code class="python keyword">from</code> <code class="python plain">PyQt5 </code><code class="python keyword">import</code> <code class="python plain">QtWidgets </code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="python plain">FORM_CLASS, _ </code><code class="python keyword">=</code> <code class="python plain">uic.loadUiType(os.path.join( os.path.dirname(__file__), </code><code class="python string">'random_number_generator_dialog_base.ui'</code><code class="python plain">)) </code></div><div class="line number7 index6 alt2"><code class="python spaces">&nbsp;</code>&nbsp;</div><div class="line number8 index7 alt1"><code class="python keyword">class</code> <code class="python plain">RandomNumberGeneratorDialog(QtWidgets.QDialog, FORM_CLASS): </code></div><div class="line number9 index8 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python keyword">def</code> <code class="python plain">__init__(</code><code class="python color1">self</code><code class="python plain">, parent</code><code class="python keyword">=</code><code class="python color1">None</code><code class="python plain">): </code></div><div class="line number10 index9 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments">"""Constructor."""</code></div><div class="line number11 index10 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python functions">super</code><code class="python plain">(RandomNumberGeneratorDialog, </code><code class="python color1">self</code><code class="python plain">).__init__(parent) </code></div><div class="line number12 index11 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments"># Set up the user interface from Designer. </code></div><div class="line number13 index12 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments"># After setupUI you can access any designer object by doing </code></div><div class="line number14 index13 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments"># self.&lt;objectname&gt;, and you can use autoconnect slots - see </code></div><div class="line number15 index14 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments"># <a href="http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html">http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html</a> </code></div><div class="line number16 index15 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments"># #widgets-and-dialogs-with-auto-connect </code></div><div class="line number17 index16 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python color1">self</code><code class="python plain">.setupUi(</code><code class="python color1">self</code><code class="python plain">) </code></div><div class="line number18 index17 alt1">&nbsp;</div><div class="line number19 index18 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python color1">self</code><code class="python plain">.pushButton.clicked.connect(</code><code class="python color1">self</code><code class="python plain">.generateNewNumber) </code></div><div class="line number20 index19 alt1">&nbsp;</div><div class="line number21 index20 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python keyword">def</code> <code class="python plain">generateNewNumber(</code><code class="python color1">self</code><code class="python plain">): </code></div><div class="line number22 index21 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">r </code><code class="python keyword">=</code> <code class="python plain">random.randint(</code><code class="python value">1</code><code class="python plain">,</code><code class="python value">100</code><code class="python plain">) </code></div><div class="line number23 index22 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python color1">self</code><code class="python plain">.label.setText(</code><code class="python string">"The number is: "</code> <code class="python keyword">+</code> <code class="python functions">str</code><code class="python plain">(r))</code></div></div></td></tr></tbody></table></div></div>
+
+<p>Now the only thing we have to do is reload the plugin again in QGIS, 
+and when we then start the plugin one more time, the button should work 
+and allow us to create random numbers. Please note that the dialog box 
+is opened non-modally from our main plugin class so that you can keep 
+the dialog box open in the background while still interacting with the 
+rest of the QGIS GUI.</p>
+
+<div class="img-center"><img alt="screenshot of plugin working: random number is 56" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/toyexampledone.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.39 The Random Number Generator plugin in QGIS after adding the main functionality</div>
+</div>
+
+<p>In this small example, all code changes needed were about wiring up 
+the GUI of the dialog box. In such cases, modifying the file with the 
+class definition for the main widget can be sufficient. In the 
+next&nbsp;section, we will implement a plugin that is significantly more
+ complex and interacts with QGIS in more sophisticated ways, e.g., by 
+adding new layers to the currently open project and continuously 
+updating the content of these layers. However, the general approach is 
+the same in that we are mainly going to modify the .ui file and the file
+ with the main widget class from the template files created by Plugin 
+Builder 3. If you want to learn more about QGIS plugin development and 
+the role the other files play, the <a href="https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins.html">official documentation</a> <span class="print-footnote">[1]</span> is a good starting point.</p>
+</div></div></div>  </div>
+</div>
+</div>
+    <div class="print-footer">
+</div>
+    <hr class="print-hr">
+          <div class="print-source_url">
+        <strong>Source URL:</strong> https://www.e-education.psu.edu/geog489/l4_p9.html      </div>
+        <div class="print-links"><p><strong>Links</strong><br>[1] https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins.html<br>
+</p></div>
+    <script type="text/javascript" src="4.11%20Optional:%20Writing%20QGIS%20Plugins_arquivos/syntaxhighlighter.js"></script>
+  
+
+</body></html>

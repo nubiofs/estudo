@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr" class="js"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Drupal 7 (http://drupal.org)">
+    <!-- base href="https://www.e-education.psu.edu/geog489/node/2357" -->
+    <title>4.11.1 Creating a Plugin Template with Plugin Builder 3</title>
+    <script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/jquery.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/jquery-extend-3.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/jquery_002.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/drupal.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/shCore.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/shBrushBash.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/shBrushJScript.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/shBrushJson.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/shBrushPhp.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/shBrushPython.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/shBrushVb.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/printable_links.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/toggler.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/lti.js"></script>
+<script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/h5p-resizer.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/geog489\/","pathPrefix":"","ajaxPageState":{"theme":"gis","theme_token":"ElZa2FjUuzOtB3B8gYrjNKvkWn-8cWeuVsNvkgfQFqQ","js":{"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.7\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shCore.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushBash.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJScript.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJson.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPhp.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPowerShell.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPython.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushVb.js":1,"sites\/all\/modules\/custom_js_libraries\/printable_links\/printable_links.js":1,"sites\/all\/modules\/custom_js_libraries\/toggler\/toggler.js":1,"sites\/all\/themes\/gis\/lti.js":1,"sites\/all\/themes\/gis\/..\/..\/modules\/h5p\/library\/js\/h5p-resizer.js":1}}});
+//--><!]]>
+</script>
+        <meta name="robots" content="noindex, nofollow">        <style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.base.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.menus.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.messages.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.theme.css?psbola");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/book/book.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/field/theme/field.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/node/node.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/quiz/quiz.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/search/search.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/user/user.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/extlink/extlink.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/views/css/views.css?psbola");
+</style>
+<link type="text/css" rel="stylesheet" href="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/css_002.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/css_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/css.css" media="all">
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/hidden_nodes/hidden_nodes.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/ctools/css/ctools.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shCore.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shThemeDefault.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/taxonomy_access/taxonomy_access.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/print_ui/css/print_ui.theme.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/css/print.css?psbola");
+</style>
+  </head>
+  <body>
+            <div class="print-site_name">Published on <em class="placeholder">GEOG 489: Advanced Python Programming for GIS</em> (<a href="https://www.e-education.psu.edu/geog489">https://www.e-education.psu.edu/geog489</a>)</div>
+    <p>
+    </p><div class="print-breadcrumb"><a href="https://www.e-education.psu.edu/geog489/home.html">Home</a> &gt; <a href="https://www.e-education.psu.edu/geog489/node/1405">GEOG 489</a> &gt; <a href="https://www.e-education.psu.edu/geog489/l4.html">Lesson 4 Object-Oriented Programming in Python and QGIS Development</a> &gt; <a href="https://www.e-education.psu.edu/geog489/l4_p9.html">4.11 Optional: Writing QGIS Plugins</a> &gt; 4.11.1 Creating a Plugin Template with Plugin Builder 3</div>
+    <hr class="print-hr">
+        <div class="print-content"><div id="node-2357" class="section-4">
+  <h1 class="book-heading">4.11.1 Creating a Plugin Template with Plugin Builder 3</h1>
+  <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>The
+ plugin builder 3 plugin should already be installed in your QGIS 
+version. If not, please go back to Section 4.4.1 and follow the 
+installation instructions there. Now run the plugin by going Plugins 
+-&gt; Plugin Builder in the main menu.</p>
+
+<p>To create a template for your plugin, you have to work through the 
+dialog boxes of Plugin Builder and fill out the information there. 
+Clicking the “Help” button will open a local .html page with detailed 
+information on the purpose and meaning of the different fields. We fill 
+out the first page as shown in the figure below. Here is a brief 
+overview:</p>
+
+<ul><li>Class name: This is the name of the main class for our plugin. It needs to be a valid Python class name.</li>
+	<li>Plugin name: This is the name of the plugin in readable form. In 
+contrast to the class name, it can contain spaces and other special 
+characters.</li>
+	<li>Description: A short description of what the plugin is for.</li>
+	<li>Module name: The name of the .py file that will contain the main 
+class for your plugin. Typically, the class name written with 
+underscores rather than in CamelCase is used here.</li>
+	<li>Version number &amp; Minimum QGIS version: These are used to 
+specify a version number for your plugin and the minimum QGIS version 
+required to run it.</li>
+	<li>Author/Company &amp; Email address: Here you provide information 
+about the author of the plugin that will be used to create the copyright
+ information at the beginning of the different files. We have no 
+intentation of publishing this plugin, so we just use “489” here.</li>
+</ul><div class="img-center"><img alt="screenshot of qgis plugin builder first dialog window" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/pluginbuilder_1stpage.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.29 Filling out the first dialog page of Plugin Builder</div>
+</div>
+
+<p>On the next page, you can enter a longer description of your plugin. 
+Since this is just a toy example, we don’t bother with this here and 
+leave the text as it is.</p>
+
+<p>On the next page, you can choose between different kinds of templates
+ for your plugin, e.g. a simple dialog box or a dock widget, meaning an 
+actual panel that can be docked and moved inside the QGIS GUI like the 
+other panels, e.g. the Layers panel. We here will go with the dialog 
+option. In&nbsp;the next section, we will then use the dock widget 
+option. With the “Text for the menu item” option, we specify which text 
+should show up in the menu for our plugin in the main menu bar. With the
+ “Menu” option we pick in which menu of the menu bar this entry should 
+be located. We will fill out this page as shown below:</p>
+
+<div class="img-center"><img alt="screenshot of plugin builder template selection: tool button with dialog" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/pluginbuilder_3rdpage.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.30 Picking the template for our plugin</div>
+</div>
+
+<p>The checkboxes on the next page allow for determining which files 
+Plugin Builder is going to create. It’s ok to leave all options checked.</p>
+
+<p>The next page is specifying information that is relevant if you plan 
+to publish your plugin, e.g. on Github. Since we are not planning this, 
+we just leave the page unchanged.</p>
+
+<p>On the last page, we can determine in which folder the new folder 
+with the files for our plugin will be created. By default this is the 
+default plugin folder of our QGIS installation, meaning the plugin will 
+immediately be listed in QGIS when we start it next. If instead of the 
+path, you just see a dot (.), please browse to the plugins folder 
+yourself, replacing the part directly after "C:/Users/" with your 
+Windows user name.&nbsp;It is possible that the “AppData” folder in your
+ user’s home directory is not visible in which case you will have to 
+change your settings to show hidden files.</p>
+
+<div class="img-center"><img alt="screenshot of plugin builder with a selected location for creation and the generate button" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/pluginbuilder_lastpage_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.31 Final dialog page of Plugin Builder for picking the path where the folder for the plugin will be created</div>
+</div>
+
+<p>We now click the “Generate” button and Plugin Builder will then 
+create the folder and different files for our plugin. It will also show 
+us a summary page like in the figure below with some valuable 
+information about where the plugin has been created and what the next 
+steps should be. Even though we won’t be following these exactly, it’s a
+ good idea to take a screenshot of this information or&nbsp;note down 
+where the&nbsp;folder for our plugin&nbsp;is located. You may also 
+want&nbsp;to add the plugins folder under “Quick access” in your Windows
+ File Explorer since we will need to access it quite a lot in the 
+remainder of this lesson.</p>
+
+<div class="img-center"><img alt="screenshot of plugin builder results, location and last steps shown after you create a plugin" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/pluginbuilder_summary_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.32 Plugin Builder summary page after creating the new plugin</div>
+</div>
+
+<p>If we now open the new folder “randomnumbergenerator” in the QGIS 
+default plugin folder, you will see the following file structure:</p>
+
+<div class="img-center"><img alt="screenshot of plugin folder" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/pluginbuilder_files_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.33 Content of the folder created by Plugin Builder for our new&nbsp;plugin&nbsp;</div>
+</div>
+
+<p>In this introduction to QGIS plugin development, we won’t go into the
+ details of features like internationalization and test code generation,
+ so you can ignore the different subfolders and also some of the files 
+in the main folder. The important files are:</p>
+
+<ul><li><strong>random_number_generator.py</strong>: This file defines 
+the main class RandomNumberGenerator for our plugin. If you look at the 
+code that Plugin Builder 3 generated for this class, you will see that 
+this class has to define a number of methods to interact with QGIS and 
+its plugin interface. One central method is the method <em>run()</em> that in this case here shows our dialog box stored in instance variable <em>self.dlg</em>.
+ If we wanted some code to be executed only if the dialog box is 
+accepted (e.g. closed with the Ok button), then we would put that code 
+here after the “if result:” line.</li>
+	<li><strong>random_number_generator_dialog.py</strong>: This is the 
+class that defines the main GUI widget for our plugin derived from 
+QDialog. We will talk about this class in more detail in a moment 
+because this is the class that we are going to modify to implement what 
+needs to happen when the user interacts with the GUI of our plugin.</li>
+	<li><strong>random_number_generator_dialog_base.ui</strong>: This is 
+the class in which the GUI for our dialog box is defined. We will modify
+ it in QT Designer in a moment to adapt the GUI for our purposes.</li>
+	<li><strong>__init__.py</strong>: A file with this name needs to be 
+contained in the main folder of each plugin and it lets QGIS know about 
+the plugin. QGIS calls the <em class="gr-progress">classFactory</em><em>(…) </em>function defined in this file to create an object of the main class of the plugin (class RandomNumberGenerator in this case).</li>
+	<li><strong>metadata.txt</strong>: This file contains most of the info about our plugin that we entered into Plugin Builder.</li>
+</ul><p>When you now restart QGIS and open the plugin manager under 
+Plugins -&gt; Manage and Install Plugins… , the Random Number Generator 
+plugin should appear in the list of installed plugins but it still needs
+ to be activated. However, if we try to activate it now, we will get an 
+error message that no module called “randomnumbergenerator.resources” 
+can be found. This is a file that we have to generate ourselves by 
+compiling the file called resources.qrc located in our plugin folder 
+with the pyrcc5 tool. The resources file contains information about all 
+additional GUI related resources needed for our plugin, like additional 
+icons for example.</p>
+
+<p>Usually, you would edit the .qrc file first, e.g. in QT Designer, and
+ then compile it. But we don’t need any additional resources for this 
+project, so we just compile it directly with the following command in 
+the OSGeo4W shell after first running the commands "py3_env" and 
+"qt5_env" and moving to our plugin folder with the cd command.</p>
+
+<pre>pyrcc5 resources.qrc –o resources.py
+</pre>
+
+<div class="img-center"><img alt="Decorative image. See text surrounding image." src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/compilercc5_0.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.34 Commands for compiling the resource.qrc file in the OSGeo4W shell</div>
+</div>
+
+<p>After running this command, we can now activate the plugin by clicking on the checkbox:<img alt="plugin activation checkbox" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/pluginactivation.jpg"></p>
+
+<p>There will now be a submenu called “Random Number Generator” with an entry with the same name in the Plugins menu:</p>
+<img alt="Random Number Generator submenu" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/pluginentry.jpg"><p></p>
+
+<p>In addition, a toolbar with a single button has been added for our 
+plugin to the toolbar section at the top. Since we didn’t make any 
+changes, the default button&nbsp;<img alt="default button" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/defaultbutton.jpg"> is used. Either clicking the menu entry or the button will open the dialog box for our plugin:</p>
+
+<div class="img-center"><img alt="screenshot of blank random number generator window with okay and cancel tabs" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/emptyplugin.jpg"> &nbsp; &nbsp; &nbsp;
+	<div class="img-caption">Figure 4.35 Empty dialog box appearing after starting the new plugin in QGIS</div>
+</div>
+
+<p>Currently, the dialog box only contains the default elements, namely 
+two buttons for accepting and rejecting the dialog. We are now going to 
+change the GUI of the dialog box and add the random number generation 
+functionality</p>
+</div></div></div>  </div>
+</div>
+    <div class="print-footer">
+</div>
+    <hr class="print-hr">
+          <div class="print-source_url">
+        <strong>Source URL:</strong> https://www.e-education.psu.edu/geog489/node/2357      </div>
+        <div class="print-links"></div>
+    <script type="text/javascript" src="4.11.1%20Creating%20a%20Plugin%20Template%20with%20Plugin%20Builder%203_arquivos/syntaxhighlighter.js"></script>
+  
+
+</body></html>

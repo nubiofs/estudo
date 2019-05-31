@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr" class="js"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Drupal 7 (http://drupal.org)">
+    <!-- base href="https://www.e-education.psu.edu/geog489/node/2201" -->
+    <title>3.5.1 Python packages for (spatial) Data Science</title>
+    <script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/jquery.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/jquery-extend-3.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/jquery_002.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/drupal.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/shCore.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/shBrushBash.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/shBrushJScript.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/shBrushJson.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/shBrushPhp.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/shBrushPython.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/shBrushVb.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/printable_links.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/toggler.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/lti.js"></script>
+<script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/h5p-resizer.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/geog489\/","pathPrefix":"","ajaxPageState":{"theme":"gis","theme_token":"jWixWMjaaQeuhn7OzlpU1N8jeegAIpujUl314rkoMeg","js":{"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.7\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shCore.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushBash.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJScript.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJson.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPhp.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPowerShell.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPython.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushVb.js":1,"sites\/all\/modules\/custom_js_libraries\/printable_links\/printable_links.js":1,"sites\/all\/modules\/custom_js_libraries\/toggler\/toggler.js":1,"sites\/all\/themes\/gis\/lti.js":1,"sites\/all\/themes\/gis\/..\/..\/modules\/h5p\/library\/js\/h5p-resizer.js":1}}});
+//--><!]]>
+</script>
+        <meta name="robots" content="noindex, nofollow">        <style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.base.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.menus.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.messages.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.theme.css?psbola");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/book/book.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/field/theme/field.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/node/node.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/quiz/quiz.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/search/search.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/user/user.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/extlink/extlink.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/views/css/views.css?psbola");
+</style>
+<link type="text/css" rel="stylesheet" href="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/css_002.css" media="all">
+<link type="text/css" rel="stylesheet" href="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/css_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/css.css" media="all">
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/hidden_nodes/hidden_nodes.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/ctools/css/ctools.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shCore.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shThemeDefault.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/taxonomy_access/taxonomy_access.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/print_ui/css/print_ui.theme.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/css/print.css?psbola");
+</style>
+  </head>
+  <body>
+            <div class="print-site_name">Published on <em class="placeholder">GEOG 489: Advanced Python Programming for GIS</em> (<a href="https://www.e-education.psu.edu/geog489">https://www.e-education.psu.edu/geog489</a>)</div>
+    <p>
+    </p><div class="print-breadcrumb"><a href="https://www.e-education.psu.edu/geog489/home.html">Home</a> &gt; <a href="https://www.e-education.psu.edu/geog489/node/1405">GEOG 489</a> &gt; <a href="https://www.e-education.psu.edu/geog489/l3.html">Lesson 3 Python Geo and Data Science Packages &amp; Jupyter Notebooks</a> &gt; <a href="https://www.e-education.psu.edu/geog489/l3_p2.html">3.5 Python for Data Science</a> &gt; 3.5.1 Python packages for (spatial) Data Science</div>
+    <hr class="print-hr">
+        <div class="print-content"><div id="node-2201" class="section-4">
+  <h1 class="book-heading">3.5.1 Python packages for (spatial) Data Science</h1>
+  <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>It
+ would be impossible to introduce or even just list all the packages 
+available for conducting spatial data analysis projects in Python here, 
+so the following is just a small selection of those that we consider 
+most important.</p>
+
+<h3>numpy</h3>
+
+<p>numpy (<a href="https://pypi.python.org/pypi/numpy">Python numpy page</a> <span class="print-footnote">[1]</span>,&nbsp;<a href="https://en.wikipedia.org/wiki/NumPy">Wikipedia numpy page</a> <span class="print-footnote">[2]</span>)&nbsp;stands
+ for “Numerical Python” and is a library that adds support for 
+efficiently dealing with large and multi-dimensional arrays and matrices
+ to Python together with a large number of mathematical operations to 
+apply to these arrays, including many matrix and linear algebra 
+operations. Many other Python packages are built on top of the 
+functionality provided by numpy.</p>
+
+<h3>matplotlib</h3>
+
+<p>matplotlib (<a href="https://pypi.python.org/pypi/matplotlib">Python matplotlib page</a> <span class="print-footnote">[3]</span>, <a href="https://en.wikipedia.org/wiki/Matplotlib">Wikipedia matplot page</a> <span class="print-footnote">[4]</span>)
+ is an example of a Python library that builds on numpy. Its main focus 
+is on producing plots and embedding them into Python applications. Take a
+ quick look at its Wikipedia page to see a few examples of plots that 
+can be generated with matplotlib. We will be using matplotlib a few 
+times in this lesson’s walkthrough to quickly create simple map plots of
+ spatial data.</p>
+
+<h3>SciPy</h3>
+
+<p>SciPy (<a href="https://pypi.python.org/pypi/scipy">Python SciPy page</a> <span class="print-footnote">[5]</span>, <a href="https://en.wikipedia.org/wiki/SciPy">Wikipedia SciPy page</a> <span class="print-footnote">[6]</span>)&nbsp;is
+ a large Python library for application in mathematics, science, and 
+engineering. It is built on top of both numpy and matplotlib, providing 
+methods for optimization, integration, interpolation, signal processing 
+and image processing. Together numpy, matplotlib, and SciPy roughly 
+provide a similar functionality as the well known software Matlab. While
+ we won’t be using SciPy in this lesson, it is definitely worth checking
+ out if you're interested in advanced mathematical methods.</p>
+
+<h3>pandas</h3>
+
+<p>pandas (<a href="https://pypi.python.org/pypi/pandas/0.22.0">Python pandas page</a> <span class="print-footnote">[7]</span>, <a href="https://en.wikipedia.org/wiki/Pandas_%28software%29">Wikipedia pandas software page</a> <span class="print-footnote">[8]</span>)
+ provides functionality to efficiently work with tabular data, so-called
+ data frames, in a similar way as this is possible in R. Reading and 
+writing tabular data, e.g. to and from .csv files, manipulating and 
+subsetting data frames, merging and joining multiple data frames, and 
+time series support are key functionalities provided by the library. A 
+more detailed overview on pandas will be given in Section 3.8.&nbsp;</p>
+
+<h3>Shapely</h3>
+
+<p>Shapely (<a href="https://pypi.python.org/pypi/Shapely/1.6.3">Python Shapely page</a> <span class="print-footnote">[9]</span>, <a href="https://toblerity.org/shapely/manual.html">Shapely User Manual</a> <span class="print-footnote">[10]</span>)&nbsp;adds
+ the functionality to work with planar geometric features in Python, 
+including the creation and manipulation of geometries such as points, 
+polylines, and polygons, as well as set-theoretic analysis capabilities 
+(intersection, union, …). It is based on the widely used <a href="https://trac.osgeo.org/geos">GEOS</a> <span class="print-footnote">[11]</span> library, the geometry engine that is used in <a href="https://postgis.net/">PostGIS</a> <span class="print-footnote">[12]</span>, which in turn is based on the<a href="https://live.osgeo.org/en/overview/jts_overview.html"> Java Topology Suite</a> <span class="print-footnote">[13]</span>  (JTS) and largely follows the OGC’s <a href="https://en.wikipedia.org/wiki/Simple_Features">Simple Features Access Specification</a> <span class="print-footnote">[14]</span>.</p>
+
+<h3>geopandas</h3>
+
+<p>geopandas (<a href="https://pypi.python.org/pypi/geopandas/0.3.0">Python geopandas page</a> <span class="print-footnote">[15]</span>, <a href="http://geopandas.org/">GeoPandas page</a> <span class="print-footnote">[16]</span>)
+ combines pandas and Shapely to facilitate working with geospatial 
+vector data sets in Python. While we will mainly use it to create a 
+shapefile from Python, the provided functionality goes significantly 
+beyond that and includes geoprocessing operations, spatial join, 
+projections, and map visualizations.</p>
+
+<h3>GDAL/OGR</h3>
+
+<p>GDAL/OGR (<a href="https://pypi.python.org/pypi/GDAL/2.2.3">Python GDAL page</a> <span class="print-footnote">[17]</span>, <a href="http://gdal.org/python/">GDAL/OGR Python</a> <span class="print-footnote">[18]</span>)&nbsp;is
+ a powerful library for working with GIS data in many different formats 
+widely used from different programming languages. Originally, it 
+consisted of two separated libraries, GDAL (‘Geospatial Data Abstraction
+ Library‘) for working with raster data and OGR (used to stand for 
+‘OpenGIS Simple Features Reference Implementation’) for working with 
+vector data, but these have now been merged. The gdal Python package 
+provides an interface to the GDAL/OGR library written in C++. In Section
+ 3.9<span style="color:#e74c3c;">&nbsp;</span>and the lesson’s walkthrough, you will see some examples of applying GDAL/OGR.</p>
+
+<h3>ArcGIS API for Python</h3>
+
+<p>As we already mentioned at the beginning, Esri&nbsp;provides its own Python API&nbsp;(<a href="https://developers.arcgis.com/python/">ArcGIS for Python page</a> <span class="print-footnote">[19]</span>)&nbsp;for
+ working with maps and GIS data via their ArcGIS Online and Portal for 
+ArcGIS web platforms. The API allows for conducting administrative 
+tasks, performing vector and raster analyses, running geocoding tasks, 
+creating map visualizations, and more. While some services can be used 
+autonomously, many are tightly coupled to Esri’s web platforms and you 
+will at least need a free ArcGIS Online account. The Esri&nbsp;API for 
+Python will be further discussed in Section 3.10.</p>
+</div></div></div>  </div>
+</div>
+    <div class="print-footer">
+</div>
+    <hr class="print-hr">
+          <div class="print-source_url">
+        <strong>Source URL:</strong> https://www.e-education.psu.edu/geog489/node/2201      </div>
+        <div class="print-links"><p><strong>Links</strong><br>[1] https://pypi.python.org/pypi/numpy<br>
+[2] https://en.wikipedia.org/wiki/NumPy<br>
+[3] https://pypi.python.org/pypi/matplotlib<br>
+[4] https://en.wikipedia.org/wiki/Matplotlib<br>
+[5] https://pypi.python.org/pypi/scipy<br>
+[6] https://en.wikipedia.org/wiki/SciPy<br>
+[7] https://pypi.python.org/pypi/pandas/0.22.0<br>
+[8] https://en.wikipedia.org/wiki/Pandas_(software)<br>
+[9] https://pypi.python.org/pypi/Shapely/1.6.3<br>
+[10] https://toblerity.org/shapely/manual.html<br>
+[11] https://trac.osgeo.org/geos<br>
+[12] https://postgis.net/<br>
+[13] https://live.osgeo.org/en/overview/jts_overview.html<br>
+[14] https://en.wikipedia.org/wiki/Simple_Features<br>
+[15] https://pypi.python.org/pypi/geopandas/0.3.0<br>
+[16] http://geopandas.org/<br>
+[17] https://pypi.python.org/pypi/GDAL/2.2.3<br>
+[18] http://gdal.org/python/<br>
+[19] https://developers.arcgis.com/python/<br>
+</p></div>
+    <script type="text/javascript" src="3.5.1%20Python%20packages%20for%20%28spatial%29%20Data%20Science_arquivos/syntaxhighlighter.js"></script>
+  
+
+</body></html>

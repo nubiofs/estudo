@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr" class="js"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Drupal 7 (http://drupal.org)">
+    <!-- base href="https://www.e-education.psu.edu/geog489/node/2318" -->
+    <title>4.12.1 Create Template with Plugin Builder</title>
+    <script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/jquery.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/jquery-extend-3.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/jquery_002.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/drupal.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/shCore.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/shBrushBash.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/shBrushJScript.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/shBrushJson.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/shBrushPhp.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/shBrushPython.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/shBrushVb.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/printable_links.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/toggler.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/lti.js"></script>
+<script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/h5p-resizer.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/geog489\/","pathPrefix":"","ajaxPageState":{"theme":"gis","theme_token":"MidcHWgZ13fy7uNwY1ba14XmsJGAaSCOuNlsVcIz7sU","js":{"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.7\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shCore.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushBash.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJScript.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJson.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPhp.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPowerShell.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPython.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushVb.js":1,"sites\/all\/modules\/custom_js_libraries\/printable_links\/printable_links.js":1,"sites\/all\/modules\/custom_js_libraries\/toggler\/toggler.js":1,"sites\/all\/themes\/gis\/lti.js":1,"sites\/all\/themes\/gis\/..\/..\/modules\/h5p\/library\/js\/h5p-resizer.js":1}}});
+//--><!]]>
+</script>
+        <meta name="robots" content="noindex, nofollow">        <style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.base.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.menus.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.messages.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.theme.css?psbola");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/book/book.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/field/theme/field.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/node/node.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/quiz/quiz.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/search/search.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/user/user.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/extlink/extlink.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/views/css/views.css?psbola");
+</style>
+<link type="text/css" rel="stylesheet" href="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/css_002.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/css_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/css.css" media="all">
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/hidden_nodes/hidden_nodes.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/ctools/css/ctools.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shCore.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shThemeDefault.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/taxonomy_access/taxonomy_access.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/print_ui/css/print_ui.theme.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/css/print.css?psbola");
+</style>
+  </head>
+  <body>
+            <div class="print-site_name">Published on <em class="placeholder">GEOG 489: Advanced Python Programming for GIS</em> (<a href="https://www.e-education.psu.edu/geog489">https://www.e-education.psu.edu/geog489</a>)</div>
+    <p>
+    </p><div class="print-breadcrumb"><a href="https://www.e-education.psu.edu/geog489/home.html">Home</a> &gt; <a href="https://www.e-education.psu.edu/geog489/node/1405">GEOG 489</a> &gt; <a href="https://www.e-education.psu.edu/geog489/l4.html">Lesson 4 Object-Oriented Programming in Python and QGIS Development</a> &gt; <a href="https://www.e-education.psu.edu/geog489/node/2316">4.12 Optional: Turning the Bus Event Analyzer into a QGIS Plugin</a> &gt; 4.12.1 Create Template with Plugin Builder</div>
+    <hr class="print-hr">
+        <div class="print-content"><div id="node-2318" class="section-4">
+  <h1 class="book-heading">4.12.1 Create Template with Plugin Builder</h1>
+  <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>To create a folder with a template version for this plugin, please follow the steps below.</p>
+
+<ol><li>Run the Plugin Builder plugin and fill out the first page as follows before clicking “Next &gt;”:
+		<div class="img-center"><img alt=" Screenshot of plugin builder firstt page" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/create_plugin_1_0.jpg"><div class="img-caption">Figure 4.40 First Plugin Builder dialog page with information about the new plugin</div>
+		</div>
+	</li>
+	<li>Just click “Next &gt;” again as we will skip the description part 
+and then on the next page pick the “Tool button with dock widget” 
+template at the top and fill out the rest of the information as shown 
+below before pressing “Next &gt;” again.
+		<div class="img-center"><img alt=" Screenshot of plugin builder with template selection--see caption" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/create_plugin_2.jpg"><div class="img-caption">Figure 4.41 Picking the "Tool button with dock widget" template in Plugin Builder</div>
+		</div>
+	</li>
+	<li>We will keep the default settings for the following setup pages, so
+ just keep pressing “Next &gt;” until you arrive at the last page where 
+the button is called “Generate” instead. Take a look at the paths where 
+Plugin Builder is going to create the folder for the new plugin. It 
+might be a good idea to copy the path to somewhere where you can 
+retrieve it at any time. Now click on “Generate” and the folder for the 
+plugin will be created.</li>
+	<li>If you now navigate to the plugins folder from the previous step, 
+it will contain a new folder called “bustrackanalyzerforqgis”. Enter 
+that folder and check out the files that have been created. The content 
+should look like this:
+		<div class="img-center"><img alt=" Screenshot of created file" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/create_plugin_3_0_0.jpg" style="width: 750px; height: 460px;"><div class="img-caption">Figure 4.42 Newly created plugin folder with files for our plugin</div>
+		</div>
+	</li>
+	<li>Please close QGIS for a moment. We still need to compile the file 
+resources.qrc into a Python .py file with the help of pyrcc5 as we did 
+in Section 4.11. For this, run OSGeo4W.bat from your OSGeo4W/QGIS 
+installation and in the shell that opens up, run the commands
+		<pre class="brush: &lt;inserttype&gt;">py3_env 
+qt5_env</pre>
+	</li>
+	<li>Now use cd to navigate to the folder containing your plugin, e.g. 
+type in the following command but adapt the path to match the path from 
+steps 3 and 4:
+		<pre class="brush: &lt;inserttype&gt;">cd C:\Users\xyz\AppData\roaming\QGIS\QGIS3\profiles\default\python\plugins\bustrackanalyzerforqgis</pre>
+	</li>
+	<li>Finally, compile the file with the command below. There should now be a file called resources.py in your plugin folder.
+		<pre class="brush: &lt;inserttype&gt;">pyrcc5 resources.qrc –o resources.py</pre>
+	</li>
+	<li>You can now restart QGIS and open the plugin manager where “Bus 
+Track Analyzer for QGIS” should now appear in the list of installed 
+plugins. Enable it and then check the Plugins menu to make sure there is
+ now an entry “Bus Track Analyzer for QGIS” there. Start the plugin and a
+ rather empty dock widget will appear in the right part of the QGIS 
+window. Try moving this dock widget around. You will see that you can 
+move it to the other areas of the main QGIS window or completely undock 
+it and have it as an independent window on the screen.</li>
+</ol></div></div></div>  </div>
+</div>
+    <div class="print-footer">
+</div>
+    <hr class="print-hr">
+          <div class="print-source_url">
+        <strong>Source URL:</strong> https://www.e-education.psu.edu/geog489/node/2318      </div>
+        <div class="print-links"></div>
+    <script type="text/javascript" src="4.12.1%20Create%20Template%20with%20Plugin%20Builder_arquivos/syntaxhighlighter.js"></script>
+  
+
+</body></html>

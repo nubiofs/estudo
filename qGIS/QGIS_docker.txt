@@ -10,6 +10,8 @@ https://github.com/spatialthoughts/qgis-tutorials/tree/master/downloads
 
 https://www.qgistutorials.com/es/docs/digitizing_basics.html
 
+--> https://www.e-education.psu.edu/geog489/node/2295
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 https://github.com/qgis/QGIS/tree/master/.docker
@@ -41,8 +43,15 @@ obs.:	IMPORTANTE:
 	$ docker ps
 	$ docker exec -it -u 0 13388846d193 /bin/bash
 
+	==> This is the QT Designer executable that you can use for creating Qt5 GUIs:
 	root@cd188d5f9fec:/# designer 
 
+	==> for compiling QT5 resource files
+	root@cd188d5f9fec:/# pyrcc5 
+		PyQt5 resource compiler
+		Usage: pyrcc5 [options] <inputs>
+	
+	==> teste acesso geoServer:
 	$ wget http://172.17.0.5:8080/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
 
 
@@ -55,6 +64,17 @@ E
 
 (para wmts)
 ==> URL = http://172.17.0.5:8080/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
+
+
+obs.:
+
+Go to Plugins -> Manage and Install Plugins in the main menu bar
+Under "Settings", make sure the box next to "Show also experimental plugins" is checked.
+Under "Not installed" look for the following three plugins and install them:
+
+    QuickMapServices (allows for quickly adding basemaps like OSM to a project)
+    Plugin Builder 3 (for creating templates for new plugins)
+    Plugin Reloader (for reloading a plugin after modifying the code)
 
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

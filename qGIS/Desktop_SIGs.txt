@@ -5,6 +5,8 @@ gvSIG - plugins in Python
 GRASS - plugins in Python
 uDig
 SAGA
+MapWindow GIS - open source project C# for the .NET platform
+SPRING
 
 - proprietários:
 ArcGIS - plugins in Python

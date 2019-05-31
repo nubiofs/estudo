@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html dir="ltr" class="js" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Drupal 7 (http://drupal.org)">
+<link rel="canonical" href="https://www.e-education.psu.edu/geog489/l3_p6.html">
+<link rel="shortlink" href="https://www.e-education.psu.edu/geog489/node/2045">
+<link rel="prev" href="https://www.e-education.psu.edu/geog489/node/2213">
+<link rel="up" href="https://www.e-education.psu.edu/geog489/l3.html">
+<link rel="next" href="https://www.e-education.psu.edu/geog489/node/2214">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>3.9 GDAL/OGR | GEOG 489: Advanced Python Programming for GIS</title>  
+  <style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.base.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.menus.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.messages.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/system/system.theme.css?psbola");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/modules/book/book.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/field/theme/field.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/node/node.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/quiz/quiz.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/search/search.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/modules/user/user.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/extlink/extlink.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/views/css/views.css?psbola");
+</style>
+<link type="text/css" rel="stylesheet" href="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/css.css" media="all">
+<link type="text/css" rel="stylesheet" href="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/css_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/css_002.css" media="all">
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/hidden_nodes/hidden_nodes.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/ctools/css/ctools.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shCore.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/syntaxhighlighter_3.0.83/styles/shThemeDefault.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/taxonomy_access/taxonomy_access.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/print/print_ui/css/print_ui.theme.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/modules/responsive_menus/styles/responsive_menus_simple/css/responsive_menus_simple.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/libraries/superfish/css/superfish.css?psbola");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/alpha-reset.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/alpha-mobile.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/alpha-alpha.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/formalize.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-text.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-branding.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-menu.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-forms.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/omega/css/omega-visuals.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/global.css?psbola");
+</style>
+
+<!--[if (lt IE 9)&(!IEMobile)]>
+<style type="text/css" media="all">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default-normal.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/grid/alpha_default/normal/alpha-default-normal-12.css?psbola");
+</style>
+<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<style type="text/css" media="all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default-narrow.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/grid/alpha_default/narrow/alpha-default-narrow-12.css?psbola");
+</style>
+<!--<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<style type="text/css" media="all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)">
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/gis/css/gis-alpha-default-normal.css?psbola");
+@import url("https://www.e-education.psu.edu/geog489/sites/all/themes/omega/alpha/css/grid/alpha_default/normal/alpha-default-normal-12.css?psbola");
+</style>
+<!--<![endif]-->
+  <script async="" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/analytics.js"></script><script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery-extend-3.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery_003.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/drupal.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shCore.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushBash.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushJScript.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushJson.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushPhp.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushPython.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/shBrushVb.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/extlink.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/printable_links.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/toggler.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/responsive_menus_simple.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/googleanalytics.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-24504751-35", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery_002.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/sfsmallscreen.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/supposition.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/superfish.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/supersubs.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/superfish_002.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/lti.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/h5p-resizer.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/jquery_004.js"></script>
+<script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/omega-mediaqueries.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/geog489\/","pathPrefix":"","ajaxPageState":{"theme":"gis","theme_token":"RilODlengrwCLWXYT8DJ_dQZ5FXmPndw6c90Sc5uCV0","js":{"sites\/all\/modules\/syntaxhighlighter\/syntaxhighlighter.min.js":1,"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.7\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shCore.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushBash.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJScript.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushJson.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPhp.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPowerShell.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushPython.js":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/scripts\/shBrushVb.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_js_libraries\/printable_links\/printable_links.js":1,"sites\/all\/modules\/custom_js_libraries\/toggler\/toggler.js":1,"sites\/all\/modules\/responsive_menus\/styles\/responsive_menus_simple\/js\/responsive_menus_simple.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/libraries\/superfish\/jquery.hoverIntent.minified.js":1,"sites\/all\/libraries\/superfish\/sfsmallscreen.js":1,"sites\/all\/libraries\/superfish\/supposition.js":1,"sites\/all\/libraries\/superfish\/superfish.js":1,"sites\/all\/libraries\/superfish\/supersubs.js":1,"sites\/all\/modules\/superfish\/superfish.js":1,"sites\/all\/themes\/gis\/lti.js":1,"sites\/all\/themes\/gis\/..\/..\/modules\/h5p\/library\/js\/h5p-resizer.js":1,"sites\/all\/themes\/omega\/omega\/js\/jquery.formalize.js":1,"sites\/all\/themes\/omega\/omega\/js\/omega-mediaqueries.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/book\/book.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"sites\/all\/modules\/quiz\/quiz.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/extlink\/extlink.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"https:\/\/fonts.googleapis.com\/css?family=Inconsolata:regular,700\u0026subset=latin-ext":1,"https:\/\/fonts.googleapis.com\/css?family=Open+Sans:300,regular,600,700\u0026subset=latin-ext":1,"https:\/\/fonts.googleapis.com\/css?family=PT+Serif\u0026subset=latin-ext":1,"sites\/all\/modules\/hidden_nodes\/hidden_nodes.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/styles\/shCore.css":1,"sites\/all\/libraries\/syntaxhighlighter_3.0.83\/styles\/shThemeDefault.css":1,"sites\/all\/modules\/taxonomy_access\/taxonomy_access.css":1,"sites\/all\/modules\/print\/print_ui\/css\/print_ui.theme.css":1,"sites\/all\/modules\/responsive_menus\/styles\/responsive_menus_simple\/css\/responsive_menus_simple.css":1,"sites\/all\/libraries\/superfish\/css\/superfish.css":1,"sites\/all\/themes\/gis\/print.css":1,"public:\/\/google_fonts.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-reset.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-mobile.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-alpha.css":1,"sites\/all\/themes\/omega\/omega\/css\/formalize.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-text.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-branding.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-menu.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-forms.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-visuals.css":1,"sites\/all\/themes\/gis\/css\/global.css":1,"ie::normal::sites\/all\/themes\/gis\/css\/gis-alpha-default.css":1,"ie::normal::sites\/all\/themes\/gis\/css\/gis-alpha-default-normal.css":1,"ie::normal::sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/normal\/alpha-default-normal-12.css":1,"narrow::sites\/all\/themes\/gis\/css\/gis-alpha-default.css":1,"narrow::sites\/all\/themes\/gis\/css\/gis-alpha-default-narrow.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/narrow\/alpha-default-narrow-12.css":1,"normal::sites\/all\/themes\/gis\/css\/gis-alpha-default.css":1,"normal::sites\/all\/themes\/gis\/css\/gis-alpha-default-normal.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/normal\/alpha-default-normal-12.css":1}},"responsive_menus":[{"toggler_text":"\u2630 Menu","selectors":["#main-menu","#superfish-1"],"media_size":"720","media_unit":"px","absolute":"1","remove_attributes":"1","responsive_menus_style":"responsive_menus_simple"}],"extlink":{"extTarget":"_blank","extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":0,"extExclude":"","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":0,"extAlertText":"This link will take you to an external web site.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"superfish":{"1":{"id":"1","sf":{"delay":"0","animation":{"opacity":"show","height":"show"},"speed":"\u0027fast\u0027","autoArrows":false,"dropShadows":false,"disableHI":false},"plugins":{"smallscreen":{"mode":"window_width","addSelected":false,"menuClasses":false,"hyperlinkClasses":false,"title":"Main menu"},"supposition":true,"bgiframe":false,"supersubs":{"minWidth":"12","maxWidth":"27","extraWidth":1}}}},"urlIsAjaxTrusted":{"\/geog489\/l3_p6.html":true},"omega":{"layouts":{"primary":"normal","order":["narrow","normal"],"queries":{"narrow":"all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)","normal":"all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)"}}}});
+//--><!]]>
+</script>
+  <!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body class="html not-front not-logged-in page-node page-node- page-node-2045 node-type-page context-l3-p6html responsive-menus-load-processed omega-mediaqueries-processed responsive-layout-normal"><div id="omega-media-query-dummy"><style media="all">#omega-media-query-dummy { position: relative; z-index: -1; }</style><!--[if (lt IE 9)&(!IEMobile)]><style media="all">#omega-media-query-dummy { z-index: 1; }</style><![endif]--><style media="all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)">#omega-media-query-dummy { z-index: 0; }</style><style media="all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)">#omega-media-query-dummy { z-index: 1; }</style></div>
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div class="page clearfix" id="page">
+      <header id="section-header" class="section section-header">
+  <div id="zone-branding-wrapper" class="zone-wrapper zone-branding-wrapper clearfix">  
+  <div id="zone-branding" class="zone zone-branding clearfix container-12">
+    <div class="grid-12 region region-branding" id="region-branding">
+  <div class="region-inner region-branding-inner">
+        <div class="block block-block block-7 block-block-7 odd block-without-title" id="block-block-7">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div class="course-title-container">
+	<table><tbody><tr><td><span class="course-title">GEOG 489</span><br><span class="course-name"> Advanced Python Programming for GIS</span></td>
+			</tr></tbody></table></div>
+
+<p><a href="http://www.geog.psu.edu/" id="dept" class="ext" target="_blank" rel="noopener noreferrer"><span class="hidden">Geography Department</span></a> <a href="http://www.psu.edu/" id="psu" class="ext" target="_blank" rel="noopener noreferrer"><span class="hidden">Penn State</span></a></p>
+    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div><div id="zone-menu-wrapper" class="zone-wrapper zone-menu-wrapper clearfix">  
+  <div id="zone-menu" class="zone zone-menu clearfix container-12">
+    <div class="grid-12 region region-menu" id="region-menu">
+  <div class="region-inner region-menu-inner">
+        <div class="block block-superfish block-1 block-superfish-1 odd block-without-title" id="block-superfish-1">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div data-mediasize="720" class="responsive-menus responsive-menus-0-1 absolute"><span class="toggler">☰ Menu</span><ul id="superfish-1" class="menu sf-menu sf-main-menu sf-horizontal sf-style-none sf-total-items-5 sf-parent-items-1 sf-single-items-4 responsive-menus-simple superfish-processed sf-js-enabled"><li id="menu-2069-1" class="first odd sf-item-1 sf-depth-1 sf-no-children"><a href="https://www.e-education.psu.edu/geog489/home.html" class="sf-depth-1">Home</a></li><li id="menu-2077-1" class="middle even sf-item-2 sf-depth-1 sf-no-children"><a href="https://www.e-education.psu.edu/geog489/syllabus" class="sf-depth-1">Syllabus</a></li><li id="menu-2079-1" class="middle odd sf-item-3 sf-depth-1 sf-no-children"><a href="https://www.e-education.psu.edu/geog489/node/1405" class="sf-depth-1">Lessons</a></li><li id="menu-2081-1" class="middle even sf-item-4 sf-depth-1 sf-total-children-4 sf-parent-children-0 sf-single-children-4 menuparent"><a href="https://www.e-education.psu.edu/geog489/node/2148" class="sf-depth-1 menuparent">Resources</a><ul id="rm-no-id-1" class="rm-no-class sf-hidden" style="float: none; width: 16em;"><li id="menu-2083-1" class="first odd sf-item-1 sf-depth-2 sf-no-children" style=""><a href="https://www.e-education.psu.edu/geog489/node/2057" class="sf-depth-2" style="">Instructor Information</a></li><li id="menu-2084-1" class="middle even sf-item-2 sf-depth-2 sf-no-children" style=""><a href="https://gis.e-education.psu.edu/" class="sf-depth-2 ext" target="_blank" rel="noopener noreferrer" style="">Program Home Page</a></li><li id="menu-2085-1" class="middle odd sf-item-3 sf-depth-2 sf-no-children" style=""><a href="http://guides.libraries.psu.edu/onlinestudentlibraryguide" class="sf-depth-2 ext" target="_blank" rel="noopener noreferrer" style="">Library Resources</a></li><li id="menu-2086-1" class="last even sf-item-4 sf-depth-2 sf-no-children" style=""><a href="https://www.e-education.psu.edu/geog489/node/2060" class="sf-depth-2" style="">Getting Help</a></li></ul></li><li id="menu-2082-1" class="last odd sf-item-5 sf-depth-1 sf-no-children"><a href="https://www.e-education.psu.edu/geog489/login" class="sf-depth-1">Login</a></li></ul></div>    </div>
+  </div>
+</div>  </div>
+</div>
+  </div>
+</div></header>    
+      <section id="section-content" class="section section-content">
+  <div id="zone-content-wrapper" class="zone-wrapper zone-content-wrapper clearfix">  
+  <div id="zone-content" class="zone zone-content clearfix container-12">    
+        
+        <div class="grid-9 region region-content" id="region-content">
+  <div class="region-inner region-content-inner">
+    <a id="main-content"></a>
+                <h1 class="title" id="page-title">3.9 GDAL/OGR</h1>
+                        <div class="block block-system block-main block-system-main odd block-without-title" id="block-system-main">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <article class="node node-page node-published node-not-promoted node-not-sticky author-jim-detwiler odd clearfix" id="node-page-2045">
+            
+  
+  <div class="content clearfix">
+    <span class="print-link"><span class="print_html"><a href="https://www.e-education.psu.edu/geog489/print/book/export/html/2045" title="Display a printer-friendly version of this page." class="print-page" rel="nofollow"><img class="print-icon print-icon-margin" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/print_icon.png" alt="Print" title="Print" width="16px" height="16px">Print</a></span></span><div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>After this general introduction to pandas, we come back to the geospatial domain and will talk about <a href="http://www.gdal.org/" class="ext" target="_blank" rel="noopener noreferrer">GDAL/OGR<span class="ext" aria-label="(link is external)"></span></a>
+ a bit. GDAL is a raster and vector processing library that has been 
+developed with a strong focus on supporting a large number of file 
+formats, being able to translate between the different formats, and 
+fostering data exchange. As we already mentioned, GDAL and OGR were 
+originally two separate libraries focusing on raster data (GDAL) and 
+vector data (OGR), respectively. These have now been merged and GDAL 
+(‘Geospatial Data Abstraction Library’) is commonly used to refer to the
+ combined library.</p>
+
+<p>GDAL had its initial release in the year 2000 and originally was 
+mainly developed by Frank Warmerdam. But since version 1.3.2, 
+responsibilities have been handed over to the GDAL/OGR Project 
+Management Committee under the umbrella of the <a href="https://www.osgeo.org/" class="ext" target="_blank" rel="noopener noreferrer">Open Source Geospatial Foundation<span class="ext" aria-label="(link is external)"></span></a>
+ (OSGeo). GDAL is available under the permissiveX/MIT style free 
+software license and has become one of the major open source GIS 
+libraries, used in many open source GIS software, including QGIS. The 
+GDAL Python package provides a wrapper around the GDAL C++ library that 
+allows for using its functionality in Python. Similar support exists for
+ other languages and it is also possible to use GDAL/OGR commands from 
+the command line of your operating system. The classes and functions of 
+the Python package are documented <a href="http://gdal.org/python/" class="ext" target="_blank" rel="noopener noreferrer">here<span class="ext" aria-label="(link is external)"></span></a>. In the following, we show a few examples illustrating common patterns of using the GDAL library with Python.</p>
+</div></div></div>  <div id="book-navigation-1405" class="book-navigation">
+    <ul class="menu"><li class="first leaf"><a href="https://www.e-education.psu.edu/geog489/node/2214">3.9.1 Working with vector data</a></li>
+<li class="last leaf"><a href="https://www.e-education.psu.edu/geog489/node/2215">3.9.2 Working with raster data</a></li>
+</ul>
+        <div class="page-links clearfix">
+
+
+
+              <a href="https://www.e-education.psu.edu/geog489/node/2213" class="page-previous" title="Go to previous page">‹ 3.8.6 Advanced data frame manipulation: Filtering via Boolean indexing</a>
+      
+              <a href="https://www.e-education.psu.edu/geog489/l3.html" class="page-up" title="Go to parent page">up</a>
+      
+
+
+              <a href="https://www.e-education.psu.edu/geog489/node/2214" class="page-next" title="Go to next page">3.9.1 Working with vector data ›</a>
+      
+
+    </div>
+    
+  </div>
+  </div>
+  
+  <div class="clearfix">
+          <nav class="links node-links clearfix"></nav>
+    
+      </div>
+</article>    </div>
+  </div>
+</div>      </div>
+</div><aside class="grid-3 region region-sidebar-first" id="region-sidebar-first">
+  <div class="region-inner region-sidebar-first-inner">
+    <div class="block block-block block-6 block-block-6 odd block-without-title" id="block-block-6">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div id="coursetitleright"><span class="coursenumber">GEOG 489:</span> <span class="coursetitle"> Advanced Python Programming for GIS</span></div>
+    </div>
+  </div>
+</div><div class="block block-search block-form block-search-form even block-without-title" id="block-search-form">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <form action="/geog489/l3_p6.html" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input title="Enter the terms you wish to search for." id="edit-search-block-form--2" name="search_block_form" size="15" maxlength="128" class="form-text" type="text">
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input id="edit-submit" name="op" value="Search" class="form-submit" type="submit"></div><input name="form_build_id" value="form-oMiiaRWgU0p4xu_VENl1tTzeAzasD1yNthJ4M_yJVhw" type="hidden">
+<input name="form_id" value="search_block_form" type="hidden">
+</div>
+</div></form>    </div>
+  </div>
+</div><section class="block block-menu-block block-4 block-menu-block-4 odd" id="block-menu-block-4">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Lessons</h2>
+            
+    <div class="content clearfix">
+      <div class="menu-block-wrapper menu-block-4 menu-name-book-toc-1405 parent-mlid-244 menu-level-1">
+  <ul class="menu"><li class="first collapsed menu-mlid-289"><a href="https://www.e-education.psu.edu/geog489/l1.html">Lesson 1 Python 3, ArcGIS Pro &amp; Multiprocessing</a></li>
+<li class="collapsed menu-mlid-280"><a href="https://www.e-education.psu.edu/geog489/l2.html">Lesson 2 GUI Development with PyQt5 and Package Management</a></li>
+<li class="expanded active-trail menu-mlid-271"><a href="https://www.e-education.psu.edu/geog489/l3.html" class="active-trail">Lesson 3 Python Geo and Data Science Packages &amp; Jupyter Notebooks</a><ul class="menu"><li class="first leaf menu-mlid-279"><a href="https://www.e-education.psu.edu/geog489/l3_p1.html">3.1 Overview and Checklist</a></li>
+<li class="leaf menu-mlid-2970"><a href="https://www.e-education.psu.edu/geog489/node/2348">3.2 Installing the required packages for this lesson</a></li>
+<li class="leaf menu-mlid-2820"><a href="https://www.e-education.psu.edu/geog489/node/2264">3.3 Regular expressions</a></li>
+<li class="leaf menu-mlid-2822"><a href="https://www.e-education.psu.edu/geog489/node/2266">3.4 Higher order functions</a></li>
+<li class="collapsed menu-mlid-274"><a href="https://www.e-education.psu.edu/geog489/l3_p2.html">3.5 Python for Data Science</a></li>
+<li class="collapsed menu-mlid-272"><a href="https://www.e-education.psu.edu/geog489/l3_p3.html">3.6 Jupyter Notebook</a></li>
+<li class="leaf menu-mlid-278"><a href="https://www.e-education.psu.edu/geog489/l3_p4.html">3.7 Species distribution modeling with R and the dismo package</a></li>
+<li class="collapsed menu-mlid-273"><a href="https://www.e-education.psu.edu/geog489/l3_p5.html">3.8 Pandas and the manipulation of tabular data</a></li>
+<li class="expanded active-trail active menu-mlid-277"><a href="https://www.e-education.psu.edu/geog489/l3_p6.html" class="active-trail active">3.9 GDAL/OGR</a><ul class="menu"><li class="first leaf menu-mlid-2769"><a href="https://www.e-education.psu.edu/geog489/node/2214">3.9.1 Working with vector data</a></li>
+<li class="last leaf menu-mlid-2770"><a href="https://www.e-education.psu.edu/geog489/node/2215">3.9.2 Working with raster data</a></li>
+</ul></li>
+<li class="collapsed menu-mlid-276"><a href="https://www.e-education.psu.edu/geog489/l3_p7.html">3.10 Esri ArcGIS API for Python</a></li>
+<li class="leaf menu-mlid-275"><a href="https://www.e-education.psu.edu/geog489/l3_p8.html">3.11 Walkthrough: Species distribution modeling with Jupyter</a></li>
+<li class="collapsed menu-mlid-1016"><a href="https://www.e-education.psu.edu/geog489/l3_concepts.html">3.12 Lesson 3 Practice Exercises</a></li>
+<li class="last leaf menu-mlid-2774"><a href="https://www.e-education.psu.edu/geog489/node/2219">3.13 Lesson 3 Assignment</a></li>
+</ul></li>
+<li class="leaf menu-mlid-2981"><a href="https://www.e-education.psu.edu/geog489/node/2362">Final Project Proposal Assignment</a></li>
+<li class="collapsed menu-mlid-260"><a href="https://www.e-education.psu.edu/geog489/l4.html">Lesson 4 Object-Oriented Programming in Python and QGIS Development</a></li>
+<li class="last leaf menu-mlid-245"><a href="https://www.e-education.psu.edu/geog489/l6.html">Term Project </a></li>
+</ul></div>
+    </div>
+  </div>
+</section><section class="block block-user block-online block-user-online even" id="block-user-online">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Who's online</h2>
+            
+    <div class="content clearfix">
+      <p>There are currently 0 users online.</p>    </div>
+  </div>
+</section>  </div>
+</aside>  </div>
+</div></section>    
+  
+      <footer id="section-footer" class="section section-footer">
+  <div id="zone-course-footer-wrapper" class="zone-wrapper zone-course-footer-wrapper clearfix">  
+  <div id="zone-course-footer" class="zone zone-course-footer clearfix container-12">
+    <div class="grid-12 region region-footer-first" id="region-footer-first">
+  <div class="region-inner region-footer-first-inner">
+    <div class="block block-block block-3 block-block-3 odd block-without-title" id="block-block-3">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <p>Authors and/or Instructors: James O'Brien, John A. Dutton 
+e-Education Institute, College of Earth and Mineral Sciences, The 
+Pennsylvania State University</p>
+<p>Jan Oliver Wallgrün, John A. Dutton e-Education Institute, College of
+ Earth and Mineral Sciences, The Pennsylvania State University</p>
+<p>Jim Detwiler, John A. Dutton e-Education Institute, College of Earth and Mineral Sciences, The Pennsylvania State University</p>
+<p>Andrew Murdoch, John A. Dutton e-Education Institute, College of Earth and Mineral Sciences, The Pennsylvania State University</p>
+<p></p><p>This courseware module is part of Penn State's College of Earth and Mineral Sciences' <a href="http://open.ems.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">OER Initiative<span class="ext" aria-label="(link is external)"></span></a>.</p>
+
+<p>Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="ext" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License<span class="ext" aria-label="(link is external)"></span></a>.</p>
+
+<p>The College of Earth and Mineral Sciences is committed to making its 
+websites accessible to all users, and welcomes comments or suggestions 
+on access improvements. Please send comments or suggestions on 
+accessibility to the <a href="mailto:editor@e-education.psu.edu?subject=Question/Feedback%20for%20GEOG%20489" class="mailto">site editor<span class="mailto" aria-label="(link sends e-mail)"></span></a>. The site editor may also be contacted with questions or comments about this Open Educational Resource.</p>
+
+    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div><div id="zone-dutton-footer-wrapper" class="zone-wrapper zone-dutton-footer-wrapper clearfix">  
+  <div id="zone-dutton-footer" class="zone zone-dutton-footer clearfix container-12">
+    <div class="grid-12 region region-footer-second" id="region-footer-second">
+  <div class="region-inner region-footer-second-inner">
+    <div class="block block-block block-4 block-block-4 odd block-without-title" id="block-block-4">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <p></p><div class="clearfix" id="dutton_footer">
+	<div class="col1"><a href="http://www.e-education.psu.edu/"><img alt="John A. Dutton e-Education Institute" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/dutton_logo_revised.png"></a>
+		<p>The John A. Dutton e-Education Institute is the learning design unit of the <a href="http://www.ems.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">College of Earth and Mineral Sciences<span class="ext" aria-label="(link is external)"></span></a> at <a href="http://www.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">The Pennsylvania State University<span class="ext" aria-label="(link is external)"></span></a>.</p>
+	</div>
+
+	<div class="col2">
+		<h3>Navigation</h3>
+
+		<ul><li><a href="http://www.e-education.psu.edu/">Home</a></li>
+			<li><a href="http://www.e-education.psu.edu/news">News</a></li>
+			<li><a href="http://www.e-education.psu.edu/about">About</a></li>
+			<li><a href="http://www.e-education.psu.edu/contact">Contact Us</a></li>
+			<li><a href="http://www.e-education.psu.edu/node/4">Programs and Courses</a></li>
+			<li><a href="http://www.e-education.psu.edu/node/3">People</a></li>
+			<li><a href="http://www.e-education.psu.edu/node/5">Resources</a></li>
+			<li><a href="http://www.e-education.psu.edu/node/6">Services</a></li>
+			<li><a href="https://www.e-education.psu.edu/geog489/user">Login</a></li>
+		</ul></div>
+
+	<div class="col3">
+		<h3>EMS</h3>
+
+		<ul><li><a href="http://www.ems.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">College of Earth and Mineral Sciences<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.eme.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Energy and Mineral Engineering<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.geog.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Geography<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.geosc.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Geosciences<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.matse.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Materials Science and Engineering<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.met.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Department of Meteorology and Atmospheric Science<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.eesi.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Earth and Environmental Systems Institute<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.energy.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Energy Institute<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.iee.psu.edu/ingar" class="ext" target="_blank" rel="noopener noreferrer">Institute for National Gas Research<span class="ext" aria-label="(link is external)"></span></a></li>
+		</ul></div>
+
+	<div class="col4">
+		<h3>Programs</h3>
+
+		<ul><li><a href="http://gis.e-education.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Online Geospatial Education Programs<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://ress.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">iMPS in Renewable Energy and Sustainability Policy Program Office<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://esp.e-education.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">BA in Energy and Sustainability Policy Program Office<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://earth.e-education.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">M.Ed. in Earth Sciences Program Office<span class="ext" aria-label="(link is external)"></span></a></li>
+		</ul></div>
+
+	<div class="col5">
+		<h3>Related Links</h3>
+
+		<ul><li><a href="https://www.yammer.com/psu.edu/#/threads/inGroup?type=in_group&amp;feedId=1099225" class="ext" target="_blank" rel="noopener noreferrer">Dutton Community Yammer Group<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://dlc.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Penn State Digital Learning Cooperative<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="http://www.worldcampus.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Penn State World Campus<span class="ext" aria-label="(link is external)"></span></a></li>
+			<li><a href="https://weblearning.psu.edu/" class="ext" target="_blank" rel="noopener noreferrer">Web Learning @ Penn State<span class="ext" aria-label="(link is external)"></span></a></li>
+		</ul></div>
+</div>
+
+<p></p>
+<style id="8777" type="text/css">
+<!--/*--><![CDATA[/* ><!--*/
+
+<!--/*--><![CDATA[/* ><!--*/
+@namespace url(http://www.w3.org/1999/xhtml);
+
+/*--><!]]]]><![CDATA[>*/
+
+/*--><!]]>*/
+</style><style id="3179" type="text/css">
+<!--/*--><![CDATA[/* ><!--*/
+
+<!--/*--><![CDATA[/* ><!--*/
+@namespace url(http://www.w3.org/1999/xhtml);
+
+/*--><!]]]]><![CDATA[>*/
+
+/*--><!]]>*/
+</style><style id="8727" type="text/css">
+<!--/*--><![CDATA[/* ><!--*/
+
+<!--/*--><![CDATA[/* ><!--*/
+@namespace url(http://www.w3.org/1999/xhtml);
+
+/*--><!]]]]><![CDATA[>*/
+
+/*--><!]]>*/
+</style>    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div><div id="zone-penn-state-footer-wrapper" class="zone-wrapper zone-penn-state-footer-wrapper clearfix">  
+  <div id="zone-penn-state-footer" class="zone zone-penn-state-footer clearfix container-12">
+    <div class="grid-12 region region-footer-third" id="region-footer-third">
+  <div class="region-inner region-footer-third-inner">
+    <div class="block block-block block-5 block-block-5 odd block-without-title" id="block-block-5">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <p></p><div class="clearfix" id="psu_footer">
+	<div class="col1"><a href="http://www.psu.edu/" target="_blank" rel="noopener noreferrer"><img alt="Penn State home page" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/psu_logo.png" style="width: 135px; height: 61px;"></a></div>
+
+	<div class="col2">
+		<p><a href="https://goo.gl/maps/9SC1XJVPTqD2" class="ext" target="_blank" rel="noopener noreferrer">2217 Earth and Engineering Sciences Building, University Park, Pennsylvania 16802<span class="ext" aria-label="(link is external)"></span></a><br><a href="http://www.psu.edu/contact-us" class="ext" target="_blank" rel="noopener noreferrer">Contact Us<span class="ext" aria-label="(link is external)"></span></a></p>
+	</div>
+
+	<div class="col3">
+		<p><a href="http://www.psu.edu/web-privacy-statement" class="ext" target="_blank" rel="noopener noreferrer">Privacy &amp; Legal Statements<span class="ext" aria-label="(link is external)"></span></a> | <a href="http://www.psu.edu/copyright-information" class="ext" target="_blank" rel="noopener noreferrer">Copyright Information<span class="ext" aria-label="(link is external)"></span></a><br>
+			The Pennsylvania State University © 2018</p>
+	</div>
+</div>
+
+    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div></footer>  </div>  <script type="text/javascript" src="3.9%20GDAL_OGR%20%7C%20GEOG%20489:%20Advanced%20Python%20Programming%20for%20GIS_arquivos/syntaxhighlighter.js"></script>
+
+
+</body></html>
