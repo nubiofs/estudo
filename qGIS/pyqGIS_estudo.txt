@@ -44,11 +44,13 @@ import qgis.utils
 >>> currentLayer.removeSelection()
 
 
-xxxxxxxxxxxxxxxxxx OK !!! FUNCIONAR !!!
+xxxxxxxxxxxxxxxxxx OK !!! FUNCIONA !!!
 
 layer = qgis.utils.iface.activeLayer()
 crsSrc = QgsCoordinateReferenceSystem(4326, QgsCoordinateReferenceSystem.EpsgCrsId)
-qgis.core.QgsVectorFileWriter.writeAsVectorFormat(layer, "/root/workspace/teste_agora_layer.json", "utf-8", crsSrc, "GeoJSON")
+error = qgis.core.QgsVectorFileWriter.writeAsVectorFormat(layer, "/root/workspace/teste_agora_layer.json", "utf-8", crsSrc, "GeoJSON")
+if error[0] == 0:
+	print("success again!")
 xxxxxxxxxxxxxxxxxx
 
 

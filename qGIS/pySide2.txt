@@ -1,0 +1,65 @@
+https://www.qt.io/download/?hsLang=en
+
+==> Melhor usar qt-designer ou qt-creator
+
+$ sudo apt install qttools5-dev-tools
+
+$ designer-qt4
+
+xxxxxxxxxxxxxxx
+
+
+https://hub.docker.com/r/ad5001/ubuntu-pyside2-xvfb/tags
+
+$ docker pull ad5001/ubuntu-pyside2-xvfb:disco-5.12.2
+
+$ docker run --rm -it --name pyside2 \
+-v /tmp/.X11-unix:/tmp/.X11-unix  \
+-e DISPLAY=unix$DISPLAY \
+ad5001/ubuntu-pyside2-xvfb:disco-5.12.2
+
+xxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+https://github.com/fredrikaverpil/pyside2-linux
+https://github.com/CentOS/sig-cloud-instance-images/blob/9a389e11460bd809bb83c5fd4f095dbc8398d8cc/docker/Dockerfile
+
+
+$ mkdir  pySide2/github/docker/ -p && cd /pySide2/docker
+
+$ git clone https://github.com/fredrikaverpil/pyside2-linux
+
+$ cd pyside2-linux
+
+$ cp Dockerfile.centos7-qt5.9.4 Dockerfile
+
+$ docker build -t pyside2-linux .
+//docker build -t pyside2-linux:centos7-qt5.9.4 .
+
+$ xhost +
+
+$ docker run --rm -it --name pyside2 \
+-v /tmp/.X11-unix:/tmp/.X11-unix  \
+-e DISPLAY=unix$DISPLAY \
+centos
+
+obs.:
+	$ source /opt/rh/devtoolset-6/enable
+	$ cd /opt/rh/devtoolset-6/root/usr/bin
+
+	/usr/bin/pip3.5 install --user --upgrade setuptools wheel 
+
+xxxxxxxxxx FERRAMENTAS: 
+
+
+$ mkdir /pySide2 && cd /pySide2
+
+/pySide2$ pipenv --python 3.6
+
+/pySide2$ pipenv shell
+
+pySide2$ pipenv run pip install pyside2
+
+pySide2$ pipenv run pip show pyside2
+
+pySide2$ pyside2

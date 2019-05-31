@@ -36,12 +36,13 @@ qgis/qgis:latest qgis
 
 This code snippet will launch QGIS inside a container and display the application on your screen.
 
-
-
-obs.:
+obs.:	IMPORTANTE:
 
 	$ docker ps
 	$ docker exec -it -u 0 13388846d193 /bin/bash
+
+	root@cd188d5f9fec:/# designer 
+
 	$ wget http://172.17.0.5:8080/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
 
 
