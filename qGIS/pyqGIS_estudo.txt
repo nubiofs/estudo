@@ -44,6 +44,63 @@ import qgis.utils
 >>> currentLayer.removeSelection()
 
 
+xxxxxxxxxxxxxxxxxx OK !!! FUNCIONAR !!!
+
+layer = qgis.utils.iface.activeLayer()
+crsSrc = QgsCoordinateReferenceSystem(4326, QgsCoordinateReferenceSystem.EpsgCrsId)
+qgis.core.QgsVectorFileWriter.writeAsVectorFormat(layer, "/root/workspace/teste_agora_layer.json", "utf-8", crsSrc, "GeoJSON")
+xxxxxxxxxxxxxxxxxx
+
+
+>>> qgis.core.QgsJsonUtils.exportAttributes(selected_features[0])
+
+layer = qgis.utils.iface.activeLayer()
+# layer.selectAll() # usar "Select Features by Polygon" ou "Select Features using an expression"
+selected_features = layer.selectedFeatures()
+for i in selected_features:
+	# attrs = i.attributeMap()
+	# i.fields().names()  ==> ['ID_LOTE_CT', 'NULOTCTM', 'ID_QUADRA_']
+	# print(...	i['ID_LOTE_CT']	i['NULOTCTM']	i['ID_QUADRA_']
+	#
+	# ==> i.hasGeometry()
+	# ==> i.geometry()
+	#
+	# ==> i.geometry().asJson()
+	#
+	# ==> VER: 	dir(i.geometry())
+	# ==> i.geometry().type()
+	# ==> i.geometry().area()
+	#
+	# ==> i.__geo_interface__ ####  # GeoJSON attributes of a feature ####
+	# ==> s = str(i.__geo_interface__)
+	# ==> s.replace("'", "\"")
+	#
+	attrs = i.attributes()
+	# l = i.fields().toList()
+	# l[0].displayName()
+	# l[0].__doc__
+	# for (k, attr) in attrs.iteritems():
+	for (k, attr) in enumerate(attrs):
+		print("%d: %s", k, attr)
+
+
+
+def mapping_feature(feature):
+	i = feature
+	geom = feature.geometry() # Para uma unica geometria
+	'''
+	properties = {}
+	fields = [field.name() for field in feature.fields()]
+	properties = dict(zip(fields, feature.attributes()))
+	'''
+	# qgis.core.QgsJsonUtils.encodeValue(i.__geo_interface__)
+	s = str(i.__geo_interface__)
+	geo = s.replace("'", "\"")
+	# print("{}{}type{} : {}FeatureCollection{}{} {}features{} : [{}]{}".format("{", "\"", "\"", "\"", "\"", ",", "\"", "\"", geo, "}"))	
+	return { "type" : "FeatureCollection", "features" : [ geo ] }
+
+
+
 from qgis.core import Qgis
 qgis.utils.iface.messageBar().pushMessage("Error", "I'm sorry Dave, I'm afraid I can't do that", level=Qgis.Critical, duration=3) # 3 segundos
 '''
