@@ -6,7 +6,7 @@ GRASS - plugins in Python
 uDig
 SAGA
 MapWindow GIS - open source project C# for the .NET platform
-SPRING
+SPRING - INPE
 
 - proprietários:
 ArcGIS - plugins in Python
