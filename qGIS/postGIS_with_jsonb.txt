@@ -1,0 +1,110 @@
+https://postgis.net/docs/ST_GeomFromGeoJSON.html
+
+==> http://blog.cleverelephant.ca/2019/03/geojson.html
+(save in "web" -> "GeoJSON Features from PostGIS · Paul Ramsey.html")
+--> http://www.postgresonline.com/journal/archives/267-Creating-GeoJSON-Feature-Collections-with-JSON-and-PostGIS-functions.html
+
+
+https://giswiki.hsr.ch/PostGIS_-_Tipps_und_Tricks
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://stackoverflow.com/questions/38279833/postgis-query-st-intersects-with-geojson-jsonb :::
+
+First of all, the function jsonb_array_elements() returns a set so you should it as a table function in a FROM clause. Secondly, you should get the text representation of the jsonb field with the ->> operator and then cast that to geometry which you then use in a PostGIS function.
+
+To retrieve the geometries that are not NULL:
+
+	SELECT f.value ->> 'geom' AS geom
+	FROM my_object t
+	JOIN LATERAL jsonb_array_elements(t.location -> 'features') f ON true
+	WHERE f.value -> 'geom' IS NOT NULL;
+
+To do the intersect:
+
+	SELECT t.iid, ST_Intersects((f.value->>'geom')::geometry, ST_GeomFromText('POINT(11 51)'))
+	FROM my_object t
+	JOIN LATERAL jsonb_array_elements(t.location -> 'features') f ON true;
+
+You probably want to add some properties to the select list such that you can distinguish between multiple geometries for each row from your table.
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Sample spatial queries in PostGIS using SRID and GeoJSON 
+
+// create table with srid=4326
+CREATE TABLE testbert1
+(
+  id bigserial NOT NULL,
+  description character varying(500),
+  encodingtype integer,
+  location public.geometry(geometry,4326)
+)
+
+// insert geometry
+insert into testbert1(id,location)
+values(1,ST_SetSRID(ST_GeomFromGeoJSON('{"type":"Polygon","coordinates":[[[-114.017347,51.048005],[-114.014433,51.047927],[-114.005899,51.045381],[-114.017347,51.048005]]]}'),4326))
+
+// do spatial select
+select id, ST_AsText(location) from testbert1
+WHERE ST_Intersects(location,ST_SetSRID(ST_GeomFromGeoJSON('{"type":"Polygon","coordinates":[[[-114.017347,51.048005],[-114.014433,51.047927],[-114.005899,51.045381],[-114.017347,51.048005]]]}'),4326))
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+https://stackoverflow.com/questions/42567972/postgres-upsert-json-props
+
+"One of these is that most operations are upserts (update-insert), and these operations are not very common in relational databases, which subscribe to the CRUD paradigm - create, read, update, delete. Upsert is a two-in-one combination of both create and update operations."
+--> (https://haselt.com/blog/working-with-postgresql-jsonb)
+--> (http://blog.bguiz.com/2017/json-merge-postgresql/)
+--> (http://blog.bguiz.com/2017/postgresql-upsert-knex/#post-content-location-document-pattern-postgres)
+
+	INSERT INTO live_data(rec_id, control_data) 
+	VALUES ('1', '{"set":{"some_prop": 99}}');
+
+	INSERT INTO live_data(rec_id, control_data) 
+	VALUES ('1', '{"set":{"some_prop": 88}}')
+	ON CONFLICT (rec_id) DO 
+	UPDATE SET control_data = 
+	    jsonb_set(live_data.control_data, array['set','some_prop'], '88', true)
+	RETURNING *;
+
+	 rec_id |        control_data        
+	--------+----------------------------
+	 1      | {"set": {"some_prop": 88}}
+	(1 row)
+
+
+
+https://stackoverflow.com/questions/51341290/how-to-get-geojson-properties-from-psql-jsonb-build-object
+
+	SELECT jsonb_build_object(
+	    'type',       'Feature',
+	    'id',         gid,
+	    'geometry',   ST_AsGeoJSON(geom)::jsonb,
+	    'properties', to_jsonb(row) - 'gid' - 'geom'
+	) FROM 
+	 (SELECT * FROM al4 
+	   where ST_Intersects( ST_GeomFromText( 'Point(13.404954 52.520008)', 4326 ), al4.geom )
+	 ) row;
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+https://stackoverflow.com/questions/17267417/how-to-upsert-merge-insert-on-duplicate-update-in-postgresql
+https://stackoverflow.com/questions/36799104/how-to-correctly-do-upsert-in-postgres-9-5
+
+http://www.postgresqltutorial.com/postgresql-upsert/
+
+https://github.com/geotools/geotools/tree/master/modules/plugin/jdbc/jdbc-postgis/src/main/java/org/geotools/data/postgis
+
+https://gis.stackexchange.com/questions/60928/how-to-insert-a-geojson-polygon-into-a-postgis-table
+
+https://gis.stackexchange.com/questions/14514/exporting-feature-geojson-from-postgis
+
+https://gis.stackexchange.com/questions/112057/sql-query-to-have-a-complete-geojson-feature-from-postgis/191446#191446
+https://gis.stackexchange.com/questions/112057/sql-query-to-have-a-complete-geojson-feature-from-postgis
+
+https://developpaper.com/bulk-upsert-for-mysql-postgresql/
+
+https://imasters.com.br/back-end/executando-upsert-update-ou-insert-com-postgresql-e-php
+

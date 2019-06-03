@@ -1,0 +1,134 @@
+/* Default / narrow-screen CSS */
+
+p.note {
+  background-color: #eeeeff;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  padding-left: 1.0em;
+  padding-right: 1.0em;
+  font-size: 80%;
+}
+
+img.externalicon {
+  width: 16px;
+  height: 16px;
+  display: inline;
+  vertical-align: middle;
+  margin: 0;
+}
+
+figure.highlight {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.content {
+  padding-top:    2rem;
+  padding-bottom: 2rem;
+}
+
+.sidebar-about .lead {
+  display: none;
+  font-size: 110%;
+}
+
+.sidebar {
+  background-color: #265a87;
+  padding: 1.5rem 1rem;
+}
+
+.sidebar-nav-item {
+  display: inline;
+}
+li.sidebar-nav-item + li.sidebar-nav-item::before {
+    content: " | ";
+}
+
+.sidebar-nav-external {
+  display: inline;
+  margin-left: 0.4rem;
+  margin-right: 0.4rem;
+}
+
+.sidebar-about h1 {
+  font-family: "PT Sans", "Abril Fatface", serif;
+  font-size: 2.5rem;
+}
+
+ul.sidebar-nav {
+  padding-left: 0;
+}
+
+.post-navigation {
+  display: none;
+  margin-bottom: 2em;
+  font-size: 100%;
+}
+
+.post {
+  margin-bottom: 2em;
+}
+
+/* Wide-screen CSS */
+@media (min-width: 48em) {
+
+  .content {
+    padding-top:    4rem;
+    padding-bottom: 4rem;
+  }
+
+  .sidebar {
+    padding: 2rem 1rem;
+  }
+
+  .sidebar-about .lead {
+    display: block;
+  }
+
+  .sidebar-about h1 {
+    font-size: 3.25rem;
+  }
+
+  .post-navigation  {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+/*  .post-navigation a {
+    display: block;
+    width: 50%;
+    float: left;
+    margin: 1em 0;
+  }
+*/
+  
+  .post-navigation .next {
+    float: right;
+    clear: left;
+    margin-left: 2em;
+  }
+
+  .post-navigation .previous {
+    text-align: left;
+  }
+
+  .sidebar-nav-item {
+    display: block;
+  }
+
+  li.sidebar-nav-item + li.sidebar-nav-item::before {
+      content: none;
+  }
+
+  .sidebar-nav-external {
+    display: block;
+    font-size: 80%;
+  }
+  
+  hr {
+    border-top: 2px solid #265a87;
+  }
+}
+
+

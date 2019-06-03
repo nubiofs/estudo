@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us"><head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      GeoJSON Features from PostGIS · Paul Ramsey
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/poole.css">
+  <link rel="stylesheet" href="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/syntax.css">
+  <link rel="stylesheet" href="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/hyde.css">
+  <link rel="stylesheet" href="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/css.css">
+  <link rel="stylesheet" href="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/hyde-extra.css">
+
+  <!-- Icons -->
+  <link rel="shortcut icon" type="image/png" href="http://blog.cleverelephant.ca/public/elephant-icon.png">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://blog.cleverelephant.ca/atom.xml">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@pwramsey">
+  <meta name="twitter:creator" content="@pwramsey">
+  
+    <meta name="twitter:title" content="GeoJSON Features from PostGIS">
+  
+  
+    <meta name="twitter:url" content="http://blog.cleverelephant.ca/2019/03/geojson.html">
+  
+  
+    <meta name="twitter:description" content="Every once in a while, someone comes to me and says:
+
+
+  Sure, it’s handy to use ST_AsGeoJSON to convert a geometry into a JSON equivalent, but all the web clients out there like to receive full GeoJSON Features and I end up writing boilerplate to convert database rows into GeoJSON. Also, the only solution I can find on the web is scary and complex. Why don’t you have a row_to_geojson function?...">
+  
+  
+    <meta name="twitter:image:src" content="http://blog.cleverelephant.ca/images/2019/geojson.png">
+  
+  
+  <!-- Facebook -->
+  <meta property="og:site_name" content="Paul Ramsey">
+  
+    <meta property="og:title" content="GeoJSON Features from PostGIS">
+  
+  
+    <meta property="og:type" content="article">
+  
+  
+    <meta property="og:description" content="Every once in a while, someone comes to me and says:
+
+
+  Sure, it’s handy to use ST_AsGeoJSON to convert a geometry into a JSON equivalent, but all the web clients out there like to receive full GeoJSON Features and I end up writing boilerplate to convert database rows into GeoJSON. Also, the only solution I can find on the web is scary and complex. Why don’t you have a row_to_geojson function?...">
+  
+  
+    <meta property="og:url" content="http://blog.cleverelephant.ca/2019/03/geojson.html">
+  
+  
+    <meta property="article:published_time" content="2019-03-27T13:00:00+00:00">
+    <meta property="article:author" content="http://blog.cleverelephant.ca/about.html">
+  
+  
+    <meta property="og:image" content="http://blog.cleverelephant.ca/images/2019/geojson.png">
+  
+  
+    
+    <meta property="article:section" content="technology">
+    
+  
+  
+    
+    <meta property="article:tag" content="geojson">
+    
+    <meta property="article:tag" content="postgis">
+    
+  
+
+<script async="" src="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/analytics.js"></script><script src="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/embed.js" data-timestamp="1559565162246"></script><link rel="prefetch" href="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/a_data/lounge.css"><link rel="prefetch" href="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/a_data/common.js"><link rel="prefetch" href="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/a_data/lounge.js"><link rel="prefetch" href="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/a_data/config.js"></head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>Paul Ramsey</h1>
+      <p id="description" class="lead">Open source software developer and information technology professional.<br>Occasional blowhard.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+        <a href="http://blog.cleverelephant.ca/">Home</a>
+      </li>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="http://blog.cleverelephant.ca/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="http://blog.cleverelephant.ca/archive">Archive</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="http://blog.cleverelephant.ca/projects">Projects</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="http://blog.cleverelephant.ca/writings">Talks &amp; Writing</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-external">
+        <img class="externalicon" src="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/github.png">&nbsp;<a href="http://github.com/pramsey">GitHub</a></li>
+      <li class="sidebar-nav-external">
+        <img class="externalicon" src="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/twitter.png">&nbsp;<a href="http://twitter.com/pwramsey">Twitter</a></li>
+      <li class="sidebar-nav-external">
+        <img class="externalicon" src="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/linkedin.png">&nbsp;<a href="http://linkedin.com/in/paul-ramsey-717134">LinkedIn</a></li>
+    </ul>
+    
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">GeoJSON Features from PostGIS</h1>
+  <span class="post-date">27 Mar 2019</span>
+  <p>Every once in a while, someone comes to me and <a href="https://trac.osgeo.org/postgis/ticket/1833">says</a>:</p>
+
+<blockquote>
+  <p>Sure, it’s handy to use <a href="http://postgis.net/docs/ST_AsGeoJSON.html">ST_AsGeoJSON</a> to convert a geometry into a JSON equivalent, but all the web clients out there like to receive full GeoJSON <a href="https://tools.ietf.org/html/rfc7946#section-3.2">Features</a> and I end up writing boilerplate to convert database rows into GeoJSON. Also, the only solution I can find on the web is <a href="http://www.postgresonline.com/journal/archives/267-Creating-GeoJSON-Feature-Collections-with-JSON-and-PostGIS-functions.html">scary and complex</a>. Why don’t you have a <code class="highlighter-rouge">row_to_geojson</code> function?</p>
+</blockquote>
+
+<p>And the answer (still) is that working with rows is fiddly and I don’t really feel like it.</p>
+
+<p>However! It turns out that, with the tools for JSON manipulation 
+already in PostgreSQL and a little scripting it’s possible to make a 
+passable function to do the work.</p>
+
+<p>Start with a simple table.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="n">mytable</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">mytable</span> <span class="p">(</span>
+  <span class="n">pk</span> <span class="n">SERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+  <span class="n">name</span> <span class="n">TEXT</span><span class="p">,</span>
+  <span class="k">size</span> <span class="n">DOUBLE</span> <span class="k">PRECISION</span><span class="p">,</span>
+  <span class="n">geom</span> <span class="n">GEOMETRY</span>
+<span class="p">);</span>
+
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">mytable</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="k">size</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span> <span class="k">VALUES</span>
+  <span class="p">(</span><span class="s1">'Peter'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'POINT(2 34)'</span><span class="p">),</span>
+  <span class="p">(</span><span class="s1">'Paul'</span><span class="p">,</span> <span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'POINT(5 67)'</span><span class="p">);</span></code></pre></figure>
+
+<p>You can convert any row into a JSON structure using the <a href="https://www.postgresql.org/docs/10/functions-json.html">to_jsonb()</a> function.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT to_jsonb(mytable.*) FROM mytable;
+
+ {"pk": 1, "geom": "010100000000000000000000400000000000004140", "name": "Peter", "size": 1}
+ {"pk": 2, "geom": "010100000000000000000014400000000000C05040", "name": "Paul", "size": 2}
+</code></pre></div></div>
+
+<p>That’s actually all the information we need to create a GeoJSON 
+feature, it just needs to be re-arranged. So let’s make a little utility
+ function to re-arrange it.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">rowjsonb_to_geojson</span><span class="p">(</span>
+  <span class="n">rowjsonb</span> <span class="n">JSONB</span><span class="p">,</span> 
+  <span class="n">geom_column</span> <span class="n">TEXT</span> <span class="k">DEFAULT</span> <span class="s1">'geom'</span><span class="p">)</span>
+<span class="k">RETURNS</span> <span class="n">TEXT</span> <span class="k">AS</span> 
+<span class="err">$$</span>
+<span class="k">DECLARE</span> 
+ <span class="n">json_props</span> <span class="n">jsonb</span><span class="p">;</span>
+ <span class="n">json_geom</span> <span class="n">jsonb</span><span class="p">;</span>
+ <span class="n">json_type</span> <span class="n">jsonb</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+ <span class="n">IF</span> <span class="k">NOT</span> <span class="n">rowjsonb</span> <span class="o">?</span> <span class="n">geom_column</span> <span class="k">THEN</span>
+   <span class="n">RAISE</span> <span class="n">EXCEPTION</span> <span class="s1">'geometry column </span><span class="se">''</span><span class="s1">%</span><span class="se">''</span><span class="s1"> is missing'</span><span class="p">,</span> <span class="n">geom_column</span><span class="p">;</span>
+ <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
+ <span class="n">json_geom</span> <span class="p">:</span><span class="o">=</span> <span class="n">ST_AsGeoJSON</span><span class="p">((</span><span class="n">rowjsonb</span> <span class="o">-&gt;&gt;</span> <span class="n">geom_column</span><span class="p">)::</span><span class="n">geometry</span><span class="p">)::</span><span class="n">jsonb</span><span class="p">;</span>
+ <span class="n">json_geom</span> <span class="p">:</span><span class="o">=</span> <span class="n">jsonb_build_object</span><span class="p">(</span><span class="s1">'geometry'</span><span class="p">,</span> <span class="n">json_geom</span><span class="p">);</span>
+ <span class="n">json_props</span> <span class="p">:</span><span class="o">=</span> <span class="n">jsonb_build_object</span><span class="p">(</span><span class="s1">'properties'</span><span class="p">,</span> <span class="n">rowjsonb</span> <span class="o">-</span> <span class="n">geom_column</span><span class="p">);</span>
+ <span class="n">json_type</span> <span class="p">:</span><span class="o">=</span> <span class="n">jsonb_build_object</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="s1">'Feature'</span><span class="p">);</span>
+ <span class="k">return</span> <span class="p">(</span><span class="n">json_type</span> <span class="o">||</span> <span class="n">json_geom</span> <span class="o">||</span> <span class="n">json_props</span><span class="p">)::</span><span class="n">text</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span> 
+<span class="err">$$</span> 
+<span class="k">LANGUAGE</span> <span class="s1">'plpgsql'</span> <span class="k">IMMUTABLE</span> <span class="k">STRICT</span><span class="p">;</span></code></pre></figure>
+
+<p>Voila! Now we can turn any relation into a proper GeoJSON “Feature” with just one(ish) function call.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT rowjsonb_to_geojson(to_jsonb(mytable.*)) FROM mytable;                         
+
+ {"type": "Feature", "geometry": {"type": "Point", "coordinates": [2, 34]}, "properties": {"pk": 1, "name": "Peter", "size": 1}}
+ {"type": "Feature", "geometry": {"type": "Point", "coordinates": [5, 67]}, "properties": {"pk": 2, "name": "Paul", "size": 2}}
+</code></pre></div></div>
+
+<h3 id="postscript">Postscript</h3>
+
+<p>You might be wondering why I made my function take in a <code class="highlighter-rouge">jsonb</code> input instead of a <code class="highlighter-rouge">record</code>, for a perfect <code class="highlighter-rouge">row_to_geojson</code> analogue to <code class="highlighter-rouge">row_to_json</code>. The answer is, the PL/PgSQL planner caches types, including the materialized types of the <code class="highlighter-rouge">record</code>
+ parameter, on the first evaluation, which makes it impossible to use 
+the same function for multiple tables. This is “too bad (tm)” but 
+fortunately it is an easy workaround to just change the input to <code class="highlighter-rouge">jsonb</code> using <code class="highlighter-rouge">to_json()</code> before calling our function.</p>
+
+</div>
+
+<!-- <div class="tags"></div> -->
+
+<div class="post-navigation">
+  
+    <a class="previous" href="http://blog.cleverelephant.ca/2019/03/fdw-pgsql12.html">« Notes for FDW in PostgreSQL 12</a>
+  
+  
+    <a class="next" href="http://blog.cleverelephant.ca/2019/05/foss4g-keynote-2019.html">Keynote @ FOSS4G NA 2019 »</a>
+  
+</div>
+
+
+
+<div id="disqus_thread"><iframe id="dsq-app2722" name="dsq-app2722" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px ! important; min-width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 1312px ! important;" src="GeoJSON%20Features%20from%20PostGIS%20%C2%B7%20Paul%20Ramsey_arquivos/a.html" horizontalscrolling="no" verticalscrolling="no" frameborder="0" width="100%"></iframe></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: 
+* EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC 
+* VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+* https://disqus.com/admin/universalcode/#configuration-variables
+*/
+
+var disqus_config = function () {
+// Replace PAGE_URL with your page's canonical URL variable
+this.page.url = 'https://blog.cleverelephant.ca/2019/03/geojson.html'; 
+// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+this.page.identifier = 'blog/2019/03/geojson.html'; 
+// this.page.category_id = 'technology'; 
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//pramsey.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+
+<div class="related">
+  <h2>Recent Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="http://blog.cleverelephant.ca/2019/05/parallel-postgis-4.html">
+            Parallel PostGIS and PgSQL 12
+            <small>27 May 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="http://blog.cleverelephant.ca/2019/05/foss4g-keynote-2019.html">
+            Keynote @ FOSS4G NA 2019
+            <small>17 May 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="http://blog.cleverelephant.ca/2019/03/fdw-pgsql12.html">
+            Notes for FDW in PostgreSQL 12
+            <small>26 Mar 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1412902-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  
+  
+
+<iframe style="display: none;"></iframe></body></html>
