@@ -1,0 +1,40 @@
+`postgres:9.6` with `postgis` and `temporal-tables`: 
+https://hub.docker.com/r/flyacts/temporal-postgis
+
+$ docker pull flyacts/temporal-postgis
+
+-----
+
+https://hub.docker.com/r/timescale/timescaledb-postgis/
+https://github.com/timescale/timescaledb
+--> https://docs.timescale.com/v1.3/getting-started/installation/docker/installation-docker
+
+$ docker run -d --name timescaledb -p 5432:5432 -e POSTGRES_PASSWORD=password timescale/timescaledb:latest-pg11
+
+-----
+
+https://hub.docker.com/r/vrtsystems/postgres-st/
+https://bitbucket.org/vrtsystems/docker-postgres-st/src/master/
+--> $ git clone https://bitbucket.org/vrtsystems/docker-postgres-st.git
+
+https://hub.docker.com/r/vrtsystems/postgres/dockerfile
+
+-----
+postgres with temporal extension:
+https://hub.docker.com/r/skalera/postgres
+
+-----
+
+https://wiki.postgresql.org/wiki/SQL2011Temporal
+
+https://pgxn.org/dist/temporal_tables/
+https://pgxn.org/dist/temporal_tables/temporal_tables.html
+
+http://clarkdave.net/2015/02/historical-records-with-postgresql-and-temporal-tables-and-sql-2011/
+https://clarkdave.net/2015/02/historical-records-with-postgresql-and-temporal-tables-and-sql-2011/
+
+https://blog.dbi-services.com/temporal-tables-with-postgresql/
+
+https://github.com/arkhipov/temporal_tables
+
+https://github.com/nearform/temporal_tables
