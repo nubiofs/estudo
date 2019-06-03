@@ -1,3 +1,11 @@
+https://pgconf.ru/en/2019/242944
+https://pgconf.ru/media/2019/02/11/Zim%C3%A1nyi.pdf
+http://demo.mobilitydb.com/mobilitydb-manual.pdf
+
+
+xxxxxxxxxxxxxxxxxxxxxx
+
+
 `postgres:9.6` with `postgis` and `temporal-tables`: 
 https://hub.docker.com/r/flyacts/temporal-postgis
 
