@@ -3,11 +3,6 @@ https://github.com/GeoNode/geonode/wiki/Community-Resources
 
 https://pypi.org/project/GeoNode/
 
-https://hub.docker.com/u/geonode
-
-https://github.com/GeoNode/geonode-docker
-https://github.com/GeoNode/geonode/tree/master/docs/tutorials/install_and_admin/running_docker
-
 https://github.com/geosolutions-it/geonode-docker
 https://github.com/geosolutions-it/geonode-project
 https://github.com/geosolutions-it/geonode
@@ -41,6 +36,203 @@ https://training.geonode.geo-solutions.it/
 
 https://github.com/ppasq/wfp-geonode
 https://github.com/ppasq/sy-template
+
+https://cga-harvard.github.io/Hypermap-Registry/installation_wm.html
+https://cga-harvard.github.io/Hypermap-Registry/installation.html
+
+http://docs.geonode.org/en/master/tutorials/users/using_geonode_w_other_applications/qgis.html
+
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bb http://docs.geonode.org/en/master/tutorials/install_and_admin/quick_install.html
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+http://geonode.org/blog/2018/04/26/geonode-2.8-released/
+
+"Installing by apt is outdated. Please consider using docker or installing by source as explained under: GeoNode (v2.8) installation on Ubuntu 16.04"
+(Ubuntu 16.04 Xenial)
+
+$ docker pull ubuntu:16.04
+
+$ docker images
+
+$ docker run -it -u 0 ubuntu:16.04 /bin/bash
+
+# apt-get update
+# apt-get install software-properties-common
+# add-apt-repository ppa:geonode/stable
+# apt-get update & apt-get autoremove
+# apt-get install geonode
+
+# geonode createsuperuser
+# geonode-updateip -p localhost
+	# geonode-updateip 127.0.0.1
+
+# geonode help
+
+-> http://localhost/
+
+obs.:
+IP_ADDRESS=$(ip route get 8.8.8.8 | awk ‘{print $NF; exit}’) sudo geonode-updateip -p $IP_ADDRESS
+
+$ docker ps
+
+$ docker commit 8e19d38df46f ubuntu:16.04
+
+$ docker images
+
+
+
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+vv from (https://github.com/GeoNode/geonode) vv
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+$ git clone https://github.com/GeoNode/geonode.git
+
+$ cd geonode
+
+$ docker build -t geonode .
+
+$ docker run -it -u 0 geonode /bin/bash
+#$ docker run -u 0 --rm -d -p 8000:8000 -v ${PWD}:/usr/src/app geonode /bin/bash
+
+
+
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+zz http://www.paolocorti.net/foss4g_2017_geonode_solr/00_setup_the_workshop_environment.html zz
+zz http://www.paolocorti.net/foss4g_2017_geonode_solr/
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+
+--> https://doc-geonode.readthedocs.io/en/stable/002_install_and_admin/002_geonode_install/index.html#geonode-install
+--> https://doc-geonode.readthedocs.io/en/stable/002_install_and_admin/002_geonode_install/setup_configure_httpd.html
+
+$ docker pull ubuntu:14.04
+
+$ docker images
+
+$ docker run -it -u 0 ubuntu:14.04 /bin/bash
+
+# sudo apt-get install nano python-virtualenv build-essential openssh-server apache2 gcc gdal-bin libgdal-dev gettext git-core libapache2-mod-wsgi libgeos-dev libjpeg-dev libpng-dev libpq-dev libproj-dev libxml2 libxml2-dev libxslt-dev patch python zlib1g-dev python-dev python-gdal python-pycurl libxslt1-dev python-imaging python-pastescript python-psycopg2 python-support python-urlgrabber unzip zip
+
+# cd
+
+# git clone https://github.com/GeoNode/geonode.git
+# sudo useradd -m geonode
+# sudo mv ~/geonode /home/geonode/
+# cd /home/geonode/geonode
+
+# testar para: 2.6.3 e 2.8
+# git checkout -b 2.6.1 tags/2.6.1
+# sudo pip install -r requirements.txt --upgrade
+# sudo pip install -e . --upgrade
+
+
+
+$ pip install pygdal==1.11.3.3
+$ pip install django-jsonfield-compat
+$ pip install ipython
+$ sudo paver setup
+$ sudo paver sync
+
+
+
+# sudo pip install -e geonode gdal
+
+# python manage.py runserver 0.0.0.0:8000
+
+	Now try to access to the GeoNode instance at: http://localhost:8000/
+	Log in in GeoNode using the administrative account which should have been already created:
+	    user: admin
+	    password: admin
+
+$ docker ps
+
+$ docker commit 8e19d38df46f ubuntu:14.04
+
+$ docker images
+
+
+================
+== https://github.com/GeoNode/geonode-project
+== http://geonode.org/dev-workshop
+== https://libraries.io/github/GeoNode/geonode
+================
+
+$ git clone https://github.com/GeoNode/geonode-project.git -b master
+
+$ cd geonode-project
+
+$ pipenv --python 2.7
+
+$ pipenv shell
+
+#$ pipenv run pip install -r requirements.txt --upgrade
+$ pipenv run pip install -e . --upgrade
+
+$ pipenv run pip install Django==1.11.20
+
+$ django-admin startproject --template=./geonode-project -e py,rst,json,yml,ini,env,sample -n Dockerfile my_geonode
+
+$ cd my_geonode
+
+
+
+GDAL_VERSION=`gdal-config --version`
+PYGDAL_VERSION="$(pip install pygdal==$GDAL_VERSION 2>&1 | grep -oP '(?<=: )(.*)(?=\))' | grep -oh $GDAL_VERSION\.[0-9])"
+pip install pygdal==$PYGDAL_VERSION
+
+# Using Default Settings
+DJANGO_SETTINGS_MODULE=my_geonode.settings paver reset
+DJANGO_SETTINGS_MODULE=my_geonode.settings paver setup
+DJANGO_SETTINGS_MODULE=my_geonode.settings paver sync
+DJANGO_SETTINGS_MODULE=my_geonode.settings paver start
+
+
+
+======================================================
+== from (https://github.com/GeoNode/geonode-docker) ==
+======================================================
+
+https://hub.docker.com/u/geonode
+https://github.com/GeoNode/geonode-docker
+https://github.com/GeoNode/geonode/tree/master/docs/tutorials/install_and_admin/running_docker
+
+$ git clone https://github.com/GeoNode/geonode-docker
+
+obs.: 
+
+	Substituir
+
+		#RUN git clone --depth=1 git://github.com/GeoNode/geonode.git --branch master /usr/src/geonode
+	por
+		RUN git clone https://github.com/GeoNode/geonode --branch master /usr/src/geonode
+
+$ docker build -t geonode-docker .
+
+...
+Step 3/25 : RUN mkdir -p /usr/src/{app,geonode}
+Step 4/25 : WORKDIR /usr/src/app
+Step 6/25 : COPY wait-for-databases.sh /usr/bin/wait-for-databases
+Step 7/25 : RUN chmod +x /usr/bin/wait-for-databases
+Installing collected packages: GeoNode
+  Running setup.py develop for GeoNode
+Successfully installed GeoNode
+Step 14/25 : RUN chmod +x /usr/src/app/tasks.py     && chmod +x /usr/src/app/entrypoint.sh
+Successfully built bc74ff01e1a3
+Successfully tagged geonode-docker:latest
+...
+
+$ docker run -u 0 --rm -d -p 8000:8000 -v ${PWD}:/usr/src/app geonode-docker
+
+#$ docker run --rm -d -p 8000:8000 geonode-docker
+#$ docker run --rm -d -p 8000:8000 -v ${PWD}:/usr/src/app/ geonode-docker
+	"exec: \"/usr/src/app/entrypoint.sh\": stat /usr/src/app/entrypoint.sh:
+#docker run --rm -d -p 8000:8000 -v ${PWD}:/usr/src/app/ geonode-docker
+
+$ docker ps
+
+$ docker exec -it -u 0 -p 8000:8000 -v ${PWD}:/usr/src/app/ 2672972b11d5 /bin/bash
+$ docker exec -it -u 0 13388846d193 /bin/bash
 
 
 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
@@ -115,13 +307,6 @@ obs.:
 	docker-compose.override.localhost.yml contains environment variables to allow you run the instances on localhost. 
 	You can use this file as template in order to run on other public addresses.
 
-
-
-
-
-======================================================
-== from (https://github.com/GeoNode/geonode-docker) ==
-======================================================
 
 
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
