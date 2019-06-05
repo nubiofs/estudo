@@ -54,6 +54,12 @@ obs.:	IMPORTANTE:
 	==> teste acesso geoServer:
 	$ wget http://172.17.0.5:8080/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
 
+	==> local de instalação de novos plugins:
+	/root/.local/share/QGIS/QGIS3/profiles/default/python/plugins
+
+	root@48b0d02a66f9:~/.local/share/QGIS/QGIS3/profiles/default#
+
+
 
 In qGIS ("Create a New WMS/WMTS Connection")
 
@@ -76,6 +82,49 @@ Under "Not installed" look for the following three plugins and install them:
     Plugin Builder 3 (for creating templates for new plugins)
     Plugin Reloader (for reloading a plugin after modifying the code)
 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++ https://github.com/boundlessgeo/qgis-geoserver-plugin ++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+$ docker ps
+$ docker exec -it -u 0 13388846d193 /bin/bash
+
+# cd
+# git clone https://github.com/boundlessgeo/qgis-geoserver-plugin
+# cd qgis-geoserver-plugin
+# pip3 install paver
+# paver setup
+# paver install
+symlink path('/root/qgis-geoserver-plugin/geoserverexplorer') path('/root/.local/share/QGIS/QGIS3/profiles/default/python/plugins/geoserverexplorer')
+
+obs.: 
+	1) Criar diretorio "geoserverexplorer" ao invés de linkSimbólico que está em "/root/.local/share/QGIS/QGIS3/profiles/default/python/plugins"
+	2) Colocar "/root/.local/share/QGIS/QGIS3/profiles/default/python/plugins", Em Settings -> Options -> System -> Plugin Paths
+	3) Chamar "Plugins" -> "Manage and Install Plugins" para marcar "geoserverexplorer" em "Installed"
+	4) Abrir no menu "Web" -> "Geoserver"
+	"Caso não apareça" instalar o plugin "Plugin Reloader" e selecionar "geoserverexplorer"
+	5) Em "Geoserver Explorer" -> "Catalogs" colocar:
+	
+		"Geoserver Local (admin)"			
+		http://172.17.0.3:8080/geoserver
+		admin
+		geoserver
+		
+		obs.: IP acima via:
+		$ docker run --rm -d -p 8080:8080 -v ${PWD}:/opt/geoserver/data_dir --name=gs_kartoza kartoza/geoserver
+		$ docker ps
+		$ docker inspect
+
+
+	
+
+$ docker ps
+
+$ docker commit 48b0d02a66f9 qgis/qgis:latest
+
+$ docker images
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

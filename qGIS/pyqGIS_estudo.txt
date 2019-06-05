@@ -1,9 +1,16 @@
 https://docs.qgis.org/3.4/pdf/pt_BR/
+https://www.qgis.org/pyqgis/master/
 https://qgis.org/pyqgis/3.6/
 https://qgis.org/api/
 https://plugins.qgis.org/
 https://docs.qgis.org/3.7/C/docs/user_manual/plugins/python_console.html
 https://docs.qgis.org/testing/en/docs/user_manual/plugins/python_console.html
+https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins/index.html#developing-python-plugins
+
+
+--==> http://www.convertcsv.com/csv-to-geojson.htm
+--==> http://www.convertcsv.com/geojson-to-csv.htm
+
 
 (GEOG 489: Advanced Python Programming for GIS):
 --> https://www.e-education.psu.edu/geog489/node/1405
@@ -22,6 +29,8 @@ https://docs.qgis.org/testing/en/docs/user_manual/plugins/python_console.html
 ==> https://github.com/g-sherman/Qgis-Plugin-Builder
 ==> http://g-sherman.github.io/Qgis-Plugin-Builder/
 ==> https://plugins.qgis.org/plugins/pluginbuilder3/
+==> http://g-sherman.github.io/Qgis-Plugin-Builder/#the-repository
+
 
 --> http://www.qgistutorials.com/pt_BR/docs/getting_started_with_pyqgis.html
 --> http://www.qgistutorials.com/pt_BR/docs/building_a_python_plugin.html

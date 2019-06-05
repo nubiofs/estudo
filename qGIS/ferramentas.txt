@@ -6,6 +6,15 @@
 
 * https://react-leaflet.js.org/
 
+(protobuffer para GeoJson) "A compact binary encoding for geographic data.":
+==> https://github.com/pygeobuf/pygeobuf
+* https://github.com/mapbox/geobuf
+-> https://github.com/mapbox/tippecanoe
+
+
+* https://github.com/boundlessgeo/qgis-geoserver-plugin
+
+
 zzzzzzzzzzzzzzzzzzzzzzzzzzz
 
 https://github.com/sdeleuze/geospatial-messenger
