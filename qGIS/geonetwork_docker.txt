@@ -3,12 +3,19 @@ https://github.com/geonetwork/docker-geonetwork/blob/master/3.6.0/Dockerfile
 https://github.com/geonetwork/docker-geonetwork
 https://github.com/geonetwork/core-geonetwork
 
-$ docker run --name some-geonetwork -d -p 8181:8080 geonetwork
+$ docker run --name some-geonetwork -d -p 8080:8080 geonetwork
 
 #$ docker run --name some-geonetwork -d -p 8080:8080 -e DATA_DIR=/var/lib/geonetwork_data geonetwork
 # docker run --name some-geonetwork -d -p 8181:8080 geonetwork
 
+$ docker run --rm -it -p 8080:8080 geonetwork /bin/bash
+
+root@f973872d99cc:/usr/local/tomcat/bin# ./startup.sh
+
 -> localhost:8080
---> http://127.0.0.1:8181/geonetwork/
+--> http://127.0.0.1:8080/geonetwork/
+
+admin
+admin
 
 ==> http://127.0.0.1:8181/geonetwork/srv/por/catalog.search#/home

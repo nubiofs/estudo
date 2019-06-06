@@ -1,0 +1,42 @@
+//https://github.com/GeoNode/geonode-project
+
+$ git clone https://github.com/GeoNode/geonode-project.git -b master
+
+$ mkdir my_geonode
+
+$ cd my_geonode
+
+$ pipenv --python 2.7
+
+$ pipenv shell
+
+(my_geonode)$ cd ..
+
+(my_geonode)$ ls
+geonode-project  my_geonode
+
+(my_geonode)$ pip2.7 install Django==1.11.20
+
+(my_geonode)$ rm -rf my_geonode
+
+(my_geonode)$ django-admin startproject --template=./geonode-project -e py,rst,json,yml,ini,env,sample -n Dockerfile my_geonode
+
+(my_geonode)$ cd my_geonode
+
+obs.:
+
+Remember to update "wsgi.py" in case you are using "local_settings" vim my_geonode/wsgi.py --> os.environ.setdefault("DJANGO_SETTINGS_MODULE", "my_geonode.local_settings")
+
+(my_geonode)$ nano my_geonode/wsgi.py 
+
+### Error in:
+	(my_geonode)$ docker-compose build --no-cache
+
+	...
+	WORKDIR /usr/src/my_geonode
+	update-alternatives: using /usr/share/postgresql/9.6/
+	Step 12/15 : RUN chmod +x /usr/src/my_geonode/tasks.py     && chmod +x /usr/src/my_geonode/entrypoint.sh
+	Running command git clone -q https://github.com/GeoNode/geonode.git /usr/src/geonode
+	...
+
+(my_geonode)$ docker-compose up -d

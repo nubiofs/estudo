@@ -274,3 +274,18 @@ docker rm $(docker ps -a -f status=exited -q)
 
 $ docker volume rm $(docker volume ls -f dangling=true -q)
 
+
+-------------
+
+obs.: https://hub.docker.com/r/chenzj/dfimage
+
+$ alias dfimage="docker run -v /var/run/docker.sock:/var/run/docker.sock --rm chenzj/dfimage"
+
+$ docker images
+
+$ dfimage image_id
+
+"ou"
+
+# docker history --no-trunc kd8939skdkskk  | tac | tr -s ' ' | cut -d " " -f 5- | sed 's,^/bin/sh -c #(nop) ,,g' | sed 's,^/bin/sh -c,RUN,g' | sed 's, && ,\n  & ,g' | sed 's,\s*[0-9]*[\.]*[0-9]*[kMG]*B\s*$,,g' | head -n -1
+

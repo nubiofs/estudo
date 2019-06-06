@@ -60,6 +60,8 @@ $ cd geonode
 
 $ docker-compose -f docker-compose.yml -f docker-compose.override.localhost.yml up --build
 
+obs.: Caso ocorra error chamar/execultar: "$ docker-compose -f docker-compose.yml -f docker-compose.override.localhost.yml up"
+
 Creating network "geonode_default" with the default driver
 Creating volume "geonode-statics" with default driver
 Creating volume "geonode-gsdatadir" with default driver
@@ -109,15 +111,22 @@ celery4geonode   | Copying '/usr/src/app/geonode/monitoring/static/monitoring/bu
 
 $ docker ps
 
-==> localhost
-
-admin
-admin
-
 obs.:
 	docker-compose.override.localhost.yml contains environment variables to allow you run the instances on localhost. 
 	You can use this file as template in order to run on other public addresses.
 
+===>>>> $ docker-compose -f docker-compose.yml up
+
+++++>>>> http://10.139.10.73 # PARA ABRIR o "geonode" e 
+admin
+admin
+
+++++>>>> http://10.139.10.73/geoserver/web/ # PARA ABRIR o "geoserver"
+admin
+geoserver
+
+
+# docker stats
 
 
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
