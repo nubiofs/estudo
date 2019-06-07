@@ -67,6 +67,11 @@ obs.:	IMPORTANTE:
 	>>> pd
 	<module 'pandas' from '/usr/local/lib/python3.6/dist-packages/pandas/__init__.py'>
 
+	obs.: O valor "0" retornado acima significa que o comando "a instalação" ocorreu com sucesso!
+		
+		>>> retorno = os.system('pip3 install pandas')
+		>>> print(retorno) # caso retorno algo diferente de 0 -> houve um erro!
+	
 
 In qGIS ("Create a New WMS/WMTS Connection")
 

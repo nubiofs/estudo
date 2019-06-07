@@ -187,6 +187,12 @@ geoserver
 ### make down
 
 
+$ docker ps
+$ docker exec -it -u 0 13388846d193 /bin/bash
+
+# docker exec -it -u 0  -v $(pwd):/geoserver_data/data 17fe0694e4cb /bin/bash
+
+
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 bb http://docs.geonode.org/en/master/tutorials/install_and_admin/quick_install.html bb
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
