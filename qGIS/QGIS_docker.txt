@@ -59,6 +59,13 @@ obs.:	IMPORTANTE:
 
 	root@48b0d02a66f9:~/.local/share/QGIS/QGIS3/profiles/default#
 
+	==> Para instalar novas libs python via console do qGI:
+	>>> import os
+	>>> os.system('pip3 install pandas')
+	0
+	>>> import pandas as pd
+	>>> pd
+	<module 'pandas' from '/usr/local/lib/python3.6/dist-packages/pandas/__init__.py'>
 
 
 In qGIS ("Create a New WMS/WMTS Connection")
