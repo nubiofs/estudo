@@ -60,6 +60,9 @@ $ cd geonode
 
 $ docker-compose -f docker-compose.yml -f docker-compose.override.localhost.yml up --build
 
+obs.: docker-compose.override.localhost.yml contains environment variables to allow you run the instances on localhost. 
+You can use this file as template in order to run on other public addresses.
+
 obs.: Caso ocorra error chamar/execultar: "$ docker-compose -f docker-compose.yml -f docker-compose.override.localhost.yml up"
 
 Creating network "geonode_default" with the default driver
@@ -115,7 +118,56 @@ obs.:
 	docker-compose.override.localhost.yml contains environment variables to allow you run the instances on localhost. 
 	You can use this file as template in order to run on other public addresses.
 
+	* VER EXEMPLO USANDO, Dockerfile e docker-compose.yml :
+	https://docs.docker.com/compose/gettingstarted/
+
+$ docker-compose logs
+
+$ docker-compose logs | grep 'django4geonode' > ver_django4geonode.txt
+
+	...
+	django4geonode   | Copying '/usr/src/app/geonode/
+	django4geonode   | Executing UWSGI server uwsgi --ini /usr/src/app/uwsgi.ini for Production
+	django4geonode   | [uWSGI] getting INI configuration from /usr/src/app/uwsgi.ini
+	...
+
+$ docker-compose images
+	    Container             Repository            Tag        Image Id        Size    
+	-----------------------------------------------------------------------------------
+	db4geonode          geonode/postgis          10          9be1b97a99b1   595 MB     
+	django4geonode      geonode/geonode          latest      9bf50293ec69   2.14 GB    
+	geonode_celery_1    geonode_celery           latest      9bf50293ec69   2.14 GB    
+	geoserver4geonode   geonode/geoserver        2.14.x      7837cf3615e1   1.02e+03 MB
+	gsconf4geonode      geonode/geoserver_data   2.14.x      479cce70513c   8.35 MB    
+	nginx4geonode       geonode/nginx            geoserver   5678056cb94f   104 MB  
+
+$ docker-compose config --volumes
+	statics
+	geoserver-data-dir
+	dbdata
+	dbbackups
+	rabbitmq
+
+$ docker-compose -f geonode/docker-compose.yml ps
+
+	Name                     Command                State     Ports
+	---------------------------------------------------------------------
+	db4geonode          docker-entrypoint.sh postgres    Exit 0          
+	django4geonode      /usr/src/app/entrypoint.sh       Exit 137        
+	geoserver4geonode   /usr/local/tomcat/tmp/entr ...   Exit 143        
+	gsconf4geonode      /bin/true                        Exit 0          
+	nginx4geonode       nginx -g daemon off;             Exit 0          
+
+
+((( RUN ))):
+===>>>> $ docker-compose -f geonode/docker-compose.yml up
 ===>>>> $ docker-compose -f docker-compose.yml up
+### docker-compose up
+### docker-compose up -d
+	If you want to run your services in the background, you can pass the -d
+	and use "docker-compose ps" to see what is currently running.
+### docker-compose up --build
+### make up
 
 ++++>>>> http://10.139.10.73 # PARA ABRIR o "geonode" e 
 admin
@@ -125,13 +177,19 @@ admin
 admin
 geoserver
 
+# ifconfig -a
+--> GeoNode will be available at the ip address of the docker0 interface
 
 # docker stats
 
 
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-bb http://docs.geonode.org/en/master/tutorials/install_and_admin/quick_install.html
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+====>>>>> $ docker-compose down
+### make down
+
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bb http://docs.geonode.org/en/master/tutorials/install_and_admin/quick_install.html bb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 http://geonode.org/blog/2018/04/26/geonode-2.8-released/
 

@@ -1,0 +1,41 @@
+//https://docs.docker.com/compose/django/
+
+1) Create a Django project:
+
+$ sudo docker-compose run web django-admin startproject composeexample .
+
+$ ls -l
+
+$ sudo chown -R $USER:$USER .
+
+$ ls -l
+
+2) In your project directory, edit the composeexample/settings.py:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
+}
+
+ALLOWED_HOSTS = ['*']
+
+3) Run app
+
+$ docker-compose up
+
+--> http://localhost:8000
+
+$ docker container ls
+
+$ docker-compose ps
+
+$ docker-compose logs
+
+$ docker-compose down
+
+
