@@ -1,0 +1,11 @@
+//https://www.rosehosting.com/blog/how-to-install-python-3-6-4-on-centos-7/
+
+sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+
+sudo yum update
+
+sudo yum install -y python36u python36u-libs python36u-devel python36u-pip
+
+python3.6 -V
+
+pip3.6 install pipenv
