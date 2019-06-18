@@ -1,0 +1,36 @@
+https://geotools.org/
+https://github.com/geotools/geotools
+https://locationtech.github.io/jts/jts-features.html
+https://docs.geotools.org/latest/userguide/tutorial/quickstart/maven.html
+
+(fatJar):
+-->>==>>++>> https://docs.geotools.org/stable/userguide/build/faq.html
+==> https://gist.github.com/ppatierno/aa616e1cedaed1d51bbd18663a53bab1
+==> https://stackoverflow.com/questions/16222748/building-a-fat-jar-using-maven
+
+1) generate our project from maven-archetype-quickstart with:
+
+$ mvn archetype:generate -DgroupId=org.geotools -DartifactId=tutorial -Dversion=1.0-SNAPSHOT -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart
+
+2) configurações para pom.xml:
+
+...
+
+3) Creating the Quickstart application:
+
+-> org.geotools.tutorial.quickstart.Quickstart.java
+
+4) Build:
+ 
+$ mvn clean install
+
+5) Run:
+
+$ mvn exec:java -Dexec.mainClass=org.geotools.tutorial.quickstart.Quickstart
+
+
+6) fatJar:
+
+$ mvn clean install
+$ java -jar target/tutorial-1.0-SNAPSHOT.jar 
+
