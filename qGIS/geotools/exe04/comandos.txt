@@ -1,0 +1,34 @@
+https://geotools.org/
+https://github.com/geotools/geotools
+https://locationtech.github.io/jts/jts-features.html
+
+(geoJson):
+-->>==>>++>> https://docs.geotools.org/latest/userguide/unsupported/geojson.html
+==> https://github.com/geotools/geotools/tree/master/modules/unsupported/geojson
+==> https://gitlab.com/snippets/5969
+==> https://github.com/geotools/geotools/blob/master/modules/unsupported/geojson/src/test/java/org/geotools/geojson/FeatureJSONTest.java
+==> https://www.codota.com/code/java/methods/org.geotools.geojson.feature.FeatureJSON/readFeatureCollection
+
+https://github.com/bjornharrtell/jts2geojson
+
+1) configurações para pom.xml:
+
+<dependency>
+  <groupId>org.geotools</groupId>
+  <artifactId>gt-geojson</artifactId>
+  <version>${geotools.version}</version>
+</dependency>
+
+2) Creating the LerGeoJson:
+
+-> org.geotools.tutorial.ler.LerGeoJson.java
+
+3) Build:
+ 
+$ mvn clean install
+
+4) Run:
+
+$ mvn exec:java -Dexec.mainClass=org.geotools.tutorial.ler.LerGeoJson
+
+
