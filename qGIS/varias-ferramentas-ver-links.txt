@@ -19,3 +19,24 @@ https://github.com/frafra/is-osm-uptodate
 
 http://geogig.org/docs/start/installation.html
 https://github.com/kartoza/docker-geogig
+
+
+=======
+
+========== EXTRA IMPORTANTE VER:
+
+--> https://github.com/locationtech/spatial4j
+
+--> https://www.geogebra.org/
+
+https://github.com/dr-jts/jts-ports
+
+--> https://github.com/dr-jts/jeql
+
+--> https://github.com/dr-jts/pg-util
+
+https://github.com/glob3mobile/g3m
+
+https://github.com/semiautomaticgit/SemiAutomaticClassificationPlugin
+
+https://github.com/lennepkade/dzetsaka

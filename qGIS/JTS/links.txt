@@ -1,0 +1,40 @@
+http://locationtech.github.io/jts/
+https://github.com/locationtech/jts
+
+--------
+
+$ git clone https://github.com/locationtech/jts
+
+$ cd jts/bin
+
+$ ./testbuilder.sh
+
+
+--------
+
+https://sourceforge.net/projects/jts-topo-suite/
+https://projects.eclipse.org/projects/locationtech.jts
+
+===> https://www.tsusiatsoftware.net/jts/main.html
+
+===> https://www.eclipse.org/community/eclipse_newsletter/2018/december/jts.php
+
+===> https://tereshenkov.wordpress.com/2018/03/14/visualizing-computational-geometry-concepts-using-jts-testbuilder/
+
+===> https://pt.slideshare.net/jgarnett/locationtech-projects-38993728
+
+========== EXTRA IMPORTANTE VER:
+
+--> https://github.com/locationtech/spatial4j
+
+https://github.com/dr-jts/jts-ports
+
+--> https://www.geogebra.org/
+
+--> https://github.com/dr-jts/jeql
+
+--> https://github.com/dr-jts/pg-util
+
+https://github.com/glob3mobile/g3m
+
+
