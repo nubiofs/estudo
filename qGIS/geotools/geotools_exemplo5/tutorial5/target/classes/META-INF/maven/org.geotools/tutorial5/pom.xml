@@ -67,15 +67,6 @@
 			<version>28.0-jre</version>
 		</dependency>
 
-		<!-- Ler arquivos geojson -->
-		<!-- https://download.osgeo.org/webdav/geotools/org/geotools/gt-geojson/21.1/ -->
-		<dependency>
-			<groupId>org.geotools</groupId>
-			<artifactId>gt-geojson</artifactId>
-<!-- 			<version>21.1</version> -->
-			<version>21.2</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.locationtech.proj4j/proj4j -->
 		<!-- https://repo1.maven.org/maven2/org/locationtech/proj4j/proj4j/1.0.0/ -->
 		<!-- https://github.com/locationtech/proj4j -->
@@ -84,12 +75,18 @@
 			<artifactId>proj4j</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.fasterxml.jackson.core</groupId> -->
-<!-- 			<artifactId>jackson-databind</artifactId> -->
-<!-- 			<version>2.9.9</version> -->
-<!-- 		</dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.fasterxml.jackson.core</groupId> -->
+		<!-- <artifactId>jackson-databind</artifactId> -->
+		<!-- <version>2.9.9</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
 
 	</dependencies>
 
@@ -112,6 +109,13 @@
 			<name>Boundless Maven Repository</name>
 			<url>http://repo.boundlessgeo.com/main</url>
 		</repository>
+
+		<repository>
+			<id>mvnrepository.com/artifact/com.googlecode.json-simple</id>
+			<name>json-simple repository</name>
+			<url>https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple</url>
+		</repository>
+
 	</repositories>
 
 	<build>
