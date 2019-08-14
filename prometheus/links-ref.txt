@@ -9,3 +9,11 @@ https://www.openlogic.com/blog/monitoring-java-applications-prometheus-and-grafa
 
 https://blog.kubernauts.io/https-blog-kubernauts-io-monitoring-java-spring-boot-applications-with-prometheus-part-1-c0512f2acd7b
 https://blog.kubernauts.io/https-blog-kubernauts-io-monitoring-java-spring-boot-applications-with-prometheus-part-2-b883063486b5
+
+https://github.com/grafana/grafana-docker
+
+---
+
+https://towardsdatascience.com/get-system-metrics-for-5-min-with-docker-telegraf-influxdb-and-grafana-97cfd957f0ac
+
+https://www.blazemeter.com/blog/how-to-create-a-lightweight-performance-monitoring-solution-with-docker-grafana-and-influxdb/

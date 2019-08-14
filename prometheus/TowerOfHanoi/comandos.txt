@@ -1,3 +1,7 @@
+********************
+** JAVA APLICAÇÃO **
+********************
+
 //https://start.spring.io/
 $ cd ~/github/estudo/prometheus/TowerOfHanoi
 
@@ -12,13 +16,19 @@ obs.:
 
 	--> MBeans -> java.lang -> OperationSystem -> Attributes -> SystemCpuLoad
 
+****************
+** PROMETHEUS **
+****************
+
 //
 //https://github.com/prometheus/prometheus
 //https://github.com/prometheus/prometheus/blob/master/Dockerfile
 //https://hub.docker.com/r/prom/prometheus/
 //$ docker run --name prometheus -d -p 127.0.0.1:9090:9090 prom/prometheus
 //
+
 $ cd ~/github/estudo/prometheus/TowerOfHanoi
+
 $ 
 docker run --rm --name prometheus --network="host" -h 127.0.0.1 -d -p 127.0.0.1:9090:9090 -p 127.0.0.1:8080:8080 -v ${PWD}/src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
 
@@ -33,6 +43,27 @@ docker run --rm --name prometheus --network="host" -h 127.0.0.1 -d -p 127.0.0.1:
 //$ docker ps
 //$ docker exec -it -u 0 fd0708a13504 /bin/bash
 
+
+*************
+** GRAFANA **
+*************
+
+//https://grafana.com/docs/installation/docker/
+//https://hub.docker.com/r/grafana/grafana/
+
+$ docker run --rm --name grafana -d -p 3000:3000 grafana/grafana
+
+$
+docker run --rm -d -p 3000:3000 \
+--name=grafana \
+grafana:latest-with-plugins
+
+
+i)
+--> http://localhost:3000. Login with the default credentials (username ‘admin’ and password ‘admin’) 
+
+ii)
+ Click “Add Data Source”, select Prometheus 9090
 
 ---
 
