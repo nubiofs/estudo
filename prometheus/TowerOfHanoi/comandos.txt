@@ -1,0 +1,42 @@
+//https://start.spring.io/
+$ cd ~/github/estudo/prometheus/TowerOfHanoi
+
+$ mvn clean install
+
+$ java -javaagent:./src/main/resources/jmx_prometheus_javaagent-0.12.0.jar=8080:./src/main/resources/config.yaml -jar ./target/TowerOfHanoi-0.0.1-SNAPSHOT.jar
+
+-> Metrics will now be accessible at http://localhost:8080/metrics
+
+obs.:
+	$ jconsole
+
+	--> MBeans -> java.lang -> OperationSystem -> Attributes -> SystemCpuLoad
+
+//
+//https://github.com/prometheus/prometheus
+//https://github.com/prometheus/prometheus/blob/master/Dockerfile
+//https://hub.docker.com/r/prom/prometheus/
+//$ docker run --name prometheus -d -p 127.0.0.1:9090:9090 prom/prometheus
+//
+$ cd ~/github/estudo/prometheus/TowerOfHanoi
+$ 
+docker run --rm --name prometheus --network="host" -h 127.0.0.1 -d -p 127.0.0.1:9090:9090 -p 127.0.0.1:8080:8080 -v ${PWD}/src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+
+-> Prometheus will now be reachable at http://localhost:9090/
+
+--> http://localhost:9090/targets
+--> http://localhost:9090/consoles/prometheus-overview.html?instance=localhost%3a8080
+
+--> http://localhost:9090/graph
+---> java_lang_OperatingSystem_ProcessCpuLoad{instance="localhost:8080",job="prometheus"}
+
+//$ docker ps
+//$ docker exec -it -u 0 fd0708a13504 /bin/bash
+
+
+---
+
+JMX Exporter
+(https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.12.0/jmx_prometheus_javaagent-0.12.0.jar)
+(https://github.com/prometheus/jmx_exporter/tree/master/example_configs)
+

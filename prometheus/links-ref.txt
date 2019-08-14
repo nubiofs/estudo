@@ -1,0 +1,11 @@
+https://github.com/prometheus/client_java
+https://github.com/prometheus/jmx_exporter
+
+=== tutoriais
+
+https://www.openlogic.com/blog/monitoring-java-applications-prometheus-and-grafana-part-1
+https://www.openlogic.com/blog/monitoring-java-applications-prometheus-and-grafana-part-2
+
+
+https://blog.kubernauts.io/https-blog-kubernauts-io-monitoring-java-spring-boot-applications-with-prometheus-part-1-c0512f2acd7b
+https://blog.kubernauts.io/https-blog-kubernauts-io-monitoring-java-spring-boot-applications-with-prometheus-part-2-b883063486b5
