@@ -1,19 +1,45 @@
 https://github.com/prometheus/client_java
 https://github.com/prometheus/jmx_exporter
 
+https://grafana.com/docs/
+
 === tutoriais
 
 https://www.openlogic.com/blog/monitoring-java-applications-prometheus-and-grafana-part-1
 https://www.openlogic.com/blog/monitoring-java-applications-prometheus-and-grafana-part-2
 
 
+https://devconnected.com/monitoring-linux-processes-using-prometheus-and-grafana/
+
 https://blog.kubernauts.io/https-blog-kubernauts-io-monitoring-java-spring-boot-applications-with-prometheus-part-1-c0512f2acd7b
 https://blog.kubernauts.io/https-blog-kubernauts-io-monitoring-java-spring-boot-applications-with-prometheus-part-2-b883063486b5
 
 https://github.com/grafana/grafana-docker
 
+(You can embed a panel using an iframe on another web site):
+https://grafana.com/docs/reference/sharing/#embed-panel
+
 ---
+
+https://blog.risingstack.com/node-js-performance-monitoring-with-prometheus/
+
+https://community.tibco.com/wiki/monitoring-your-nodejs-apps-prometheus
 
 https://towardsdatascience.com/get-system-metrics-for-5-min-with-docker-telegraf-influxdb-and-grafana-97cfd957f0ac
 
 https://www.blazemeter.com/blog/how-to-create-a-lightweight-performance-monitoring-solution-with-docker-grafana-and-influxdb/
+
+https://github.com/jdbranham/grafana-diagram
+
+==== busca google
+
+"integration grafana dashboard view in angular"???
+"Can Grafana dashboard be integrated in Angular node js application?"???
+
+Sounds tricky. You will have to use the Simple Json Datasource 93 to get the data into Grafana and then iframe the Graph panel into your app.
+
+But it is possible, for inspiration this video from GrafanaCon shows what you can do if you are prepared to do some custom development: https://youtu.be/I3o3tnj5j6s 273
+
+--> https://stackoverflow.com/questions/53605978/get-iframe-img-in-angular-6
+-> https://stackoverflow.com/questions/51365118/embed-grafana-dashboard-in-angular-6-application
+-> https://github.com/grafana/simple-json-datasource
