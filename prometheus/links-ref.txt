@@ -5,14 +5,26 @@ https://grafana.com/docs/
 
 === tutoriais
 
+(OK)
 https://www.openlogic.com/blog/monitoring-java-applications-prometheus-and-grafana-part-1
 https://www.openlogic.com/blog/monitoring-java-applications-prometheus-and-grafana-part-2
 
 
-https://devconnected.com/monitoring-linux-processes-using-prometheus-and-grafana/
-
 https://blog.kubernauts.io/https-blog-kubernauts-io-monitoring-java-spring-boot-applications-with-prometheus-part-1-c0512f2acd7b
 https://blog.kubernauts.io/https-blog-kubernauts-io-monitoring-java-spring-boot-applications-with-prometheus-part-2-b883063486b5
+
+https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/
+https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/
+https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/
+https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/
+https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/
+
+https://sysdig.com/blog/prometheus-metrics/
+https://www.robustperception.io/instrumenting-java-with-prometheus
+https://stackoverflow.com/questions/53728336/instrumenting-a-java-application-with-prometheus
+
+
+https://devconnected.com/monitoring-linux-processes-using-prometheus-and-grafana/
 
 https://github.com/grafana/grafana-docker
 
