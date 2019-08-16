@@ -1,0 +1,35 @@
+https://medium.com/@sourav.pati09/how-to-use-java-high-level-rest-client-with-spring-boot-to-talk-to-aws-elasticsearch-2b6106f2e2c
+
+https://github.com/dadoonet/legacy-search/blob/01-direct/src/main/java/fr/pilato/demo/legacysearch/dao/ElasticsearchDao.java
+
+https://dzone.com/articles/java-high-level-rest-client-elasticsearch
+
+https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.1/java-rest-high-supported-apis.html
+https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.1/java-rest-high-document-index.html
+https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.1/java-rest-high-document-update.html
+
+https://www.baeldung.com/elasticsearch-java
+
+https://github.com/eugenp/tutorials/tree/master/persistence-modules/spring-data-elasticsearch
+
+===
+
+ElasticSearch Geo Query
+(https://www.baeldung.com/elasticsearch-geo-spatial)
+
+<dependency>
+    <groupId>org.locationtech.spatial4j</groupId>
+    <artifactId>spatial4j</artifactId>
+    <version>0.7</version> 
+</dependency>
+</dependency>
+    <groupId>com.vividsolutions</groupId>
+    <artifactId>jts</artifactId>
+    <version>1.13</version>
+    <exclusions>
+        <exclusion>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
