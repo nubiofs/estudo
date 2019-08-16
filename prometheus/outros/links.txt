@@ -1,0 +1,37 @@
+https://github.com/philwinder/prometheus-java-spring-boot/blob/master/Dockerfile
+
+---
+
+https://github.com/thomasdarimont/spring-boot-prometheus-example
+
+====
+
+(https://github.com/prometheus/client_java/issues/405)
+
+
+@SpringBootApplication
+@RestController
+@EnablePrometheusEndpoint
+@EnableSpringBootMetricsCollector
+public class DemoApplication {
+
+    private static final Counter requestTotal = Counter.build()
+            .name("my_sample_counter")
+            .labelNames("status")
+            .help("A simple Counter to illustrate custom Counters in Spring Boot and Prometheus").register();
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+    @RequestMapping("/")
+    String sayHi() {
+        Random random = new Random(System.currentTimeMillis());
+        if (random.nextInt(2) > 0) {
+            requestTotal.labels("success").inc();
+        } else {
+            requestTotal.labels("error").inc();
+        }
+        return "Welcome to my world!";
+    }
+}
