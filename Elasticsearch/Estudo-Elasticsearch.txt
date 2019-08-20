@@ -18,6 +18,22 @@ http://exploringelasticsearch.com/
 * Intalação/Configuração (Elasticsearch): *
 *******************************************
 
+1) Via docker:
+//https://www.docker.elastic.co/
+
+$ docker run --rm -d --name elasticsearch --network="host" -h 127.0.0.1 -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.3.0
+
+2) Via download:
+//https://www.elastic.co/pt/downloads/elasticsearch
+
+$ cd /home/02963357460/Desenvolvimento/INSTALACAO/elasticsearch-7.3.0-linux-x86_64/elasticsearch-7.3.0/bin
+
+$ ./elasticsearch
+
+--> http://localhost:9200/
+
+===
+
 $ java -version
 
 > java version "1.8.0_121"
@@ -70,6 +86,10 @@ $ cd elasticsearch-5.3.0/bin
 
 $ ./elasticsearch
 
+*******************
+* EXEMPLOS DE USO *
+*******************
+
 $ curl -X GET http://localhost:9200/
 
 curl http://localhost:9200/
@@ -81,11 +101,13 @@ $ curl -XGET 'http://localhost:9200/twitter/tweet/_search?pretty=true' -H 'Conte
     }
 }'
 
-$ curl -XGET 'localhost:9200/_cat/master?v'
+$ curl -X GET http://localhost:9200/_cat/health?v&pretty
 
-$ curl -XGET 'localhost:9200/_cat/master?help&pretty'
+$ curl -X GET http://localhost:9200/_cat/master?v
 
-$ curl -XGET 'localhost:9200/_cat/allocation?v&pretty'
+$ curl -X GET http://localhost:9200/_cat/master?help&pretty
+
+$ curl -X GET http://localhost:9200/_cat/allocation?v&pretty
 
 ** Importando arquivos json no elastic:
 
@@ -99,7 +121,62 @@ https://github.com/andrewvc/elastic-loader
 http://elastichammer.exploringelasticsearch.com/
 http://stackoverflow.com/questions/20646836/is-there-any-way-to-import-a-json-filecontains-100-documents-in-elasticsearch
 
+http://localhost:9200/[INDEX]/[TYPE]/_search?pretty
+
 - The right command if you want to use a file with curl is this:
+
+$ cd ~/github/estudo/Elasticsearch
+
+$ curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/lotes/lote/1 --data-binary @./lote.json
+
+	{"_index":"lotes","_type":"lote","_id":"1","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":0,"_primary_term":
+1}	
+
+
+$
+curl -X PUT http://localhost:9200/customer/_doc/1?pretty -H 'Content-Type: application/json' -d'
+{
+  "name": "John Doe"
+}
+'
+
+	{
+	  "_index" : "customer",
+	  "_type" : "_doc",
+	  "_id" : "1",
+	  "_version" : 1,
+	  "result" : "created",
+	  "_shards" : {
+	    "total" : 2,
+	    "successful" : 1,
+	    "failed" : 0
+	  },
+	  "_seq_no" : 0,
+	  "_primary_term" : 1
+	}
+
+$ 
+curl -X GET http://localhost:9200/customer/_doc/1?pretty
+
+	{
+	  "_index" : "customer",
+	  "_type" : "_doc",
+	  "_id" : "1",
+	  "_version" : 1,
+	  "_seq_no" : 0,
+	  "_primary_term" : 1,
+	  "found" : true,
+	  "_source" : {
+	    "name" : "John Doe"
+	  }
+	}
+
+
+
+$ curl -XGET 'localhost:9200/_cat/indices?v&pre
+
+	health status index uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+	yellow open   lotes 0BMm85mUSJGnSI5gl4sy1w   1   1 
 
 $ curl -XPOST 'http://jfblouvmlxecs01:9200/test/test/1' -d @lane.json
 
@@ -118,6 +195,78 @@ Note: @is important before the file path
 $ curl -XPOST 'http://localhost:9200/tests/test/1' --data-binary @/home/02963357460/Documentos/SINTER/Elasticsearch/sample.json
 
 Sendo "sample.json" apenas um documento json!!!
+
+********************
+* Kibana - console *
+********************
+
+1) Via docker:
+
+$ docker run --rm -d --name kibana --network="host" -h 127.0.0.1 -p 5601:5601 kibana:7.3.0
+
+docker run --link YOUR_ELASTICSEARCH_CONTAINER_NAME_OR_ID:elasticsearch -p 5601:5601 {docker-repo}:{version}
+
+--> http://localhost:5601/app/kibana#/dev_tools/console
+
+2) Via download:
+//https://www.elastic.co/pt/downloads/kibana
+
+$ cd /home/02963357460/Desenvolvimento/INSTALACAO/kibana-7.3.0-linux-x86_64/bin
+
+$ ./kibana
+
+--> http://localhost:5601/app/kibana#/dev_tools
+--> http://localhost:5601/app/kibana#/dev_tools/console
+
+*************
+** GRAFANA **
+*************
+
+==> IMPORTANTE (ABRIR O GRAFANA NO GOOGLE-CHROME)!!!
+
+1) Via docker:
+
+//https://grafana.com/docs/installation/docker/
+//https://hub.docker.com/r/grafana/grafana/
+
+$ docker run --rm --name grafana --network="host" -h 127.0.0.1 -d -p 3000:3000 grafana/grafana
+
+//$ docker run --rm --name grafana -d -p 3000:3000 grafana/grafana:6.1.3
+
+//
+docker run --rm -d -p 3000:3000 \
+--name=grafana \
+grafana:latest-with-plugins
+
+//
+docker run \
+  -d \
+  -p 3000:3000 \
+  --name=grafana \
+  -e "GF_SERVER_ROOT_URL=http://grafana.server.name" \
+  -e "GF_SECURITY_ADMIN_PASSWORD=secret" \
+  grafana/grafana
+
+//
+docker run \
+  -d \
+  -p 3000:3000 \
+  --name=grafana \
+  -e "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource" \
+  grafana/grafana
+
+i)
+--> http://localhost:3000. Login with the default credentials (username ‘admin’ and password ‘admin’) 
+
+ii)
+ Click “Add Data Source”, select Prometheus 9090
+
+2) Via download:
+
+https://dl.grafana.com/oss/release/grafana-6.3.3.linux-amd64.tar.gz
+
+/grafana-6.3.3.linux-amd64/grafana-6.3.3/bin$ ./grafana-server
+
 
 ************************************
 * Intalação/Configuração (Kibana): *
