@@ -1,3 +1,45 @@
+
+==> https://medium.com/@sece.cosmin/monitor-spring-boot-application-performance-with-elastic-apm-elasticsearch-and-kibana-8d4299cad2be
+-> (https://github.com/cosminseceleanu/tutorials)
+
+https://bhuwanupadhyay.github.io/cloud-native/performance-benchmarking/2018/10/06/enable-elastic-apm-in-spring-boot-application.html
+https://github.com/BhuwanUpadhyay/enable-elastic-apm-in-spring-boot-application
+
+https://www.elastic.co/pt/blog/elastic-apm-java-agent-is-generally-available
+https://www.elastic.co/pt/blog/elastic-apm-java-agent-beta-released
+https://github.com/cosminseceleanu/tutorials/blob/master/elastic-apm-java/docs/index.md
+https://www.elastic.co/guide/en/apm/agent/java/current/index.html
+https://www.elastic.co/guide/en/apm/agent/java/current/configuration.html
+
+
+==> 
+https://aboullaite.me/spring-boot-elastic-kibana/
+
+
+https://www.elastic.co/pt/blog/monitoring-applications-with-elasticsearch-and-elastic-apm
+
+https://www.elastic.co/pt/webinars/elastic-open-source-apm-for-java-applications
+
+https://www.elastic.co/guide/en/apm/agent/java/current/index.html
+
+
+-->
+https://logz.io/blog/beats-tutorial/
+https://pandorafms.com/blog/light-monitoring/
+https://logz.io/blog/metricbeat-elastic-stack-5-0/
+
+
+https://www.elastic.co/pt/blog/monitoring-java-applications-with-metricbeat-and-jolokia
+
+https://github.com/stagemonitor/stagemonitor
+https://github.com/stagemonitor/spring-petclinic
+https://github.com/stagemonitor/spring-petclinic#running-petclinic-locally-with-stagemonitor-enabled
+https://github.com/stagemonitor/stagemonitor/wiki/Installation
+https://blog.overops.com/java-performance-monitoring-5-open-source-tools-you-should-know/
+--> https://github.com/stagemonitor/stagemonitor/tree/master/stagemonitor-grafana-elasticsearch
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
 https://medium.com/@sourav.pati09/how-to-use-java-high-level-rest-client-with-spring-boot-to-talk-to-aws-elasticsearch-2b6106f2e2c
 
 https://github.com/dadoonet/legacy-search/blob/01-direct/src/main/java/fr/pilato/demo/legacysearch/dao/ElasticsearchDao.java

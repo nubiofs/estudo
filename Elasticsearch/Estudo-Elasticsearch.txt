@@ -178,6 +178,27 @@ $ curl -XGET 'localhost:9200/_cat/indices?v&pre
 	health status index uuid                   pri rep docs.count docs.deleted store.size pri.store.size
 	yellow open   lotes 0BMm85mUSJGnSI5gl4sy1w   1   1 
 
+$
+curl -X POST "localhost:9200/customer/_bulk?pretty&pretty" -H 'Content-Type: application/json' -d'
+{"index":{"_id":"1"}}
+{"name": "John Doe" }
+{"index":{"_id":"2"}}
+{"name": "Jane Doe" }
+'
+
+$
+curl -X POST "localhost:9200/customer/_bulk?pretty" -H 'Content-Type: application/json' -d'
+{"update":{"_id":"1"}}
+{"doc": { "name": "John Doe becomes Jane Doe" } }
+{"delete":{"_id":"2"}}
+'
+
+$
+curl -H "Content-Type: application/json" -XPOST "localhost:9200/bank/_bulk?pretty&refresh" --data-binary "@accounts.json"
+
+$
+curl "localhost:9200/_cat/indices?v"
+
 $ curl -XPOST 'http://jfblouvmlxecs01:9200/test/test/1' -d @lane.json
 
 - Per the current docs, http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html:
