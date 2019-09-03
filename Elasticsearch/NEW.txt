@@ -1,3 +1,10 @@
+--> https://nocf-www.elastic.co/guide/en/elasticsearch/guide/master/concurrency-solutions.html
+https://qbox.io/blog/data-concurrency-issues-in-elasticsearch
+https://dbdb.io/db/elasticsearch
+
+"Concurrency Control Document Locking Deadlock Detection Elastic Search ACIDic"
+
+=======
 
 ==> https://medium.com/@sece.cosmin/monitor-spring-boot-application-performance-with-elastic-apm-elasticsearch-and-kibana-8d4299cad2be
 -> (https://github.com/cosminseceleanu/tutorials)

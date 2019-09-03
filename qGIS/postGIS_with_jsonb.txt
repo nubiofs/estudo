@@ -1,3 +1,85 @@
+
+====
+
+https://gis.stackexchange.com/questions/107533/how-to-rename-postgresql-postgis-columns-while-importing-shapefiles
+https://gis.stackexchange.com/questions/53084/fastest-way-to-convert-shapefile-to-postgis-in-java
+https://gdal.org/programs/ogr2ogr.html
+
+http://erouault.blogspot.com/2015/10/gdal-and-ogr-utilities-as-library.html
+
+(JAVA)
+---
+==> https://github.com/OSGeo/gdal/blob/master/gdal/swig/java/apps/ogr2ogr.java
+http://geoexamples.blogspot.com/2012/05/running-gdal-java.html
+--> https://github.com/OSGeo/gdal/tree/master/gdal/swig/java
+https://svn.osgeo.org/gdal/trunk/gdal/swig/java/apps/
+---
+
+(PYTHON)
+***>>> https://pcjericks.github.io/py-gdalogr-cookbook/index.html
+https://gdal.org/java/overview-summary.html
+http://svn.osgeo.org/gdal/trunk/autotest/utilities/test_ogr2ogr_lib.py
+
+
+https://gdal.org/java/overview-summary.html
+https://trac.osgeo.org/gdal/wiki/GdalOgrInJava
+https://gis.stackexchange.com/questions/287028/how-to-set-up-gdal-java-bindings-for-windows-with-osgeo4w
+
+To expand on David Bitner's answer, here's an example ogr2ogr instruction demonstrating an optional OGR SQL clause to rename fields from a source dataset (shapefile in this case) before they are brought into a target dataset (a PostGREsql table):
+
+ogr2ogr -f "PostGreSQL" PG:"host=127.0.0.1 user=YourUser dbname=YourDB password=YourPass"
+"E:\path\to\YourShapefile.shp" -nln NewTableName -nlt geometry 
+-sql "SELECT col_1 AS BetterName, col_2 AS ImprovedName FROM YourShapefile" 
+-lco GEOMETRY_NAME=the_geom
+
+    -nln Allows you to provide a name for the new PostGREsql table
+    -nlt Will allow multipart and singlepart features to exist in the same table
+    -sql The OGR SQL clause renaming the source fields
+    -lco GEOMETRY_NAME=the_geom By default ogr2ogr names the geometry field wkb_geometry, but we can use a Layer Creation Option (-lco) to name it something else, like the_geom so it will share this convention with shp2pgsql..
+
+Gotchas: A valid ogr2ogr instruction should not have any line breaks. Also, I've had trouble copying single quotes (') and double quotes (") from web examples and pasting them into the terminal. Perhaps it's a weird unicode issue? So it's recommended to type your command in a simple text editor like notepad before pasting it into the terminal. Or just type it directly into the terminal. Either way the point is beware copy-and-pasted quotes and double quotes.
+
+
+--
+
+--> http://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet
+--> http://www.postgresonline.com/journal/index.php?/archives/31-GDALOGR2OGR-for-Data-Loading.html
+
+Selecting specific fields, sets of data and Geometry
+
+Sometimes you have more than one geometry field in a table, and ESRI shape can only support one geometry field per shape. Also you may only want a subset of data. In these cases, you will need to select the geometry field to use. The most flexible way to do this is to use the -sql command which will take any sql statement.
+
+$ ogr2ogr -f "ESRI Shapefile" mydata.shp PG:"host=myhost user=myloginname dbname=mydbname password=mypassword" -sql "SELECT name, the_geom FROM neighborhoods" 
+
+
+If you want to output only a subset of the data in a table you can use the -sql, -select, -where properties of OGR2OGR - such as shown below
+
+
+$ ogr2ogr -overwrite -f "ESRI Shapefile" "C:/datadbf/" -select "company,sector_id" -where "company_group=2"
+	PG:"host=pghost user=pgloginname dbname=pgdbname password=pgpassword port=5432" "msaccessdump.company"
+
+
+If you needed to use an SQL statement to rename fields and so forth, you would do it something like the below. The main issue we have with this is that the OGR tool is not smart enough to figure out the data types and lengths to output the fields so lengths etc are wrong. In general if we need to rename fields, we create a view in PostgreSQL and output the view.
+
+
+$ ogr2ogr -overwrite -f "ESRI Shapefile" "C:\datadbf" 
+	-sql "SELECT company_name As company,sector_id FROM accessdump.company" 
+	PG:"host=pghost user=pgloginname dbname=pgdbname password=pgpassword port=5432" -nln compsec2
+
+You can use the ogr2ogr utility which is packaged with the gdal command line tools. Use the -sql option as follows:
+
+$ ogr2ogr outputfile.shp inputfile.shp -sql "SELECT oldfield1 AS newfield1, oldfield2 AS newfield2 from inputfile"
+
++++++
+
+https://hub.docker.com/r/osgeo/gdal/tags
+https://gdal.org/
+https://github.com/OSGeo/gdal
+
+----
+
+
+
 https://postgis.net/docs/ST_GeomFromGeoJSON.html
 
 ==> http://blog.cleverelephant.ca/2019/03/geojson.html
