@@ -1,0 +1,3 @@
+https://github.com/locationtech/geogig
+
+https://github.com/boundlessgeo/geogig-py

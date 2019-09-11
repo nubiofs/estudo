@@ -1,0 +1,120 @@
+===> http://www.bigfastblog.com/geohash-intro
+
+http://geohash.gofreerange.com/
+
+https://gis.stackexchange.com/tags/geohash/hot
+
+https://postgis.net/docs/ST_GeoHash.html
+https://gis.stackexchange.com/questions/313774/getting-geohash-of-linestring-in-postgis
+
+https://github.com/Bonsanto/polygon-geohasher
+
+https://github.com/mnelemans/geohash-extra
+
+https://github.com/kungfoo/geohash-java
+https://github.com/davidmoten/geo
+https://github.com/davidmoten/geo/blob/master/geo/src/main/java/com/github/davidmoten/geo/GeoHash.java
+
+https://github.com/xlvecle/geohash-poly
+https://github.com/derrickpelletier/geohash-poly
+
+https://mvnrepository.com/artifact/ch.hsr/geohash/1.3.0
+
+https://github.com/jaredkoontz/GeoHashesInPolygon
+
+https://github.com/locationtech/geomesa/blob/master/geomesa-utils/src/main/scala/org/locationtech/geomesa/utils/geohash/GeohashUtils.scala
+
+https://github.com/jillesvangurp/geogeometry
+
+https://github.com/vinsci/geohash
+
+https://medium.com/miq-tech-and-analytics/geohash-vs-open-location-codes-understanding-the-two-geocoding-techniques-in-advertising-space-8002452201c8
+
+(Creates a compressed set of geohashes, i.e., a combination of geohashes at different levels.):
+==> https://github.com/ashwin711/georaptor
+
+https://github.com/astrapi69/jgeohash
+
+https://www.elastic.co/guide/en/elasticsearch/guide/current/geohashes.html
+
+https://blog.tafkas.net/2018/09/28/creating-a-grid-based-on-geohashes/
+
+https://hackernoon.com/putting-chinas-second-hand-economy-on-the-map-with-geohash-matching-f6eb7626ff96
+
+https://duyanghao.github.io/geohash/
+
+https://gis.stackexchange.com/questions/102941/what-methods-exist-for-geohash-of-polygon
+
+
+https://github.com/google/open-location-code/wiki/Evaluation-of-Location-Encoding-Systems
+
+https://gis.stackexchange.com/questions/219834/library-to-convert-polygon-to-geohash/281017#281017
+
+---
+
++++>
+http://www.paulnorman.ca/blog/2016/05/improve-your-st-geohash-sorting-with-these-three-simple-tricks/
+
+
+	CREATE TABLE foo AS
+	  SELECT * FROM foo_unordered
+	    ORDER BY ST_GeoHash(ST_Transform(ST_Envelope(geom),4326));
+
+	* Shorter GeoHashes
+
+	ST_GeoHash takes an argument which lets you define the length of the resulting GeoHash. It turns out that 10 GeoHash characters are ideal, being 5% faster than the full length GeoHashes. It also doesn’t impact the quality of the resulting order, as 12 characters only has 0.02% more unique hashes on a planet-wide dataset. Shorter would be worse, as 8 characters has 23% fewer hashes.
+
+	Our SQL is now 15% faster
+
+	CREATE TABLE foo AS
+	  SELECT * FROM foo_unordered
+	    ORDER BY ST_GeoHash(ST_Transform(ST_Envelope(geom),4326),10);
+
+	* Stupider sorting
+
+	ST_GeoHash produces text, which on most databases will be sorted with a locale-specific UTF8 sort. This will properly sort accents, capitals, and other special characters. But GeoHashes are in base-32, using only 0-9 and b-z. This lets us sort in the “C” locale, which sorts by byte order.
+
+	Changing the ORDER BY collation lets us change how it’s sorted
+
+	CREATE TABLE foo AS
+	  SELECT * FROM foo_unordered
+	    ORDER BY ST_GeoHash(ST_Transform(ST_Envelope(geom),4326),10) COLLATE "C";
+
+	This SQL is 40% faster than we started with, and it’s what osm2pgsql has started using to save up to an hour off of some imports.
+
+
+-->
+https://tech.willhaben.at/geo-clustering-3-000-000-points-on-the-fly-a-brief-how-to-9f04d8d5b3a7
+
+==> 
+https://postgis.net/workshops/postgis-intro/clusterindex.html
+
+	Clustering on GeoHash
+
+	To cluster on the ST_GeoHash() function, you first need to have a geohash index on your data. Fortunately, they are easy to build.
+
+	The geohash algorithm only works on data in geographic (longitude/latitude) coordinates, so we need to transform the geometries (to EPSG:4326, which is longitude/latitude) at the same time as we hash them.
+
+	CREATE INDEX nyc_census_blocks_geohash ON nyc_census_blocks (ST_GeoHash(ST_Transform(geom,4326)));
+
+	Once you have a geohash index, clustering on it uses the same syntax as the R-Tree clustering.
+
+	CLUSTER nyc_census_blocks USING nyc_census_blocks_geohash;
+
+	Now your data is nicely arranged in spatially correlated order!
+
+
+
+https://gis.stackexchange.com/questions/18330/using-geohash-for-proximity-searches
+
+https://stackoverflow.com/questions/22602722/which-geo-implementation-to-use-for-millions-of-points
+
+https://gis.stackexchange.com/questions/313774/getting-geohash-of-linestring-in-postgis
+
+https://github.com/yinqiwen/ardb/wiki/Spatial-Index
+
+==================
+
+https://github.com/eruci/geocode
+
+
