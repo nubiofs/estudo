@@ -1,3 +1,26 @@
+============ 5 X 10 ====================
+
+obs.: No mínimo tem que haver uma precisão de localização em (lat, long) 
+"CRS EPSG:4326 - WGS 84 - Geographic" de 5 casas decimais (com 10 números de precisão do geohash)!
+
+--> http://geohash.co/
+
+(centroide 01 "poligono A")
+-44.00776
+-19.96734
+--> 781v9sshpq
+
+(centroide 02 "poligono B")
+-44.00777
+-19.96734
+--> 781v9sshpm
+
+obs.: Também a "Area (Ellipsoidal, WGS84) muda bem para os dois polígonos acima:
+	1582799.949 m²
+1588362.050 m²
+
+============ 5 X 10 ====================
+
 ===> http://www.bigfastblog.com/geohash-intro
 
 http://geohash.gofreerange.com/
