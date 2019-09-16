@@ -4,6 +4,7 @@ obs.: No mínimo tem que haver uma precisão de localização em (lat, long)
 "CRS EPSG:4326 - WGS 84 - Geographic" de 5 casas decimais (com 10 números de precisão do geohash)!
 
 --> http://geohash.co/
+http://geohash.gofreerange.com/
 
 (centroide 01 "poligono A")
 -44.00776
