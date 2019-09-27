@@ -1,0 +1,74 @@
+artigos ler:
+
+(go)
+https://www.akitaonrails.com/2008/07/15/off-topic-por-que-programadores-devem-jogar-go
+https://news.ycombinator.com/item?id=245911
+
+(chess)
+https://www.ibm.com/developerworks/community/blogs/fd26864d-cb41-49cf-b719-d89c6b072893/entry/sobre_codar_e_jogar_xadrez1?lang=en
+http://blog.incubaid.com/2012/02/24/how-hard-can-it-be-on-coding-chess-and-elo/
+
+http://sam-koblenski.blogspot.com/2013/12/what-can-chess-teach-us-about.html
+
+https://hackernoon.com/andrii-ryzhenko-chess-and-programming-busting-the-myth-that-all-programmers-are-good-chess-players-5ad6c6b8bb57
+
+https://www.quora.com/Can-playing-chess-make-you-a-better-computer-programmer
+
+https://galido.net/blog/can-playing-chess-make-better-computer-programmer/
+
+https://dev.to/bcbreeden/programming-and-chess-2c6b
+
+https://zeroequalsfalse.press/posts/chess-for-programming/
+"The Overlap Between Chess and Programming is Real"
+
+
+https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/?gi=7875a645241e
+"A step-by-step guide to building a simple chess AI"
+-> https://github.com/lhartikk/simple-chess-ai
+
+https://code.zoia.org/2014/11/20/the-parallel-between-chess-and-programming/
+"
+I found this quote I wrote down some time ago from an interview with Victoria Livschitz, serial entrepreneur, a founder of Grid Dynamics and more recently, a technology start-up Qubell1.
+
+ Chess, like any other complex intellectual activity, involves a combination of knowledge, creative vision, and technique. Good chess players are able to acquire and store a lot of information — classic and trendy opening systems, standard endgame positions, novelties specific to their repertoire, and so forth. The creative vision of a master comes through his or her ability to discover patterns hidden in the position, then correctly interpret the competing (and often incomplete) patterns as either more or less relevant to their goals — and finally choose the best option. Also, it requires flawless technique to see the well-played game through to its logical conclusion, in the face of the creative resistance put up by a skilled opponent. This combination of knowledge, creativity, and technique is what has been attracting people to chess for over 4,000 years. The parallel between chess and programming is rather obvious. Programming is also about knowledge, creativity, and technique. Good programmers must have a vast body of knowledge at their fingertips: the programming syntax of one or more languages, standard and special-purpose data structures, typical (as well as advanced) coding techniques, many kinds of libraries and APIs, a multitude of design patterns, and so on. Good programmers use their creative vision to recognize many patterns that may be relevant to the solution of the specific design problem at hand, and correctly choose the best approach. Finally, no matter how good the architecture and design are, to deliver bug-free software with optimal performance and reliability, the implementation technique must be flawless.”
+(Victoria Livschitz)
+"
+
+===>
+
+http://178.32.81.228/developer/technicalArticles/Interviews/livschitz_qa.html
+"Playing Chess and Creating Software"
+
+==========
+
+Off Topic!? Por que programadores devem jogar xadrez? O que o xadrez tem em comum com a programação? 
+Realmente uma modalidade esportiva / artística / criativa pode trazer benefícios para a atividade de codificação?
+
+
+Alan Turing, famous Computer Scientist, was the first person to design “computer chess” by writing a program that was capable of 
+playing a FULL game of chess. Alan Turing provided a significant amount of research into the field of Artificial Intelligence, including the famous “Turing test”, which tests if an AI robot is indistinguishable from a human.
+
+começo
+
+A melhor forma de aprender programação é programando = A melhor forma de aprender xadrez é jogando. Pois ambas as atividade
+se baseam no mesmo princípio "A única forma de aprender é errando, errando e errando."
+
+A programação é um tipo de jogo? Programar um código pode ser divertido como jogar uma partida?
+
+um desenvolvedor de software precisa ser um artista. Jogar é uma atividade criativa. Estratégia é uma atividade criativa.
+
+padrões de projeto = padrões de aberturas
+refatoração = estratégia e tática
+
+
+ Ser um codificador no estilo empilhador-de-tijolos é muito fácil: qualquer "peão" pode fazer. Agora, chegar ao nível de mestre na programação, é somente para os que se esforçaram muito na arte.
+
+
+Na minha opinião, nem tão Off-topic. -> formas alternativas de aprendizagem
+
+
+xxxxxxxxxxxxxx
+
+aumenta muito sua velocidade de raciocínio e habilidade tática.
+
+Deleuze & Guattari, que fazem comparações entre Go e xadrez em Mil Platôs.
