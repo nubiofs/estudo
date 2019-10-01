@@ -1,0 +1,134 @@
+=========== TUTORIAL 
+
+
+* https://docs.docker.com/swarm/provision-with-machine/
+
+
+(Maq Local)
+$ docker-machine create -d virtualbox local
+
+	Creating CA: /home/eu/.docker/machine/certs/ca.pem
+	Creating client certificate: /home/02963357460/.docker/machine/certs/cert.pem
+	Running pre-create checks...
+	(local) Image cache directory does not exist, creating it at /home/02963357460/.docker/machine/cache...
+	(local) No default Boot2Docker ISO found locally, downloading the latest release...
+	(local) Latest release for github.com/boot2docker/boot2docker is v18.09.9
+	(local) Downloading /home/eu/.docker/machine/cache/boot2docker.iso from https://github.com/boot2docker/boot2docker/releases/download/v18.09.9/boot2docker.iso...
+	(local) 0%....10%....20%....30%....40%....50%....60%....70%....80%....90%....100%
+	Creating machine...
+	(local) Copying /home/eu/.docker/machine/cache/boot2docker.iso to /home/eu/.docker/machine/machines/local/boot2docker.iso...
+	(local) Creating VirtualBox VM...
+	(local) Creating SSH key...
+	(local) Starting the VM...
+	(local) Check network to re-create if needed...
+	(local) Found a new host-only adapter: "vboxnet0"
+	(local) Waiting for an IP...
+	Waiting for machine to be running, this may take a few minutes...
+	Detecting operating system of created instance...
+	Waiting for SSH to be available...
+	Detecting the provisioner...
+	Provisioning with boot2docker...
+	Copying certs to the local machine directory...
+	Copying certs to the remote machine...
+	Setting Docker configuration on the remote daemon...
+	Checking connection to Docker...
+	Docker is up and running!
+	To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env local
+
+$ docker-machine ls
+
+	NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER     ERRORS
+	local   -        virtualbox   Running   tcp://192.168.99.100:2376           v18.09.9   
+
+$ docker-machine inspect local
+
+...
+
+$
+docker-machine ssh local
+
+"ou":
+
+"LEGAL --> [Para ter no prompt o Local & Comandos extras para docker-machine]":
+	
+(Configurando) "para download desses .bash 'ver configurações abaixo'":
+$ sudo touch /etc/bash_completion.d/docker-machine-prompt.bash
+$ sudo touch /etc/bash_completion.d/docker-machine-wrapper.bash
+$ PS1='[\u@\h \W$(__docker_machine_ps1 " [%s]")]\$ '
+
+(Mudando para Maq Virtual 'local'):
+$ docker-machine use local
+"ou":
+//$ eval $(docker-machine env local)
+	
+(Para sair):
+$[local] docker-machine use -u
+
+$[local] docker run swarm create
+
+	Unable to find image 'swarm:latest' locally
+	latest: Pulling from library/swarm
+	d85c18077b82: Pull complete 
+	1e6bb16f8cb1: Pull complete 
+	85bac13497d7: Pull complete 
+	Digest: sha256:b866583a3b8791bcd705b7bc0fd94c66b695a1a2dbaeb5f59ed29940e5015dc8
+	Status: Downloaded newer image for swarm:latest
+	2019/10/01 17:55:52 Post https://discovery.hub.docker.com/v1/clusters: dial tcp: lookup discovery.hub.docker.com on 10.0.2.3:53: no such host
+
+$[local] 
+docker run -d -p 80:80 --name webserver nginx
+
+==== CONFIGURACAO
+
+* https://www.digitalocean.com/community/tutorials/como-provisionar-e-gerenciar-hosts-remotos-do-docker-com-docker-machine-no-ubuntu-18-04-pt
+
+- Instalando Scripts Adicionais do Docker Machine
+
+$ 
+cd /etc/bash_completion.d/
+
+$
+/etc/bash_completion.d$ ls
+
+	apport_completion  git-prompt  grub
+$
+/etc/bash_completion.d$ pwd
+	/etc/bash_completion.d
+
+$
+/etc/bash_completion.d$ sudo wget https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-prompt.bash -O /etc/bash_completion.d/docker-machine-prompt.bash
+
+	--2019-10-01 14:18:49--  https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-prompt.bash
+	Resolvendo raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.92.133
+	Conectando-se a raw.githubusercontent.com (raw.githubusercontent.com)|151.101.92.133|:443... conectado.
+	A requisição HTTP foi enviada, aguardando resposta... 200 OK
+	Tamanho: 1469 (1,4K) [text/plain]
+	Salvando em: “/etc/bash_completion.d/docker-machine-prompt.bash”
+
+	/etc/bash_completion.d/docker-machine-p 100%[==============================================================================>]   1,43K  --.-KB/s    em 0s      
+
+	2019-10-01 14:18:50 (164 MB/s) - “/etc/bash_completion.d/docker-machine-prompt.bash” salvo [1469/1469]
+
+#$
+#gedit ~/.bashrc
+
+#$ touch ~/.bashrc
+
+--
+
+$ sudo wget https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-wrapper.bash -O /etc/bash_completion.d/docker-machine-wrapper.bash
+
+--2019-10-01 14:43:07--  https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-wrapper.bash
+Resolvendo raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.92.133
+Conectando-se a raw.githubusercontent.com (raw.githubusercontent.com)|151.101.92.133|:443... conectado.
+A requisição HTTP foi enviada, aguardando resposta... 200 OK
+Tamanho: 1525 (1,5K) [text/plain]
+Salvando em: “/etc/bash_completion.d/docker-machine-wrapper.bash”
+
+/etc/bash_completion.d/docker-machine-w 100%[==============================================================================>]   1,49K  --.-KB/s    em 0s      
+
+2019-10-01 14:43:08 (165 MB/s) - “/etc/bash_completion.d/docker-machine-wrapper.bash” salvo [1525/1525]
+
+
+
+
