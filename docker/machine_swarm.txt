@@ -1,3 +1,122 @@
+https://churrops.io/2017/07/02/docker-desvendando-docker-machine-swarm-com-virtualbox/
+
+$
+for N in 1 2 3; do docker-machine create --driver virtualbox docker-node-$N; done;
+
+$ docker-machine ls
+	NAME            ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER     ERRORS
+	docker-node-1   -        virtualbox   Running   tcp://192.168.99.103:2376           v18.09.9   
+	docker-node-2   -        virtualbox   Running   tcp://192.168.99.104:2376           v18.09.9   
+	docker-node-3   -        virtualbox   Running   tcp://192.168.99.105:2376           v18.09.9   
+
+$ docker-machine env docker-node-1
+	export DOCKER_TLS_VERIFY="1"
+	export DOCKER_HOST="tcp://192.168.99.103:2376"
+	export DOCKER_CERT_PATH="/home/clenubio/.docker/machine/machines/docker-node-1"
+	export DOCKER_MACHINE_NAME="docker-node-1"
+	# Run this command to configure your shell: 
+	# eval $(docker-machine env docker-node-1)
+
+$ eval $(docker-machine env docker-node-1) && env | grep docker
+	DOCKER_MACHINE_NAME=docker-node-1
+	DOCKER_CERT_PATH=/home/clenubio/.docker/machine/machines/docker-node-1
+
+//(docker-node-1) -> swarm manager
+
+$ docker swarm init --advertise-addr 192.168.99.103
+	Swarm initialized: current node (okuqqimox7mup5058qirwdw2r) is now a manager.
+
+	To add a worker to this swarm, run the following command:
+
+	    docker swarm join --token SWMTKN-1-3wqrjw6pqm0ljcmvddkovrvvf3z0antfwlzpv57y17tl2l59lr-ayvn07vlcunxkgkobi4fas2su 192.168.99.103:2377
+
+	To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+$ docker node ls
+	ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
+	okuqqimox7mup5058qirwdw2r *   docker-node-1       Ready               Active              Leader              18.09.9
+
+//(docker-node-2) -> swarm worker
+
+$ eval $(docker-machine env docker-node-2) && env | grep docker
+	DOCKER_MACHINE_NAME=docker-node-2
+	DOCKER_CERT_PATH=/home/clenubio/.docker/machine/machines/docker-node-2
+
+$
+docker swarm join --token SWMTKN-1-3wqrjw6pqm0ljcmvddkovrvvf3z0antfwlzpv57y17tl2l59lr-ayvn07vlcunxkgkobi4fas2su 192.168.99.103:2377
+	This node joined a swarm as a worker.
+
+//(docker-node-3) -> swarm worker
+
+$ eval $(docker-machine env docker-node-3) && env | grep docker
+
+$
+docker swarm join --token SWMTKN-1-3wqrjw6pqm0ljcmvddkovrvvf3z0antfwlzpv57y17tl2l59lr-ayvn07vlcunxkgkobi4fas2su 192.168.99.103:2377
+	This node joined a swarm as a worker.
+
+$
+eval $(docker-machine env docker-node-1)
+
+$
+docker node ls
+
+$ docker-machine ls
+	NAME            ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER     ERRORS
+	docker-node-1   *        virtualbox   Running   tcp://192.168.99.103:2376           v18.09.9   
+	docker-node-2   -        virtualbox   Running   tcp://192.168.99.104:2376           v18.09.9   
+	docker-node-3   -        virtualbox   Running   tcp://192.168.99.105:2376           v18.09.9   
+
+$ env | grep docker
+
+
+	obs.: Para execultar comandos para o container (fora do mesmo via a maquina local):
+
+		$ docker-machine ssh docker-node-3 uname -r
+
+$
+docker service create -p 80:80 --name webserver nginx
+
+//$ docker service create --name my-web1 --publish 8081:80 --replicas 2 nginx
+
+$
+docker service ps webserver
+
+$
+docker service scale webserver=3
+
+$ docker service ps webserver
+	ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+	csplawefdiwj        webserver.1         nginx:latest        docker-node-1       Running             Running 2 minutes ago                        
+	z12rgfnsx8ud        webserver.2         nginx:latest        docker-node-2       Running             Running 14 seconds ago                       
+	q7jfz4pzvlss        webserver.3         nginx:latest        docker-node-3       Running             Running 12 seconds ago                       
+
+
+$ eval $(docker-machine env docker-node-3) && env | grep docker && docker ps
+
+$ docker-machine ssh docker-node-3 bash
+
+$ docker-machine ssh docker-node-1
+
+"ou"
+
+$
+eval $(docker-machine env docker-node-1) && env | grep docker && docker ps
+	DOCKER_MACHINE_NAME=docker-node-1
+	DOCKER_CERT_PATH=/home/clenubio/.docker/machine/machines/docker-node-1
+	CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+	a67bc687de01        nginx:latest        "nginx -g 'daemon of…"   30 minutes ago      Up 30 minutes       80/tcp              webserver.1.csplawefdiwjlfhnqm6voad31
+
+$ docker exec -it a67bc687de01 bash
+
+
+
+++++++++++++++++
+
+https://www.ionos.com/digitalguide/server/know-how/docker-orchestration-with-swarm-and-compose/
+
+
+
+
 =========== TUTORIAL 
 
 
@@ -128,6 +247,125 @@ Salvando em: “/etc/bash_completion.d/docker-machine-wrapper.bash”
 /etc/bash_completion.d/docker-machine-w 100%[==============================================================================>]   1,49K  --.-KB/s    em 0s      
 
 2019-10-01 14:43:08 (165 MB/s) - “/etc/bash_completion.d/docker-machine-wrapper.bash” salvo [1525/1525]
+
+
+
+================================================================
+-- outros -ver
+================================================================
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-cluster-of-docker-containers-with-docker-swarm-and-digitalocean-on-ubuntu-16-04
+
+$ docker-machine create -d virtualbox local
+
+...
+
+(Criando e inicializando um 'swarm manager' "dentro do container"):
+
+$ docker-machine ip local
+	192.168.99.100
+
+$ docker-machine ssh local
+
+[local]$ docker swarm init --advertise-addr 192.168.99.100
+
+	Swarm initialized: current node (ymslsr3rjby7uz76y46mw08yk) is now a manager.
+
+	To add a worker to this swarm, run the following command:
+
+	    docker swarm join --token SWMTKN-1-50ny5vnuloqq59xb4cewwix2rj7euruykfcuf2j25r2c11adtw-bjg04eqvw68utjjkcv7r1otbx 192.168.99.100:2377
+
+	To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+[local]$ docker swarm join-token manager
+
+	To add a manager to this swarm, run the following command:
+
+	    docker swarm join --token SWMTKN-1-50ny5vnuloqq59xb4cewwix2rj7euruykfcuf2j25r2c11adtw-7evgms7fb4izncb3mmx38dnin 192.168.99.100:2377
+
+
+---
+
+$
+docker-machine create \
+-d virtualbox \
+--swarm \
+--swarm-master \
+--swarm-discovery token://SWMTKN-1-50ny5vnuloqq59xb4cewwix2rj7euruykfcuf2j25r2c11adtw-7evgms7fb4izncb3mmx38dnin \
+swarm-manager
+
+	Running pre-create checks...
+	Creating machine...
+	(swarm-manager) Copying /home/clenubio/.docker/machine/cache/boot2docker.iso to /home/clenubio/.docker/machine/machines/swarm-manager/boot2docker.iso...
+	(swarm-manager) Creating VirtualBox VM...
+	(swarm-manager) Creating SSH key...
+	(swarm-manager) Starting the VM...
+	(swarm-manager) Check network to re-create if needed...
+	(swarm-manager) Waiting for an IP...
+	Waiting for machine to be running, this may take a few minutes...
+	Detecting operating system of created instance...
+	Waiting for SSH to be available...
+	Detecting the provisioner...
+	Provisioning with boot2docker...
+	Copying certs to the local machine directory...
+	Copying certs to the remote machine...
+	Setting Docker configuration on the remote daemon...
+	Configuring swarm...
+	Checking connection to Docker...
+	Docker is up and running!
+	To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env swarm-manager
+
+$
+docker-machine create \
+-d virtualbox \
+--swarm \
+--swarm-discovery token://SWMTKN-1-50ny5vnuloqq59xb4cewwix2rj7euruykfcuf2j25r2c11adtw-7evgms7fb4izncb3mmx38dnin \
+node-1
+
+	Running pre-create checks...
+	Creating machine...
+	(node-1) Copying /home/clenubio/.docker/machine/cache/boot2docker.iso to /home/clenubio/.docker/machine/machines/node-1/boot2docker.iso...
+	(node-1) Creating VirtualBox VM...
+	(node-1) Creating SSH key...
+	(node-1) Starting the VM...
+	(node-1) Check network to re-create if needed...
+	(node-1) Waiting for an IP...
+	Waiting for machine to be running, this may take a few minutes...
+	Detecting operating system of created instance...
+	Waiting for SSH to be available...
+	Detecting the provisioner...
+	Provisioning with boot2docker...
+	Copying certs to the local machine directory...
+	Copying certs to the remote machine...
+	Setting Docker configuration on the remote daemon...
+	Configuring swarm...
+	Checking connection to Docker...
+	Docker is up and running!
+	To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env node-1
+
+$ docker-machine ls
+
+	NAME            ACTIVE   DRIVER       STATE     URL                         SWARM                    DOCKER     ERRORS
+	local           -        virtualbox   Running   tcp://192.168.99.100:2376                            v18.09.9   
+	node-1          -        virtualbox   Running   tcp://192.168.99.101:2376   swarm-manager            v18.09.9   
+	swarm-manager   -        virtualbox   Running   tcp://192.168.99.102:2376   swarm-manager (master)   v18.09.9 
+
+$ docker-machine ssh swarm-manager
+
+[swarm-manager]$ docker ps
+
+[swarm-manager]$ docker swarm init --advertise-addr 192.168.99.102
+
+[swarm-manager]$ docker node ls
+
+
+$ docker-machine ssh node-1
+[node-1] 
+
+
+fa3c28e2bc26
+
+
 
 
 
