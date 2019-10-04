@@ -1,0 +1,7 @@
+
+
+https://www.guru99.com/create-your-first-hadoop-program.html
+
+https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
+
+
