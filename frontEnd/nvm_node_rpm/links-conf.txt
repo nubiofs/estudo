@@ -1,0 +1,55 @@
+https://github.com/nvm-sh/nvm
+
+// Para instalar o Node.js e NPM, usar o NVM (Node Version Manager).
+
+$
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | bash
+
+	=> Appending nvm source string to /home/eu/.bashrc
+	=> Appending bash_completion source string to /home/eu/.bashrc
+	=> Close and reopen your terminal to start using nvm or run the following to use it now:
+
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+$ source ~/.bashrc
+
+$ nvm --version
+
+// To install a specific version of node
+$
+nvm install 10.14.1
+
+	Now using node v10.14.1 (npm v6.4.1)
+	Creating default alias: default -> 10.14.1 (-> v10.14.1)
+
+$
+node --version
+
+$
+npm --version
+
+//Para instalar o Angular CLI, execute:
+
+$
+npm install -g @angular/cli
+
+$
+ng help
+
+
+* Desenvolvendo Localmente:
+
+$ cd projeto/
+
+// Importar projeto do frontend no Visual Studio Code
+
+$ npm install # instalar as dependências do projeto.
+
+$ ng serve # iniciar um servidor de desenvolvimento (http://localhost:4200/)
+
+$ ng build #  construir o projeto na pasta dist/ ("-prod" para construir uma distribuição em ambientes produtivos )
+
+
