@@ -31,10 +31,12 @@ node --version
 $
 npm --version
 
-//Para instalar o Angular CLI, execute:
+//Para instalar o Angular CLI (Install Globablly), execute:
 
 $
-npm install -g @angular/cli
+npm install -g @angular/cli@1.7.4
+
+obs.: "mais novo": $ npm install -g @angular/cli
 
 $
 ng help
@@ -48,7 +50,10 @@ $ cd projeto/
 
 $ npm install # instalar as dependências do projeto.
 
-$ ng serve # iniciar um servidor de desenvolvimento (http://localhost:4200/)
+# iniciar um servidor de desenvolvimento (http://localhost:4200/)
+$ npm start
+"ou"
+$ ng serve 
 
 $ ng build #  construir o projeto na pasta dist/ ("-prod" para construir uma distribuição em ambientes produtivos )
 
