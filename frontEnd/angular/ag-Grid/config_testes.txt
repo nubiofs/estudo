@@ -1,0 +1,39 @@
+https://www.ag-grid.com/
+https://www.ag-grid.com/angular-getting-started/
+https://www.ag-grid.com/documentation-main/documentation.php
+https://github.com/ag-grid/ag-grid
+https://blog.ag-grid.com/learn-to-customize-angular-grid-in-less-than-10-minutes/
+https://github.com/angular-grid/customization-demo
+https://www.ag-grid.com/example.php#/
+https://www.ag-grid.com/best-angular-2-data-grid/
+
+$ cd prj01
+
+#$ npm install -g @angular/cli@1.7.4
+#$ npm install @angular/cli
+$ ng new my-app --style scss --routing false
+$ cd my-app
+$ ng serve
+
+//Novo terminal
+$ npm install --save ag-grid-community ag-grid-angular
+$ npm install # in certain circumstances npm will perform an "auto prune". This step ensures all expected dependencies are present
+$ npm install --save ag-grid-enterprise
+
+-----
+
+$ cd ag-Grid/customization-demo-master
+
+$ npm i --save ag-grid ag-grid-angular
+$ npm install # in certain circumstances npm will perform an "auto prune". This step ensures all expected dependencies are present
+$ ng server
+
+
+==== recursos ver
+
+--> https://www.ag-grid.com/javascript-grid-grouping-headers/
+--> https://www.ag-grid.com/javascript-grid-column-header/
+--> https://www.ag-grid.com/javascript-grid-cell-styles/
+--> https://www.ag-grid.com/javascript-grid-highlighting-rows-and-columns/
+--> https://www.ag-grid.com/javascript-grid-filtering/
+
