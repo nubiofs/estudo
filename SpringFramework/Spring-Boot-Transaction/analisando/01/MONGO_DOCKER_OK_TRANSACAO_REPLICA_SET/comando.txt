@@ -1,0 +1,16 @@
+$ 
+docker-compose up
+
+$
+docker ps
+
+$
+docker inspect xxxxx
+
+================
+
+(testar usando):
+
+/home/02963357460/Downloads/Desenvolvimento/jee-2019-06/workspace/estudo_mongoACID/java-spring-boot-mongodb-starter-master
+
+

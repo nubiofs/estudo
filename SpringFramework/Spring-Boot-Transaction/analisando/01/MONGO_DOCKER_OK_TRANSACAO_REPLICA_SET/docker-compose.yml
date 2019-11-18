@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+
+  database:
+    image: 'bitnami/mongodb:latest'
+    hostname: mongo-container
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
+      - ./mongo-volume:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGODB_REPLICA_SET_MODE: primary
+      MONGODB_DATABASE: test
+      MONGODB_USERNAME: sinter
+      MONGODB_ROOT_PASSWORD: sinter
+      MONGODB_PASSWORD: sinter
+      MONGODB_REPLICA_SET_KEY: replicasetkey123
+networks:
+  sinter-net:
+    driver: bridge
+# Para conectar ao mongodb:      
+# mongo -u sinter -p sinter --port 27019 --authenticationDatabase admin
+

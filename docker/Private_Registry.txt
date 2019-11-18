@@ -1,0 +1,45 @@
+https://docs.docker.com/registry/
+https://www.katacoda.com/courses/docker-production/launch-private-registry
+
+https://hub.docker.com/_/registry
+
+https://github.com/docker/distribution
+https://github.com/docker/docker-registry
+https://github.com/docker/docker.github.io/blob/master/registry/deploying.md
+
+=============
+
+1) 
+
+$ docker run -d -p 5000:5000 \
+-v /opt/registry/data:/var/lib/registry \
+--name registry registry:2
+
+"ou":
+
+docker run -d -p 5000:5000 \
+-v /root/certs:/certs \
+-e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.test.training.katacoda.com.crt \
+-e REGISTRY_HTTP_TLS_KEY=/certs/registry.test.training.katacoda.com.key \
+-v /opt/registry/data:/var/lib/registry \
+--name registry registry:2
+
+obs.:
+Mounting the volume /var/lib/registry is important. This is where the Registry will store all of the pushed images. Mounting the directory will allow you to restart and upgrade the container in future.
+
+#$ docker login localhost
+
+2) Obtendo imagens do docker-hub publico e colocando no registry local:
+
+$ docker pull ubuntu:16.04
+
+$ docker tag ubuntu:16.04 localhost:5000/my-ubuntu
+
+$ docker push localhost:5000/my-ubuntu
+
+$ docker image remove ubuntu:16.04
+$ docker image remove localhost:5000/my-ubuntu
+
+$ docker pull localhost:5000/my-ubuntu
+
+

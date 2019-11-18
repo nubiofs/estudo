@@ -1,0 +1,29 @@
+https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster
+https://github.com/kubernetes/minikube
+
+https://minikube.sigs.k8s.io/docs/
+
+https://github.com/kubernetes/kubeadm
+
+=======
+
+$ egrep -q 'vmx|svm' /proc/cpuinfo && echo yes || echo no
+
+$
+ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+   && sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+
+$ minikube version
+$ minikube start --wait=false
+
+
+$ kubectl cluster-info
+
+$ kubectl get nodes
+
+$ kubectl create deployment first-deployment --image=katacoda/docker-http-server
+
+$ kubectl get pods
+
+$ kubectl expose deployment first-deployment --port=80 --type=NodePort

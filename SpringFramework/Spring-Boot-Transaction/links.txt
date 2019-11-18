@@ -1,0 +1,77 @@
+----
+
+https://github.com/bitnami/bitnami-docker-mongodb
+
+****
+
+
+https://github.com/MaBeuLux88/java-spring-boot-mongodb-starter
+https://www.mongodb.com/blog/post/rest-apis-with-java-spring-boot-and-mongodb
+https://www.mongodb.com/blog/post/quick-start-getting-your-free-mongodb-atlas-cluster
+https://www.mongodb.com/blog/post/mongodb-multi-document-acid-transactions-general-availability
+----
+-> https://www.mongodb.com/blog/post/java-and-mongodb-40-support-for-multidocument-acid-transactions
+-> https://github.com/MaBeuLux88/mongodb-4.0-demos
+
+
+https://github.com/MaBeuLux88/mongodb-4.0-demos
+
+
+https://github.com/spring-projects/spring-data-examples/tree/master/mongodb/transactions
+
+https://github.com/hantsy/spring-reactive-sample/tree/master/data-mongo-transaction
+
+https://github.com/christophstrobl/mongodb-bookstore
+
+---
+
+https://github.com/vinothr/spring-boot-transactional-example
+https://github.com/mhewedy/spwrap-examples/tree/master/spring-boot-transactions-mysql
+
+))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+(How to deploy a MongoDB Replica Set using Docker):
+
+	https://towardsdatascience.com/how-to-deploy-a-mongodb-replica-set-using-docker-6d0b9ac00e49
+	https://github.com/Crizstian/mongo-replica-with-docker?source=post_page-----6d0b9ac00e49----------------------
+
+(https://medium.com/@cramirez92/deploy-a-mongodb-replica-set-in-a-devops-fashion-style-infrastructre-as-code-f631d7a0ad80):
+
+	https://medium.com/@cramirez92/deploy-a-mongodb-replica-set-in-a-devops-fashion-style-infrastructre-as-code-f631d7a0ad80
+
+(Creating a MongoDB replica set using Docker):
+
+	https://www.sohamkamani.com/blog/2016/06/30/docker-mongo-replica-set/
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+https://www.mongodb.com/transactions
+https://docs.mongodb.com/master/core/transactions/
+--> https://docs.mongodb.com/manual/core/transactions/
+--> https://docs.mongodb.com/manual/core/transactions-operations/
+
+--> https://developpaper.com/mongodb-4-0-transaction/
+
+https://www.javainuse.com/spring/boot-transaction
+https://www.javainuse.com/spring/boot-transaction-isolation
+https://www.javainuse.com/spring/boot-transaction-propagation
+https://www.javainuse.com/spring/boot-rollback
+
+--> https://mastercraftcoding.com/mongodb-atlas-communication-with-spring-data/
+
+https://medium.com/@rameez.s.shaikh/spring-boot-transaction-management-hello-world-example-5df4457ced92
+https://dzone.com/articles/spring-boot-transactions-tutorial-understanding-tr
+
+
+=========================================================================
+
+https://dzone.com/articles/bountyspring-transactional-management
+
+
+https://github.com/mhewedy/spwrap-examples
+https://github.com/mhewedy/spwrap-examples/tree/master/spring-boot-transactions-mysql
+
+
+
+http://www.programmersought.com/article/1793432759/
+
