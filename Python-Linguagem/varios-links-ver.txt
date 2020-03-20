@@ -187,6 +187,8 @@ https://pipenv.readthedocs.io/en/latest/
 
 $ pip install pipenv
 
+obs.: python3 -m pip install --force-reinstall pipenv==2018.7.1
+
 $ mkdir testeDir
 
 $ cd testeDir/
