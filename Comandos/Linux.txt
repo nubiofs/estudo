@@ -102,6 +102,17 @@ $ sudo gnome-desktop-item-edit /usr/share/applications/ --create-new
 
     -- create-new : cria novo lançador / atalho
 
+** Verificando a quantidade de arquivos num diretorio:
+
+$ ls -la|grep -e "^-"|wc -l
+
+** como dividir arquivos grandes:
+(https://www.vivaolinux.com.br/dica/Como-dividir-arquivos-grandes-%28split%29)
+
+$ split -b 1440k arquivo_grande.gz
+
+$ cat xaa xab xac xad > arquivo_grande.gz
+
 **  Descobrindo a data de criação de um Arquivo
 
 $ ls -i sample_pg_inserts.json 
@@ -466,6 +477,22 @@ $ tar -xvf nome_do_arquivo.tar
 Obs.: Depois confirmar se a cópia foi ok com o comando:
 
 $ md5sum backup.tar
+
+--> Empacotar usando p7zip:
+
+$ 7z a -mx=0 -v1g arquivo_comprimido.7z arquivo_a_comprimir
+
+obs.: -mx=0 -> Don't compress at all - just copy the contents to archive.
+
+-mx=[0,1,3,5,7,9]
+
+--> Recombinar o arquivo original:
+
+$ cat bigfile_part* > bigfile.7z
+
+Obs.: Depois confirmar se a cópia foi ok com o comando:
+
+$ md5sum bigfile.7z
 
 
 ======
