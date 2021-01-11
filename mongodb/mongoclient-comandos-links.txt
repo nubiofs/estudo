@@ -1,0 +1,31 @@
+//https://www.nosqlclient.com/docs/
+//https://github.com/nosqlclient/nosqlclient
+//https://hub.docker.com/r/mongoclient/mongoclient/
+--> https://www.nosqlclient.com/docs/start.html
+
+
+$ docker volume create mongoclient
+
+$ export MONGO_URL=mongodb://sinter:1234@172.17.0.2:27017/sinter-rtd?authSource=sinter-rtd
+//$ echo $MONGO_URL
+//-e MONGOCLIENT_USERNAME=sinter -e MONGOCLIENT_PASSWORD=1234
+
+$
+docker run -d --rm --name mongoclient -p 3000:3000 -e MONGO_URL=mongodb://sinter:1234@172.17.0.2:27017/sinter-rtd?authSource=sinter-rtd -v mongoclient:/data/db mongoclient/mongoclient
+
+--> http://localhost:3000
+
+1) Primeiro passo (exportação dos dados):
+
+Management -> Backup Tools -> Mongoexport (Arguments: host; db; username; password; collection; out)
+(Obs.: Out = /tmp/export.json)
+
+2) Segundo passo (importação dos dados):
+
+Management -> Backup Tools -> Mongoimport (Arguments: host; db; username; password; collection; file)
+(Obs.: File = /tmp/export.json) 
+
+Obs.: É util obter os URL (origem) "mongodb://sinter:xpto@1.1.1.1:27017/db-rtd?authSource=db-rtd" e URL (destino) "mongodb://sinter:1234@172.17.0.2:27017/sinter-rtd?authSource=sinter-rtd"!
+
+$
+docker exec -it mongoclient sh
