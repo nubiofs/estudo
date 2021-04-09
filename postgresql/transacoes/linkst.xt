@@ -1,0 +1,40 @@
+https://www.enterprisedb.com/postgres-tutorials/how-work-postgresql-transactions
+
+https://www.postgresqltutorial.com/postgresql-transaction/
+
+https://especializa.com.br/blog/2010/06/27/transacoes-no-postgresql/
+
+https://www.devmedia.com.br/trabalhando-com-transacoes-no-postgresql/15224
+
+https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464
+
+===========
+//https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464
+
+* Tipo de problemas podem ocorrer ao trabalhar em multithread:
+
+- "Dirty Read": um dado que foi alterado e depois não foi confirmado (por uma transação 'A'), causando uma inconsistência a uma outra transação 'B' que o lê (antes da não confirmação pela transação 'A');
+
+- "Nonrepeatable Read": dados alterados ("delete" e "update") e confirmados (commit) por uma transação 'A' (concluida) são “sentidos” por outra transação 'B' que ainda não foi finalizada (não terminou o escopo da sua transação);
+
+- "Phatom Read": a lógica é quase a mesma do Nonrepeatable read, tendo apenas uma única diferença: as inserções de novos registros ("insert" commitados pela transação 'A'); podem ser lidos pela transação 'B' que ainda está em execução.
+
+
+* Existem quatro níveis de isolamento segundo o padrão SQL:
+
+- Read Uncommited: Este é o nível menos isolado e o como o próprio nome já sugere, ele permite a leitura antes da confirmação. É exatamente o caso do Dirty Read que estudamos logo no início. Neste nível de isolação todos os problemas (os 3 citados nas seções anteriores) podem ocorrer sem restrição. É muito difícil que esse nível seja aplicado na prática pois poderiamos ter sérios problemas de consistência, por isso ele é considerado mais acadêmico, apenas para fins de estudos. O PostgreSQL não possui esse nível de isolação, evitando assim que este seja configurado.
+-> O nível "Read Uncommited" tem: Dirty Read (Sim); Nonrepeatable Read (Sim) e "Phatom Read" (Sim)
+
+
+- Read Commited: Neste nível de isolação não podem ocorrer Dirty Reads mas são permitidos Nonrepeatable reads e Phantom Reads. Este é o nível padrão do PostgresSQL. Por este motivo que você conseguiu executar todos os testes das listagens abaixo sem problemas, pois o PostgreSQL tem como padrão o nível de isolamento Read Commited.
+-> O nível "Read Commited" tem: Dirty Read (Não); Nonrepeatable Read (Sim) e "Phatom Read" (Sim)
+
+Obs.: Por padrão, o PostgreSQL vem configurado com o nível de isolação "Read Commited".
+
+
+- Repeatable Readed: Aqui apenas ocorrem Phantom Reads. O SGBD bloqueia o conjunto de dados lidos de uma transação, não permitindo leitura de dados alterados ou deletados mesmo que comitados pela transação concorrente, porém ele permite a leitura de novos registros comitados por outras transações.
+-> O nível "Repeatable Readed" tem: Dirty Read (Não); Nonrepeatable Read (Não) e "Phatom Read" (Sim)
+
+
+- Serializable: Este é o nível mais isolado que não permite nenhum tipo de problema (Dirty Read, Nonrepeatable read e Phantom Read).
+-> O nível "Serializable" tem: Dirty Read (Não); Nonrepeatable Read (Não) e "Phatom Read" (Não)

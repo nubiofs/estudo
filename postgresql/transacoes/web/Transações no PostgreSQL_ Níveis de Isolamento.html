@@ -1,0 +1,2913 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464 -->
+<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><script type="text/javascript" async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/analytics.js"></script><script type="text/javascript" async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/js"></script><script async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/tfa.js" id="tb_tfa_script"></script><script src="./Transações no PostgreSQL_ Níveis de Isolamento_files/bat.js" async=""></script><script type="text/javascript" async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/mgsensor.js"></script><script type="text/javascript" async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/uwt.js"></script><script type="text/javascript" async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/insight.min.js"></script><script type="text/javascript" async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/analytics.js"></script><script type="text/javascript" async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/js(1)"></script><script type="text/javascript" async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/analytics.js"></script><script async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/gtm.js"></script>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Transações no PostgreSQL: Níveis de Isolamento</title>
+        <meta name="description" content="Veja neste artigo como funcionam os níveis de isolamento das transações no PostgreSQL.">
+        
+                    <meta name="robots" content="index, follow">
+                    <!-- google tags -->
+                    <link rel="author" href="https://plus.google.com/+devmedia/posts">
+                <link rel="publisher" href="https://plus.google.com/+devmedia">
+                <meta itemprop="name" content="Transações no PostgreSQL: Níveis de Isolamento">
+                <meta itemprop="description" content="Veja neste artigo como funcionam os níveis de isolamento das transações no PostgreSQL.">
+                    <!-- twitter tags -->
+                    <meta name="twitter:card" content="summary_large_image">
+                <meta name="twitter:title" content="Transações no PostgreSQL: Níveis de Isolamento">
+                <meta name="twitter:description" content="Veja neste artigo como funcionam os níveis de isolamento das transações no PostgreSQL.">
+                <meta name="twitter:site" content="@DevMedia">
+                <meta name="twitter:creator" content="@DevMedia">
+                    <meta property="twitter:image" content="https://arquivo.devmedia.com.br/midiasocial/artigo-devmedia-facebook.jpg">
+                    <!-- facebook tags -->
+                    <meta property="og:locale" content="pt_BR">
+                <meta property="og:url" content="https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464">
+                <meta property="og:title" content="Transações no PostgreSQL: Níveis de Isolamento">
+                <meta property="og:description" content="Veja neste artigo como funcionam os níveis de isolamento das transações no PostgreSQL.">
+                <meta property="og:site_name" content="DevMedia">
+                <meta property="og:type" content="article">
+                <meta property="fb:admins" content="devmedia.com.br">
+                <meta property="article:author" content="https://www.facebook.com/devmedia.com.br">
+                    <meta property="og:image:secure_url" content="https://arquivo.devmedia.com.br/midiasocial/artigo-devmedia-facebook.jpg"><meta property="og:image" content="https://arquivo.devmedia.com.br/midiasocial/artigo-devmedia-facebook.jpg">
+                    
+        <link rel="canonical" href="https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464">
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="apple-mobile-web-app-title" content="Transações no PostgreSQL: Níveis de Isolamento">
+        <meta property="fb:app_id" content="264090640744017">
+        <!-- ICON MAC -->
+        <link rel="apple-touch-icon" href="https://www.devmedia.com.br/favicon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="https://www.devmedia.com.br/imagens/2013/Devmedia72x.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="https://www.devmedia.com.br/imagens/2013/Devmedia114x.png">
+        <link rel="apple-touch-icon" sizes="129x129" href="https://www.devmedia.com.br/imagens/2013/Devmedia129x.png">  
+        <!-- FAVICON HTML5-->
+        <link rel="icon" href="https://www.devmedia.com.br/favicon.png">
+        <!-- FAVICON IE-->
+        <link rel="icon" type="image/png" href="https://www.devmedia.com.br/favicon.png">
+        <link rel="stylesheet" type="text/css" href="./Transações no PostgreSQL_ Níveis de Isolamento_files/devmedia-header-footer.min.css">
+        <link href="./Transações no PostgreSQL_ Níveis de Isolamento_files/css2" rel="stylesheet">
+        <link href="./Transações no PostgreSQL_ Níveis de Isolamento_files/css2(1)" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./Transações no PostgreSQL_ Níveis de Isolamento_files/preview.css">
+                    <!-- syntax highlighter -->
+                        <link rel="stylesheet" href="./Transações no PostgreSQL_ Níveis de Isolamento_files/prism-dark.css">
+                        <link rel="stylesheet" href="./Transações no PostgreSQL_ Níveis de Isolamento_files/prism-line-numbers.min.css">
+                        <style>
+                        pre[class*=pre_], :not(pre) > code[class*=pre_] {
+                            background: #263238 !important;
+                            border: none !important;
+                            box-shadow: none !important;
+                            font-size: 16px !important;
+                        }
+                        .token.number, .token.unit {
+                            color: #af7dff !important;
+                        }
+                        </style>
+                    <!-- fim SH -->
+                    
+                    <!-- slider -->
+                        <link rel="stylesheet" href="./Transações no PostgreSQL_ Níveis de Isolamento_files/slider.css">
+                    <!-- fim slider -->
+    
+                    <link rel="stylesheet" type="text/css" href="./Transações no PostgreSQL_ Níveis de Isolamento_files/jquery.mCustomScrollbar.min.css">
+                    <link rel="stylesheet" type="text/css" href="./Transações no PostgreSQL_ Níveis de Isolamento_files/viewcomp.css">
+        <style>.content-site-devmedia {
+            margin-top: 70px;
+        }
+        .tecnologia-topo-destaque:before {
+            width: 100vw;
+        }</style>
+        <script src="./Transações no PostgreSQL_ Níveis de Isolamento_files/jquery.min.js"></script><script src="./Transações no PostgreSQL_ Níveis de Isolamento_files/hide-show-menu.js"></script>
+                    <!-- syntax highlighter -->  
+                        <script type="text/javascript" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/prism.js"></script>    
+                        <script type="text/javascript" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/prism-autoloader.min.js"></script>    
+                        <script type="text/javascript" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/prism-line-numbers.min.js"></script>    
+                        <script type="text/javascript" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/prism-normalize-whitespace.min.js"></script>    
+                        <script type="text/javascript">
+                        // Optional
+                        Prism.plugins.NormalizeWhitespace.setDefaults({
+                            'remove-trailing': true,
+                            'remove-indent': true,
+                            'left-trim': true,
+                            'right-trim': true,
+                        });
+                        </script>
+                    <!-- fim SH -->
+    
+                    <!-- slider -->
+                        <script type="text/javascript" async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/devslider.js" id="devslider"></script>
+                    <!-- fim slider -->
+                    <script type="text/javascript" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/jquery.mCustomScrollbar.js"></script><script src="./Transações no PostgreSQL_ Níveis de Isolamento_files/jquery.mousewheel.min.js"></script>
+                    <script async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/utils.1.1.0.js" id="utilscript" type="text/javascript"></script>
+                    <script src="./Transações no PostgreSQL_ Níveis de Isolamento_files/viewcomp.js" type="text/javascript"></script>
+
+                    <script type="application/ld+json">
+                                        {                
+                                        "@context": "https://schema.org",
+                                        "@type": "NewsArticle",
+                                        "mainEntityOfPage": {                
+                                            "@type": "WebPage",                
+                                            "@id": "https://www.devmedia.com.br/"
+                                        },                
+                                        "headline": "Transa&ccedil;&otilde;es no PostgreSQL: N&iacute;veis de Isolamento",
+                                        "image": "https://arquivo.devmedia.com.br/midiasocial/artigo-devmedia-facebook.jpg",                
+                                        "datePublished": "2015-04-10-0312:06:00-03:00",                
+                                        "dateModified": "2015-04-10-0312:06:00-03:00",                
+                                        "author": {                
+                                            "@type": "Person",                
+                                            "name": "Ronaldo Lanhellas"                
+                                        },                
+                                        "publisher": {                
+                                            "@type": "Organization",                
+                                            "name": "DevMedia",                
+                                            "logo": {                
+                                            "@type": "ImageObject",                
+                                            "url": "https://www.devmedia.com.br/Imagens/2013/logo_ass.png"                
+                                            }                
+                                        },                
+                                        "description": "Veja neste artigo como funcionam os níveis de isolamento das transações no PostgreSQL."                
+                                        }                
+                                    </script>
+                    
+                    
+                    <script type="application/ld+json">{
+                    "@context": "https://schema.org",
+                    "@type": "BreadcrumbList",
+                      "itemListElement": [{
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Artigos",
+                        "item": "https://devmedia.com.br/artigos"
+                      },{
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Banco de Dados",
+                        "item": "https://devmedia.com.br/artigos/banco-de-dados"
+                      },{
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "Transações no PostgreSQL: Níveis de Isolamento",
+                        "item": "https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464"
+                      }]
+                } </script>
+        
+    <script>function fixScreenDevMedia(){
+        $("body").css("top", ($(window).scrollTop() * -1) + "px");
+        $("body").addClass("fixScreen-devmedia");
+    }
+
+    function unfixScreenDevMedia(){
+        var top = $("body").offset().top * -1;
+        $("body").removeClass("fixScreen-devmedia");
+        $(window).scrollTop(top);
+    }</script><!--[if lt IE 9]>
+    <script async defer src="js/modernizr.custom.js"></script>
+    <![endif]--><script async="">
+    dataLayer = [{'visitorType': 'deslogado'}, {'userName': 'Programador'}];
+    </script><!-- Optmizer -->
+    <script>
+        (function(a,s,y,n,c,h,i,d,e){
+            s.className+=" "+y;
+            h.start=1*new Date;
+            h.end=i=function(){
+                s.className=s.className.replace(RegExp(" ?"+y),"")
+            }; (a[n]=a[n]||[]).hide=h;
+            setTimeout(function(){
+                i();
+                h.end=null
+            },c);
+            h.timeout=c; 
+        })
+        (window,document.documentElement,"async-hide","dataLayer",4000, {"GTM-MCHBV6W":true});
+    </script>	
+    <!-- End Optmizer -->
+    <!-- Google Analytics -->
+            <script async="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/js(2)"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag("js", new Date());
+                
+                gtag("config", "UA-15997918-1");
+                gtag('config', 'UA-15997918-6');
+            </script>
+            <!-- End Google Analytics -->
+            <!-- Google Tag Manager -->
+            <script>
+                (function(w,d,s,l,i){
+                    w[l]=w[l]||[];w[l].push({
+                        "gtm.start": new Date().getTime(),event:"gtm.js"
+                    });
+                    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";
+                    j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;
+                    f.parentNode.insertBefore(j,f);
+                })
+                (window,document,"script","dataLayer","GTM-MCHBV6W");
+            </script>
+            <!-- End Google Tag Manager --><!-- Analytics Custom Dimension -->
+        <link href="./Transações no PostgreSQL_ Níveis de Isolamento_files/css" rel="stylesheet">
+    <script src="./Transações no PostgreSQL_ Níveis de Isolamento_files/preview.js" type="text/javascript"></script><link rel="stylesheet" type="text/css" href="./Transações no PostgreSQL_ Níveis de Isolamento_files/preview(1).css"><style>.Typewriter__cursor{-webkit-animation:Typewriter-cursor 1s infinite;animation:Typewriter-cursor 1s infinite;margin-left:1px}@-webkit-keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}@keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}</style></head>
+<body class="sala-conteudo-global" style="">
+    <!-- Tag manager --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MCHBV6W" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- Tag manager -->
+    <section>
+        <header class="header-site-devmedia " style="">
+            <nav class="lateral" style="height: 300px;">
+                <!-- MENU LATERAL -->
+            <style>
+header .lateral{
+    overflow-anchor: none;
+}
+header nav.lateral>ul li>a {
+box-shadow: none !important;
+}
+header nav.lateral>ul hr{
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+</style>
+<ul style="height: 300px;">
+<!-- <li>
+    <strong>
+    <a href="#" rel="nofollow">
+            <span class="font-dev">bem</span>
+            <span class="font-media">vindo</span>
+    </a>
+    </strong>
+</li> -->
+<li><a href="https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464#" class="back close-menu close-menu-back" data-main="true">
+    <div class="sidebar-lateral-close"></div>
+    Fechar
+</a></li>
+<!--<li><a href="//www.devmedia.com.br/app/" rel="nofollow"></span>Baixe o App</a></li>-->
+    <li><a href="https://www.devmedia.com.br/pro/" rel="nofollow">Assine</a></li>
+
+
+<li><a href="https://www.devmedia.com.br/fale-conosco/" rel="nofollow">Fale conosco</a></li>
+<!-- <li><a href="#" class="back submenu-titulo" data-tipo="ponto-de-partida">
+    Ponto de partida 
+    <div class='container-svg-menu-lateral'><svg viewBox="0 0 7.453 4.647" class="img-seta-menu"><path class="img-seta-menu-path" d="M18.9,6.556l2.851-2.851L18.9.9" transform="translate(7.454 -18.002) rotate(90)"></path></svg></div>
+</a></li>
+<li class="submenu-itens submenu-ponto-de-partida">    
+    <a rel="nofollow" href="https://www.devmedia.com.br/aprender-javascript/">JavaScript </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/guia/programador-front-end/38792">HTML e CSS </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/nodejs/">Node.js </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/angular/">Angular </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/react/">React </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/react-native/">React Native </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/docker/">Docker </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/guia/programador-php/38193">PHP </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/serie-python/">Python </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/android-developer/">Android </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/guia/programador-java/37809">Java </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/guia/programador-net/37814">.Net </a>
+    <a rel="nofollow" href="https://www.devmedia.com.br/sql/">SQL </a>
+</li> -->
+<li>
+    <a href="https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464#" class="back submenu-titulo" data-tipo="tecnologias">
+    Tecnologias
+    <div class="container-svg-menu-lateral"><svg viewBox="0 0 7.453 4.647" class="img-seta-menu"><path class="img-seta-menu-path" d="M18.9,6.556l2.851-2.851L18.9.9" transform="translate(7.454 -18.002) rotate(90)"></path></svg></div>
+    </a>
+</li>
+<li class="submenu-itens submenu-tecnologias">      
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/algoritmo/">Algoritmo</a>     
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/angular/">Angular</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/csharp/">C#</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/css/">CSS</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/dart/">Dart</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/delphi/">Delphi</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/django/">Django</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/docker/">Docker</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/flutter/">Flutter</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/git/">Git</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/html/">HTML</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/java/">Java</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/javascript/">JavaScript</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/kotlin/">Kotlin</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/laravel/">Laravel</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/levantamento-de-requisitos/">Levantamento de requisitos</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/banco-de-dados/">Modelagem de dados</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/mysql/">MySQL</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/mvc/">MVC</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/net/">.Net</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/node-js/">Node.js</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/oracle/">Oracle</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/orientacao-a-objetos/">Orientação a Objetos</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/padrao-de-projeto/">Padrões de projeto</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/php/">PHP</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/postgresql/">PostgreSQL</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/python/">Python</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/react/">React</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/react-native/">React Native</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/rest/">Rest</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/spring/">Spring</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/scrum/">Scrum</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/sql/">SQL</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/sql-server/">SQL Server</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/teste-de-software/">Teste de software</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/typescript/">TypeScript</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/uml/">UML</a>
+    <a class="item-link-tecnologia" href="https://www.devmedia.com.br/vue-js/">Vue.js</a>
+
+</li>
+<li>
+    <a href="https://www.devmedia.com.br/tecnologia/novos-desafios">Exercite</a>
+</li>
+<li>
+    <a href="https://www.devmedia.com.br/empresarial/">Contrate um programador</a>
+</li>
+
+
+</ul>
+
+<script>
+$(function(){        
+    $(document).on("click", ".submenu-titulo", function(){
+        var tipo = $(this).data("tipo");
+        var menus = $(".submenu-titulo");
+        for(var i=0; i < menus.length; i++){
+            var datatipo = $(menus[i]).data('tipo');
+            if(datatipo != tipo){
+                $(".submenu-" + datatipo).hide();
+                $(menus[i]).find('.container-svg-menu-lateral').removeClass("img-rotate");
+            }
+        }
+        $(".submenu-" + tipo).slideToggle(300);
+        $(this).find('.container-svg-menu-lateral').toggleClass("img-rotate");
+        $("body").addClass("fixScreen-devmedia");
+    });
+    $(window).resize(function(){
+        $("header nav.lateral,header nav.lateral>ul").height(window.innerHeight);
+    });
+    
+   /* $(document).keyup(function(e){
+        if(e.keyCode==27 && $("header nav.lateral").css("display")=="block"){//esc
+            $("header nav.lateral").fadeOut(100).find(".active").removeClass("active");
+        }
+        if (typeof unfixScreenDevMedia != undefined) {
+            unfixScreenDevMedia();
+        }
+    });*/
+    
+    // $(document).on("click", "header .opacity,header nav.lateral", function(e){
+    $(document).on("click", "header .opacity,header .close-menu", function(e){
+        if($(e.target).attr('class')=="lateral"){
+            $("header nav.lateral").fadeOut(100).find(".active").removeClass("active");
+        }
+
+        if (typeof unfixScreenDevMedia != undefined) {
+            unfixScreenDevMedia();
+        }
+    });
+    
+    $(document).on("click", "header .menu",function(event){
+        event.preventDefault();
+        $("header nav.lateral,header nav.lateral>ul").height(window.innerHeight);
+        $("header nav.lateral").css({"display":"table"});
+        $("header nav.lateral").fadeIn(100,function(){
+            $("header nav.lateral").css({"display":"block"});
+            $("header nav.lateral>ul").css({"display":"table"});
+        });
+        if (typeof fixScreenDevMedia != undefined) {
+            fixScreenDevMedia();
+        }
+    });
+    
+    $(document).on("click", "header nav.lateral li a", function(event){
+        if($(this).attr("href")=="#") event.preventDefault();
+        var alvo = $(this).parent().parent().find(".active");
+        if(alvo.length){event.preventDefault();alvo.removeClass("active");}
+        else{$(this).parent().children("ul").addClass("active");
+            // $("header nav.lateral").scrollTop(0);
+        }
+    });
+    
+    $(document).on("click", "header nav.lateral li .home", function(){
+        $("header nav.lateral").find(".active").removeClass("active");
+    });
+
+    $(document).on("click", "header nav.lateral li .back", function(){
+        if($(this).data("main")==true){
+            $("header nav.lateral").fadeOut(100).find(".active").removeClass("active");
+            $("header .opacity").fadeOut(100);
+            $("body").css({"overflow":"auto"});
+        }else{
+            $(this).parent().parent().parent().find(".active").removeClass("active");
+        }
+    });
+});
+</script></nav>
+    
+            <nav class="menu-topo-devmedia"> 
+                <!-- MENU MOBILE -->     
+                <div class="devmenu-mobile">
+                    <i class="drop-mobile">
+                        <a href="https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464#" class="menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                    </i>
+                    <a class="logo-mob" href="https://www.devmedia.com.br/">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 415.8 57.608"> <g id="Group_12827" data-name="Group 12827" transform="translate(6923.284 -4629.421)"> <g id="Logo_new" transform="translate(-7091.984 4591.029)"> <g id="Layer_1-2"> <path id="Path_78099" data-name="Path 78099" class="cls-1" d="M168.7,95.9V38.4h20.9a30.56,30.56,0,0,1,12.3,2.3A25.02,25.02,0,0,1,216.1,56a34.876,34.876,0,0,1,1.8,11.1,32.376,32.376,0,0,1-2,11.9,25.465,25.465,0,0,1-5.7,9.1,26.354,26.354,0,0,1-8.9,5.8A33.182,33.182,0,0,1,189.6,96Zm38-28.8a27.931,27.931,0,0,0-1.1-7.6,17.656,17.656,0,0,0-3.3-6,14.98,14.98,0,0,0-5.4-3.9,18.251,18.251,0,0,0-7.3-1.4h-9.7V86.1h9.7a18.345,18.345,0,0,0,7.3-1.5,14.06,14.06,0,0,0,5.3-4,17.656,17.656,0,0,0,3.3-6,24.017,24.017,0,0,0,1.2-7.5Z"></path> <path id="Path_78100" data-name="Path 78100" class="cls-1" d="M270.2,86.1v9.8H226.7V38.4h43.5v9.8H237.9V62h32.3v9.1H237.9v15Z"></path> <path id="Path_78101" data-name="Path 78101" class="cls-1" d="M390.3,95.9V46.2L368.3,80l-22-33.8V95.9h-4.1V38.4h4.1l22,34.1,22-34.1h4.1V95.9Z"></path> <path id="Path_78102" data-name="Path 78102" class="cls-1" d="M448.2,92.2v3.7H408V38.4h39.5v3.7H412.1V64.7h36.1v3.6H412.1V92.2h36.1Z"></path> <path id="Path_78103" data-name="Path 78103" class="cls-1" d="M459.2,95.9V38.4h21.2a28.387,28.387,0,0,1,11.9,2.3,22.811,22.811,0,0,1,8.5,6.2,27.318,27.318,0,0,1,5.1,9.1,35.213,35.213,0,0,1,1.7,11.1A34.88,34.88,0,0,1,505.7,79a24.4,24.4,0,0,1-14.1,14.9A31.034,31.034,0,0,1,480.3,96Zm44.4-28.8a33.651,33.651,0,0,0-1.5-10,22.228,22.228,0,0,0-4.5-7.9,21.181,21.181,0,0,0-7.3-5.2,25.656,25.656,0,0,0-9.9-1.9H463.3v50h17.1a24.711,24.711,0,0,0,10-1.9,19.036,19.036,0,0,0,7.2-5.3,22.411,22.411,0,0,0,4.4-8A30.038,30.038,0,0,0,503.6,67.1Z"></path> <path id="Path_78104" data-name="Path 78104" class="cls-1" d="M518.3,95.9V38.4h4.1V95.9Z"></path> <path id="Path_78105" data-name="Path 78105" class="cls-1" d="M555.8,38.4h3.7l25,57.5H580l-6-13.8-32.8.2-6,13.7h-4.6Zm16.8,39.7L557.7,43.4,542.5,78.2Z"></path> <path id="Path_78106" data-name="Path 78106" class="cls-1" d="M322.4,38.4,304.7,82.9v-.1l-.1.1L287,38.4H275.9l22.4,57.5h12.8l22.4-57.5Z"></path> </g> </g> </g> </svg>
+                    </a>
+                </div>
+                <!-- FIM MENU MOBILE -->    
+
+                <!-- MENU DESKTOP -->  
+                <div class="devmenu">
+                    <a class="logo-devmedia-svg" href="https://www.devmedia.com.br/" title="DevMedia - Plataforma para Programadores">
+                        <svg class="logo-devmedia" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 584.52 132.87" shape-rendering="geometricPrecision "><defs><style>.cls-1{fill:#7bac3b;}.cls-2{fill:#484848;}</style></defs><title>DevMedia - Plataforma para Programadores</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><g id="_Group_" data-name="&lt;Group&gt;"><path id="_Path_" data-name="&lt;Path&gt;" class="cls-1" d="M39.7,61.42,94.78,6.34A66.45,66.45,0,0,0,9.87,31.59Z"></path><path id="_Path_2" data-name="&lt;Path&gt;" class="cls-1" d="M71.3,39.7l55.18,55.18A66.47,66.47,0,0,0,101.19,9.81Z"></path><path id="_Path_3" data-name="&lt;Path&gt;" class="cls-1" d="M93,71.31,37.89,126.44A66.47,66.47,0,0,0,123,101.28Z"></path><path id="_Path_4" data-name="&lt;Path&gt;" class="cls-1" d="M61.42,93l-55-55a66.46,66.46,0,0,0,25.11,85Z"></path></g><path class="cls-2" d="M168.68,95.88V38.41h20.88a31.2,31.2,0,0,1,12.34,2.27,24.82,24.82,0,0,1,14.21,15.26,34.27,34.27,0,0,1,1.78,11.13,33.65,33.65,0,0,1-2,11.86A25.34,25.34,0,0,1,210.2,88a25.7,25.7,0,0,1-8.94,5.83,31.58,31.58,0,0,1-11.7,2.06Zm38-28.82a24.48,24.48,0,0,0-1.13-7.61,17,17,0,0,0-3.32-6,14.78,14.78,0,0,0-5.38-3.89,18.18,18.18,0,0,0-7.25-1.38h-9.71V86.08h9.71a17.5,17.5,0,0,0,7.33-1.46,15,15,0,0,0,5.34-4,17.87,17.87,0,0,0,3.28-6A24.19,24.19,0,0,0,206.64,67.06Z"></path><path class="cls-2" d="M270.19,86.08v9.79H226.72V38.41h43.47V48.2h-32.3V62h32.3v9.07h-32.3v15Z"></path><path class="cls-2" d="M390.26,95.88V46.18l-22,33.77-22-33.77v49.7h-4.13V38.41h4.13l22,34.12,22-34.12h4.13V95.88Z"></path><path class="cls-2" d="M448.19,92.15v3.72H408V38.41h39.47v3.72H412.12V64.71h36.07v3.56H412.12V92.15Z"></path><path class="cls-2" d="M459.23,95.88V38.41h21.22a29.36,29.36,0,0,1,11.94,2.27,24,24,0,0,1,8.54,6.15,25.77,25.77,0,0,1,5.1,9.11,35.75,35.75,0,0,1,1.7,11.13,34.94,34.94,0,0,1-1.9,11.86A25.58,25.58,0,0,1,500.36,88a24.4,24.4,0,0,1-8.62,5.83,29.64,29.64,0,0,1-11.29,2.06ZM503.6,67.06a31.22,31.22,0,0,0-1.54-10,22.51,22.51,0,0,0-4.49-7.89A20.49,20.49,0,0,0,490.32,44a24.61,24.61,0,0,0-9.87-1.86H463.36v50h17.09a24.65,24.65,0,0,0,10-1.9,19.94,19.94,0,0,0,7.24-5.3,23.18,23.18,0,0,0,4.41-8A31.72,31.72,0,0,0,503.6,67.06Z"></path><path class="cls-2" d="M518.32,95.88V38.41h4.13V95.88Z"></path><path class="cls-2" d="M555.84,38.41h3.67l25,57.47H580l-6-13.82-32.8.15-6,13.67h-4.59Zm16.71,39.67L557.67,43.43,542.44,78.24Z"></path><polygon class="cls-2" points="322.35 38.41 304.73 82.9 304.69 82.78 304.64 82.9 287.02 38.41 275.85 38.41 298.27 95.88 304.69 95.88 311.1 95.88 333.52 38.41 322.35 38.41"></polygon></g></g></svg> 
+                    </a>
+
+                    <nav class="menu-itens-devmedia">
+
+                        <div class="secao-menu-devmedia-1">
+
+                            <span class="menu-item-devmedia show-submenu-devmedia menu-inicio-devmedia">Tecnologias
+                                <svg viewBox="0 0 7.453 4.647" class="img-seta-menu">
+                                <path class="img-seta-menu-path" d="M18.9,6.556l2.851-2.851L18.9.9" transform="translate(7.454 -18.002) rotate(90)"></path>
+                                </svg>
+                                <nav class="nav-menu-devmedia nav-menu-tecnologia">
+                                    <div class="wrap-teclogias-novidades">
+                                        <div class="wrap-tecnologias">
+                                            <div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">Comece aqui</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/programacao/">Plano de estudos</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">Fundamentos</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/algoritmo/">Algoritmo</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">Front-end</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/angular/">Angular</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/css/">CSS</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/html/">HTML</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/react/">React</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/vue-js/">Vue.js</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">Mobile</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/flutter/">Flutter</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/react-native/">React Native</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">Linguagens</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/csharp/">C#</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/delphi/">Delphi</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/dart/">Dart</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/java/">Java</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/javascript/">JavaScript</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/kotlin/">Kotlin</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/php/">PHP</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/python/">Python</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/typescript/">TypeScript</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">Back-end</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/django/">Django</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/laravel/">Laravel</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/node-js/">Node.js</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/spring/">Spring</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/net/">.Net</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+											<div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">Arquitetura e Design</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/orientacao-a-objetos/">Orientação a Objetos</a></li><li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/mvc/">MVC</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/rest/">Rest</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/padrao-de-projeto/">Padrões de projeto</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            
+                                            <div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">Banco de dados</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/banco-de-dados/">Modelagem de dados</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/mysql/">MySQL</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/oracle/">Oracle</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/postgresql/">PostgreSQL</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/sql/">SQL</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/sql-server/">SQL Server</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">CI/CD</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/docker/">Docker</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/git/">Git</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/teste-de-software/">Teste de software</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>    
+                                            <div class="topico-tecnologia">
+                                                <span class="menu-titulo-topico">Engenharia de Software</span>
+                                                <nav class="itens-topico-tecnologia">
+                                                    <ul class="lista-tecnologia">
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/levantamento-de-requisitos/">Levantamento de requisitos</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/scrum/">Scrum</a></li>
+                                                        <li class="lista-item-tecnologia"><a class="item-link-tecnologia" href="https://www.devmedia.com.br/uml/">UML</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                        <div class="wrap-novidades">
+                                            <div class="box-acesso-rapido">
+                                                <a title="Mapa" href="https://www.devmedia.com.br/tecnologia/" class="acesso-rapido-item">Mapa</a>
+                                                <a title="Novos conteúdos" href="https://www.devmedia.com.br/tecnologia/novos-conteudos" class="acesso-rapido-item">Novos Conteúdos</a>
+                                                <a title="Novos exercícios" href="https://www.devmedia.com.br/tecnologia/novos-desafios" class="acesso-rapido-item">Novos Exercícios</a>
+                                                                                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </span>
+
+                            <a class="menu-item-devmedia menu-exercite-devmedia" href="https://www.devmedia.com.br/tecnologia/novos-desafios">Exercite </a>
+
+                                                            <a class="menu-item-devmedia menu-contrate-devmedia" href="https://www.devmedia.com.br/empresarial/">Contrate um programador</a>
+                                                                                            
+                                                                <!-- <a class="menu-item-devmedia menu-vagas-devmedia" href="//www.devmedia.com.br/empresarial/">Empresarial <span class="item-news">new</span></a> -->
+                                                                <!-- <a class="menu-item-devmedia menu-vagas-devmedia" href="//www.devmedia.com.br/vagas/">Vagas</a> -->
+                            
+                        </div>
+                        <div class="secao-menu-devmedia-2">
+
+                            <span class="menu-item-devmedia show-submenu-devmedia menu-forum-devmedia">Navegue
+                                <svg viewBox="0 0 7.453 4.647" class="img-seta-menu">
+                                <path class="img-seta-menu-path" d="M18.9,6.556l2.851-2.851L18.9.9" transform="translate(7.454 -18.002) rotate(90)"></path>
+                                </svg>
+                                <nav class="submenu-itens-devmedia subsecundario">
+                                    <a href="https://www.devmedia.com.br/cursos/" class="submenu-item-devmedia">Cursos</a>
+                                    <a href="https://www.devmedia.com.br/artigos/" class="submenu-item-devmedia">Artigos</a>
+                                    <a href="https://www.devmedia.com.br/devcast/" class="submenu-item-devmedia">Vídeos</a>
+                                    <a href="https://www.devmedia.com.br/guias/" class="submenu-item-devmedia">Guias</a>
+                                    <a href="https://www.devmedia.com.br/exemplos/" class="submenu-item-devmedia">Projetos</a>
+                                    <a href="https://www.devmedia.com.br/revistas/" class="submenu-item-devmedia">Revistas</a>
+                                    <a href="https://www.devmedia.com.br/forum/" class="submenu-item-devmedia">Fórum</a>
+                                    <a href="https://www.devmedia.com.br/gamification/devups/" class="submenu-item-devmedia">Ranking</a>
+                                </nav>
+                            </span>
+
+                        </div>
+            
+                    </nav>
+                    
+                    <div class="login-box">
+
+                                                        <div class="page-mvp">
+                                <a href="https://www.devmedia.com.br/join/" class="link-page-mvp">teste grátis</a>
+                            </div>
+                        
+                        <div class="form-busca form-busca-off">
+                            <form class="form-busca-site" action="https://www.devmedia.com.br/busca/">
+                                <input class="btn-text-top" type="text" name="txtsearch" placeholder="Buscar">
+                                <button class="btn-buscar-top" type="submit"></button>
+                            </form>
+                        </div>
+
+                        
+                                                        <div class="empresarial-devmedia">
+                                <a class="link-empresarial-devmedia" href="https://www.devmedia.com.br/empresarial/">Empresarial</a>
+                            </div>
+                            <div class="login-devmedia">
+                                <svg class="link-login-devmedia" width="35" height="35" viewBox="0 0 35 35">
+                                    <g transform="translate(0)">
+                                        <path class="login-usuario" d="M29.874,22.626a17.433,17.433,0,0,0-6.65-4.171,10.117,10.117,0,1,0-11.449,0A17.528,17.528,0,0,0,0,35H2.734a14.766,14.766,0,1,1,29.531,0H35A17.386,17.386,0,0,0,29.874,22.626ZM17.5,17.5a7.383,7.383,0,1,1,7.383-7.383A7.391,7.391,0,0,1,17.5,17.5Z" transform="translate(0)"></path>
+                                    </g>
+                                </svg>
+                                <!-- <span class="link-login-devmedia">Login</span> -->
+                                <div class="box-login-devmedia">
+                                    <form action="https://www.devmedia.com.br/login/login.asp" method="post">
+                                        <label class="lbl-form-devmedia" for="usuario">Usuário</label>
+                                        <input class="input-form-devmedia" type="text" name="usuario" required="">
+                                        <label class="lbl-form-devmedia" for="senha">Senha</label>
+                                        <input class="input-form-devmedia" type="password" name="senha" autocomplete="off" required="">
+                                        <input type="hidden" name="ac" value="1">
+                                        <input type="hidden" name="erro" value="-1">
+                                        <a class="lembrar-senha-devmedia" href="https://www.devmedia.com.br/cadastro/lembrar-cadastro/">Esqueceu o login ou a senha?</a>
+                                        <button class="submit-form-devmedia" type="submit">Entrar</button>
+                                        <a class="cadastro-devmedia" href="https://www.devmedia.com.br/join/?cadastro">Cadastre-se</a>
+                                    </form>
+                                </div>
+                            </div>
+                            <script>
+                                $(document).on("click", ".link-login-devmedia", function() {
+                                    $(".box-login-devmedia").toggleClass('show-form-login-devmedia');
+                                    $(".login-devmedia").toggleClass('active_login');
+                                    $("body").toggleClass('body-form-login-devmedia');
+                                });
+                            </script>
+                                                    <div class="busca-mobile">
+                            <img src="./Transações no PostgreSQL_ Níveis de Isolamento_files/buscar_grey.png" alt="Buscar conteudo">
+                            <form action="https://www.devmedia.com.br/busca/">
+                                <span class="busca-close"></span>
+                                <input type="text" name="txtsearch" placeholder="Buscar">
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- FIM MENU DESKTOP -->  
+
+            </nav>
+
+            </header>
+        <main class="content-site-devmedia "><section id="viewcomp" class="">
+	<div class="dark-overlay"></div>
+	                
+        <script>
+            document.getElementsByTagName("body")[0].classList.add("sala-conteudo-global");
+        </script>
+    <section class="page-header">
+        <div class="page-header-bg">
+            <span class="page-header-bg-gradient"></span>
+        </div>
+        <section class="page-header-wrapper">
+            <span class="page-tipo">
+                Artigo
+            </span>
+                <style>
+    .acesso-mvp-topo {
+        font-family: "Montserrat", sans-serif;
+        background-color: #FE0056;
+        color: #fff;
+        padding: 20px 30px;
+        font-size: 18px;
+        border-radius: 5px;
+        box-shadow: 12px 15px 20px rgba(0,0,0,.16);
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        text-decoration: none;
+        justify-content: center;
+        align-items: center;
+    margin: 10px 0;
+}
+svg.slide-next {
+    width: 20px;
+    height: 20px;
+    background-color: #FFFFFF;
+    position: absolute;
+    right: -15px;
+    padding: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 12px 15px 20px rgba(0,0,0,.16);
+    border-radius: 2px;
+    transition: .3s all;
+}
+</style>
+<a href="https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464#modulo-mvp" class="acesso-mvp-topo">Invista em você! Saiba como a DevMedia pode ajudar sua carreira.
+    <svg class="slide-next" viewBox="0 0 4.6 7.5" xml:space="preserve">
+        <path class="seta" d="M0.9,6.6l2.9-2.9L0.9,0.9"></path>
+    </svg>
+</a>
+            <h1 class="page-title" data-gtm-vis-first-on-screen-6296301_531="1640656" data-gtm-vis-total-visible-time-6296301_531="100" data-gtm-vis-has-fired-6296301_531="1" data-gtm-vis-recent-on-screen-6296301_541="1640662" data-gtm-vis-first-on-screen-6296301_541="1640662" data-gtm-vis-total-visible-time-6296301_541="100" data-gtm-vis-has-fired-6296301_541="1" data-gtm-vis-recent-on-screen-6296301_547="1640664" data-gtm-vis-first-on-screen-6296301_547="1640664" data-gtm-vis-total-visible-time-6296301_547="100" data-gtm-vis-has-fired-6296301_547="1">Transações no PostgreSQL: Níveis de Isolamento</h1>
+            <h2 class="page-description">Veja neste artigo como funcionam os níveis de isolamento das transações no PostgreSQL.</h2>
+        </section>
+    </section>
+    <section class="page-body">
+        
+<section class="action-menu side-menu" style="">
+    <ul class="action-menu-list">
+
+        <li class="action-menu-item comment-button">
+            <span class="action-menu-icone">
+                <svg class="icone-svg svg-comment">
+                    <path class="svg-element border" d="M26,7.8H8.8c-1.5,0-2.7,1.2-2.7,2.7v16.8l5.8-4.6h14.3c1.5,0,2.7-1.2,2.7-2.7v-9.5
+                        C28.7,8.9,27.5,7.9,26,7.8z"></path>
+                    <line class="svg-element line" x1="11.4" y1="12.9" x2="23.6" y2="12.9"></line>
+                    <line class="svg-element line" x1="11.4" y1="17" x2="17.4" y2="17"></line>
+                </svg>
+            </span>
+            <span class="action-menu-label">Tirar Dúvida</span>
+        </li>
+
+        <li class="action-menu-item note-button" data-id="32464">
+            <span class="action-menu-icone">
+                <svg class="icone-svg svg-notes">
+                    <path class="svg-element pen" d="M28.4,9.3L16.6,21.1l-4,1.4l1.4-3.9L25.8,6.8L28.4,9.3z"></path>
+                    <polygon class="svg-element border" points="25.8,6.8 27.4,5.2 30,7.6 28.4,9.3 "></polygon>
+                    <path class="svg-element line" d="M23.8,18.4v10.1c0,0.7-0.5,1.2-1.2,1.2H6.2c-0.7,0-1.2-0.5-1.2-1.2V7.3c0-0.7,0.5-1.2,1.2-1.2h15.5"></path>
+                    <line class="svg-element line" x1="8.4" y1="10.5" x2="18.8" y2="10.5"></line>
+                    <line class="svg-element line" x1="8.4" y1="14.2" x2="14.9" y2="14.2"></line>
+                    <line class="svg-element line" x1="8.4" y1="17.8" x2="11.1" y2="17.8"></line>
+                    <line class="svg-element line" x1="8.4" y1="22.5" x2="12.6" y2="22.5"></line>
+                </svg>
+            </span>
+            <span class="action-menu-label">Anotações</span>
+        </li>
+
+        <li class="action-menu-item fav-button" data-id="32464" onclick="ga(&#39;send&#39;, {hitType: &#39;social&#39;, socialNetwork: &#39;DevMedia&#39;, socialAction: &#39;favoritar&#39;, socialTarget: &#39;https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464&#39;});">
+            <span class="action-menu-icone">
+                <svg class="icone-svg svg-star">
+                    <path class="svg-element border" d="M27.2,14.2c0.2-0.2,0.3-0.5,0.2-0.7c-0.1-0.3-0.3-0.5-0.6-0.5l-5.4-0.7c-0.3-0.2-0.6-0.4-0.8-0.7
+                        l-2.4-4.9c-0.1-0.3-0.3-0.4-0.6-0.4c-0.3,0-0.5,0.2-0.6,0.4l-2.5,4.9c-0.2,0.4-0.5,0.6-0.9,0.6L8.3,13c-0.3,0-0.6,0.2-0.6,0.5
+                        c-0.1,0.3,0,0.6,0.2,0.7l3.8,3.7c0.3,0.3,0.4,0.7,0.3,1l-0.9,5.3c0,0.3,0.1,0.5,0.3,0.7c0.1,0.1,0.3,0.1,0.4,0.1l0,0
+                        c0.1,0,0.2,0,0.3-0.1l0.4-0.2l4.4-2.3c0.2-0.1,0.3-0.1,0.5-0.1c0.2,0,0.4,0,0.5,0.1l4.8,2.5C22.8,25,22.9,25,23,25
+                        c0.1,0,0.3,0,0.4-0.1c0.2-0.2,0.3-0.5,0.3-0.7l-0.9-5.3c-0.1-0.4,0.1-0.8,0.3-1L27.2,14.2z"></path>
+                    <line class="svg-element line" x1="11.1" y1="8" x2="10.4" y2="7.1"></line>
+                    <line class="svg-element line" x1="23.9" y1="8" x2="24.5" y2="7.1"></line>
+                    <line class="svg-element line" x1="7.2" y1="20.1" x2="6.2" y2="20.4"></line>
+                    <line class="svg-element line" x1="27.8" y1="20.1" x2="28.9" y2="20.4"></line>
+                    <line class="svg-element line" x1="17.6" y1="27.6" x2="17.6" y2="28.7"></line>
+                </svg>
+            </span>
+            <span class="action-menu-label">Favoritar</span>
+        </li>
+
+        <li class="action-menu-item concluido-button" data-id="32464">
+            <span class="action-menu-icone">
+                <svg class="icone-svg svg-concluido" viewBox="0 0 35 35">
+                    <circle cx="17.5" cy="17.5" r="10.5"></circle>
+                    <path d="M21.1,14.4l-4.4,6.9l-3.5-4"></path>
+                </svg>
+            </span>
+            <span class="action-menu-label">Concluído</span>
+        </li>
+
+        <li class="action-menu-item like-button" data-id="32464" onclick="ga(&#39;send&#39;, {hitType: &#39;social&#39;, socialNetwork: &#39;DevMedia&#39;, socialAction: &#39;like&#39;, socialTarget: &#39;https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464&#39;});">
+            <span class="action-menu-icone">
+                <svg class="icone-svg svg-like" id="svg-like" x="0px" y="0px" viewBox="0 0 35 35">
+                    <path d="M18.2,26.7h-2.7c-1.6,0-2.9-1.3-2.9-2.9V16c4.8-1.3,4.5-4.5,4.5-8.1c0,0,3.4-0.5,3.4,2.4v3.8h5
+                        c1.3-0.1,2.5,1,2.6,2.3c0,0.2,0,0.4,0,0.6l-0.9,6.9c-0.3,1.7-1.7,2.9-3.3,2.9h-5.7V26.7z"></path>
+                    <path d="M9.9,25.7h1.8c0.4,0,0.8-0.4,0.8-0.8l0,0v-9.1c0-0.4-0.4-0.8-0.8-0.8l0,0H9
+                        c-0.4,0-0.8,0.4-0.8,0.8l0,0v8.3"></path>
+                    <circle cx="8.4" cy="25.6" r="1.5"></circle>
+                </svg>
+
+
+                <span class="menu-icone-like-count">10</span>
+            </span>
+            <span class="action-menu-label">Gostei</span>
+        </li>
+
+        <li class="action-menu-item sub-menu">
+            <span class="action-menu-icone">
+                <svg class="icone-svg svg-share" viewBox="0 0 17.552 18.498">
+                    <g transform="translate(1 1)">
+                        <path class="svg-element lines" d="M12.594,11.3a2.959,2.959,0,0,0-2.337,1.152L5.728,9.917a2.96,2.96,0,0,0,0-1.948l4.529-2.526a2.964,2.964,0,1,0-.441-.818L5.287,7.151A2.946,2.946,0,1,0,5.3,10.734l4.529,2.53a2.9,2.9,0,0,0-.171.985A2.95,2.95,0,1,0,12.594,11.3Zm0-9.666a2.025,2.025,0,1,1-2.025,2.025,2.026,2.026,0,0,1,2.025-2.025ZM2.954,10.97A2.025,2.025,0,1,1,4.979,8.945,2.026,2.026,0,0,1,2.954,10.97Zm9.64,5.3a2.025,2.025,0,1,1,2.025-2.025,2.026,2.026,0,0,1-2.025,2.025Zm0,0" transform="translate(0 -0.7)"></path>
+                    </g>
+                </svg>
+            </span>
+            <span class="action-menu-sub-icone">
+                
+                <span class="social-icone">
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464" target="_blank" class="linkedin-share" title="Compartilhe no LinkedIn">
+                        <svg viewBox="0 0 512 512" class="sub-icone-svg svg-linkedin">
+                            <path d="m256 0c-141.363281 0-256 114.636719-256 256s114.636719 256 256 256 256-114.636719 256-256-114.636719-256-256-256zm-74.390625 387h-62.347656v-187.574219h62.347656zm-31.171875-213.1875h-.40625c-20.921875 0-34.453125-14.402344-34.453125-32.402344 0-18.40625 13.945313-32.410156 35.273437-32.410156 21.328126 0 34.453126 14.003906 34.859376 32.410156 0 18-13.53125 32.402344-35.273438 32.402344zm255.984375 213.1875h-62.339844v-100.347656c0-25.21875-9.027343-42.417969-31.585937-42.417969-17.222656 0-27.480469 11.601563-31.988282 22.800781-1.648437 4.007813-2.050781 9.609375-2.050781 15.214844v104.75h-62.34375s.816407-169.976562 0-187.574219h62.34375v26.558594c8.285157-12.78125 23.109375-30.960937 56.1875-30.960937 41.019531 0 71.777344 26.808593 71.777344 84.421874zm0 0"></path>
+                        </svg>
+                    </a>
+                </span>
+                <span class="social-icone">
+                    <a href="https://twitter.com/intent/tweet?text=Veja%20esse%20conte%C3%BAdo%20na%20%40DevMedia%3A%20Transa%C3%A7%C3%B5es+no+PostgreSQL%3A+N%C3%ADveis+de+Isolamento+https%3A%2F%2Fwww.devmedia.com.br%2Ftransacoes-no-postgresql-niveis-de-isolamento%2F32464" target="_blank" class="twitter-share" title="Compartilhe no Twitter">
+                        <svg viewBox="0 0 512 512" class="sub-icone-svg svg-twitter">
+                            <path d="m256 0c-141.363281 0-256 114.636719-256 256s114.636719 256 256 256 256-114.636719 256-256-114.636719-256-256-256zm116.886719 199.601562c.113281 2.519532.167969 5.050782.167969 7.59375 0 77.644532-59.101563 167.179688-167.183594 167.183594h.003906-.003906c-33.183594 0-64.0625-9.726562-90.066406-26.394531 4.597656.542969 9.277343.8125 14.015624.8125 27.53125 0 52.867188-9.390625 72.980469-25.152344-25.722656-.476562-47.410156-17.464843-54.894531-40.8125 3.582031.6875 7.265625 1.0625 11.042969 1.0625 5.363281 0 10.558593-.722656 15.496093-2.070312-26.886718-5.382813-47.140624-29.144531-47.140624-57.597657 0-.265624 0-.503906.007812-.75 7.917969 4.402344 16.972656 7.050782 26.613281 7.347657-15.777343-10.527344-26.148437-28.523438-26.148437-48.910157 0-10.765624 2.910156-20.851562 7.957031-29.535156 28.976563 35.554688 72.28125 58.9375 121.117187 61.394532-1.007812-4.304688-1.527343-8.789063-1.527343-13.398438 0-32.4375 26.316406-58.753906 58.765625-58.753906 16.902344 0 32.167968 7.144531 42.890625 18.566406 13.386719-2.640625 25.957031-7.53125 37.3125-14.261719-4.394531 13.714844-13.707031 25.222657-25.839844 32.5 11.886719-1.421875 23.214844-4.574219 33.742187-9.253906-7.863281 11.785156-17.835937 22.136719-29.308593 30.429687zm0 0"></path>
+                        </svg>
+                    </a>
+                </span>
+            </span>
+        </li>
+
+
+            </ul>
+</section>
+
+<section class="action-menu menu-action-top menu-hidden" style="top: 75px; left: 619.467px; height: 334px; display: none;">
+    <ul class="action-menu-list">
+        <li class="action-menu-item like-button" data-id="32464" onclick="ga(&#39;send&#39;, {hitType: &#39;social&#39;, socialNetwork: &#39;DevMedia&#39;, socialAction: &#39;like&#39;, socialTarget: &#39;https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464&#39;});">
+            <span class="action-menu-icone">
+                                    <svg class="icone-svg svg-like" x="0px" y="0px" viewBox="0 0 35 35">
+                        <path class="svg-element border" d="M17.6,26.9h-2.7c-1.6,0-2.9-1.3-2.9-2.9v-7.8c4.8-1.3,4.5-4.5,4.5-8.1c0,0,3.4-0.5,3.4,2.4v3.8h5 c1.3-0.1,2.5,1,2.6,2.3c0,0.2,0,0.4,0,0.6l-0.9,6.9c-0.3,1.7-1.7,2.9-3.3,2.9H17.6z"></path>
+                        <path class="svg-element border" d="M11.9,25.1V16c0-0.4-0.4-0.8-0.8-0.8c0,0,0,0,0,0H8.4c-0.4,0-0.8,0.4-0.8,0.8c0,0,0,0,0,0v8.7"></path>
+                    </svg>
+                                <span class="menu-icone-like-count">10</span>
+            </span>
+            <span class="action-menu-label">Gostei</span>
+        </li>
+        <li class="action-menu-item fav-button" data-id="32464" onclick="ga(&#39;send&#39;, {hitType: &#39;social&#39;, socialNetwork: &#39;DevMedia&#39;, socialAction: &#39;favoritar&#39;, socialTarget: &#39;https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464&#39;});">
+            <span class="action-menu-icone">
+                <svg class="icone-svg svg-star">
+                    <path class="svg-element border" d="M27.2,14.2c0.2-0.2,0.3-0.5,0.2-0.7c-0.1-0.3-0.3-0.5-0.6-0.5l-5.4-0.7c-0.3-0.2-0.6-0.4-0.8-0.7
+                        l-2.4-4.9c-0.1-0.3-0.3-0.4-0.6-0.4c-0.3,0-0.5,0.2-0.6,0.4l-2.5,4.9c-0.2,0.4-0.5,0.6-0.9,0.6L8.3,13c-0.3,0-0.6,0.2-0.6,0.5
+                        c-0.1,0.3,0,0.6,0.2,0.7l3.8,3.7c0.3,0.3,0.4,0.7,0.3,1l-0.9,5.3c0,0.3,0.1,0.5,0.3,0.7c0.1,0.1,0.3,0.1,0.4,0.1l0,0
+                        c0.1,0,0.2,0,0.3-0.1l0.4-0.2l4.4-2.3c0.2-0.1,0.3-0.1,0.5-0.1c0.2,0,0.4,0,0.5,0.1l4.8,2.5C22.8,25,22.9,25,23,25
+                        c0.1,0,0.3,0,0.4-0.1c0.2-0.2,0.3-0.5,0.3-0.7l-0.9-5.3c-0.1-0.4,0.1-0.8,0.3-1L27.2,14.2z"></path>
+                    <line class="svg-element line" x1="11.1" y1="8" x2="10.4" y2="7.1"></line>
+                    <line class="svg-element line" x1="23.9" y1="8" x2="24.5" y2="7.1"></line>
+                    <line class="svg-element line" x1="7.2" y1="20.1" x2="6.2" y2="20.4"></line>
+                    <line class="svg-element line" x1="27.8" y1="20.1" x2="28.9" y2="20.4"></line>
+                    <line class="svg-element line" x1="17.6" y1="27.6" x2="17.6" y2="28.7"></line>
+                </svg>
+            </span>
+            <span class="action-menu-label">Favoritar</span>
+        </li>
+        <li class="action-menu-item sub-menu">
+            <span class="action-menu-icone">
+                <svg class="icone-svg svg-share" viewBox="0 0 17.552 18.498">
+                    <g transform="translate(1 1)">
+                        <path class="svg-element lines" d="M12.594,11.3a2.959,2.959,0,0,0-2.337,1.152L5.728,9.917a2.96,2.96,0,0,0,0-1.948l4.529-2.526a2.964,2.964,0,1,0-.441-.818L5.287,7.151A2.946,2.946,0,1,0,5.3,10.734l4.529,2.53a2.9,2.9,0,0,0-.171.985A2.95,2.95,0,1,0,12.594,11.3Zm0-9.666a2.025,2.025,0,1,1-2.025,2.025,2.026,2.026,0,0,1,2.025-2.025ZM2.954,10.97A2.025,2.025,0,1,1,4.979,8.945,2.026,2.026,0,0,1,2.954,10.97Zm9.64,5.3a2.025,2.025,0,1,1,2.025-2.025,2.026,2.026,0,0,1-2.025,2.025Zm0,0" transform="translate(0 -0.7)"></path>
+                    </g>
+                </svg>
+            </span>
+            <span class="action-menu-sub-icone">
+                
+                <span class="social-icone">
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464" target="_blank" class="linkedin-share" title="Compartilhe no LinkedIn">
+                        <svg viewBox="0 0 512 512" class="sub-icone-svg svg-facebook">
+                            <path d="m256 0c-141.363281 0-256 114.636719-256 256s114.636719 256 256 256 256-114.636719 256-256-114.636719-256-256-256zm-74.390625 387h-62.347656v-187.574219h62.347656zm-31.171875-213.1875h-.40625c-20.921875 0-34.453125-14.402344-34.453125-32.402344 0-18.40625 13.945313-32.410156 35.273437-32.410156 21.328126 0 34.453126 14.003906 34.859376 32.410156 0 18-13.53125 32.402344-35.273438 32.402344zm255.984375 213.1875h-62.339844v-100.347656c0-25.21875-9.027343-42.417969-31.585937-42.417969-17.222656 0-27.480469 11.601563-31.988282 22.800781-1.648437 4.007813-2.050781 9.609375-2.050781 15.214844v104.75h-62.34375s.816407-169.976562 0-187.574219h62.34375v26.558594c8.285157-12.78125 23.109375-30.960937 56.1875-30.960937 41.019531 0 71.777344 26.808593 71.777344 84.421874zm0 0"></path>
+                        </svg>
+                    </a>
+                </span>
+                <span class="social-icone">
+                    <a href="https://twitter.com/intent/tweet?text=Veja%20esse%20conte%C3%BAdo%20na%20%40DevMedia%3A%20Transa%C3%A7%C3%B5es+no+PostgreSQL%3A+N%C3%ADveis+de+Isolamento+https%3A%2F%2Fwww.devmedia.com.br%2Ftransacoes-no-postgresql-niveis-de-isolamento%2F32464" target="_blank" class="twitter-share" title="Compartilhe no Twitter">
+                        <svg viewBox="0 0 512 512" class="sub-icone-svg svg-twitter">
+                            <path d="m256 0c-141.363281 0-256 114.636719-256 256s114.636719 256 256 256 256-114.636719 256-256-114.636719-256-256-256zm116.886719 199.601562c.113281 2.519532.167969 5.050782.167969 7.59375 0 77.644532-59.101563 167.179688-167.183594 167.183594h.003906-.003906c-33.183594 0-64.0625-9.726562-90.066406-26.394531 4.597656.542969 9.277343.8125 14.015624.8125 27.53125 0 52.867188-9.390625 72.980469-25.152344-25.722656-.476562-47.410156-17.464843-54.894531-40.8125 3.582031.6875 7.265625 1.0625 11.042969 1.0625 5.363281 0 10.558593-.722656 15.496093-2.070312-26.886718-5.382813-47.140624-29.144531-47.140624-57.597657 0-.265624 0-.503906.007812-.75 7.917969 4.402344 16.972656 7.050782 26.613281 7.347657-15.777343-10.527344-26.148437-28.523438-26.148437-48.910157 0-10.765624 2.910156-20.851562 7.957031-29.535156 28.976563 35.554688 72.28125 58.9375 121.117187 61.394532-1.007812-4.304688-1.527343-8.789063-1.527343-13.398438 0-32.4375 26.316406-58.753906 58.765625-58.753906 16.902344 0 32.167968 7.144531 42.890625 18.566406 13.386719-2.640625 25.957031-7.53125 37.3125-14.261719-4.394531 13.714844-13.707031 25.222657-25.839844 32.5 11.886719-1.421875 23.214844-4.574219 33.742187-9.253906-7.863281 11.785156-17.835937 22.136719-29.308593 30.429687zm0 0"></path>
+                        </svg>
+                    </a>
+                </span>
+            </span>
+        </li>
+    </ul>
+</section>
+
+        <section class="page-content main-content video-conteudo-area">
+			<section class="page-content-wrapper">
+
+				<section class="body-menu-top">
+					<button class="action-menu-item comment-button" style="margin-top: 0;">
+                        <span class="label">Tire sua dúvida</span>
+                        <span class="btn-icon">
+                            <svg class="svg-element border" viewBox="0 0 35 35">
+                                <path id="Path_975" class="st0" d="M26,7.8H8.8c-1.5,0-2.7,1.2-2.7,2.7v16.8l5.8-4.6h14.3c1.5,0,2.7-1.2,2.7-2.7v-9.5
+                                    C28.7,8.9,27.5,7.9,26,7.8z"></path>
+                                <line id="Line_423" class="st0" x1="11.4" y1="12.9" x2="23.6" y2="12.9"></line>
+                                <line id="Line_424" class="st0" x1="11.4" y1="17" x2="17.4" y2="17"></line>
+                            </svg>
+                        </span>
+                    </button>
+
+                    <button class="finish-btn " data-id="32464">
+    					<span class="label">Marcar como concluído</span>
+    					<span class="btn-icon">
+						<svg class="svg-symbol" id="svg-checked" viewBox="0 0 35 35">
+							<circle class="st1" cx="17.5" cy="17.5" r="10.5"></circle>
+                                <path id="Path_1130_1_" class="st0" d="M21.1,14.4l-4.4,6.9l-3.5-4"></path>
+                            </svg>
+                        </span>
+                    </button>
+
+                        <button class="note-button " data-id="32464">
+                                <span class="label">Anotar</span>
+                                <span class="btn-icon">
+                                <svg class="icone-svg svg-notes" viewBox="0 0 35 35">
+                                        <path class="svg-element pen" d="M28.4,9.3L16.6,21.1l-4,1.4l1.4-3.9L25.8,6.8L28.4,9.3z"></path>
+                                        <polygon class="svg-element border" points="25.8,6.8 27.4,5.2 30,7.6 28.4,9.3 "></polygon>
+                                        <path class="svg-element line" d="M23.8,18.4v10.1c0,0.7-0.5,1.2-1.2,1.2H6.2c-0.7,0-1.2-0.5-1.2-1.2V7.3c0-0.7,0.5-1.2,1.2-1.2h15.5"></path>
+                                        <line class="svg-element line" x1="8.4" y1="10.5" x2="18.8" y2="10.5"></line>
+                                        <line class="svg-element line" x1="8.4" y1="14.2" x2="14.9" y2="14.2"></line>
+                                        <line class="svg-element line" x1="8.4" y1="17.8" x2="11.1" y2="17.8"></line>
+                                        <line class="svg-element line" x1="8.4" y1="22.5" x2="12.6" y2="22.5"></line>
+                                    </svg>
+                                </span>
+                            </button>
+                        </section>
+
+				<div class="breadcrumb">
+						<a href="https://www.devmedia.com.br/artigos/" title="Artigos">Artigos</a>
+						<span class="arrow-left"></span>
+						<a href="https://www.devmedia.com.br/artigos/banco-de-dados" title="Artigos de Banco de Dados">Banco de Dados</a>
+							<span class="arrow-left"></span>
+						<span class="bread-artigo">Transações no PostgreSQL: Níveis de Isolamento</span>
+					</div>
+
+                <p>Neste
+artigo aprenderemos sobre o uso de transações no <a href="http://www.devmedia.com.br/instalacao-e-configuracao-do-servidor-postgresql-no-linux/26184" target="_blank">PostgreSQL</a>, sendo o foco
+principal estudar os níveis de isolação e como o banco comporta-se diante de
+cada um destes. Mas antes de iniciarmos com a prática, precisamos entender
+alguns conceitos básicos que servem para <a href="http://www.devmedia.com.br/formacao-banco-de-dados/31329" target="_blank">todos os SGBDs</a>, que é o conceito de
+Atomicidade.</p>
+
+<p>O
+acrônimo <strong>ACID</strong> faz referência aos quatro princípios básicos que qualquer SGBD
+deve satisfazer para que possua esse título: </p>
+
+<p></p><ul><li>A
+= Atomicidade;</li><li>C
+= Consistência;</li><li>I
+= Isolamento;</li><li>D
+= Durabilidade.</li></ul><p></p>
+
+
+
+
+
+
+
+<p>Nosso
+foco aqui será estudar a Atomicidade, que é algo indivisível ou, em termos mais
+simples, execute tudo ou não execute nada.</p>
+
+<p>Este
+princípio pode ser visto diariamente em transações bancárias como, por exemplo,
+quando você transfere algum valor da sua conta para alguma outra conta, é
+realizado um UPDATE na sua conta, atualizando seu saldo (saldo atual – valor
+transferido), e a conta destino, que também recebe um UPDATE de atualização de
+saldo (saldo atual + valor transferido), certo?</p>
+
+<p>Agora
+imagine que são apenas dois passos: UPDATE na conta origem e UPDATE na conta
+destino. Se por algum motivo ocorrer um problema no segundo UPDATE (atualizar o
+saldo da conta destino) então todo o processo é desfeito para garantir a
+consistência dos dados. A isso chamamos de Atomicidade. Perceba que neste ponto,
+a Atomicidade e Consistência estão diretamente ligados.</p>
+
+<p>Se
+não existisse Atomicidade teríamos sérios problemas de consistência, vejamos:</p>
+
+<p></p><ol><li>João tem R$ 5000,00 na sua conta e
+transfere R$ 500,00 para Pedro.</li><li>Internamente um UPDATE é executado no
+saldo de João que agora é R$ 4500,00.</li><li>Um UPDATE começa a ser executado na conta
+de Pedro para receber os R$ 500,00 mas algum problema ocorre e uma falha é
+retornada.</li><li>João continua com os R$ 4500,00 e Pedro não recebeu os R$ 500,00.</li></ol><p></p>
+
+
+
+
+
+
+
+<p>Veja
+o tamanho do problema que temos a frente, inconsistência de dados, e o pior:
+trabalhando com valores monetários.</p>
+
+<p>Então
+já ficou claro que a Atomicidade garante a execução completa de um conjunto de
+comandos, caso contrário, tudo será cancelado. Mas como usamos tal conceito na prática?
+É o que veremos na próxima seção.</p>
+
+<h3>Transações</h3>
+
+<p>Transação
+é o sinônimo de Atomicidade no mundo do SGBD, então daqui em diante começaremos
+a usar o termo transação e você leitor deve entender que todo conceito de
+Atomicidade explicado na seção anterior aplica-se aqui de forma idêntica e o estudaremos
+aplicado ao PostgreSQL.</p>
+
+<p>Quando
+tratamos de concorrência em SGBD, a primeira ideia que deve vir a mente são as
+“Transações”, pois estas podem garantir a execução de múltiplas threads em um
+mesmo instante de tempo. No PostgreSQL existem dois comandos de suma
+importância para iniciar e finalizar uma transação, como mostra a <strong>Listagem 1.</strong></p>
+
+<p><strong>Listagem
+1. </strong>Iniciando e parando uma transação<strong></strong></p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js"><span class="token constant">BEGIN</span> <span class="token operator">-</span> <span class="token operator">-</span>iniciar
+<span class="token operator">-</span> <span class="token operator">-</span>  comandos
+<span class="token constant">COMMIT</span> <span class="token operator">-</span> <span class="token operator">-</span>comitar<span class="token operator">/</span>confirmar
+<span class="token constant">ROLLBACK</span> <span class="token operator">-</span> <span class="token operator">-</span>parar<span class="token operator">/</span>cancelar
+<span class="token constant">END</span> <span class="token operator">-</span> <span class="token operator">-</span>memsa função <span class="token keyword">do</span> <span class="token constant">COMMIT</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Acima
+temos o BEGIN para dar início a uma transação e o COMMIT para finalizar esta
+transação de forma “positiva”, ou seja, persistir as alterações na base de
+dados. Por outro lado, o ROLLBACK também finaliza a transação, mas cancelando
+qualquer alteração realizada. Ou seja, qualquer <a href="http://www.devmedia.com.br/linguagem-sql-extraindo-informacao-de-qualidade-com-sql/31396" target="_blank">comando SQL</a> que você execute é
+tratado dentro de uma transação, como mostra a <strong>Listagem 2.</strong></p>
+
+<p><strong>Listagem
+2. </strong>Transação implícita<strong></strong></p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js"><span class="token operator">--</span><span class="token constant">BEGIN</span> <span class="token punctuation">(</span>implícito<span class="token punctuation">)</span>
+<span class="token constant">UPDATE</span> conta <span class="token constant">SET</span> saldo <span class="token operator">=</span> <span class="token number">100</span> <span class="token constant">WHERE</span> id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token operator">--</span><span class="token constant">COMMIT</span> <span class="token punctuation">(</span>implícito<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Ao
+realizar o comando da <strong>Listagem 2</strong>
+implicitamente você está usando BEGIN e COMMIT, isso porque obrigatoriamente
+todos os comandos são executados dentro de uma transação, independente do seu
+tamanho (seja uma linha ou mil linhas).</p>
+
+<p>Para
+que seja possível voltar a pontos anteriores depois de um ROLLBACK, o PostgreSQL
+trabalha com o conceito de Snapshots, que são como “fotos” do momento atual do
+banco antes de iniciar a transação, sendo que esta que será “comitada” só terá
+sucesso se aquele determinado snapshot não conflitar com dados de outras
+transações, recurso que veremos posteriormente nos níveis de isolação.</p>
+
+<p>A
+partir daqui vamos criar uma estrutura para começar a trabalhar de fato com
+transações e entender seu funcionamento na prática.</p>
+
+<p>Primeiramente
+criamos a nossa tabela “conta”, como mostra a <strong>Listagem 3.</strong></p>
+
+<p><strong>Listagem
+3. </strong>Tabela conta<strong></strong></p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js">create table teste<span class="token punctuation">.</span><span class="token method function property-access">conta</span><span class="token punctuation">(</span>
+  id integer primary key<span class="token punctuation">,</span>
+  cliente <span class="token function">varchar</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span> not <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+  saldo <span class="token function">numeric</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword module">default</span> <span class="token number">0</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Agora
+vamos inserir alguns dados em nossa tabela, como mostra a <strong>Listagem 4.</strong></p>
+
+<p><strong>Listagem
+4. </strong>Inserindo dados<strong></strong></p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js">insert into teste<span class="token punctuation">.</span><span class="token method function property-access">conta</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span>cliente<span class="token punctuation">,</span>saldo<span class="token punctuation">)</span>
+<span class="token function">values</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'JOAO'</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'PEDRO'</span><span class="token punctuation">,</span><span class="token number">15000</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">'MARIO'</span><span class="token punctuation">,</span><span class="token number">450</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">'JOAQUIM'</span><span class="token punctuation">,</span><span class="token number">40000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Finalmente
+vamos começar a trabalhar com transações usando nossa tabela “teste.conta”,
+como mostra a <strong>Listagem 5.</strong></p>
+
+<p><strong>Listagem
+5. </strong>Transação com rollback</p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js">select <span class="token operator">*</span> <span class="token keyword module">from</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span> where id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+begin<span class="token punctuation">;</span>
+update teste<span class="token punctuation">.</span><span class="token property-access">conta</span> <span class="token keyword">set</span> saldo <span class="token operator">=</span> <span class="token number">120</span> where id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+rollback<span class="token punctuation">;</span>
+select <span class="token operator">*</span> <span class="token keyword module">from</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span> where id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Na
+primeira linha mostramos os dados da consulta antes de iniciar a transação. Em
+seguida começamos uma transação e atualizamos o saldo da conta “1” e logo em
+seguida executamos um rollback. O resultado das execuções acima não tem nenhum
+efeito nos dados do SGBD, isso porque o rollback anulou todas as alterações e
+isso significa que o resultado do primeiro <a href="http://www.devmedia.com.br/sql-select-entendendo-a-instrucao-select/32250" target="_blank">SELECT</a> será igual ao resultado do
+último SELECT.</p>
+
+<p>Outro
+recurso muito interessante do PostgreSQL é o “SavePoint”, que possibilita que salvar
+determinado ponto dentro de uma transação e volte para ele quando achar
+necessário, como mostra a <strong>Listagem 6.</strong></p>
+
+<p><strong>Listagem
+6. </strong>Usando savepoint<strong></strong></p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js">begin<span class="token punctuation">;</span>
+update teste<span class="token punctuation">.</span><span class="token property-access">conta</span> <span class="token keyword">set</span> saldo <span class="token operator">=</span> <span class="token number">120</span> where id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+savepoint savepoint_1<span class="token punctuation">;</span>
+update teste<span class="token punctuation">.</span><span class="token property-access">conta</span> <span class="token keyword">set</span> saldo <span class="token operator">=</span> saldo <span class="token operator">-</span> <span class="token number">1000</span> where id <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+select <span class="token operator">*</span> <span class="token keyword module">from</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span> where id <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+rollback to savepoint_1<span class="token punctuation">;</span>
+select <span class="token operator">*</span> <span class="token keyword module">from</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span> where id <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+commit<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Vamos
+acompanhar o passo a passo:</p>
+
+<p></p><ol><li>Iniciamos a transação e executamos um
+update na conta 1, atualizando o saldo para 120;</li><li>Criamos um savepoint chamado savepoint_1, assim
+temos agora um ponto salvo em nossa transação e podemos voltar a ele quando
+necessário;</li><li>Atualizamos o saldo da conta 2 para o seu
+saldo atual – 1000 e depois executamos um SELECT para checar como ficou;</li><li>Percebemos que o UPDATE que fizemos está errado, na conta 2, e queremos
+desfazer só ele, evitando a perda de toda a transação. Sendo assim, usamos o
+comando “rollback to savepoint_1”, que nos leva exatamente ao momento anterior
+ao update da conta 2;</li><li>Agora executamos o SELECT na conta 2 e verificamos que o valor do saldo já
+estava como antes;</li><li>Executamos o commit para confirma as alterações.</li></ol><p></p>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Isolamento
+de Transações</h3>
+
+<p>Até
+o momento as transações foram muitos úteis em ambientes stand alone, onde
+trabalhamos apenas com uma thread por vez, sem concorrência. Em cenários que
+trabalham com tarefas concorrentes a estória muda de contexto e já precisamos
+pensar em como isolar determinadas transações, não permitindo que uma alteração
+de dados na transação A afete a execução da transação B.</p>
+
+<p>Os
+níveis de isolamento só existem porque existem problemas ao trabalhar-se com
+transações concorrente, e antes de vermos quais são esses níveis e como
+aplicá-los, nós temos que entender que tipo de problemas podem ocorrer ao
+trabalhar em multithread.</p>
+
+<p>São
+três os possíveis problemas que você encontrará: Dirty Read, Nonrepeatable Read
+e Phatom Read. Citaremos estes em inglês para que você não fique confuso quem é
+quem na hora de executar os comandos.</p>
+
+<h3>Dirty
+Read</h3>
+
+<p>Conhecido
+também como “leitura suja”, é um dos piores problemas que podem ocorrer
+relacionados a integridade do <a href="http://www.devmedia.com.br/cursos/banco-de-dados" target="_blank">banco de dados</a>, sendo que a maioria dos bancos
+não permitem, em nenhuma circunstância, que isso ocorra. No PostgreSQL este
+tipo de problema nunca ocorrerá, pois a leitura suja ocorre quando uma
+transação A altera um determinado valor e uma transação B lê este valor
+alterado. A transação A executa um rollback, ou seja, não confirma a
+persistência dos dados alterados, porém a transação B já leu este valor
+“errado”.</p>
+
+<p>Mesmo
+sabendo que esta situação não poderá ocorrer no PostgreSQL, vamos simular o que
+aconteceria se isso fosse permitido, como mostra a <strong>Listagem 7.</strong></p>
+
+<p><strong>Listagem
+7. </strong>Transações com Dirty Read<strong></strong></p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js"><span class="token operator">--</span><span class="token constant">TRANSA</span>ÇÃ<span class="token constant">O</span> <span class="token constant">A</span>
+begin<span class="token punctuation">;</span>
+<span class="token constant">UPDATE</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span> <span class="token constant">SET</span> cliente <span class="token operator">=</span> <span class="token string">'JOAO II'</span> <span class="token constant">WHERE</span> id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token constant">SELECT</span> <span class="token operator">*</span> <span class="token constant">FROM</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span><span class="token punctuation">;</span>
+rollback<span class="token punctuation">;</span>
+
+
+<span class="token operator">--</span><span class="token constant">TRANSA</span>ÇÃ<span class="token constant">O</span> <span class="token constant">B</span>
+begin
+<span class="token operator">--</span><span class="token constant">V</span>ários comandos
+<span class="token constant">UPDATE</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span> <span class="token constant">SET</span> saldo <span class="token operator">=</span> <span class="token number">300</span> <span class="token constant">WHERE</span> cliente <span class="token operator">=</span> <span class="token string">'JOAO'</span><span class="token punctuation">;</span>
+commit<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Ambas
+as transações acima devem ser executadas em instâncias diferentes, ou seja, se
+você estiver usando uma ferramenta como o PgAdmin você deve abrir duas janelas
+de consulta e executar cada uma em uma janela separada.</p>
+
+<p>Imaginando
+que o PostgreSQLaceite Dirty Read vejamos o que aconteceria na <strong>Listagem 7</strong>.</p>
+
+<p></p><ol><li>Ambas as transações A e B são iniciadas.</li><li>A transação A executa primeiramente um UPDATE no cliente 'JOAO' mudando seu
+nome para 'JOAO II'.</li><li>Como a transação B executa vários comandos antes de chegar no seu UPDATE,
+quando ela chegar neste ponto o UPDATE da transação A já foi feito e quando a
+transação B tentar fazer um UPDATE pelo cliente 'JOAO' nada será feito pois o
+nome do cliente agora é 'JOAO II'.</li><li>Mesmo a transação A executando um rollback a transação B já está com o dado
+errado e a inconsistência de dados ocorre.</li></ol><p></p>
+
+
+
+
+
+
+
+<p>Como
+dissemos anteriormente o PostgreSQL não permite que isso ocorra então ao
+realizar o UPDATE na transação B tudo funcionará normalmente visto que houve um
+rollback na transação A.</p>
+
+<h3><em>Nonrepeatable read</em></h3>
+
+<p>Este
+tipo de problema não chega a ser um problema e alguns tipos de sistemas concorrentes,
+por isso o padrão do PostgreSQL é permitir que este caso ocorra, chamamos de
+“caso” por não considerar um problema para todos.</p>
+
+<p>No
+Dirty Read tínhamos um dado que foi alterado e depois não foi confirmado
+causando uma inconsistência a uma outra transação que o lê, porém neste caso os
+dados alterados são confirmados, através do commit. No Nonrepeatable read dados
+alterados e confirmados são “sentidos” pela outra transação que ainda não foi
+finalizada. Vejamos um exemplo na <strong>Listagem
+8.</strong></p>
+
+<p><strong>Listagem
+8. </strong>Transações com Nonrepeatable read<strong></strong></p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js"><span class="token operator">--</span><span class="token maybe-class-name">Transação</span> <span class="token constant">A</span>
+begin<span class="token punctuation">;</span>
+<span class="token constant">UPDATE</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span> <span class="token constant">SET</span> cliente <span class="token operator">=</span> <span class="token string">'JOAO II'</span> <span class="token constant">WHERE</span> id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+commit
+
+<span class="token operator">--</span><span class="token maybe-class-name">Transação</span> <span class="token constant">B</span>
+begin
+update teste<span class="token punctuation">.</span><span class="token property-access">conta</span> <span class="token keyword">set</span> saldo <span class="token operator">=</span> <span class="token number">350</span> <span class="token constant">WHERE</span> cliente <span class="token operator">=</span> <span class="token string">'JOAO II'</span><span class="token punctuation">;</span>
+commit<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Vejamos
+como testar a <strong>Listagem 8</strong> de forma
+adequada:</p>
+
+<p></p><ol><li>Executa o begin de ambas as transações para torna-las concorrentes;</li><li>Execute o UPDATE da transação A para mudar o nome de JOAO para JOAO II;</li><li>Agora execute o UPDATE da transação B para tentar mudar o saldo de JOAO II
+para 350. Você verá a seguinte mensagem: 0 rows affected. Isso ocorreu porque a
+transação A ainda não foi comitada e até o momento “JOAO” ainda não é “JOAO
+II”, se a atualização ocorresse então teríamos um caso de Dirty Read;</li><li>Agora execute o COMMIT da transação A;</li><li>Depois execute novamente o UPDATE da transação B, agora você verá que 1
+registro foi alterado (1 rows affected), isso porque a transação A já foi
+comitada/confirmada.</li></ol><p></p>
+
+
+
+
+
+
+
+
+
+<p>O
+nonrepeatable read serve tanto para alterações como deleções, mas não para
+inserções que veremos mais adiante.</p>
+
+<h3><em>Phantom Read</em></h3>
+
+<p>Por
+fim temos o último problema que pode ocorrer em transações concorrentes, as
+leituras fantasmas. A lógica do Phantom Read é quase a mesma do Nonrepeatable
+read, tendo apenas uma única diferença: as inserções de novos registros.</p>
+
+<p>Quando
+um dado é inserido em uma transação A e esta transação é comitada/confirmada,
+então este dando pode ser lido por uma transação B que ainda não foi
+confirmada. Lembre-se que no Nonrepeatable read nós tínhamos apenas as
+alterações e deleções como sendo propagadas para outras transações.</p>
+
+<p><strong>Listagem
+9. </strong>Transações com Phantom Read<strong></strong></p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js"><span class="token operator">--</span><span class="token maybe-class-name">Transação</span> <span class="token constant">A</span>
+begin<span class="token punctuation">;</span>
+insert into teste<span class="token punctuation">.</span><span class="token method function property-access">conta</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span>cliente<span class="token punctuation">,</span>saldo<span class="token punctuation">)</span>
+<span class="token function">values</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">'NOVO CLIENTE'</span><span class="token punctuation">,</span><span class="token number">503</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+commit
+
+<span class="token operator">--</span><span class="token maybe-class-name">Transação</span> <span class="token constant">B</span>
+begin
+<span class="token constant">SELECT</span> <span class="token operator">*</span> <span class="token constant">FROM</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span><span class="token punctuation">;</span>
+commit<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Vejamos
+como funciona o Phantom read no exemplo da <strong>Listagem
+9</strong>.</p>
+
+<p></p><ol><li>Inicie ambas as transações com o “begin”.</li><li>Execute o insert do novo registro na
+transação A.</li><li>Execute o SELECT na transação B. VocÊ terá
+o seguinte retorno: 0 rows retrieved. Isso ocorre porque a transação A ainda
+não foi confirmada e voltamos a dizer que Dirty Read não são permitidas, seja
+para alterações, deleções ou inserções.</li><li>Execute o commit da transação A.</li><li>Agora execute o SELECT da transação B. Seu retorno será 1 linha contendo os
+valores do novo registro inserido na transação A: 5;"NOVO
+CLIENTE";503.00</li></ol><p></p>
+
+
+
+
+
+
+
+
+
+<h3>Entendendo
+os Níveis de Isolação</h3>
+
+<p>Chegamos
+finalmente ao ponto que gostaríamos depois de explicar todos os detalhes
+necessários para que seja possível o entendimento desta seção. Os níveis de
+isolação configuram quais “problemas” podem e não podem ocorrer, é como dizer
+ao SGBD que você deseja que ele permita que ocorra um Dirty Read, ou um
+Nonrepeatable read ou um Phantom Read. </p>
+
+<p>Como
+já vimos não é possível permitir o Dirty Read no PostgresSQL, mas é possível
+controlar os outros “problemas”, permitindo ou não. Usamos aspas na palavra
+problemas pois neste caso vale ao DBA considerar se este é um problema ou não.</p>
+
+<p>Existem
+quatro níveis de isolamento segundo o padrão SQL, e estes não são específicos
+somente para o PostgresSQL: Read Uncommited, Read Commited, Repeatable Read,
+Serializable. Vamos entende-los:</p>
+
+<p></p><ol><li><strong>Read Uncommited: </strong>Este é o nível menos
+isolado e o como o próprio nome já sugere, ele permite a leitura antes da
+confirmação. É exatamente o caso do Dirty Read que estudamos logo no início.
+Neste nível de isolação todos os problemas (os 3 citados nas seções anteriores)
+podem ocorrer sem restrição. É muito difícil que esse nível seja aplicado na
+prática pois poderiamos ter sérios problemas de consistência, por isso ele é
+considerado mais acadêmico, apenas para fins de estudos. O PostgreSQL não
+possui esse nível de isolação, evitando assim que este seja configurado.</li><li><strong>Read Commited:</strong>
+Neste nível de isolação não podem ocorrer Dirty Reads mas são permitidos
+Nonrepeatable reads e Phantom Reads. Este é o nível padrão do PostgresSQL. Por
+este motivo que você conseguiu executar todos os testes das listagens abaixo
+sem problemas, pois o PostgreSQL tem como padrão o nível de isolamento Read
+Commited.</li><li><strong>Repeatable Readed: </strong>Aqui
+apenas ocorrem Phantom Reads. O SGBD bloqueia o conjunto de dados lidos de uma
+transação, não permitindo leitura de dados alterados ou deletados mesmo que
+comitados pela transação concorrente, porém ele permite a leitura de novos
+registros comitados por outras transações.</li><li><strong>Serializable: </strong>Este
+é o nível mais isolado que não permite nenhum tipo de problema (Dirty Read,
+Nonrepeatable read e Phantom Read).</li></ol><p></p>
+
+
+
+
+
+
+
+<p>Vejamos
+como ficou nossa tabela de associação: Isolamento x Problemas (<strong>Tabela 1</strong>).</p>
+
+<div class="responsive-table"><table border="1" cellspacing="0" cellpadding="0" width="643">
+ <tbody><tr>
+ <td width="161" valign="top">
+ <p><strong>Nível
+ de Isolamento</strong></p>
+ </td>
+ <td width="161" valign="top">
+ <p><strong>Dirty
+ Read</strong></p>
+ </td>
+ <td width="161" valign="top">
+ <p><strong>Nonrepeatable
+ read</strong></p>
+ </td>
+ <td width="161" valign="top">
+ <p><strong>Phantom
+ Read</strong></p>
+ </td>
+ </tr>
+ <tr>
+ <td width="161" valign="top">
+ <p>Read
+ Uncommited</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Sim</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Sim</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Sim</p>
+ </td>
+ </tr>
+ <tr>
+ <td width="161" valign="top">
+ <p>Read
+ Commited</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Não</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Sim</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Sim</p>
+ </td>
+ </tr>
+ <tr>
+ <td width="161" valign="top">
+ <p>Repeatable
+ Read</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Não</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Não</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Sim</p>
+ </td>
+ </tr>
+ <tr>
+ <td width="161" valign="top">
+ <p>Serializable</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Não</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Não</p>
+ </td>
+ <td width="161" valign="top">
+ <p>Não</p>
+ </td>
+ </tr>
+</tbody></table></div>
+
+<p><strong>Tabela
+1. </strong>Isolamento X
+Problemas</p>
+
+<p>Porém
+ainda não terminamos, o PostgreSQL tem algumas peculiaridades em relação aos
+níveis de isolação mostrados acima.</p>
+
+<p>Primeiramente
+vamos ver como usar um destes níveis dentro de uma transação, como mostra a <strong>Listagem 10</strong>.</p>
+
+<p><strong>Listagem
+10. </strong>Usando nível de isolação no PostgreSQL<strong></strong></p>
+
+<p></p><div><pre style="white-space:pre;" class="line-numbers pre_js"><code class="pre_js"><span class="token operator">--</span><span class="token maybe-class-name">Transação</span> <span class="token constant">A</span>
+begin<span class="token punctuation">;</span>
+update teste<span class="token punctuation">.</span><span class="token property-access">conta</span> <span class="token keyword">set</span> saldo <span class="token operator">=</span> <span class="token number">120</span> where id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+commit<span class="token punctuation">;</span>
+
+<span class="token operator">--</span><span class="token maybe-class-name">Transação</span> <span class="token constant">B</span>
+begin
+<span class="token keyword">set</span> transaction <span class="token constant">ISOLATION</span> <span class="token constant">LEVEL</span> <span class="token constant">REPEATABLE</span> <span class="token constant">READ</span><span class="token punctuation">;</span>
+<span class="token constant">SELECT</span> <span class="token operator">*</span> <span class="token constant">FROM</span> teste<span class="token punctuation">.</span><span class="token property-access">conta</span> where id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+commit<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><p></p>
+
+<p>Vamos
+entender o funcionamento da <strong>Listagem 10</strong>:</p>
+
+<p></p><ol><li>Por padrão, como dissemos anteriormente o PostgreSQL vem configurado com o
+nível de isolação Read Commited, mas neste caso vamos mudar a sua configuração
+para Repeatable Read.</li><li>Iniciamos as duas transações com o begin.</li><li>Na transação que gostaríamos de configurar o tipo de isolação nós chamamos o
+“set transaction ISOLATION LEVEL REPEATABLE READ”, assim toda a transação terá
+uma isolação diferente das outras.</li><li>Executamos o update na transação A e logo em seguida o commit.</li><li>O normal do PostgreSQL seria mostrar o resultado alterado ao executar o
+SELECT na transação B, mas como mudamos o nível de isolação para aceitar apenas
+Phantom Reads, ao realizar o SELECT o saldo da conta 1 continuará inalterado.</li></ol><p></p>
+
+
+
+
+
+
+
+
+
+<p>A
+mesma lógica aplica-se aos outros níveis, onde o mais isolado (serializable)
+não irá permitir que você veja nenhuma alteração, deleção ou inserção que forem
+realizadas fora da sua transação, totalmente isolada do “mundo exterior”.</p>
+
+<p>No
+PostgreSQL há alguns tratamentos diferentes do padrão para os níveis mostrados
+acima e isso é muito importante para que você não pense que a explicação foi
+feita de forma errônea:</p>
+
+<p></p><ol><li>O nível REPEATABLE READ é tratado como SERIALIZABLE, ou seja, não permite
+leituras fantasmas.</li><li>O nível READ UNCOMMITED é tratado como READ COMMITED, e é exatamente por isso
+que você não consegue permitir o Dirty Read.</li></ol><p></p>
+
+
+
+<p>O
+objetivo principal deste artigo foi mostrar o uso dos níveis de isolação no <strong>PostgreSQL</strong>,
+porém isso não seria possível sem antes passar por todo o caminho necessário da
+Atomicidade, Transação, Problemas de Concorrência para só então chegar na
+isolação de transação. Mostramos em detalhes como funcionam cada um dos níveis
+e quais tipos de problemas eles permitam que ocorram ou não.</p>
+
+<p>Vale
+ressaltar ainda que por tratarmos estes como “Problemas” não quer dizer que de
+fato são problemas e podem ser encarados como soluções para alguns casos, e é
+exatamente por isso que os níveis de isolação podem ou não permitir que eles
+ocorram dependendo da regra de cada projeto em especial.</p>
+                    
+            </section>
+        </section>
+
+        <section class="page-content page-content-buttons">
+                <section class="page-content-wrapper">
+                    <section class="body-menu-top bottom">
+                        <button class="action-menu-item comment-button" style="margin-top: 0;">
+                        	<span class="label">Tire sua dúvida</span>
+                        	<span class="btn-icon">
+                            	<svg class="svg-element border" viewBox="0 0 35 35">
+                                	<path id="Path_975" class="st0" d="M26,7.8H8.8c-1.5,0-2.7,1.2-2.7,2.7v16.8l5.8-4.6h14.3c1.5,0,2.7-1.2,2.7-2.7v-9.5
+                                    	C28.7,8.9,27.5,7.9,26,7.8z"></path>
+                                	<line id="Line_423" class="st0" x1="11.4" y1="12.9" x2="23.6" y2="12.9"></line>
+                                	<line id="Line_424" class="st0" x1="11.4" y1="17" x2="17.4" y2="17"></line>
+                            	</svg>
+                        	</span>
+                    	</button>
+
+                        <button class="finish-btn " data-id="32464">
+                            <span class="label">Marcar como concluído</span>
+                            <span class="btn-icon">
+                                <svg class="svg-symbol" id="svg-checked" viewBox="0 0 35 35">
+                                    <circle class="st1" cx="17.5" cy="17.5" r="10.5"></circle>
+                                    <path id="Path_1130_1_" class="st0" d="M21.1,14.4l-4.4,6.9l-3.5-4"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="note-button " data-id="32464">
+                                <span class="label">Anotar</span>
+                                <span class="btn-icon">
+                                    <svg class="icone-svg svg-notes" viewBox="0 0 35 35">
+                                        <path class="svg-element pen" d="M28.4,9.3L16.6,21.1l-4,1.4l1.4-3.9L25.8,6.8L28.4,9.3z"></path>
+                                        <polygon class="svg-element border" points="25.8,6.8 27.4,5.2 30,7.6 28.4,9.3 "></polygon>
+                                        <path class="svg-element line" d="M23.8,18.4v10.1c0,0.7-0.5,1.2-1.2,1.2H6.2c-0.7,0-1.2-0.5-1.2-1.2V7.3c0-0.7,0.5-1.2,1.2-1.2h15.5"></path>
+                                        <line class="svg-element line" x1="8.4" y1="10.5" x2="18.8" y2="10.5"></line>
+                                        <line class="svg-element line" x1="8.4" y1="14.2" x2="14.9" y2="14.2"></line>
+                                        <line class="svg-element line" x1="8.4" y1="17.8" x2="11.1" y2="17.8"></line>
+                                        <line class="svg-element line" x1="8.4" y1="22.5" x2="12.6" y2="22.5"></line>
+                                    </svg>
+                                </span>
+                            </button>
+                        </section>
+
+                    </section>
+            </section>
+        <section id="content-end"></section>
+
+        <style>  
+#modulo-mvp * { 
+    font-family: 'Montserrat'; 
+    box-sizing: border-box; 
+}
+.subscription-container {
+    width: 100%;
+    padding: 80px 30px;
+    background-color: rgb(0 46 123);
+    background-size: cover;
+    background-position: 30%;
+    box-sizing: border-box;
+}
+.subscription-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.subscription-description a {
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+}
+.subscription-description a:hover {
+    text-decoration: underline;
+}
+.subscription-left, .subscription-right {
+    width: 60%;
+}
+
+/* PRIMEIRO BOX */
+    .subscription-title {
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 1.2;
+        text-align: left;
+        color: rgba(255, 255, 255, 1);
+    }
+    .subscription-title i {
+        font-style: initial;
+        font-size: 26px;
+    }
+    .subscription-description {
+        width: 100%;
+        margin: 40px 0 30px 0;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 24px;
+        text-transform: none;
+    }
+    .plan-text-title {
+        width: 100%;
+        color: #fff;
+        font-size: 80px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .plan-text-title span:first-child { 
+        color: #01CD6A; 
+        font-size: 47px; 
+    }
+    .plan-text-title span:last-child {
+        display: block;
+        font-size: 34px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+    .company-plan {
+        margin-top: 60px;
+        display: none;
+    }
+    .company-plan label {
+        display: block;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .company-plan a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 15px 40px;
+        color: #fff;
+        font-size: 14px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+    .company-plan a:hover {
+        color: #253A44;
+        border: 1px solid transparent;
+        background: #fff;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+/* SEGUNDO BOX */
+    .plan-content { 
+        width: 100%;
+        max-width: 280px;
+        padding: 20px 30px 30px 30px;
+        margin: 30px auto 0 auto;
+        border-radius: 10px;
+        background: #FFFFFF;
+    }
+    .plan-title { 
+        text-align: center;
+        border-bottom: 1px solid #DADCE3;
+        font-size: 26px;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: #8795A2;
+        padding-bottom: 10px;
+    }
+    .plan-list { 
+        width: 100%;
+        padding: 0 0 0 25px;
+        margin: 30px 0 0 0;
+        list-style: none;
+    }
+    .plan-list li {
+        margin-bottom: 15px;
+        position: relative;
+        color: #253A44;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .plan-list li:before {
+        width: 6px;
+        height: 6px;
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -20px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: 100%;
+        transform: translateY(-50%);
+        background: #2ba4ff;
+    }
+    .plan-list li:last-child { 
+        margin-bottom: 0;
+    }
+    .button-container { 
+        width: 100%;
+        margin-top: 30px;
+    }
+    .button-container a {
+        width: 100%;
+        padding: 10px 0;
+        display: block;
+        color: #fff;
+        font-size: 22px;
+        font-weight: 400;
+        border: 1px solid transparent;
+        border-radius: 30px;
+        background: rgba(43, 164, 255, 1);
+        text-align: center;
+        text-decoration: none;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+    .button-container a:hover { 
+        color: rgba(43, 164, 255, 1);
+        border: 1px solid rgba(43, 164, 255, 1);
+        background: #fff;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+/* RESPONSIVO */
+    @media (max-width: 1023px) {
+        .subscription-content { flex-direction: column; }
+        .subscription-left, .subscription-right { width: 100%; }
+        .company-plan { display: none; }
+        .plan-text-title { font-size: 60px; text-align: center; }
+    }
+    @media (max-width: 640px) {
+        .subscription-title {font-size: 42px; text-align: center;}
+        .subscription-description {margin: 40px 0 10px 0; text-align: center;}
+    }
+    @media (max-width: 425px) {
+        .subscription-container { padding: 40px 20px; }
+        .subscription-title {font-size: 32px;}
+        .subscription-description {margin: 20px 0 0;font-size: 16px;}
+        .plan-text-title { font-size: 40px; }
+        .plan-text-title span:last-child { font-size: 24px; }
+    }
+</style>
+
+<section class="subscription-container" id="modulo-mvp">
+    <div class="subscription-content">
+        <div class="subscription-left">
+                <div class="subscription-title">Inicie agora sua carreira de programador por apenas R$49,90<i>/mês</i></div>
+                
+                <div class="subscription-description">Ainda está em dúvida? Experimente a plataforma grátis durante 7 dias. <a href="https://www.devmedia.com.br/pro/">Faça um teste grátis</a></div>
+
+                <div class="company-plan">
+                    <label>
+                        Já conhece nosso Plano Empresarial?
+                    </label>
+
+                    <a href="https://www.devmedia.com.br/empresarial/" title="Conheça agora o plano empresarial">
+                        Conheça agora!
+                    </a>
+                </div>
+            </div>
+
+            <div class="subscription-right">
+                <div class="plan-container">
+                    <div class="plan-content">
+                        <div class="plan-title">Benefícios</div>
+
+                        <ul class="plan-list">
+                            <li>Suporte em tempo real</li>
+                            <li>Certificado de autoridade</li>
+                            <li>Exercícios para praticar</li>
+                            <li>Estudo gamificado</li>
+                            <li>Planos de estudo para cada carreira de programador</li>
+                        </ul>
+
+                        <div class="button-container">
+                            <a href="https://www.devmedia.com.br/pro/" title="Assine agora o plano DevMedia">
+                                Saiba mais
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+        <section class="page-content page-info ">
+                <section class="page-content-wrapper">
+                    <div class="autor-info-area">
+                            <figure>
+                                <img src="./Transações no PostgreSQL_ Níveis de Isolamento_files/244531_20150129162200.jpg" alt="autor">
+                            </figure>
+                            <div class="autor-info">
+                                Por <a href="https://www.devmedia.com.br/perfil/ronaldo-lanhellas" title="ir ao space do autor" class="autor-nome">Ronaldo</a>
+                                <span class="autor-ano">Em 2015</span>
+                            </div>
+                        </div>
+                    </section>
+            </section>
+        <section class="page-content page-newsletter">
+                <section class="page-content-wrapper">
+                    <style>
+    .page-newsletter { background: linear-gradient(to right, rgba(0, 126, 174, .85), rgba(26, 193, 187, .85)); color: white; font-family: Montserrat;}
+    .newsletter-container { padding: 40px 0 60px;}
+    .newsletter-container .title-news { font-size:  25px; line-height:  30px; font-weight: 300; margin: 10px 0 20px; text-transform: uppercase;}
+    .newsletter-container .form-group { flex: 1 1 auto;}
+    .newsletter-container .form-group input[type="email"] { font-size: 14px; line-height: 18px; font-weight: 300; padding: 21px 24px; box-sizing:  border-box; border-radius: 6px; border: 2px solid white; font-family:  inherit; width: 100%;}
+    .newsletter-container .form-group input[type="email"]::placeholder{ color:#8795A2;}
+    .newsletter-container .form-box .btn { flex: 0 0 auto; border: 2px solid white; border-radius: 6px; height: 100%; box-sizing:  border-box; padding: 20px 24px; background: transparent; cursor: pointer; color: inherit; font-family: inherit; font-weight:  400; font-size: 16px; line-height: 19px; transition: all .2s ease; margin-left:  25px;}
+    .newsletter-container .form-box .btn:hover { background-color: rgba(255,255,255,0.4);}
+    .newsletter-container .login-form-news { display: flex; align-items:  center; justify-content:  center;}
+    
+    @media (max-width: 768px){
+        .newsletter-container .title-news { font-size: 20px;}
+        .newsletter-container .form-group input[type="email"] { padding: 15px 15px;}
+        .newsletter-container .form-box .btn { font-size: 14px; padding: 15px 15px;}
+    }
+    @media (max-width: 579px){
+        .newsletter-container .login-form-news { flex-direction:  column;}
+        .newsletter-container .form-group { width: 100%; margin-bottom: 25px;}
+        .newsletter-container .form-box .btn { margin: 0;}   
+    }
+    @media (max-width: 375px){
+        .newsletter-container .form-box .btn { width: 100%;}
+    }
+</style>
+    
+<div class="newsletter-container">
+    <div class="form-box">
+        <h5 class="title-news">Receba nossas novidades</h5>
+
+        <form action="https://devmedia.activehosted.com/proc.php" method="post" target="_blank" class="login-form-news">
+            <input type="hidden" name="u" value="7">
+            <input type="hidden" name="f" value="7">
+            <input type="hidden" name="s">
+            <input type="hidden" name="c" value="0">
+            <input type="hidden" name="m" value="0">
+            <input type="hidden" name="act" value="sub">
+            <input type="hidden" name="v" value="2">
+
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Informe o seu e-mail" class="form-email form-control" id="form-email validate" required="">
+            </div>
+
+            <button type="submit" class="btn">Receber Newsletter</button>
+        </form>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+
+    /* Aqui valida os campos de texto e e-mail */
+    $('.login-form input[type="text"], .login-form input[type="email"], .login-form textarea').on('focus', function() {
+        $(this).removeClass('input-error');
+    });
+
+    $('.login-form').on('submit', function(e) {
+        $(this).find('input[type="text"], input[type="email"], textarea').each(function() {
+            if( $(this).val() == "" ) {
+                e.preventDefault();
+                $(this).addClass('input-error');
+                
+            } else {
+                $(this).removeClass('input-error');
+            }
+        });
+    });
+
+    /* Aqui valida o e-mail completo */
+    $("#validate").keyup(function() {
+        var email = $("#validate").val();
+        if(email != 0) {
+            e.preventDefault();
+            $(this).addClass('input-error');
+        } else {
+            $(this).removeClass('input-error');
+        }         
+    });
+});
+
+function isValidEmailAddress(emailAddress) {
+    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z])?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]|[0-9]{1,2})\.)(25[0-5]|2[0-4][0-9]|1[0-9]|[0-9]{1,2})\]?$)/i);
+    return pattern.test(emailAddress);
+}
+</script>
+                </section>
+            </section>
+        <section class="page-content page-comment">
+            <section class="page-content-wrapper">
+                <style>
+	#carrega-comentarios{ height: 50px; background-image: url(//www.devmedia.com.br/comentarios/img/loading.gif); background-repeat: no-repeat; background-size: contain; background-position: center; margin: 40px 0;}
+	.comentario-load{ opacity:0; transition: opacity 1s; }
+	.comentario-load.active{ opacity:1; }
+	.comentarios_outer { box-sizing: border-box; margin: 30px auto; max-width: 950px; position: relative; width: 100% }
+	.comentarios_outer { box-sizing: border-box; margin: 30px auto; max-width: 950px; position: relative; width: 100% }
+	.comentario_viewaula { width: 950px; margin-left: 24%; margin-bottom: 30px; padding: 0 60px; box-sizing: border-box; }
+	.comentarios_title { font-size: 24px; font-family: lato; color: #494949; background-color: #f5f5f5; padding: 10px 20px; margin-bottom: 30px; }
+	@media screen and (max-width: 1266px) {
+		.comentario_viewaula { width: 76%; }
+	}
+	@media screen and (max-width: 1199px) {
+		.comentario_viewaula { width: 100%; margin-left: 0; margin-right: 0; }
+		.comentarios_outer { box-sizing: border-box; margin: 40px auto 0; width: 100%; }
+	}
+	@media screen and (max-width: 639px) { 
+		.comentario_viewaula { padding: 0 10px; }
+		.comentarios_outer { padding: 0 15px; }
+	}
+</style>
+
+
+<div class="comentarios_outer" id="comentario">
+	<link href="./Transações no PostgreSQL_ Níveis de Isolamento_files/css(1)" rel="stylesheet">
+	<div class="comentarios_title">Suporte ao aluno - Tire a sua dúvida.</div>
+	<div class="comentario-load"></div>
+	<link href="./Transações no PostgreSQL_ Níveis de Isolamento_files/css(1)" rel="stylesheet"><div id="carrega-comentarios">
+		<script>
+			//Comentários
+			var comentariosReadyEvent = document.createEvent('Event');
+			comentariosReadyEvent.initEvent('comentariosReady', true, true);
+			window.comentariosReady = false;
+			
+			
+			$(document).ready(function(){
+				var comentarios_status = 0;
+				var comentarioBox = $("#carrega-comentarios");
+
+				$("#carrega-comentarios").before("<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>");
+				
+				$(document).on("scroll",function(){
+					loadComentarios()
+				});
+
+				loadComentarios();
+
+				loadPreview();
+				
+				function loadComentarios(){
+					if(comentarios_status == 0){
+						if(isOnScreen(comentarioBox)){
+							comentarios_status = 1;
+
+							if(typeof listaAulas != "undefined" && listaAulas.length > 0){
+								var dados = {c: 32464, a:listaAulas, exibicao: false};
+							}else{
+								var dados = {c: 32464, exibicao: false};
+							}
+							
+							var url = "//www.devmedia.com.br/comentarios/index_unificado.php";
+							$.ajax({
+								url: url,
+								method: "POST",
+								data: dados
+							}).done(function(response){
+								$(".comentario-load").append(response);
+								comentarioBox.remove();
+								comentarios_status = 2;
+								setTimeout(function(){ $(".comentario-load").addClass("active"); comentarioBox.remove(); $(".comentario-load")[0].dispatchEvent(comentariosReadyEvent); window.comentariosReady = true;}, 200);
+							});
+						}
+					}
+				}
+			});
+
+			function isOnScreen(element){
+				var win = $(window);
+				var screenTop = win.scrollTop();
+				var screenBottom = screenTop + win.height();
+
+				var elementTop = element.offset().top;
+				var elementBottom = elementTop + element.height();
+
+				return elementBottom > screenTop && elementTop < screenBottom;        
+			}
+
+			function loadPreview() {
+				var canload = $("script[src='//www.devmedia.com.br/perfil/js/preview.js']").length == 0;
+				if(canload){
+					var newScript = $("<script>");
+					newScript.attr("src", "//www.devmedia.com.br/perfil/js/preview.js?id=17");
+					newScript.attr("type", "text/javascript");
+					$("head").append(newScript);
+				}
+			}
+		</script>
+	</div>
+</div>
+            </section>
+        </section>
+
+                <section id="menu-anotacao" off=""></section>
+
+
+
+    </section>
+</section>
+
+<div class="dev-modal">
+	<div class="dev-modal-body">
+		
+
+		<div class="devbot-wrapper">
+    <link rel="stylesheet" href="./Transações no PostgreSQL_ Níveis de Isolamento_files/devbot.css">
+    <script src="./Transações no PostgreSQL_ Níveis de Isolamento_files/core.js"></script>
+    <script src="./Transações no PostgreSQL_ Níveis de Isolamento_files/devbot.js"></script>
+    
+    <div class="devbot-avatar" id="devbot-avatar-box">
+<svg xmlns="http://www.w3.org/2000/svg" class="dev-avatar" viewBox="0 0 1513.29 1836.18">
+    <defs>
+        <style>
+            .dev-avatar .robot-avatar{
+                isolation: isolate;
+            }
+
+            .dev-avatar .background-circle{
+                fill: #0ac5d4;
+            }
+            
+            .dev-avatar .robot-skin,
+            .dev-avatar .robot-face-shadow {
+                fill: #ececec;
+            }
+
+            .dev-avatar .robot-stroke {
+                fill: #665c64;
+            }
+
+            .dev-avatar .robot-neck-shadow {
+                fill: #c7c7c7;
+            }
+
+            .dev-avatar .robot-neck-shadow,
+            .dev-avatar .robot-face-shadow {
+                mix-blend-mode: multiply;
+            }
+
+            .dev-avatar .robot-face {
+                fill: #3f3f3f;
+            }
+
+            .dev-avatar .robot-reflection {
+                fill: #fff;
+                opacity: 0.57;
+                mix-blend-mode: screen;
+            }
+
+            .dev-avatar .robot-eyes{
+                fill:#31d6cc;
+                fill-opacity:1;
+                animation: robot-blinkEye 3.3s infinite linear;
+            }
+
+            .sad-avatar .dev-avatar .robot-eyes.right-eye{
+                animation-name: robot-sad-right-eye, robot-sad-blink-right-eye;
+                animation-duration: 1s, 3.3s;
+                animation-delay: 0.5s, 1.5s;
+                animation-iteration-count: 1, infinite;
+                animation-fill-mode: forwards, unset;
+            }
+
+            .sad-avatar .dev-avatar .robot-eyes.left-eye{
+                animation-name: robot-sad-left-eye, robot-sad-blink-left-eye;
+                animation-duration: 1s, 3.3s;
+                animation-delay: 0.5s, 1.5s;
+                animation-iteration-count: 1, infinite;
+                animation-fill-mode: forwards, unset;
+            }
+
+            .dev-avatar .robot-mouth-wrapper {
+                transform-origin: center center;
+            }
+            .dev-avatar .robot-mouth {
+                fill: #31d6cc;
+                transition: .2s ease;
+                transform-origin: center;
+                transform: translate(-214px, -48px);
+            }
+
+            .sad-avatar .dev-avatar .robot-mouth {
+                animation: robot-sad-mouth 1s 0.5s 1 forwards;
+            }
+
+            .talk-avatar .dev-avatar .robot-mouth-wrapper {
+                animation: robot-talk-mouth .4s infinite ease;
+            }
+
+            @keyframes robot-sad-mouth{
+                0% { transform: translate(-214px, -48px) scale(1, 1); }
+                50% { transform: translate(-107px, -220px) scale(0.5, 0); }
+                100% { transform: translate(-214px, -440px) scale(1, -1); }
+            }
+
+            @keyframes robot-talk-mouth {
+                0%,100% { transform: translate(0px,0px) scale(1, 1); }
+                50% { transform: translate(0px,-200px) scale(1, 0.2); }
+            }
+
+            @keyframes robot-blinkEye {
+                0% { transform: translate(-214px, -48px) scaleY(1); }
+                5% { transform: translate(-214px, 455px) scaleY(0.1); }
+                10% { transform: translate(-214px, -48px) scaleY(1); }
+                100% { transform: translate(-214px, -48px) scaleY(1); }
+            }
+
+            @keyframes robot-sad-right-eye{
+                0% { transform: translate(-214px, -48px) rotate(0deg); }
+                100% {transform: rotate(-15deg) translate(-400px, 230px)}
+            }
+              
+            @keyframes robot-sad-blink-right-eye{
+                0% {transform: rotate(-15deg) translate(-400px, 230px) scaleY(1)}
+                10% {transform: rotate(-15deg) translate(-400px, 700px) scaleY(0.1)}
+                20% {transform: rotate(-15deg) translate(-400px, 230px) scaleY(1)}
+                100% {transform: rotate(-15deg) translate(-400px, 230px) scaleY(1)}
+            }
+
+            @keyframes robot-sad-left-eye{
+                0% { transform: rotate(0deg) translate(-214px, -48px)}
+                100% {transform: rotate(15deg) translate(-75px, -170px)}
+            }
+            
+            @keyframes robot-sad-blink-left-eye{
+                0% {transform: rotate(15deg) translate(-60px, -170px) scaleY(1)}
+                10% {transform: rotate(15deg) translate(-60px, 310px) scaleY(0.1)}
+                20% {transform: rotate(15deg) translate(-60px, -170px) scaleY(1)}
+                100% {transform: rotate(15deg) translate(-60px, -170px) scaleY(1)}
+            }
+        </style>
+    </defs>
+    <g class="robot-avatar">
+        <circle class="background-circle" cx="756.64" cy="1079.54" r="756.64"></circle>
+        <g>
+            <path class="robot-skin" d="M1552.57,848.59a72.18,72.18,0,0,1-11-.85c-33.92-5.26-61.6-34.14-78-81.32-15.63-45.12-19.23-102.23-10.14-160.81,18.13-116.8,81-204.88,146.35-204.88a72.14,72.14,0,0,1,11,.84c33.92,5.27,61.61,34.15,78,81.33,15.63,45.12,19.23,102.23,10.14,160.81-18.13,116.8-81.05,204.88-146.35,204.88Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M1599.83,410.28a62.34,62.34,0,0,1,9.53.74c62.56,9.71,98.43,113.23,80.11,231.22-17.38,112-77.34,196.8-136.9,196.8a62.34,62.34,0,0,1-9.53-.74c-62.56-9.71-98.43-113.23-80.12-231.22,17.39-112,77.35-196.8,136.91-196.8Zm0-19.11c-35.34,0-70.83,22.93-99.93,64.55-27.21,38.92-47.05,91.63-55.86,148.43-20.24,130.39,22,241.54,96.07,253a81,81,0,0,0,12.46,1c35.33,0,70.83-22.93,99.93-64.55,27.21-38.92,47-91.63,55.86-148.43,20.24-130.39-22-241.54-96.07-253a81.21,81.21,0,0,0-12.46-1Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-skin" d="M1664.18,452.55c-14.2-23.11-32.85-38.12-54.82-41.53-62.56-9.71-128.12,78.07-146.44,196.06S1480.48,828.59,1543,838.3c20.71,3.22,41.75-4.31,61.3-20Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-skin" d="M390,809.21c-65.3,0-128.22-88.09-146.35-204.89-19.41-125.1,19.28-231.45,88.09-242.13a72.38,72.38,0,0,1,11-.85c65.3,0,128.22,88.08,146.35,204.89C508.47,691.32,469.78,797.68,401,808.36A72.28,72.28,0,0,1,390,809.21Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M342.71,370.9c59.56,0,119.52,84.78,136.91,196.79,18.31,118-17.56,221.52-80.12,231.23a62.32,62.32,0,0,1-9.53.73c-59.56,0-119.52-84.78-136.91-196.8-18.31-118,17.56-221.51,80.12-231.22a62.32,62.32,0,0,1,9.53-.73Zm0-19.12h0a82.29,82.29,0,0,0-12.46,1c-37.59,5.84-67.95,37-85.52,87.64C228.6,487,224.85,545.69,234.18,605.79,243,662.59,262.83,715.3,290,754.21c29.11,41.63,64.59,64.55,99.93,64.55a81,81,0,0,0,12.46-1c37.59-5.83,68-36.95,85.52-87.63,16.13-46.57,19.88-105.32,10.55-165.41-8.81-56.8-28.65-109.51-55.86-148.42-29.1-41.63-64.59-64.56-99.93-64.56Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-skin" d="M278.36,413.16c14.19-23.11,32.85-38.12,54.82-41.53,62.56-9.71,128.12,78.07,146.44,196.06S462.06,789.21,399.5,798.92c-20.72,3.21-41.75-4.32-61.3-20Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-skin" d="M403.54,298.51l19.52-130.32c9.28-62,63.58-108.79,126.28-108.79h839.52c62.7,0,117,46.77,126.28,108.79l19.51,130.32Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M1388.86,70.8a116.3,116.3,0,0,1,115,99.07l17.55,117.24H416.78l17.55-117.24a116.3,116.3,0,0,1,115-99.07Zm0-22.8H549.35A139.08,139.08,0,0,0,411.79,166.5L394.23,283.74l-3.92,26.17H1547.88L1544,283.74,1526.41,166.5A139.1,139.1,0,0,0,1388.86,48Z" transform="translate(-214.64 -48)"></path>
+            <rect class="robot-skin" x="400.84" y="829.28" width="707.24" height="317.97"></rect>
+            <rect class="robot-neck-shadow" x="400.84" y="829.28" width="707.24" height="212.75"></rect>
+            <path class="robot-stroke" d="M1311.32,888.68v295.17H626.88V888.68Zm22.8-22.8h-730v340.77h730V865.88Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-skin" d="M511.34,1009.67c-62.7,0-117-46.77-126.28-108.79L298.09,320a127.7,127.7,0,0,1,126.29-146.6H1513.82A127.7,127.7,0,0,1,1640.11,320l-87,580.89c-9.28,62-63.57,108.79-126.28,108.79Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M1513.82,184.79c71.09,0,125.54,63.21,115,133.51l-87,580.89a116.28,116.28,0,0,1-115,99.08H511.35a116.28,116.28,0,0,1-115-99.08l-87-580.89c-10.52-70.3,43.93-133.51,115-133.51Zm0-22.8H424.37A139.1,139.1,0,0,0,286.81,321.68l87,580.89a139.08,139.08,0,0,0,137.56,118.49h915.5a139.08,139.08,0,0,0,137.56-118.49l87-580.89A139.08,139.08,0,0,0,1513.82,162Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-face-shadow" d="M1541.86,830.46a116.28,116.28,0,0,1-115,99.07H511.35a116.28,116.28,0,0,1-115-99.07l-84-560.76a115.88,115.88,0,0,0-3,48.6l87,580.89a116.28,116.28,0,0,0,115,99.08h915.5a116.28,116.28,0,0,0,115-99.08l87-580.89a115.88,115.88,0,0,0-3-48.6Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-face" d="M590.53,837.9a116.09,116.09,0,0,1-115.46-99.31L443.41,529.08A160,160,0,0,1,601.63,345.15H1341a160,160,0,0,1,158.22,183.93L1467.5,738.59a116.08,116.08,0,0,1-115.45,99.31Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M601.05,356.55h739.32c90.93,0,160.54,80.92,147,170.82l-31.66,209.51a105.38,105.38,0,0,1-104.19,89.63H590a105.37,105.37,0,0,1-104.18-89.63L454.11,527.37c-13.59-89.9,56-170.82,146.94-170.82Zm0-22.79a171.39,171.39,0,0,0-169.48,197l31.66,209.51A128.15,128.15,0,0,0,590,849.3h761.52a128.17,128.17,0,0,0,126.73-109l31.66-209.51a171.4,171.4,0,0,0-169.49-197Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-face" d="M601.05,389.68h739.32c77.48,0,139.44,58.77,147.68,131.77,9.73-87.5-58.76-164.9-147.68-164.9H601.05c-88.92,0-157.4,77.4-147.67,164.9C461.62,448.45,523.57,389.68,601.05,389.68Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-eyes right-eye" transform="translate(-214.64 -48)" d="M 1197.48,491.81 A 62.41,62.41 0 0 0 1195.24,507 L 1320,506 a 62.55,62.55 0 0 0 -2.47,-15.15 z m -2.2606,31.56526 124.9563,-0.95962 0.1165,15.16956 -124.9564,0.95961 z M 1205.8,617.53 a 62.36,62.36 0 0 0 105.35,-0.81 z m -10.3391,-62.70758 124.9563,-0.95961 0.1165,15.16955 -124.9563,0.95961 z M 1310.05,474.66 a 62.37,62.37 0 0 0 -105.36,0.82 z m 10.55,110.54 -124.74,1 a 62,62 0 0 0 2.47,15.14 l 120,-0.93 a 62.81,62.81 0 0 0 2.27,-15.21 z"></path>
+            <path class="robot-eyes left-eye" transform="translate(-214.64 -48)" d="m 625.51,492 a 62.47,62.47 0 0 0 -2.21,15.19 l 124.75,-1.25 a 62.34,62.34 0 0 0 -2.51,-15.14 z m -2.10988,31.37228 124.9536,-1.26494 0.15356,15.16922 -124.9536,1.26494 z M 634.11,617.65 a 62.37,62.37 0 0 0 105.36,-1.06 z m -10.40153,-62.82246 124.95359,-1.26494 0.15357,15.16922 -124.9536,1.26494 z M 738,474.54 a 62.37,62.37 0 0 0 -105.36,1.06 z m 10.84,110.51 -124.74,1.26 a 62,62 0 0 0 2.51,15.14 l 120,-1.21 a 61.84,61.84 0 0 0 2.23,-15.19 z"></path>
+            <path class="robot-skin" d="M440.48,1506.13A66.52,66.52,0,0,1,374,1439.69V1259.92a87.57,87.57,0,0,1,87.47-87.47H1476.69a87.56,87.56,0,0,1,87.46,87.47v179.77a66.51,66.51,0,0,1-66.43,66.44Z" transform="translate(-214.64 -48)" id="path3894"></path>
+            <path class="robot-stroke" d="M1476.69,1183.85a76.06,76.06,0,0,1,76.06,76.07v179.77a55,55,0,0,1-55,55H440.48a55,55,0,0,1-55-55V1259.92a76.07,76.07,0,0,1,76.07-76.07Zm0-22.8H461.51a99,99,0,0,0-98.87,98.87v179.77a77.92,77.92,0,0,0,77.84,77.83H1497.72a77.91,77.91,0,0,0,77.83-77.83V1259.92a99,99,0,0,0-98.86-98.87Z" transform="translate(-214.64 -48)" id="path3896"></path>
+            <path class="robot-skin" d="M450.79,114h0Z" transform="translate(-214.64 -48)"></path>
+            <rect class="robot-stroke" x="236.15" y="60.25" width="1036.61" height="11.4"></rect>
+            <path class="robot-skin" d="M623.59,1048.23h0Z" transform="translate(-214.64 -48)"></path>
+            <rect class="robot-stroke" x="408.95" y="994.53" width="698.88" height="11.4"></rect>
+            <path class="robot-skin" d="M623.59,1113.15h0Z" transform="translate(-214.64 -48)"></path>
+            <rect class="robot-stroke" x="408.95" y="1059.44" width="698.88" height="11.4"></rect>
+            <path class="robot-reflection" d="M722.13,242.29c4.48,29.79-65.18,62-155.61,72s-167.36-6.09-171.85-35.88,65.18-62,155.61-72S717.64,212.49,722.13,242.29Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-reflection" d="M910.43,237.48c-.44,11.5-35.28,19.75-77.82,18.42s-76.64-11.72-76.2-23.22,35.29-19.75,77.82-18.42S910.88,226,910.43,237.48Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-skin" d="M452.46,1184.41v71.88a54.56,54.56,0,0,0,16,38.59L509,1335.46a54.53,54.53,0,0,0,38.58,16h0A54.57,54.57,0,0,1,602.18,1406v88.71Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M607.88,1494.73h-11.4V1406a48.92,48.92,0,0,0-48.86-48.87A59.89,59.89,0,0,1,505,1339.5l-40.59-40.59a59.9,59.9,0,0,1-17.65-42.62v-71.88h11.4v71.88a48.54,48.54,0,0,0,14.31,34.56l40.59,40.59a48.54,48.54,0,0,0,34.56,14.31A60.34,60.34,0,0,1,607.88,1406Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-skin" d="M1472.2,1184.41v71.88a54.61,54.61,0,0,1-16,38.59l-40.59,40.58a54.54,54.54,0,0,1-38.59,16h0a54.57,54.57,0,0,0-54.57,54.57v88.71Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M1328.17,1494.73h-11.39V1406a60.34,60.34,0,0,1,60.26-60.27,48.54,48.54,0,0,0,34.56-14.31l40.59-40.59a48.54,48.54,0,0,0,14.31-34.56v-71.88h11.4v71.88a59.9,59.9,0,0,1-17.65,42.62l-40.59,40.59a59.89,59.89,0,0,1-42.62,17.65,48.93,48.93,0,0,0-48.87,48.87Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M707.77,1263.14h-75a19.22,19.22,0,0,1-19.22-19.21h0a19.23,19.23,0,0,1,19.22-19.22h75A19.22,19.22,0,0,1,727,1243.93h0A19.21,19.21,0,0,1,707.77,1263.14Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M632.26,1314h0a16.5,16.5,0,0,1-16.5-16.5v-3.27a16.49,16.49,0,0,1,16.5-16.49h0a16.49,16.49,0,0,1,16.49,16.49v3.27A16.49,16.49,0,0,1,632.26,1314Z" transform="translate(-214.64 -48)"></path>
+            <path class="robot-stroke" d="M710.48,1314h0a16.5,16.5,0,0,1-16.49-16.5v-3.27a16.49,16.49,0,0,1,16.49-16.49h0a16.49,16.49,0,0,1,16.5,16.49v3.27A16.5,16.5,0,0,1,710.48,1314Z" transform="translate(-214.64 -48)"></path>
+            <g class="robot-mouth-wrapper" viewBox="0 0 1513.29 1836.18">
+                <path class="robot-mouth" x="10" d="M902.31,674.83a7.31,7.31,0,0,0-7.35,7.86,87.8,87.8,0,0,0,174.89,0,7.32,7.32,0,0,0-7.36-7.86Z"></path>
+            </g>
+        </g>
+    </g>
+</svg></div>
+    <div class="devbot-dialog" id="devbot-dialog-box"><span class="Typewriter__wrapper"> </span><span class="Typewriter__cursor"></span></div>
+<span class="dev-modal-close">
+			<svg x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve">
+				<path d="M505.943,6.058c-8.077-8.077-21.172-8.077-29.249,0L6.058,476.693c-8.077,8.077-8.077,21.172,0,29.249 C10.096,509.982,15.39,512,20.683,512c5.293,0,10.586-2.019,14.625-6.059L505.943,35.306 C514.019,27.23,514.019,14.135,505.943,6.058z"></path>
+				<path d="M505.942,476.694L35.306,6.059c-8.076-8.077-21.172-8.077-29.248,0c-8.077,8.076-8.077,21.171,0,29.248l470.636,470.636 c4.038,4.039,9.332,6.058,14.625,6.058c5.293,0,10.587-2.019,14.624-6.057C514.018,497.866,514.018,484.771,505.942,476.694z"></path>
+			</svg>
+		</span></div>
+<script>
+    var devbotWrapper = document.getElementsByClassName("devbot-wrapper")[0];
+    var texto = ` `;
+
+    devbot = new Devbot(devbotWrapper, DevbotHumor.default, texto);
+</script>
+
+	</div>
+</div>
+
+<script>
+function updatePageElements(top) {
+    $(".header-container").css("top", top + "px");
+
+    let altura_barra_principal = $(".header-container").height();
+    let offset_top_menu_lateral = altura_barra_principal + top;
+
+   if( $(window).innerWidth() < 1024 ){
+		$(".side-menu-container").css("top", top + "px");
+	} else {
+		$(".side-menu-container").css("top", offset_top_menu_lateral + "px");
+    }
+}
+</script>        </main>
+        
+		
+		<footer class="footer-wrapper main-footer">
+			<div class="footer-content">
+
+                <div class="great-place-column">
+
+
+
+                </div>
+
+				<div class="menus-column">
+
+					<div class="menu-footer-container">
+						<p class="menu-footer-title">Menu</p>
+
+						<div class="menu-footer-content">
+
+                            <div class="menu-group">
+								<div class="menu-item">
+                                    <a title="Cursos" href="https://www.devmedia.com.br/tecnologia/">Tecnologias</a>
+                                </div>
+
+                                <div class="menu-item">
+                                    <a title="Cursos" href="https://www.devmedia.com.br/tecnologia/novos-desafios/">Exercicios</a>
+                                </div>
+
+								<div class="menu-item">
+                                    <a title="Cursos" href="https://www.devmedia.com.br/cursos/">Cursos</a>
+                                </div>
+				
+								<div class="menu-item">
+                                    <a title="Artigos" href="https://www.devmedia.com.br/artigos/">Artigos</a>
+                                </div>
+				
+                                <div class="menu-item">
+                                    <a title="Revistas" href="https://www.devmedia.com.br/revistas/">Revistas</a>
+                                </div>
+
+                            </div>
+
+                            <div class="menu-group">
+			    				
+			    				
+
+			     				<div class="menu-item">
+                                    <a title="Fale conosco" href="https://www.devmedia.com.br/fale-conosco/">Fale conosco</a>
+                                </div>
+
+                                <div class="menu-item">
+                                    <a title="Trabalhe conosco" href="https://www.devmedia.com.br/perfil/empresarial/devmedia">Trabalhe conosco</a>
+                                </div>
+
+                                <div class="menu-item">
+                                    <a title="Assinatura Empresarial" href="https://www.devmedia.com.br/empresarial/">Assinatura para empresas</a>
+                                </div>
+				
+				<div class="menu-item">
+                                    <a style="background: #0ac5d4; width: 120px; text-align: center; border-radius: 16px; padding: 8px; color: #fff;" title="Assine" href="https://www.devmedia.com.br/shop/">Assine agora</a>
+                                </div>
+
+                            </div>
+
+						</div>
+					</div>
+
+                    <!-- USUÁRIO DESLOGADO -->
+                    
+                        <div class="footer-tech-container">
+                            <p class="footer-tech-title">
+                                Tecnologias
+                            
+
+                            </p><div class="footer-tech-content">
+                                <div class="sub-columns">
+                                    <div class="sub-item">
+										<a title="Fundamentos" href="https://www.devmedia.com.br/guias/fundamentos">Fundamentos</a>
+									</div>
+                                	<div class="sub-item">
+										<a title=".NET" href="https://www.devmedia.com.br/guias/net">.NET</a>
+									</div>
+									<div class="sub-item">
+										<a title="PHP" href="https://www.devmedia.com.br/guias/php">PHP</a>
+									</div>
+									<div class="sub-item">
+										<a title="Python" href="https://www.devmedia.com.br/guias/python">Python</a>
+									</div>
+									<div class="sub-item">
+										<a title="Java" href="https://www.devmedia.com.br/guias/java">Java</a>
+									</div>
+									<div class="sub-item">
+										<a title="Delphi" href="https://www.devmedia.com.br/guias/delphi">Delphi</a>
+									</div>
+                                </div>
+
+                                <div class="sub-columns">
+									<div class="sub-item">
+										<a title="Front-End" href="https://www.devmedia.com.br/guias/html-e-css">HTML e CSS</a>
+									</div>
+									<div class="sub-item">
+										<a title="JavaScript" href="https://www.devmedia.com.br/guias/javascript">JavaScript</a>
+									</div>
+									<div class="sub-item">
+										<a title="Node" href="https://www.devmedia.com.br/guias/node-js">Node</a>
+									</div>
+									<div class="sub-item">
+										<a title="React Native" href="https://www.devmedia.com.br/guias/react-native">React Native</a>
+									</div>
+									<div class="sub-item">
+										<a title="Flutter" href="https://www.devmedia.com.br/guias/flutter">Flutter</a>
+									</div>
+									<div class="sub-item">
+										<a title="Banco de dados" href="https://www.devmedia.com.br/guias/banco-de-dados">Banco de Dados</a>
+									</div>
+                                </div>
+
+                                <div class="sub-columns">
+									<div class="sub-item"> 
+										<a title="Mobile" href="https://www.devmedia.com.br/guias/mobile">Mobile</a>
+									</div>
+									<div class="sub-item">
+										<a title="Spring" href="https://www.devmedia.com.br/guias/spring">Spring</a>
+									</div>
+									<div class="sub-item">
+										<a title="Arquitetura" href="https://www.devmedia.com.br/guias/arquitetura">Arquitetura</a>
+									</div>
+									<div class="sub-item">
+										<a title="Automação Comercial" href="https://www.devmedia.com.br/guias/automacao-comercial">Automação</a>
+									</div>
+									<div class="sub-item">
+										<a title="Engenharia de Software" href="https://www.devmedia.com.br/guias/engenharia-de-software">Engenharia</a>
+									</div>
+									<div class="sub-item">
+										<a title="Outras Tecnologias" href="https://www.devmedia.com.br/guias/mais-assuntos">+ Assuntos</a>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                </div>
+                
+                <div class="footer-info-social">
+                        
+                    <div class="footer-social-container">
+
+                        <a href="https://github.com/DevMedia" target="_blank" rel="noopener noreferrer" class="footer-icons" data-external="true">
+                            <svg class="git-footer" viewBox="0 0 90 90">
+                                <path d="M65.709,10.5c1.17,2.657,1.928,7.07,0.797,10.301c4.625,3.949,6.215,13.549,3.982,21.394 C77.08,42.698,84.932,41.953,90,43.976c-4.738-0.609-11.209-1.804-17.32-1.388c-1.158,0.079-2.873-0.044-2.789,1.585 c7.074,0.555,14.104,1.16,19.912,2.973c-5.761-0.941-12.754-2.375-19.912-2.574c-2.957,5.835-8.908,8.703-17.123,9.307 c0.883,1.922,2.574,2.653,2.987,5.744c0.616,4.618-0.964,11.381,0.595,14.459c0.748,1.475,1.967,1.514,2.789,2.775 c-2.012,2.381-7-0.268-7.568-2.775c-0.973-4.295,1.482-10.953-1.192-13.865c0.188,4.685-1.108,11.264,0.199,15.449 c0.515,1.646,2.002,2.281,1.593,3.766c-9.352,0.949-5.443-12.104-6.972-19.81c-1.411,0.101-0.791,2.113-0.796,2.972 c-0.04,7.524,1.54,17.844-6.57,16.838c-0.237-1.582,1.088-2.119,1.593-3.563c1.479-4.233-0.277-10.542,0.401-15.651 c-3.095,2.334,0.325,10.48-1.593,14.657c-1.105,2.404-4.666,3.45-7.367,2.377c0.352-1.79,2.2-1.501,2.984-3.169 c1.096-2.324,0.008-5.674,0.399-9.111c-5.729,1.144-10.173-0.166-12.348-3.764c-0.973-1.615-1.214-3.52-2.39-4.951 c-1.17-1.432-3.04-1.625-3.582-3.563c7.095-1.708,7.367,7.302,13.739,7.524c1.954,0.071,2.97-0.563,4.778-0.988 c0.506-2.272,1.589-3.967,3.186-5.153c-7.929-1.085-14.477-3.554-17.522-9.504c-7.208,0.354-13.804,1.317-19.913,2.771 c5.545-2.014,12.384-2.736,19.715-2.973c-0.432-2.596-4.219-1.882-6.57-1.782C8.973,42.781,3.473,43.324,0,43.976 c5.034-1.795,12.098-1.571,18.918-1.585c-2.086-6.54-1.363-16.929,3.186-20.798C20.815,18.344,21.215,13.03,22.9,10.5 c5.079,0.228,8.159,2.443,11.35,4.557c3.957-1.125,8.118-1.685,13.54-1.387c2.28,0.126,4.651,1.151,6.369,0.989 c1.685-0.158,3.542-2.049,5.178-2.771C61.468,10.947,63.271,10.588,65.709,10.5z"></path>
+                            </svg>
+                        </a>
+
+                        <a href="https://www.facebook.com/devmedia.com.br/" target="_blank" rel="noopener noreferrer" class="footer-icons">
+                            <svg class="icon-facebook">
+                                <path d="M18.6,15h-2.4v8.4h-3.5V15H11v-3h1.7v-1.9c-0.1-1.8,1.2-3.4,3-3.5c0.2,0,3.1,0,3.1,0v2.9H17 c-0.4,0-0.7,0.3-0.7,0.7l0,1.8H19L18.6,15z"></path>
+                            </svg>
+                        </a>
+
+                        <a href="http://twitter.com/devmedia" target="_blank" rel="noopener noreferrer" class="footer-icons">
+                            <svg class="icon-twitter">
+                                <path d="M21.6,11.6V12c0,5.3-4.2,9.7-9.5,9.7c-0.1,0-0.1,0-0.2,0c-1.8,0-3.8-0.6-5.2-1.5 c2.4,0.1,3.8-0.5,5-1.5c-1.5,0-2.8-1-3.2-2.4c0.6,0.2,1.2,0.1,1.5,0C8.4,16,7.3,14.6,7.3,13l0,0c0.5,0.3,1,0.4,1.5,0.4 c-0.9-0.6-1.5-1.7-1.5-2.8c0-0.6,0.2-1.2,0.5-1.7c1.7,2.1,4.3,3.4,7,3.6C14.2,10,16.6,8.3,18,8.3c1.4,0,1.9,0.4,2.6,1.1 c0.8-0.2,1.5-0.4,2.2-0.8c-0.3,0.8-0.8,1.5-1.5,1.9c0.7-0.1,1.3-0.3,2-0.5C22.8,10.5,22.2,11.1,21.6,11.6z"></path>
+                            </svg>
+                        </a>
+
+                        <a href="https://www.instagram.com/devmedia.com.br/" target="_blank" rel="noopener noreferrer" class="footer-icons">
+                            <svg class="icon-instagram">
+                                <path d="M19.9,5H10c-2.8,0-5,2.2-5,5v10c0,2.8,2.2,5,5,5H20c2.8,0,5-2.2,5-5V10C24.9,7.2,22.7,5,19.9,5 z M22.7,20c0,1.6-1.3,2.9-2.9,2.9l0,0H9.9C8.3,22.9,7,21.6,7,20V10C7,8.4,8.3,7.1,10,7.1l0,0h9.9c1.6,0,2.9,1.3,2.9,2.9v0L22.7,20z"></path>
+                                <circle cx="20.3" cy="9.7" r="1.2"></circle>
+                                <path d="M14.9,9.7c-2.9,0-5.3,2.4-5.3,5.3s2.4,5.3,5.3,5.3c2.9,0,5.3-2.4,5.3-5.3S17.8,9.7,14.9,9.7z M14.9,18 c-1.7,0-3-1.4-3-3s1.4-3,3-3c1.7,0,3,1.4,3,3S16.6,18,14.9,18z"></path>
+                            </svg>
+                        </a>
+
+                        <a href="https://www.youtube.com/c/DevmediaBrasil" target="_blank" rel="noopener noreferrer" class="footer-icons">
+                            <svg class="icon-youtube">
+                                <path d="M25.3,9.9C25,8.8,24.1,8,23,7.8c-2.7-0.2-5.3-0.3-8-0.3c-2.7-0.1-5.3,0-8,0.3 C5.9,8,5,8.8,4.7,9.9c-0.3,1.7-0.5,3.4-0.4,5.1c-0.1,1.7,0.1,3.4,0.4,5.1C5,21.2,5.9,22,7,22.2c2.7,0.2,5.3,0.3,8,0.3 c2.7,0.1,5.3,0,8-0.3c1.1-0.1,2.1-1,2.3-2.1c0.3-1.7,0.5-3.4,0.4-5.1C25.8,13.3,25.6,11.6,25.3,9.9z M12.2,18.3v-7.1 c2.3,1.2,4.5,2.4,6.8,3.5C16.7,16,14.5,17.1,12.2,18.3z"></path>
+                            </svg>
+                        </a>
+
+                    </div>
+
+                    <div class="porta80-mobile-container">
+
+                        <a href="https://www.devmedia.com.br/transacoes-no-postgresql-niveis-de-isolamento/32464#" title="Porta 80 Web Hosting" class="porta80">
+                            Hospedagem web por Porta 80 Web Hosting
+                        </a>
+
+                    </div>
+
+                </div>
+
+			</div>
+		</footer>
+
+		<style>
+			.footer-wrapper {
+				width: 100%;
+				padding: 30px 20px;
+				
+				background: #f8fafb;
+				box-sizing: border-box;
+			}
+				.footer-wrapper * {
+					box-sizing: border-box;
+					font-family: 'Montserrat', sans-serif;
+				}
+
+			.footer-content {
+				width: 100%;
+				/* max-width: 320px; */
+				margin: 0 auto;
+			}
+			.footer-logo-container {
+				width: 100%;
+			}
+			.footer-logo {
+				width: 100%;
+
+				display: flex;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+				.footer-logo svg {
+					width: 143px;
+					height: 33px;
+				}
+					.footer-logo svg path {
+						fill: #8795A2;
+					}
+
+			.logo-slogan {
+				width: 100%;
+				display: block;
+
+				margin-top: 20px;
+				margin-bottom: 0;
+
+				color: #8795a2;
+				font-size: 14px;
+				font-weight: 600;
+				text-align: center;
+			}
+			.porta80 {
+				font-size: 11px;
+				font-weight: 300;
+				color: #8795A2;
+				text-align: center;
+
+				text-decoration: none;
+			}
+			.contact-container {
+				width: 100%;
+				max-width: 250px;
+				margin: 20px auto 0 auto;
+				text-align: center;
+			}
+				.contact-container label {
+					display: inline-block;
+					padding: 10px 20px;
+
+					color: #fff;
+					font-size: 12px;
+					font-weight: 600;
+
+					border-radius: 5px;
+					background: #0AC5D4;
+					box-shadow: 12px 15px 20px rgba(17, 136, 233, 0.05);
+				}
+					.contact-container label span {
+						width: 100%;
+						display: block;
+						margin-top: 10px;
+
+						font-size: 16px;
+					}
+
+			.app-button-container {
+				width: 100%;
+				margin: 20px 0;
+			}
+			.app-button {
+				width: 100%;
+				display: block;
+				text-align: center;
+			}
+				.app-button img {
+					width: 140px;
+				}
+
+			.porta80-desktop-container {
+				display: none;
+			}
+			.menu-footer-container {
+				width: 100%;
+				margin: 25px 0;
+			}
+			.menu-footer-title {
+				display: none;
+			}
+			.menu-item {
+				width: 100%;
+				display: block;
+				margin-bottom: 20px;
+				text-align: center;
+			}
+				.menu-item:last-child {
+					margin-bottom: 0;
+				}
+				.menu-item a,
+				.sub-item a {
+					display: inline-block;
+					
+					color: #8795A2;
+					font-size: 13px;
+					font-weight: 400;
+
+					text-decoration: none;
+
+					transition: all .2s ease;
+				}
+					.menu-item a:hover,
+					.sub-item a:hover {
+						color: #373737;
+						transform: scale(1.04);
+					}
+
+			.footer-tech-container {
+				display: none;
+			}
+			.footer-address-container {
+				width: 100%;
+				margin: 20px 0;
+				padding: 10px 0;
+
+				text-align: center;
+
+				border-top: 1px solid #ECECEC;
+				border-bottom: 1px solid #ECECEC;
+			}
+				.footer-address-container p {
+					margin: 0;
+					padding: 0 10px;
+
+					color: #8795A2;
+					font-size: 12px;
+					font-weight: 500;
+				}
+
+			.footer-social-container {
+				width: 100%;
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+			}
+			.footer-icons {
+				width: 30px;
+				height: 30px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin: 0 10px;
+			}
+				.footer-icons svg {
+					width: 30px;
+					height: 30px;
+				}
+					.footer-icons svg path {
+						fill: #8795A2;
+					}
+
+			.porta80-mobile-container {
+				width: 100%;
+				margin-top: 30px;
+				text-align: center;
+            }
+            
+            .great-place-column {
+                flex: 0 0 auto;
+                width: 200px;
+            }
+
+            .footer-info-social {
+                flex: 0 0 auto;
+                /* width: 300px; */
+            }
+
+            .badges-gptw a {
+                display: block;
+                text-align: center;
+            }
+
+            .badges-gptw a img {
+                max-width: 120px;
+            }
+
+			@media screen and (min-width: 760px) {
+				.footer-content {
+					max-width: 680px;
+				}
+				.footer-address-container {
+					max-width: 320px;
+					margin: 20px auto;
+				}
+				.footer-social-container {
+					max-width: 320px;
+					margin: 0 auto;
+				    justify-content: center;
+				}
+				.menu-footer-container {
+					margin: 40px 0;
+
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					flex-wrap: wrap;
+				}
+				.menu-footer-content {
+					width: 100%;
+					display: flex;
+					justify-content: flex-start;
+				}
+				.menu-item {
+					width: auto;
+					margin-bottom: 0;
+                }
+                
+                .menu-group:first-child {
+                    margin-right: 50px;
+                }
+			}
+
+			@media screen and (min-width: 1024px) {
+				.footer-wrapper {
+					padding: 30px 60px 40px 60px;
+				}
+				.footer-content {
+					max-width: unset;
+					margin: 0;
+
+					display: flex;
+					justify-content: flex-start;
+					flex-wrap: wrap;
+				}
+				.info-column {
+					width: 25%;
+					max-width: 250px;
+				}
+				.footer-logo-container {
+					width: 100%;
+				}
+				.porta80-desktop-container {
+					display: block;
+					text-align: center;
+				}
+				.menus-column {
+					/*width: 65%;*/
+					display: flex;
+					justify-content: space-around;
+                    flex-wrap: wrap;
+                    flex: 1 1 auto;
+				}
+				.menu-footer-container {
+					width: 70%;
+					margin: 0;
+					display: block;
+				}
+				.menu-footer-content {
+					flex-wrap: wrap;
+				}
+				.menu-footer-title,
+				.footer-tech-title {
+					display: block;
+					margin-top: 0;
+					margin-bottom: 20px;
+					font-size: 14px;
+					color: rgba(55, 55, 55, 0.75);
+					font-weight: 500;
+				}
+				.menu-item,
+				.sub-item {
+					width: 100%;
+					margin-bottom: 20px;
+					text-align: left;
+				}
+					.menu-item:last-child,
+					.sub-item:last-child {
+						margin-bottom: 0;
+					}
+
+				.footer-tech-container {
+					width: 60%;
+					display: block;
+				}
+				.footer-tech-content {
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					flex-wrap: nowrap;
+				}
+				.sub-columns {
+					width: 100%;
+				}
+				.sub-item {
+					width: 100%;
+					display: block;
+				}
+				.footer-address-container {
+					width: 100%;
+					max-width: unset;
+					margin: 20px 0 0 0;
+					padding: 20px 0 0 0;
+					border-bottom: 0;
+				}
+					.footer-address-container p {
+						padding: 0;
+					}
+				.footer-social-container {
+					flex-wrap: wrap;
+				}
+				/* .porta80-mobile-container {
+					display: none;
+				} */
+            }
+            
+            @media screen and (max-width: 1054px)
+            {
+                .menu-group:first-child{
+                    margin-right: 0;
+                    margin-top: 0;
+                }
+                
+                .menu-group{
+                    margin-top: 20px;
+                    width: 100%;
+                }
+            }
+
+            @media screen and (max-width: 1023px)
+            {
+                .great-place-column{
+                    width: auto;
+                    margin-top: 15px;
+                }
+
+                .menu-footer-content{
+                    flex-wrap: wrap;
+                }
+
+                .menu-group{
+                    margin-top: 0;
+                }
+
+                .menu-item{
+                    margin-top: 10px;
+                    margin-bottom: 0;
+                }
+
+                .footer-info-social{
+                    width: auto;
+                }
+
+                .porta80-mobile-container{
+                    margin-top: 15px;
+                }
+
+                .badges-gptw a img{
+                    max-width: 140px;
+                }
+
+                .footer-wrapper{
+                    padding: 0 20px 60px 20px !important;
+                }
+                
+            }
+
+            @media screen and (max-width: 400px)
+            {
+                .footer-info-social{
+                    margin: 0 auto;
+                    width: 280px;
+                }
+
+                .badges-gptw a img{
+                    max-width: 125px;
+                }
+            }
+
+            .dashboard-container{
+                padding: 0px 5px 25px 5px !important;
+            }
+
+        </style>
+        
+        
+        
+            <style>
+                .menu-group{
+                    width: 100%;
+                    margin-top: 20px;
+                }
+
+                .menu-group:first-child{
+                    margin-top: 0;
+                }
+
+                .menu-footer-container{
+                    width: 40%;
+                }
+                
+                .footer-tech-container{ 
+                    width: 60%;
+                }
+
+                .menus-column{
+                    padding: 0 15px;
+                }
+
+                .dashboard-container{
+                    padding: 0px 5px 50px 5px !important;
+                }
+
+                @media screen and (max-width: 1200px)
+                {
+                    .great-place-column{
+                        width: 170px;
+                    }
+
+                    .footer-info-social{
+                        width: 265px;
+                    }
+                }
+
+                @media screen and (max-width: 1023px)
+                {
+                    .great-place-column{
+                        width: auto;
+                    }
+
+                    .footer-tech-container, .menu-footer-container{
+                        width: 100%;
+                    }
+
+                    .menu-footer-container{
+                        margin: 30px 0 40px 0;
+                    }
+
+                    .menu-group{
+                        margin: 0;
+                    }
+
+                    .menu-item{
+                        margin-top: 15px;
+                    }
+
+                    .footer-info-social{
+                        width: auto;
+                    }
+
+                    .badges-gptw a img{
+                        max-width: 140px;
+                    }
+
+                    .footer-tech-container {
+                        display: flex;
+                        justify-content: center;
+                        margin: 15px 0 50px;
+                        flex-wrap: wrap;
+                    }
+
+                    p.footer-tech-title {
+                        width: 100%;
+                        text-align: center;
+                        font-size: 14px;
+                        color: rgba(55, 55, 55, 0.75);
+                        font-weight: 500;
+                        margin: 0;
+                    }
+
+                    .footer-tech-content {
+                        display: flex;
+                        width: 100%;
+                    }
+
+                    .footer-tech-content .sub-item{
+                        text-align: center;
+                        margin-top: 15px;
+                    }
+
+                    .footer-tech-content .sub-columns{
+                        width: 50%;
+                    }
+
+                }
+
+                @media screen and (max-width: 400px)
+                {
+                    .badges-gptw a img{
+                        max-width: 125px;
+                    }
+                }
+            </style>
+
+        		
+
+	
+		
+			
+</section><div style="display: none; visibility: hidden;"><script>(function(b,c,e,f,d){b[d]=b[d]||[];var g=function(){var a={ti:"5710452"};a.q=b[d];b[d]=new UET(a);b[d].push("pageLoad")};var a=c.createElement(e);a.src=f;a.async=1;a.onload=a.onreadystatechange=function(){var b=this.readyState;b&&"loaded"!==b&&"complete"!==b||(g(),a.onload=a.onreadystatechange=null)};c=c.getElementsByTagName(e)[0];c.parentNode.insertBefore(a,c)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script></div><div style="display: none; visibility: hidden;">
+<script type="text/javascript">window._tfa=window._tfa||[];window._tfa.push({notify:"event",name:"page_view",id:1103214});!function(a,b,d,c){document.getElementById(c)||(a.async=1,a.src=d,a.id=c,b.parentNode.insertBefore(a,b))}(document.createElement("script"),document.getElementsByTagName("script")[0],"//cdn.taboola.com/libtrc/unip/1103214/tfa.js","tb_tfa_script");</script>
+<noscript></noscript>
+</div><script type="text/javascript" id="">gtag("config","UA-15997918-1",{custom_map:{dimension6:"visitorType"}});gtag("event","visitorType",{visitorType:"deslogado",non_interaction:!0});</script><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon673903544580"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon418814348500" width="0" height="0" alt="" src="./Transações no PostgreSQL_ Níveis de Isolamento_files/0"></div><script src="./Transações no PostgreSQL_ Níveis de Isolamento_files/adsct" type="text/javascript"></script></body></html>

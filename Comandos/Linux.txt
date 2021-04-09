@@ -494,9 +494,23 @@ Obs.: Depois confirmar se a cópia foi ok com o comando:
 
 $ md5sum bigfile.7z
 
+xxxxxxx compactar / descompactar com zip (no ubuntum):
+//https://itsfoss.com/password-protect-zip-file/
+
+$ sudo apt install zip unzip
+
+$ zip -re output_file.zip file1 folder1
 
 ======
 - Restart the network manager:
 
 $ sudo service network-manager restart
 
+
+================== Arronax (gerador de atalhos):
+//https://www.edivaldobrito.com.br/gerador-de-atalhos-arronax-no-ubuntu/
+$ sudo add-apt-repository ppa:diesch/stable
+$ sudo apt-get update
+$ sudo apt-get install arronax arronax-*
+
+Obs.: 1) copia qualquer *.desktop de /usr/share/applications para "/home/clenubio/Área de Trabalho" (depois 'permitir inicializar /executar'). Exemplo: org.gnome.Screenshot.desktop

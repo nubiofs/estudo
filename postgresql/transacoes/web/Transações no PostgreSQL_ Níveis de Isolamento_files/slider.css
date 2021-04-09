@@ -1,0 +1,37 @@
+.slider-box{ position: relative; width: 100%;}
+.slide-wrapper{ position: relative; left:0; display: flex; align-items: center;}
+.slider-img{ display: inline; user-select: none;}
+.slider-pagination{ position: absolute; top:320px;}
+.slide-pagination { text-align: center; padding: 5px; display: flex; justify-content: center; margin-bottom: 5px;}
+.slide-pagination-item { display: inline-block; height: 15px; width: 15px; border-radius: 50%; border: 3px solid #777; box-sizing: border-box; margin: 0 2px; cursor: pointer;}
+.slide-pagination-item.active { background-color: #777;}
+.slider-box:hover .slide-pagination-arrow{ opacity: 1;}
+.slide-pagination-arrow { display: inline-flex; justify-content: center; align-items: center; height: 40px; width: 40px; background-color: white; color: #777; border-radius: 7px; position: absolute; top: calc(50% - 25px); box-shadow: 0 3px 6px rgba(0,0,0, 0.16); cursor: pointer; opacity: 0; transition: opacity .3s ease;}
+.slide-pagination-arrow-icon { display: flex; position: relative; height: 40px; width: 20px; border-radius: 4px; overflow: hidden; align-items: center; left: 3px; transform: scale(0.6);}
+.slide-pagination-arrow.before-arrow { left: 10px; transform: scaleX(-1);}
+.slide-pagination-arrow.after-arrow { right: 10px;}
+.slide-pagination-arrow-icon::after { content: ''; display: block; position: relative; width: 20px; height: 20px; border: 3px solid currentColor; border-radius: 2px; transform: rotateZ(-45deg); flex: 0 0 auto; left: -13px;}
+.slider-box:hover .slide-pagination-arrow.slide-button-hidden { opacity: 0; pointer-events: none;}
+.slider-inner-area { width: 100%; /*height: 100%;*/ overflow: hidden; box-sizing: border-box; box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); background-color: white; position: relative;}
+.lightbox-wrapper { position: fixed; background-color: rgba(0,0,0,.5); height: 100vh; width: 100vw; top: 0; left: 0; display: none; align-items: center; justify-content: center; z-index: 200;}
+.lightbox-wrapper.active{ display: flex;}
+.lightbox-img { background-color: white; padding: 5px; border-radius: 3px; max-width: calc(100% - 30px); max-height: calc(100% - 30px);}
+.slide-img-wrapper { background-repeat: no-repeat; background-position: center; background-size: contain;}
+.lightbox-slider-arrow {display: inline-flex;justify-content: center;align-items: center;height: 40px;width: 40px;color: #777;border-radius: 7px;position: absolute;top: calc(50% - 20px);cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,.2); background-color: white;}
+.lightbox-slider-arrow-icon {display: flex;position: relative;height: 40px;width: 20px;border-radius: 4px;overflow: hidden;align-items: center; left: 3px; transform: scale(0.7);}
+.lightbox-slider-arrow.before-arrow { left: 30px; transform: scaleX(-1);}
+.lightbox-slider-arrow.after-arrow { right: 30px;}
+.lightbox-slider-arrow-icon::after {content: '';display: block;position: relative;width: 20px;height: 20px;border: 3px solid currentColor;border-radius: 2px;transform: rotateZ(-45deg);flex: 0 0 auto;left: -15px;}
+.lightbox-close-icon { height: 25px; width: 3px; display: block; background-color: currentColor; border-radius: 10px; position: relative; transform: rotateZ(45deg) scale(0.65);}
+.lightbox-close-icon::after { height: 100%; width: 100%; display: block; content: ""; background-color: currentColor; border-radius: 10px; transform: rotateZ(90deg);}
+.lightbox-close { height: 35px; width: 35px; position: fixed; top: 10px; right: 10px; display: flex; align-items: center; justify-content: center; color: #777; cursor: pointer; border-radius: 8px; background-color: white; box-shadow: 0 3px 6px rgba(0,0,0,.2);}
+.lightbox-slider-arrow.hidden{ opacity: 0; pointer-events: none;}
+.lightbox-slider-opened{overflow: hidden;}
+@media (max-width: 768px){
+    .slide-pagination-arrow, .slider-box:hover .slide-pagination-arrow{opacity: 0; pointer-events: none;}
+    .lightbox-img { max-width: calc(100% - 80px);}    
+    .lightbox-close { height: 30px; width: 30px; right: 5px; top: 5px;}    
+    .lightbox-slider-arrow { width: 30px; height: 50px; top: calc(50% - 25px);}    
+    .lightbox-slider-arrow.before-arrow { left: 10px;}    
+    .lightbox-slider-arrow.after-arrow { right: 10px;}
+}

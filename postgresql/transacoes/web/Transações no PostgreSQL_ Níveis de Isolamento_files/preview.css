@@ -1,0 +1,177 @@
+.perfil-preview > * {
+	box-sizing: border-box;
+}
+.perfil-preview {
+	width: 210px;
+	height: 320px;
+	display: flex;
+	flex-direction: column;
+	font-family: Montserrat;
+	border-radius: 7px;
+	z-index: 999;
+	position: absolute;
+	margin: 20px;
+	background-color: #105576;
+	border: 4px solid #1c4561;
+	pointer-events: none;
+	animation: preview-fade-out .0s ease forwards;
+}
+.perfil-preview.pro-preview {
+	background-color: #242424;
+	border: 4px solid #474747;
+}
+.name-perfil-preview {
+    padding: 13px 12px;
+    color: #FBFBFB;
+    font-size: 15px;
+    text-align: initial;
+    flex: 0 0 auto;
+}
+.infos-perfil-preview {
+    position: absolute;
+    width: 50px;
+    background: #0AC5D4;
+    top: -4px;
+    right: 4px;
+    border-radius: 0 0 50px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 65px;
+}
+.perfil-preview.pro-preview .infos-perfil-preview{
+	background: url('//www.devmedia.com.br/perfil/img/gold-texture-up.png');
+	background-size: cover;
+}
+.b2b-perfil-preview img {
+    width: 60px;
+    border-radius: 50%;
+}
+.level-perfil-preview {
+    border: 3px solid #105576;
+    color: #105576;
+    margin: 10px 0;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+    box-sizing: border-box;
+}
+.perfil-preview.pro-preview .level-perfil-preview {
+	border: 3px solid #242424;
+	color: #242424;
+}
+.pro-perfil-preview {
+    background: #242424;
+    color: #FFFFFF;
+    font-size: 9px;
+    padding: 2px 7px;
+    margin-bottom: 15px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.b2b-perfil-preview {
+    margin: 0 0 15px;
+    border: 5px solid #105576;
+    border-radius: 50%;
+}
+.picture-perfil-preview img.picture-user-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 0;
+}
+.info-perfil-preview {
+    background: rgba(28, 68, 96, 0.95);
+    height: 55px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0;
+    display: flex;
+    margin-top: -4px;
+    align-items: center;
+}
+.perfil-preview.pro-preview .info-perfil-preview {
+	background: url('//www.devmedia.com.br/perfil/img/gold-texture-line.png');
+	background-size: cover;
+	flex: 0 0 auto;
+}
+.info-perfil-preview p {
+    margin: 0;
+    line-height: 1.6em;
+    font-size: 12px;
+    color: #FBFBFB;
+}
+.numbers-perfil-preview {
+    display: flex;
+    height: 50px;
+}
+.numbers_preview {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #FBFBFB;
+    font-size: 14px;
+    font-weight: 500;
+    width: 33%;
+    padding-top: 3px;
+}
+.numbers_preview svg {
+    width: 16px;
+    margin-bottom: 3px;
+}
+.numbers_preview.devup_preview {
+    border: 1px solid rgba(197, 197, 197, 0.3);
+    border-top: none;
+    border-bottom: none;
+}
+.bg-icon-svg {
+	fill: #105576; 
+	stroke: #105576;
+}
+.perfil-preview.pro-preview .bg-icon-svg {
+    fill: #242424;
+    stroke: #242424;
+}
+[data-preview]{
+	position: relative;
+}
+[data-preview]:hover .perfil-preview{
+	animation: preview-fade-in .2s ease forwards;
+	pointer-events: auto;
+}
+@keyframes preview-fade-in {
+	0% { transform:translateX(-30px); opacity: 0;}
+	100% { transform:translateX(-10px); opacity: 1;}
+}
+
+@keyframes preview-fade-out {
+	0% { transform:translateX(-10px); opacity: 1;}
+	100% { transform:translateX(-30px); opacity: 0;}
+}
+
+.numbers_preview.devup_preview svg {
+    background: #fff;
+    height: 16px;
+    width: 16px;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.numbers_preview.devup_preview svg path {
+    fill: #242424;
+}
+.picture-perfil-preview {
+    flex: 1 1 auto !important;
+    overflow: hidden;
+}

@@ -1,0 +1,11 @@
+É importante deixar claro que a busca por soluções não é um processo exato e, dependendo das condições, pode exigir um procedimento de tentativa e erro para chegar a uma solução final.
+
+---
+
+Réplica de banco de dados
+
+Atualmente, é de extrema importância entender e utilizar as réplicas de banco de dados, seja para melhorar a performance ou para servir de contingência. Com o aumento da mobilidade, as cargas de acesso a bases de dados cresceu exponencialmente. Replicar a base de dados é quase uma obrigação do desenvolvedor, é praticamente parte necessária para garantir maior acessibilidade e contingência ao sistema como um todo, principalmente sistemas críticos.
+
+Quando uma base de dados é replicada, temos a vantagem de direcionar escritas e leituras. Só com esta pequena modificação, provavelmente podemos ganhar 50% de performance, simplesmente porque o banco de dados de escrita está ocupado somente com as escritas, e o banco de dados de leitura está ocupado somente com as leituras.
+
+Quando temos leituras e escritas na mesma base de dados, muitas vezes temos problemas relacionados à memória e I/O. Imagine um usuário fazendo uma consulta na tabela “transações” em busca de todas as transações de uma loja durante um ano, acessando o banco de dados por meio de um sistema. Se esta consulta demora 0,5 segundos, multiplique por 100 usuários e teremos um banco de dados ocioso por 50 segundos. Neste momento, uma escrita certamente estará esperando, pois boa parte da memória está sendo utilizada para a consulta. Este é um exemplo simples, mas na realidade podemos ter problemas bem mais sérios, chegando até a travar a aplicação.

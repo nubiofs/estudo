@@ -1,0 +1,18 @@
+.devbot-wrapper {max-width: 100%;display: flex;flex-direction: row;align-items: center;font-family: montserrat, sans-serif;}
+.devbot-avatar {width: 100px;height: 100px;flex: 0 0 auto;filter: drop-shadow(0px 2px 3px rgba(0,0,0,.16));}
+.devbot-dialog {background-color: #01CD6A;flex: 0 1 auto;padding: 10px 30px;position: relative;display: flex;justify-content: center;margin-left: 30px;border-radius: 50px;color: white;font-weight: 500;line-height: 25px;filter: drop-shadow(4px 18px 10px rgba(0,0,0,.16));flex-direction: column;transition: opacity .4s ease;z-index: 1;}
+.devbot-dialog.dialog-hidden {opacity:0;}
+.devbot-dialog.dialog-erro {background-color: #b85d5d;}
+.devbot-dialog.dialog-medalha {background-color: #008d9b;}
+.devbot-dialog:before {content: "";position: absolute;border-color: #01CD6A;border-width: 40px;border-style: solid;border-top-color: transparent;border-left-width: 0;border-top-width: 15px;border-bottom-width: 15px;border-bottom-color: transparent;left: -24px;z-index: -1;}
+.devbot-dialog.dialog-erro:before {border-color: #b85d5d;border-top-color: transparent;border-bottom-color: transparent;}
+.devbot-dialog.dialog-medalha:before {border-color: #008d9b;border-top-color: transparent;border-bottom-color: transparent;}
+.devbot-dialog label {display: block;font-size: 19px;font-weight: 500;margin: 10px 0;}
+.devbot-dialog .btn-link {font-weight: 700;cursor: pointer;text-decoration: underline;}
+
+@media (max-width: 768px) {
+    .devbot-dialog{ margin-left: 20px; font-size:14px}
+    .devbot-dialog:before{border-width:10px;border-right-width: 20px;border-left-width: 0;left: -15px;}
+    .devbot-dialog label{font-size:16px;}
+    .devbot-avatar{ width: 50px; height: 50px;}
+}

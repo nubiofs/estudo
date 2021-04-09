@@ -1,0 +1,12 @@
+https://rsbeoriginal.medium.com/partitioning-with-postgresql-v11-6fe5388c6e98
+https://rsbeoriginal.medium.com/partitioning-with-postgres-v11-2-2-2619e024a23c
+
+https://www.enterprisedb.com/postgres-tutorials/how-use-table-partitioning-scale-postgresql
+
+https://medium.com/swlh/beginners-guide-to-table-partitioning-in-postgresql-5a014229042
+
+https://www.devmedia.com.br/postgresql-partition-trabalhando-com-particoes-no-postgresql/33969
+
+https://www.devmedia.com.br/particionamento-de-tabelas-no-postgresql/16824
+
+https://www.devmedia.com.br/nosql-particionando-dados-com-sql/30916
