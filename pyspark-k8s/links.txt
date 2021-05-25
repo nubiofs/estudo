@@ -1,0 +1,57 @@
+https://databricks.com/session_na20/running-apache-spark-on-kubernetes-best-practices-and-pitfalls
+
+https://datenworks.com/quickstart-como-rodar-apache-spark-no-kubernetes/
+
+https://databricks.com/session_na20/running-apache-spark-jobs-using-kubernetes
+
+
+https://www.kdnuggets.com/2020/08/containerization-pyspark-kubernetes.html
+
+https://medium.com/analytics-vidhya/deploy-spark-on-kubernetes-cluster-7779c658bf6c
+
+https://levelup.gitconnected.com/spark-on-kubernetes-3d822969f85b
+
+https://github.com/stijndehaes/pyspark-k8s-example
+
+
+---
+
+https://github.com/delta-io/delta
+https://docs.delta.io/0.8.0/delta-update.html#language-python
+
+(How to install Hadoop on your local Kubernetes cluster):
+https://gist.github.com/TeemuKoivisto/5632fabee4915dc63055e8e544247f60
+
+https://medium.com/digitalwing/development-of-a-distributed-computing-system-based-on-mapreduce-and-kubernetes-837fc7f112f9
+
+https://medium.com/sfu-cspmp/kubernetes-and-big-data-a-gentle-introduction-6f32b5570770
+
+------------- Para aplicar "estudo diferencas de valores entre duas listas:
+
+https://stackoverflow.com/questions/19755376/getting-the-difference-delta-between-two-lists-of-dictionaries
+
+https://www.arundhaj.com/blog/calculate-difference-with-previous-row-in-pyspark.html
+
+https://stackoverflow.com/questions/35713093/how-can-i-compare-two-lists-in-python-and-return-not-matches
+
+https://stackoverflow.com/questions/3462143/get-difference-between-two-lists
+
+https://www.geeksforgeeks.org/python-difference-two-lists/
+
+https://www.kite.com/python/answers/how-to-get-the-difference-between-two-list-in-python
+
+https://www.techbeamers.com/python-difference-between-two-lists/
+
+https://thispointer.com/compare-get-differences-between-two-lists-in-python/
+
+https://stackoverflow.com/questions/6486450/python-compute-list-difference
+
+--> https://stackoverflow.com/questions/13511917/ef-5-compare-two-lists-of-entities-and-perform-insert-update-delete-where-nee
+
+https://www.geeksforgeeks.org/python-find-missing-additional-values-two-lists/
+
+==--> https://docs.microsoft.com/pt-br/azure/databricks/delta/delta-update
+
+https://stackoverflow.com/questions/31275850/apache-spark-difference-between-two-rdds
+
+--> https://www.baeldung.com/java-lists-difference
