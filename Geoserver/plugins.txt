@@ -1,0 +1,3 @@
+app-schema "Application schemas":
+
+https://docs.geoserver.org/latest/en/user/data/app-schema/index.html
