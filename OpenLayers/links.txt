@@ -1,0 +1,12 @@
+https://taylor.callsen.me/using-openlayers-with-react-functional-components/
+
+https://github.com/hajkmap/Hajk
+--> https://hub.docker.com/r/hallbergs/hajk
+--> https://hajk-demo.netlify.app/
+
+# Build the container
+# docker build -t hajk-backend-with-client-and-admin .
+
+# And run it. Check out the result at localhost:1337
+# docker run -p 1337:3002 hajk-backend-with-client-and-admin/
+
