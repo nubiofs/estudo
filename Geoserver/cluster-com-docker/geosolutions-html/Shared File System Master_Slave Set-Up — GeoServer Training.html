@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Shared File System Master/Slave Set-Up — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Shared%20File%20System%20Master_Slave%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Shared%20File%20System%20Master_Slave%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Shared%20File%20System%20Master_Slave%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Shared%20File%20System%20Master_Slave%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Shared%20File%20System%20Master_Slave%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="GeoServer Active Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html">
+    <link rel="next" title="Basics of clustering with Apache Tomcat" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/tomcat.html">
+    <link rel="prev" title="JDBC Master/Slave HA Set-Up" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/JDBC.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Shared%20File%20System%20Master_Slave%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Shared File System Master/Slave Set-Up</a><ul>
+<li><a class="reference internal" href="#startup">Startup</a></li>
+<li><a class="reference internal" href="#master-failure">Master failure</a></li>
+<li><a class="reference internal" href="#master-restart">Master restart</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/JDBC.html" title="previous chapter">JDBC Master/Slave HA Set-Up</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/tomcat.html" title="next chapter">Basics of clustering with Apache Tomcat</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/clustering/active/activemq/SharedFolder.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="shared-file-system-master-slave-set-up">
+<h1>Shared File System Master/Slave Set-Up<a class="headerlink" href="#shared-file-system-master-slave-set-up" title="Permalink to this headline">¶</a></h1>
+<p>Basically you can run as many brokers as you wish from the same 
+shared file system directory.
+The first broker to grab the exclusive lock on the file is the master 
+broker.
+If that broker dies and releases the lock then another broker takes 
+over.
+The slave brokers sit in a loop trying to grab the lock from the master 
+broker.
+The following example shows how to configure a broker for Shared File 
+System Master Slave where /sharedFileSystem is some directory on a 
+shared file system.
+It is just a case of configuring a file based store to use a shared 
+directory.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;persistenceAdapter&gt;</span>
+  <span class="nt">&lt;kahaDB</span> <span class="na">directory=</span><span class="s">"/sharedFileSystem/sharedBrokerData"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/persistenceAdapter&gt;</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;persistenceAdapter&gt;</span>
+  <span class="nt">&lt;levelDB</span> <span class="na">directory=</span><span class="s">"/sharedFileSystem/sharedBrokerData"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/persistenceAdapter&gt;</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;persistenceAdapter&gt;</span>
+  <span class="nt">&lt;amqPersistenceAdapter</span> <span class="na">directory=</span><span class="s">"/sharedFileSystem/sharedBrokerData"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/persistenceAdapter&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="startup">
+<h2>Startup<a class="headerlink" href="#startup" title="Permalink to this headline">¶</a></h2>
+<p>On startup one master grabs an exclusive lock on the broker file 
+directory - all other brokers are slaves and pause waiting for the 
+exclusive lock.</p>
+<div class="figure align-center">
+<img alt="../../../../_images/Startup.png" src="Shared%20File%20System%20Master_Slave%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/Startup.png">
+</div>
+<p>Clients should be using the Failover Transport to connect to the 
+available brokers. e.g. using a URL something like the following</p>
+<div class="highlight-xml"><div class="highlight"><pre>failover:(tcp://broker1:61616,tcp://broker2:61616,tcp://broker3:61616)
+</pre></div>
+</div>
+<p>Only the master broker starts up its transport connectors and so the clients can only connect to the master.</p>
+</div>
+<div class="section" id="master-failure">
+<h2>Master failure<a class="headerlink" href="#master-failure" title="Permalink to this headline">¶</a></h2>
+<p>If the master looses the exclusive lock then it immediately shuts 
+down. If a master shuts down or fails, one of the other slaves will grab
+ the lock and so the topology switches to the following diagram</p>
+<div class="figure align-center">
+<img alt="../../../../_images/MasterFailed.png" src="Shared%20File%20System%20Master_Slave%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/MasterFailed.png">
+</div>
+<p>One of the other slaves immediately grabs the exclusive lock on the 
+file system to them commences becoming the master, starting all of its 
+transport connectors.
+Clients loose connection to the stopped master and then the failover 
+transport tries to connect to the available brokers - of which the only 
+one available is the new master.</p>
+</div>
+<div class="section" id="master-restart">
+<h2>Master restart<a class="headerlink" href="#master-restart" title="Permalink to this headline">¶</a></h2>
+<p>At any time you can restart other brokers which join the cluster and 
+start as slaves waiting to become a master if the master is shutdown or a
+ failure occurs.
+So the following topology is created after a restart of an old master...</p>
+<div class="figure align-center">
+<img alt="../../../../_images/MasterRestarted.png" src="Shared%20File%20System%20Master_Slave%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/MasterRestarted.png">
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you have a SAN or shared file system it can be used to provide 
+high availability such that if a broker is killed, another broker can 
+take over immediately.</p>
+<blockquote>
+<div>Ensure your shared file locks work</div></blockquote>
+<p>Note that the requirements of this failover system are a distributed 
+file system like a SAN for which exclusive file locks work reliably. If 
+you do not have such a thing available then consider using MasterSlave 
+instead which implements something similar but working on commodity 
+hardware using local file systems which ActiveMQ does the replication.</p>
+<blockquote>
+<div>OCFS2 Warning</div></blockquote>
+<p>Was testing using OCFS2 and both brokers thought they had the master 
+lock - this is because “OCFS2 only supports locking with ‘fcntl’ and not
+ ‘lockf and flock’, therefore mutex file locking from Java isn’t 
+supported.”</p>
+<p>From <a class="reference external" href="http://sources.redhat.com/cluster/faq.html#gfs_vs_ocfs2">http://sources.redhat.com/cluster/faq.html#gfs_vs_ocfs2</a> :</p>
+<p>OCFS2: No cluster-aware flock or POSIX locks</p>
+<p>GFS: fully supports Cluster-wide flocks and POSIX locks and is supported.</p>
+<blockquote>
+<div>NFSv3 Warning</div></blockquote>
+<p class="last">In the event of an abnormal NFSv3 client termination 
+(i.e., the ActiveMQ master broker), the NFSv3 server will not timeout 
+the lock that is held by that client. This effectively renders the 
+ActiveMQ data directory inaccessible because the ActiveMQ slave broker 
+can’t acquire the lock and therefore cannot start up. The only solution 
+to this predicament with NFSv3 is to reboot all ActiveMQ instances to 
+reset everything.
+Use of NFSv4 is another solution because it’s design includes timeouts 
+for locks. When using NFSv4 and the client holding the lock experiences 
+an abnormal termination, by design, the lock is released after 30 
+seconds, allowing another client to grab the lock. For more information 
+about this, see this blog entry.</p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>[JDBC Master Slave]</dt>
+<dd><a class="reference external" href="http://activemq.apache.org/jdbc-master-slave.html">http://activemq.apache.org/jdbc-master-slave.html</a></dd>
+<dt>[Shared File System Master Slave]</dt>
+<dd><a class="reference external" href="http://activemq.apache.org/shared-file-system-master-slave.html">http://activemq.apache.org/shared-file-system-master-slave.html</a></dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/tomcat.html" title="Basics of clustering with Apache Tomcat" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/JDBC.html" title="JDBC Master/Slave HA Set-Up" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">Clustering GeoServer</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html" accesskey="U">GeoServer Active Clustering</a> »</li>
+        <li><a href="#">Shared File System Master/Slave Set-Up</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

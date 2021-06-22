@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>More details on the Active Clustering Extension — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="More%20details%20on%20the%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="More%20details%20on%20the%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="More%20details%20on%20the%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="More%20details%20on%20the%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="More%20details%20on%20the%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="GeoServer Active Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html">
+    <link rel="next" title="Installing the GeoServer Active Clustering Extension" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/installation.html">
+    <link rel="prev" title="GeoServer Active Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="More%20details%20on%20the%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">More details on the Active Clustering Extension</a><ul>
+<li><a class="reference internal" href="#limitations-and-future-extensions">Limitations and future extensions</a><ul>
+<li><a class="reference internal" href="#moving-data-between-nodes">Moving data between nodes</a></li>
+<li><a class="reference internal" href="#additional-files-in-the-geoserver-data-directory">Additional files in the GeoServer Data Directory</a></li>
+<li><a class="reference internal" href="#integrated-geowebcache-support">Integrated GeoWebCache Support</a></li>
+<li><a class="reference internal" href="#things-you-should-not-be-doing">Things you should not be doing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html" title="previous chapter">GeoServer Active Clustering</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/installation.html" title="next chapter">Installing the GeoServer Active Clustering Extension</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/clustering/active/description.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-clustering.active.description"></span><div class="section" id="more-details-on-the-active-clustering-extension">
+<span id="clustering-active-description"></span><h1>More details on the Active Clustering Extension<a class="headerlink" href="#more-details-on-the-active-clustering-extension" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this section we are going to provide a few technical details on the Active Clustering Extension.</p>
+</div>
+<p>The GeoServer Active Clustering Extension is implemented using Spring
+ and Apache ActiveMQ as the MOM (Message Oriented Middleware) in 
+particular using JMS (Java Message Service) as the message exchange 
+technology.
+The picture here below (click <a class="reference external" href="https://docs.google.com/drawings/d/1hlPbf0uWMfZzJXltHEBKhpOgeBNorY4AUurfbUg_fA4/edit?usp=sharing">here</a> for the live drawing) represents a complete high level design of the solution implemented.</p>
+<p>For the implementation of the message exchange we are leveraging on <strong>ActiveMQ VirtualTopics</strong> to exploit dynamic routing (you can dynamically attach masters and slaves).
+The VirtualTopics feature has also other advantages explained <a class="reference external" href="http://activemq.apache.org/virtual-destinations.html">here</a></p>
+<div class="figure align-center" id="id1">
+<img alt="Illustration  Component Diagram for the MOM based clustering" src="More%20details%20on%20the%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/Arch.png">
+<p class="caption"><span class="caption-text">Illustration  Component Diagram for the MOM based clustering</span></p>
+</div>
+<div class="section" id="limitations-and-future-extensions">
+<h2>Limitations and future extensions<a class="headerlink" href="#limitations-and-future-extensions" title="Permalink to this headline">¶</a></h2>
+<p>The current implementation has a few limitations as well as 
+assumptions that must be taken into account when planning a deployment. 
+Let’s quickly summarise them.</p>
+<div class="section" id="moving-data-between-nodes">
+<h3>Moving data between nodes<a class="headerlink" href="#moving-data-between-nodes" title="Permalink to this headline">¶</a></h3>
+<p>The clustering solution we have put in place is specific for managing
+ the GeoServer internal configuration, no data is transferred between 
+master and slaves. For that purpose use external mechanisms depending on
+ your deployment.</p>
+<p>In principle this is not a limitation per-se since usually in a 
+clustered environment data is stored in shared locations outside the 
+data directory or synched using other means.</p>
+</div>
+<div class="section" id="additional-files-in-the-geoserver-data-directory">
+<h3>Additional files in the GeoServer Data Directory<a class="headerlink" href="#additional-files-in-the-geoserver-data-directory" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Styles’ accompanying graphics are not replicated over to slaves. Styles are replicated instead.</li>
+<li>Freemarker templates are not replicated over to slaves</li>
+</ul>
+</div></blockquote>
+<p>It is worth to point out that the use case we were bearing in mind 
+when we developed this extensions was more towards publishing new 
+stores/layers periodically (e.g. MetOc data), hence changing styles and 
+other ‘manual’ actions were not a priority for us as we were expecting 
+users to perform them upfront.or manually one in a while.
+The shared data dir set up will also help with respect to this 
+limitation, as the new graphics and freemarker templates will be 
+transparently available to every node.</p>
+</div>
+<div class="section" id="integrated-geowebcache-support">
+<h3>Integrated GeoWebCache Support<a class="headerlink" href="#integrated-geowebcache-support" title="Permalink to this headline">¶</a></h3>
+<p>Support for the integrated GeoWebCache is still somewhat sloppy since
+ GeoWebCache does not fully integrate with the GeoServer event subsystem
+ which is at the core of our extension,
+as a result changes to GWC are not automatically propagating to other 
+nodes, a reload wil be required in this case.</p>
+</div>
+<div class="section" id="things-you-should-not-be-doing">
+<h3>Things you should not be doing<a class="headerlink" href="#things-you-should-not-be-doing" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>NEVER RELOAD THE GEOSERVER CATALOG ON A MASTER</strong>
+Each master instance should never call the catalog reload since this 
+propagates the creation of all the resources, styles, etc to all the 
+connected slaves.</li>
+<li><strong>NEVER CHANGE CONFIGURATION USING A PURE SLAVE</strong>
+This will make the configuration of the specific slave out of synch with the others.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/installation.html" title="Installing the GeoServer Active Clustering Extension" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html" title="GeoServer Active Clustering" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">Clustering GeoServer</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html" accesskey="U">GeoServer Active Clustering</a> »</li>
+        <li><a href="#">More details on the Active Clustering Extension</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Tuning Control Flow Settings — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    <link rel="next" title="JVM and deploy configuration" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jvm.html">
+    <link rel="prev" title="Tuning Resource Limits" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/resource_limits.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tuning Control Flow Settings</a><ul>
+<li><a class="reference internal" href="#control-flow-and-the-surroundings">Control Flow and the surroundings</a></li>
+<li><a class="reference internal" href="#configure-jmeter-for-the-test">Configure JMeter for the test</a></li>
+<li><a class="reference internal" href="#test-without-control-flow">Test without Control Flow</a></li>
+<li><a class="reference internal" href="#configure-control-flow">Configure Control Flow</a></li>
+<li><a class="reference internal" href="#test-with-control-flow">Test with Control Flow</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/resource_limits.html" title="previous chapter">Tuning Resource Limits</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jvm.html" title="next chapter">JVM and deploy configuration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/controlflow.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tuning-control-flow-settings">
+<span id="geoserver-jmeter-controlflow"></span><h1>Tuning Control Flow Settings<a class="headerlink" href="#tuning-control-flow-settings" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You should read this section right after having read the <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/adv_gsconfig/controlflow.html#geoserver-controlflow"><span class="std std-ref">Configuring the Control flow plugin</span></a> section.</p>
+</div>
+</div></blockquote>
+<p>The control flow extension can be used to prevent GeoServer from 
+executing too many requests in parallel, which could lead to bad 
+performances, by reducing the number of concurrent operations to execute
+ and appending the others to a queue.</p>
+<dl class="docutils">
+<dt>The control flow extension, if properly configured can:</dt>
+<dd><ul class="first last simple">
+<li>improve GeoServer scalability and stability under heavy load 
+reducing OOM errors and resource contentions (e.g. for DBMS connections)</li>
+<li>Enforce fairness between users</li>
+<li>Improve performance</li>
+</ul>
+</dd>
+</dl>
+<p>Control flow provides granular control on the level parallelism is 
+allowed for requests to be served by GeoServer. Limits can be set per 
+service (WMS, WCS, etc.), per request (GetMap, GetFeatureInfo, etc.) and
+ per user. Control flow also allows you to set a global timeout for the 
+maximum time requests are allowed to stay in the request queue before 
+being dropped.</p>
+<p>A common mistake is to confuse the rendering timeout (as described in the <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/resource_limits.html#geoserver-jmeter-wmslimits"><span class="std std-ref">previous section</span></a>)
+ with control flow timeout. Control flow timeout keep track of the 
+amount of time spent by each request in the request queue before being 
+pulled from the queue and processed by GeoServer, rendering timeout 
+accounts for the time spent by GeoServer to actually process the 
+request. Resource limits and control flow need to work jointly to 
+achieve optimal performance under heavy load.</p>
+<p>In production environments spatial infrastructures usually comprise 
+components other than GeoServer itself (for example a spatial DBMS, a 
+Web Server acting as a proxy, load balancer etc.). In this scenario 
+incoming requests will go through a whole chain of steps before actually
+ being served to the client and we need to keep that in mind when tuning
+ control flow limits. For example if the proxy timeout on the web server
+ is set to a low value (lower than the sum of control flow timeout and 
+rendering timeout), under heavy load client connections will be dropped 
+by the proxy server before having the chance to be served by GeoServer 
+even in the case of a request observing the limits set in resource 
+limits and control flow settings.</p>
+<p>The effect of a properly configured control flow (as well as resource
+ limits) for GeoServer is, that once the throughput has reached its peak
+ and right before resource thrashing kicks in GeoServer starts queueing 
+and eventually timing out overwhelming requests as shown here below. In 
+an healthy system throughput should keep constant once the maximum 
+resource utilization has been reached.</p>
+<blockquote>
+<div><div class="figure align-center" id="id1">
+<img alt="../_images/controlflow2.png" src="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/controlflow2.png">
+<p class="caption"><span class="caption-text"><em>Decreased throughput (Note the results may be different in other machines)</em></span></p>
+</div>
+</div></blockquote>
+<div class="section" id="control-flow-and-the-surroundings">
+<h2>Control Flow and the surroundings<a class="headerlink" href="#control-flow-and-the-surroundings" title="Permalink to this headline">¶</a></h2>
+<p>If you are wondering what mechanism is used by GeoServer to implement
+ control flow, you can refer to the picture below. A sophisticated queue
+ based throttling framework has been implemented in order to decide 
+which requests can execute, which are delayed and which will time out.</p>
+<blockquote>
+<div><div class="figure align-center" id="id2">
+<img alt="../_images/controlflow.png" src="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/controlflow.png">
+<p class="caption"><span class="caption-text"><em>Decreased throughput (Note the results may be different in other machines)</em></span></p>
+</div>
+</div></blockquote>
+<p>To make sure that control flow can do its work we need to make sure 
+that Apache Httpd and/or Apache Tomcat (or whatever Web Proxy and 
+Application Server you are using) are not acting as bottlenecks.
+Before a request can actually hit GeoServer it has to go through the 
+(eventual) proxy (Apache Httpd, Nginx, etc..) and then it has to be 
+accepted by the Application Server that is running GeoServer (Apache 
+Tomcat, JBoss, etc.). Let us focus on Apache Httpd for the moment; 
+Although we usually recommend using Workers rather than Prefork, you’ll 
+have to make sure that the maximum number of requests that Apache Httpd 
+will let pass is not smaller than the settings you have configured in 
+control flow, otherwise Apache Httpd will become your bottleneck and 
+you’ll never reach full utilization with GeoServer. If Apache Httpd is 
+acting as a load balancer in front of a cluster of GeoServer instances 
+this is even more pressing.
+As far as Apache Tomcat is concerned, its thread pool ideally should be 
+set to a value which is not going to be smaller than the control flow 
+values otherwise request will be queued at the Application Server level,
+ waiting for a free thread, before control flow can do its work. 
+Generally speaking we tend to play with the default thread pools values 
+in Apache Tomcat to set them according to control flow.</p>
+<blockquote>
+<div><div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Web Server settings for incoming requests as well as 
+Application Server setting for multithreading needs to be configured 
+with attention. If they are too small compared to the settings you 
+choose for control flow they will act as bottleneck, if they are too big
+ this is usually ok but it might be worth setting them to a value close 
+the the values in control flow to have extra protection. <strong>Ideally, requests should be queued as far as possible from the core processing chain inside GeoServer</strong>,
+ so better discarding them at the HTTP Proxy level than instantiating a 
+rendering buffer and being stuch on waiting on a DBMS connection from a 
+pool.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">Problems happens frequently with Apache Httpd when not 
+using workers but prefork or with default Apache Tomcat threadpool 
+configuration when there is a fast Tiling Server behind, so we are in 
+the order of thousands of requests per second.</p>
+</div>
+</div></blockquote>
+<p>Along the same line, when you do set control flow always think about 
+what bottlenecks you are hitting when you process a request. If all of 
+your layers are served from a DBMS and you cannot use more than X 
+connections, you’ll hardly be able to process more than X WMS requests 
+at a time (this is a simplication, we are assuming we keep a connection 
+open for the entire time we process a request but we know it is not like
+ that. Anyway we are just trying to give you some hints) along the same 
+line, if you have 4 cores you will hardly be able to processe more than 8
+ or 16 requests in parallel, depending on how much time you spend in I/O
+ versus real processor work.
+Long story short, stress tests are a crucial tool to understand your 
+limits and set control flow accordingly but, as usual, we should not 
+forget about using our brain and knowledge to validate the results.</p>
+</div>
+<div class="section" id="configure-jmeter-for-the-test">
+<h2>Configure JMeter for the test<a class="headerlink" href="#configure-jmeter-for-the-test" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This example requires to have already completed <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/adding_data/add_shp.html#geoserver-add-shp"><span class="std std-ref">Adding a ShapeFile</span></a> and <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/pretty_maps/add_style.html#geoserver-add-style"><span class="std std-ref">Adding a Style</span></a> sections.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) and copy the file <code class="docutils literal"><span class="pre">template.jmx</span></code> file into <code class="docutils literal"><span class="pre">controlflow.jmx</span></code></p>
+</li>
+<li><p class="first">From the training root, on the command line, run <code class="docutils literal"><span class="pre">jmeter.bat</span></code> (or <code class="docutils literal"><span class="pre">jmeter.sh</span></code> if you’re on Linux) to start JMeter</p>
+</li>
+<li><p class="first">On the top left go to <span class="guilabel">File –&gt; Open</span> and search for the new <em>jmx</em> file copied</p>
+</li>
+<li><p class="first">Disable <strong>View Results Tree</strong> section</p>
+</li>
+<li><p class="first">In the <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">Data</span> <span class="pre">Set</span> <span class="pre">Config</span></code> element, modify the <strong>path</strong> of the CSV file by setting the path for the file <code class="docutils literal"><span class="pre">controlflow.csv</span></code> in the <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) directory</p>
+</li>
+<li><p class="first">In the <strong>HTTP Request Default</strong> element modify the following parameters:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>layers</td>
+<td>geosolutions:Mainrd</td>
+</tr>
+<tr class="row-odd"><td>srs</td>
+<td>EPSG:2876</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="test-without-control-flow">
+<h2>Test without Control Flow<a class="headerlink" href="#test-without-control-flow" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Run the test</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to run and stop the test a few times for having stable results</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">When the test is completed, Save the results in a text file.</p>
+<blockquote>
+<div><p>You should notice that the throughput initially increases and 
+then starts to decrease. This is associated to a bad scalability of the 
+input requests. Remember which number of threads provides better 
+throughput (it should be <em>8</em>). This value indicates the maximum number of concurrent requests that the server can execute simultaneously.</p>
+</div></blockquote>
+<div class="figure align-center" id="id3">
+<img alt="../_images/jmeter34.png" src="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter34.png">
+<p class="caption"><span class="caption-text"><em>Decreased throughput (Note the results may be different in other machines)</em></span></p>
+</div>
+</li>
+<li><p class="first">Remove the result from JMeter by clicking on <span class="guilabel">Run –&gt; Clear All</span> on the menu</p>
+</li>
+<li><p class="first">Stop GeoServer</p>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-control-flow">
+<h2>Configure Control Flow<a class="headerlink" href="#configure-control-flow" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/plugins/not_installed</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\plugins\not_installed</span></code> on Windows ) and copy <code class="docutils literal"><span class="pre">geoserver-2.13.2-control-flow-plugin.zip</span></code> zip file inside <code class="docutils literal"><span class="pre">/opt/tomcat_geoserver/webapps/geoserver/WEB-INF/lib</span></code> (<code class="docutils literal"><span class="pre">%TRAINING_ROOT%\tomcat-7.0.72\instances\instance1\webapps\geoserver\WEB-INF\lib</span></code> if you are on Windows )</p>
+</li>
+<li><p class="first">Unzip the content of <code class="docutils literal"><span class="pre">geoserver-2.13.2-control-flow-plugin.zip</span></code> inside the same folder</p>
+</li>
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/geoserver_data</span></code> ( or <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\geoserver_data</span></code> on Windows ) and create a new file called <code class="docutils literal"><span class="pre">controlflow.properties</span></code> and add the following snippet</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre># don't allow more than 8 WMS GetMap in parallel
+ows.wms.getmap=8
+</pre></div>
+</div>
+<p>This code snippet indicates that no more than 8 <em>GetMap</em> 
+request can be executed simultaneously by the WMS service. Other 
+informations about the configuration can be found in the next section</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If during your test you have found another number for the maximum throughput, you should set that value instead of 8</p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="test-with-control-flow">
+<h2>Test with Control Flow<a class="headerlink" href="#test-with-control-flow" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Restart GeoServer</p>
+</li>
+<li><p class="first">Run again the test.</p>
+<blockquote>
+<div><p>You may see that the throughput is no more reduced after the 
+control-flow configuration, because the input requests are scheduled by 
+the control-flow plugin, improving GeoServer scalability.</p>
+</div></blockquote>
+<div class="figure align-center" id="id4">
+<img alt="../_images/jmeter35.png" src="Tuning%20Control%20Flow%20Settings%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter35.png">
+<p class="caption"><span class="caption-text"><em>Stable throughput (Note the results may be different in other machines)</em></span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jvm.html" title="JVM and deploy configuration" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/resource_limits.html" title="Tuning Resource Limits" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" accesskey="U">Enterprise Set-up Recommendations</a> »</li>
+        <li><a href="#">Tuning Control Flow Settings</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

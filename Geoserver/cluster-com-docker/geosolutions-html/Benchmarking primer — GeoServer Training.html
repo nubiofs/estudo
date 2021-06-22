@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Benchmarking primer — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Benchmarking%20primer%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Benchmarking%20primer%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Benchmarking%20primer%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Benchmarking%20primer%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Benchmarking%20primer%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    <link rel="next" title="Stress testing with JMeter" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jmeter.html">
+    <link rel="prev" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Benchmarking%20primer%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Benchmarking primer</a><ul>
+<li><a class="reference internal" href="#benchmarking-and-stress-testing">Benchmarking and Stress Testing</a></li>
+<li><a class="reference internal" href="#definitions">Definitions</a><ul>
+<li><a class="reference internal" href="#throughput">Throughput</a></li>
+<li><a class="reference internal" href="#response-time">Response Time</a></li>
+<li><a class="reference internal" href="#scalability">Scalability</a></li>
+<li><a class="reference internal" href="#high-availability">(High) Availability</a></li>
+<li><a class="reference internal" href="#perceived-performance">Perceived Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#response-time-vs-throughput">Response time VS throughput</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" title="previous chapter">Enterprise Set-up Recommendations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jmeter.html" title="next chapter">Stress testing with JMeter</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/benchmarking_intro.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="benchmarking-primer">
+<span id="geoserver-jmeter-benchmarking-intro"></span><h1>Benchmarking primer<a class="headerlink" href="#benchmarking-primer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="benchmarking-and-stress-testing">
+<h2>Benchmarking and Stress Testing<a class="headerlink" href="#benchmarking-and-stress-testing" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Benchmarking and Stress Testing is an important phase in a project 
+since it gives you various information about your application and the 
+deploy infrastructure. It is crucial to investigate and characterize:</dt>
+<dd><ul class="first last simple">
+<li>Scalability</li>
+<li>Robustness in extreme conditions</li>
+<li>Presence of any bottleneck inside the application</li>
+<li>Performance</li>
+</ul>
+</dd>
+<dt>Deciding where to send the test requests is important. Network 
+connection sometimes can compromise the results of your tests since:</dt>
+<dd><ul class="first last simple">
+<li>In case of unrelated high network overload you may see low throughput;</li>
+<li>This can be associated to a bottleneck of the connection which 
+results in bad performance without concerning about the request type.</li>
+</ul>
+</dd>
+</dl>
+<p>For this reason, be careful to set up your remote tests in a separate network in order to avoid network overload.</p>
+<p>The main reason why benchmarking is performed is to look for 
+bottlenecks, which could greatly hinder performance and scalability.
+Typical bottlenecks are as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>CPU: at high load all the CPUs are pegged.</li>
+<li>Disk: CPUs are not hot, the server is reading a lot from the disk during the benchmark.</li>
+<li>Network (data sources): CPUs are not hot, but the local network (maybe towards the DB) is at full capacity.</li>
+<li>Network (output): all local resources are mildly used, but the outbound connection is at full capacity.</li>
+<li>Code scalability: none of the above, every resource seems to be in 
+light use and usage is not going up despire higher client load.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions">
+<h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h2>
+<p>Here below you can find some definitions that are going to be useful throughout this section.</p>
+<div class="section" id="throughput">
+<h3>Throughput<a class="headerlink" href="#throughput" title="Permalink to this headline">¶</a></h3>
+<p>Citing <a class="reference external" href="https://en.wikipedia.org/wiki/Throughput">wikipedia</a>, <em>Throughput is the rate at which requests are processed by a running system</em></p>
+</div>
+<div class="section" id="response-time">
+<h3>Response Time<a class="headerlink" href="#response-time" title="Permalink to this headline">¶</a></h3>
+<p>Citing <a class="reference external" href="https://en.wikipedia.org/wiki/Response_time_(technology)">wikipedia</a>, <em>Response time is the total amount of time it takes to respond to a request for service.</em></p>
+</div>
+<div class="section" id="scalability">
+<h3>Scalability<a class="headerlink" href="#scalability" title="Permalink to this headline">¶</a></h3>
+<p>Citing <a class="reference external" href="https://en.wikipedia.org/wiki/Scalability">wikipedia</a>, <em>Scalability
+ is the capability of a system, network, or process to handle a growing 
+amount of work, or its potential to be enlarged in order to accommodate 
+that growth.</em></p>
+</div>
+<div class="section" id="high-availability">
+<h3>(High) Availability<a class="headerlink" href="#high-availability" title="Permalink to this headline">¶</a></h3>
+<p>Citing <a class="reference external" href="https://en.wikipedia.org/wiki/High_availability">wikipedia</a>, <em>High
+ availability is a characteristic of a system, which aims to ensure an 
+agreed level of operational performance for a higher than normal period.</em></p>
+</div>
+<div class="section" id="perceived-performance">
+<h3>Perceived Performance<a class="headerlink" href="#perceived-performance" title="Permalink to this headline">¶</a></h3>
+<p>Citing <a class="reference external" href="https://en.wikipedia.org/wiki/Perceived_performance">wikipedia</a>, <em>perceived performance, in computer engineering, refers to how quickly a software appears to perform its task.</em> The concept applies mainly to user acceptance aspects and it is very different from pure performance.</p>
+</div>
+</div>
+<div class="section" id="response-time-vs-throughput">
+<h2>Response time VS throughput<a class="headerlink" href="#response-time-vs-throughput" title="Permalink to this headline">¶</a></h2>
+<p>It is important now to spend a few words on how to read and interpret the results of benchmarking tests from JMeter.</p>
+<p>Looking at the picture below, the goal of running stress tests is to 
+actually infer the throughput curve and the avg response time curves in 
+order to understand how the system behaves under increasing load and 
+find the moment when we hit the first bottleneck and the throughput 
+starts to fall (while the reponse time starts to grow quickly); this 
+conditions is called <strong>maximum resource utilization</strong>, it 
+basically manifests itself when the system cannot cope with additional 
+load as one or more of the critical resources (CPU, RAM, Disk) or the 
+software itself becomes a bottleneck: in this situation if the load 
+keeps growing, the stability of the system will be compromized and the 
+user experience will suffer greatly.</p>
+<blockquote>
+<div><div class="figure" id="id5">
+<img alt="../_images/response_time.png" src="Benchmarking%20primer%20%E2%80%94%20GeoServer%20Training_arquivos/response_time.png">
+<p class="caption"><span class="caption-text">Response time versus throughput against load</span></p>
+</div>
+</div></blockquote>
+<p>The goals of the enterprise set up section can be summarized as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the information and the examples that we provide on JMeter are 
+directed towards providing you with the basic knowledge to perform 
+stress tests as well as capture and make sense of the results.</li>
+<li>the information that we provide about the various ways to tune and 
+optimize GeoServer will be crucial in deciding where and how to 
+intervene in order to improve the results.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jmeter.html" title="Stress testing with JMeter" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" title="Enterprise Set-up Recommendations" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" accesskey="U">Enterprise Set-up Recommendations</a> »</li>
+        <li><a href="#">Benchmarking primer</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

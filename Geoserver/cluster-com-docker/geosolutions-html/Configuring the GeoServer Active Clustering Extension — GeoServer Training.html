@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Configuring the GeoServer Active Clustering Extension — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="GeoServer Active Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html">
+    <link rel="next" title="Implementing Different Clustering Topologies" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/topologies.html">
+    <link rel="prev" title="Installing the GeoServer Active Clustering Extension" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/installation.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuring the GeoServer Active Clustering Extension</a><ul>
+<li><a class="reference internal" href="#accessing-the-active-clustering-extension-gui">Accessing the Active Clustering Extension GUI</a></li>
+<li><a class="reference internal" href="#configuring-the-active-clustering-extension-via-the-gui">Configuring the Active Clustering Extension via the GUI</a><ul>
+<li><a class="reference internal" href="#name-of-this-instance">Name of this instance</a></li>
+<li><a class="reference internal" href="#url-of-the-broker">URL of the broker</a></li>
+<li><a class="reference internal" href="#the-topic-name">The Topic Name</a></li>
+<li><a class="reference internal" href="#slave-connection">Slave connection</a></li>
+<li><a class="reference internal" href="#master-enabled">Master enabled</a></li>
+<li><a class="reference internal" href="#slave-enabled">Slave enabled</a></li>
+<li><a class="reference internal" href="#read-only">Read Only</a></li>
+<li><a class="reference internal" href="#embedded-broker">Embedded broker</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#other-parameters-from-cluster-properties">Other Parameters from cluster.properties</a><ul>
+<li><a class="reference internal" href="#xbeanurl">xbeanURL</a></li>
+<li><a class="reference internal" href="#durability">Durability</a></li>
+<li><a class="reference internal" href="#connection">Connection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-active-clustering-extension-rest-interface">The Active Clustering Extension REST interface</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/installation.html" title="previous chapter">Installing the GeoServer Active Clustering Extension</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/topologies.html" title="next chapter">Implementing Different Clustering Topologies</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/clustering/active/usage.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-clustering.active.usage"></span><div class="section" id="configuring-the-geoserver-active-clustering-extension">
+<span id="clustering-active-usage"></span><h1>Configuring the GeoServer Active Clustering Extension<a class="headerlink" href="#configuring-the-geoserver-active-clustering-extension" title="Permalink to this headline">¶</a></h1>
+<p>Each GeoServer instance with the Active Clustering Extension 
+installed starts with a default configuration which can be managed using
+ the provided GUI or modifying a specific file called <strong>cluster.properties</strong> placed inside the <em>cluster</em> directory inside the GeoServer Data Directory. When GeoServer starts, it automatically populates the configuration file <strong>cluster.properties</strong>, if not present, with default values to have a Master/Slave instance with embedded broker.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To override the default location of this configuration 
+file, which is crucial in case you are scaling up GeoServer with shared 
+data directory, you have to set-up the <strong>CLUSTER_CONFIG_DIR</strong> variable defining the destination folder of the <strong>cluster.properties</strong> file. As mentioned, this is useful when you want to share the same data directory between multiple GeoServer instances.</p>
+</div>
+<p>Into the standalone package you may found the cluster.settings under:</p>
+<div class="highlight-xml"><div class="highlight"><pre>${TRAINING_ROOT}/data/cluster/instance1/cluster.properties
+</pre></div>
+</div>
+<p>Here is an example of its content (automatically generated):</p>
+<div class="highlight-xml"><div class="highlight"><pre>#Fri Mar 28 18:27:32 CET 2014
+    toggleSlave=true
+    topicName=VirtualTopic.&gt;
+    connection=enabled
+    brokerURL=
+    durable=true
+    xbeanURL=./broker.xml
+    toggleMaster=true
+    embeddedBroker=enabled
+    CLUSTER_CONFIG_DIR=%TRAINING_ROOT%\\data\\cluster\\instance1
+    connection.retry=3
+    readOnly=disabled
+    instanceName=524463bd-f732-488c-a0a4-1127a57b8d12
+    connection.maxwait=10000
+</pre></div>
+</div>
+<p>These parameters are described more in detail below. Note that the 
+GUI intentionally supports only the most commons settings and the status
+ of the connections and listeners.</p>
+<div class="section" id="accessing-the-active-clustering-extension-gui">
+<h2>Accessing the Active Clustering Extension GUI<a class="headerlink" href="#accessing-the-active-clustering-extension-gui" title="Permalink to this headline">¶</a></h2>
+<p>To access to the Active Clustering Extension GUI setting page, log into GeoServer and click on the clustering menu:</p>
+<div class="figure align-center" id="id1">
+<img alt="Illustration: Active Clustering Extension GUI" src="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/Clustering_menu.png">
+<p class="caption"><span class="caption-text">Illustration: Active Clustering Extension GUI</span></p>
+</div>
+<p>The setting page will be shown as below:</p>
+<div class="figure align-center" id="id2">
+<img alt="Illustration: Active Clustering Extension settings" src="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/Clustering_settings.png">
+<p class="caption"><span class="caption-text">Illustration: Active Clustering Extension settings</span></p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Each change to this interface is immediately applied to 
+the GeoServer cluster configuration however these changes are stored in 
+memory, if you need to keep changes for the next reboot you need to 
+persist them using the save button.</p>
+</div>
+</div>
+<div class="section" id="configuring-the-active-clustering-extension-via-the-gui">
+<h2>Configuring the Active Clustering Extension via the GUI<a class="headerlink" href="#configuring-the-active-clustering-extension-via-the-gui" title="Permalink to this headline">¶</a></h2>
+<p>The parameters we are going to describe are available in the <strong>cluster.properties</strong> file moreover some of them are also available in the user interface.</p>
+<div class="section" id="name-of-this-instance">
+<h3>Name of this instance<a class="headerlink" href="#name-of-this-instance" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>instanceName</strong> is used to distinguish from which 
+GeoServer instance the message is coming from, so each GeoServer 
+instance should use a different, unique (for a single cluster of 
+GeoServer instances) name.</p>
+</div>
+<div class="section" id="url-of-the-broker">
+<h3>URL of the broker<a class="headerlink" href="#url-of-the-broker" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>brokerURL</strong> field is used to instruct the internal
+ message exchange machinery where to publish messages to (Master 
+GeoServer Instance) or where to consume messages from (Slave GeoServer 
+Instance). Many options are available for configuring the connection 
+between the GeoServer instance and the message broker, for a complete 
+list, please, check the ActiveMQ documentation or the last page of this 
+section.</p>
+<p>The Broker URL is by default empty which allows you to try and 
+connect to the embedded broker, which is started by GeoServer with the 
+default configuration and that runs inside the same JVM instance, 
+sharing memory and threads with it (bear that in mind when configuring 
+the Heap memory for the GeoServer JVM process).</p>
+</div>
+<div class="section" id="the-topic-name">
+<h3>The Topic Name<a class="headerlink" href="#the-topic-name" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>topicName</strong> parameter can be used to set-up the target name of the used topic.
+The default setting leverage on an ActiveMQ specific feature called <strong>virtual destinations</strong>.
+This allow producers to be decoupled from consumers so that they do not 
+even know how many consumers are interested in the messages they 
+publish.
+For more info about this take a look <a class="reference external" href="http://activemq.apache.org/virtual-destinations.html">here</a></p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not change the Topic Name unless you are an expert of ActiveMQ</p>
+</div>
+</div>
+<div class="section" id="slave-connection">
+<h3>Slave connection<a class="headerlink" href="#slave-connection" title="Permalink to this headline">¶</a></h3>
+<p>The slave connection setting forces a GeoServer instance to connect 
+to the Broker as a Slave in order to receive message bearing 
+configuration changes.</p>
+<p>Clicking on it you will try to connect to the configured broker:</p>
+<blockquote>
+<div><div class="figure align-center" id="id3">
+<img alt="Illustration: Active Clustering Extension connection as Slave" src="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/Clustering_slave_connection_on.png">
+<p class="caption"><span class="caption-text">Illustration: Active Clustering Extension connection as Slave</span></p>
+</div>
+</div></blockquote>
+<p>When you connect the first time to the broker the instance name is 
+registered as consumer and all the messages sent to the broker will be 
+made persistent so if your GeoServer goes down or if you disconnect for 
+any reason on reconnection all the messages will be retrieved (this is 
+known as <em>durable subscription</em>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is worth pointing out that by default the GeoServer 
+Clustering Extension starts the connection to the broker as Slave 
+immediately, hence you don’t need to do anything when starting with the 
+default configuration.</p>
+</div>
+<p>In case you disconnect the Slave connection, thus not receiving 
+configuration changes messages from the Master instances the following 
+will appear:</p>
+<blockquote>
+<div><div class="figure align-center" id="id4">
+<img alt="Illustration: Active Clustering Extension, disconnecting a Slave" src="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/Clustering_slave_connection_off.png">
+<p class="caption"><span class="caption-text">Active Clustering Extension connection, disconnecting a Slave</span></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="master-enabled">
+<h3>Master enabled<a class="headerlink" href="#master-enabled" title="Permalink to this headline">¶</a></h3>
+<p>Configure the GeoServer instance as Master which means that each 
+change made to the configuration of this instance will be sent to all 
+the registered Slave instances.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default the GeoServer Active Clustering Extension 
+starts with the Master setting checked, hence an instance is a Master 
+instance unless reconfigured.</p>
+</div>
+</div>
+<div class="section" id="slave-enabled">
+<h3>Slave enabled<a class="headerlink" href="#slave-enabled" title="Permalink to this headline">¶</a></h3>
+<p>Configure the GeoServer instance as slave which means that each 
+change made by any Master GeoServer instance in the cluster will be 
+applied on this instance.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default the GeoServer Active Clustering Extension 
+starts with the Slave setting set to true, hence an instance is a Slave 
+instance unless reconfigured.</p>
+</div>
+</div>
+<div class="section" id="read-only">
+<h3>Read Only<a class="headerlink" href="#read-only" title="Permalink to this headline">¶</a></h3>
+<p>Enable the <strong>Read Only</strong> mode. When true the GeoServer 
+instance will not persists changes to the GeoServer Data Directory which
+ means that changes are only applied in memory.</p>
+<p>This can be useful if you  want to share the GeoServer Data Directory
+ between multiple Slave instances, to avoid having concurrency problem 
+with the configuration files.</p>
+</div>
+<div class="section" id="embedded-broker">
+<h3>Embedded broker<a class="headerlink" href="#embedded-broker" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>Embedded broker</strong> parameter tells GeoServer to 
+start an embedded broker, which is a version ot the broker that runs 
+inside the same JVM of the GeoServer Instance.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default the GeoServer Active Clustering Extension starts an embedded broker unless reconfigured.</p>
+</div>
+</div>
+</div>
+<div class="section" id="other-parameters-from-cluster-properties">
+<h2>Other Parameters from cluster.properties<a class="headerlink" href="#other-parameters-from-cluster-properties" title="Permalink to this headline">¶</a></h2>
+<p>Some of the cluster parameters are intentionally hidden to keep the 
+GUI as simple as possible.
+So the below settings can be changed only using the cluster.properties 
+(or overridden by the system properties or JVM properties).</p>
+<div class="section" id="xbeanurl">
+<h3>xbeanURL<a class="headerlink" href="#xbeanurl" title="Permalink to this headline">¶</a></h3>
+<p>This parameter represents the complete URL of the xml file which may 
+represent a valid ActiveMQ broker and all of its configurations which 
+will be loaded when the <strong>embedded broker</strong> is enabled.
+The default URI is ./broker.xml (which is relative to the classPath of 
+GeoServer) points to the default configuration which can be used as is 
+or overriding the main parameters via system properties.</p>
+<p>If you want to use your own configuration be sure to specify an 
+absolute path. Moreover this is going to be used only if you are using 
+the <em>Embedded Broker</em>.</p>
+</div>
+<div class="section" id="durability">
+<h3>Durability<a class="headerlink" href="#durability" title="Permalink to this headline">¶</a></h3>
+<p>With this setting you can enable (by default) or disable the topic 
+durability. When the durability is true all the registered instances of 
+GeoServer slave which are temporarily down will receive all the missing 
+message when they reconnect to the broker network.
+Consider to switch this to false you want to share the data dir or use 
+other backup/restore mechanisms.
+This is used when you enable the <strong>slave connection</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default the GeoServer Active Clustering Extension starts with a durable topic.</p>
+</div>
+</div>
+<div class="section" id="connection">
+<h3>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a></h3>
+<p>Some times the connection may take few seconds to be established some
+ time instead the connection fails due to a network timeout.
+This may depend on the type (LAN or WAN) and the load of the network you
+ are using.
+The following parameters can be used to wait for the connection and to 
+try to automatically reconnect:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="o">*</span> <span class="n">connection</span><span class="o">.</span><span class="n">retry</span><span class="o">=</span><span class="mi">3</span>
+
+<span class="o">*</span> <span class="n">connection</span><span class="o">.</span><span class="n">maxwait</span><span class="o">=</span><span class="mi">1000</span>
+</pre></div>
+</div>
+<p>These parameters are used only once by the enable/disable button of the <strong>slave connection</strong> or by the <strong>embedded broker</strong>.
+Note that if you want to add reconnect on fail capability to your configuration you have to use the activemq settings like <strong>failover</strong> or <strong>discover</strong>, you will find some more details in the next pages.</p>
+<p>In case of connection failure:</p>
+<blockquote>
+<div><div class="figure align-center" id="id5">
+<img alt="Illustration: Active Clustering Extension connection fails" src="Configuring%20the%20GeoServer%20Active%20Clustering%20Extension%20%E2%80%94%20GeoServer%20Training_arquivos/Clustering_slave_connection_fails.png">
+<p class="caption"><span class="caption-text">Active Clustering Extension connection fails</span></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="the-active-clustering-extension-rest-interface">
+<h2>The Active Clustering Extension REST interface<a class="headerlink" href="#the-active-clustering-extension-rest-interface" title="Permalink to this headline">¶</a></h2>
+<p>The REST interface for the Active Clustering Extension is quite 
+simple since since it simply maps a properties file to the 
+*/rest/cluster URL.</p>
+<p>All the changes to the configuration can be applied via the rest 
+interface using a POST. Note that each change is immediately applied to 
+the target GeoServer and stored into the configuration file so those 
+changes will be used also at the next reboot.</p>
+<p>To check the status of the cluster you can call the GET request at:</p>
+<div class="highlight-xml"><div class="highlight"><pre>http://localhost:8083/geoserver/rest/cluster[.{xml|html|json}]
+</pre></div>
+</div>
+<p>To modify the cluster configuration use a POST at the */rest/cluster url.</p>
+<p>Here is a configuration example using curl:</p>
+<div class="highlight-xml"><div class="highlight"><pre>curl -u admin:Geos -X POST -H "Content-type: text/xml" http://localhost:8083/geoserver/rest/cluster -d "<span class="nt">&lt;properties&gt;&lt;property</span> <span class="na">name=</span><span class="s">\"connection.retry\"</span> <span class="na">value=</span><span class="s">\"5\"/</span><span class="nt">&gt;&lt;/properties&gt;</span>"
+</pre></div>
+</div>
+<p>Perform again the GET request described above, the value of the <strong>connection.retry</strong> property is now equal to 5.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/topologies.html" title="Implementing Different Clustering Topologies" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/installation.html" title="Installing the GeoServer Active Clustering Extension" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">Clustering GeoServer</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html" accesskey="U">GeoServer Active Clustering</a> »</li>
+        <li><a href="#">Configuring the GeoServer Active Clustering Extension</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

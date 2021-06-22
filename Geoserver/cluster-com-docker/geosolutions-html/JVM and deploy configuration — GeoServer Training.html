@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>JVM and deploy configuration — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="JVM%20and%20deploy%20configuration%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="JVM%20and%20deploy%20configuration%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="JVM%20and%20deploy%20configuration%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="JVM%20and%20deploy%20configuration%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="JVM%20and%20deploy%20configuration%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    <link rel="prev" title="Tuning Control Flow Settings" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/controlflow.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="JVM%20and%20deploy%20configuration%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JVM and deploy configuration</a><ul>
+<li><a class="reference internal" href="#jvm-settings">JVM settings</a></li>
+<li><a class="reference internal" href="#setup-a-local-cluster">Setup a local cluster</a></li>
+<li><a class="reference internal" href="#using-the-marlin-renderer">Using the Marlin Renderer</a><ul>
+<li><a class="reference internal" href="#configure-jmeter">Configure JMeter</a></li>
+<li><a class="reference internal" href="#test-without-marlin">Test without Marlin</a></li>
+<li><a class="reference internal" href="#setup-marlin">Setup Marlin</a></li>
+<li><a class="reference internal" href="#test-with-marlin-renderer">Test with Marlin renderer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/controlflow.html" title="previous chapter">Tuning Control Flow Settings</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/jvm.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jvm-and-deploy-configuration">
+<span id="geoserver-jmeter-jvm"></span><h1>JVM and deploy configuration<a class="headerlink" href="#jvm-and-deploy-configuration" title="Permalink to this headline">¶</a></h1>
+<p>This section introduces some finishing touches that can improve the GeoServer performance.</p>
+<p>Please keep in mind that the options discussed here are not going to 
+help visibly if you did not prepare the data and the styles.</p>
+<p>For more details you can also check the <em>Running in production</em> instructions from the GeoServer documentation <a class="reference external" href="http://docs.geoserver.org/latest/en/user/production/index.html">here</a>.</p>
+<div class="section" id="jvm-settings">
+<h2>JVM settings<a class="headerlink" href="#jvm-settings" title="Permalink to this headline">¶</a></h2>
+<p>Java programs are compiled to Java bytecode. This code can only be run through the use of a <em>Java Virtual Machine</em> (JVM).
+Below are some settings that can be used to tune the JVM (of the webapplication server the GeoServer runs on):</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--server</span></code> JVM is running in <strong>server mode</strong>; enables the server JIT compiler, which is optimized for operating speed (instead of quick startup or small memory footprint)</li>
+<li><code class="docutils literal"><span class="pre">--Xms2048m</span></code> (or <code class="docutils literal"><span class="pre">--Xms2g</span></code>) sets the amount of memory given to JVM at startup to two gigabytes (<strong>Initial heap</strong>)</li>
+<li><code class="docutils literal"><span class="pre">--Xmx2048m</span></code> specifies that the heap memory can grow to two gigabytes (<strong>Maximum heap</strong>)</li>
+<li><code class="docutils literal"><span class="pre">--XX:+UseParallelOldGC</span> <span class="pre">--XX:+UseParallelGC</span></code> enables multi-threaded, i.e. <strong>parallel garbage collection</strong>, useful if you have more than two cores</li>
+<li><code class="docutils literal"><span class="pre">--XX:NewRatio=2</span></code> informs the JVM there will be a high number of short lived objects</li>
+<li><code class="docutils literal"><span class="pre">--XX:+AggressiveOpts</span></code> enables experimental optimizations that will be defaults in future versions of the JVM</li>
+</ul>
+</div>
+<div class="section" id="setup-a-local-cluster">
+<h2>Setup a local cluster<a class="headerlink" href="#setup-a-local-cluster" title="Permalink to this headline">¶</a></h2>
+<p>As Oracle Java2D locks when drawing antialiased vectors, the scalability is limited severely.</p>
+<p>To address this problem, there are two options:</p>
+<ul class="simple">
+<li>Use <em>OpenJDK</em>, which is slower at rendering but scales up well.</li>
+<li>Use Apache <em>mod_proxy_balance</em> and setup a GeoServer each 2 (or 4) cores</li>
+</ul>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="https://docs.geoserver.geo-solutions.it/edu/en/_images/local_cluster.png"><img alt="../_images/local_cluster.png" src="JVM%20and%20deploy%20configuration%20%E2%80%94%20GeoServer%20Training_arquivos/local_cluster.png" style="width: 80%;"></a>
+<p class="caption"><span class="caption-text"><em>Local cluster with mod_proxy_balance</em></span></p>
+</div>
+<p>You will find a lot of detailed information in the <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html"><span class="doc">Clustering GeoServer</span></a> module.</p>
+</div>
+<div class="section" id="using-the-marlin-renderer">
+<h2>Using the Marlin Renderer<a class="headerlink" href="#using-the-marlin-renderer" title="Permalink to this headline">¶</a></h2>
+<p>This section explains how GeoServer performances are improved when using the <strong>Marlin</strong> renderer.</p>
+<p>The Oracle JDK and OpenJDK come with two different anti-aliased renderers:</p>
+<ul class="simple">
+<li>Oracle JDK uses <strong>Ductus</strong>, a fast native renderer that has scalability issues (good for desktop use, less so on the server side)</li>
+<li>OpenJDK uses <strong>Pisces</strong>, a pure java renderer that is 
+not as fast as “Ductus”, but has good scalability (anecdotally, it 
+becomes faster than Ductus above the 4 concurrent requests)</li>
+</ul>
+<p>The <a class="reference external" href="https://github.com/bourgesl/marlin-renderer">Marlin</a> renderer is an improved version of Pisces that is as fast, if not faster, than Ductus, and scales just as well as Pisces.</p>
+<div class="section" id="configure-jmeter">
+<h3>Configure JMeter<a class="headerlink" href="#configure-jmeter" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( or <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) and copy the file <code class="docutils literal"><span class="pre">template.jmx</span></code> file creating a <code class="docutils literal"><span class="pre">marlin.jmx</span></code> file</p>
+</li>
+<li><p class="first">From the training root, on the command line, run <code class="docutils literal"><span class="pre">jmeter.bat</span></code> (or <code class="docutils literal"><span class="pre">jmeter.sh</span></code> if you’re on Linux) to start JMeter</p>
+</li>
+<li><p class="first">On the top left go to <span class="guilabel">File –&gt; Open</span> and search for the new <em>jmx</em> file copied</p>
+</li>
+<li><p class="first">Disable <strong>View Results Tree</strong> section</p>
+</li>
+<li><p class="first">In the <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">Data</span> <span class="pre">Set</span> <span class="pre">Config</span></code> element, modify the <strong>path</strong> of the CSV file by setting the path for the file <code class="docutils literal"><span class="pre">controlflow.csv</span></code> in the <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( or <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) directory</p>
+</li>
+<li><p class="first">In the <strong>HTTP Request Default</strong> element modify the following parameters:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>layers</td>
+<td>boulder</td>
+</tr>
+<tr class="row-odd"><td>srs</td>
+<td>EPSG:2876</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="test-without-marlin">
+<h3>Test without Marlin<a class="headerlink" href="#test-without-marlin" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Run the test</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to run and stop the test a few times for having stable results</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">When the test is completed, Save the results in a text file.</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/no_marlin.png" src="JVM%20and%20deploy%20configuration%20%E2%80%94%20GeoServer%20Training_arquivos/no_marlin.png">
+<p class="caption"><span class="caption-text"><em>Throughput without Marlin (Note the results may be different in other machines)</em></span></p>
+</div>
+</li>
+<li><p class="first">Remove the result from JMeter by clicking on <span class="guilabel">Run –&gt; Clear All</span> on the menu</p>
+</li>
+<li><p class="first">Stop GeoServer</p>
+</li>
+</ol>
+</div>
+<div class="section" id="setup-marlin">
+<h3>Setup Marlin<a class="headerlink" href="#setup-marlin" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Stop GeoServer</p>
+</li>
+<li><p class="first">Download the latest Marlin rasterizer library at <a class="reference external" href="https://github.com/bourgesl/marlin-renderer/releases/">https://github.com/bourgesl/marlin-renderer/releases/</a> and save it in <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data</span></code> on Windows )</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">“Unsafe” in he JAR name does not mean the library is 
+unsafe to use, it merely refers to the usage of the sun.misc.Unsafe 
+class, which allows Java code to perform a few native operations that 
+normally would not be permitted. Safety wise, Marlin is being integrated
+ in Java 9, where it will be the default rasterizer.</p>
+</div>
+</li>
+<li><p class="first">If you are on Linux open <code class="docutils literal"><span class="pre">/opt/tomcat_geoserver/conf/setenv.sh</span></code> and add the following lines after the existing JAVA_OPTS definition to enable the Marlin renderer:</p>
+<div class="highlight-default"><div class="highlight"><pre>JAVA_OPTS="$JAVA_OPTS -Xbootclasspath/p:"$TRAINING_ROOT/data/marlin-0.9.1Unsafe-OpenJDK9.jar"
+JAVA_OPTS="$JAVA_OPTS -Dsun.java2d.renderer=org.marlin.pisces.PiscesRenderingEngine"
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you are on Windows <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\setenv.bat</span></code> and add the following lines to enable the Marlin renderer, right before the “Tomcat options for the JVM” section:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">REM</span> <span class="n">Marlin</span> <span class="n">support</span>
+<span class="nb">set</span> <span class="n">JAVA_OPTS</span><span class="o">=%</span><span class="n">JAVA_OPTS</span><span class="o">%</span> <span class="o">-</span><span class="n">Xbootclasspath</span><span class="o">/</span><span class="n">p</span><span class="p">:</span><span class="s">"%ROOT%\data\marlin-0.9.1Unsafe-OpenJDK9.jar.jar"</span>
+<span class="nb">set</span> <span class="n">JAVA_OPTS</span><span class="o">=%</span><span class="n">JAVA_OPTS</span><span class="o">%</span> <span class="o">-</span><span class="n">Dsun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">=</span><span class="n">org</span><span class="o">.</span><span class="n">marlin</span><span class="o">.</span><span class="n">pisces</span><span class="o">.</span><span class="n">PiscesRenderingEngine</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Start GeoServer again</p>
+</li>
+<li><p class="first">Go to the map preview and open the <code class="docutils literal"><span class="pre">boulder</span></code> layer, you should see the following in the Tomcat console:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">INFO</span><span class="p">:</span> <span class="o">===============================================================================</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Marlin</span> <span class="n">software</span> <span class="n">rasterizer</span>           <span class="o">=</span> <span class="n">ENABLED</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Version</span>                              <span class="o">=</span> <span class="p">[</span><span class="n">marlin</span><span class="o">-</span><span class="mf">0.4</span><span class="o">.</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span>                  <span class="o">=</span> <span class="n">org</span><span class="o">.</span><span class="n">marlin</span><span class="o">.</span><span class="n">pisces</span><span class="o">.</span><span class="n">PiscesRenderingEngine</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">useThreadLocal</span>   <span class="o">=</span> <span class="n">true</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">useRef</span>           <span class="o">=</span> <span class="n">soft</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">pixelsize</span>        <span class="o">=</span> <span class="mi">2048</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">subPixel_log2_X</span>  <span class="o">=</span> <span class="mi">3</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">subPixel_log2_Y</span>  <span class="o">=</span> <span class="mi">3</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">tileSize_log2</span>    <span class="o">=</span> <span class="mi">5</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">useFastMath</span>      <span class="o">=</span> <span class="n">true</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">useSimplifier</span>    <span class="o">=</span> <span class="n">false</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">doStats</span>          <span class="o">=</span> <span class="n">false</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">doMonitors</span>       <span class="o">=</span> <span class="n">false</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">doChecks</span>         <span class="o">=</span> <span class="n">false</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">useJul</span>           <span class="o">=</span> <span class="n">false</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">logCreateContext</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">sun</span><span class="o">.</span><span class="n">java2d</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">logUnsafeMalloc</span>  <span class="o">=</span> <span class="n">false</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="o">===============================================================================</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="test-with-marlin-renderer">
+<h3>Test with Marlin renderer<a class="headerlink" href="#test-with-marlin-renderer" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Run again the test.</p>
+<blockquote>
+<div><p>You may see that the throughput got significantly higher, especially at mid-high thread counts</p>
+</div></blockquote>
+<div class="figure align-center" id="id3">
+<img alt="../_images/marlin.png" src="JVM%20and%20deploy%20configuration%20%E2%80%94%20GeoServer%20Training_arquivos/marlin.png">
+<p class="caption"><span class="caption-text"><em>Throughput with Marlin (Note the results may be different in other machines)</em></span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/controlflow.html" title="Tuning Control Flow Settings" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" accesskey="U">Enterprise Set-up Recommendations</a> »</li>
+        <li><a href="#">JVM and deploy configuration</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Vector Data Optimization — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Vector%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Vector%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Vector%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Vector%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Vector%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    <link rel="next" title="Style Optimizations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/styles.html">
+    <link rel="prev" title="Raster Data Optimization" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/raster.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Vector%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Vector Data Optimization</a><ul>
+<li><a class="reference internal" href="#vector-data-optimization-checklikst">Vector data optimization checklikst</a></li>
+<li><a class="reference internal" href="#choosing-a-format">Choosing a format</a><ul>
+<li><a class="reference internal" href="#slow-formats">Slow formats</a></li>
+<li><a class="reference internal" href="#good-formats-local-and-index-able">Good formats, local and index-able</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dbms-checklist">DBMS Checklist</a></li>
+<li><a class="reference internal" href="#shapefile-preparation">Shapefile preparation</a></li>
+<li><a class="reference internal" href="#shapefile-filtering">Shapefile filtering</a></li>
+<li><a class="reference internal" href="#postgresql-postgis-specific-hints">PostgreSQL/PostGIS specific hints</a></li>
+<li><a class="reference internal" href="#connection-pooling-tricks">Connection Pooling Tricks</a></li>
+<li><a class="reference internal" href="#benchmarking-shapefile-versus-postgis">Benchmarking Shapefile versus PostGIS</a></li>
+<li><a class="reference internal" href="#configuring-the-database">Configuring the database</a></li>
+<li><a class="reference internal" href="#configuring-geoserver">Configuring GeoServer</a></li>
+<li><a class="reference internal" href="#configuring-jmeter">Configuring JMeter</a></li>
+<li><a class="reference internal" href="#test-the-shapefile">Test the Shapefile</a></li>
+<li><a class="reference internal" href="#test-the-database">Test the Database</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/raster.html" title="previous chapter">Raster Data Optimization</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/styles.html" title="next chapter">Style Optimizations</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/vector.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="vector-data-optimization">
+<span id="geoserver-jmeter-vector"></span><h1>Vector Data Optimization<a class="headerlink" href="#vector-data-optimization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="vector-data-optimization-checklikst">
+<h2>Vector data optimization checklikst<a class="headerlink" href="#vector-data-optimization-checklikst" title="Permalink to this headline">¶</a></h2>
+<p>In order to have high performance and stable serving the list below captures what we do want from vector data:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Binary data, as usual storing data in a format which is not binary won’t help (size, poor compression, no seek, etc. etc.)</li>
+<li>No complex parsing of data structures: The more transformations we 
+have to do during extraction (e.g. complex-feature) the slower serving 
+will be.</li>
+<li>Fast extraction of a geographic subset</li>
+<li>Fast filtering on the most commonly used attributes, this is crucial
+ for serving huge datasets with services like WMS and WFS where 
+filtering is used extensively</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="choosing-a-format">
+<h2>Choosing a format<a class="headerlink" href="#choosing-a-format" title="Permalink to this headline">¶</a></h2>
+<p>The first thing to evaluate when optimizing vector data is the native format used to store the data.
+A quick and dirty classification of the formats is performed here below:</p>
+<div class="section" id="slow-formats">
+<h3>Slow formats<a class="headerlink" href="#slow-formats" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>WFS</li>
+<li>GML</li>
+<li>DXF</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="good-formats-local-and-index-able">
+<h3>Good formats, local and index-able<a class="headerlink" href="#good-formats-local-and-index-able" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Shapefile, directory of shapefiles; not good if you have heavy filtering on non spatial attributes</li>
+<li>SDE</li>
+<li>Spatial databases: PostGIS,  Oracle Spatial, DB2, SQL server, MySQL</li>
+<li>SpatiaLite; although it cannot be shared safely in a clustered 
+environment as multiple processes should not access the same SQLite file
+ (especially on networked file systems).</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="dbms-checklist">
+<h2>DBMS Checklist<a class="headerlink" href="#dbms-checklist" title="Permalink to this headline">¶</a></h2>
+<p>Well, it’s pretty clear from the above lists that on average the way 
+to go for storing vector data is using a spatial DBMS due to many 
+factors but primarily its rich support for complex native filters. A 
+quick checklist for properly configuring a spatial DBMS is presented 
+below:</p>
+<ul>
+<li><p class="first">Use connection pooling properly and consider using JNDI for sharing pools.</p>
+</li>
+<li><p class="first">Validate connections (with proper pooling), better doing that in background but never trust a connection coming from the pool.</p>
+</li>
+<li><p class="first">Table Clustering, you can usually cluster tables on most frequently used indexes</p>
+</li>
+<li><p class="first">Use Spatial Indexing</p>
+</li>
+<li><p class="first">Use Spatial Indexing</p>
+</li>
+<li><p class="first">Use Spatial Indexing</p>
+</li>
+<li><p class="first">Use Alphanumeric Indexing</p>
+</li>
+<li><p class="first">Use Alphanumeric Indexing</p>
+</li>
+<li><p class="first">Use Alphanumeric Indexing</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Did we mention that indexes are important? Most part of the time performance problems are due to missing indexes.</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="shapefile-preparation">
+<h2>Shapefile preparation<a class="headerlink" href="#shapefile-preparation" title="Permalink to this headline">¶</a></h2>
+<p>Remove .qix file if present
+If there are large DBF attributes that are not in use, get rid of them using ogr2ogr, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">ogr2ogr</span> <span class="o">-</span><span class="n">select</span> <span class="n">FULLNAME</span><span class="p">,</span><span class="n">MTFCC</span> <span class="n">arealm</span><span class="o">.</span><span class="n">shp</span> <span class="n">tl_2010_08013_arealm</span><span class="o">.</span><span class="n">shp</span>
+</pre></div>
+</div>
+<p>If on Linux, enable memory mapping, faster, more scalable (beware that this option should not be enabled on Windows):</p>
+<blockquote>
+<div><div class="figure align-center" id="id4">
+<img alt="../_images/shapefile.png" src="Vector%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/shapefile.png">
+<p class="caption"><span class="caption-text"><em>Shapefile DataStore options panel</em></span></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="shapefile-filtering">
+<h2>Shapefile filtering<a class="headerlink" href="#shapefile-filtering" title="Permalink to this headline">¶</a></h2>
+<p>Using a Shapefile as data source is not a bad choice generally 
+speaking. GeoServer has been optimized for serving large shapefile (GB 
+size) with good speed (especially on Linux). The main limitation to take
+ into account is that currently Shapefile (the Directory of Shapefiles 
+DataStore in turn) do not offer alphanumeric indexing capabilities 
+therefore if you have a schema to serve with many attributes and you 
+want to be able to filter them finely for rendering or styling (i.e. 
+being able to quickly extract small subset of rows depending purely on 
+the non spatial attributes) then you need to move onto using a spatial 
+DBMS. If you are stuck with shapefiles and have scale dependent rules 
+like the following:</p>
+<ul class="simple">
+<li>Show highways first</li>
+<li>Show all streets when zoomed in</li>
+</ul>
+<p>In order to avoid forcing GeoServer to load everything in memory to filter on alphanumeric attributes you can do the following:</p>
+<ol class="arabic">
+<li><p class="first">Use ogr2ogr to build two shapefiles, one with just the highways, one with everything, and build two layers, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">ogr2ogr</span> <span class="o">-</span><span class="n">sql</span> <span class="s">"SELECT * FROM tl_2010_08013_roads WHERE MTFCC in ('S1100', 'S1200')"</span> <span class="n">primaryRoads</span><span class="o">.</span><span class="n">shp</span> <span class="n">tl_2010_08013_roads</span><span class="o">.</span><span class="n">shp</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Or hire us to develop non-spatial indexing for shapefile!</p>
+</li>
+</ol>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We highly recommend the second option.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="postgresql-postgis-specific-hints">
+<h2>PostgreSQL/PostGIS specific hints<a class="headerlink" href="#postgresql-postgis-specific-hints" title="Permalink to this headline">¶</a></h2>
+<p>PostgreSQL is out of the box configured for very small hardware as indicated <a class="reference external" href="http://wiki.postgresql.org/wiki/Performance_Optimization">here</a>,
+ therefore you might want to investigate on tweaking such configuration 
+to get more speed out of your hardware, especially if you have a lot of 
+memory available.</p>
+<p>Here below you can find a list of other useful hints:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Make sure to run ANALYZE after data imports (updates optimizer stats)</li>
+<li>As usual, avoid large joins in SQL views, consider materialized views</li>
+<li>If the dataset is massive, CLUSTER on the spatial index as explained <a class="reference external" href="http://postgis.refractions.net/documentation/manual-1.3/ch05.html">here</a></li>
+<li>Careful with prepared statements (bad performances)</li>
+</ul>
+</div></blockquote>
+<p>About usage of prepared statements, which may seem counterintuitive, here below a longer explanation.</p>
+<blockquote>
+<div><ul class="simple">
+<li>USE CASE: The layer’s style allows to display the whole layer in a 
+single shot (no scale dependencies) -&gt; prepared statements will slow 
+down execution</li>
+<li>EXPLANATION: PostGIS will choose to use the spatial index in all 
+cases, this makes retrieving the full data set 2-4 times slower than 
+when using a sequential scan</li>
+<li>COUNTERMEASURE: Not using prepared statement allows PostGIS to 
+figure out a suitable plan based on the request BBOX instead (assuming 
+someone run “vacuum analyze” on the database to update the index 
+statistics, and of course, provided there is a spatial index to start 
+with)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="connection-pooling-tricks">
+<h2>Connection Pooling Tricks<a class="headerlink" href="#connection-pooling-tricks" title="Permalink to this headline">¶</a></h2>
+<p>As indicated above connection pools are a fundamental element in properly exploiting spatial DBMS from GeoServer.
+Here below you can find some advices on how to best configure them:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Connection pool size should be proportional to the number of concurrent requests you want to serve (obvious, right?)</li>
+<li>Activate connection validation, preferably in background although doing it in foreground is ok</li>
+<li>Mind networking tools that might cut connections sitting idle (yes, 
+your server is not always busy), they might cut the connection in “bad” 
+ways (10 minutes timeout before the pool realizes the TCP connection 
+attempt gives up)</li>
+<li>Read more <a class="reference external" href="http://geoserver.geo-solutions.it/edu/en/adv_gsconfig/db_pooling.html">here</a> and <a class="reference external" href="https://docs.google.com/document/d/1O02PeDRYKt2xLWG21k6BmcaRPzVRvXb4SQcrcZf4bHQ/edit">here</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="benchmarking-shapefile-versus-postgis">
+<h2>Benchmarking Shapefile versus PostGIS<a class="headerlink" href="#benchmarking-shapefile-versus-postgis" title="Permalink to this headline">¶</a></h2>
+<p>The following section compares vector data preparation using 
+Shapefile and PostGIS. For this example a Shapefile containing primary 
+or secondary roads is used.</p>
+<p>The purpose is to test the throughput between the shapefile and an 
+optimized database containing the same data. The result will demonstrate
+ that database optimization can provide a better
+throughput than the one of the shapefile</p>
+</div>
+<div class="section" id="configuring-the-database">
+<h2>Configuring the database<a class="headerlink" href="#configuring-the-database" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Open the terminal and change to training root directory: <code class="docutils literal"><span class="pre">$TRAINING_ROOT</span></code> on a linux machine resp. <code class="docutils literal"><span class="pre">%TRAINING_ROOT%</span></code> on a Windows machine</p>
+</li>
+<li><p class="first">Load the shapefile <code class="docutils literal"><span class="pre">tl_2014_01_prisecroads</span></code> located in the corresponding user-data subfolder into PostGIS with the following commands:</p>
+<blockquote>
+<div><p>Linux (shapefile located in folder <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/user_data</span></code>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">createdb</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span> <span class="o">-</span><span class="n">T</span> <span class="n">postgis20</span> <span class="n">shape2</span>
+
+<span class="n">shp2pgsql</span> <span class="o">-</span><span class="n">k</span> <span class="o">-</span><span class="n">I</span> <span class="s">"data/user_data/tl_2014_01_prisecroads/tl_2014_01_prisecroads.shp"</span> <span class="n">public</span><span class="o">.</span><span class="n">pgroads</span> <span class="o">|</span> <span class="n">psql</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span> <span class="o">-</span><span class="n">d</span> <span class="n">shape2</span>
+</pre></div>
+</div>
+<p>Windows (shapefile located in folder <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\user_data</span></code>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">setenv</span><span class="o">.</span><span class="n">bat</span>
+
+<span class="n">createdb</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span> <span class="o">-</span><span class="n">T</span> <span class="n">postgis20</span> <span class="n">shape2</span>
+
+<span class="n">shp2pgsql</span> <span class="o">-</span><span class="n">k</span> <span class="o">-</span><span class="n">I</span> <span class="s">"data\user_data</span><span class="se">\t</span><span class="s">l_2014_01_prisecroads</span><span class="se">\t</span><span class="s">l_2014_01_prisecroads.shp"</span> <span class="n">public</span><span class="o">.</span><span class="n">pgroads</span> <span class="o">|</span> <span class="n">psql</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span> <span class="o">-</span><span class="n">d</span> <span class="n">shape2</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">More information can be found at <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/adding_data/shp_postgis.html#geoserver-shp-postgis"><span class="std std-ref">Loading a Shapefile into PostGIS</span></a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Run PgAdmin3</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Linux: Run command <strong>pgadmin3</strong> in a terminal</li>
+<li>Windows machines: On the <code class="docutils literal"><span class="pre">%TRAINING_ROOT%</span></code> run command <strong>pgAdmin.bat</strong></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">Go to the table <code class="docutils literal"><span class="pre">pgroads</span></code> inside database <code class="docutils literal"><span class="pre">shape2</span></code> and execute the following SQL script for creating an index on the <em>MTFCC</em> column:</p>
+<blockquote>
+<div><div class="highlight-sql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">mtfcc_idx</span> <span class="k">ON</span> <span class="n">pgroads</span> <span class="p">(</span><span class="ss">"MTFCC"</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id5">
+<img alt="../_images/jmeter46.png" src="Vector%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter46.png">
+<p class="caption"><span class="caption-text"><em>Create a new index</em></span></p>
+</div>
+</div></blockquote>
+<p>The following index optimizes the access to the database when filtering on the <em>MTFCC</em> column.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="configuring-geoserver">
+<h2>Configuring GeoServer<a class="headerlink" href="#configuring-geoserver" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">On your Web browser, navigate to the GeoServer <a class="reference external" href="http://localhost:8083/geoserver/">Welcome Page</a>.</p>
+</li>
+<li><p class="first">Following the instructions on <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/adding_data/postgis_lay.html#geoserver-postgis-lay"><span class="std std-ref">Adding a Postgis layer</span></a>, configure the database <code class="docutils literal"><span class="pre">shape2</span></code> in GeoServer, publish the pgroads table and call it <strong>pgroads</strong></p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that the database <cite>Coordinate Reference System</cite> is <code class="docutils literal"><span class="pre">EPSG:4269</span></code></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Configure the shapefile <code class="docutils literal"><span class="pre">tl_2014_01_prisecroads</span></code> used before in GeoServer following the instructions in <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/adding_data/add_shp.html#geoserver-add-shp"><span class="std std-ref">Adding a Shapefile</span></a>, publish a layer and call it <strong>allroads</strong></p>
+<blockquote>
+<div><ul>
+<li><p class="first">Linux: <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/user_data/tl_2014_01_prisecroads/</span></code></p>
+</li>
+<li><p class="first">Windows: <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\user_data\tl_2014_01_prisecroads\</span></code></p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><cite>Coordinate Reference System</cite> of shapefile is <code class="docutils literal"><span class="pre">EPSG:4269</span></code></p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Go to <span class="guilabel">Styles</span> and click on <code class="docutils literal"><span class="pre">Add</span> <span class="pre">new</span> <span class="pre">Style</span></code></p>
+</li>
+<li><p class="first">On the bottom of the page, click on <span class="guilabel">Choose File</span> and select the SLD file called <code class="docutils literal"><span class="pre">shproads</span></code> in the JMeter data directory:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Linux: <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code></li>
+<li>Windows: <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Click on <span class="guilabel">Upload</span> and then on <span class="guilabel">Submit</span>. This new style supports scale dependency which is used as filter on the roads to display.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Filter in SLD rule “Rule1” uses the attribute <code class="docutils literal"><span class="pre">"MTFCC"</span></code> for which an index has been created before.</p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="configuring-jmeter">
+<h2>Configuring JMeter<a class="headerlink" href="#configuring-jmeter" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) and copy the file <code class="docutils literal"><span class="pre">template.jmx</span></code> file creating a <code class="docutils literal"><span class="pre">vector.jmx</span></code> file.</p>
+</li>
+<li><p class="first">From the training root, on the command line, run <code class="docutils literal"><span class="pre">jmeter.bat</span></code> (or <code class="docutils literal"><span class="pre">jmeter.sh</span></code> if you’re on Linux) to start JMeter</p>
+</li>
+<li><p class="first">On the top left go to <span class="guilabel">File –&gt; Open</span> and search for the new <em>jmx</em> file copied</p>
+</li>
+<li><p class="first">In all the <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">Data</span> <span class="pre">Set</span> <span class="pre">Config</span></code> elements, modify the <strong>path</strong> of the CSV file by setting the path for the file <code class="docutils literal"><span class="pre">shp2pg.csv</span></code> in the <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) directory</p>
+</li>
+<li><p class="first">In the <strong>HTTP Request Default</strong> element modify the following parameters:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>layers</td>
+<td>geosolutions:allroads</td>
+</tr>
+<tr class="row-odd"><td>srs</td>
+<td>EPSG:4269</td>
+</tr>
+<tr class="row-even"><td>styles</td>
+<td>shproads</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="test-the-shapefile">
+<h2>Test the Shapefile<a class="headerlink" href="#test-the-shapefile" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Run the test. You should see something like this:</p>
+<blockquote>
+<div><div class="figure align-center" id="id6">
+<img alt="../_images/jmeter47.png" src="Vector%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter47.png">
+<p class="caption"><span class="caption-text"><em>Sample request on the Shapefile</em></span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to run and stop the test a few times for having stable results</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">When the test is completed, Save the results in a text file (e.g. with <strong>Save Table Data</strong> at the bottom of <strong>Summary Report</strong>)</p>
+</li>
+<li><p class="first">Remove the results from JMeter by clicking on <span class="guilabel">Run –&gt; Clear All</span> on the menu</p>
+</li>
+</ol>
+</div>
+<div class="section" id="test-the-database">
+<h2>Test the Database<a class="headerlink" href="#test-the-database" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">In the <strong>HTTP Request Default</strong> element modify the following parameter:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>layers</td>
+<td>geosolutions:pgroads</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">Run the test again. It should be noted that <strong>database throughput should be increased to those of the shapefile</strong>, because the <strong>created index provides a faster access on the database</strong>, improving GeoServer performances.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/styles.html" title="Style Optimizations" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/raster.html" title="Raster Data Optimization" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" accesskey="U">Enterprise Set-up Recommendations</a> »</li>
+        <li><a href="#">Vector Data Optimization</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

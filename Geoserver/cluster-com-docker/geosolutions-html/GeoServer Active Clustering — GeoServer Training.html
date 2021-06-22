@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>GeoServer Active Clustering — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="GeoServer%20Active%20Clustering%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="GeoServer%20Active%20Clustering%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="GeoServer%20Active%20Clustering%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="GeoServer%20Active%20Clustering%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="GeoServer%20Active%20Clustering%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Clustering GeoServer" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">
+    <link rel="next" title="More details on the Active Clustering Extension" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/description.html">
+    <link rel="prev" title="Basic (Passive) GeoServer Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="GeoServer%20Active%20Clustering%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GeoServer Active Clustering</a><ul>
+<li><a class="reference internal" href="#installing-and-configuring-the-geoserver-active-clustering-extension">Installing and Configuring the GeoServer Active Clustering Extension</a></li>
+<li><a class="reference internal" href="#advanced-stand-alone-mom-configuration-and-usage">Advanced Stand-Alone MOM Configuration and Usage</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html" title="previous chapter">Basic (Passive) GeoServer Clustering</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/description.html" title="next chapter">More details on the Active Clustering Extension</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/clustering/active/index.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-clustering.active.index"></span><div class="section" id="geoserver-active-clustering">
+<h1>GeoServer Active Clustering<a class="headerlink" href="#geoserver-active-clustering" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this section, and in the following as well, we are assuming you are familiar with the concept of GeoServer Data Directory</p>
+</div>
+<p>As we have seen in previous sections, various approaches exist to 
+implement a clustered deployment with GeoServer based on different mixes
+ of data directory sharing/syncing plus configuration reload.
+However, these techniques have intrinsic limitations in terms of 
+scalability with respect to the number of layer therefore we decided to 
+create a specific GeoServer Clustering Extension in order to overcome 
+them.</p>
+<p>We have implemented a <strong>Multi Master</strong> extension for GeoServer which leverages on a <strong>Message Oriented Middleware (MOM)</strong> to keep all the nodes in the cluster in synch with respect to their configurations.</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <strong>Masters</strong> accept changes to the internal 
+configuration, persist them on their own data directory and forward them
+ to the Slaves via the MOM (with guaranteed delivery)</li>
+<li>The <strong>Slaves</strong> should not be used to change  the 
+configuration from either REST or the User Interface, since they are 
+configured to receive and inject (directly in memory) configuration 
+changes disseminated by the Master(s) via the MOM</li>
+<li>The <strong>MOM</strong> is used behind the scenes to make the 
+Masters and the Slaves exchange messages that contain changes to the 
+configuration. Sometimes we are going to use the term <strong>Broker</strong> as a synonym for <em>MOM</em></li>
+</ul>
+</div></blockquote>
+<p>Each Slave can be configured to have its own (<strong>private</strong>)
+ data directory, in this case it shall be configured to use a durable 
+subscription to the MOM  to keep its data dir in synch with the Master’s
+ one so that when a configuration change from a Master (through the MOM)
+ is received it will also be persisted. With this configuration in case a
+ Slave goes down when it goes up again he will receive a bunch of 
+configuration changes to align its data directory to the Master’s one.
+In the illustration below this set up (with a Single Master - Multiple 
+Slaves approach) is depicted.</p>
+<div class="figure align-center" id="id1">
+<img alt="Illustration: Single Master - Multiple Slaves cluster with private data directories and external MOM" src="GeoServer%20Active%20Clustering%20%E2%80%94%20GeoServer%20Training_arquivos/Master-Slave_Private_Data_Dir.png">
+<p class="caption"><span class="caption-text">Illustration: Single Master - Multiple Slaves cluster with private data directories and external MOM</span></p>
+</div>
+<p>Such set up is useful in cases when sharing files via shared 
+filesystem is not recommended, hence sharing the data directory is not 
+possible. It is worth to mention that data to be served (e.g. 
+ShapeFiles) should be synced between different instances through an 
+external mechanism.</p>
+<p>It is also possible to share the same data directory between Masters 
+and Slaves as long as the Slave instances are configured to never 
+persist the configuration changes once they are injected in memory and 
+also a single master at a time is used. This is configurable in the 
+GeoServer Active Clustering Extension (more on this later).
+In the illustration below a set up with a Multiple Masters - Multiple 
+Slaves and shared data directory is depicted.</p>
+<div class="figure align-center" id="id2">
+<img alt="Illustration: Multiple Masters - Multiple Slaves and shared data directory" src="GeoServer%20Active%20Clustering%20%E2%80%94%20GeoServer%20Training_arquivos/MultiMaster-MultiSlaveSharedDataDir.png">
+<p class="caption"><span class="caption-text">Illustration: Multiple Masters - Multiple Slaves and shared data directory</span></p>
+</div>
+<p>A similar set up is useful in cases when sharing the data directory 
+across multiple instances is possible (e.g. scaling up or vertical 
+scaling on a single large instance but even scaling out while still 
+having shared/clustered file-system available). It is worth to mention 
+that while changes to the configuration via UI or REST interface should 
+be directed as much as possible to same Master (hence we recommend to 
+configure them in fail-over or Active/Passive). It is however possible 
+to configure all the instances in Active/Active when it comes to 
+answering OGC queries.</p>
+<p>It is worth to point out that with the GeoServer Active Clustering Extension <strong>a Node can be both Master and Slave at the same time</strong> allowing a <strong>Peer-to-Peer</strong>
+ set-up. Generally speaking all nodes can be Master and Slave at the 
+same time, however, as mentioned above, it would be good to configure 
+the load balancer to use a fail-over for configuration changes (GUI or 
+REST) in case frequent changes to the configuration are expected (more 
+on this later).
+In the illustration below a set up with a P2P layout and shared data 
+directory is depicted.</p>
+<div class="figure align-center" id="id3">
+<img alt="Illustration: P2P and shared data directory" src="GeoServer%20Active%20Clustering%20%E2%80%94%20GeoServer%20Training_arquivos/P2p.png">
+<p class="caption"><span class="caption-text">Illustration: P2P and shared data directory</span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All the set-up described so far use a standalone broker.
+ In the following sections we will show how to use an embedded version 
+of the MOM which would make deployments much easier at the cost of less 
+control.</p>
+</div>
+<p>In the following sections we are going to provide more information 
+about how to install and use the Active Clustering Extension for 
+GeoServer.</p>
+<div class="section" id="installing-and-configuring-the-geoserver-active-clustering-extension">
+<h2>Installing and Configuring the GeoServer Active Clustering Extension<a class="headerlink" href="#installing-and-configuring-the-geoserver-active-clustering-extension" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/description.html">More details on the Active Clustering Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/installation.html">Installing the GeoServer Active Clustering Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/usage.html">Configuring the GeoServer Active Clustering Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/topologies.html">Implementing Different Clustering Topologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/advancedbrokerURI.html">Advanced Configuration for the Broker URIs</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="advanced-stand-alone-mom-configuration-and-usage">
+<h2>Advanced Stand-Alone MOM Configuration and Usage<a class="headerlink" href="#advanced-stand-alone-mom-configuration-and-usage" title="Permalink to this headline">¶</a></h2>
+<p>We deliver a web application based on ActiveMQ which is preconfigured
+ to be used with the GeoServer Active Clustering Extension as the MOM.
+Additional information can be found at the links below</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/activemqBroker.html">How-To configure a Standalone ActiveMQ broker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/JDBC.html">JDBC Master/Slave HA Set-Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/SharedFolder.html">Shared File System Master/Slave Set-Up</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/description.html" title="More details on the Active Clustering Extension" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html" title="Basic (Passive) GeoServer Clustering" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html" accesskey="U">Clustering GeoServer</a> »</li>
+        <li><a href="#">GeoServer Active Clustering</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

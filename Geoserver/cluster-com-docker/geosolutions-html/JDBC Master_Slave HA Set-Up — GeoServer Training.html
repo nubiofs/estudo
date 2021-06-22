@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>JDBC Master/Slave HA Set-Up — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="JDBC%20Master_Slave%20HA%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="JDBC%20Master_Slave%20HA%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="JDBC%20Master_Slave%20HA%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="JDBC%20Master_Slave%20HA%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="JDBC%20Master_Slave%20HA%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="GeoServer Active Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html">
+    <link rel="next" title="Shared File System Master/Slave Set-Up" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/SharedFolder.html">
+    <link rel="prev" title="How-To configure a Standalone ActiveMQ broker" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/activemqBroker.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="JDBC%20Master_Slave%20HA%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JDBC Master/Slave HA Set-Up</a><ul>
+<li><a class="reference internal" href="#startup">Startup</a></li>
+<li><a class="reference internal" href="#master-failure">Master failure</a></li>
+<li><a class="reference internal" href="#configuring-jdbc-master-slave">Configuring JDBC Master Slave</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/activemqBroker.html" title="previous chapter">How-To configure a Standalone ActiveMQ broker</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/SharedFolder.html" title="next chapter">Shared File System Master/Slave Set-Up</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/clustering/active/activemq/JDBC.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jdbc-master-slave-ha-set-up">
+<h1>JDBC Master/Slave HA Set-Up<a class="headerlink" href="#jdbc-master-slave-ha-set-up" title="Permalink to this headline">¶</a></h1>
+<p>If you are using pure JDBC and not using the high performance journal
+ then you are generally relying on your database as your single point of
+ failure and persistence engine. If you do not have really high 
+performance requirements this approach can make a lot of sense as you 
+have a single persistence engine to backup and manage etc.</p>
+<div class="section" id="startup">
+<h2>Startup<a class="headerlink" href="#startup" title="Permalink to this headline">¶</a></h2>
+<p>When using just JDBC as the data source you can use a Master Slave 
+approach, running as many brokers as you wish as this diagram shows. On 
+startup one master grabs an exclusive lock in the broker database - all 
+other brokers are slaves and pause waiting for the exclusive lock.</p>
+<div class="figure align-center">
+<img alt="../../../../_images/Startup.png" src="JDBC%20Master_Slave%20HA%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/Startup.png">
+</div>
+<p>Clients should be using the Failover Transport to connect to the 
+available brokers. e.g. using a URL something like the following
+failover:(tcp://broker1:61616,tcp://broker2:61616,tcp://broker3:61616)
+Only the master broker starts up its transport connectors and so the 
+clients can only connect to the master.</p>
+</div>
+<div class="section" id="master-failure">
+<h2>Master failure<a class="headerlink" href="#master-failure" title="Permalink to this headline">¶</a></h2>
+<p>If the master looses connection to the database or looses the 
+exclusive lock then it immediately shuts down. If a master shuts down or
+ fails, one of the other slaves will grab the lock and so the topology 
+switches to the following diagram</p>
+<div class="figure align-center">
+<img alt="../../../../_images/MasterFailed.png" src="JDBC%20Master_Slave%20HA%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/MasterFailed.png">
+</div>
+<p>One of the other other slaves immediately grabs the exclusive lock on
+ the database to them commences becoming the master, starting all of its
+ transport connectors.
+Clients loose connection to the stopped master and then the failover 
+transport tries to connect to the available brokers - of which the only 
+one available is the new master.
+Master restart
+At any time you can restart other brokers which join the cluster and 
+start as slaves waiting to become a master if the master is shutdown or a
+ failure occurs. So the following topology is created after a restart of
+ an old master...</p>
+</div>
+<div class="section" id="configuring-jdbc-master-slave">
+<h2>Configuring JDBC Master Slave<a class="headerlink" href="#configuring-jdbc-master-slave" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<img alt="../../../../_images/MasterRestarted.png" src="JDBC%20Master_Slave%20HA%20Set-Up%20%E2%80%94%20GeoServer%20Training_arquivos/MasterRestarted.png">
+</div>
+<p>By default if you use the &lt;jdbcPersistenceAdapter/&gt; to avoid 
+the high performance journal you will be using JDBC Master Slave by 
+default. You just need to run more than one broker and point the client 
+side URIs to them to get master/slave. This works because they both try 
+an acquire an exclusive lock on a shared table in the database and only 
+one will succeed.</p>
+<p>The following example shows how to configure the ActiveMQ broker in JDBC Master Slave mode</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;beans&gt;</span>
+
+  <span class="c">&lt;!-- Allows us to use system properties as variables in this configuration file --&gt;</span>
+  <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"</span><span class="nt">/&gt;</span>
+
+  <span class="nt">&lt;broker</span> <span class="na">xmlns=</span><span class="s">"http://activemq.apache.org/schema/core"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;destinationPolicy&gt;</span>
+      <span class="nt">&lt;policyMap&gt;&lt;policyEntries&gt;</span>
+
+          <span class="nt">&lt;policyEntry</span> <span class="na">topic=</span><span class="s">"FOO.&gt;"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;dispatchPolicy&gt;</span>
+              <span class="nt">&lt;strictOrderDispatchPolicy</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/dispatchPolicy&gt;</span>
+            <span class="nt">&lt;subscriptionRecoveryPolicy&gt;</span>
+              <span class="nt">&lt;lastImageSubscriptionRecoveryPolicy</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/subscriptionRecoveryPolicy&gt;</span>
+          <span class="nt">&lt;/policyEntry&gt;</span>
+
+      <span class="nt">&lt;/policyEntries&gt;&lt;/policyMap&gt;</span>
+    <span class="nt">&lt;/destinationPolicy&gt;</span>
+
+
+    <span class="nt">&lt;persistenceAdapter&gt;</span>
+        <span class="nt">&lt;jdbcPersistenceAdapter</span> <span class="na">dataDirectory=</span><span class="s">"${activemq.base}/activemq-data"</span><span class="nt">/&gt;</span>
+
+        <span class="c">&lt;!--</span>
+<span class="c">        &lt;jdbcPersistenceAdapter dataDirectory="activemq-data" dataSource="#oracle-ds"/&gt;</span>
+<span class="c">        --&gt;</span>
+    <span class="nt">&lt;/persistenceAdapter&gt;</span>
+
+    <span class="nt">&lt;transportConnectors&gt;</span>
+      <span class="nt">&lt;transportConnector</span> <span class="na">name=</span><span class="s">"default"</span> <span class="na">uri=</span><span class="s">"tcp://localhost:61616"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/transportConnectors&gt;</span>
+
+  <span class="nt">&lt;/broker&gt;</span>
+
+  <span class="c">&lt;!--  This xbean configuration file supports all the standard spring xml configuration options --&gt;</span>
+
+  <span class="c">&lt;!-- Postgres DataSource Sample Setup --&gt;</span>
+  <span class="c">&lt;!--</span>
+<span class="c">  &lt;bean id="postgres-ds" class="org.postgresql.ds.PGPoolingDataSource"&gt;</span>
+<span class="c">    &lt;property name="serverName" value="localhost"/&gt;</span>
+<span class="c">    &lt;property name="databaseName" value="activemq"/&gt;</span>
+<span class="c">    &lt;property name="portNumber" value="0"/&gt;</span>
+<span class="c">    &lt;property name="user" value="activemq"/&gt;</span>
+<span class="c">    &lt;property name="password" value="activemq"/&gt;</span>
+<span class="c">    &lt;property name="dataSourceName" value="postgres"/&gt;</span>
+<span class="c">    &lt;property name="initialConnections" value="1"/&gt;</span>
+<span class="c">    &lt;property name="maxConnections" value="10"/&gt;</span>
+<span class="c">  &lt;/bean&gt;</span>
+<span class="c">  --&gt;</span>
+
+  <span class="c">&lt;!-- MySql DataSource Sample Setup --&gt;</span>
+  <span class="c">&lt;!--</span>
+<span class="c">  &lt;bean id="mysql-ds" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"&gt;</span>
+<span class="c">    &lt;property name="driverClassName" value="com.mysql.jdbc.Driver"/&gt;</span>
+<span class="c">    &lt;property name="url" value="jdbc:mysql://localhost/activemq?relaxAutoCommit=true"/&gt;</span>
+<span class="c">    &lt;property name="username" value="activemq"/&gt;</span>
+<span class="c">    &lt;property name="password" value="activemq"/&gt;</span>
+<span class="c">    &lt;property name="poolPreparedStatements" value="true"/&gt;</span>
+<span class="c">  &lt;/bean&gt;</span>
+<span class="c">  --&gt;</span>
+
+  <span class="c">&lt;!-- Oracle DataSource Sample Setup --&gt;</span>
+  <span class="c">&lt;!--</span>
+<span class="c">  &lt;bean id="oracle-ds" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"&gt;</span>
+<span class="c">    &lt;property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/&gt;</span>
+<span class="c">    &lt;property name="url" value="jdbc:oracle:thin:@localhost:1521:AMQDB"/&gt;</span>
+<span class="c">    &lt;property name="username" value="scott"/&gt;</span>
+<span class="c">    &lt;property name="password" value="tiger"/&gt;</span>
+<span class="c">    &lt;property name="poolPreparedStatements" value="true"/&gt;</span>
+<span class="c">  &lt;/bean&gt;</span>
+<span class="c">  --&gt;</span>
+
+  <span class="c">&lt;!-- Embedded Derby DataSource Sample Setup --&gt;</span>
+  <span class="c">&lt;!--</span>
+<span class="c">  &lt;bean id="derby-ds" class="org.apache.derby.jdbc.EmbeddedDataSource"&gt;</span>
+<span class="c">    &lt;property name="databaseName" value="derbydb"/&gt;</span>
+<span class="c">    &lt;property name="createDatabase" value="create"/&gt;</span>
+<span class="c">  &lt;/bean&gt;</span>
+<span class="c">  --&gt;</span>
+
+<span class="nt">&lt;/beans&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>[JDBC Master Slave]</dt>
+<dd><a class="reference external" href="http://activemq.apache.org/jdbc-master-slave.html">http://activemq.apache.org/jdbc-master-slave.html</a></dd>
+<dt>[Shared File System Master Slave]</dt>
+<dd><a class="reference external" href="http://activemq.apache.org/shared-file-system-master-slave.html">http://activemq.apache.org/shared-file-system-master-slave.html</a></dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/SharedFolder.html" title="Shared File System Master/Slave Set-Up" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/activemqBroker.html" title="How-To configure a Standalone ActiveMQ broker" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">Clustering GeoServer</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html" accesskey="U">GeoServer Active Clustering</a> »</li>
+        <li><a href="#">JDBC Master/Slave HA Set-Up</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Style Optimizations — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    <link rel="next" title="Tile Caching with GeoWebCache" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/gwc.html">
+    <link rel="prev" title="Vector Data Optimization" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/vector.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Style Optimizations</a><ul>
+<li><a class="reference internal" href="#use-scale-dependencies">Use scale dependencies</a></li>
+<li><a class="reference internal" href="#labeling">Labeling</a></li>
+<li><a class="reference internal" href="#the-concept-of-featuretypestyle">The Concept of FeatureTypeStyle</a></li>
+<li><a class="reference internal" href="#use-translucency-sparingly">Use translucency sparingly</a></li>
+<li><a class="reference internal" href="#configuring-geoserver">Configuring GeoServer</a></li>
+<li><a class="reference internal" href="#configuring-jmeter">Configuring JMeter</a></li>
+<li><a class="reference internal" href="#test-with-unoptimized-styles">Test with unoptimized styles</a></li>
+<li><a class="reference internal" href="#setting-optimized-styles">Setting optimized styles</a></li>
+<li><a class="reference internal" href="#test-with-optimized-styles">Test with optimized styles</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/vector.html" title="previous chapter">Vector Data Optimization</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/gwc.html" title="next chapter">Tile Caching with GeoWebCache</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/styles.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="style-optimizations">
+<span id="geoserver-jmeter-styles"></span><h1>Style Optimizations<a class="headerlink" href="#style-optimizations" title="Permalink to this headline">¶</a></h1>
+<p>The following section explains how GeoServer performances are 
+improved when using optimized styles since styling is an important 
+feature but requires some  attention in order to avoid slowing down the 
+performances.
+This tutorial aims at showing how GeoServer performances change by 
+choosing a different style for the same data set using JMeter.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This example requires to have already completed <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/adding_data/add_shp.html#geoserver-add-shp"><span class="std std-ref">Adding a Shapefile</span></a>, <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/pretty_maps/add_style.html#geoserver-add-style"><span class="std std-ref">Adding a Style</span></a> and the first 9 steps of the <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/pretty_maps/base_map.html#geoserver-base-map"><span class="std std-ref">Creating a Base Map with a Layer Group</span></a> section.</p>
+</div>
+<div class="section" id="use-scale-dependencies">
+<h2>Use scale dependencies<a class="headerlink" href="#use-scale-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>One of the key tricks with styling data is to delay the display of 
+detailed layers at higher zoom levels by filtering data based on 
+attributes to display only the <strong>important</strong> features first.</p>
+<p>If you show too much data the map will not be readable, but rather a 
+graphic blob. Rule of thumb: never show more than 1000 features 
+(records) max in the display. A few additional hints:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Have labels show up only when zoomed in</li>
+<li>Show details as you zoom in</li>
+<li>Eagerly add MinScaleDenominator to your SLD rules</li>
+<li>Add more expensive rendering when there are less features, this is key to get both a good looking and fast map</li>
+</ul>
+</div></blockquote>
+<p>In the picture below we can see various applications of scale 
+dependencies. Detailed layers, such as streets and buildings, show up 
+only when fairly zoomed in. The DEM is hidden when we get very close to 
+the city to avoid getting the representation too «busy», visually 
+speaking. The streets change from simple line to cased line.</p>
+<blockquote>
+<div><div class="figure align-center" id="id2">
+<img alt="../_images/styling1.png" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/styling1.png">
+<p class="caption"><span class="caption-text"><em>Proper usage of scale dependencies</em></span></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="labeling">
+<h2>Labeling<a class="headerlink" href="#labeling" title="Permalink to this headline">¶</a></h2>
+<p>Labels are one of the most important elements in creating good looking maps. Here below some recommendations:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Labeling conflict resolution is expensive, limit to the most inner zooms</p>
+</li>
+<li><p class="first">Halo is important for readability, but adds significant overhead</p>
+</li>
+<li><p class="first">Be careful with maxDisplacement, makes for various label location attempts</p>
+<blockquote>
+<div><div class="figure align-center" id="id3">
+<img alt="../_images/styling2.png" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/styling2.png">
+<p class="caption"><span class="caption-text"><em>Proper labels at work</em></span></p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="the-concept-of-featuretypestyle">
+<h2>The Concept of FeatureTypeStyle<a class="headerlink" href="#the-concept-of-featuretypestyle" title="Permalink to this headline">¶</a></h2>
+<p>GeoServer uses SLD FeatureTypeStyle objects as Z layers for painting.
+  Each one allocates its own rendering surface (which can use a lot of 
+memory), hence the recommendation here is to use as few of them as 
+possible.</p>
+<blockquote>
+<div><div class="figure align-center" id="id4">
+<img alt="../_images/styling3.png" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/styling3.png">
+<p class="caption"><span class="caption-text"><em>FeatureTypeStyle at work</em></span></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="use-translucency-sparingly">
+<h2>Use translucency sparingly<a class="headerlink" href="#use-translucency-sparingly" title="Permalink to this headline">¶</a></h2>
+<p>Translucent display is expensive, use it sparingly (e.g. translucent fill <code class="docutils literal"><span class="pre">&lt;CssParameter</span> <span class="pre">name="fill-opacity"&gt;0.5&lt;/CssParameter&gt;</span></code>).</p>
+<p>Delay the display of detailed layers at higher zoom levels, filter based on attributes to display only the <em>important</em> features first.</p>
+<p>Ok now let’s dive into benchmarking various styling options.</p>
+</div>
+<div class="section" id="configuring-geoserver">
+<h2>Configuring GeoServer<a class="headerlink" href="#configuring-geoserver" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">On your Web browser, navigate to the GeoServer <a class="reference external" href="http://localhost:8083/geoserver/">Welcome Page</a>.</p>
+</li>
+<li><p class="first">Go to <span class="guilabel">Styles</span> and click on <code class="docutils literal"><span class="pre">Add</span> <span class="pre">new</span> <span class="pre">Style</span></code></p>
+</li>
+<li><p class="first">On the bottom of the page, click on <span class="guilabel">Choose File</span> and select the SLD file called <code class="docutils literal"><span class="pre">line_label</span></code> in the <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> if you are on Windows )  directory</p>
+</li>
+<li><p class="first">Click on <span class="guilabel">Upload</span> and then on <span class="guilabel">Submit</span>. Now we have a style which supports labeling but has no control on the label conflicts and overlapping</p>
+</li>
+<li><p class="first">Return to the GeoServer <a class="reference external" href="http://localhost:8083/geoserver/">Welcome Page</a>.</p>
+</li>
+<li><p class="first">Go to <span class="guilabel">Layer Groups</span> and click on <code class="docutils literal"><span class="pre">test</span></code></p>
+</li>
+<li><p class="first">Add a new Layer to the Layer Group called <strong>bbuildings</strong></p>
+<blockquote>
+<div><div class="figure align-center" id="id5">
+<img alt="../_images/jmeter36.png" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter36.png">
+<p class="caption"><span class="caption-text"><em>Add a new Layer to the Layer Group</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Change the associated styles by clicking on each style and choosing another one on the list. Use the following styles:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Layer</strong></td>
+<td><strong>Style</strong></td>
+</tr>
+<tr class="row-even"><td>geosolutions:Mainrd</td>
+<td>line_label</td>
+</tr>
+<tr class="row-odd"><td>geosolutions:BoulderCityLimits</td>
+<td>polygon</td>
+</tr>
+<tr class="row-even"><td>geosolutions:bplandmarks</td>
+<td>polygon</td>
+</tr>
+<tr class="row-odd"><td>geosolutions:bbuildings</td>
+<td>polygon</td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-center" id="id6">
+<img alt="../_images/jmeter37.png" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter37.png">
+<p class="caption"><span class="caption-text"><em>Styles configuration</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Click on <span class="guilabel">Save</span>. With 
+this configuration we have a Layer Group composed by 4 Layers with 4 bad
+ styles associated. This will result in a low throughput, if compared to
+ that of the test with optimized styels.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="configuring-jmeter">
+<h2>Configuring JMeter<a class="headerlink" href="#configuring-jmeter" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) and copy the file <code class="docutils literal"><span class="pre">template.jmx</span></code> file and create a <code class="docutils literal"><span class="pre">styles.jmx</span></code> one</p>
+</li>
+<li><p class="first">From the training root, on the command line, run <code class="docutils literal"><span class="pre">jmeter.bat</span></code> ( or <code class="docutils literal"><span class="pre">jmeter.sh</span></code> if you’re on Linux) to start JMeter</p>
+</li>
+<li><p class="first">On the top left go to <span class="guilabel">File –&gt; Open</span> and search for the new <em>jmx</em> file copied</p>
+</li>
+<li><p class="first">Disable <strong>Thread Group</strong> <strong>8</strong>, <strong>16</strong>, <strong>32</strong> and <strong>64</strong></p>
+</li>
+<li><p class="first">In the active <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">Data</span> <span class="pre">Set</span> <span class="pre">Config</span></code> elements, modify the <strong>path</strong> of the CSV file by setting the path for the file <code class="docutils literal"><span class="pre">style.csv</span></code> in the <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code>  ( or <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) directory</p>
+</li>
+<li><p class="first">In the <strong>HTTP Request Default</strong> element modify the following parameters:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>layers</td>
+<td>test</td>
+</tr>
+<tr class="row-odd"><td>srs</td>
+<td>EPSG:2876</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="test-with-unoptimized-styles">
+<h2>Test with unoptimized styles<a class="headerlink" href="#test-with-unoptimized-styles" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Run the test. You should see something like this:</p>
+<blockquote>
+<div><div class="figure align-center" id="id7">
+<img alt="../_images/jmeter38.png" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter38.png">
+<p class="caption"><span class="caption-text"><em>View Results Tree panel with a bad styling</em></span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to run and stop the test a few times for having stable results</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">When the test is completed, Save the results in a text file.</p>
+</li>
+<li><p class="first">Remove the result from JMeter by clicking on <span class="guilabel">Run –&gt; Clear All</span> on the menu</p>
+</li>
+</ol>
+</div>
+<div class="section" id="setting-optimized-styles">
+<h2>Setting optimized styles<a class="headerlink" href="#setting-optimized-styles" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Go to <span class="guilabel">Layer Groups</span> and click on <code class="docutils literal"><span class="pre">test</span></code></p>
+</li>
+<li><p class="first">Change the associated styles by clicking on each style and choosing another one on the list. Use the following styles:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Layer</strong></td>
+<td><strong>Style</strong></td>
+</tr>
+<tr class="row-even"><td>geosolutions:Mainrd</td>
+<td>mainrd</td>
+</tr>
+<tr class="row-odd"><td>geosolutions:BoulderCityLimits</td>
+<td>citylimits</td>
+</tr>
+<tr class="row-even"><td>geosolutions:bplandmarks</td>
+<td>arealandmarks</td>
+</tr>
+<tr class="row-odd"><td>geosolutions:bbuildings</td>
+<td>buildings</td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-center" id="id8">
+<img alt="../_images/jmeter39.png" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter39.png">
+<p class="caption"><span class="caption-text"><em>Styles configuration</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Click on <span class="guilabel">Save</span>. The new styles contain scale dependencies and label optimization, which will result in a better throughput.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="test-with-optimized-styles">
+<h2>Test with optimized styles<a class="headerlink" href="#test-with-optimized-styles" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Run again the test.</p>
+<blockquote>
+<div><div class="figure align-center" id="id9">
+<img alt="../_images/jmeter40.png" src="Style%20Optimizations%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter40.png">
+<p class="caption"><span class="caption-text"><em>View Results Tree panel with good styling</em></span></p>
+</div>
+<p>You may see that the throughput is greater than that of the first 
+test. The use of scale dependencies reduces the layers to see at lower 
+zoom levels while conflict resolution avoids to show multiple 
+overlapping label at each zoom level.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/gwc.html" title="Tile Caching with GeoWebCache" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/vector.html" title="Vector Data Optimization" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" accesskey="U">Enterprise Set-up Recommendations</a> »</li>
+        <li><a href="#">Style Optimizations</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

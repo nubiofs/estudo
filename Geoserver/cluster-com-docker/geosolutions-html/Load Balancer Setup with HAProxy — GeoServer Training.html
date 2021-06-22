@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Load Balancer Setup with HAProxy — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Load%20Balancer%20Setup%20with%20HAProxy%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Load%20Balancer%20Setup%20with%20HAProxy%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Load%20Balancer%20Setup%20with%20HAProxy%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Load%20Balancer%20Setup%20with%20HAProxy%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Load%20Balancer%20Setup%20with%20HAProxy%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Clustering GeoServer" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">
+    <link rel="next" title="Load Balancer Setup with IIS" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/microsoft_IIS.html">
+    <link rel="prev" title="Load Balancer Setup with Apache HTTP" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/apache_http.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Load%20Balancer%20Setup%20with%20HAProxy%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Load Balancer Setup with HAProxy</a><ul>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#the-timeout-directives">The timeout directives</a></li>
+<li><a class="reference internal" href="#configuring-the-logs">Configuring the logs</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/apache_http.html" title="previous chapter">Load Balancer Setup with Apache HTTP</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/microsoft_IIS.html" title="next chapter">Load Balancer Setup with IIS</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/load_balancing/haproxy.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-haproxy"></span><div class="section" id="load-balancer-setup-with-haproxy">
+<span id="haproxy"></span><h1>Load Balancer Setup with HAProxy<a class="headerlink" href="#load-balancer-setup-with-haproxy" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>For all the links of this training to work correctly, you have to disable the URL parameters encryption under <strong>Security</strong> –&gt; <strong>Settings</strong>.</p>
+<p class="last">Unselect the <strong>Encrypt web admin URL parameters</strong> option and <em>Save</em></p>
+</div>
+<p>To install the HAProxy on an ubuntu server use the apt-get command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">haproxy</span>
+</pre></div>
+</div>
+<p>We need to enable HAProxy to be started by the init script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">haproxy</span>
+</pre></div>
+</div>
+<p>Set the ENABLED option to 1:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">ENABLED</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>To check if this change is done properly execute the init script of HAProxy without any parameters.
+You should see the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">service</span> <span class="n">haproxy</span>
+<span class="n">Usage</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">haproxy</span> <span class="p">{</span><span class="n">start</span><span class="o">|</span><span class="n">stop</span><span class="o">|</span><span class="n">reload</span><span class="o">|</span><span class="n">restart</span><span class="o">|</span><span class="n">status</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Now create and edit a new configuration file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">haproxy</span><span class="o">/</span><span class="n">haproxy</span><span class="o">.</span><span class="n">cfg</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>In the proposed configuration we provide a single frontend called 
+(http-in) on the port 88 which will proxy 2 different backends:</dt>
+<dd><ol class="first last arabic simple">
+<li><a class="reference external" href="http://localhost:88/geoserver">geoserver</a> Is the default backend and will serve requests using a roundrobin algorithm to balance the <strong>OGC</strong> requests between all the available tomcat instances.</li>
+<li><a class="reference external" href="http://localhost:88/geoserver_adm">geoserver_adm</a> Is used to serve administration requests to geoserver (via gui or REST)</li>
+</ol>
+</dd>
+</dl>
+<p>The frontend specifies a small set of rules used to redirect the incoming requests to the right backend.
+The rule:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">acl</span> <span class="n">IS_ADM</span> <span class="n">path_beg</span> <span class="o">/</span><span class="n">geoserver_adm</span>
+</pre></div>
+</div>
+<p>Checks if the path begin with the /geoserver_adm string, if so the frontend will select the geoserver_adm backend via the:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">use_backend</span> <span class="n">geoserver_adm</span> <span class="k">if</span> <span class="n">IS_ADM</span> <span class="o">||</span> <span class="n">IS_GEOADMIN</span>
+</pre></div>
+</div>
+<p>When the <strong>geoserver_adm</strong> backend is selected:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">A cookie called GEOADMIN is added to the request 
+(here we have only 1 master instance so the value of this cookie will be
+ ‘‘1’‘):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">cookie</span> <span class="n">GEOADMIN</span> <span class="n">insert</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The url is rewritten (ignoring case) as <a class="reference external" href="http://localhost:88/geoserver">http://localhost:88/geoserver</a></p>
+<blockquote>
+<div><p>reqirep ^([^:]*)/geoserver_adm(.*)     1/geoserver/2</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>Any further request will ship the cookie called GEOADMIN so next call to the <a class="reference external" href="http://localhost:88/geoserver">http://localhost:88/geoserver</a> URL will be redirected to the right backend (geoserver_adm).</dt>
+<dd><p class="first">This is checked by the following rule:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span class="n">acl</span> <span class="n">IS_GEOADMIN</span> <span class="n">hdr_sub</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span> <span class="n">GEOADMIN</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<p>Then we have on the port 8088 the usual statistics monitor proxied by the listener called <strong>admin</strong> which can be accessed using the url:</p>
+<blockquote>
+<div><a class="reference external" href="http://localhost:8088/haproxy?stats">http://localhost:8088/haproxy?stats</a></div></blockquote>
+<p>The configuration is shown below:</p>
+<div class="highlight-default"><div class="highlight"><pre>global
+    log 127.0.0.1 local0
+    log 127.0.0.1 local0 notice
+    maxconn 2000
+    user haproxy
+    group haproxy
+    daemon
+
+frontend http-in
+    bind *:88
+    mode http
+    timeout client          1m
+    # acl routing to backend
+      # check for the ADM backend
+      acl IS_GEOADMIN hdr_sub(cookie) GEOADMIN
+      acl IS_ADM path_beg /geoserver_adm
+
+    # which backend
+      # ADM backend
+      use_backend geoserver_adm if IS_ADM || IS_GEOADMIN
+      # default backend
+      default_backend geoserver
+
+backend geoserver
+    mode http
+    balance roundrobin
+    timeout connect         10s
+    timeout server          1m
+    server geoserver_1 localhost:8083/geoserver maxconn 1000 check port 8083
+    server geoserver_2 localhost:8082/geoserver maxconn 1000 check port 8082
+
+backend geoserver_adm
+    mode http
+    option httpclose
+    option httplog
+    timeout connect         10s
+    timeout server          1m
+    balance roundrobin
+    cookie GEOADMIN insert
+    reqirep ^([^\ :]*)\ /geoserver_adm(.*)     \1\ /geoserver/\2
+    server geoserver_1 localhost:8083/geoserver cookie 1 maxconn 30 check port 8083
+
+listen admin
+    bind *:8088
+    mode http
+    stats enable
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    stats uri /haproxy?stats
+
+defaults
+    log     global
+    mode http
+    option httpclose
+    option httplog
+    option  dontlognull
+    retries 3
+    option redispatch
+    timeout connect  5000
+    timeout client  10000
+    timeout server  10000
+</pre></div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>option httpclose</strong> enable or disable passive HTTP connection closing.</p>
+<p>The <strong>option httplog</strong> enable logging of HTTP request, session state and timers.</p>
+<p>The <strong>log</strong> directive mentions a syslog server to which 
+log messages will be sent. On Ubuntu rsyslog is already installed and 
+running but it doesn’t listen on any IP address. We’ll modify the config
+ files of rsyslog later.</p>
+<p>The <strong>maxconn</strong> directive specifies the number of 
+concurrent connections on the frontend. The default value is 2000 and 
+should be tuned according to your desired configuration.</p>
+<p>The <strong>user</strong> and <strong>group</strong> directives changes the HAProxy process to the specified user/group.</p>
+</div>
+<div class="section" id="the-timeout-directives">
+<h2>The timeout directives<a class="headerlink" href="#the-timeout-directives" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>connect</strong> option specifies the maximum time to wait for a connection attempt to a VPS to succeed.</p>
+<p>The <strong>client</strong> and <strong>server</strong> timeouts apply when the client or server is expected to acknowledge or send data during the TCP process.
+HAProxy recommends setting the client and server timeouts to the same value.</p>
+<p>The <strong>retries</strong> directive sets the number of retries to perform on a VPS after a connection failure.</p>
+<p>The <strong>stats</strong> directives enable the connection 
+statistics page and protects it with HTTP Basic authentication using the
+ credentials specified by the stats auth directive.
+This page can viewed with the URL mentioned in stats uri so in this 
+case, it is <a class="reference external" href="http://localhost:8088/haproxy?stats">http://localhost:8088/haproxy?stats</a></p>
+</div>
+<div class="section" id="configuring-the-logs">
+<h2>Configuring the logs<a class="headerlink" href="#configuring-the-logs" title="Permalink to this headline">¶</a></h2>
+<p>In the global section we added a line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">log</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span> <span class="n">local0</span> <span class="n">notice</span>
+</pre></div>
+</div>
+<p>which sends syslog messages to the localhost IP address. But by default, rsyslog on Ubuntu doesn’t listen on any address.
+So we have to make it do so.</p>
+<p>Edit the config file of rsyslog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">rsyslog</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Add/Edit/Uncomment the following lines:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ModLoad imudp
+$UDPServerAddress 127.0.0.1
+$UDPServerRun 514
+</pre></div>
+</div>
+<p>Now rsyslog will work on UDP port 514 on address 127.0.0.1 but all 
+HAProxy messages will go to /var/log/syslog so we have to separate them.</p>
+<p>Create a rule for HAProxy logs:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">rsyslog</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">haproxy</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Add the following line to it:</p>
+<div class="highlight-default"><div class="highlight"><pre>if ($programname == 'haproxy') then -/var/log/haproxy.log
+</pre></div>
+</div>
+<p>Now restart the rsyslog service:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">service</span> <span class="n">rsyslog</span> <span class="n">restart</span>
+</pre></div>
+</div>
+<p>This writes all HAProxy messages and access logs to /var/log/haproxy.log</p>
+<p>For any other details on options and configuration check the official documentation <a class="reference external" href="http://haproxy.1wt.eu/download/1.4/doc/configuration.txt">here</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/microsoft_IIS.html" title="Load Balancer Setup with IIS" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/apache_http.html" title="Load Balancer Setup with Apache HTTP" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html" accesskey="U">Clustering GeoServer</a> »</li>
+        <li><a href="#">Load Balancer Setup with HAProxy</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

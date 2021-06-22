@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Basics of clustering with Apache Tomcat — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Basics%20of%20clustering%20with%20Apache%20Tomcat%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Basics%20of%20clustering%20with%20Apache%20Tomcat%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Basics%20of%20clustering%20with%20Apache%20Tomcat%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Basics%20of%20clustering%20with%20Apache%20Tomcat%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Basics%20of%20clustering%20with%20Apache%20Tomcat%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Clustering GeoServer" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">
+    <link rel="next" title="Load Balancer Setup with Apache HTTP" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/apache_http.html">
+    <link rel="prev" title="Shared File System Master/Slave Set-Up" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/SharedFolder.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Basics%20of%20clustering%20with%20Apache%20Tomcat%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basics of clustering with Apache Tomcat</a><ul>
+<li><a class="reference internal" href="#apache-tomcat-configuration-for-vertical-clustering">Apache Tomcat configuration for vertical clustering</a></li>
+<li><a class="reference internal" href="#tomcat-connectors">Tomcat connectors</a><ul>
+<li><a class="reference internal" href="#http">HTTP</a></li>
+<li><a class="reference internal" href="#ajp">AJP</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#prepare-tomcat-connectors">Prepare Tomcat connectors</a><ul>
+<li><a class="reference internal" href="#http-connector">HTTP connector</a></li>
+<li><a class="reference internal" href="#ajp-connector">AJP connector</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#personalize-geoserver-instances">Personalize GeoServer instances</a><ul>
+<li><a class="reference internal" href="#step-1-basic-customization-for-instances-environment-variables">Step 1: Basic Customization for instances’ environment variables</a></li>
+<li><a class="reference internal" href="#step-2-customization-for-instances-environment-variables-related-to-geoserver">Step 2: Customization for instances’ environment variables related to GeoServer</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/SharedFolder.html" title="previous chapter">Shared File System Master/Slave Set-Up</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/apache_http.html" title="next chapter">Load Balancer Setup with Apache HTTP</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/load_balancing/tomcat.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-tomcat"></span><div class="section" id="basics-of-clustering-with-apache-tomcat">
+<span id="tomcat"></span><h1>Basics of clustering with Apache Tomcat<a class="headerlink" href="#basics-of-clustering-with-apache-tomcat" title="Permalink to this headline">¶</a></h1>
+<p>A Tomcat worker is a Tomcat instance that is waiting to execute 
+servlets on behalf of some web application. For example, we can have a 
+web server such as Apache Http forwarding  requests to a Tomcat process 
+(the worker) running behind it.</p>
+<p>The scenario described above is a very simple one; in fact one can 
+configure multiple Tomcat workers to serve servlets on behalf of a 
+certain web server.
+The reasons for such configuration can be:</p>
+<blockquote>
+<div><ul class="simple">
+<li>We want different contexts to be served by different Tomcat workers 
+to provide a development environment where all the developers share the 
+same web server but own a Tomcat worker of their own.</li>
+<li>We want different virtual hosts served by different Tomcat processes
+ to provide a clear separation between sites belonging to different 
+companies.</li>
+<li>We want to provide load balancing, meaning run multiple Tomcat 
+workers each on a machine of its own and distribute the requests between
+ them.</li>
+</ul>
+</div></blockquote>
+<p>The package we prepared for this training contains a ready to use 
+installation for Apache Tomcat 6.0.36 with multiple instances that can 
+be used as master and/or slaves depending on the type of clustering we 
+want to perform.</p>
+<div class="section" id="apache-tomcat-configuration-for-vertical-clustering">
+<h2>Apache Tomcat configuration for vertical clustering<a class="headerlink" href="#apache-tomcat-configuration-for-vertical-clustering" title="Permalink to this headline">¶</a></h2>
+<p>The first step to perform in order to create a vertical cluster with 
+Apache Tomcat to run multiple instances on the same box (physical or 
+virtual) is actually have a single Tomcat HOME folder containing the 
+standard Apache Tomcat binaries but then configuring additional Tomcat 
+BASE folders containing the configurations for each instance (We are 
+assuming the reader is familiar with Tomcat and relative concepts and 
+terminology).</p>
+<p>First of all we should download a version of the Apache Tomcat 
+binaries (in this document we are using 6.0.36) and extract them into a 
+common folder, which will become the CATALINA_HOME default folder.</p>
+<p>Next step, we should start to create a new folder for each instance 
+we want to have. This folder will contain the following sub-folders, 
+copied from the original Tomcat folders that are part of the download:</p>
+<blockquote>
+<div><ul class="simple">
+<li>bin/ : we should empty this directory after we copy it. It will contain scripts to set environmental variables</li>
+<li>conf/ :</li>
+<li>logs/ : empty; will contain the Tomcat logs for the specific instance</li>
+<li>temp/ : empty; will contain the temp files for the specific instance</li>
+<li>work/ : empty; will contain the compiled JSPs for the specific instance</li>
+</ul>
+</div></blockquote>
+<p>You need to repeat this step for each instance we want to have. In 
+our sample package we created multiple directories which we’ll allow us 
+to run multiple instances of Tomcat on the same machine.
+On Windows you can find the instances under:</p>
+<div class="highlight-xml"><div class="highlight"><pre>%TRAINING_ROOT%\tomcat-7.0.72\instances\
+</pre></div>
+</div>
+<p>On Linux you can find the instances under:</p>
+<div class="highlight-xml"><div class="highlight"><pre>\opt\tomcat_geoserver\
+\opt\tomcat_geoserver2\
+</pre></div>
+</div>
+</div>
+<div class="section" id="tomcat-connectors">
+<h2>Tomcat connectors<a class="headerlink" href="#tomcat-connectors" title="Permalink to this headline">¶</a></h2>
+<p>Now, we need to tweak the ports used by each Tomcat instance.
+This means opening up the <strong>conf/server.xml</strong> file inside the conf directory for each instance and making sure the various instances use different ports for each service.
+As an instance we did the following:</p>
+<ol class="arabic simple">
+<li>Instance 1</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>shutdown port 8005</li>
+<li>HTTP connector port 8083</li>
+<li>AJP connector port 8009</li>
+<li>HTTPS port 8443</li>
+</ol>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Instance 2</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>shutdown port 8006</li>
+<li>HTTP connector port 8082</li>
+<li>AJP connector port 8010</li>
+<li>HTTPS port 8444</li>
+</ol>
+</div></blockquote>
+<div class="section" id="http">
+<h3>HTTP<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h3>
+<p>The HTTP connector is setup by default with Tomcat, and is ready to 
+use.
+This connector features the lowest latency and best overall performance.
+For clustering, a HTTP load balancer with support for web sessions 
+stickiness must be installed to direct the traffic to the Tomcat 
+servers.
+Tomcat supports mod_proxy (on Apache HTTP Server 2.x, and included by 
+default in Apache HTTP Server 2.2) as the load balancer.
+It should be noted that the performance of HTTP proxying is usually 
+lower than the performance of AJP, so AJP clustering is often 
+preferable.</p>
+</div>
+<div class="section" id="ajp">
+<h3>AJP<a class="headerlink" href="#ajp" title="Permalink to this headline">¶</a></h3>
+<p>When using a single server, the performance when using a native 
+webserver in front of the Tomcat instance is most of the time 
+significantly worse than a standalone Tomcat with its default HTTP 
+connector, even if a large part of the web application is made of static
+ files.
+If integration with the native webserver is needed for any reason, an 
+AJP connector will provide faster performance than proxied HTTP.
+AJP clustering is the most efficient from the Tomcat perspective.
+It is otherwise functionally equivalent to HTTP clustering.</p>
+</div>
+</div>
+<div class="section" id="prepare-tomcat-connectors">
+<h2>Prepare Tomcat connectors<a class="headerlink" href="#prepare-tomcat-connectors" title="Permalink to this headline">¶</a></h2>
+<p>Note also that we have configured a route for each slave, all of the 
+above settings should be done into the ${CATALINA_BASE}/conf/server.xml 
+file of each tomcat slave instance:</p>
+<div class="section" id="http-connector">
+<h3>HTTP connector<a class="headerlink" href="#http-connector" title="Permalink to this headline">¶</a></h3>
+<p>Edit the <strong>conf/server.xml</strong> file located into your CATALINA_BASE instance folder and modify the connector as following:</p>
+<div class="highlight-default"><div class="highlight"><pre>  &lt;!-- A "Connector" represents an endpoint by which requests are received
+          and responses are returned. Documentation at :
+          Java HTTP Connector: /docs/config/http.html (blocking &amp; non-blocking)
+          Java AJP  Connector: /docs/config/ajp.html
+          APR (HTTP/AJP) Connector: /docs/apr.html
+          Define a non-SSL HTTP/1.1 Connector on port 8083
+      --&gt;
+  &lt;Connector port="8083" protocol="HTTP/1.1"
+            connectionTimeout="20000"
+            redirectPort="8443" /&gt;
+
+.. note:: To add multiple instances you may modify the port attributes.
+</pre></div>
+</div>
+</div>
+<div class="section" id="ajp-connector">
+<h3>AJP connector<a class="headerlink" href="#ajp-connector" title="Permalink to this headline">¶</a></h3>
+<p>The following steps show you how to set the ajp connector port.</p>
+<p>Edit the <strong>conf/server.xml</strong> file located into your CATALINA_BASE instance folder and modify the connector as following:</p>
+<div class="highlight-default"><div class="highlight"><pre>&lt;!-- Define an AJP 1.3 Connector on port 8009 --&gt;
+      &lt;Connector port="8009" protocol="AJP/1.3" redirectPort="8443" connectionTimeout="20000" /&gt;
+</pre></div>
+</div>
+<p>and the route name into the Engine node:</p>
+<div class="highlight-default"><div class="highlight"><pre>&lt;!-- You should set jvmRoute to support load-balancing via AJP ie :
+&lt;Engine name="Catalina" defaultHost="localhost" jvmRoute="jvm1"&gt;
+--&gt;
+&lt;Engine defaultHost="localhost" name="Catalina" jvmRoute="route1"&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="personalize-geoserver-instances">
+<h1>Personalize GeoServer instances<a class="headerlink" href="#personalize-geoserver-instances" title="Permalink to this headline">¶</a></h1>
+<p>In the following sections we will go over the steps needed to 
+configure multiple Tomcat instances to run GeoServer in a perfect 
+Active-Active clustered configuration with Apache HTTP.</p>
+<div class="section" id="step-1-basic-customization-for-instances-environment-variables">
+<h2>Step 1: Basic Customization for instances’ environment variables<a class="headerlink" href="#step-1-basic-customization-for-instances-environment-variables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Create a setenv.bat file in the bin folder for each instance</li>
+<li>Make sure the JAVA_HOME and JRE_HOME contains the full path of the JDK you intend to use</li>
+<li>Make sure CATALINA_BASE contains the full path of the Apache Tomcat base folder</li>
+<li>Set the instance name to use the same name of the directory that contains the config for such an instance</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>In the provided training <strong>Linux environment</strong> the variable is configured in <em>setenv.sh</em> located in the conf folder of each tomcat instance: <code class="docutils literal"><span class="pre">/opt/tomcat_geoserver/conf/setenv.sh</span></code> and <code class="docutils literal"><span class="pre">/opt/tomcat_geoserver2/conf/setenv.sh</span></code></li>
+</ul>
+</div></blockquote>
+<p>The setenv.bat so far looks like the following:</p>
+<div class="highlight-xml"><div class="highlight"><pre>REM Setting Java
+set JAVA_HOME=%TRAINING_ROOT%\jdk
+set JRE_HOME=%JAVA_HOME%/jre
+rem basic Tomcat configuration
+set INSTANCE_NAME=instance1
+set CATALINA_HOME=%TRAINING_ROOT%\tomcat-7.0.72
+set CATALINA_BASE=%CATALINA_HOME%\instances\%INSTANCE_NAME%
+</pre></div>
+</div>
+<p>Notice how we initialized the CATALINA_BASE environmental variable.</p>
+<p>This set up works since the various instances have been created in a 
+path contained within the CATALINA_HOME directory where the parent 
+Tomcat instances resides.</p>
+<p>It is also crucial to remark that the instance name must match the 
+name of the enclosing directory for the instance’s configuration.</p>
+</div>
+<div class="section" id="step-2-customization-for-instances-environment-variables-related-to-geoserver">
+<h2>Step 2: Customization for instances’ environment variables related to GeoServer<a class="headerlink" href="#step-2-customization-for-instances-environment-variables-related-to-geoserver" title="Permalink to this headline">¶</a></h2>
+<p>We are now going to provide some basic hints on how to customize 
+environmental variable in order to run two instance of GeoServer in 
+parallel on the same machine sharing the same data directory in order to
+ create a perfect cluster in Active-Active mode. Notice that we are 
+assuming that the data directory to use sits right next to the instances
+ directories.</p>
+<p>All the instructions below refer again to the setenv.bat file and must be replicated on all instances.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Make sure the geoserver_data directory is properly set for all instances in order to have them point to the same location</p>
+</li>
+<li><p class="first">Make sure the GEOSERVER_LOG_LOCATION points to 
+different locations for each instances in order to prevent them for 
+writing on the same log file</p>
+</li>
+<li><p class="first">If your GeoServer comes with integrated GeoWebCache:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Make sure the GEOWEBCACHE_CACHE_DIR is the same on all instances</li>
+<li>Disable the diskquota or enable support for clustered disk quota</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/apache_http.html" title="Load Balancer Setup with Apache HTTP" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/SharedFolder.html" title="Shared File System Master/Slave Set-Up" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html" accesskey="U">Clustering GeoServer</a> »</li>
+        <li><a href="#">Basics of clustering with Apache Tomcat</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

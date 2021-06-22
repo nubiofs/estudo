@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Introduction To Clustering and High Availability — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Introduction%20To%20Clustering%20and%20High%20Availability%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Introduction%20To%20Clustering%20and%20High%20Availability%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Introduction%20To%20Clustering%20and%20High%20Availability%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Introduction%20To%20Clustering%20and%20High%20Availability%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Introduction%20To%20Clustering%20and%20High%20Availability%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Clustering GeoServer" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">
+    <link rel="next" title="Basic (Passive) GeoServer Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html">
+    <link rel="prev" title="Clustering GeoServer" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Introduction%20To%20Clustering%20and%20High%20Availability%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction To Clustering and High Availability</a><ul>
+<li><a class="reference internal" href="#high-availability">High-availability</a></li>
+<li><a class="reference internal" href="#scalability">Scalability</a></li>
+<li><a class="reference internal" href="#cluster-configurations">Cluster Configurations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html" title="previous chapter">Clustering GeoServer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html" title="next chapter">Basic (Passive) GeoServer Clustering</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/clustering/introduction.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-clustering.introduction"></span><div class="section" id="introduction-to-clustering-and-high-availability">
+<span id="clustering-introduction"></span><h1>Introduction To Clustering and High Availability<a class="headerlink" href="#introduction-to-clustering-and-high-availability" title="Permalink to this headline">¶</a></h1>
+<p>Clustering techniques are used to improve performance and 
+availability of a complex system. Generally speaking a cluster is 
+intended as a redundant set of services providing the same set of 
+functionalities.</p>
+<p>Cluster quality can be measured by:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Reliability</strong> the ability to successfully provide responses on each incoming request</li>
+<li><strong>Availability</strong> the uptime of the server (usually measured as % of annual uptime)</li>
+<li><strong>Performance</strong> measured by the average of the time spent by the service to provide responses or by the throughput</li>
+<li><strong>Scalability</strong> is the ability to handle a growing 
+amount of work in a capable manner without degradation in the quality of
+ service (e.g. non-decreasing throughput)</li>
+</ul>
+</div></blockquote>
+<div class="section" id="high-availability">
+<h2>High-availability<a class="headerlink" href="#high-availability" title="Permalink to this headline">¶</a></h2>
+<p>High-availability (<strong>HA</strong>) clusters  are groups of 
+services that can be reliably utilized with a minimum (or null) 
+down-time. Without clustering, if a service crashes or is too busy, the 
+user asking for that service will never get a quick response.
+HA clustering should be designed to remedies this situation by detecting
+ service down (using a <strong>watchdog</strong>), and immediately restarting it. During this operation the service will be provided by a failover instance of the same service.</p>
+</div>
+<div class="section" id="scalability">
+<h2>Scalability<a class="headerlink" href="#scalability" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Scaling a software usually means adding more instances of the product. We can distinguish two different ways of scaling:</dt>
+<dd><ul class="first last simple">
+<li><strong>Horizontal Scalability</strong> also known as <em>scale out</em>
+ which can be performed by adding additional HW resources to the 
+existing pool. In our context this means adding more physical or virtual
+ machines with GeoServer installed.</li>
+<li><strong>Vertical Scalability</strong> also known as <em>scale up</em>
+ which can be performed by getting more powerful hardware
+(single box with more CPUs/memory), and that normally needs to be 
+compounded by adding more SW instances as well on the same boxes (as
+in practice no software is 100% linearly scalable)
+In our context this means installing more GeoServer instances on the 
+existing HW to fully utilize available resources,
+in particular the extra CPUs.</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice that in our context saying a <em>GeoServer instance</em>
+ means a separate Java process running GeoServer (e.g. a Tomcat running 
+instance).
+It is to be noticed that the main scalability bottleneck, the Java own 
+rasterizer, is an issue in Oracle JDK, and can be reduced/eliminated
+by either installing OpenJDK instead of Oracle JDK, or by installing the
+ <a class="reference external" href="https://github.com/bourgesl/marlin-renderer">Marlin renderer</a> in
+a Oracle JDK.</p>
+</div>
+<p>Here below you can find an illustration showing both scalability mode at the same time.</p>
+<div class="figure align-center" id="id1">
+<img alt="Illustration: Horizontal VS Vertical Scalability" src="Introduction%20To%20Clustering%20and%20High%20Availability%20%E2%80%94%20GeoServer%20Training_arquivos/Scale-Up-Out.png">
+<p class="caption"><span class="caption-text">Illustration: Horizontal VS Vertical Scalability</span></p>
+</div>
+</div>
+<div class="section" id="cluster-configurations">
+<h2>Cluster Configurations<a class="headerlink" href="#cluster-configurations" title="Permalink to this headline">¶</a></h2>
+<p>A cluster can be configured as:</p>
+<ul class="simple">
+<li><strong>Active/active</strong> All the node of the cluster are active at the same time. The traffic is distributed on all the services.</li>
+</ul>
+<div class="figure align-center" id="id2">
+<img alt="Illustration: Active/Active cluster configuration" src="Introduction%20To%20Clustering%20and%20High%20Availability%20%E2%80%94%20GeoServer%20Training_arquivos/HA_Cluster_AA.png">
+<p class="caption"><span class="caption-text">Illustration: Active/Active cluster configuration</span></p>
+</div>
+<p>This gives maximum performance but if a single HW instance fails the 
+overall throughput and response time may suffer. On the other side this 
+set-up provide maximum performance.</p>
+<ul class="simple">
+<li><strong>Active/passive</strong> Provides a fully redundant instance of each node, which is only brought on-line when its associated primary node fails.</li>
+</ul>
+<div class="figure align-center" id="id3">
+<img alt="Illustration: Active/Passive cluster configuration" src="Introduction%20To%20Clustering%20and%20High%20Availability%20%E2%80%94%20GeoServer%20Training_arquivos/HA_Cluster_AP.png">
+<p class="caption"><span class="caption-text">Illustration: Active/Passive cluster configuration</span></p>
+</div>
+<p>This gives maximum availability but does not fully utilize all the 
+resources available since at most times part of them will be not 
+utilized.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html" title="Basic (Passive) GeoServer Clustering" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html" title="Clustering GeoServer" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html" accesskey="U">Clustering GeoServer</a> »</li>
+        <li><a href="#">Introduction To Clustering and High Availability</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

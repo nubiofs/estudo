@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Tuning Resource Limits — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    <link rel="next" title="Tuning Control Flow Settings" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/controlflow.html">
+    <link rel="prev" title="Tile Caching with GeoWebCache" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/gwc.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tuning Resource Limits</a><ul>
+<li><a class="reference internal" href="#relation-with-control-flow">Relation with Control Flow</a></li>
+<li><a class="reference internal" href="#relation-between-wms-resource-limits-and-other-timeouts">Relation between WMS resource limits and other timeouts</a></li>
+<li><a class="reference internal" href="#testing-resource-limits-for-wms">Testing Resource Limits for WMS</a></li>
+<li><a class="reference internal" href="#preliminary-steps">Preliminary Steps</a></li>
+<li><a class="reference internal" href="#configure-jmeter">Configure JMeter</a></li>
+<li><a class="reference internal" href="#test-without-wms-limits">Test without WMS Limits</a></li>
+<li><a class="reference internal" href="#configure-wms-limits">Configure WMS Limits</a></li>
+<li><a class="reference internal" href="#test-with-wms-limits">Test with WMS Limits</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/gwc.html" title="previous chapter">Tile Caching with GeoWebCache</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/controlflow.html" title="next chapter">Tuning Control Flow Settings</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/resource_limits.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tuning-resource-limits">
+<span id="geoserver-jmeter-wmslimits"></span><h1>Tuning Resource Limits<a class="headerlink" href="#tuning-resource-limits" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You should read this section right after having read the <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/adv_gsconfig/parameters.html#geoserver-parameters"><span class="std std-ref">Configuring GeoServer for robustness</span></a> section.</p>
+</div>
+</div></blockquote>
+<p>Resource limits are settings to be configured for individual OGC 
+services to limit the amount of resources dedicated to an individual 
+request in order to improve fairness between requests, by preventing 
+individual requests from hijacking the server and/or running for a very 
+long time.
+It is obviously <strong>EXTREMELY IMPORTANT</strong> to properly configure them in production environment to avoid problems like:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Frequent OOM Errors despite plenty of RAM</li>
+<li>Requests that keep running for a long time (e.g. CPU usage peaks even if no requests are being sent)</li>
+<li>DB Connection being killed by the DBMS while in usage (ok, you might also need to talk to the DBA...)</li>
+</ul>
+</div></blockquote>
+<div class="section" id="relation-with-control-flow">
+<h2>Relation with Control Flow<a class="headerlink" href="#relation-with-control-flow" title="Permalink to this headline">¶</a></h2>
+<p>The Control Flow extension and the resource limits settings need to 
+be configured together in order to ensure that a proper setup has been 
+performed.
+Setting resource limits properly will ensure that individual requests 
+will not consume too many resources (<strong>fairness</strong>) while properly configuring Control Flow will ensure that we will not be overwhelmed by a huge number of parallel requests.</p>
+<p>In general a client can bring a server application to its knees by 
+either sending too many requests in parallel to exceed its scalability 
+limit or by sending resource intensive requests or a combination of both
+ of them. To protect GeoServer from both situations you need to 
+configure resource limits as well as Control Flow properly.</p>
+</div>
+<div class="section" id="relation-between-wms-resource-limits-and-other-timeouts">
+<h2>Relation between WMS resource limits and other timeouts<a class="headerlink" href="#relation-between-wms-resource-limits-and-other-timeouts" title="Permalink to this headline">¶</a></h2>
+<p>When setting the WMS timeouts we need to think in larger terms and 
+make sure that all the elements in the GeoServer response chain are 
+configured accordingly.
+The elements that we might need to take into account when configuring 
+the WMS Timeout are mainly:</p>
+<blockquote>
+<div><ul class="simple">
+<li>LifeTime of DB Connection (usually long)</li>
+<li>WaitTime for a new connection</li>
+</ul>
+</div></blockquote>
+<p>When a WMS request hit GeoServer, we will do the following steps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>A new thread will be created by the Application Server. This is usually not heavy</li>
+<li>The request is parsed and we allocate a buffer in memory to respond. The WMS Timeout triggers.</li>
+<li>We start to grab resources in a Thread and we render them in a separate one to reduce the impact of I/O Waits</li>
+<li>We release resources</li>
+<li>We do the encoding</li>
+<li>We stream the encoded image</li>
+</ol>
+</div></blockquote>
+<p>Let us focus on data that comes from a DBMS. On average, it is safe 
+to state that we will use the connection for 75% of the time needed to 
+answer the request (to pump the data to render) and - even if the 
+encoding can be heavy - the remaining 25% for encoding.
+Ok, assuming that the buffer for drawing has been already instantiated 
+before we try to acquire a connection and that the WMS timeout trigger 
+has already triggered it is obvious that the DBMS WaitTime needs to be 
+configured accordingly: we often see people configuring WaitTime blindly
+ to 20 seconds but in reality nobody will wait for more than 2 or 3 
+seconds for a WMS image; setting the WMS timeout to a value which is 
+smaller than the WaitTime might result in too many requests holding 
+memory for too much time!
+Once a request has been accepted by GeoServer and we start processing 
+it, i.e. moving it from the boundaries (parsing engine) to the core of 
+GeoServer (rendering and I/O engine) we need to make sure that it does 
+not get parked because it does not have the resources it needs and if 
+that happens it fails quickly and release resources for other requests.</p>
+</div>
+<div class="section" id="testing-resource-limits-for-wms">
+<h2>Testing Resource Limits for WMS<a class="headerlink" href="#testing-resource-limits-for-wms" title="Permalink to this headline">¶</a></h2>
+<p>The following section explains how GeoServer performances are improved when setting the resource limits for WMS.</p>
+</div>
+<div class="section" id="preliminary-steps">
+<h2>Preliminary Steps<a class="headerlink" href="#preliminary-steps" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Open your Web browser and navigate to the GeoServer <a class="reference external" href="http://localhost:8083/geoserver/">Welcome Page</a>.</p>
+</li>
+<li><p class="first">Go to <span class="guilabel">Stores</span> and select <code class="docutils literal"><span class="pre">storms</span></code> DataStore</p>
+</li>
+<li><p class="first">Change the following parameters:</p>
+<blockquote>
+<div><blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>max connections</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>Connection timeout</td>
+<td>20000000</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>It should appear something like this:</p>
+<blockquote>
+<div><div class="figure align-center" id="id2">
+<img alt="../_images/jmeter30.png" src="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter30.png">
+<p class="caption"><span class="caption-text"><em>Change `storms` parameters</em></span></p>
+</div>
+</div></blockquote>
+<p>Now you have configured this store to enqueue all the requests in a single queue until they are not timed out.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-jmeter">
+<h2>Configure JMeter<a class="headerlink" href="#configure-jmeter" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> and copy the file <code class="docutils literal"><span class="pre">template.jmx</span></code> file and create <code class="docutils literal"><span class="pre">limit.jmx</span></code></p>
+</li>
+<li><p class="first">From the training root, on the command line, run <code class="docutils literal"><span class="pre">jmeter.bat</span></code> (or <code class="docutils literal"><span class="pre">jmeter.sh</span></code> if you’re on Linux) to start JMeter</p>
+</li>
+<li><p class="first">On the top left go to <span class="guilabel">File –&gt; Open</span> and search for the new <em>jmx</em> file copied</p>
+</li>
+<li><p class="first">Disable all the <strong>Thread Groups</strong> except for the <strong>64</strong> one in order to create a test environment with multiple concurrent requests to be enqueued.</p>
+</li>
+<li><p class="first">In the <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">Data</span> <span class="pre">Set</span> <span class="pre">Config</span></code> element, modify the <strong>path</strong> of the CSV file by setting the path for the file <code class="docutils literal"><span class="pre">limits.csv</span></code> in the <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> directory</p>
+</li>
+<li><p class="first">In the <strong>HTTP Request Default</strong> element modify the following parameters:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>layers</td>
+<td>geosolutions:storm_obs</td>
+</tr>
+<tr class="row-odd"><td>srs</td>
+<td>EPSG:4326</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="test-without-wms-limits">
+<h2>Test without WMS Limits<a class="headerlink" href="#test-without-wms-limits" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Run the test</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to run and stop the test a few times for having stable results</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">You should see something like this:</p>
+<blockquote>
+<div><div class="figure align-center" id="id3">
+<img alt="../_images/jmeter31.png" src="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter31.png">
+<p class="caption"><span class="caption-text"><em>View Results Tree</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">When the test is completed, Save the results in a text file and remove them from the console by clicking on <span class="guilabel">Run –&gt; Clear All</span> on the menu</p>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-wms-limits">
+<h2>Configure WMS Limits<a class="headerlink" href="#configure-wms-limits" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">On your Web browser, navigate to the GeoServer <a class="reference external" href="http://localhost:8083/geoserver/">Welcome Page</a>.</p>
+</li>
+<li><p class="first">Go to <span class="guilabel">WMS</span> and edit the <span class="guilabel">Raster Rendering Options</span> section:</p>
+<blockquote>
+<div><blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>Max rendering time</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="figure align-center" id="id4">
+<img alt="../_images/jmeter32.png" src="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter32.png">
+<p class="caption"><span class="caption-text"><em>Changing WMS limit configuration</em></span></p>
+</div>
+</div></blockquote>
+<p>With this option, GeoServer will cut off all the requests that need 
+more than 10s to be rendered, making GeoServer more responsive. Note 
+that this
+will result in various error returned by GeoServer for those operations 
+which are cut off.
+You can choose another value to set. For having a good result you should
+ take a value minor than the average response time of the first test.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="test-with-wms-limits">
+<h2>Test with WMS Limits<a class="headerlink" href="#test-with-wms-limits" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Run again the test. You should see multiple errors like this:</p>
+<blockquote>
+<div><blockquote>
+<div><div class="figure align-center" id="id5">
+<img alt="../_images/jmeter33.png" src="Tuning%20Resource%20Limits%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter33.png">
+<p class="caption"><span class="caption-text"><em>Exceptions caused by maximum rendering limit exceeded</em></span></p>
+</div>
+</div></blockquote>
+<p>You may see that the throughput is increased because most of the 
+timed out requests have been removed. With this kind of configuration 
+you can control the responsiveness
+of your GeoServer by removing stale requests instead of waiting for 
+them.</p>
+</div></blockquote>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">At the end of the test remove the limits and restore the previous configuration of the <code class="docutils literal"><span class="pre">storms</span></code> DataStore</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/controlflow.html" title="Tuning Control Flow Settings" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/gwc.html" title="Tile Caching with GeoWebCache" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" accesskey="U">Enterprise Set-up Recommendations</a> »</li>
+        <li><a href="#">Tuning Resource Limits</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

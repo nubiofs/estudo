@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Clustering GeoServer — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Clustering%20GeoServer%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Clustering%20GeoServer%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Clustering%20GeoServer%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Clustering%20GeoServer%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Clustering%20GeoServer%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="next" title="Introduction To Clustering and High Availability" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/introduction.html">
+    <link rel="prev" title="Configuring the Control flow plugin" href="https://docs.geoserver.geo-solutions.it/edu/en/adv_gsconfig/controlflow.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Clustering%20GeoServer%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Clustering GeoServer</a><ul>
+<li><a class="reference internal" href="#introduction-to-clustering">Introduction to Clustering</a></li>
+<li><a class="reference internal" href="#basic-passive-geoserver-clustering">Basic (Passive) GeoServer Clustering</a></li>
+<li><a class="reference internal" href="#advanced-active-geoserver-clustering">Advanced (Active) GeoServer Clustering</a></li>
+<li><a class="reference internal" href="#common-load-balancing-options-for-geoserver">Common load-balancing options for GeoServer</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/adv_gsconfig/controlflow.html" title="previous chapter">Configuring the Control flow plugin</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/introduction.html" title="next chapter">Introduction To Clustering and High Availability</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/index.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="clustering-geoserver">
+<h1>Clustering GeoServer<a class="headerlink" href="#clustering-geoserver" title="Permalink to this headline">¶</a></h1>
+<p>Clustering GeoServer can be requested in order to achieve either an 
+Highly Available set up or in order to achieve more scalability.
+Regardless of the reason why intend to create a clustered deployment for
+ GeoServer there are a few limitations that must be taken into account 
+and where possible worked around.</p>
+<p>In the remaining part of this section we will provide the attendee 
+with information to gain a basic understanding of Clustering then we 
+will dwelve into the various possibilities for clustering GeoServer and 
+GeoWebCache discussing pros and cons of each approach.</p>
+<div class="section" id="introduction-to-clustering">
+<h2>Introduction to Clustering<a class="headerlink" href="#introduction-to-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/introduction.html">Introduction To Clustering and High Availability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/introduction.html#high-availability">High-availability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/introduction.html#scalability">Scalability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/introduction.html#cluster-configurations">Cluster Configurations</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="basic-passive-geoserver-clustering">
+<h2>Basic (Passive) GeoServer Clustering<a class="headerlink" href="#basic-passive-geoserver-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html">Basic (Passive) GeoServer Clustering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html#highly-available-ha-set-up-for-geoserver">Highly Available (HA) set up for GeoServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html#geoserver-limitations">GeoServer Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html#backoffice-production-configuration-separate-data-directory">Backoffice/Production configuration (separate Data Directory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html#master-slave-cluster-with-shared-data-directory">Master/Slave cluster with shared Data Directory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html#in-memory-configuration">In Memory Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/passive/passive.html#performing-changes-to-the-configuration">Performing changes to the configuration</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="advanced-active-geoserver-clustering">
+<h2>Advanced (Active) GeoServer Clustering<a class="headerlink" href="#advanced-active-geoserver-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html">GeoServer Active Clustering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html#installing-and-configuring-the-geoserver-active-clustering-extension">Installing and Configuring the GeoServer Active Clustering Extension</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/description.html">More details on the Active Clustering Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/installation.html">Installing the GeoServer Active Clustering Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/usage.html">Configuring the GeoServer Active Clustering Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/topologies.html">Implementing Different Clustering Topologies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/advancedbrokerURI.html">Advanced Configuration for the Broker URIs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html#advanced-stand-alone-mom-configuration-and-usage">Advanced Stand-Alone MOM Configuration and Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/activemqBroker.html">How-To configure a Standalone ActiveMQ broker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/JDBC.html">JDBC Master/Slave HA Set-Up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/SharedFolder.html">Shared File System Master/Slave Set-Up</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="common-load-balancing-options-for-geoserver">
+<h2>Common load-balancing options for GeoServer<a class="headerlink" href="#common-load-balancing-options-for-geoserver" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/tomcat.html">Basics of clustering with Apache Tomcat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/tomcat.html#personalize-geoserver-instances">Personalize GeoServer instances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/apache_http.html">Load Balancer Setup with Apache HTTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/haproxy.html">Load Balancer Setup with HAProxy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/microsoft_IIS.html">Load Balancer Setup with IIS</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/introduction.html" title="Introduction To Clustering and High Availability" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/adv_gsconfig/controlflow.html" title="Configuring the Control flow plugin" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+        <li><a href="#">Clustering GeoServer</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

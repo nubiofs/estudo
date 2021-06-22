@@ -1,0 +1,581 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Implementing Different Clustering Topologies — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Implementing%20Different%20Clustering%20Topologies%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Implementing%20Different%20Clustering%20Topologies%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Implementing%20Different%20Clustering%20Topologies%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Implementing%20Different%20Clustering%20Topologies%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Implementing%20Different%20Clustering%20Topologies%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="GeoServer Active Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html">
+    <link rel="next" title="Advanced Configuration for the Broker URIs" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/advancedbrokerURI.html">
+    <link rel="prev" title="Configuring the GeoServer Active Clustering Extension" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/usage.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Implementing%20Different%20Clustering%20Topologies%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Implementing Different Clustering Topologies</a><ul>
+<li><a class="reference internal" href="#preliminary-information-what-to-know-when-sharing-the-geoserver-data-directory">Preliminary Information: What to know when sharing the GeoServer data directory</a><ul>
+<li><a class="reference internal" href="#read-only-pure-slaves">Read-only (pure) Slaves</a></li>
+<li><a class="reference internal" href="#master-slave-instances">Master/Slave instances</a></li>
+<li><a class="reference internal" href="#useful-configuration-tweaks">Useful Configuration Tweaks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#topology-1-peer-to-peer-network-with-embedded-brokers-and-shared-data-directory">Topology 1:  Peer-to-peer network with embedded brokers and shared data directory</a><ul>
+<li><a class="reference internal" href="#configuring-the-location-of-the-cluster-properties-file">Configuring the location of the cluster.properties file</a></li>
+<li><a class="reference internal" href="#configuring-the-embedded-broker">Configuring the embedded broker</a></li>
+<li><a class="reference internal" href="#summary-of-mandatory-steps">Summary of mandatory steps</a></li>
+<li><a class="reference internal" href="#advanced-stuff-connect-to-the-embedded-broker">Advanced Stuff: Connect to the embedded broker</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#topology-2-1-master-and-1-slave-instances-with-shared-data-directory-using-a-stand-alone-broker">Topology 2: 1 Master and 1 Slave instances with shared data directory using a stand-alone broker</a><ul>
+<li><a class="reference internal" href="#installing-and-configuring-the-broker">Installing and configuring the broker</a></li>
+<li><a class="reference internal" href="#setup-for-the-standalone-broker-configuration-windows-training-environment">Setup for the standalone broker configuration (Windows training environment)</a></li>
+<li><a class="reference internal" href="#setup-for-the-standalone-broker-configuration-linux-training-environment">Setup for the standalone broker configuration (Linux training environment)</a></li>
+<li><a class="reference internal" href="#connecting-geoserver-to-the-external-broker">Connecting GeoServer to the external broker</a></li>
+<li><a class="reference internal" href="#broker-transport-setup">Broker transport setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/usage.html" title="previous chapter">Configuring the GeoServer Active Clustering Extension</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/advancedbrokerURI.html" title="next chapter">Advanced Configuration for the Broker URIs</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/clustering/active/topologies.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-clustering.active.topologies"></span><div class="section" id="implementing-different-clustering-topologies">
+<span id="clustering-active-topologies"></span><h1>Implementing Different Clustering Topologies<a class="headerlink" href="#implementing-different-clustering-topologies" title="Permalink to this headline">¶</a></h1>
+<p>With the GeoServer Active Clustering Extension we are able to 
+configure the cluster in many different ways leveraging on the 
+capabilities provided by the extension.</p>
+<p>In the following sections we are going to show you a few useful 
+configurations, however bear in mind that additional set ups can be 
+implemented by further customizing the configuration for the broker as 
+well as how the GeoServer instances connect to the Broker itself.</p>
+<div class="section" id="preliminary-information-what-to-know-when-sharing-the-geoserver-data-directory">
+<h2>Preliminary Information: What to know when sharing the GeoServer data directory<a class="headerlink" href="#preliminary-information-what-to-know-when-sharing-the-geoserver-data-directory" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Besides what we are going to here, when you share the 
+GeoServer data directory between multiple GeoServer instances there are 
+other things you need to take into account and configure correctly, 
+namely the GeoServer logging file (each instance needs to be instructed 
+to log to its own file) and the GeoWebCache disk quota mechanism, in 
+case it is used. This is covered in the standard GeoServer documentation
+ <a class="reference external" href="http://docs.geoserver.org/2.10.x/en/user/advanced/logging.html">here</a> and <a class="reference external" href="http://geowebcache.org/docs/1.5.1/production/index.html#clustering">here</a>.</p>
+</div>
+<div class="section" id="read-only-pure-slaves">
+<h3>Read-only (pure) Slaves<a class="headerlink" href="#read-only-pure-slaves" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">More information on the GeoServer data directory can be found in the standard documentation <a class="reference external" href="http://docs.geoserver.org/stable/en/user/datadirectory/index.html">here</a></p>
+</div>
+<p>The shared GeoServer data directory set-up is a common approach to 
+cluster GeoServer instances that is used to share data and the 
+configuration within a cluster.</p>
+<p>It is possible to continue using the same approach with the GeoServer
+ Active Clustering Extension (which supports, with some limitation as 
+indicated before, the use of private GeoServer data directories) with 
+some tweaking of the configuration for the cluster.</p>
+<p>A suitable way is to elect one of more GeoServer instances as Master and use the <strong>readOnly</strong>
+ toggle for the cluster configuration of the Slave instances to disable 
+the persistence for them.
+Once you defined which are the GeoServers you want to use as Master, 
+(nodes which are able to propagate changes of the configuration over the
+ network), you may want to set the <strong>readOnly</strong> status as following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="c">#. GeoServer Masters: readOnly=false</span>
+<span class="c">#. GeoServer Slaves: readOnly=true</span>
+</pre></div>
+</div>
+<p>In this configuration all the Slave instances will receive the 
+configuration changes through the network and will apply such changes 
+only to their in-memory configuration skipping the persistence phase 
+because only Master instances will actually write to the GeoServer data 
+directory.</p>
+<p>Note that when sharing the GeoServer data directory  you may also 
+evaluate to disable the durable subscriptions from the GeoServer Slave 
+instances to the Broker (to improve performances). You can do this via 
+the cluster.properties file setting:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">durable</span><span class="o">=</span><span class="n">false</span>
+</pre></div>
+</div>
+<p>Note that this is <strong>not</strong> the default setting. If a 
+Slave instance goes down when it goes up again it will load the 
+configuration from the shared data directory hence it is not needed to 
+get messages about changes made while the slave was down.</p>
+</div>
+<div class="section" id="master-slave-instances">
+<h3>Master/Slave instances<a class="headerlink" href="#master-slave-instances" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to have a peer-to-peer set up where all the GeoServer 
+instances share the GeoServer data directory while acting both as Master
+ sand Slaves at the same time. This means all the instances can perform 
+changes to the configuration on disk.</p>
+<p>This set up is fine(actually great in some cases) and does not 
+require any additional thinking  when changes to the configuration are 
+sporadic and/or well temporally separated between each other; in case 
+you expect to make many concurrent modifications to the GeoServer 
+configuration using this set-up is still ok but we do recommend to use 
+sticky-sessions at the load balancer level or, better, to configure 
+connections to the Master with a Fail-over approach. It is unsafe to 
+have multiple GeoServer instances making changes to the configuration 
+files concurrently when sharing the GeoServer data directory among all 
+of them.</p>
+</div>
+<div class="section" id="useful-configuration-tweaks">
+<h3>Useful Configuration Tweaks<a class="headerlink" href="#useful-configuration-tweaks" title="Permalink to this headline">¶</a></h3>
+<p>When we share the GeoServer data directory we have to consider that the default <em>cluster.properties</em> location is:</p>
+<div class="highlight-default"><div class="highlight"><pre>$data/cluster/cluster.properties
+</pre></div>
+</div>
+<p>and therefore it would read and written by all the instances 
+(depending on their roles). However this files contains information that
+ are <strong>unique</strong> to a certain instance like the instance name, therefore it must be kept separate for each instance.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Each GeoServer instance must have its own cluster.properties file with a unique identifier for that instance’s <strong>instanceName</strong>.</p>
+</div>
+<p>To overcome this problem the <strong>CLUSTER_CONFIG_DIR</strong> variable comes to the rescue (in a way similar to the geoserver data  variable that you should be familiar with).</p>
+<p>When we want share the GeoServer data directory we have to make sure we add to the <strong>JAVA_OPTS</strong> for that instance an override for the CLUSTER_CONFIG_DIR variable telling that same instance where to locate the <em>cluster.properties</em> file.</p>
+<blockquote>
+<div><ul class="simple">
+<li>In the provided training <strong>Windows package</strong> the variable is configured in <em>setenv.bat</em> located in the <code class="docutils literal"><span class="pre">%TRAINING_ROOT%</span> <span class="pre">folder</span></code></li>
+<li>In the provided training <strong>Linux environment</strong> the variable is configured in <em>setenv.sh</em> located in the conf folder of each tomcat instance: <code class="docutils literal"><span class="pre">/opt/tomcat_geoserver/conf/setenv.sh</span></code> and <code class="docutils literal"><span class="pre">/opt/tomcat_geoserver2/conf/setenv.sh</span></code></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="topology-1-peer-to-peer-network-with-embedded-brokers-and-shared-data-directory">
+<h2>Topology 1:  Peer-to-peer network with embedded brokers and shared data directory<a class="headerlink" href="#topology-1-peer-to-peer-network-with-embedded-brokers-and-shared-data-directory" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This approach uses multicast for discovery hence you 
+might want to talk to your network administrator to make sure multicast 
+is available/possible!</p>
+</div>
+<p>The simplest way to use the GeoServer Active Clustering Extension is 
+by setting up a peer-to-peer network of instances with shared data 
+directory.
+This is particularly well suited when scaling up GeoServer (which means 
+installing multiple instances on a single large machine) but it can be 
+also very useful when scaling out GeoServer on multiple smaller virtual 
+machines as it allows new instances to <em>automagically</em> join the cluster since in this set up:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Each GeoServer instance will run an embedded broker</li>
+<li>Each GeoServer instance will talk to its own embedded broker without opening a port but directly in the same VM process</li>
+<li>Each broker will automagically discover other brokers on the same 
+network and bind to them to create a network of brokers (act as a single
+ fault-tolerant broker)</li>
+<li>Messages sent to a broker will be delivered to all the other brokers in the same network</li>
+<li>GeoServer instances can join and leave the network dynamically</li>
+</ul>
+</div></blockquote>
+<p>This set-up is described in the picture below.</p>
+<div class="figure align-center" id="id2">
+<img alt="P2P Cluster of GeoServer instances" src="Implementing%20Different%20Clustering%20Topologies%20%E2%80%94%20GeoServer%20Training_arquivos/P2pSharedDataDir.png">
+<p class="caption"><span class="caption-text">Illustration  P2P Cluster of GeoServer instances</span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is the default configuration for the GeoServer 
+Active Clustering Extension, you can find this configured in the 
+provided training package.</p>
+</div>
+<p>This (default) approach would work out of the box when you are using 
+dedicate machines for each GeoServer instance (scaling out) while it 
+requires some tweaks when scaling up to make sure you don’t mess things 
+up.</p>
+<div class="section" id="configuring-the-location-of-the-cluster-properties-file">
+<h3>Configuring the location of the cluster.properties file<a class="headerlink" href="#configuring-the-location-of-the-cluster-properties-file" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned above you need to make sure each instance will have its own <em>cluster.properties</em> file with a unique name. It is worth saying that when you install the GeoServer Active Clustering Extension it created a <em>cluster.properties</em> file inside the GeoServer data directory with a randomized <em>instanceName</em> and default configuration which you can reuse as a baseline for configuring new instances.</p>
+</div>
+<div class="section" id="configuring-the-embedded-broker">
+<span id="id1"></span><h3>Configuring the embedded broker<a class="headerlink" href="#configuring-the-embedded-broker" title="Permalink to this headline">¶</a></h3>
+<p>When the embedded broker is enabled the broker configuration is loaded via the <em>xbeanURL</em> property of  the <em>cluster.properties</em> file.</p>
+<p>The default broker configuration can be downloaded <a class="reference external" href="https://github.com/geoserver/geoserver/blob/master/src/community/jms-cluster/jms-geoserver/src/main/resources/broker.xml">here</a>
+ and it’s included in the classpath for GeoServer. The default path for 
+it its a relative path (for the geeks, relative to the Extension JAR in 
+GeoServer itself) but can be changed to an absolute path.</p>
+<p>If you are using the same machine for more GeoServer instances 
+(scaling up) and you also sharing the same GeoServer data directory you 
+may have to configure the embedded brokers to use different ports (e.g. 
+JMX ports) and file system paths (e.g. for persistence) to avoid 
+collisions.
+When you use different machines for each GeoServer instance then you 
+don’t need to configure any port, while you might still need to 
+reconfigure some path in case you are sharing the GeoServer data 
+directory.</p>
+<p><em>The good news is that by default there is nothing you need to 
+reconfigure in terms of embedded broker ports since the default 
+configuration dynamically choose a free port for the messaging and 
+discovery agents when it starts</em>. You have to try and reconfigure 
+the embedded broker (this is advanced stuff) only if you do want to use 
+things like JMX to inspect what is going on with the embedded broker 
+then you need to check the steps below. Jump to the note below to know 
+how to reconfigure the persistence embedded database.</p>
+<p>Generally speaking, to customize the configuration of the broker you can proceed in the following way:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Changing the xbeanURL in this instance’s 
+cluster.properties file to point to a new broker definition (.xml file) 
+in case you want to have deep control over the embedded broker 
+configuration (which means you are an ActiveMQ black belt and like XML).</p>
+</li>
+<li><dl class="first docutils">
+<dt>Overriding the default values for the parameters provided to customize broker definition. To override them you can:</dt>
+<dd><ol class="first last arabic simple">
+<li>Adding to the JAVA_OPTS the overriding value for the parameter you 
+want to customize (this works best if you have multiple instances on the
+ same machine)</li>
+<li>put a file called <strong>embedded-broker.properties</strong> into your user home dir. (this does not work well if you have multiple instances on the same machine).</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<p>Here is a list of all the available parameters for the <em>embedded-broker.properties</em> file (you’ll find the explanations as comments). You can skip it if you are not interested in the low level details:</p>
+<div class="highlight-default"><div class="highlight"><pre>## JMX settings (can be overridden by env vars)
+## For more information, see: http://activemq.apache.org/jmx.html
+# enable/disable broker jmx
+activemq.jmx.useJmx=false
+# set the JMX connector port
+activemq.jmx.port=1098
+# set the JMX connector host
+activemq.jmx.host=localhost
+# enable the JMX connector
+activemq.jmx.createConnector=false
+
+## broker settings
+# set the base path of the temporary broker dir
+# this is also used as persistence base dir
+activemq.base=./
+
+## configuring the embedded broker
+# connects the server via native I/O socket to the local network broadcast using an automatic assigned port
+# maximumConnections and wireFormat.maxFrameSize are added to avoid ddos attacks
+activemq.transportConnectors.server.uri=tcp://127.0.0.1:0?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600&amp;jms.useAsyncSend=true&amp;transport.daemon=true
+## the broker performs discovery using the following protocol:
+# multicast on default network
+activemq.transportConnectors.server.discoveryURI=multicast://default
+
+## persistence settings and system usage
+## The systemUsage controls the maximum amount of space the broker will
+## use before slowing down producers.
+## For more information, see: http://activemq.apache.org/producer-flow-control.html
+# enable/disable persistence
+activemq.broker.persistent=true
+# heap memory usage
+activemq.broker.systemUsage.memoryUsage=128 mb
+# disk space memory usage
+activemq.broker.systemUsage.storeUsage=1 gb
+# temp disk space memory usage
+activemq.broker.systemUsage.tempUsage=128 mb
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The one parameter that you might want to configure aside from the <em>cluster.properties</em> location is the <em>activemq.base</em>
+ location as it is where the broker places the embedded database (which 
+is KahaDB in case you wondered) it uses for persisting messages and 
+making them durable. You don’t want two instances to try and write to 
+the same DB hence you may to point to a path of choice like shown below 
+which defines an override for the persistence and temporary folder of 
+the Embedded Broker:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span class="o">-</span><span class="n">Dactivemq</span><span class="o">.</span><span class="n">base</span><span class="o">=</span><span class="n">smartpath</span><span class="o">/</span><span class="n">cluster</span><span class="o">/</span><span class="n">instance1</span><span class="o">/</span><span class="n">db</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="summary-of-mandatory-steps">
+<h3>Summary of mandatory steps<a class="headerlink" href="#summary-of-mandatory-steps" title="Permalink to this headline">¶</a></h3>
+<p>Summarising, in case you want to share the same GeoServer data 
+directory between multiple GeoServer instances you need to make sure 
+each instance has its own <em>CLUSTER_CONFIG_DIR</em> with a unique <em>instanceName</em> in the <em>cluster.properties</em> file and a separate <em>activemq.base</em> location. A good set-up is as follows (for Windows):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">set</span> <span class="n">INSTANCE_NAME</span><span class="o">=</span><span class="n">instance1</span> <span class="c">#unique across the cluster</span>
+<span class="nb">set</span> <span class="n">CLUSTER_CONFIG_DIR</span><span class="o">=%</span><span class="n">GEOSERVER_DATA_DI</span><span class="o">%</span>\<span class="n">cluster</span>\<span class="o">%</span><span class="n">INSTANCE_NAME</span><span class="o">%</span>
+<span class="nb">set</span> <span class="n">JAVA_OPTS</span><span class="o">=%</span><span class="n">JAVA_OPTS</span><span class="o">%</span> <span class="o">-</span><span class="n">DCLUSTER_CONFIG_DIR</span><span class="o">=%</span><span class="n">CLUSTER_CONFIG_DIR</span><span class="o">%</span>
+<span class="nb">set</span> <span class="n">JAVA_OPTS</span><span class="o">=%</span><span class="n">JAVA_OPTS</span><span class="o">%</span> <span class="o">-</span><span class="n">Dactivemq</span><span class="o">.</span><span class="n">base</span><span class="o">=%</span><span class="n">CLUSTER_CONFIG_DIR</span><span class="o">%</span>\<span class="n">tmp</span>
+</pre></div>
+</div>
+<p>Now, unless you really want to to know the details you may want to 
+skip the following subsections as they contains low level information on
+ how we start and user the embedded broker.</p>
+</div>
+<div class="section" id="advanced-stuff-connect-to-the-embedded-broker">
+<h3>Advanced Stuff: Connect to the embedded broker<a class="headerlink" href="#advanced-stuff-connect-to-the-embedded-broker" title="Permalink to this headline">¶</a></h3>
+<p>Each instance by default is configured (check the <a class="reference external" href="https://github.com/geoserver/geoserver/blob/master/src/community/jms-cluster/jms-geoserver/src/main/resources/broker.xml">broker configuration file</a>)
+ to connect to the embedded broker instantiated by the same VM, to 
+improve performance. In the GUI the brokerURL is empty as we build it 
+internally as needed, but it could be set as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre>brokerURL=vm://localhost?create=false&amp;waitForStart=5000
+</pre></div>
+</div>
+<p>where <em>localhost</em> is a placeholder to tell the internal 
+machinery to look for the first embedded broker available (there is only
+ 1). The best config would be as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre>brokerURL=vm://${INSTANCE_NAME}?create=false&amp;waitForStart=5000
+</pre></div>
+</div>
+<p>since internally we used the <em>instance name</em>, which is unique within all the instances, to name each embedded broker.</p>
+<p>Some observations:</p>
+<ol class="arabic simple">
+<li>This set-up will connect the GeoServer Instance to the embedded broker.</li>
+<li>The connection will be performed using a VM transport allowing 
+clients to connect to each other inside the VM without the overhead of 
+the network communication. The connection used is not a socket 
+connection but use direct method invocations which enables a high 
+performance embedded messaging system.</li>
+<li>The <strong>create</strong> parameter is used to define if the VM 
+transport may create an embedded broker is set to false (it is very 
+important to set it to false for performance and persistence related 
+reasons). This is why we already have created an embedded broker so we 
+don’t have to create a new one.</li>
+<li><strong>waitForStart</strong> can optionally be specified to add 
+tolerance to the VM connector waiting for some milliseconds before 
+failure (default is infinite -1).</li>
+</ol>
+</div>
+</div>
+<div class="section" id="topology-2-1-master-and-1-slave-instances-with-shared-data-directory-using-a-stand-alone-broker">
+<h2>Topology 2: 1 Master and 1 Slave instances with shared data directory using a stand-alone broker<a class="headerlink" href="#topology-2-1-master-and-1-slave-instances-with-shared-data-directory-using-a-stand-alone-broker" title="Permalink to this headline">¶</a></h2>
+<p>Using this configuration we can move the broker outside the 
+GeoServer’s own JVM process delegating the CPU and the memory load 
+necessary for the message storage and dispatch to a standalone web 
+application.</p>
+<p>Let’s consider a typical configuration where the broker is deployed 
+in a separate Tomcat instance (as an instance on the same server of the 
+GeoServer master instance) and the various GeoServer instances are 
+sharing the GeoServer data directory (f.e.: via NFS or GFS share).</p>
+<div class="figure align-center" id="id3">
+<img alt="Illustration: Standalone broker configuration" src="Implementing%20Different%20Clustering%20Topologies%20%E2%80%94%20GeoServer%20Training_arquivos/Clustering_external_broker.png">
+<p class="caption"><span class="caption-text">Illustration Standalone broker configuration</span></p>
+</div>
+<div class="section" id="installing-and-configuring-the-broker">
+<h3>Installing and configuring the broker<a class="headerlink" href="#installing-and-configuring-the-broker" title="Permalink to this headline">¶</a></h3>
+<p>Here you can download a very minimal web application based on the ActiveMQ:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">build</span><span class="o">.</span><span class="n">geoserver</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">geoserver</span><span class="o">/</span><span class="mf">2.13</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">community</span><span class="o">-</span><span class="n">latest</span><span class="o">/</span><span class="n">geoserver</span><span class="o">-</span><span class="mf">2.13</span><span class="o">-</span><span class="n">SNAPSHOT</span><span class="o">-</span><span class="n">activeMQ</span><span class="o">-</span><span class="n">broker</span><span class="o">-</span><span class="n">plugin</span><span class="o">.</span><span class="n">zip</span>
+</pre></div>
+</div>
+<p>Note that this is a minimal ready to use ActiveMQ broker web 
+application so you can just take the configuration and use the official 
+ActiveMQ broker distribution which is available <a class="reference external" href="https://activemq.apache.org/download.html">here</a></p>
+<p>The default broker configuration can be downloaded <a class="reference external" href="https://github.com/geoserver/geoserver/blob/master/src/community/jms-cluster/activemqBroker/src/main/webapp/WEB-INF/classes/applicationContext.xml">here</a></p>
+</div>
+<div class="section" id="setup-for-the-standalone-broker-configuration-windows-training-environment">
+<h3>Setup for the standalone broker configuration (Windows training environment)<a class="headerlink" href="#setup-for-the-standalone-broker-configuration-windows-training-environment" title="Permalink to this headline">¶</a></h3>
+<p>In the <strong>training Windows package</strong> you’ll find the above broker deployed as a Tomcat instance <code class="docutils literal"><span class="pre">%TRAINING_ROOT%/tomcat-7.0.72/instances/instance3/</span></code>.</p>
+<p>The provided broker configuration can be customized as usually overriding variables via the JAVA_OPTS or the system properties.</p>
+<p>To switch from the default configuration where the cluster uses 
+embedded brokers to the new one where we want to use the standalone 
+broker, locate the following lines in the global <strong>setenv.bat</strong> script located in %TRAINING_ROOT%:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">REM</span> <span class="n">GeoServer</span> <span class="n">cluster</span> <span class="n">options</span>
+<span class="nb">set</span> <span class="n">CLUSTER_CONFIG_DIR</span><span class="o">=%</span><span class="n">TRAINING_ROOT</span><span class="o">%</span>\<span class="n">data</span>\<span class="n">cluster</span>\<span class="o">%</span><span class="n">INSTANCE_NAME</span><span class="o">%</span>
+
+<span class="n">REM</span> <span class="nb">set</span> <span class="n">this</span> <span class="ow">and</span> <span class="n">comment</span> <span class="n">the</span> <span class="n">above</span> <span class="n">to</span> <span class="n">use</span> <span class="n">instance3</span> <span class="p">(</span><span class="n">standalone</span> <span class="n">broker</span><span class="p">)</span>
+<span class="n">REM</span> <span class="nb">set</span> <span class="n">CLUSTER_CONFIG_DIR</span><span class="o">=%</span><span class="n">TRAINING_ROOT</span><span class="o">%</span>\<span class="n">data</span>\<span class="n">cluster</span>\<span class="n">instance3</span>\<span class="o">%</span><span class="n">INSTANCE_NAME</span><span class="o">%</span>
+</pre></div>
+</div>
+<p>Looking at the comment suggestions you’ll be able to switch using the
+ standalone broker deployed into the third tomcat instance using the 
+second CLUSTER_CONFIG_DIR setting.</p>
+<p>Now we have changed the CLUSTER_CONFIG_DIR pointing to a new set of 
+configurations ready to use the standalone standalone broker.</p>
+<p>The parameters used to configure the broker are essentially the same 
+of the internal one so you can refer to the embedded Broker for a 
+complete explanation.
+The default setup is overridden (in the tomcat_start_3.bat) as 
+following:</p>
+<div class="highlight-default"><div class="highlight"><pre>set INSTANCE_NAME=instance3
+
+REM cluster OPTS:
+set JAVA_OPTS=%JAVA_OPTS% -Dactivemq.broker.transportConnectors.uri=tcp://localhost:61661?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600&amp;jms.useAsyncSend=true
+set JAVA_OPTS=%JAVA_OPTS% -Dactivemq.base=.\data\cluster\%INSTANCE_NAME%\tmp
+</pre></div>
+</div>
+<p>Once the tomcat instance is started we are ready to connect to it with the GeoServer instances.</p>
+</div>
+<div class="section" id="setup-for-the-standalone-broker-configuration-linux-training-environment">
+<h3>Setup for the standalone broker configuration (Linux training environment)<a class="headerlink" href="#setup-for-the-standalone-broker-configuration-linux-training-environment" title="Permalink to this headline">¶</a></h3>
+<p>In the <strong>Linux training environment</strong> you’ll find the broker deployed as a Tomcat instance located in <code class="docutils literal"><span class="pre">/opt/tomcat_broker</span></code>.</p>
+<p>The provided broker configuration can be customized as usually overriding variables via the JAVA_OPTS or the system properties.</p>
+<p>To switch from the default configuration where the cluster uses 
+embedded brokers to the new one where we want to use the standalone 
+broker, locate in the <strong>setenv.sh script of each geoserver instance</strong> the following lines.</p>
+<p>Change:</p>
+<div class="highlight-default"><div class="highlight"><pre>CLUSTER_CONFIG_DIR=/home/geosolutions/Desktop/geoserver_training/geoserver_data/cluster/${INSTANCE_NAME}
+</pre></div>
+</div>
+<p>with:</p>
+<div class="highlight-default"><div class="highlight"><pre>CLUSTER_CONFIG_DIR=/home/geosolutions/Desktop/geoserver_training/geoserver_data/cluster/instance3/${INSTANCE_NAME}
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>${INSTANCE_NAME}</strong> is a placeholder for the name of the tomcat instance (<code class="docutils literal"><span class="pre">instance1</span></code> or <code class="docutils literal"><span class="pre">instance2</span></code>), it can be useful to declare it as a variable in the top of the <em>setenv.sh</em> script</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">the setenv.sh files are located in <code class="docutils literal"><span class="pre">/opt/tomcat_geoserver/conf/</span></code> for the instance1 and <code class="docutils literal"><span class="pre">/opt/tomcat_geoserver2/conf/</span></code> for the instance2</p>
+</div>
+<p>Now we have changed the CLUSTER_CONFIG_DIR pointing to a new set of 
+configurations ready to use the standalone standalone broker.</p>
+<p>The parameters used to configure the broker are essentially the same 
+of the internal one so you can refer to the embedded Broker for a 
+complete explanation.</p>
+<p>The standalone broker environment configuration file located in <code class="docutils literal"><span class="pre">/opt/tomcat_broker/conf/setenv.sh</span></code> looks like:</p>
+<div class="highlight-default"><div class="highlight"><pre>CATALINA_BASE=/opt/tomcat_broker
+INSTANCE_NAME=instance3
+
+# cluster OPTS:
+JAVA_OPTS=${JAVA_OPTS}"-Dactivemq.broker.transportConnectors.uri=tcp://localhost:61661?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600&amp;jms.useAsyncSend=true"
+JAVA_OPTS=${JAVA_OPTS}"-Dactivemq.base=.\data\cluster\${INSTANCE_NAME}\tmp"
+</pre></div>
+</div>
+<p>Restart all the three tomcat instances with the commands:</p>
+<div class="highlight-default"><div class="highlight"><pre>geosolutions@ubuntu:/$ sudo service broker restart
+geosolutions@ubuntu:/$ sudo service geoserver restart
+geosolutions@ubuntu:/$ sudo service geoserver2 restart
+</pre></div>
+</div>
+<p>Once the tomcat instance are restarted we are ready to connect to the standalone broker with the GeoServer instances.</p>
+</div>
+<div class="section" id="connecting-geoserver-to-the-external-broker">
+<h3>Connecting GeoServer to the external broker<a class="headerlink" href="#connecting-geoserver-to-the-external-broker" title="Permalink to this headline">¶</a></h3>
+<p>Access to the the <strong>master</strong> GeoServer cluster interface and setup the cluster status as following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">brokerURL</span><span class="o">=</span><span class="n">tcp</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">61661</span>
+</pre></div>
+</div>
+<p>This sets the producer connection to the native I/O protocol which is
+ able to connect to other web application within the same server.</p>
+<p>A more complex setup can use static failover:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">brokerURL</span><span class="o">=</span><span class="n">failover</span><span class="p">:</span><span class="o">//</span><span class="p">(</span><span class="n">tcp</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">61616</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Which can be extended adding more then one broker:</p>
+<div class="highlight-default"><div class="highlight"><pre>brokerURL=failover://({PROTOCOL}://{BROKER_IP}:{BROKER_PORT},{PROTOCOL}://{BROKER_IP2}:{BROKER_PORT2},...)?options
+</pre></div>
+</div>
+<p>This type of connection url will leverage on a static failover 
+transport to be able to switch between brokers in the case some of them 
+are temporarily down or offline.</p>
+<p>Other parameters needed for the GeoServer <strong>master</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">topicName</span><span class="o">=</span><span class="n">VirtualTopic</span><span class="o">.&gt;</span>
+<span class="n">toggleMaster</span><span class="o">=</span><span class="n">true</span>
+<span class="n">readOnly</span><span class="o">=</span><span class="n">false</span>
+<span class="n">embeddedBroker</span><span class="o">=</span><span class="n">disabled</span>
+</pre></div>
+</div>
+<p>Then consider to shutdown the slave capabilities (if you want a pure master):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">toggleSlave</span><span class="o">=</span><span class="n">false</span>
+<span class="n">connection</span><span class="o">=</span><span class="n">disabled</span>
+</pre></div>
+</div>
+<p>Now log into all the GeoServer Slaves and setup as following:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><strong>brokerURL</strong> can be set as the master instance</li>
+<li><strong>topicName</strong> can be set as the master instance</li>
+</ol>
+</div></blockquote>
+<p>then:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">toggleSlave</span><span class="o">=</span><span class="n">true</span>
+<span class="n">readOnly</span><span class="o">=</span><span class="n">true</span>
+<span class="n">connection</span><span class="o">=</span><span class="n">enabled</span>
+<span class="n">embeddedBroker</span><span class="o">=</span><span class="n">disabled</span>
+</pre></div>
+</div>
+<p>Then consider to shutdown the master capabilities (if you want a pure slave):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">toggleMaster</span><span class="o">=</span><span class="n">false</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="broker-transport-setup">
+<h3>Broker transport setup<a class="headerlink" href="#broker-transport-setup" title="Permalink to this headline">¶</a></h3>
+<p>In the next section we are going to provide advanced information on how to configure the connections to the Broker.
+You can refer to the activeMQ documentation for additional information.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/advancedbrokerURI.html" title="Advanced Configuration for the Broker URIs" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/usage.html" title="Configuring the GeoServer Active Clustering Extension" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">Clustering GeoServer</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html" accesskey="U">GeoServer Active Clustering</a> »</li>
+        <li><a href="#">Implementing Different Clustering Topologies</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Stress testing with JMeter — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    <link rel="next" title="Raster Data Optimization" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/raster.html">
+    <link rel="prev" title="Benchmarking primer" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/benchmarking_intro.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Stress testing with JMeter</a><ul>
+<li><a class="reference internal" href="#configuring-a-simple-test">Configuring a simple test</a></li>
+<li><a class="reference internal" href="#creating-a-multiscale-test">Creating a Multiscale test</a><ul>
+<li><a class="reference internal" href="#create-csv-file">Create CSV file</a></li>
+<li><a class="reference internal" href="#configure-jmeter">Configure JMeter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/benchmarking_intro.html" title="previous chapter">Benchmarking primer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/raster.html" title="next chapter">Raster Data Optimization</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/jmeter.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="stress-testing-with-jmeter">
+<span id="geoserver-jmeter-simple"></span><h1>Stress testing with JMeter<a class="headerlink" href="#stress-testing-with-jmeter" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://jmeter.apache.org/">Apache JMeter</a>  is an open source Java desktop application, built to verify functional behavior, perform load tests, and measure performance.
+Some of JMeter points of strength are mentioned here below:</p>
+<blockquote>
+<div><ul class="simple">
+<li>It ships with an easy-to-use GUI;</li>
+<li>It allows to set up multiple thread groups, different parallelism and request count, to ramp up the load;</li>
+<li>It can use CSV files to generate semi-randomized requests;</li>
+<li>It can execute parameterized tests;</li>
+<li>It reports results in a simple table;</li>
+<li>It uses assertions for checking test results;</li>
+<li>It can be executed in batch.</li>
+</ul>
+</div></blockquote>
+<p>In the picture below we have summarised the basic concepts of a JMeter test which we are going to build right afterwards.</p>
+<blockquote>
+<div><div class="figure align-center" id="id1">
+<img alt="../_images/jmeter11.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter11.png">
+<p class="caption"><span class="caption-text"><em>JMeter basic concepts</em></span></p>
+</div>
+</div></blockquote>
+<div class="section" id="configuring-a-simple-test">
+<h2>Configuring a simple test<a class="headerlink" href="#configuring-a-simple-test" title="Permalink to this headline">¶</a></h2>
+<p>This section explains how to run performance tests using JMeter in 
+order to evaluate the GeoServer performances when serving WMS requests.
+The performance test aims to stress the server and evaluates the 
+response time and throughput with an increasing number of simulated 
+users
+sending concurrent requests to the server.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ideally, to avoid adding extra load to the server JMeter should run on a different machine.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you have performed the exercises in the security section, please go back to the layer and
+service security pages and open access to everybody, on all data and all services, before performing
+the exercises in this section</p>
+</div>
+<ol class="arabic">
+<li><p class="first">From the training root, on the command line, run <code class="docutils literal"><span class="pre">jmeter.bat</span></code> (or <code class="docutils literal"><span class="pre">jmeter.sh</span></code> if you’re on Linux) to start JMeter:</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/jmeter2.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter2.png">
+<p class="caption"><span class="caption-text"><em>jMeter interface</em></span></p>
+</div>
+</li>
+<li><p class="first">Add a new <strong>Thread Group</strong> with the mouse right click on <code class="docutils literal"><span class="pre">Test</span> <span class="pre">Plan</span></code> tree node:</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/jmeter3.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter3.png">
+<p class="caption"><span class="caption-text"><em>Adding a new Thread Group</em></span></p>
+</div>
+</li>
+<li><p class="first">In the <code class="docutils literal"><span class="pre">Thread</span> <span class="pre">Group</span></code>
+ panel set the number of thread for the test to  4 (this represents the 
+number of simultaneous requests that are made to GeoServer) and the 
+ramp-up period to 60. Also, chek <code class="docutils literal"><span class="pre">Forever</span></code> on the <strong>Loop Count</strong> field.</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/jmeter14.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter14.png">
+<p class="caption"><span class="caption-text"><em>Setting the Thread Group</em></span></p>
+</div>
+</li>
+<li><p class="first">Add a new <strong>Loop Controller</strong> with the mouse right click on <code class="docutils literal"><span class="pre">Thread</span> <span class="pre">Group</span></code> tree node:</p>
+<div class="figure align-center" id="id5">
+<img alt="../_images/jmeter4.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter4.png">
+<p class="caption"><span class="caption-text"><em>Adding a new Loop Controller</em></span></p>
+</div>
+</li>
+<li><p class="first">Right click on the <code class="docutils literal"><span class="pre">Loop</span> <span class="pre">Controller</span></code> tree node and add a new <strong>HTTP Request</strong> element:</p>
+<div class="figure align-center" id="id6">
+<img alt="../_images/jmeter5.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter5.png">
+<p class="caption"><span class="caption-text"><em>Adding a new HTTP Request</em></span></p>
+</div>
+</li>
+<li><p class="first">In the <strong>HTTP Request</strong> enter the following basic configuration:</p>
+<table class="docutils" border="1">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Server Name or IP</td>
+<td>localhost</td>
+</tr>
+<tr class="row-odd"><td>Port Number</td>
+<td>8083</td>
+</tr>
+<tr class="row-even"><td>Path</td>
+<td>geoserver/ows</td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-center" id="id7">
+<img alt="../_images/jmeter9.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter9.png">
+<p class="caption"><span class="caption-text"><em>HTTP Request host/port/path configuration</em></span></p>
+</div>
+</li>
+<li><p class="first">From the training data dir root, open the <code class="docutils literal"><span class="pre">data/jmeter_data/jmeter_request_params.txt</span></code>,
+ select and copy its contents in the clipboard, then click “Add from 
+Clipboard” in the “HTTP request” panel to setup a sample GetMap request:</p>
+</li>
+</ol>
+<blockquote>
+<div><div class="figure align-center" id="id8">
+<img alt="../_images/jmeter_request_params.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter_request_params.png">
+<p class="caption"><span class="caption-text"><em>HTTP parameters configuration</em></span></p>
+</div>
+</div></blockquote>
+<ol class="arabic">
+<li><p class="first">Add the following listeners by right clicking on <code class="docutils literal"><span class="pre">Test</span> <span class="pre">Plan</span></code> tree node: <code class="docutils literal"><span class="pre">View</span> <span class="pre">results</span> <span class="pre">Tree</span></code>, <code class="docutils literal"><span class="pre">Summary</span> <span class="pre">Report</span></code>, <code class="docutils literal"><span class="pre">Graph</span> <span class="pre">results</span></code></p>
+<div class="figure align-center" id="id9">
+<img alt="../_images/jmeter7.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter7.png">
+<p class="caption"><span class="caption-text"><em>Adding a Listeners</em></span></p>
+</div>
+</li>
+<li><p class="first">Save this configuration into <code class="docutils literal"><span class="pre">data/jmeter_data/</span></code> as <code class="docutils literal"><span class="pre">jmeter_simple.jmx</span></code></p>
+</li>
+</ol>
+<p>At this point JMeter is configured to run a GeoServer performance test:</p>
+<ol class="arabic">
+<li><p class="first">Click on <code class="docutils literal"><span class="pre">Run</span></code> tool and select <strong>Start</strong> to startig the jMeter test.</p>
+<div class="figure align-center" id="id10">
+<img alt="../_images/jmeter13.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter13.png">
+<p class="caption"><span class="caption-text"><em>starting jMeter test</em></span></p>
+</div>
+</li>
+<li><p class="first">Select <code class="docutils literal"><span class="pre">View</span> <span class="pre">Results</span> <span class="pre">Tree</span></code> to directly see the request informations produced and the request result:</p>
+<div class="figure align-center" id="id11">
+<img alt="../_images/jmeter15.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter15.png">
+<p class="caption"><span class="caption-text"><em>The View Results Tree panel</em></span></p>
+</div>
+</li>
+<li><p class="first">Select <code class="docutils literal"><span class="pre">Summary</span> <span class="pre">report</span></code> to view the statistical informations about the requests:</p>
+<div class="figure align-center" id="id12">
+<img alt="../_images/jmeter19.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter19.png">
+<p class="caption"><span class="caption-text"><em>The Aggregate Graph panel</em></span></p>
+</div>
+</li>
+<li><p class="first">Select <code class="docutils literal"><span class="pre">Graph</span> <span class="pre">Results</span></code> to analyze the technical trend of the requests:</p>
+<div class="figure align-center" id="id13">
+<img alt="../_images/jmeter17.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter17.png">
+<p class="caption"><span class="caption-text"><em>The Spline Visualizer panel</em></span></p>
+</div>
+</li>
+<li><p class="first">Click on <code class="docutils literal"><span class="pre">Run</span></code> tool and select <strong>Stop</strong> to end the benchmarking session</p>
+</li>
+</ol>
+</div>
+<div class="section" id="creating-a-multiscale-test">
+<h2>Creating a Multiscale test<a class="headerlink" href="#creating-a-multiscale-test" title="Permalink to this headline">¶</a></h2>
+<p>This chapter explains how to create a custom randomized Multiscale test with a set of multiple concurrent threads.</p>
+<p>In the example before, we ran a test on a layer always requesting the
+ same bounding box and image size.
+Now we should set up a more sophisticated test asking for different 
+bounding boxes and resolutions, i.e. a multiscale test. Multiscale 
+testing is
+useful because it stresses GeoServer requesting new data each time, 
+mimicking real usage conditions and providing better testing for 
+eventual SLD scale
+dependencies. With JMeter we can execute the test by passing a CSV file 
+containing multiple randomized bounding boxes and image dimensions.</p>
+<p>In the first paragraph we are going to describe how to generate a CSV
+ file for randomized requests at different scales. In the second one is 
+shown how to configure a new JMeter test
+with multiple simultaneous threads.</p>
+<div class="section" id="create-csv-file">
+<h3>Create CSV file<a class="headerlink" href="#create-csv-file" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Only for Windows machines: open the file <code class="file docutils literal"><span class="pre">gdal.bat</span></code> under <code class="docutils literal"><span class="pre">%TRAINING_ROOT%</span></code> folder inside the training home folder.</p>
+</li>
+<li><p class="first">Run:</p>
+<blockquote>
+<div><p>Linux:</p>
+<div class="highlight-default"><div class="highlight"><pre>cd $TRAINING_ROOT/geoserver_data/data/boulder
+
+gdalinfo srtm_boulder.tiff
+</pre></div>
+</div>
+<p>Windows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">cd</span> <span class="o">%</span><span class="n">TRAINING_ROOT</span><span class="o">%</span>\<span class="n">geoserver_data</span>\<span class="n">data</span>\<span class="n">boulder</span>
+
+<span class="n">gdalinfo</span> <span class="n">srtm_boulder</span><span class="o">.</span><span class="n">tiff</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">The output of the command will be something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">Driver</span><span class="p">:</span> <span class="n">GTiff</span><span class="o">/</span><span class="n">GeoTIFF</span>
+<span class="n">Files</span><span class="p">:</span> <span class="n">srtm_boulder</span><span class="o">.</span><span class="n">tiff</span>
+<span class="n">Size</span> <span class="ow">is</span> <span class="mi">2520</span><span class="p">,</span> <span class="mi">1800</span>
+<span class="n">Coordinate</span> <span class="n">System</span> <span class="ow">is</span><span class="p">:</span>
+<span class="n">GEOGCS</span><span class="p">[</span><span class="s">"WGS 84"</span><span class="p">,</span>
+        <span class="n">DATUM</span><span class="p">[</span><span class="s">"WGS_1984"</span><span class="p">,</span>
+                <span class="n">SPHEROID</span><span class="p">[</span><span class="s">"WGS 84"</span><span class="p">,</span><span class="mi">6378137</span><span class="p">,</span><span class="mf">298.257223563</span><span class="p">,</span>
+                        <span class="n">AUTHORITY</span><span class="p">[</span><span class="s">"EPSG"</span><span class="p">,</span><span class="s">"7030"</span><span class="p">]],</span>
+                <span class="n">AUTHORITY</span><span class="p">[</span><span class="s">"EPSG"</span><span class="p">,</span><span class="s">"6326"</span><span class="p">]],</span>
+        <span class="n">PRIMEM</span><span class="p">[</span><span class="s">"Greenwich"</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">UNIT</span><span class="p">[</span><span class="s">"degree"</span><span class="p">,</span><span class="mf">0.0174532925199433</span><span class="p">],</span>
+        <span class="n">AUTHORITY</span><span class="p">[</span><span class="s">"EPSG"</span><span class="p">,</span><span class="s">"4326"</span><span class="p">]]</span>
+<span class="n">Origin</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">105.700138888888890</span><span class="p">,</span><span class="mf">40.300138888888888</span><span class="p">)</span>
+<span class="n">Pixel</span> <span class="n">Size</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.000277777777778</span><span class="p">,</span><span class="o">-</span><span class="mf">0.000277777777778</span><span class="p">)</span>
+<span class="n">Metadata</span><span class="p">:</span>
+  <span class="n">AREA_OR_POINT</span><span class="o">=</span><span class="n">Area</span>
+<span class="n">Image</span> <span class="n">Structure</span> <span class="n">Metadata</span><span class="p">:</span>
+  <span class="n">INTERLEAVE</span><span class="o">=</span><span class="n">BAND</span>
+<span class="n">Corner</span> <span class="n">Coordinates</span><span class="p">:</span>
+<span class="n">Upper</span> <span class="n">Left</span>  <span class="p">(</span><span class="o">-</span><span class="mf">105.7001389</span><span class="p">,</span>  <span class="mf">40.3001389</span><span class="p">)</span> <span class="p">(</span><span class="mi">105</span><span class="n">d42</span><span class="s">' 0.50"W, 40d18'</span> <span class="mf">0.50</span><span class="s">"N)</span>
+<span class="n">Lower</span> <span class="n">Left</span>  <span class="p">(</span><span class="o">-</span><span class="mf">105.7001389</span><span class="p">,</span>  <span class="mf">39.8001389</span><span class="p">)</span> <span class="p">(</span><span class="mi">105</span><span class="n">d42</span><span class="s">' 0.50"W, 39d48'</span> <span class="mf">0.50</span><span class="s">"N)</span>
+<span class="n">Upper</span> <span class="n">Right</span> <span class="p">(</span><span class="o">-</span><span class="mf">105.0001389</span><span class="p">,</span>  <span class="mf">40.3001389</span><span class="p">)</span> <span class="p">(</span><span class="mi">105</span><span class="n">d</span> <span class="mi">0</span><span class="s">' 0.50"W, 40d18'</span> <span class="mf">0.50</span><span class="s">"N)</span>
+<span class="n">Lower</span> <span class="n">Right</span> <span class="p">(</span><span class="o">-</span><span class="mf">105.0001389</span><span class="p">,</span>  <span class="mf">39.8001389</span><span class="p">)</span> <span class="p">(</span><span class="mi">105</span><span class="n">d</span> <span class="mi">0</span><span class="s">' 0.50"W, 39d48'</span> <span class="mf">0.50</span><span class="s">"N)</span>
+<span class="n">Center</span>      <span class="p">(</span><span class="o">-</span><span class="mf">105.3501389</span><span class="p">,</span>  <span class="mf">40.0501389</span><span class="p">)</span> <span class="p">(</span><span class="mi">105</span><span class="n">d21</span><span class="s">' 0.50"W, 40d 3'</span> <span class="mf">0.50</span><span class="s">"N)</span>
+<span class="n">Band</span> <span class="mi">1</span> <span class="n">Block</span><span class="o">=</span><span class="mi">256</span><span class="n">x256</span> <span class="n">Type</span><span class="o">=</span><span class="n">Int16</span><span class="p">,</span> <span class="n">ColorInterp</span><span class="o">=</span><span class="n">Gray</span>
+  <span class="n">Overviews</span><span class="p">:</span> <span class="mi">1260</span><span class="n">x900</span><span class="p">,</span> <span class="mi">630</span><span class="n">x450</span><span class="p">,</span> <span class="mi">315</span><span class="n">x225</span><span class="p">,</span> <span class="mi">158</span><span class="n">x113</span><span class="p">,</span> <span class="mi">79</span><span class="n">x57</span><span class="p">,</span> <span class="mi">40</span><span class="n">x29</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The information needed to create a multiscale CSV file are:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tile Size</strong></td>
+<td>256 x 256</td>
+</tr>
+<tr class="row-even"><td><strong>Pixel Size</strong></td>
+<td>0.000277777777778</td>
+</tr>
+<tr class="row-odd"><td><strong>Bounding Box</strong></td>
+<td>((-105.7001389, -105.0001389), (39.8001389, 40.3001389))</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">Run:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Linux::</dt>
+<dd><div class="first last highlight-xml"><div class="highlight"><pre>cd $TRAINING_ROOT/data/jmeter_data
+
+python ./wms_request.py -count 100 -region -105.7 39.8 -105.0 40.3 -minres 0.00028 -maxres 0.00224 -minsize 256 256 -maxsize 1024 1024 &gt; multiscale.csv
+</pre></div>
+</div>
+</dd>
+<dt>Windows::</dt>
+<dd><div class="first highlight-xml"><div class="highlight"><pre>cd %TRAINING_ROOT%\data\jmeter_data
+
+wms_request.py -count 100 -region -105.7 39.8 -105.0 40.3 -minres 0.00028 -maxres 0.00224 -minsize 256 256 -maxsize 1024 1024 &gt; multiscale.csv
+</pre></div>
+</div>
+<p><strong>wms_request.py</strong> is a python script which generates 
+randomized requests at different bounding box and resolutions. The 
+parameters are described in the following table:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Parameter</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-even"><td><em>count</em></td>
+<td>Indicates the number of requests to generate</td>
+</tr>
+<tr class="row-odd"><td><em>region</em></td>
+<td>Indicates the maximum bounding box of each request</td>
+</tr>
+<tr class="row-even"><td><em>minres/maxres</em></td>
+<td>Indicates the minimum and maximum value for the Pixel Size to request (Typically it should be at least the minimum resolution)</td>
+</tr>
+<tr class="row-odd"><td><em>minsize/maxsize</em></td>
+<td>Indicates the minimum and maximum dimensions of the requested image (Typically it should be at least as big as the tile size)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The CSV file is structured following the rule <code class="docutils literal"><span class="pre">$width;$height;$bbox</span></code>.</p>
+<p>For example <code class="docutils literal"><span class="pre">290;444;-105.5904,39.910198,-105.48776,40.067338</span></code> indicates a request of size <strong>290x444</strong> and Bounding box <strong>[-105.5904,39.910198,-105.48776,40.067338]</strong>.</p>
+<p class="last">JMeter must be configured for parsing the CSV file correctly by using the <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">Data</span> <span class="pre">Set</span> <span class="pre">Config</span></code> element.</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-jmeter">
+<h3>Configure JMeter<a class="headerlink" href="#configure-jmeter" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">From the training root, on the command line, run <code class="docutils literal"><span class="pre">jmeter.bat</span></code> (or <code class="docutils literal"><span class="pre">jmeter.sh</span></code> if you’re on Linux) to start JMeter:</p>
+<div class="figure align-center" id="id14">
+<img alt="../_images/jmeter2.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter2.png">
+<p class="caption"><span class="caption-text"><em>jMeter interface</em></span></p>
+</div>
+</li>
+<li><p class="first">Add three new items of type <strong>Thread Group</strong> called <em>1</em>, <em>2</em>, <em>4</em></p>
+</li>
+<li><p class="first">For each <strong>Thread Group</strong> set the <code class="docutils literal"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">Thread</span> <span class="pre">(users)</span></code> field equal to the <strong>Thread Group</strong> name, the <code class="docutils literal"><span class="pre">Ramp-Up</span> <span class="pre">Period</span></code> and <code class="docutils literal"><span class="pre">Loop</span> <span class="pre">Count</span></code> fields to 1.</p>
+<div class="figure align-center" id="id15">
+<img alt="../_images/jmeter18.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter18.png">
+<p class="caption"><span class="caption-text"><em>Setting the Thread Group (here: Thread Group 1)</em></span></p>
+</div>
+</li>
+<li><p class="first">In the <strong>Test Plan</strong> section, check the <cite>Run Thread Groups consecutively</cite> checkbox</p>
+</li>
+<li><p class="first">Add a new <strong>Loop Controller</strong> to the first <strong>Thread Group</strong> object</p>
+</li>
+<li><p class="first">Right click on the <code class="docutils literal"><span class="pre">Loop</span> <span class="pre">Controller</span></code> tree node and add a new <strong>HTTP Request</strong> element with the same name of the <strong>Thread Group</strong>:</p>
+<div class="figure align-center" id="id16">
+<img alt="../_images/jmeter21.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter21.png">
+<p class="caption"><span class="caption-text"><em>Setting the HTTP Request</em></span></p>
+</div>
+</li>
+<li><p class="first">In each <strong>HTTP Request</strong> add the following fields to the panel:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Value</th>
+<th class="head">Encode?</th>
+<th class="head">Include Equals?</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>bbox</td>
+<td>${bbox}</td>
+<td>unchecked</td>
+<td>checked</td>
+</tr>
+<tr class="row-odd"><td>height</td>
+<td>${height}</td>
+<td>unchecked</td>
+<td>checked</td>
+</tr>
+<tr class="row-even"><td>width</td>
+<td>${width}</td>
+<td>unchecked</td>
+<td>checked</td>
+</tr>
+</tbody>
+</table>
+<p>Which should look like in the picture</p>
+<div class="figure align-center" id="id17">
+<img alt="../_images/jmeter20.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter20.png">
+<p class="caption"><span class="caption-text"><em>HTTP Request panel configuration</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Uncheck the <code class="docutils literal"><span class="pre">Follow</span> <span class="pre">Redirects</span></code> and <code class="docutils literal"><span class="pre">Use</span> <span class="pre">KeepAlive</span></code> checkbox</p>
+</li>
+<li><p class="first">Right click on the <code class="docutils literal"><span class="pre">Loop</span> <span class="pre">Controller</span></code> tree node and add a new <strong>CSV Data Set Config</strong> element:</p>
+<div class="figure align-center" id="id18">
+<img alt="../_images/jmeter22.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter22.png">
+<p class="caption"><span class="caption-text"><em>Setting the CSV Data Set Config</em></span></p>
+</div>
+</li>
+<li><p class="first">Configure the <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">Data</span> <span class="pre">Set</span> <span class="pre">Config</span></code> as follows:</p>
+<blockquote>
+<div><blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field name</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Filename</td>
+<td>./multiscale.csv</td>
+</tr>
+<tr class="row-odd"><td>Variable names</td>
+<td>width,height,bbox</td>
+</tr>
+<tr class="row-even"><td>Delimiter</td>
+<td><strong>;</strong></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="figure align-center" id="id19">
+<img alt="../_images/jmeter23.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter23.png">
+<p class="caption"><span class="caption-text"><em>Configuring the CSV Data Set Config</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Right click the loop controller and choose “Copy”, 
+then right click the other thread groups (one by one) and choose “paste”
+ to get a full copy of the
+controller, HTTP sampler and CSV confiuration. Adjust each “HTTP 
+request” node name to match the thread group name (1, 2 and 4)</p>
+</li>
+<li><p class="first">Configure the <strong>Loop Controller</strong> along the following schema:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><dl class="first last docutils">
+<dt><strong>Thread Group</strong></dt>
+<dd><ul class="first last simple">
+<li>1</li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="first last docutils">
+<dt><strong>Loop Controller –&gt; Loop Count</strong></dt>
+<dd><ul class="first last simple">
+<li>100</li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td><dl class="first last docutils">
+<dt><strong>Thread Group</strong></dt>
+<dd><ul class="first last simple">
+<li>2</li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="first last docutils">
+<dt><strong>Loop Controller –&gt; Loop Count</strong></dt>
+<dd><ul class="first last simple">
+<li>50</li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><dl class="first last docutils">
+<dt><strong>Thread Group</strong></dt>
+<dd><ul class="first last simple">
+<li>4</li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="first last docutils">
+<dt><strong>Loop Controller –&gt; Loop Count</strong></dt>
+<dd><ul class="first last simple">
+<li>50</li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">From the <code class="docutils literal"><span class="pre">Test</span> <span class="pre">Plan</span></code> tree node add an <strong>HTTP Request Defaults</strong> element (Config Element -&gt; HTTP Request Defaults) and enter the following basic configuration:</p>
+<table class="docutils" border="1">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Server Name or IP</td>
+<td>localhost</td>
+</tr>
+<tr class="row-odd"><td>Port Number</td>
+<td>8083</td>
+</tr>
+<tr class="row-even"><td>Path</td>
+<td>geoserver/ows</td>
+</tr>
+</tbody>
+</table>
+<p>It should look like this:</p>
+<div class="figure align-center" id="id20">
+<img alt="../_images/jmeter9.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter9.png">
+<p class="caption"><span class="caption-text"><em>HTTP Default Request host/port/path configuration</em></span></p>
+</div>
+</li>
+<li><p class="first">From the training data dir root, open the <code class="docutils literal"><span class="pre">data/jmeter_data/jmeter_request_params_2.txt</span></code>, select and copy its contents in the clipboard, then click <strong>Add from Clipboard</strong> in the <strong>HTTP request</strong> panel to set up a sample GetMap request:</p>
+</li>
+<li><p class="first">Add the following listeners by right clicking on <code class="docutils literal"><span class="pre">Test</span> <span class="pre">Plan</span></code> tree node: <strong>View results Tree</strong> and <strong>Summary Report</strong></p>
+</li>
+<li><p class="first">Add the following assertions by right clicking on <code class="docutils literal"><span class="pre">Test</span> <span class="pre">Plan</span></code> tree node: <strong>Response Assertion</strong></p>
+<div class="figure align-center" id="id21">
+<img alt="../_images/jmeter24.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter24.png">
+<p class="caption"><span class="caption-text"><em>Adding Assertions</em></span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Using <code class="docutils literal"><span class="pre">Assertions</span></code> is helpful because it avoids to continuously do a visual check on the results.</p>
+</div>
+</li>
+<li><p class="first">Configure the <strong>Response Assertion</strong> following this table:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Apply to</td>
+<td>Main sample only</td>
+</tr>
+<tr class="row-odd"><td>Response field to test</td>
+<td>Response Headers</td>
+</tr>
+<tr class="row-even"><td>Pattern Matching Rules</td>
+<td>Contains</td>
+</tr>
+</tbody>
+</table>
+<p>In the <code class="docutils literal"><span class="pre">Pattern</span> <span class="pre">to</span> <span class="pre">test</span></code> panel add:</p>
+<div class="highlight-xml"><div class="highlight"><pre>Content-Type: image/png
+</pre></div>
+</div>
+<p>The final result should look like in the picture:</p>
+<div class="figure align-center" id="id22">
+<img alt="../_images/jmeter25.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter25.png">
+<p class="caption"><span class="caption-text"><em>Configuring Response Assertion</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">The overall test plan should look as follows. Save it in the <code class="docutils literal"><span class="pre">jmeter_data</span></code> directory as <code class="docutils literal"><span class="pre">multiscale.jmx</span></code></p>
+</li>
+</ol>
+<blockquote>
+<div><div class="figure align-center" id="id23">
+<img alt="../_images/multiscale.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/multiscale.png">
+<p class="caption"><span class="caption-text"><em>Saving the multiscale benchmark</em></span></p>
+</div>
+</div></blockquote>
+<p>At this point JMeter is configured to run a GeoServer performance test:</p>
+<ol class="arabic">
+<li><p class="first">Select the <strong>Test Plan</strong> tree node and select <code class="docutils literal"><span class="pre">Run</span></code> - <code class="docutils literal"><span class="pre">Start</span></code> from the top menu to start the JMeter test.</p>
+<div class="figure align-center" id="id24">
+<img alt="../_images/jmeter13.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter13.png">
+<p class="caption"><span class="caption-text"><em>starting JMeter test</em></span></p>
+</div>
+</li>
+<li><p class="first">Select <code class="docutils literal"><span class="pre">View</span> <span class="pre">Results</span> <span class="pre">Tree</span></code> to directly see the request information produced and the requests results:</p>
+<div class="figure align-center" id="id25">
+<img alt="../_images/jmeter26.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter26.png">
+<p class="caption"><span class="caption-text"><em>The View Results Tree panel with a sample request</em></span></p>
+</div>
+<div class="figure align-center" id="id26">
+<img alt="../_images/jmeter27.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter27.png">
+<p class="caption"><span class="caption-text"><em>Another request with different resolution and bounding box</em></span></p>
+</div>
+</li>
+<li><p class="first">Select <code class="docutils literal"><span class="pre">Summary</span> <span class="pre">Report</span></code> to view the statistical information about the requests:</p>
+<div class="figure align-center" id="id27">
+<img alt="../_images/jmeter28.png" src="Stress%20testing%20with%20JMeter%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter28.png">
+<p class="caption"><span class="caption-text"><em>Suymmary report panel</em></span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/raster.html" title="Raster Data Optimization" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/benchmarking_intro.html" title="Benchmarking primer" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" accesskey="U">Enterprise Set-up Recommendations</a> »</li>
+        <li><a href="#">Stress testing with JMeter</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

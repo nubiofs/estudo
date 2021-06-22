@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ActiveMQ</title>
+    <style type="text/css">svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.33333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1em}.svg-inline--fa.fa-stack-2x{height:2em;width:2em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}</style><link rel="icon" type="image/png" href="https://activemq.apache.org/assets/img/favicon.png">
+
+    <link rel="stylesheet" href="ActiveMQ_arquivos/main.css">
+    <script defer="defer" src="ActiveMQ_arquivos/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+    <script src="ActiveMQ_arquivos/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="ActiveMQ_arquivos/popper.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="ActiveMQ_arquivos/bootstrap.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <!-- <a class="navbar-brand mr-auto" href="#"><img style="height: 50px" src="assets/img/apache-feather.png" /></a> -->
+        <a class="navbar-brand mr-auto" href="https://activemq.apache.org/"><img src="ActiveMQ_arquivos/activemq_logo_black_small.png" style="height: 50px"></a>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="ml-auto collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="https://activemq.apache.org/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" id="navbarDropdownComponents" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Components<span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="navbarDropdownComponents">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="multi-column-dropdown">
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/components/classic">ActiveMQ "Classic"</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/components/artemis/">ActiveMQ Artemis</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/components/nms">NMS Clients</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/components/cms">CMS Client</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" id="navbarDropdownCommunity" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Community<span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-center multi-column columns-1" aria-labelledby="navbarDropdownCommunity">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="multi-column-dropdown">
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/contact">Contact Us</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/contributing">Contribute</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/issues">Report Issues</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/support">Get Support</a></li>
+                                </ul>
+                            </div>
+                          </div>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" id="navbarDropdownTeam" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="ActiveMQ_arquivos/feather.png" style="height:20px">Apache<span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-center multi-column columns-1" aria-labelledby="navbarDropdownTeam">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="multi-column-dropdown">
+                                    <li class="nav-item"><a class="dropdown-item" href="https://www.apache.org/">The Apache Software Foundation</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://www.apache.org/licenses/">License</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/security-advisories">Security</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://www.apache.org/events/current-event">Events</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://people.apache.org/phonebook.html?pmc=activemq">PMC &amp; Committers</a></li>
+                                    <li class="nav-item"><a class="dropdown-item" href="https://activemq.apache.org/team/reports">Board Reports</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+  <div class="page-title-activemq5">
+    <div class="container">
+      <h1>Virtual Destinations</h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row" style="margin-top: 30px">
+      <div class="col-12 activemq5">
+        <p><a href="https://activemq.apache.org/features">Features</a>&nbsp;&gt;&nbsp;<a href="https://activemq.apache.org/destination-features">Destination Features</a>&nbsp;&gt;&nbsp;<a href="https://activemq.apache.org/virtual-destinations">Virtual Destinations</a></p>
+
+<p><em>Virtual Destinations</em> allow us to create logical destinations that clients can use to produce and consume from but which map onto one or more <em>physical destinations</em>. It allows us to provide more flexible loosely coupled messaging configurations.</p>
+
+<h2 id="virtual-topics">Virtual Topics</h2>
+
+<p>The idea behind <em>publish subscribe</em> is a great one. Allow 
+producers to be decoupled from consumers so that they do not even know 
+how many consumers are interested in the messages they publish. The JMS 
+specification defines support for durable topics however they have 
+limitations as we will describe…</p>
+
+<h3 id="the-limitations-of-jms-durable-topics">The limitations of JMS durable topics</h3>
+
+<p>A JMS durable subscriber MessageConsumer is created with a unique JMS
+ clientID and durable subscriber name. To be JMS compliant only one JMS 
+connection can be active at any point in time for one JMS clientID, and 
+only one consumer can be active for a clientID and subscriber name. 
+i.e., only <strong>one</strong> thread can be actively consuming from a given logical topic subscriber. This means we cannot implement</p>
+
+<ul>
+  <li>load balancing of messages.</li>
+  <li>fast failover of the subscriber if that one process running that one consumer thread dies.</li>
+</ul>
+
+<p>Now <em>queue</em> semantics in JMS offer the ability to load balance
+ work across a number of consumers in a reliable way - allowing many 
+threads, processes and machines to be used to process messages. Then we 
+have sophisticated sticky load balancing techniques like <a href="https://activemq.apache.org/message-groups">Message Groups</a> to load balance and parallelise work while maintaining ordering.</p>
+
+<p>Another added benefit of having physical queues for each logical topic subscriber is we can them monitor the queue depths via <a href="https://activemq.apache.org/jmx">JMX</a> to monitor system performance together with being able to browse these physical queues.</p>
+
+<h3 id="virtual-topics-to-the-rescue">Virtual Topics to the rescue</h3>
+
+<p>The idea behind virtual topics is that producers send to a topic in 
+the usual JMS way. Consumers can continue to use the Topic semantics in 
+the JMS specification. However if the topic is virtual, consumer can 
+consume from a physical queue for a logical topic subscription, allowing
+ many consumers to be running on many machines &amp; threads to load 
+balance the load.</p>
+
+<p>E.g., let’s say we have a topic called <strong>VirtualTopic.Orders</strong>.
+ (Where the prefix VirtualTopic. indicates its a virtual topic). And we 
+logically want to send orders to systems A and B. Now with regular 
+durable topics we’d create a JMS consumer for clientID_A and “A” along 
+with clientID_B and “B”.</p>
+
+<p>With virtual topics we can just go right ahead and consume to queue <strong>Consumer.A.VirtualTopic.Orders</strong> to be a consumer for system A or consume to <strong>Consumer.B.VirtualTopic.Orders</strong> to be a consumer for system B.</p>
+
+<p>We can now have a pool of consumers for each system which then 
+compete for messages for systems A or B such that all the messages for 
+system A are processed exactly once and similarly for system B.</p>
+
+<h3 id="customizing-the-out-of-the-box-defaults">Customizing the out-of-the-box defaults</h3>
+
+<p>The out-of-the-box defaults are described above. Namely that the only virtual topics available must be within the <strong>VirtualTopic.&gt;</strong> namespace and that the consumer queues are named <strong>Consumer.*.VirtualTopic.&gt;</strong>.</p>
+
+<p>You can configure this to use whatever naming convention you wish. The following <a href="https://svn.apache.org/repos/asf/incubator/activemq/trunk/activemq-unit-tests/src/test/resources/org/apache/activemq/broker/virtual/global-virtual-topics.xml">example</a> shows how to make all topics virtual topics. The example below is using the name <strong>&gt;</strong> to indicate ‘match all topics’. You could use this wildcard to apply different virtual topic policies in different hierarchies.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;destinationInterceptors&gt; 
+  &lt;virtualDestinationInterceptor&gt; 
+    &lt;virtualDestinations&gt; 
+      &lt;virtualTopic name="&gt;" prefix="VirtualTopicConsumers.*." selectorAware="false"/&gt;   
+    &lt;/virtualDestinations&gt;
+  &lt;/virtualDestinationInterceptor&gt; 
+&lt;/destinationInterceptors&gt;
+</code></pre></div></div>
+<p>Note that making a topic virtual does add a small CPU overhead when sending messages to the topic but it is fairly small.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>selectorAwae</td>
+      <td>false</td>
+      <td>only messages that match one of the existing subscribers are 
+actually dispatched. Using this option prevents the build up of 
+unmatched messages when selectors are used by exclusive consumers</td>
+    </tr>
+    <tr>
+      <td>local</td>
+      <td>false</td>
+      <td>when true, don’t fan out messages that were received over a network</td>
+    </tr>
+    <tr>
+      <td>concurrentSend</td>
+      <td>false</td>
+      <td>when true, use an executor to fanout such that sends occur in 
+parallel. This allows the journal to batch writes which will reduce disk
+ io (5.12)</td>
+    </tr>
+    <tr>
+      <td>transactedSend</td>
+      <td>false</td>
+      <td>when true, use a transaction for fanout sends such that there 
+is a single disk sync. A local broker transaction will be created if 
+there is no client transaction (5.13)</td>
+    </tr>
+    <tr>
+      <td>dropOnResourceLimit</td>
+      <td>false</td>
+      <td>when true, ignore any ResourceAllocationException thrown during fanout (see: sendFailIfNoSpace policy entry) (5.16)</td>
+    </tr>
+    <tr>
+      <td>setOriginalDestination</td>
+      <td>true</td>
+      <td>when true, the destination on the forwarded message is set to 
+the consumer queue and the originalDestination message property tracks 
+the virtual topic (5.16)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="virtualselectorcachebrokerplugin">VirtualSelectorCacheBrokerPlugin</h2>
+
+<p>When selectorAware=true, only active consumers are condidered for 
+selector matching. If consumers disconnect and reconnect they will miss 
+messages. The intent of selectorAware=true is to not have messages build
+ up. The virtualSelectorCacheBrokerPlugin provides a cache that tracks 
+the selectors associated with a destination by a consumers such that 
+they can apply in the absense of that consumer. In this way the just the
+ selected messages build up. The existing set of selectors can be 
+persisted such that it can be recovered on restart. the plugin is 
+applied in the normal way to the plugins section.
+Code Block</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugins&gt;
+ &lt;virtualSelectorCacheBrokerPlugin persistFile="&lt;some path&gt;/selectorcache.data" /&gt;
+&lt;/plugins&gt;
+</code></pre></div></div>
+
+<p>Note: the persistFile option uses java serialisation that should be 
+locked down with an appropriate jdk.serialFilter that allows 
+ConcurrentHashMap</p>
+
+<h2 id="composite-destinations">Composite Destinations</h2>
+
+<p>Composite Destinations allow for one-to-many relationships on individual destinations; the main use case is for <em>composite queues</em>.
+ For example when a message is sent to queue A you may want to forward 
+it also to queues B and C and topic D. Composite destinations are then a
+ mapping from a virtual destination to a collection of other physical 
+destinations. In this case the mapping is broker side and the client is 
+unaware of the mapping between the destinations. This is different from 
+client side <a href="https://activemq.apache.org/composite-destinations">Composite Destinations</a> where the client uses a URL notation to specify the actual physical destinations that a message must be sent to.</p>
+
+<p>The following <a href="http://svn.apache.org/repos/asf/incubator/activemq/trunk/activemq-unit-tests/src/test/resources/org/apache/activemq/broker/virtual/composite-queue.xml">example</a> shows how to set up a <strong><compositequeue></compositequeue></strong> element in the XML configuration so that when a message is sent to <code class="language-plaintext highlighter-rouge">MY.QUEUE</code> then it is really forwarded to the physical queue <code class="language-plaintext highlighter-rouge">FOO</code> and the topic <code class="language-plaintext highlighter-rouge">BAR</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;destinationInterceptors&gt;
+ &lt;virtualDestinationInterceptor&gt; 
+   &lt;virtualDestinations&gt; 
+     &lt;compositeQueue name="MY.QUEUE"&gt;
+       &lt;forwardTo&gt;
+         &lt;queue physicalName="FOO" /&gt; 
+         &lt;topic physicalName="BAR" /&gt;
+       &lt;/forwardTo&gt;
+     &lt;/compositeQueue&gt;
+   &lt;/virtualDestinations&gt;
+ &lt;/virtualDestinationInterceptor&gt;
+&lt;/destinationInterceptors&gt;
+</code></pre></div></div>
+<p>By default, subscribers cannot consume messages directly from a 
+composite queue or topic - it is a logical construct only. Given the 
+configuration above, subscribers can only consume messages from <code class="language-plaintext highlighter-rouge">FOO</code> and <code class="language-plaintext highlighter-rouge">BAR</code>; but not <code class="language-plaintext highlighter-rouge">MY.QUEUE</code>.</p>
+
+<p>This behaviour can be altered to implement use cases such as watching
+ a queue by sending the same messages to a notification topic (wire 
+tapping), by setting the optionally set <code class="language-plaintext highlighter-rouge">forwardOnly</code> attribute to false.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;compositeQueue name="IncomingOrders" forwardOnly="false"&gt; 
+   &lt;forwardTo&gt;
+    &lt;topic physicalName="Notifications" /&gt;
+   &lt;/forwardTo&gt;
+ &lt;/compositeQueue&gt;
+</code></pre></div></div>
+<p>Messages sent to <code class="language-plaintext highlighter-rouge">IncomingOrders</code> will all be copied and forwarded to <code class="language-plaintext highlighter-rouge">Notifications</code>, before being placed on the physical <code class="language-plaintext highlighter-rouge">IncomingOrders</code> queue for consumption by subscribers.</p>
+
+<p>Where the <code class="language-plaintext highlighter-rouge">forwardOnly</code> attribute is not defined or is set to <code class="language-plaintext highlighter-rouge">true</code>, there is no logical difference between a <code class="language-plaintext highlighter-rouge">compositeQueue</code> and a <code class="language-plaintext highlighter-rouge">compositeTopic</code> - they can be used interchangeably. It is only when a composite destination is made physical through the use of <code class="language-plaintext highlighter-rouge">forwardOnly</code> that the choice of <code class="language-plaintext highlighter-rouge">compositeTopic</code>/<code class="language-plaintext highlighter-rouge">compositeQueue</code> has an impact on behavior.</p>
+
+<h3 id="using-filtered-destinations">Using filtered destinations</h3>
+
+<p>From Apache ActiveMQ <strong>4.2</strong> onwards you can now use selectors to define virtual destinations.</p>
+
+<p>You may wish to create a virtual destination which forwards messages 
+to multiple destinations but applying a selector first to decide if the 
+message really does have to go to a particular destination.</p>
+
+<p>The following example shows how a message sent to the virtual destination <strong>MY.QUEUE</strong> will be forwarded to <strong>FOO</strong> and <strong>BAR</strong> if the selectors match</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;destinationInterceptors&gt; &lt;virtualDestinationInterceptor&gt; &lt;virtualDestinations&gt; 
+   &lt;compositeQueue name="MY.QUEUE"&gt;
+    &lt;forwardTo&gt;
+     &lt;filteredDestination selector="odd = 'yes'" queue="FOO"/&gt;
+     &lt;filteredDestination selector="i = 5" topic="BAR"/&gt;
+    &lt;/forwardTo&gt;
+  &lt;/compositeQueue&gt;
+&lt;/virtualDestinations&gt; &lt;/virtualDestinationInterceptor&gt; &lt;/destinationInterceptors&gt;
+</code></pre></div></div>
+
+<h2 id="avoiding-duplicate-message-in-a-network-of-brokers">Avoiding Duplicate Message in a Network of Brokers</h2>
+
+<p><strong>TLDR:</strong> bridge consumer queues or virtual topics, not both.</p>
+
+<p>Typically you would network consumer queues. In this case it is 
+important to not bridge any normal topic consumer on the virtual topic 
+because any forwarded message would again get fanned out to consumer 
+queues on the networked broker, leading to duplicates.</p>
+
+<p>It is also possible to bridge the virtual topic in which case it is 
+necessary exclude the consumer queues from any network connector 
+configuration.</p>
+
+<p>Here is an example of how to exclude virtual topic consumer queues:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;networkConnectors&gt; &lt;networkConnector uri="static://([tcp://localhost:61617](tcp://localhost:61617))"&gt;
+ &lt;excludedDestinations&gt; 
+ &lt;queue physicalName="Consumer.*.VirtualTopic.&gt;"/&gt; 
+ &lt;/excludedDestinations&gt; 
+&lt;/networkConnector&gt; &lt;/networkConnectors&gt;
+</code></pre></div></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row sitemap">
+  <div class="col-sm-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-3">
+              <div>
+                <img class="float-left" style="max-height: 100px" src="ActiveMQ_arquivos/activemq_logo_white_vertical_small.png">
+              </div>
+            </div>
+            <div style="text-align: center; margin-bottom: 0px; margin-top: 30px; font-size: 65%" class="col-sm-6">
+              <p><a href="https://www.apache.org/foundation/marks/list/">Apache, ActiveMQ, Apache ActiveMQ</a>,
+ the Apache feather logo, and the Apache ActiveMQ project logo are 
+trademarks of The Apache Software Foundation. Copyright © 2021, The 
+Apache Software Foundation. Licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+            </div>
+            <div class="col-sm-3">
+              <div>
+                <a href="https://www.apache.org/"><img class="float-right" style="margin-top: 10px; max-height: 80px" src="ActiveMQ_arquivos/apache-logo-small.png"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body></html>

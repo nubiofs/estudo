@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>How-To configure a Standalone ActiveMQ broker — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="GeoServer Active Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html">
+    <link rel="next" title="JDBC Master/Slave HA Set-Up" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/JDBC.html">
+    <link rel="prev" title="Advanced Configuration for the Broker URIs" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/advancedbrokerURI.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How-To configure a Standalone ActiveMQ broker</a><ul>
+<li><a class="reference internal" href="#persistence-configuration">Persistence Configuration</a><ul>
+<li><a class="reference internal" href="#oracle-datasource">Oracle datasource</a></li>
+<li><a class="reference internal" href="#postgres-datasource">Postgres datasource</a></li>
+<li><a class="reference internal" href="#kaha-datasource-embedded-database">Kaha datasource (Embedded database)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#control-instances-using-jmx">Control instances using JMX</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/advancedbrokerURI.html" title="previous chapter">Advanced Configuration for the Broker URIs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/JDBC.html" title="next chapter">JDBC Master/Slave HA Set-Up</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/clustering/active/activemq/activemqBroker.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-activemq.activemqBroker"></span><div class="section" id="how-to-configure-a-standalone-activemq-broker">
+<span id="activemq-activemqbroker"></span><h1>How-To configure a Standalone ActiveMQ broker<a class="headerlink" href="#how-to-configure-a-standalone-activemq-broker" title="Permalink to this headline">¶</a></h1>
+<p>Deploy the activemqBroker.war in your Tomcat instance and check the 
+extracted webapp. You may locate a file called activemq-jmx.properties 
+which will help you to configure your instance with the most important 
+parameters.
+Anyhow it is only an example and we encourage you to also check the <code class="docutils literal"><span class="pre">ApplicationContext.xml</span></code> file deployed to <code class="docutils literal"><span class="pre">activemq/WEB-INF/classes/ApplicationContext.xml</span></code> which is the complete configuration:</p>
+<div class="highlight-xml"><div class="highlight"><pre>...
+<span class="c">&lt;!-- The transport connectors expose ActiveMQ over a given protocol to</span>
+<span class="c">      clients and other brokers.</span>
+<span class="c">      For more information, see: http://activemq.apache.org/configuring-transports.html --&gt;</span>
+<span class="nt">&lt;transportConnectors&gt;</span>
+        <span class="nt">&lt;transportConnector</span> <span class="na">name=</span><span class="s">"openwire"</span> <span class="na">uri=</span><span class="s">"tcp://192.168.1.XXX:61616"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/transportConnectors&gt;</span>
+...
+</pre></div>
+</div>
+<div class="section" id="persistence-configuration">
+<h2>Persistence Configuration<a class="headerlink" href="#persistence-configuration" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to enable persistence for messages that cannot be 
+delivered right away (e.g. all consumers are down). Detailed information
+ can be found here, we are simply going to provide basic information on 
+how to achieve that.
+To configure the persistence for the messages to deliver you need to 
+setup the <code class="docutils literal"><span class="pre">&lt;persistenceAdapter&gt;</span></code> node in the same file as above and then configure a proper datasource in your DBMS of choice.</p>
+<div class="highlight-xml"><div class="highlight"><pre>...
+<span class="nt">&lt;persistenceAdapter&gt;</span>
+<span class="c">&lt;!-- &lt;kahaDB directory="${activemq.base}/data/kahadb"/&gt; --&gt;</span>
+  <span class="nt">&lt;jdbcPersistenceAdapter</span> <span class="na">dataDirectory=</span><span class="s">"activemq-data"</span>
+        <span class="na">dataSource=</span><span class="s">"#postgres-ds"</span> <span class="na">lockKeepAlivePeriod=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/persistenceAdapter&gt;</span>
+...
+</pre></div>
+</div>
+<p>In the above section we defined a <code class="docutils literal"><span class="pre">jdbcPersistenceAdapter</span></code> connected to a dataSource called <code class="docutils literal"><span class="pre">#postgres-ds</span></code>
+ that forces the broker to use PostgreSQL for persisting its messages 
+when the delivery cannot be guaranteed (e.g. a slave goes down 
+unexpectedly).
+You now need to configure your own datasource as specified in the 
+following section which are specific for different DBMS.</p>
+<div class="section" id="oracle-datasource">
+<h3>Oracle datasource<a class="headerlink" href="#oracle-datasource" title="Permalink to this headline">¶</a></h3>
+<p>To configure the broker to use an oracle database as datasource you need to uncomment and modify the following bit into the <code class="docutils literal"><span class="pre">applicationContext.xml</span></code> file:</p>
+<div class="highlight-xml"><div class="highlight"><pre>...
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"oracle-ds"</span> <span class="na">class=</span><span class="s">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="na">destroy-method=</span><span class="s">"close"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"driverClassName"</span> <span class="na">value=</span><span class="s">"oracle.jdbc.driver.OracleDriver"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"url"</span> <span class="na">value=</span><span class="s">"jdbc:oracle:thin:@localhost:1521:AMQDB"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"username"</span> <span class="na">value=</span><span class="s">"oracle"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">value=</span><span class="s">" oracle "</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"poolPreparedStatements"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+...
+</pre></div>
+</div>
+<p>In addition, you need to make sure that the jar containing the driver for Oracle is correctly deployed inside the <code class="docutils literal"><span class="pre">WEB-INF/lib</span></code>
+ for the activemq war file. At the same time the database referred in 
+provided instructions as well as the user must be already present.</p>
+</div>
+<div class="section" id="postgres-datasource">
+<h3>Postgres datasource<a class="headerlink" href="#postgres-datasource" title="Permalink to this headline">¶</a></h3>
+<p>Configuring PostgreSQL as the datasource to use for the persistence 
+of the messages for the ActiveMQ broker follows the same pattern as 
+above. See below for some examples.</p>
+<div class="highlight-xml"><div class="highlight"><pre>...
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"postgres-ds"</span> <span class="na">class=</span><span class="s">"org.postgresql.ds.PGPoolingDataSource"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"serverName"</span> <span class="na">value=</span><span class="s">"192.168.1.XXX"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"databaseName"</span> <span class="na">value=</span><span class="s">"activemq"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"portNumber"</span> <span class="na">value=</span><span class="s">"5432"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"user"</span> <span class="na">value=</span><span class="s">"postgres"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">value=</span><span class="s">"postgres"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSourceName"</span> <span class="na">value=</span><span class="s">"postgres"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"initialConnections"</span> <span class="na">value=</span><span class="s">"15"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"maxConnections"</span> <span class="na">value=</span><span class="s">"30"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+...
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The above <code class="docutils literal"><span class="pre">ApplicationContext.xml</span></code>
+ file contains some unused sections which are intentionally commented 
+out to show different types of configurations [Ref. ActiveMQ].</p>
+</div>
+</div>
+<div class="section" id="kaha-datasource-embedded-database">
+<h3>Kaha datasource (Embedded database)<a class="headerlink" href="#kaha-datasource-embedded-database" title="Permalink to this headline">¶</a></h3>
+<p>Besides using server DBMS as indicated above we can use embedded 
+database for simpler uses cases of demoing since this usually largely 
+simplify the configuration. At this link all the information needed for 
+achieving this result can be found; basically we need to uncomment the 
+related datasource and then reference it from the persistenceAdapter.</p>
+</div>
+</div>
+<div class="section" id="control-instances-using-jmx">
+<h2>Control instances using JMX<a class="headerlink" href="#control-instances-using-jmx" title="Permalink to this headline">¶</a></h2>
+<p>Be sure to edit the <code class="docutils literal"><span class="pre">activemq-jmx.properties</span></code>
+ (or via the environment variables) setting different JMX ports for 
+different broker instances.
+Deploy as explained the instances into 2 different webapplication 
+container (f.e. Tomcat) and start both application (on different port 
+f.e. 8084 and 8085).
+Now run jconsole to connect to the brokers via JMX:</p>
+<p>${JAVA_HOME}/bin/jconsole</p>
+<p>After you connect to the brokers you may see something like this:</p>
+<div class="figure align-center">
+<img alt="../../../../_images/master_slave_jmx_1.png" src="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/master_slave_jmx_1.png">
+</div>
+<p>You may look at the console, as you can see the 2nd instance of the 
+broker cannot take the look on the file (the example uses KahaDB); this 
+is also visible in the JMX console into the window on the right side.</p>
+<p>If now you select the ‘operation’ (on the left side window) you will see:</p>
+<div class="figure align-center">
+<img alt="../../../../_images/master_slave_jmx_2.png" src="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/master_slave_jmx_2.png">
+</div>
+<p>Using that console we are able to perform many operation, so to simulate a broker down we try to click on the ‘stop()’ button.</p>
+<p>Doing so, the first broker instance will stop and the JMX connection 
+will be closed, and the second instance (on the right side) will keep 
+the control of the DB.</p>
+<div class="figure align-center">
+<img alt="../../../../_images/master_slave_jmx_3.png" src="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/master_slave_jmx_3.png">
+</div>
+<div class="figure align-center">
+<img alt="../../../../_images/master_slave_jmx_4.png" src="How-To%20configure%20a%20Standalone%20ActiveMQ%20broker%20%E2%80%94%20GeoServer%20Training_arquivos/master_slave_jmx_4.png">
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/JDBC.html" title="JDBC Master/Slave HA Set-Up" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/advancedbrokerURI.html" title="Advanced Configuration for the Broker URIs" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">Clustering GeoServer</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html" accesskey="U">GeoServer Active Clustering</a> »</li>
+        <li><a href="#">How-To configure a Standalone ActiveMQ broker</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

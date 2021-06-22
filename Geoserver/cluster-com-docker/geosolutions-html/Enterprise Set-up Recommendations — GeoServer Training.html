@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Enterprise Set-up Recommendations — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Enterprise%20Set-up%20Recommendations%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Enterprise%20Set-up%20Recommendations%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Enterprise%20Set-up%20Recommendations%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Enterprise%20Set-up%20Recommendations%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Enterprise%20Set-up%20Recommendations%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="next" title="Benchmarking primer" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/benchmarking_intro.html">
+    <link rel="prev" title="Load Balancer Setup with IIS" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/microsoft_IIS.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Enterprise%20Set-up%20Recommendations%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/microsoft_IIS.html" title="previous chapter">Load Balancer Setup with IIS</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/benchmarking_intro.html" title="next chapter">Benchmarking primer</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/index.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-geoserver.jmeter"></span><div class="section" id="enterprise-set-up-recommendations">
+<span id="geoserver-jmeter"></span><h1>Enterprise Set-up Recommendations<a class="headerlink" href="#enterprise-set-up-recommendations" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter we are going to cover various recommendations which 
+are fundamental for performing an enterprise-grade set up for GeoServer.
+We are also going to describe how to use the JMeter tool in order to 
+perform benchmarking of GeoServer for measuring the impact of 
+performance improvements as well as settings to improve stability and 
+robustness.</p>
+<p>The list of items that we are going to cover is presented here below.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/benchmarking_intro.html">Benchmarking primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jmeter.html">Stress testing with JMeter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/raster.html">Raster Data Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/vector.html">Vector Data Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/styles.html">Style Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/gwc.html">Tile Caching with GeoWebCache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/resource_limits.html">Tuning Resource Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/controlflow.html">Tuning Control Flow Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jvm.html">JVM and deploy configuration</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/benchmarking_intro.html" title="Benchmarking primer" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/microsoft_IIS.html" title="Load Balancer Setup with IIS" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+        <li><a href="#">Enterprise Set-up Recommendations</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

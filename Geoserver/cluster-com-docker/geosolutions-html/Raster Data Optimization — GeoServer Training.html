@@ -1,0 +1,525 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Raster Data Optimization — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    <link rel="next" title="Vector Data Optimization" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/vector.html">
+    <link rel="prev" title="Stress testing with JMeter" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jmeter.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Raster Data Optimization</a><ul>
+<li><a class="reference internal" href="#checklist-for-wms-and-wcs-serving">Checklist for WMS and WCS serving</a></li>
+<li><a class="reference internal" href="#about-raster-data-formats">About Raster Data Formats</a><ul>
+<li><a class="reference internal" href="#png-jpeg-direct-serving-as-data-sources">PNG/JPEG direct serving (as data sources)</a></li>
+<li><a class="reference internal" href="#any-input-ascii-format-gml-grid-ascii-grid">Any input ASCII format (GML grid, ASCII grid)</a></li>
+<li><a class="reference internal" href="#jpeg2000">JPEG2000</a></li>
+<li><a class="reference internal" href="#others">Others</a></li>
+<li><a class="reference internal" href="#geotiff-for-the-win">GeoTiff for the win</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#proper-geotiff-preparation">Proper GeoTiff Preparation</a><ul>
+<li><a class="reference internal" href="#about-tile-size">About tile size</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deciding-when-to-go-beyond-and-use-mosaicking-plugins">Deciding when to go beyond and use mosaicking plugins</a></li>
+<li><a class="reference internal" href="#additional-tweaks">Additional Tweaks</a><ul>
+<li><a class="reference internal" href="#proper-mosaic-preparation">Proper Mosaic Preparation</a></li>
+<li><a class="reference internal" href="#jai-settings">JAI Settings</a></li>
+<li><a class="reference internal" href="#coverage-settings">Coverage Settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#test-the-unoptimized-mosaic">Test the Unoptimized Mosaic</a></li>
+<li><a class="reference internal" href="#test-the-optimized-mosaic">Test the Optimized Mosaic</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jmeter.html" title="previous chapter">Stress testing with JMeter</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/vector.html" title="next chapter">Vector Data Optimization</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/raster.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="raster-data-optimization">
+<span id="geoserver-jmeter-mosaic"></span><h1>Raster Data Optimization<a class="headerlink" href="#raster-data-optimization" title="Permalink to this headline">¶</a></h1>
+<p>The following section explains how to improve the GeoServer 
+performances with the optimization of raster files. Basic optimizations 
+have been already been discussed in the <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/raster_data/processing.html#geoserver-processing"><span class="std std-ref">Introduction To Processing With GDAL</span></a> sections, describing the most common techniques used.</p>
+<div class="section" id="checklist-for-wms-and-wcs-serving">
+<h2>Checklist for WMS and WCS serving<a class="headerlink" href="#checklist-for-wms-and-wcs-serving" title="Permalink to this headline">¶</a></h2>
+<p>The objectives for the optimizations to be performed on raster data are listed here geared towards essentially two objectives:</p>
+<ul class="simple">
+<li>Fast extraction of a subset of the data, which usually involves re-tiling and compression.</li>
+<li>Fast extraction at any resolution, which usually involves adding 
+overviews or creating reduced resolution version of the original data.</li>
+</ul>
+<p>By experience there is a number of things to take into account for achieving such objectives:</p>
+<ol class="arabic simple">
+<li>Avoid having to open a large number of files per request.</li>
+<li>Avoid parsing of complex structures and slow compressions.</li>
+<li>You’ll have to get familiar with the eventual bottlenecks in your infrastructure: CPU vs. Disk Access, Time vs. Memory.</li>
+<li>You’ll have to experiment with format, compression, different color models, tile size, overviews, GeoServer configuration.</li>
+</ol>
+</div>
+<div class="section" id="about-raster-data-formats">
+<h2>About Raster Data Formats<a class="headerlink" href="#about-raster-data-formats" title="Permalink to this headline">¶</a></h2>
+<p>It is important to become familiar with the different specifics of 
+the various input formats. Be aware that some issues might be software 
+specific but most are format dependant.
+Find a list of formats that should raise a flag when you are willing to 
+perform high performance serving with GeoServer below.</p>
+<div class="section" id="png-jpeg-direct-serving-as-data-sources">
+<h3>PNG/JPEG direct serving (as data sources)<a class="headerlink" href="#png-jpeg-direct-serving-as-data-sources" title="Permalink to this headline">¶</a></h3>
+<p>A few hints:</p>
+<ul class="simple">
+<li>Bad formats to be used as input (especially in Java).</li>
+<li>No tiling (or rarely supported).</li>
+<li>Chew a lot of memory and CPU for decompression.</li>
+<li>Mitigate with external overviews.</li>
+</ul>
+<p>It is a common use case to receive aerial imagery as a large number 
+of jpeg compressed imagery. Well, I would refrain from the impulse of 
+serving this as a simple mosaic since it simply won’t work
+as soon as you zoom out a little.</p>
+</div>
+<div class="section" id="any-input-ascii-format-gml-grid-ascii-grid">
+<h3>Any input ASCII format (GML grid, ASCII grid)<a class="headerlink" href="#any-input-ascii-format-gml-grid-ascii-grid" title="Permalink to this headline">¶</a></h3>
+<p>Well, it’s usually bad to serve from formats which are not binary as,
+ no surprise, reading from disk is usually the most important 
+bottleneck, as such if you use a text format (e.g. ascii grid)
+the size on disk of a small (in pixel terms) dataset is much bigger than
+ binary formats. In addition tiling is usually absent, compression is 
+difficult to achieve in a way
+that would not kill reading portions of the data, etc. etc.</p>
+<p>Generally speaking, avoid serving data using native formats which are textual unless you really know what you are doing.</p>
+</div>
+<div class="section" id="jpeg2000">
+<h3>JPEG2000<a class="headerlink" href="#jpeg2000" title="Permalink to this headline">¶</a></h3>
+<p>JPEG200 is a format which is extensible and rich, but not (always) 
+fast. We have a quite extensive experience with it and we can safely 
+states that it
+can be difficult to tune it for performance as it might require specific
+ encoding options.
+The point is that if someone has encoded a JPEG2000 file for maximum 
+compression and/or streaming it is almost impossible to get high 
+performance in direct serving out of it
+unless you spend billions on an high-end decoder that does a lot of 
+caching.</p>
+</div>
+<div class="section" id="others">
+<h3>Others<a class="headerlink" href="#others" title="Permalink to this headline">¶</a></h3>
+<p>The usual ones.</p>
+<ul class="simple">
+<li>MrSID usually decently fast needs tuning during compression</li>
+<li>ECW usually pretty fast, beware of the licensing issues!</li>
+</ul>
+</div>
+<div class="section" id="geotiff-for-the-win">
+<h3>GeoTiff for the win<a class="headerlink" href="#geotiff-for-the-win" title="Permalink to this headline">¶</a></h3>
+<p>Our experience in serving raster data points in one direction: <strong>GeoTiff is a swiss knife (so you don’t want to cut a tree with it!).</strong>
+A few remarks about this format.</p>
+<ul class="simple">
+<li>Tremendously flexible, good for most (<em>if not all</em>) use cases</li>
+<li>BigTiff pushes the GeoTiff limits farther, but beware of the limitation of extremely large BigTiffs</li>
+</ul>
+<p>As a rule of thumb use individual GeoTiff when:</p>
+<ul>
+<li><p class="first">Overviews and Tiling stay within 4GB (hint: compression can help to push this limit much farther)</p>
+</li>
+<li><p class="first">No additional dimensions (TIME, ELEVATION,...)</p>
+</li>
+<li><p class="first">Consider BigTiff for large files (&gt; 4 GB)</p>
+</li>
+<li><p class="first">Exploit the support for inner tiling</p>
+</li>
+<li><p class="first">Exploit the support for internal overviews</p>
+</li>
+<li><p class="first">Can be inefficient with very large files + small tiling</p>
+<blockquote>
+<div><div class="figure align-center" id="id1">
+<img alt="../_images/geotiff.png" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/geotiff.png">
+<p class="caption"><span class="caption-text"><em>GeoTiff with inner overviews and tiling</em></span></p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="proper-geotiff-preparation">
+<h2>Proper GeoTiff Preparation<a class="headerlink" href="#proper-geotiff-preparation" title="Permalink to this headline">¶</a></h2>
+<p>Here below the basic steps for properly preprocessing a GeoTiff file 
+are presented; notice that these are not GeoServer specific but can be 
+applied to other servers as well.</p>
+<ol class="arabic simple" start="0">
+<li>Perform a <code class="docutils literal"><span class="pre">gdalinfo</span></code> and spend time in understanding the characteristics of your data as well as how you want to serve them</li>
+<li>(Optional) Use <code class="docutils literal"><span class="pre">gdal_warp</span></code>
+ to transform the data in the most used output reference system (mind, 
+any reprojection ruins the data a bit hence beware of the interpolation 
+scheme you are going to use)</li>
+<li>Use <code class="docutils literal"><span class="pre">gdal_translate</span></code> to add inner tiling and fix eventual issues with coordinate reference system</li>
+<li>Add compression options if you disks are small/slow/not local (consider <em>JPEG compression</em> with <em>YCBCR color interpretation</em> for photos, <em>LZW/Deflate</em> for scientific data)</li>
+<li>Use <code class="docutils literal"><span class="pre">gdaladdo</span></code> to add internal overviews (remember to replicate compression here)</li>
+</ol>
+<div class="section" id="about-tile-size">
+<h3>About tile size<a class="headerlink" href="#about-tile-size" title="Permalink to this headline">¶</a></h3>
+<p>There is no mathematical rule to decide the tile size for inner 
+tiling. Let us dig a little deeper on this subject.
+A GeoTiff can contain multiple pages/images, each page/image starts with
+ what is called the image directory which contains various info about 
+the current page; in such directory we have 2 arrays of integers (for 
+bigtiff are long) which contains the location on the disk of the tile 
+and its size in bytes.</p>
+<p>Splitting the file in proper tiles is important to minimize the 
+amount of data we read/write on each requests, the number of read 
+operations (i.e. seeks and load) and the amount of storage we might 
+waste when the file size is not a valid multiple of the tile size on 
+both side. If the tiles are too small, for large tiles the page 
+directory might explode and become slow to scan for the Tiff reader, on 
+the other side a tile that is too big will make the directory small and 
+fast but might end up in too much data to read for most operations.</p>
+<p>The default for GDAL is 256x256 but it is not unusual for us to set 
+this to 512x512 on large bigtiff files. Smaller tiles are usually 
+problematic as the TIFF directory size might explode, larger tile size 
+can be useful together with JPEG compression and very large files since 
+we might loose some CPU cycle but reduce the impact of slow 
+storage/large files.</p>
+</div>
+</div>
+<div class="section" id="deciding-when-to-go-beyond-and-use-mosaicking-plugins">
+<h2>Deciding when to go beyond and use mosaicking plugins<a class="headerlink" href="#deciding-when-to-go-beyond-and-use-mosaicking-plugins" title="Permalink to this headline">¶</a></h2>
+<p>As long as the size of the dataset (again, beware that proper 
+compression can help greatly to reduce the size of the disk) is 
+reasonable (by experience below 20 to 30 GB) with respect to the disks 
+speed we can use individual geotiff for our datasets without problems. 
+Notice that this means that if you received a mosaic of a large number 
+of small files we are implicitly suggesting that the best option you 
+have is to merge them into a single, larger, properly preprocessed file 
+(and <code class="docutils literal"><span class="pre">gdal_merge</span></code> or <code class="docutils literal"><span class="pre">gdalbuildvrt</span></code>
+ is your friend for this first step).
+If an individual GeoTiff is not enough or if for any other reason you 
+need to retain individual files then the ImageMosaic plugin is the tool 
+to use, in certain specific cases the ImagePyramid might get into play.</p>
+<dl class="docutils">
+<dt>As a rule of thumb we would suggest to use ImageMosaic when:</dt>
+<dd><ul class="first last">
+<li><p class="first">A single file gets too big therefore slow when 
+accessing (inefficient seeks, too much metadata to read, etc.). This 
+depends greatly on the speed of data access (local disk, NAS, etc.) it 
+is hard to given a number but experience says 20 to 30 GB.</p>
+</li>
+<li><p class="first">Data has multiple Dimensions (time, elevation, others..)</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/geotiff_mosaic.png" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/geotiff_mosaic.png">
+<p class="caption"><span class="caption-text"><em>Mosaic of geotiff files</em></span></p>
+</div>
+</li>
+</ul>
+</dd>
+<dt>When you use the ImageMosaic, you are asking GeoServer to compose a 
+raster on the fly from the individual granules to answer a request. To 
+retain performance we need to make sure that each possible request does 
+not require GeoServer to open too many files but also that each file is 
+properly preprocessed. This means that:</dt>
+<dd><ul class="first last simple">
+<li>ImageMosaic works best if we never open more than 32 to 64 files for
+ request (take special for request at global scale). Use exclusion rules
+ in your styles to avoid problems.</li>
+<li>Single granules can be large, so no problems in having a mosaic of 
+large BigTiff files. We have configured mosaics made of BigTiff of 100GB
+ each (with a clever usage of styling exclusion rules)</li>
+<li>Use Tiling + Overviews + Compression on granules, they are individual GeoTiff in the end.</li>
+</ul>
+</dd>
+</dl>
+<p>In specific cases we have used the ImagePyramid (or a LayerGroup if 
+multiple ImageMosaics with proper scale exclusions in the styles). This 
+usually happens when</p>
+<blockquote>
+<div><ul>
+<li><p class="first">We have a tremendously large dataset (e.g. 1TB or more )</p>
+</li>
+<li><p class="first">Made by too many files / too large files</p>
+</li>
+<li><p class="first">Which we need to serve at all scales</p>
+</li>
+<li><p class="first">Especially at low resolution / global scale</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/pyramid.png" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/pyramid.png">
+<p class="caption"><span class="caption-text"><em>Pyramid of geotiff files</em></span></p>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<p>In this case <code class="docutils literal"><span class="pre">gdal_retile</span></code> can be your friend although usually more complex workflow need to be set up to reduce creation time.
+Special care needs to be taken with respect to the number of files that we are going to generate:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Having too many files inside a single directory can be problematic 
+for some file systems, therefore you might want to use multiple 
+directories even for individual resolution levels.</li>
+<li>Individual files in each level of the pyramid do not need to be 
+small. It is legit to build multiple mosaics of largish files to reduce 
+the impact of small files on the file system</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Regardless of using ImageMosaic or ImagePyramid, 
+particular care is needed with respect to the chosen layout according to
+ eventual requirements in terms of data updates, addition or 
+reprocessing. Depending on the chosen layout reprocessing or updates can
+ be particularly difficult.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Once you get familiar with the tools you can mix things 
+up using multiple ImageMosaic together with a LayerGroup or an 
+ImagePyramid with an odd layout of resolutions levels.</p>
+</div>
+</div>
+<div class="section" id="additional-tweaks">
+<h2>Additional Tweaks<a class="headerlink" href="#additional-tweaks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="proper-mosaic-preparation">
+<h3>Proper Mosaic Preparation<a class="headerlink" href="#proper-mosaic-preparation" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>If memory is scarce:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">USE_JAI_IMAGREAD</span></code> to true, to activate reading in streaming</li>
+<li><code class="docutils literal"><span class="pre">USE_MULTITHREADING</span></code> to false as multithreading is useless with streaming reads</li>
+</ul>
+</dd>
+<dt>Otherwise</dt>
+<dd><ul class="first last">
+<li><p class="first"><code class="docutils literal"><span class="pre">USE_JAI_IMAGREAD</span></code> to false, to activate immediate reading in memory</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">ALLOW_MULTITHREADING</span></code> to true (Load data from different granules in parallel)</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/imagemosaic.png" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/imagemosaic.png">
+<p class="caption"><span class="caption-text"><em>`ImageMosaic` panel detail</em></span></p>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="jai-settings">
+<h3>JAI Settings<a class="headerlink" href="#jai-settings" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul>
+<li><p class="first">Install the TurboJPEG extension</p>
+</li>
+<li><p class="first">Give JAI enough memory but not too much!</p>
+</li>
+<li><p class="first">Don’t raise JAI memory threshold!</p>
+</li>
+<li><p class="first">JAI multithreading rule of thumb: use 2 times #Core Tile Threads (check “Coverage Settings” below)</p>
+</li>
+<li><p class="first">Play with tile Recycling against your workflows (might help, might not, in most cases it does not help!)</p>
+<div class="figure align-center" id="id5">
+<img alt="../_images/jai.png" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/jai.png">
+<p class="caption"><span class="caption-text"><em>`JAI Settings` panel</em></span></p>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="coverage-settings">
+<h3>Coverage Settings<a class="headerlink" href="#coverage-settings" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul>
+<li><p class="first">Multithreaded Granule Loading</p>
+</li>
+<li><p class="first">Allows to fine tuning multithreading for ImageMosaic</p>
+</li>
+<li><p class="first">Orthogonal to JAI Tile Threads</p>
+</li>
+<li><p class="first">Rule of Thumb: use 2 times #Core Tile Threads, 
+perform testing to fine tune depending on layer configuration as well as
+ on typical requests</p>
+</li>
+<li><p class="first">ImageIO Cache threshold, decide when we switch to disk cache (very large WCS requests)</p>
+<div class="figure align-center" id="id6">
+<img alt="../_images/coverage.png" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/coverage.png">
+<p class="caption"><span class="caption-text"><em>`Coverage Access` panel</em></span></p>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="test-the-unoptimized-mosaic">
+<h2>Test the Unoptimized Mosaic<a class="headerlink" href="#test-the-unoptimized-mosaic" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This section requires the layers published in the <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/adding_data/mosaic.html#geoserver-mosaic"><span class="std std-ref">Adding an Image Mosaic</span></a>, <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/raster_data/processing.html#geoserver-processing"><span class="std std-ref">Introduction To Processing With GDAL</span></a> and <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/raster_data/mosaic_pyramid.html#geoserver-mosaic-pyramid"><span class="std std-ref">Advanced Mosaics Configuration</span></a> sections.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) and copy the file <code class="docutils literal"><span class="pre">template.jmx</span></code> file, creating a <code class="docutils literal"><span class="pre">mosaic.jmx</span></code> file</p>
+</li>
+<li><p class="first">From the training root, on the command line, run <code class="docutils literal"><span class="pre">jmeter.bat</span></code> ( or <code class="docutils literal"><span class="pre">jmeter.sh</span></code> if you’re on Linux) to start JMeter</p>
+</li>
+<li><p class="first">On the top left go to <span class="guilabel">File –&gt; Open</span> and search for the new <em>jmx</em> file copied</p>
+</li>
+<li><p class="first">Disable the Thread Groups <strong>8</strong>, <strong>16</strong>, <strong>32</strong>, <strong>64</strong> by right-clicking on them and selecting <cite>Disable</cite>.</p>
+</li>
+<li><p class="first">In the <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">Data</span> <span class="pre">Set</span> <span class="pre">Config</span></code> (under the Loop Controller) element of the remaining thread groups, modify the <strong>path</strong> of the CSV file by setting the path for the file <code class="docutils literal"><span class="pre">optimized.csv</span></code> in the <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( or <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> ) directory</p>
+</li>
+<li><p class="first">In the <strong>HTTP Request Default</strong> element modify the following parameters:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>layers</td>
+<td>geosolutions:boulder_bg</td>
+</tr>
+<tr class="row-odd"><td>srs</td>
+<td>EPSG:26913</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ol>
+<p>At this point JMeter is configured to run a GeoServer performance test:</p>
+<ol class="arabic">
+<li><p class="first">Run the test</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to run and stop the test a few times for having stable results</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">You should see something like this:</p>
+<blockquote>
+<div><div class="figure align-center" id="id7">
+<img alt="../_images/jmeter29.png" src="Raster%20Data%20Optimization%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter29.png">
+<p class="caption"><span class="caption-text"><em>`View Results Tree` panel</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">When the test is completed, Save the results in a text file (e.g. with <strong>Save Table Data</strong> at the bottom of <strong>Summary Report</strong>)</p>
+</li>
+<li><p class="first">Remove the results from JMeter by clicking on <span class="guilabel">Run –&gt; Clear All</span> on the menu</p>
+</li>
+</ol>
+</div>
+<div class="section" id="test-the-optimized-mosaic">
+<h2>Test the Optimized Mosaic<a class="headerlink" href="#test-the-optimized-mosaic" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">In the <strong>HTTP Request Default</strong> section modify the following parameter:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>layers</td>
+<td>geosolutions:boulder_bg_optimized</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">Run the test again</p>
+</li>
+<li><p class="first">Compare the results of this test with the ones saved before. <strong>You should see that throughput is increased with the optimized mosaic.</strong></p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/vector.html" title="Vector Data Optimization" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/jmeter.html" title="Stress testing with JMeter" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" accesskey="U">Enterprise Set-up Recommendations</a> »</li>
+        <li><a href="#">Raster Data Optimization</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

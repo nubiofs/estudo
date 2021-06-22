@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Tile Caching with GeoWebCache — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Enterprise Set-up Recommendations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html">
+    <link rel="next" title="Tuning Resource Limits" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/resource_limits.html">
+    <link rel="prev" title="Style Optimizations" href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/styles.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tile Caching with GeoWebCache</a><ul>
+<li><a class="reference internal" href="#integrated-geowebcache">Integrated GeoWebCache</a></li>
+<li><a class="reference internal" href="#space-considerations">Space considerations</a></li>
+<li><a class="reference internal" href="#client-side-caching">Client Side Caching</a></li>
+<li><a class="reference internal" href="#more-tweaks">More Tweaks</a></li>
+<li><a class="reference internal" href="#testing-geowebcache-fullwms-support-with-jmeter">Testing GeoWebCache fullWMS support with JMeter</a></li>
+<li><a class="reference internal" href="#configuring-geoserver-geowebcache">Configuring GeoServer/GeoWebCache</a></li>
+<li><a class="reference internal" href="#configuring-jmeter">Configuring JMeter</a></li>
+<li><a class="reference internal" href="#test-geoserver-wms">Test GeoServer WMS</a></li>
+<li><a class="reference internal" href="#test-geowebcache-fullwms">Test GeoWebCache fullWMS</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/styles.html" title="previous chapter">Style Optimizations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/resource_limits.html" title="next chapter">Tuning Resource Limits</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/enterprise/gwc.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tile-caching-with-geowebcache">
+<span id="geoserver-jmeter-gwc"></span><h1>Tile Caching with GeoWebCache<a class="headerlink" href="#tile-caching-with-geowebcache" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You should read this section right after having read the <a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/caching_data/index.html#gwc-cahing-data"><span class="std std-ref">Caching maps with GeoWebCache</span></a> section.</p>
+</div>
+</div></blockquote>
+<p>In this section we are going to capture some additional 
+recommendations on how to best tune GeoWebCache with special focus on 
+when it’s integrated with GeoServer.</p>
+<p>First of all, using a tile oriented cache like GeoWebCache can 
+greatly enhance throughput at runtime compared to pure WMS of 10 to 100 
+times, assuming tiles are already cached (whole layer pre-seeded), 
+therefore when looking for performance (speed and throughput) tile 
+caching is an obvious candidate for enhancement. It is, however, 
+important to understand the limitations of tile oriented protocols:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Tile oriented maps means having clients working at fixed zoom levels
+ and using a fixed grid as well as, potentially, a small set of 
+coordinate reference systems and styles</li>
+<li>Protocols supported are peculiar: WMTS, TMS, WMS-C, Google Maps/Earth, Virtual Earth</li>
+</ul>
+</div></blockquote>
+<p>As usual the speed up you get is payed by the restrictions on the 
+degrees of freedom that the protocols you expose offer the target 
+clients.
+As a rule of thumb tile caching, these hints are worth to keep in mind:</p>
+<ol class="arabic simple">
+<li>Tile caching is first class option for background layers.</li>
+<li>Tile caching is always useful for static layers, i.e. layers that 
+are not update often (once a week? once a month? once in a lifetime?)</li>
+<li>Tile caching is always useful for simple layers, i.e. layers with 
+no/few dynamic parameters (CQL filters, SLD params, SQL query params, 
+time/elevation, format options)</li>
+</ol>
+<dl class="docutils">
+<dt>Generally speaking, tile caching should be part of the plan for layers where:</dt>
+<dd><ul class="first simple">
+<li>Data doesn’t change frequently and/or where we can introduce a 
+slight delay between the changes in the data and the changes in the 
+cached content (e.g. to group changes in batches)</li>
+<li>The rendering options are limited. Layers with complex filtering, 
+many styling, multiple dimensions might become a nightmare for the cache
+ since a cache is as useful once if it gets reused a lot between 
+different requests. If chances that two different requests would hit the
+ cache are low then you should not be caching.</li>
+</ul>
+<blockquote class="last">
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Caching is usually expensive so you should use it 
+wisely. Caching involves writing to disk, keeping track of the age of 
+the files as well as of the size of the cache and so on: it needs 
+resources, therefore we need to make sure its impact is positive, 
+everything considered.</p>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+<div class="section" id="integrated-geowebcache">
+<h2>Integrated GeoWebCache<a class="headerlink" href="#integrated-geowebcache" title="Permalink to this headline">¶</a></h2>
+<p>GeoWebCache can be used either standalone or integrated with 
+GeoServer. GeoServer ships by default with GeoWebCache deployed into it 
+but the <a class="reference external" href="http://docs.geoserver.org/stable/en/user/geowebcache/using.html#direct-integration-with-geoserver-wms">direct integration</a>  is not activated by default and needs to be activated as shown below from the <em>Caching Default</em> subsection under the <em>Tile Caching</em> section.</p>
+<blockquote>
+<div><div class="figure align-center" id="id1">
+<img alt="../_images/gwc_embed.png" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/gwc_embed.png">
+<p class="caption"><span class="caption-text"><em>Create a new Gridset</em></span></p>
+</div>
+</div></blockquote>
+<p>Once the direct integration is activated and a client sends a WMS 
+request to GeoServer that is cacheable according to the GeoWebCache 
+setup (i.e. request aligned to the gridset, proper style, proper params,
+ etc..) GeoServer will pass this request to GeoWebCache for serving a 
+cached tile <strong>if and only if</strong> the client has added the <strong>TILED=TRUE</strong> key-value-pair to the request.</p>
+<p>Ok, but why using the integrated GeoWebCache is interesting? Well, it
+ is simple, there is no double encoding when using meta-tiling which 
+means faster cache creation times; this happens because, as shown below,
+ the integrated GeoWebCache taps directly into the GeoServer rendering 
+chain and there is less encodings before writing to disk. Encoding can 
+be the most expensive step for most use cases.</p>
+<blockquote>
+<div><div class="figure align-center" id="id2">
+<img alt="../_images/gwc1.png" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/gwc1.png">
+<p class="caption"><span class="caption-text"><em>Create a new Gridset</em></span></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="space-considerations">
+<h2>Space considerations<a class="headerlink" href="#space-considerations" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned above, caching comes with a cost, actually more than 
+one. One cost factor to take into consideration when designing a tile 
+cache is the space we need for caching the data we want to cache, or at 
+least the maximum amount of space that the cache we are setting up might
+ take.</p>
+<p>We used such a distinction since most part of the time we won’t seed 
+entirely the cache for a layer upfront but we will simply cache the 
+landing areas and zoom levels and we will leave the cache grow lazily at
+ runtime (this is a cost factor which is often forgotten).
+Anyway, if you need help in estimating how much space a cache would need
+ we have set up a spreadsheet which you can use to perform space 
+oocupation estimates, you can find it <a class="reference external" href="https://docs.google.com/spreadsheets/d/1t9OJb-Z9vnHYKw6fWR82Wml4Dj9ePnNoOzqDw3v_PwU/edit#gid=0.">here</a></p>
+<p>The space required for the cache, especially on layers with many 
+parameters combinations (CRS or gridset, Style, CQL_FILTER and so on) 
+can grow exponential since for any combination of the available 
+parameters we will have to build a different cache.
+Assuming you have taken this into account and you are still willing to 
+use a cache, you don’t need to make sure you have the whole space 
+available upfront but you can set up disk quota and have GeoServer make 
+sure it will not use too much space (see the relative section in this 
+material).</p>
+</div>
+<div class="section" id="client-side-caching">
+<h2>Client Side Caching<a class="headerlink" href="#client-side-caching" title="Permalink to this headline">¶</a></h2>
+<p>When we talk about GeoWebCache we are usually considering only server
+ side caching, i.e. render a tile, save it on disk and send it every 
+time a client requests it. Well there is more and that is client-side 
+caching of tiles.
+Once the tile has been cached on the server and tranfered to the client 
+there is no point for the client in asking that specific tile once again
+ unless its content has changed.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Client-Side Caching does not work with browsers in private mode.</p>
+</div>
+</div></blockquote>
+<p>To send Caching-Headers to the requesting client one could set the 
+expiration header value zoom dependent in the geowebcache.xml:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="o">&lt;</span><span class="n">expireClientsList</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">expirationRule</span> <span class="n">minZoom</span><span class="o">=</span><span class="s">"0"</span> <span class="n">expiration</span><span class="o">=</span><span class="s">"7200"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="n">expirationRule</span> <span class="n">minZoom</span><span class="o">=</span><span class="s">"10"</span> <span class="n">expiration</span><span class="o">=</span><span class="s">"600"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">expireClientsList</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>and here is what you should expect to see if you inspect HTTP header for a request in a browser:</p>
+<blockquote>
+<div><div class="figure align-center" id="id3">
+<img alt="../_images/gwc31.png" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/gwc31.png">
+<p class="caption"><span class="caption-text"><em>HTTP Headers with client side caching at work</em></span></p>
+</div>
+</div></blockquote>
+<p>In case you were wondering you can set this option for the integrated
+ GeoWebCache on a per layer basis using the tile caching tab as shown 
+below.</p>
+<blockquote>
+<div><div class="figure align-center" id="id4">
+<img alt="../_images/gwc41.png" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/gwc41.png">
+<p class="caption"><span class="caption-text"><em>Client side caching settings in the GeoServer GUI</em></span></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="more-tweaks">
+<h2>More Tweaks<a class="headerlink" href="#more-tweaks" title="Permalink to this headline">¶</a></h2>
+<p>It is important to use the right formats for the cache:</p>
+<blockquote>
+<div><ul class="simple">
+<li>JPEG for background raster data (e.g. orthos) since you won’t need transparency</li>
+<li>PNG8 + precomputed palette for background vector data (e.g. osm)</li>
+<li>PNG8 full for overlays with transparency</li>
+<li>The format impacts also the disk space needed! (as well as the generation time) so evaluate it carefully</li>
+</ul>
+</div></blockquote>
+<p>For a detailed list of things to look at for tweaking GeoWebCache 
+(most of them applies to the standalone version but it is worth knowing 
+them anyway), you can refer to <a class="reference external" href="http://www.geo-solutions.it/blog/tips-tricks-geowebcache-tweaks-checklist/">this</a> blog post.</p>
+</div>
+<div class="section" id="testing-geowebcache-fullwms-support-with-jmeter">
+<h2>Testing GeoWebCache fullWMS support with JMeter<a class="headerlink" href="#testing-geowebcache-fullwms-support-with-jmeter" title="Permalink to this headline">¶</a></h2>
+<p>The following section compares GeoServer WMS with GeoWebCache <code class="docutils literal"><span class="pre">fullWMS</span></code> support. <code class="docutils literal"><span class="pre">FullWMS</span></code> is a new feature which allows GeoWebCache to act as a WMS endpoint, like GeoServer.
+Using GeoWebCache, the server is able to cache the requested tiles in order to return them faster then GeoServer.</p>
+<p>This example will show how to configure GeoWebCache with fullWMS support and how the performances are improved.</p>
+</div>
+<div class="section" id="configuring-geoserver-geowebcache">
+<h2>Configuring GeoServer/GeoWebCache<a class="headerlink" href="#configuring-geoserver-geowebcache" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">On your Web browser, navigate to the GeoServer <a class="reference external" href="http://localhost:8083/geoserver/">Welcome Page</a>.</p>
+</li>
+<li><p class="first">Go to <span class="guilabel">Gridsets</span> and click on <code class="docutils literal"><span class="pre">Create</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">gridest</span></code></p>
+</li>
+<li><p class="first">Call it <code class="docutils literal"><span class="pre">EPSG_2876</span></code> and set <code class="docutils literal"><span class="pre">EPSG:2876</span></code> as <span class="guilabel">Coordinate Reference System</span></p>
+</li>
+<li><p class="first">Click on <span class="guilabel">Compute from maximum extent of CRS</span> and add 15 new <strong>Zoom Levels</strong> (from 0 to 14) by clicking on <span class="guilabel">Add zoom level</span>. It should look like this picture:</p>
+<blockquote>
+<div><div class="figure align-center" id="id5">
+<img alt="../_images/jmeter41.png" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter41.png">
+<p class="caption"><span class="caption-text"><em>Create a new Gridset</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Click on <span class="guilabel">Save</span>. Now this <cite>GridSet</cite> can be added to the Layer Group <code class="docutils literal"><span class="pre">boulder</span></code> for caching it with GeoWebCache</p>
+</li>
+<li><p class="first">Go to <span class="guilabel">Layer Groups</span> and click on <code class="docutils literal"><span class="pre">boulder</span></code></p>
+</li>
+<li><p class="first">On the <span class="guilabel">Available gridsets</span> panel add the gridset <code class="docutils literal"><span class="pre">EPSG_2876</span></code> from the list. Then click on <span class="guilabel">Save</span>.</p>
+<blockquote>
+<div><div class="figure align-center" id="id6">
+<img alt="../_images/jmeter42.png" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter42.png">
+<p class="caption"><span class="caption-text"><em>Add the new Gridset</em></span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to set <span class="guilabel">Published zoom levels</span> to <code class="docutils literal"><span class="pre">Min</span></code> and <code class="docutils literal"><span class="pre">Max</span></code></p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="configuring-jmeter">
+<h2>Configuring JMeter<a class="headerlink" href="#configuring-jmeter" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code>  if you are on Windows ) and copy the file <code class="docutils literal"><span class="pre">template.jmx</span></code> file into <code class="docutils literal"><span class="pre">gwc.jmx</span></code></p>
+</li>
+<li><p class="first">From the training root, on the command line, run <code class="docutils literal"><span class="pre">jmeter.bat</span></code> (or <code class="docutils literal"><span class="pre">jmeter.sh</span></code> if you’re on Linux) to start JMeter</p>
+</li>
+<li><p class="first">On the top left go to <span class="guilabel">File –&gt; Open</span> and search for the new <em>jmx</em> file copied</p>
+</li>
+<li><p class="first">Disable all the <strong>Thread Groups</strong> except for <strong>8</strong></p>
+</li>
+<li><p class="first">Disable the <strong>Content-Type Check</strong></p>
+</li>
+<li><p class="first">In the <code class="docutils literal"><span class="pre">CSV</span> <span class="pre">Data</span> <span class="pre">Set</span> <span class="pre">Config</span></code> element, modify the <strong>path</strong> of the CSV file by setting the path for the file <code class="docutils literal"><span class="pre">gwc.csv</span></code> in the <code class="docutils literal"><span class="pre">$TRAINING_ROOT/data/jmeter_data</span></code> ( or <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\data\jmeter_data</span></code> on Windows ) directory</p>
+</li>
+<li><p class="first">In the <strong>HTTP Request Default</strong> element modify the following parameters:</p>
+<blockquote>
+<div><table class="docutils" border="1">
+<colgroup>
+<col width="38%">
+<col width="63%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Value</strong></td>
+</tr>
+<tr class="row-even"><td>layers</td>
+<td>boulder</td>
+</tr>
+<tr class="row-odd"><td>srs</td>
+<td>EPSG:2876</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="test-geoserver-wms">
+<h2>Test GeoServer WMS<a class="headerlink" href="#test-geoserver-wms" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Run the test</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to run and stop the test a few times for having stable results</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">When the test is completed, Save the results in a text file.</p>
+</li>
+<li><p class="first">Remove the result from JMeter by clicking on <span class="guilabel">Run –&gt; Clear All</span> on the menu</p>
+</li>
+<li><p class="first">Stop GeoServer</p>
+</li>
+</ol>
+</div>
+<div class="section" id="test-geowebcache-fullwms">
+<h2>Test GeoWebCache fullWMS<a class="headerlink" href="#test-geowebcache-fullwms" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Go to <code class="docutils literal"><span class="pre">$TRAINING_ROOT/geoserver_data/gwc/geowebcache.xml</span></code> ( <code class="docutils literal"><span class="pre">%TRAINING_ROOT%\geoserver_data\gwc\geowebcache.xml</span></code> on Windows ) and add the following snippet:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;gwcConfiguration&gt;</span>
+
+  ...
+
+  <span class="nt">&lt;fullWMS&gt;</span>true<span class="nt">&lt;/fullWMS&gt;</span>
+<span class="nt">&lt;/gwcConfiguration&gt;</span>
+</pre></div>
+</div>
+<p>Setting <code class="docutils literal"><span class="pre">fullWMS</span></code> to <cite>true</cite> allows GeoWebCache to use fullWMS support</p>
+</div></blockquote>
+</li>
+<li><p class="first">Restart GeoServer</p>
+</li>
+<li><p class="first">On the JMeter <strong>HTTP Request Default</strong> panel, change the <em>Path</em> from <code class="docutils literal"><span class="pre">geoserver/ows</span></code> to <code class="docutils literal"><span class="pre">geoserver/gwc/service/wms</span></code> in order to execute WMS requests directly to GeoWebCache, without passing from GeoServer</p>
+</li>
+<li><p class="first">Add a new parameter called <strong>hints</strong> which can have 3 values <code class="docutils literal"><span class="pre">speed</span></code>, <code class="docutils literal"><span class="pre">default</span></code> and <code class="docutils literal"><span class="pre">quality</span></code>.
+ The first one should be used for having a faster response without 
+concerning about image quality; the last one, instead, is slower but 
+with a better quality; the second one is a good trade off between them. 
+For the first test set <strong>hints</strong> to <code class="docutils literal"><span class="pre">speed</span></code>.</p>
+</li>
+<li><p class="first">Run the test</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">At the first run, the throughput should be lower than 
+that of GeoServer, because GeoWebCache has spent much time on generating
+ the cached tiles.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Remove the result from JMeter by clicking on <span class="guilabel">Run –&gt; Clear All</span> on the menu</p>
+</li>
+<li><p class="first">Run the same test again.</p>
+<blockquote>
+<div><p>Now the throughput should be improved, because GeoWebCache have 
+already generated the tiles to cache and can reuse them. Image quality 
+should be very poor because of the <code class="docutils literal"><span class="pre">hints=speed</span></code> configuration.</p>
+<div class="figure align-center" id="id7">
+<img alt="../_images/jmeter43.png" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter43.png">
+<p class="caption"><span class="caption-text"><em>Result from GeoWebCache fullWMS with hints=speed</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Run the same test with <code class="docutils literal"><span class="pre">hints=default</span></code></p>
+<blockquote>
+<div><div class="figure align-center" id="id8">
+<img alt="../_images/jmeter44.png" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter44.png">
+<p class="caption"><span class="caption-text"><em>Result from GeoWebCache fullWMS with hints=default</em></span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Run the same test with <code class="docutils literal"><span class="pre">hints=quality</span></code></p>
+<blockquote>
+<div><div class="figure align-center" id="id9">
+<img alt="../_images/jmeter45.png" src="Tile%20Caching%20with%20GeoWebCache%20%E2%80%94%20GeoServer%20Training_arquivos/jmeter45.png">
+<p class="caption"><span class="caption-text"><em>Result from GeoWebCache fullWMS with hints=quality</em></span></p>
+</div>
+<p>It should be noted that changing the <code class="docutils literal"><span class="pre">hints</span></code> parameter changes the image quality, but the throughput is always greater than that of GeoServer WMS</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/resource_limits.html" title="Tuning Resource Limits" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/styles.html" title="Style Optimizations" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/enterprise/index.html" accesskey="U">Enterprise Set-up Recommendations</a> »</li>
+        <li><a href="#">Tile Caching with GeoWebCache</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

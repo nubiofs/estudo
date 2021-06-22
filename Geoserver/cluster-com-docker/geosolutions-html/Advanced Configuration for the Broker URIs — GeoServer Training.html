@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Advanced Configuration for the Broker URIs — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Advanced%20Configuration%20for%20the%20Broker%20URIs%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Advanced%20Configuration%20for%20the%20Broker%20URIs%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Advanced%20Configuration%20for%20the%20Broker%20URIs%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Advanced%20Configuration%20for%20the%20Broker%20URIs%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Advanced%20Configuration%20for%20the%20Broker%20URIs%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="GeoServer Active Clustering" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html">
+    <link rel="next" title="How-To configure a Standalone ActiveMQ broker" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/activemqBroker.html">
+    <link rel="prev" title="Implementing Different Clustering Topologies" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/topologies.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Advanced%20Configuration%20for%20the%20Broker%20URIs%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Advanced Configuration for the Broker URIs</a><ul>
+<li><a class="reference internal" href="#tcp">TCP</a></li>
+<li><a class="reference internal" href="#failover-transport">Failover Transport</a></li>
+<li><a class="reference internal" href="#discovery">Discovery</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/topologies.html" title="previous chapter">Implementing Different Clustering Topologies</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/activemqBroker.html" title="next chapter">How-To configure a Standalone ActiveMQ broker</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/clustering/active/advancedbrokerURI.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-clustering.active.advancedbrokerURI"></span><div class="section" id="advanced-configuration-for-the-broker-uris">
+<span id="clustering-active-advancedbrokeruri"></span><h1>Advanced Configuration for the Broker URIs<a class="headerlink" href="#advanced-configuration-for-the-broker-uris" title="Permalink to this headline">¶</a></h1>
+<p>In this section we are going to provide some advanced information on 
+the the URIs that can be used to configure the link from a Slave 
+Instance to the Broker.</p>
+<div class="section" id="tcp">
+<h2>TCP<a class="headerlink" href="#tcp" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="tcp://host:port">tcp://host:port</a></p>
+<p>Client connects to the broker at the given URL</p>
+<p><strong>Supported Options:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>trace (false) Causes all commands that are sent over the transport to be logged</li>
+<li>daemon (false) Tells the transport thread to run as a daemon or not.
+ Useful to enable when embedding in a Spring container or a web 
+container to allow the container to shut down properly.</li>
+<li>useLocalHost (false) When true, it causes the local machines name to resolve to “localhost”.</li>
+<li>socketBufferSize (64 * 1024) Sets the socket buffer size in bytes</li>
+<li>keepAlive (false) When true, enables TCP KeepAlive on the broker 
+connection. Useful to ensure that inactive consumers don’t time out.</li>
+<li>soTimeout (0) sets the socket timeout in milliseconds</li>
+<li>connectionTimeout (30000) A non-zero value specifies the connection 
+timeout in milliseconds. A zero value means wait forever for the 
+connection to be established. Negative values are ignored.</li>
+<li>wireFormat (default) The name of the WireFormat to use</li>
+<li>wireFormat.* All the properties with this prefix are used to 
+configure the wireFormat. See Configuring Wire Formats for more 
+information</li>
+<li>closeAsync (true) The false value causes all sockets to be closed synchronously</li>
+<li>soLinger (MIN_INTEGER) When &gt; -1 causes the socket soLinger 
+option to be enabled with this value. When == -1, causes soLinger to be 
+disabled. (from 5.6.0)</li>
+<li>maximumConnections (Integer.MAX_VALUE) The maximum number of sockets the broker is allowed to create</li>
+<li>tcpNoDelay (true) When true, the TCP_NODELAY setting is enabled on the socket.</li>
+</ul>
+</div></blockquote>
+<p><strong>Example URI</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>On Server side (in TransportConnector):</li>
+</ul>
+</div></blockquote>
+<p><a class="reference external" href="tcp://localhost:61616?transport.trace=false&amp;transport.soTimeout=60000">tcp://localhost:61616?transport.trace=false&amp;transport.soTimeout=60000</a></p>
+<blockquote>
+<div><ul class="simple">
+<li>On Client side:</li>
+</ul>
+</div></blockquote>
+<p><a class="reference external" href="tcp://localhost:61616?trace=false&amp;soTimeout=60000">tcp://localhost:61616?trace=false&amp;soTimeout=60000</a></p>
+</div>
+<div class="section" id="failover-transport">
+<h2>Failover Transport<a class="headerlink" href="#failover-transport" title="Permalink to this headline">¶</a></h2>
+<p>failover:(Uri1,Uri2,Uri3,...,UriN)</p>
+<p>Provides a list of possible URIs to connect to and one of them is 
+randomly chosen. If the connection fails then the transport 
+auto-reconnects to a different one. This is highly recommended in 
+combination with the tcp protocol to work with an HA active-passive 
+brokers configuration.</p>
+<p>You can add options to the various URLs. Previously, if you wanted to
+ detect dead connections faster you had to add the 
+wireFormat.maxInactivityDuration=1000 option to all the nested URLs in 
+the fail-over list. For example:</p>
+<dl class="docutils">
+<dt><strong>Supported Options:</strong></dt>
+<dd><ul class="first last simple">
+<li>updateClusterClients (false) if true, pass information to connected clients about changes in the topology of the broker cluster</li>
+<li>rebalanceClusterClients (false) if true, connected clients will be 
+asked to rebalance across a cluster of brokers when a new broker joins 
+the network of brokers (note: priorityBackup=true can override)</li>
+<li>updateClusterClientsOnRemove (false) if true, will update clients 
+when a cluster is removed from the network. Having this as separate 
+option enables clients to be updated when new brokers join, but not when
+ brokers leave.</li>
+<li>updateClusterFilter (null) comma separated list of regular 
+expression filters used to match broker names of brokers to designate as
+ being part of the fail-over cluster for the clients</li>
+<li>initialReconnectDelay (10) How long to wait before the first reconnect attempt (in ms)</li>
+<li>maxReconnectDelay (30000) The maximum amount of time we ever wait between reconnect attempts (in ms)</li>
+<li>useExponentialBackOff (true) Should an exponential backoff be used between reconnect attempts</li>
+<li>reconnectDelayExponent (2.0) The exponent used in the exponential backoff attempts</li>
+<li>maxReconnectAttempts (-1 | 0) -1 is default and means retry forever,
+ 0 means don’t retry (only try connection once but no retry). If set to 
+&gt;0, then this is the maximum number of reconnect attempts before an 
+error is sent back to the client.</li>
+<li>startupMaxReconnectAttempts (0) If not 0, then this is the maximum 
+number of reconnect attempts before an error is sent back to the client 
+on the first attempt by the client to start a connection, once connected
+ the maxReconnectAttempts option takes precedence.</li>
+<li>randomize (true) use a random algorithm to choose the the URI to use for reconnect from the list provided</li>
+<li>backup (false) initialize and hold a second transport connection - to enable fast fail-over</li>
+<li>timeout (-1) Enables timeout on send operations (in milliseconds) without interruption of reconnection process</li>
+<li>trackMessages (false) keep a cache of in-flight messages that will flushed to a broker on reconnect</li>
+<li>maxCacheSize (131072) size in bytes for the cache, if trackMessages is enabled</li>
+<li>updateURIsSupported (true) Determines whether the client should 
+accept updates to its list of known URIs from the connected broker. 
+Added in ActiveMQ 5.4</li>
+<li>updateURIsURL (null) A URL (or path to a local file) to a text file 
+containing a comma separated list of URIs to use for reconnect in the 
+case of failure. Added in ActiveMQ 5.4</li>
+<li>nested.* (null) Extra options to add to the nested URLs.</li>
+<li>warnAfterReconnectAttempts.* (10) After every N reconnect attempts 
+log a warning to indicate there is no connection but that we are still 
+trying, set to &lt;= 0 to disable. Added in ActiveMQ 5.10</li>
+<li>reconnectSupported (true) Determines whether the client should 
+respond to broker ConnectionControl events with a reconnect (see: 
+rebalanceClusterClients)</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example URI</strong>:</p>
+<p>failover:(tcp://localhost:61616,tcp://remotehost:61616)?initialReconnectDelay=100</p>
+</div>
+<div class="section" id="discovery">
+<h2>Discovery<a class="headerlink" href="#discovery" title="Permalink to this headline">¶</a></h2>
+<p>discovery://</p>
+<p>The Discovery transport works just like the Failover transport, 
+except that it uses a discovery agent to locate the list of uri to 
+connect to. The Discovery transport is also used by the Fanout transport
+ for discovering brokers to send a fanout message to.</p>
+<p><strong>Configuration Syntax</strong></p>
+<p>discovery://(discoveryAgentURI)?transportOptions</p>
+<p>Note that to be able to use Discovery to find brokers, the brokers 
+need to have the multicast discovery agent enabled on the broker.</p>
+<dl class="docutils">
+<dt><strong>Supported Options</strong></dt>
+<dd><ul class="first last simple">
+<li>reconnectDelay (10) How long to wait for discovery</li>
+<li>initialReconnectDelay (10) How long to wait before the first reconnect attempt to a discovered url</li>
+<li>maxReconnectDelay (30000) The maximum amount of time we ever wait between reconnect attempts</li>
+<li>useExponentialBackOff (true) Should an exponential backoff be used between reconnect attempts</li>
+<li>backOffMultiplier   (2) The exponent used in the exponential backoff attempts</li>
+<li>maxReconnectAttempts (0) If not 0, then this is the maximum number 
+of reconnect attempts before an error is sent back to the client</li>
+<li>group (default) an identifier for the group to partition multi cast 
+traffic among collaborating peers; the group forms part of the shared 
+identity of a discovery datagram</li>
+</ul>
+</dd>
+</dl>
+<p>Refer to <a class="reference external" href="http://activemq.apache.org/uri-protocols.html">this page</a> for a complete list of supported protocols.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/activemq/activemqBroker.html" title="How-To configure a Standalone ActiveMQ broker" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/topologies.html" title="Implementing Different Clustering Topologies" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">Clustering GeoServer</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/clustering/active/index.html" accesskey="U">GeoServer Active Clustering</a> »</li>
+        <li><a href="#">Advanced Configuration for the Broker URIs</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>

@@ -1,3 +1,7 @@
 https://www.fernandoquadro.com.br/html/2019/07/22/escalabilidade-do-geoserver-com-docker-parte-1/
 
 https://www.fernandoquadro.com.br/html/2019/07/24/clusterizacao-do-geoserver-com-docker-parte-2/
+
+=================================================================================================
+
+https://docs.geoserver.geo-solutions.it/edu/en/clustering/

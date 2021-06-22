@@ -1,0 +1,478 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Load Balancer Setup with Apache HTTP — GeoServer Training</title>
+    
+    <link rel="stylesheet" href="Load%20Balancer%20Setup%20with%20Apache%20HTTP%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.css" type="text/css">
+    <link rel="stylesheet" href="Load%20Balancer%20Setup%20with%20Apache%20HTTP%20%E2%80%94%20GeoServer%20Training_arquivos/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.17.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="Load%20Balancer%20Setup%20with%20Apache%20HTTP%20%E2%80%94%20GeoServer%20Training_arquivos/jquery.js"></script>
+    <script type="text/javascript" src="Load%20Balancer%20Setup%20with%20Apache%20HTTP%20%E2%80%94%20GeoServer%20Training_arquivos/underscore.js"></script>
+    <script type="text/javascript" src="Load%20Balancer%20Setup%20with%20Apache%20HTTP%20%E2%80%94%20GeoServer%20Training_arquivos/doctools.js"></script>
+    <link rel="top" title="GeoServer Training" href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">
+    <link rel="up" title="Clustering GeoServer" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html">
+    <link rel="next" title="Load Balancer Setup with HAProxy" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/haproxy.html">
+    <link rel="prev" title="Basics of clustering with Apache Tomcat" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/tomcat.html">
+    
+
+  </head>
+  <body role="document">
+    <div class="header">
+        <div class="wrap">
+			
+            <div class="logo">
+			<a href="https://www.geosolutionsgroup.com/"><img src="Load%20Balancer%20Setup%20with%20Apache%20HTTP%20%E2%80%94%20GeoServer%20Training_arquivos/geosolutions.png" alt="GeoSolutions"></a>
+			<div class="social-container"> 
+				<ul id="social">
+					<li><a href="https://twitter.com/geosolutions_it/" id="twitter">Twitter</a></li>
+				</ul>
+			</div>
+			</div>
+					
+            <h2 class="docstitle"><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a></h2>
+			
+        </div>
+    </div>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Load Balancer Setup with Apache HTTP</a><ul>
+<li><a class="reference internal" href="#windows">Windows</a><ul>
+<li><a class="reference internal" href="#httpd-setup">HTTPD setup</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linux">Linux</a></li>
+<li><a class="reference internal" href="#further-optional-configurations">Further optional configurations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/tomcat.html" title="previous chapter">Basics of clustering with Apache Tomcat</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/haproxy.html" title="next chapter">Load Balancer Setup with HAProxy</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/_sources/clustering/load_balancing/apache_http.txt" rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-apache_http"></span><div class="section" id="load-balancer-setup-with-apache-http">
+<span id="apache-http"></span><h1>Load Balancer Setup with Apache HTTP<a class="headerlink" href="#load-balancer-setup-with-apache-http" title="Permalink to this headline">¶</a></h1>
+<p>Here you’ll find a quick setup to configure a proxy with load 
+balancer to distribute requests between multiple instances of GeoServer 
+each one running in a different Tomcat process.</p>
+<blockquote>
+<div><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The following steps are OS specific as they involve 
+creating scripts and setting environmental variables to run Tomcat. As 
+such we will differentiate instructions between different OS.</p>
+</div>
+</div></blockquote>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<p>Into the provided package you’ll find the <strong>apache_start.bat</strong> script which sets specific environment variables and starts the httpd server as standalone program.
+Closing the window will shutdown the service.</p>
+<p>The <strong>apache_start.bat</strong> script is used to setup the APACHE HTTPD settings and to startup the server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">set</span> <span class="n">TRAINING_ROOT</span><span class="o">=%~</span><span class="n">dp0</span>
+
+<span class="nb">set</span> <span class="n">HTTPD_HOME</span><span class="o">=%</span><span class="n">TRAINING_ROOT</span><span class="o">%</span>\<span class="n">Apache2</span><span class="o">.</span><span class="mi">2</span>
+
+<span class="nb">set</span> <span class="n">HTTPD_PORT</span><span class="o">=</span><span class="mi">88</span>
+
+<span class="n">call</span> <span class="o">%</span><span class="n">ROOT</span><span class="o">%</span>\<span class="n">setenv</span><span class="o">.</span><span class="n">bat</span>
+
+<span class="nb">set</span> <span class="n">EXECUTABLE</span><span class="o">=%</span><span class="n">HTTPD_HOME</span><span class="o">%</span>\<span class="nb">bin</span>\<span class="n">httpd</span><span class="o">.</span><span class="n">exe</span>
+<span class="n">call</span> <span class="o">%</span><span class="n">EXECUTABLE</span><span class="o">%</span>
+</pre></div>
+</div>
+<p>In the above script we setup some useful environment variables which will be used into the other configurations:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>the HTTPD_HOME (set to %TRAINING_ROOT%/Apache2.2)</li>
+<li>the HTTPD_PORT (set to 88)</li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default Apache port is 80. We are using port 88 to avoid any overlap.</p>
+</div>
+<p>Using the above script you may access to the Apache HTTPD server using a browser pointing to the URL:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">88</span>
+</pre></div>
+</div>
+<p>To setup the Load Balancer we still have to configure httpd to proxy the GeoServer tomcat instances.</p>
+<div class="section" id="httpd-setup">
+<h3>HTTPD setup<a class="headerlink" href="#httpd-setup" title="Permalink to this headline">¶</a></h3>
+<p>The main configuration file is located here:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="o">%</span><span class="n">HTTPD_HOME</span><span class="o">%/</span><span class="n">conf</span><span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Edit that file to add global changes to the httpd server.</p>
+<p>F.e. we have added the <strong>HTTPD_HOME</strong> prefix in front all the relative paths and set the server root and port as following:</p>
+<div class="highlight-default"><div class="highlight"><pre>ServerRoot "${HTTPD_HOME}"
+
+#
+# Listen: Allows you to bind Apache to specific IP addresses and/or
+# ports, instead of the default. See also the &lt;VirtualHost&gt;
+# directive.
+#
+# Change this to Listen on specific IP addresses as shown below to
+# prevent Apache from glomming onto all bound IP addresses.
+#
+#Listen 12.34.56.78:80
+Listen 0.0.0.0:${HTTPD_PORT}
+</pre></div>
+</div>
+<p>Be also sure to uncomment the extra configuration inclusions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="c"># Virtual hosts</span>
+<span class="n">Include</span> <span class="n">conf</span><span class="o">/</span><span class="n">extra</span><span class="o">/</span><span class="n">httpd</span><span class="o">-</span><span class="n">vhosts</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the distributed package you’ll find this file under %HTTPD_HOME%/conf/extra/http-vhosts.conf</p>
+</div>
+<p>Which may result as following:</p>
+<div class="highlight-default"><div class="highlight"><pre>&lt;VirtualHost *:${HTTPD_PORT}&gt;
+  LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+  LoadModule proxy_module modules/mod_proxy.so
+  LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
+  LoadModule proxy_connect_module modules/mod_proxy_connect.so
+  LoadModule proxy_ftp_module modules/mod_proxy_ftp.so
+  LoadModule proxy_http_module modules/mod_proxy_http.so
+  LoadModule reqtimeout_module modules/mod_reqtimeout.so
+
+  &lt;IfModule mod_proxy_ajp.c&gt;
+      ProxyRequests Off
+      ProxyTimeout 300
+      ProxyPreserveHost On
+      ProxyVia On
+
+      &lt;Proxy balancer://cluster&gt;
+        BalancerMember ajp://localhost:8009 route=route1 timeout=20
+        BalancerMember ajp://localhost:8010 route=route2 timeout=20
+        ProxySet lbmethod=bybusyness
+      &lt;/Proxy&gt;
+      &lt;Location /geoserver&gt;
+        Order allow,deny
+        Allow from all
+        ProxyPass balancer://cluster/geoserver stickysession=JSESSIONID
+      &lt;/Location&gt;
+
+  &lt;/IfModule&gt;
+&lt;/VirtualHost&gt;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">in the above configuration we consider the HTTPD_PORT environment variable set to an valid integer port number.</p>
+</div>
+<dl class="docutils">
+<dt>The used proxy parameters are:</dt>
+<dd><ol class="first last arabic">
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxyrequests">ProxyRequests</a></dt>
+<dd><p class="first last">This allows or prevents Apache from 
+functioning as a forward proxy server. (Setting ProxyRequests to Off 
+does not disable use of the ProxyPass directive.)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxyvia">ProxyVia</a></dt>
+<dd><p class="first last">This directive controls the use of the Via: HTTP header by the proxy. We don’t need it here, but it does not hurt either.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxytimeout">ProxyTimeout</a></dt>
+<dd><p class="first last">This directive allows a user to specify a 
+timeout on proxy requests. This is useful when you have a slow/buggy 
+appserver which hangs, and you would rather just return a timeout and 
+fail gracefully instead of waiting however long it takes the server to 
+return.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxypreservehost">ProxyPreserveHost</a></dt>
+<dd><p class="first last">When enabled, this option will pass the Host: 
+line from the incoming request to the proxied host, instead of the 
+hostname specified in the ProxyPass line.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxyset">ProxySet</a></dt>
+<dd><p class="first last">This directive is used as an alternate method 
+of setting any of the parameters available to Proxy balancers and 
+workers normally done via the ProxyPass directive</p>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+<p>The Proxy node contains all the BalancerMember of the cluster, in 
+this configuration we configured 2 different instances of tomcat using 
+the ajp connectors (on ports 8009, 8010).
+It contains some other parameters:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://httpd.apache.org/docs/2.2/mod/mod_authz_host.html#order">Order</a></dt>
+<dd><p class="first last">The Order directive, along with the Allow and 
+Deny directives, controls a three-pass access control system. The first 
+pass processes either all Allow or all Deny directives, as specified by 
+the Order directive.
+The second pass parses the rest of the directives (Deny or Allow).
+The third pass applies to all requests which do not match either of the 
+first two.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://httpd.apache.org/docs/2.2/mod/mod_authz_host.html#allow">Allow</a></dt>
+<dd><p class="first last">The Allow directive affects which hosts can 
+access an area of the server.
+Access can be controlled by hostname, IP address, IP address range, or 
+by other characteristics of the client request captured in environment 
+variables.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxypass">ProxyPass</a></dt>
+<dd><p class="first last">This directive allows remote servers to be mapped into the space of the local server;
+the local server does not act as a proxy in the conventional sense, but appears to be a mirror of the remote server.
+The local server is often called a reverse proxy or gateway.
+The path is the name of a local virtual path;
+url is a partial URL for the remote server and cannot include a query string.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxypassreverse">ProxyPassReverse</a></dt>
+<dd><p class="first last">This directive lets Apache adjust the URL in 
+the Location, Content-Location and URI headers on HTTP redirect 
+responses.
+This is essential when Apache is used as a reverse proxy (or gateway) to
+ avoid by-passing the reverse proxy because of HTTP redirects on the 
+backend servers which stay behind the reverse proxy</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html#stickyness">stickysession</a></dt>
+<dd><p class="first last">This directive is required for the user to be 
+able to interact with GeoServer’s UI. When a session is created for the 
+user (e.g. as a result of the user logging into GeoServer’s UI) all 
+subsequent requests from the user will be routed through the same route 
+instead of being balanced to both instances. This is required to 
+properly interact with the UI.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When a session is created (e.g. you used the GeoServer 
+GUI or the integrated GWC GUI) a cookie is set in your browser to 
+transport the Session ID (it uses the key JSESSIONID). To observe the 
+behaviour where incoming requests are being balanced to all GeoServer 
+instances you need to either clear your browser cookies or open an <a class="reference external" href="https://en.wikipedia.org/wiki/Privacy_mode">incognito mode</a> window in the browser. Normally users going through the OGC services will not have a session id.</p>
+</div>
+<p><a class="reference internal" href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/tomcat.html#tomcat"><span class="std std-ref">For the tomcat connectors configuration click here</span></a>.</p>
+<p>Each BalancerMember points to a tomcat instance using the ajp protocol (through its route: see below):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="o">&lt;</span><span class="n">Proxy</span> <span class="n">balancer</span><span class="p">:</span><span class="o">//</span><span class="n">cluster</span><span class="o">&gt;</span>
+           <span class="n">BalancerMember</span> <span class="n">ajp</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8009</span> <span class="n">route</span><span class="o">=</span><span class="n">route1</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span>
+           <span class="n">BalancerMember</span> <span class="n">ajp</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8010</span> <span class="n">route</span><span class="o">=</span><span class="n">route2</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span>
+           <span class="n">ProxySet</span> <span class="n">lbmethod</span><span class="o">=</span><span class="n">bybusyness</span>
+<span class="o">&lt;/</span><span class="n">Proxy</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The traffic is routed bybusyness but you may chose a different algorithm (see Proxy doc).</p>
+</div>
+<p>If you want to use the http connector you may change the proxy configuration pointing to those connectors:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="o">&lt;</span><span class="n">Proxy</span> <span class="n">balancer</span><span class="p">:</span><span class="o">//</span><span class="n">cluster</span><span class="o">&gt;</span>
+           <span class="n">BalancerMember</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8083</span>
+           <span class="n">BalancerMember</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8084</span>
+           <span class="n">ProxySet</span> <span class="n">lbmethod</span><span class="o">=</span><span class="n">bybusyness</span>
+<span class="o">&lt;/</span><span class="n">Proxy</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The incoming requests is redirect from the proxy to the load balancer by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="o">&lt;</span><span class="n">Location</span> <span class="o">/</span><span class="n">geoserver</span><span class="o">&gt;</span>
+      <span class="n">Order</span> <span class="n">allow</span><span class="p">,</span><span class="n">deny</span>
+      <span class="n">Allow</span> <span class="kn">from</span> <span class="nn">all</span>
+      <span class="n">ProxyPass</span> <span class="n">balancer</span><span class="p">:</span><span class="o">//</span><span class="n">cluster</span><span class="o">/</span><span class="n">geoserver</span> <span class="n">stickysession</span><span class="o">=</span><span class="n">JSESSIONID</span>
+<span class="o">&lt;/</span><span class="n">Location</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Each request to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">88</span><span class="o">/</span><span class="n">geoserver</span>
+</pre></div>
+</div>
+<p>is now redirected to one of your tomcat instances depending on the incoming traffic and accordingly to the chosen lbmethod.
+You are able to check the status of each Balancer Member using your browser (protected by authentication).</p>
+</div>
+</div>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The following instructions are distribution-dependant 
+and they have been tested on Ubuntu 12.04 that is the OS of the linux 
+training environment. Although they should be valid on all the 
+Debian-based distributions some changes may are required on other Debian
+ or Ubuntu versions. For the Linux Red Hat-based distributions the 
+apache package is called <strong>httpd</strong> instead of apache2.</p>
+</div>
+<p>Install the <strong>apache webserver</strong> on the linux training environment running the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">apache2</span>
+</pre></div>
+</div>
+<p>The apt-get installation process will install Apache 2.2.22 on your system as a system service.</p>
+<p>start the apache2 daemon:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">service</span> <span class="n">apache2</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>Stop you apache2 daemon:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">service</span> <span class="n">apache2</span> <span class="n">stop</span>
+</pre></div>
+</div>
+<p>Reload the configuration files without stopping the service:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">service</span> <span class="n">apache2</span> <span class="n">reload</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For some configurations a reload is not enough and a restart is required, see the <a class="reference external" href="http://httpd.apache.org/docs/2.2/">official apache documentation</a> for more info</p>
+</div>
+<p>The main apache modules configuration directory is <code class="docutils literal"><span class="pre">/etc/apache2/mods-enabled/</span></code></p>
+<p>To configure the apache2 proxy you have to configure the tomcat 
+connector (see the previous chapter) and the webserver configuration.</p>
+<p>First load all the apache2 needed modules that are not enabled by default:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">mods</span><span class="o">-</span><span class="n">available</span><span class="o">/</span><span class="n">proxy</span><span class="o">.</span><span class="n">load</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">mods</span><span class="o">-</span><span class="n">enabled</span>
+<span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">mods</span><span class="o">-</span><span class="n">available</span><span class="o">/</span><span class="n">proxy_ajp</span><span class="o">.</span><span class="n">load</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">mods</span><span class="o">-</span><span class="n">enabled</span>
+<span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">mods</span><span class="o">-</span><span class="n">available</span><span class="o">/</span><span class="n">proxy_balancer</span><span class="o">.</span><span class="n">load</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">mods</span><span class="o">-</span><span class="n">enabled</span>
+</pre></div>
+</div>
+<p>Then create a new configuration file under the apache modules configuration directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">mods</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="n">proxy_balancer</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Edit it as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">ProxyRequests</span> <span class="n">Off</span>
+<span class="n">ProxyTimeout</span> <span class="mi">300</span>
+<span class="n">ProxyPreserveHost</span> <span class="n">On</span>
+<span class="n">ProxyVia</span> <span class="n">On</span>
+<span class="o">&lt;</span><span class="n">Proxy</span> <span class="n">balancer</span><span class="p">:</span><span class="o">//</span><span class="n">cluster</span><span class="o">&gt;</span>
+    <span class="n">BalancerMember</span> <span class="n">ajp</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8009</span> <span class="n">route</span><span class="o">=</span><span class="n">route1</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span>
+    <span class="n">BalancerMember</span> <span class="n">ajp</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8010</span> <span class="n">route</span><span class="o">=</span><span class="n">route2</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span>
+    <span class="n">ProxySet</span> <span class="n">lbmethod</span><span class="o">=</span><span class="n">bybusyness</span>
+<span class="o">&lt;/</span><span class="n">Proxy</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Location</span> <span class="o">/</span><span class="n">geoserver</span><span class="o">&gt;</span>
+    <span class="n">Order</span> <span class="n">allow</span><span class="p">,</span><span class="n">deny</span>
+    <span class="n">Allow</span> <span class="kn">from</span> <span class="nn">all</span>
+    <span class="n">ProxyPass</span> <span class="n">balancer</span><span class="p">:</span><span class="o">//</span><span class="n">cluster</span><span class="o">/</span><span class="n">geoserver</span> <span class="n">stickysession</span><span class="o">=</span><span class="n">JSESSIONID</span>
+<span class="o">&lt;/</span><span class="n">Location</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Save the file (<code class="docutils literal"><span class="pre">ctrl-o</span></code> using nano as suggested) and restart apache as seen before (a configuration reload in not enough for this step).</p>
+<p>Open the browser and access to the url:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="o">/</span><span class="n">geoserver</span>
+</pre></div>
+</div>
+<p>The geoserver is now accessed through the apache2 webserver and the 
+requests are balanced between the 2 geoserver instances available.</p>
+</div>
+<div class="section" id="further-optional-configurations">
+<h2>Further optional configurations<a class="headerlink" href="#further-optional-configurations" title="Permalink to this headline">¶</a></h2>
+<p>The following section is optional (not configured in the Linux/Windows packages).
+This is useful to check the configuration using your browser:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="o">&lt;</span><span class="n">Location</span> <span class="o">/</span><span class="n">balancer</span><span class="o">-</span><span class="n">manager</span><span class="o">&gt;</span>
+   <span class="n">SetHandler</span> <span class="n">balancer</span><span class="o">-</span><span class="n">manager</span>
+   <span class="n">AuthType</span> <span class="n">basic</span>
+   <span class="n">AuthName</span> <span class="s">"My_auth_name"</span>
+   <span class="n">AuthUserFile</span> <span class="s">"/etc/httpd/passwd/passwords"</span>
+   <span class="c"># Anonymous *</span>
+   <span class="n">Require</span> <span class="n">valid</span><span class="o">-</span><span class="n">user</span>
+<span class="o">&lt;/</span><span class="n">Location</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Here we also have set a basic authentication to access the basic auth</p>
+</div>
+<p>Point your browser to <a class="reference external" href="http://localhost:88/balancer-manager">http://localhost:88/balancer-manager</a> to see the manager.</p>
+<p>To configure a basic authentication account on Linux proceed as following.</p>
+<p>Create a password file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">httpd</span><span class="o">/</span><span class="n">passwd</span>
+<span class="n">touch</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">httpd</span><span class="o">/</span><span class="n">passwd</span><span class="o">/</span><span class="n">passwords</span>
+</pre></div>
+</div>
+<p>Create the user:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">htpasswd</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">httpd</span><span class="o">/</span><span class="n">passwd</span><span class="o">/</span><span class="n">passwords</span> <span class="n">USER</span>
+<span class="n">Password</span><span class="p">:</span> <span class="n">PASSWORD</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+            <li class="right" style="margin-right: 10px">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/genindex.html" title="General Index" accesskey="I">index</a></li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/py-modindex.html" title="Python Module Index">modules</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/haproxy.html" title="Load Balancer Setup with HAProxy" accesskey="N">next</a> |</li>
+            <li class="right">
+              <a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/load_balancing/tomcat.html" title="Basics of clustering with Apache Tomcat" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/index.html">GeoServer Training</a> »</li>
+          <li><a href="https://docs.geoserver.geo-solutions.it/edu/en/clustering/index.html" accesskey="U">Clustering GeoServer</a> »</li>
+        <li><a href="#">Load Balancer Setup with Apache HTTP</a></li>
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        © Copyright 2020, GeoSolutions.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  
+</body></html>
