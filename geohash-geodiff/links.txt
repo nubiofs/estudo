@@ -1,10 +1,53 @@
 https://github.com/mathieuripert/geoh
 
 https://www.geospatialworld.net/blogs/polygeohasher-an-optimized-way-to-create-geohashes/
+--> http://web.archive.org/web/20210115083430/https://www.geospatialworld.net/blogs/polygeohasher-an-optimized-way-to-create-geohashes/
 
 https://github.com/rohitsinghsalyan/polygeohasher
-
 https://pypi.org/project/polygeohasher/
+
+https://www.movable-type.co.uk/scripts/geohash.html
+
+https://otonomo.io/how-to-count-large-scale-geohashes/
+https://github.com/Bonsanto/polygon-geohasher
+https://pypi.org/project/polygon-geohasher/
+https://otonomo.io/how-to-count-large-scale-geohashes/
+
+
+https://en.wikipedia.org/wiki/Geohash
+http://geohash.org/
+http://geohash.org/site/tips.html
+
+http://geohash.gofreerange.com
+http://geohash.gofreerange.com
+
+https://gis.stackexchange.com/questions/18330/using-geohash-for-proximity-searches
+https://github.com/yinqiwen/ardb/wiki/Spatial-Index
+https://github.com/davetroy/geohash-js
+https://github.com/yinqiwen/geohash-int
+
+
+--> https://www.ibm.com/docs/en/db2/11.5?topic=concepts-geohashes-geohash-covers
+
+https://otonomo.io/how-to-count-large-scale-geohashes/
+
+===> https://stackoverflow.com/questions/60433226/how-to-do-in-memory-search-for-polygons-that-contain-a-given-point
+
+
+--> https://github.com/CptFoobar/geotrie
+
+
+https://github.com/omanges/turfpy
+
+https://wrf.ecse.rpi.edu//Research/Short_Notes/pnpoly.html
+
+
+https://www.geomesa.org/documentation/stable/tutorials/geohash-substrings.html
+
+
+https://stackoverflow.com/questions/43892459/check-if-geo-point-is-inside-or-outside-of-polygon
+
+--
 
 http://geogig.org/
 https://github.com/locationtech/geogig
@@ -16,6 +59,20 @@ https://github.com/lutraconsulting/geodiff
 https://eurostat.github.io/GeoDiff/
 https://github.com/eurostat/GeoDiff
 https://eurostat.github.io/GeoDiff/geodiff_format/
+
+
+=======
+
+--> https://github.com/google/open-location-code/wiki/Evaluation-of-Location-Encoding-Systems
+
+https://gis.stackexchange.com/questions/102941/methods-for-geohash-of-polygon
+https://github.com/ashwin711/georaptor
+
+https://github.com/google/open-location-code
+-> https://maps.google.com/pluscodes/
+https://code.google.com/archive/p/s2-geometry-library/source/default/source
+http://openlocationcode.com/
+--> https://en.wikipedia.org/wiki/Open_Location_Code
 
 -------
 

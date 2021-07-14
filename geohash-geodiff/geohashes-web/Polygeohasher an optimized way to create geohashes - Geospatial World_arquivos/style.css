@@ -1,0 +1,999 @@
+/*
+Theme Name: Newsmag Child New
+Theme URI: http://tagdiv.com
+Template: Newsmag
+Author: tagDiv
+Author URI: http://themeforest.net/user/tagDiv/portfolio
+Description: Premium wordpress template, clean and easy to use.
+Tags: black,white,one-column,two-columns,fixed-layout
+Version: 4.9.1559833421
+Updated: 2019-06-06 20:33:41
+
+
+*/
+
+.no-border { border: none !important; }
+
+.btn-special {
+
+	display: inline-block;
+
+	background: #e92e00;
+
+	max-width: 45%;
+
+	margin: 0px 4% 0px 0px;
+
+	border-radius: 5px;
+
+}
+
+.btn-special:hover { background: #0975a7; }
+
+
+
+.newsletters-list {}
+
+.newsletters-list ul {
+
+	margin: 0px 0px 2.5em;
+
+	padding: 0px;
+
+	border-bottom: 1px solid #e6e6e6;
+
+}
+
+.newsletters-list ul li {
+
+	margin: 0px;
+
+	padding: 1em 0px;
+
+	border-top: 1px solid #e6e6e6;
+
+	list-style: none;
+
+}
+
+.newsletters-list h4 { margin: 0px; }
+
+.newsletters-list p { margin: 1em 0px 0px; }
+
+
+
+.thesis-list {}
+
+.thesis-list ul { list-style-position: outside; }
+
+
+
+.magazine-wrap {}
+
+.magazine-wrap .magazine-thumb {
+
+	float: left;
+
+	width: 160px;
+
+	margin: 0px;
+
+	padding: 0px 0px 21px;
+
+}
+
+.magazine-wrap .magazine-thumb h2 {
+
+	margin: 0px 0px 10px;
+
+	padding: 0px;
+
+	font-size: 22px;
+
+}
+
+.magazine-wrap .magazine-thumb img { margin: 0px; }
+
+.magazine-wrap .magazine-thumb .punch { padding: 10px 0px 0px; }
+
+.magazine-wrap .magazine-thumb .link { padding: 25px 0px 0px; }
+
+.magazine-wrap .magazine-summary {
+
+	float: right;
+
+	width: 460px;
+
+}
+
+
+
+/* used to position the ajax loader (added 19 aug 2015) */
+
+.td-ss-main-content {
+
+  position: relative;
+
+}
+
+
+
+.magazine-wrap .magazine-summary h3 {
+
+	margin: 0px 0px 10px;
+
+	padding: 0px;
+
+	line-height: 38px;
+
+}
+
+.magazine-wrap .magazine-embeddedcode { margin: 0px 0px 25px; }
+
+.magazine-wrap .magazine-content {}
+
+
+
+#geo-googlemap { 
+
+	width: 100%;
+
+	height: 400px;
+
+	margin: 0px auto 25px;
+
+}
+
+/* ========== Custom css start here 23 May 2016 ========== */
+
+.home_form fieldset {margin:0; padding:0; border:0;}
+.home_form fieldset span label {display:inline-block; padding:0 0 5px; font-weight:bold;}
+.home_form fieldset input.form-control {-webkit-box-sizing: border-box;  -moz-box-sizing: border-box;  box-sizing: border-box; width:300px; margin:0 0 5px;}
+.home_form fieldset select {font-family:Verdana, Geneva, sans-serif; font-size:12px; line-height:21px; color: #444444;    border: 1px solid #e6e6e6;    
+	width: 100%;    max-width: 100%;    height: 34px;    padding: 3px 9px 3px 9px; margin:0 0 5px;}
+
+body.page-id-51454 .magazines-home {display:table-header-group;}
+
+body.page-id-51454 .mag-home-cont {display:table-footer-group; font-size:10px; line-height:14px; margin:10px 0 0;}
+body.page-id-51454 .mag-home-cont p {font-size:10px; line-height:14px;}
+
+/* ========== For responsive here 23 May 2016 ========== */
+
+@media all and (max-width:640px) 
+	{
+			.magazine-wrap .magazine-thumb {display:block; width:initial; float: inherit;}
+			.magazine-wrap .magazine-summary {display:block; width:initial; float: inherit;}
+	}
+
+
+
+
+
+
+/* =========== css made by kamal saini start here [20160907] ==========*/
+
+table.remove_borders td {border:0!important;}
+.td-trending-now-title.block-title {border-bottom:none;
+    display: block;
+    margin: 0 20px 0 0!important;     border-radius: 0; font-weight:normal!important;
+    font-size: 13px;
+    line-height: 30px;
+    top: 0;
+
+}
+.td-trending-now-display-area .entry-title {line-height: 30px!important;}
+.widget .block-title { margin-left:0!important; }
+form.new_sub {display:block; margin:0 0 20px 0;}
+form.new_sub fieldset {margin:0; padding:20px; background:#f7f7f7; border-radius:3px; display:block;}
+form.new_sub fieldset div {max-width:300px;}
+form.new_sub fieldset div span {display:block; margin:0 0 5px;}
+form.new_sub fieldset input[type="text"] {width:100%; -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;}
+  form.new_sub fieldset select {width:100%; -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; border:1px solid #e6e6e6; padding:5px 9px; margin:0 0 5px;}
+  form.new_sub fieldset input[type="string"] {width:100%; -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    line-height: 21px;
+    color: #444444;
+    border: 1px solid #e6e6e6;
+    width: 100%;
+    max-width: 100%;
+    height: 34px;
+    padding: 3px 9px 3px 9px;}
+  form.new_sub fieldset select {width:100%; -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; border:1px solid #e6e6e6; padding:5px 9px; margin:0 0 5px;}
+  form.new_sub fieldset .lists input[type="checkbox"] {margin-right:5px;}
+  .vc_cta3-container {margin-top:3px;}
+  
+  
+/* =========== css made by kamal saini start here [20161007] ==========*/
+
+.geospatial-world-home-oct-32016 .td-header-border::before {background:#516eab;}
+.geospatial-world-home-oct-32016 .td-header-border:after {content:"";  background-color:#516eab; display:block; height:4px;}
+
+.geospatial-world-home-oct-32016 .sf-menu {margin-left:0;}
+
+.geospatial-world-home-oct-32016 .td-container {border-bottom:none;}
+.geospatial-world-home-oct-32016 .td-pb-row [class*="td-pb-span"] {border:none;}
+.geospatial-world-home-oct-32016 .td_block_trending_now {background:#eeeeee; margin:0 0 20px 0; border:none;}
+.geospatial-world-home-oct-32016 .td_block_trending_now .td-next-prev-wrap i {border:1px solid #ddd; background:#fff;}
+.geospatial-world-home-oct-32016 .td-next-prev-wrap {top:5px;}
+
+.geospatial-world-home-oct-32016 .td-pb-border-top {border:none;}
+.geospatial-world-home-oct-32016 .td-pb-border-top::after {border:none;}
+.geospatial-world-home-oct-32016 .td-pb-border-top::before {border:none;}
+
+.geospatial-world-home-oct-32016 .td-pb-row .wpb_column::before {background:none;}
+.geospatial-world-home-oct-32016 .td-pb-row .wpb_column::after {background:none;}
+.geospatial-world-home-oct-32016 .td-pb-row .wpb_column {background:none;}
+
+.geospatial-world-home-oct-32016 .td-pb-span8 .td_block_wrap {background:#f7f7f7; padding:15px 0; border-radius:3px; 
+margin:0 0 0 20px;}
+.geospatial-world-home-oct-32016 .td-pb-span8 .td_block_wrap .td-block-span6 {width:319px;}
+.geospatial-world-home-oct-32016 .td-pb-span8 .td_block_wrap .td-block-span4 {width:210px;}
+
+.geospatial-world-home-oct-32016 .td-pb-span4 .vc_cta3-container {margin:0;}
+.vc_cta3-container .vc_general.vc_cta3 {padding:20px;}
+.td-pb-span4 .vc_cta3-container .vc_general.vc_cta3 h2 {font-size:22px; 
+color:#111!important; line-height:24px; margin:0 0 15px 0;}
+.td-pb-span4 .vc_cta3-container .vc_general.vc_cta3 h4 {font-size:15px; line-height:22px; letter-spacing:0.5px;}
+
+.geospatial-world-home-oct-32016 .td-pb-full-cell .td-block-row {padding:0!important; background:none!important; border-left:0!important;}
+.geospatial-world-home-oct-32016 .td-pb-full-cell .td-block-row .td-block-span4 {width:318px}
+
+.geospatial-world-home-oct-32016 .td-pb-full-cell .block-title {border:none;}
+.geospatial-world-home-oct-32016 .td-pb-full-cell .block-title span {border:none;}
+.geospatial-world-home-oct-32016 .td-block-title-wrap {display:none;}
+
+.td-header-main-menu.td-affix .sf-menu > li > a {padding:0 12px; font-size:12px;} 
+.td-header-main-menu.td-affix .sf-menu > li > a.sf-with-ul {padding-right:31px;}
+
+.geospatial-world-home-oct-32016 .td-pb-full-cell {display:block; margin:0 20px 20px 20px; overflow:hidden;}
+.geospatial-world-home-oct-32016 .td-pb-full-cell .td-block-span12 {width:32.7%; float:left;}
+
+
+
+/*  anshu 23 june 2017*/
+
+/*.homepage-anshu-23june2017 .td-header-border::before {background:#516eab;}
+.homepage-anshu-23june2017 .td-header-border:after {content:"";  background-color:#516eab; display:block; height:4px;}*/
+
+.homepage-anshu-23june2017 .sf-menu {margin-left:0;}
+
+.homepage-anshu-23june2017 .td-container {border-bottom:none;}
+.homepage-anshu-23june2017 .td-pb-row [class*="td-pb-span"] {border:none;}
+/*.homepage-anshu-23june2017 .td_block_trending_now {background:#eeeeee; margin:0 0 20px 0; border:none;}
+.homepage-anshu-23june2017 .td_block_trending_now .td-next-prev-wrap i {border:1px solid #ddd; background:#fff;}*/
+.homepage-anshu-23june2017 .td-next-prev-wrap {top:5px;}
+
+.homepage-anshu-23june2017 .td-pb-border-top {border:none;}
+.homepage-anshu-23june2017 .td-pb-border-top::after {border:none;}
+.homepage-anshu-23june2017 .td-pb-border-top::before {border:none;}
+
+.homepage-anshu-23june2017 .td-pb-row .wpb_column::before {background:none;}
+.homepage-anshu-23june2017 .td-pb-row .wpb_column::after {background:none;}
+.homepage-anshu-23june2017 .td-pb-row .wpb_column {background:none;}
+
+/*.homepage-anshu-23june2017 .td-pb-span8 .td_block_wrap {background:#f7f7f7; padding:15px 0; border-radius:3px; 
+margin:0 0 0 20px;}*/
+.homepage-anshu-23june2017 .td-pb-span8 .td_block_wrap .td-block-span6 {width:319px;}
+.homepage-anshu-23june2017 .td-pb-span8 .td_block_wrap .td-block-span4 {width:210px;}
+
+.homepage-anshu-23june2017 .td-pb-span4 .vc_cta3-container {margin:0;}
+.vc_cta3-container .vc_general.vc_cta3 {padding:20px;}
+.td-pb-span4 .vc_cta3-container .vc_general.vc_cta3 h2 {font-size:22px; 
+color:#111!important; line-height:24px; margin:0 0 15px 0;}
+.td-pb-span4 .vc_cta3-container .vc_general.vc_cta3 h4 {font-size:15px; line-height:22px; letter-spacing:0.5px;}
+
+.homepage-anshu-23june2017 .td-pb-full-cell .td-block-row {padding:0!important; background:none!important; border-left:0!important;}
+.homepage-anshu-23june2017 .td-pb-full-cell .td-block-row .td-block-span4 {width:318px}
+
+/*.homepage-anshu-23june2017 .td-pb-full-cell .block-title {border:none;}
+.homepage-anshu-23june2017 .td-pb-full-cell .block-title span {border:none;}
+.homepage-anshu-23june2017 .td-block-title-wrap {display:none;}*/
+
+.td-header-main-menu.td-affix .sf-menu > li > a {padding:0 12px; font-size:12px;} 
+.td-header-main-menu.td-affix .sf-menu > li > a.sf-with-ul {padding-right:31px;}
+
+.homepage-anshu-23june2017 .td-pb-full-cell {display:block; margin:0 20px 20px 20px; overflow:hidden;}
+.homepage-anshu-23june2017 .td-pb-full-cell .td-block-span12 {width:32.7%; float:left;}
+/*end anshu 23 june 2017*/
+
+
+
+
+
+ .vc_cta3-content-header h2{font-size:21px;}
+
+ .vc_cta3-content-header h4{font-size:16px; margin-top:-20px;}
+
+
+/*.td-header-border::before {background:#516eab;}
+.td-header-border:after {content:"";  background-color:#516eab; display:block; height:4px;}*/
+
+
+
+
+
+
+
+.td-ad-background-link #td-outer-wrap {
+  cursor: pointer;
+}
+.td-ad-background-link .td-header-container,
+.td-ad-background-link .td-container {
+  cursor: auto;
+}
+.single_template_6.td-ad-background-link #td-outer-wrap {
+  cursor: auto;
+}
+
+.wpb_raw_code.wpb_content_element.wpb_raw_html {position:relative; padding:0;}
+.side_ad_banner {width:160px; height:600px; position:absolute; left:-160px; top:-260px; display:none;}
+
+@media (min-width:1366px) {
+
+    .side_ad_banner {display:block;}
+}
+
+
+/* ========== 14 nov 2016 css made by Kamal Saini start here ========== */
+
+/*.td-header-main-menu {background:#fff!important;}
+.td-header-main-menu .sf-menu > li > a {color:#000;} 
+.td-header-main-menu .sf-menu > li > a:hover {background:#516eab; color:#fff;}
+.td-header-main-menu .header-search-wrap .td-icon-search {color:#000;}
+ .td-pb-span8 .td_block_wrap {margin:0 0 20px 20px!important;}*/
+
+/*h4.block-title {display:block; border-bottom:2px solid #516eab; margin-right:20px!important;}*/
+/*h4.block-title {display:block;  margin-right:20px!important;}*/
+
+
+/*h4.block-title a {border-radius:0; line-height:32px; padding:0 15px; font-weight:normal; letter-spacing:0.25px; 
+top:0; font-size:12px;}
+
+.geospatial-world-home-oct-32016 .td-a-rec.td-a-rec-id-custom_ad_2 {margin-top:0!important;}
+.td-pb-span4 .vc_cta3-container .vc_general.vc_cta3 {box-shadow:none!important; border-radius:0!important;}
+
+.widget .block-title {display:block; border-bottom:2px solid #222; margin-bottom:20px!important;}
+.widget .block-title span {border-radius:0; line-height:32px; padding:0 15px; 
+font-weight:normal; letter-spacing:0.25px; top:0; font-size:12px;}
+
+.td_block_social_counter h4.block-title {display:block; border-bottom:2px solid #222; margin-bottom:20px!important;}
+.td_block_social_counter h4.block-title span {border-radius:0; line-height:32px; padding:0 15px; 
+font-weight:normal; letter-spacing:0.25px; top:0; font-size:12px;}*/
+
+.entry-crumbs {color:#000;}
+.entry-crumbs a {color:#000;}
+
+
+#td-top-mobile-toggle i {color:#000!important;}
+.td-a-rec.td-a-rec-id-custom_ad_5 {margin-top:0!important;} 
+.vc_cta3-container {margin-bottom:20px!important} 
+
+
+
+
+.td-post-content p {margin:0 0 15px 0!important;}
+
+
+@media (max-width: 640px) {
+.td-post-template-default header .entry-title {
+    font-size: 18px!important;
+    line-height: 28px!important;
+   }
+
+}
+
+.rc-anchor-normal .rc-anchor-checkbox-label {width:110px!important;}
+
+
+/* ========== Custom css start here [20170623] ========== */
+
+
+body.anshu-23-june .td-header-border::after {display:none;}
+body.anshu-23-june .td-header-main-menu {border-bottom:none!important;}
+body.anshu-23-june .wpb_revslider_element.wpb_content_element {padding:0!important;}
+
+
+/* ========== Custom css start here [20170623] ========== */
+
+
+.homepage-anshu-23june2017 .td-header-border::after {display:none;}
+.homepage-anshu-23june2017 .td-header-main-menu {border-bottom:none!important;}
+.homepage-anshu-23june2017 .wpb_revslider_element.wpb_content_element {padding:0 0 20px!important; position:relative;}
+
+.homepage-anshu-23june2017 .td_block_trending_now {position:relative;}
+.homepage-anshu-23june2017 .td_block_trending_now::before  {content: '';
+    position: absolute;    background-color:#e6e6e6;    top: 0;    width:100%;    height:1px;    display: block;
+    left: 0;}
+
+.homepage-anshu-23june2017 .wpb_revslider_element.wpb_content_element::before {content: '';
+    position: absolute;    background-color: #fff;    bottom: 0;    width: 1px;    height: 20px;    display: block;
+    left: 0;}
+
+.homepage-anshu-23june2017 .wpb_revslider_element.wpb_content_element::after {content: '';
+    position: absolute;    background-color: #fff;    bottom: 0;    width: 2px;    height:20px;    display: block;
+    right:-1px;}
+#header .policywatch {
+    display: none;
+}
+
+body.home .wpb_content_element {padding:0 0 20px;}
+body.home .td_block_14 .td-block-row:last-child
+{
+ width: 1020px;
+
+    margin-bottom: 20px;
+
+}
+/*
+body.home .td_block_inner
+{
+      margin-left: -20px!important;
+
+}
+
+body.home .td-block-row
+{
+    width:680px;
+}*/
+
+    .team_blk {display:block; font-family:verdana;}
+	.team_blk h2 {display:block; font-size:28px; color:#000; padding:0 0 30px; margin:0;}
+	
+	.tb_inner {display:block; padding:0 0 30px; margin:0 0 30px; border-bottom:1px solid #ddd; position:relative; overflow: hidden;}
+	.tb_inner p {display:block; font-size:14px; color:#222; line-height:24px; text-align:justify; letter-spacing:0.5px; padding:0; margin:0;}
+	.tb_inner p strong {display:block;}
+	.tb_inner p b {display:block; font-weight:normal; font-size:13px; padding:0 0 15px; line-height:18px;} 
+	.tb_inner p img {width:auto; float:left; margin:8px 20px 5px 0; border:3px solid #ccc; 
+	padding:3px; border-top:none; border-left:none; border-radius:5px;}
+	
+	.tb_inner .icons_blk {width:auto; position:absolute; right:0; top:0;}
+	.tb_inner .icons_blk a {width:30px; height:29px; float:left; text-indent:-9999em;}
+	.tb_inner .icons_blk a.linkedin {background: url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/uploads/team/linkedin.jpg) no-repeat left top;}
+	.tb_inner .icons_blk a.twitter {background: url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/uploads/team/twitter.jpg) no-repeat left top;}
+	.tb_inner .icons_blk a.email {background: url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/uploads/team/email.jpg) no-repeat left top;}
+	
+	.tb_inner:last-child {border:none; margin:0;}
+	.top-header-menu ul li a{
+    color: #000000!important;
+}
+
+
+
+
+/* for about us page */
+    
+
+	.about_blk {display:block; font-family:verdana;}
+	.about_blk h2 {display:block; font-size:28px; color:#000; padding:0 0 30px; margin:0;}
+	
+	.about_blk .ab_sub_head {display:block; padding:0 0 20px;}
+	.about_blk .ab_sub_head strong {background:#ff823a; color:#fff; text-transform:uppercase; 
+	font-size:14px; display:inline-block; padding:8px 20px; letter-spacing:0.5px;}
+	
+	.about_blk .ab_inner {display:block; padding:0 0 10px; margin:0 0 20px; 
+	border-bottom:1px solid #ddd; position:relative; overflow: hidden;}
+	
+	.about_blk .ab_inner .abi_content {width:65%; float:left;}
+	.about_blk .ab_inner .abi_content p {display:block; font-size:13px; color:#222; line-height:22px; text-align:justify; letter-spacing:0.5px; padding:0 0 12px; margin:0;}
+	.about_blk .ab_inner .abi_content p strong {display:block;}
+	.about_blk .ab_inner .abi_content p b {display:block; font-weight:normal; font-size:13px; padding:0 0 15px; line-height:18px;}
+	.about_blk .ab_inner .abi_content b.dark {display:block; font-size:16px; font-weight:bold; padding:0 0 15px;}
+	.about_blk .ab_inner .abi_content p img {width:auto; float:left; margin:8px 20px 5px 0; border:3px solid #ccc; padding:3px; border-top:none; border-left:none; border-radius:5px;}
+	
+	.ab_inner .abi_rtl_img {width:32%; float:right; border:1px solid #ddd; padding:9px; 
+	box-sizing:border-box; vertical-align:top;}
+	.ab_inner .abi_rtl_img  img {width:100%;}
+	
+	.about_blk .ab_inner .abi_content.full {width:100%;}
+	
+	.about_blk .ab_inner .img_row {width:100%; float:left; padding:8px 0 0 0;}
+	.about_blk .ab_inner .img_row .img_blk {width:48.5%; border:1px solid #ddd; padding:9px; 
+	box-sizing:border-box; float:left; margin:0 0 10px;}
+	.about_blk .ab_inner .img_row .img_blk img {width:100%;}
+	.about_blk .ab_inner .img_row .img_blk:last-child {float:right;}
+
+	.ab_inner:last-child {border:none; margin:0;}
+	
+
+	@media all and (max-width:640px)
+		
+	{
+		.main_wrapper {max-width:100%;}
+		.about_blk .ab_inner .abi_content {width:100%;}
+		.ab_inner .abi_rtl_img {width:100%; margin:0 0 10px;}
+         body.home .td_block_14.s_video_blk .td-block-row:last-child {width:100%;}
+          body.home .td-pb-row .wpb_column.td-pb-span8:after {display:none;}
+
+          .wpb_widgetised_column.wpb_content_element.homepagevotebanner {padding-top:25px!important;}
+	}
+
+    /* end about us page */
+
+
+    .sf-menu a.sf-with-ul {padding:0 25px 0 10px;}
+
+
+    	.team_blk {display:block; font-family:verdana;}
+	.team_blk h2 {display:block; font-size:28px; color:#000; padding:0 0 30px; margin:0;}
+	
+	.tb_inner {display:block; padding:0 0 30px; margin:0 0 30px; border-bottom:1px solid #ddd; position:relative; overflow: hidden;}
+	.tb_inner p {display:block; font-size:14px; color:#222; line-height:24px; text-align:justify; letter-spacing:0.5px; padding:0; margin:0;}
+	.tb_inner p strong {display:block;}
+	.tb_inner p b {display:block; font-weight:normal; font-size:13px; padding:0 0 15px; line-height:18px;} 
+	.tb_inner p img {width:auto; float:left; margin:8px 20px 5px 0; border:3px solid #ccc; 
+	padding:3px; border-top:none; border-left:none; border-radius:5px;}
+	
+	.tb_inner .icons_blk {width:auto; position:absolute; right:0; top:0;}
+	.tb_inner .icons_blk a {width:30px; height:29px; float:left; text-indent:-9999em;}
+	.tb_inner .icons_blk a.linkedin {background: url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/uploads/team/linkedin.jpg) no-repeat left top;}
+	.tb_inner .icons_blk a.twitter {background: url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/uploads/team/twitter.jpg) no-repeat left top;}
+	.tb_inner .icons_blk a.email {background: url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/uploads/team/email.jpg) no-repeat left top;}
+	
+	.tb_inner:last-child {border:none; margin:0;}
+
+     body.home .td_block_14.s_video_blk .block-title {position:inherit; top:inherit; left:inherit; z-index: inherit; 
+     margin:0 0 21px 20px;}
+
+     body.home .td-pb-row .wpb_column.td-pb-span8:after {content: ''; position:absolute; z-index:1;
+    background-color: #e6e6e6;    bottom:-50px;    width: 1px;    height:100px;    display: block;    right: -1px; display:none;}
+
+     /*========== 02 Feb 2018 css start here {By kamal Saini} ==========*/
+
+     .tag_menu {background:#fff; display:block; text-align:left; width:1021px; margin:0 auto!important;}
+     .tag_menu .wpb_content_element {padding:0; text-align:left;}
+     .tag_menu .wpb_content_element .widget {padding:0 15px; background:#ff823a; margin:15px 0;}
+     .tag_menu .widget ul.menu {display:block; text-align:center;}
+     .tag_menu .widget ul.menu li {display:inline-block;}
+     .tag_menu .widget ul.menu li a {color:#fff; border-radius:3px; margin:0 10px 0 0; padding:0; line-height:32px; display:block;  font-size:15px; font-weight:700;  font-family: "Raleway";}
+
+     .tag_menu.noline .td-pb-span12 {border-left:none}
+     body.home .tag_menu .wpb_content_element {padding:0;}
+
+     .tag_menu .vc_column-inner  {padding:0!important;}
+     .tag_menu .vc_column-inner .wpb_content_element {padding:0!important; margin:0!important;}
+
+     .cp_head {display:block; border:none !important;}
+     .cp_head h1 {display:block; margin-top:31px; position:relative; z-index:1; border:none !important;}
+     .cp_head strong {display:inline-block; border:none !important; background:#ff823a!important; color:#fff!important; font-size:22px; font-weight:700; font-family: 'Open Sans', arial, sans-serif; padding:0 20px;}
+
+     
+     .cp_headlidar {display:block;}
+     .cp_headlidar h1 {display:block; margin-top:31px; position:relative; z-index:1;}
+     .cp_headlidar strong {display:inline-block; background:#ff823a!important; color:#fff!important; font-size:22px; font-weight:700; font-family: 'Open Sans', arial, sans-serif; padding:0 20px;}
+
+
+     .widgetisedbanner {text-align:center!important;}
+
+     /* ========== 26 feb 2018 css ========== */
+
+     .sf-menu > li > a {padding:0 9px!important; font-size:14px!important;}
+     .sf-menu > li:first-child > a {background:url(http://web.archive.org/web/20210115004915im_/https://www.geospatialworld.net/wp-content/uploads/home.png) no-repeat left center; text-indent:-9999em;}
+   
+     .custom-slider>ul {margin:0 15px!important;}
+
+     /* ========== 07 mar 2018 css ========== */
+
+     #td-header-menu {background:#777; min-height:36px!important;}
+     #td-header-menu .sf-menu .td-menu-item a {line-height:36px; color:#fff;}
+     #td-header-menu .sf-menu .td-menu-item a:hover {background:#eee;}
+     #td-header-menu .sf-menu .td-menu-item:hover a {background:#eee; color:#ff823a;}
+     #td-header-menu .sf-menu .td-menu-item.current-menu-item a {background:#eee;}
+
+     
+      #td-header-menu .sf-menu .td-menu-item .sub-menu {padding:20px; background:#eee;}
+      #td-header-menu .sf-menu .td-menu-item .sub-menu li a {color:#333; line-height:22px; margin:7px 0; padding:0;}
+      #td-header-menu .sf-menu .td-menu-item .sub-menu li:first-child {margin:0;}
+
+       /* ========== 09 may 2018 css ========== */
+
+       .left_leadership_banner {width:100%!important;}
+       .left_leadership_banner img {width:100%!important;}
+
+       /**for media partner page*/
+       .mp_events_blk {width:680px; font-family:Verdana;}
+
+.mp_events_blk .mp_eb_header {display:block; padding:0 0 20px;}
+.mp_events_blk .mp_eb_header h3 {text-transform:uppercase; margin:0; padding:0; 
+font-size:20px;}
+.mp_events_blk .mp_eb_header strong {display:block; color:#222; font-size:18px; 
+font-family: 'Raleway', sans-serif; font-weight:600; padding:0 0 5px;}
+.mp_events_blk .mp_eb_header p {display:block; padding:0; margin:0; color:#444; 
+font-size:14px;}
+
+.mp_events_blk .mp_eb_row {display:block; overflow:hidden;}
+
+.mp_events_blk .mp_eb_row .event_blk {width:310px; float:left; background:#fff; 
+border:1px solid #eee; margin:0 20px 25px 0; box-sizing:border-box; min-height:306px;}
+
+.mp_events_blk .mp_eb_row .event_blk .logo {display:block; text-align:center; padding:10px 0 25px; border-bottom:1px solid #eee; position:relative;}
+.mp_events_blk .mp_eb_row .event_blk .logo a {display:block;}
+.mp_events_blk .mp_eb_row .event_blk .logo a img {width:auto; display:inline-block;}
+
+.mp_events_blk .mp_eb_row .event_blk .logo .tag {width:auto; position:absolute; left:0; bottom:4px;}
+.mp_events_blk .mp_eb_row .event_blk .logo .tag span {background:#ff823a; padding:5px 20px; 
+font-size:13px; color:#fff; font-family: 'Raleway', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.25px;}
+
+.mp_events_blk .mp_eb_row .event_blk .info {display:block; padding:15px;}
+.mp_events_blk .mp_eb_row .event_blk .info .date_blk {display:block; padding:0 0 10px;}
+.mp_events_blk .mp_eb_row .event_blk .info .date_blk span {display:inline-block; 
+letter-spacing:0; font-size:11px; color:#000; line-height:18px; padding:0 5px 0 25px;}
+.mp_events_blk .mp_eb_row .event_blk .info .date_blk span.location {background:url(http://web.archive.org/web/20210115004915im_/https://www.geospatialworld.net/wp-content/uploads/location-icon.png) no-repeat left top; padding-left:22px}
+.mp_events_blk .mp_eb_row .event_blk .info .date_blk span.date {background:url(http://web.archive.org/web/20210115004915im_/https://www.geospatialworld.net/wp-content/uploads/date-icon.png) no-repeat left top;}
+
+.mp_events_blk .mp_eb_row .event_blk .info .content {display:block;}
+.mp_events_blk .mp_eb_row .event_blk .info .content h3 {display:block; letter-spacing:0.5px; 
+font-size:18px; color:#222222; padding:0 0 10px; font-family: 'Raleway', sans-serif; 
+line-height:24px; font-weight:600; margin:0;}
+.mp_events_blk .mp_eb_row .event_blk .info .content h3 a {color:#222222; text-decoration:none;}
+.mp_events_blk .mp_eb_row .event_blk .info .content h3 a:hover {color:#ff823a;}
+.mp_events_blk .mp_eb_row .event_blk .info .content p {font-size:12px; line-height:18px; 
+padding:0; color:#444; margin:0; letter-spacing:0.25px;}
+.mp_events_blk .mp_eb_row .event_blk .info .content p a {text-decoration:none; font-weight:bold; font-size:10px; color:#000;}
+
+.profile_info {display:block; font-family:Verdana;}
+.profile_info .pi_inner {display:block; padding:25px 30px 15px;}
+.profile_info .pi_inner span {display:block; font-size:20px; color:#ff823a; 
+letter-spacing:1px; padding:0 0 10px; font-weight:bold; text-transform:uppercase; 
+font-family: 'Raleway', sans-serif;}
+.profile_info .pi_inner p {font-size:13px; padding:0 0 15px; margin:0; line-height:20px; 
+letter-spacing:0.5px; color:#000;}
+
+
+/* ========== Popup css start here ========== */
+
+.popup_blk {display:none; position:fixed; z-index:1; padding-top:150px; left:0; top:0; 
+width:100%; height:100%; overflow:auto; background-color: rgb(0,0,0); 
+background-color:rgba(0,0,0,0.4);}
+.popup_blk .pb_inner {display:block; padding:25px 30px 15px;  position:relative;
+background:#fff; margin:auto;  border:1px solid #888; width:80%; max-width:600px; 
+-webkit-animation-name:animatetop; -webkit-animation-duration:0.4s;
+animation-name:animatetop; animation-duration:0.4s;}
+.popup_blk .pb_inner span {display:block; font-size:20px; color:#ff823a; 
+letter-spacing:1px; padding:0 0 10px; font-weight:bold; text-transform:uppercase; 
+font-family: 'Raleway', sans-serif;}
+.popup_blk .pb_inner p {font-size:13px; padding:0 0 15px; margin:0; line-height:20px; 
+letter-spacing:0.5px; color:#000; font-family:Verdana;}
+
+/* ===== Add Animation ===== */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* ===== The Close Button ===== */
+
+.popup_blk .pb_inner span.close {float:right; font-size:36px!important; font-weight:bold; padding:0!important; position:absolute; z-index:100; right:20px; top:5px;}
+.close:hover,.close:focus {color:#000; text-decoration:none; cursor:pointer;}
+
+
+
+/* event start */
+
+	.events_attend_blk {width:320px; box-sizing:border-box; background:rgba(8,131,190,0.1); border-radius:5px; padding:10px; margin:30px auto;}
+		.events_attend_blk h2 {display:block; padding:0 0 20px; font-family: 'Raleway', sans-serif; font-size:22px; color:#e16a4b; 
+		letter-spacing:0.5px; margin:0; line-height:24px; font-weight:700;}
+		
+		.events_attend_blk .eab_com {display:block; border-top:1px solid #000; padding:10px 0; overflow:hidden;}
+		.events_attend_blk .eab_com h3 {display:block; margin:0; padding:0; text-transform:uppercase; font-family:verdana; font-size:15px; 
+		letter-spacing:0.5px;}
+		.events_attend_blk .eab_com h3 a {color:#000; margin:0 0 8px; display:inline-block; text-decoration:none;}
+		.events_attend_blk .eab_com h3 a:hover {color:#ff823a;}
+		.events_attend_blk .eab_com span {width:auto; float:left; font-family:verdana; font-size:12px; line-height:20px; padding:0 0 0 22px; min-width:115px;}
+		.events_attend_blk .eab_com span.date {background:url(http://web.archive.org/web/20210115004915im_/https://geospatialmedia.net/images/date.png) no-repeat left center;}
+		.events_attend_blk .eab_com span.location {background:url(http://web.archive.org/web/20210115004915im_/https://geospatialmedia.net/images/location.png) no-repeat left center;}
+        /* event end */
+
+
+
+        /******For Image Caption  wp-caption*/
+
+
+        .single.single-post article figure.wp-caption {font-size:11px; line-height:17px; color:#444; text-align:right;}
+
+        /******End  For Image Caption  wp-caption*/
+
+
+        /*  anshu */
+
+
+.speakers_container {width:100%; float:left; padding:50px 0;}
+.speakers_container h2 {display:block; color:#ff6200; text-transform:uppercase; font-weight:700; letter-spacing:1px; font-size:28px; 
+font-family: 'Work Sans', sans-serif; padding:0 0 30px;}
+
+.speakers_container .ss_blk .seperator {clear:both;}
+
+.speakers_container .ss_blk .col4 {margin:0 2%; width:29%;}
+
+.speakers_container .ss_blk .ui-sign-box {display:block; padding:15px; background:#eee; margin:0 0 30px; box-shadow:0 20px 60px 0 rgba(0, 0, 0, .1);}
+.speakers_container .ss_blk .ui-sign-box .ui-sign-content-box {display:block;}
+
+.speakers_container .ss_blk .ui-sign-box .ui-sign-content-box .s_pic {display:block; margin:0 0 15px;}
+
+.speakers_container .ss_blk .ui-sign-box .ui-sign-content-box .s_info {display:block; text-align:center;}
+.speakers_container .ss_blk .ui-sign-box .ui-sign-content-box .s_info strong {display:block; color:#ff6200; font-size:18px; text-transform:uppercase; 
+letter-spacing:0.5px; padding:0 0 10px; font-family: 'Work Sans', sans-serif; font-weight:700;}
+.speakers_container .ss_blk .ui-sign-box .ui-sign-content-box .s_info span {display:block; color:#333; font-size:12px; font-family:'Work Sans', sans-serif; 
+line-height:18px; letter-spacing:0.25px; min-height:54px;}
+
+/* PLENARY */
+
+.speakers_container.plenary {background:rgba(0,161,222,0.1);}
+.speakers_container.plenary .ss_blk .ui-sign-box {background:linear-gradient(#ffffff 50%, #5d2e8c 50%);}
+.speakers_container.plenary .ss_blk .ui-sign-box .ui-sign-content-box .s_pic {margin:0;}
+.speakers_container.plenary .ss_blk .ui-sign-box .ui-sign-content-box .s_info {background:none; padding:15px 10px;} 
+.speakers_container.plenary .ss_blk .ui-sign-box .ui-sign-content-box .s_info strong {color:#fff;} 
+.speakers_container.plenary .ss_blk .ui-sign-box .ui-sign-content-box .s_info span {color:#fff;} 
+
+/* SPEAKERS */
+
+.speakers_container.speakers h3 {display:block; text-align:left; background:#fff; padding:12px 20px; border-radius:5px;  margin:0 0 30px; 
+border:1px dashed #000; border-left:3px solid #000;  font-size:18px; font-weight:700; line-height:26px; color:#02b16e; letter-spacing:0.5px; 
+font-family: 'Work Sans', sans-serif; text-transform:uppercase;}
+
+.speakers_container.speakers h3.geosmart_cities {border-color:#00a4b6; color:#00a4b6;}
+.speakers_container.speakers h3.geosmart_construction {border-color:#e2b22a; color:#e2b22a;}
+.speakers_container.speakers h3.geosmart_agriculture {border-color:#2f9741; color:#2f9741;}
+.speakers_container.speakers h3.geo4sdgs {border-color:#00a1de; color:#00a1de;}
+.speakers_container.speakers h3.geosmart_water {border-color:#0563c1; color:#0563c1;}
+.speakers_container.speakers h3.geoint {border-color:#003e24; color:#003e24;}
+
+.speakers_container.speakers .ss_blk .ui-sign-box {box-shadow:none; padding:0; background:none;}
+.speakers_container.speakers .ss_blk .ui-sign-box .ui-sign-content-box {text-align:center;}
+.speakers_container.speakers .ss_blk .ui-sign-box .ui-sign-content-box .s_pic {display:inline-block; width:150px; height:150px; border-radius:50%; 
+border:2px solid #000;}
+.speakers_container.speakers .ss_blk .ui-sign-box .ui-sign-content-box .s_pic img {border-radius:50%;}
+
+.speakers_container.speakers .ss_blk.geosmart_cities .ui-sign-box .ui-sign-content-box .s_pic {border-color:#00a4b6;} 
+.speakers_container.speakers .ss_blk.geosmart_cities .ui-sign-box .ui-sign-content-box .s_info strong {color:#00a4b6;}
+
+.speakers_container.speakers .ss_blk.geosmart_construction .ui-sign-box .ui-sign-content-box .s_pic {border-color:#e2b22a;} 
+.speakers_container.speakers .ss_blk.geosmart_construction .ui-sign-box .ui-sign-content-box .s_info strong {color:#e2b22a;}
+
+.speakers_container.speakers .ss_blk.geosmart_agriculture .ui-sign-box .ui-sign-content-box .s_pic {border-color:#2f9741;} 
+.speakers_container.speakers .ss_blk.geosmart_agriculture .ui-sign-box .ui-sign-content-box .s_info strong {color:#2f9741;}
+
+.speakers_container.speakers .ss_blk.geo4sdgs .ui-sign-box .ui-sign-content-box .s_pic {border-color:#00a1de;} 
+.speakers_container.speakers .ss_blk.geo4sdgs .ui-sign-box .ui-sign-content-box .s_info strong {color:#00a1de;}
+
+.speakers_container.speakers .ss_blk.geosmart_water .ui-sign-box .ui-sign-content-box .s_pic {border-color:#0563c1;} 
+.speakers_container.speakers .ss_blk.geosmart_water .ui-sign-box .ui-sign-content-box .s_info strong {color:#0563c1;}
+
+.speakers_container.speakers .ss_blk.geoint .ui-sign-box .ui-sign-content-box .s_pic {border-color:#003e24;} 
+.speakers_container.speakers .ss_blk.geoint .ui-sign-box .ui-sign-content-box .s_info strong {color:#003e24;}
+
+/* INDIVIDUAL PROGRAM SPEAKERS */
+
+.inner .speakers_container.speakers {width:auto; float:none; clear:both; display:block; overflow:hidden; padding:30px 0;}
+
+
+.inner.programs .container_container .cc_bottom .left_blk .partner_container {width:auto; float:none; padding:30px 0 0; display:block;}
+.inner.programs .container_container .cc_bottom .left_blk .partner_container .pc_inner .pc_outer {display:block;}
+.inner.programs .container_container .cc_bottom .left_blk .partner_container .pc_inner .pc_outer .p_cat {text-align:center;}
+
+/* ICONS CSS */
+
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links {background:none; border:0; margin:0; padding:10px 0 0;}
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links a {width:32px; height:32px; border:1px solid #ccc; display:inline-block; padding:3px; border-radius:50%; margin:0 2px;}
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links a span {display:block; border-radius:50%; background:#e81500; width:32px; height:32px; -webkit-transition:all 0.5s ease; 
+-moz-transition:all 0.5s ease; -o-transition:all 0.5s ease; transition:all 0.5s ease; min-height:inherit; text-indent:-9999em;}
+
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links a span.bio {background:url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/themes/images/link_icon.png) no-repeat left top #e81500; }
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links a:hover span.bio {background:url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/themes/images/link_icon.png) no-repeat left -32px #ffffff;}
+
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links a span.linkedin {background:url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/themes/images/linkedin_icon.png) no-repeat left top #006699;}
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links a:hover span.linkedin {background:url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/themes/images/linkedin_icon.png) no-repeat left -32px #ffffff;}
+
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links a span.twitter {background:url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/themes/images/twitter_icon.png) no-repeat left top #1da1f2; }
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links a:hover span.twitter {background:url(/web/20210115004915im_/https://www.geospatialworld.net/wp-content/themes/images/twitter_icon.png) no-repeat left -32px #ffffff;}
+
+.inner .speakers_container.speakers .ss_blk  .spcommon {clear:both;}
+
+
+/* TIME BLOCK CSS */
+
+.container_container .speakers_container .time_slot {display:block; text-align:left; background:#f7f7f7; padding:12px 20px; border:1px solid #ddd; 
+border-radius:5px;  margin:0 0 30px;}
+.container_container .speakers_container .time_slot span {display:block; font-size:18px; font-weight:700; line-height:26px;
+font-family:'Work Sans', sans-serif; color:#111; letter-spacing: 0.5px;}
+.container_container .speakers_container .time_slot strong {display:inline-block; background:#000; padding:5px 10px; line-height:24px; color:#fff; margin:5px 0 0; font-family:'Work Sans', sans-serif; font-weight:700; letter-spacing:0.5px; font-size:15px;}
+.container_container .speakers_container .ss_blk .ui-sign-box .ui-sign-content-box .s_info span.moderator {display:inline-block; background:#c51c8d; border-radius:3px; line-height:28px; padding:0 10px; color:#fff; font-weight:bold; text-transform:uppercase; font-size:13px; margin: 0 0 10px; min-height:inherit;}
+
+.geo4sdgs .container_container .speakers_container .ss_blk .ui-sign-box .ui-sign-content-box .s_info span.moderator {background:#00a1de;}
+.agriculture .container_container .speakers_container .ss_blk .ui-sign-box .ui-sign-content-box .s_info span.moderator {background:#2f9741;}
+.construction .container_container .speakers_container .ss_blk .ui-sign-box .ui-sign-content-box .s_info span.moderator {background:#e2b22a;}
+.water .container_container .speakers_container .ss_blk .ui-sign-box .ui-sign-content-box .s_info span.moderator {background:#0563c1;}
+
+/* 13 Nov 2019 css start here */
+
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links .abstract_title strong { display:block;
+font-weight:400; color:#000; font-size:12px; line-height:18px; text-transform:none;  border:1px dashed #ccc; border-radius:5px; margin:10px 0 30px; padding:10px;}
+.ss_blk .ui-sign-box .ui-sign-content-box .s_info .s_links .abstract_title strong a {width:auto; height:auto; border:none; border-radius:none; margin:0; padding:0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*  anshu end */
+
+
+        /*  covid 19 ashboard start*/
+        
+.maincontainer {width:100%; float:left;}
+.main_wrapper {width:1000px; margin:0 auto;}
+
+
+.onerow {display:block; overflow:hidden;}
+
+
+.dash_blk {width:309px; float:left; margin:0 15px 30px; box-shadow:0 20px 25px 0 rgba(0,0,0,.15); 
+font-family: 'Raleway', sans-serif;}
+
+
+.dash_blk .top {display:block;}
+.dash_blk .top img {width:100%;}
+
+
+.dash_blk .bottom {display:block; padding:10px 15px 20px 15px; background:#fff;}
+
+
+.dash_blk .bottom .tag {display:block; padding:0 0 20px;}
+.dash_blk .bottom .tag span {display:inline-block; background:#000; line-height:28px; padding:0 10px; 
+border-radius:5px; color:#fff; font-size:13px; text-transform:uppercase; font-weight:700; letter-spacing:0.5px;}
+
+
+.dash_blk .bottom .info {display:block;}
+.dash_blk .bottom .info strong {display:block; font-size:20px; color:#000; font-weight:700; letter-spacing:0.5px; padding:0 0 15px;}
+.dash_blk .bottom .info p {display:block; font-size:15px; color:#555; letter-spacing:0.25px; 
+padding:0 0 15px; line-height:24px; margin:0; min-height:110px;}
+.dash_blk .bottom .info a {display:inline-block; color:#ff823a; text-decoration:underline; font-weight:700; 
+font-size:16px;}
+.dash_blk .bottom .info a:hover {color:#000; text-decoration:none; }
+
+/* 10 APRIL 2020 CSS START HERE */
+
+.menu-covid-19-container {display:block; background:#000; padding: 6px 0;}
+.menu-covid-19-container ul {display:block; text-align:left; margin:0;}
+.menu-covid-19-container ul li {display:inline-block; font-size:13px; text-transform:uppercase; position:relative;}
+.menu-covid-19-container ul li a {display:block; margin:0 12px; color:#fff; line-height:20px; font-size:13px;}
+
+.menu-covid-19-container ul li ul {display:none; width:250px; padding:10px; position:absolute; left:0; 
+top:20px; background:#000; margin:0; z-index:100;}
+.menu-covid-19-container ul li:hover ul {display:block;}
+.menu-covid-19-container ul li ul li {display:block; padding:2px 0;}
+.menu-covid-19-container ul li ul li a {text-transform:none;}
+
+.menu-covid-19-container ul li.menu-item-type-custom::before {position:absolute; top:-6px;
+padding-right:0; font-size:9px; content:'\e806' !important; font-family:newsmag; color:#fff; right:0;}
+
+/* 29 JUNE 2020 CSS START HERE */
+
+body .prime_content p {font-size:20px!important; font-family: 'Playfair Display', serif!important; 
+line-height:30px!important; padding:0 0 15px!important;}
+
+.prime_restriction .pointers_blk {width:auto; display:block; margin:0;}
+
+#pms_login {width:400px; margin:50px auto 0; overflow:hidden; background:#f5f7f9; border-radius:5px; 
+padding:30px; box-sizing:border-box; border:1px solid #eee; text-align:center;}
+#pms_login p {display:block; padding:0 0 20px; margin:0; font-family: "Lato", open sans;}
+#pms_login p label {display:block; padding:0 0 10px; color:#333; font-size:14px; 
+text-transform:uppercase; text-align:left;}
+#pms_login p input[type="text"], #pms_login p input[type="password"] {width:100%; box-sizing:border-box; border-radius:5px; padding:7px 10px; height:36px; border:1px solid #ddd; background:#fff; font-size:16px; 
+color:#222; line-height:20px; text-align:left;}
+#pms_login p input[type="submit"] {width:100%; background:#0D84BE; display:block; padding:0 20px; border:none; 
+border-radius:5px; color:#fff; font-size:17px; text-transform:uppercase; height:42px; letter-spacing:0.5px; 
+font-family: "Lato", open sans; margin:0; cursor:pointer; text-align:center; box-sizing:border-box;}
+
+#pms_login p.login-remember label {text-transform:none; font-size:12px; font-weight:300; letter-spacing:0.5px; padding:0;}
+#pms_login p.login-remember input[type="checkbox"] {width:auto; float:left; margin:3px 5px 0 0;}
+
+#pms_login a {display:inline-block; font-size:13px; margin:0 3px; font-family: "Lato", open sans;}
+
+.search_container {width:100%; float:left; background:url("http://web.archive.org/web/20210115004915im_/http://geospatialmedia.in/KAMAL/2020/WEBSITES/PRIME/images/search_bg.jpg") no-repeat center; 
+background-size:cover;}
+.search_container .sc_inner {width:100%; float:left; padding:100px 0 70px; 
+background:linear-gradient(87deg, rgba(193, 39, 0, 0.9) , rgba(0, 89, 164, 0.9) 100%)}
+.main_wrapper {width:1000px; margin:0 auto;}
+.main_wrapper .row {display:block; text-align:center; padding:0 0 30px;}
+.main_wrapper .row h3 {font-family: 'Raleway', sans-serif; display:block; color:#fff; font-weight:bold; font-size:28px; 
+letter-spacing:0.75px; text-transform:uppercase; margin:0; padding:0 0 5px;}
+.main_wrapper .row span {display:block; font-size:17px; line-height:20px; color:#fff; padding:0; 
+margin:0; font-family:'Lato', sans-serif; letter-spacing:0.5px;}
+ 
+.main_wrapper .row input[type="text"] {width:160px; display:inline-block; box-sizing:border-box; 
+border-radius:5px; padding:10px; height:42px; border:0; background:#fff; font-family: 'Lato', sans-serif; 
+font-size:15px; color:#222; line-height:22px; vertical-align:top;}
+.main_wrapper .row select {width:160px; display:inline-block; box-sizing:border-box; -webkit-appearance:none; 
+border-radius:5px; padding:10px; height:42px; border:0; background:#fff; font-family: 'Lato', sans-serif; 
+font-size:15px; color:#222; line-height:22px; vertical-align:top;}
+.main_wrapper .row input[type="submit"] {width:auto; display:inline-block; background:#c12700; padding:0 15px; 
+border:none; border-radius:5px; color:#fff; font-size:16px; text-transform:uppercase; height:42px; 
+letter-spacing:1px; font-family: 'Raleway', sans-serif; margin:0; cursor:pointer; vertical-align:top; 
+font-weight:700;}
+
+.registation_blk {display:block;}
+
+.registation_blk .rb_left {display:none;}
+
+.registation_blk .rb_right {display:block; overflow:hidden; box-sizing:border-box; padding:0 0 30px;}
+.registation_blk .rb_right .pms-form ul {margin:10px 0 20px; display:block; overflow:hidden;}
+.registation_blk .rb_right .pms-form ul li {margin:0; padding:0 20px 15px 0; width:40%; display:inline-block; box-sizing:border-box; vertical-align:top;}
+.registation_blk .rb_right .pms-form ul li label {display:block; padding:0 0 8px; color:#333; font-size:14px; 
+text-transform:uppercase; text-align:left; font-family: "Lato", open sans;} 
+.registation_blk .rb_right input[type="text"], .registation_blk .rb_right input[type="password"] {width:100%; box-sizing:border-box; border-radius:5px; padding:7px 10px; height:36px; border:1px solid #ddd; 
+background:#fff; font-size:16px; color:#222; line-height:20px; text-align:left;}
+.registation_blk .rb_right input[type="password"] {margin:0;}
+.registation_blk .rb_right input[type="submit"] {width:auto; min-width:300px; background:#0D84BE; display:block; 
+padding:0 20px; border:none; border-radius:5px; color:#fff; font-size:17px; text-transform:uppercase; 
+height:42px; letter-spacing:0.5px; font-family: "Lato", open sans; margin:0; cursor:pointer; 
+text-align:center; box-sizing:border-box;}
+
+.registation_blk .rb_right .pms-form ul li.pms-field.pms-field-subscriptions {width:100%;} 
+.registation_blk .rb_right .pms-subscription-plan {margin:5px 0 0;}
+.registation_blk .rb_right .pms-subscription-plan label {padding:0!important;}
+.registation_blk .rb_right .pms-subscription-plan .pms-subscription-plan-name {text-transform:none;}
+.registation_blk .rb_right .pms-subscription-plan-description {font-size:13px; font-weight:400; 
+font-family: "Lato", open sans; letter-spacing:0.25px;}
+.registation_blk .rb_right .pms-subscription-plan-auto-renew {padding-top:10px;}
+.registation_blk .rb_right .pms-subscription-plan-auto-renew label {text-transform:none!important;}
+
+.registation_blk .rb_right .pms_field-errors-wrapper p {color:#f00; font-size:12px; 
+font-family: "Lato", open sans; line-height:20px; letter-spacing:0.25px; margin:5px 0 0;}
+
+.registation_blk .rb_right .pms-form ul.pms-billing-details {margin-top:-20px;}
+.registation_blk .rb_right .pms-form ul.pms-billing-details li.pms-field.pms-field-type-heading {width:100%;}
+.registation_blk .rb_right .pms-form ul.pms-billing-details li.pms-field.pms-field-type-heading h3 
+{font-family: "Lato", open sans; font-weight:700; text-transform:uppercase; margin:0 0 10px;}
+
+.registation_blk .rb_right .pms-form ul.pms-billing-details li.pms-billing-company p.pms-field-description 
+{color:#555; font-size:13px; font-family: "Lato", open sans; line-height:20px; font-style:normal;}
+
+.registation_blk .rb_right .chosen-container-single .chosen-single {height:36px; border:1px solid #ddd;}
+/*
+     FILE ARCHIVED ON 00:49:15 Jan 15, 2021 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:52:58 Jul 12, 2021.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  PetaboxLoader3.datanode: 418.236 (5)
+  captures_list: 103.687
+  load_resource: 514.926 (2)
+  exclusion.robots.policy: 0.263
+  exclusion.robots: 0.281
+  CDXLines.iter: 22.796 (3)
+  esindex: 0.015
+  LoadShardBlock: 63.47 (3)
+  RedisCDXSource: 7.052
+  PetaboxLoader3.resolve: 88.687 (2)
+*/

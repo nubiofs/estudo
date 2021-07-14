@@ -5,3 +5,13 @@ https://www.fernandoquadro.com.br/html/2019/07/24/clusterizacao-do-geoserver-com
 =================================================================================================
 
 https://docs.geoserver.geo-solutions.it/edu/en/clustering/
+
+
+================================================================================
+--> https://github.com/kartoza/docker-geoserver/blob/master/clustering/README.md
+
+Clustering using JMS Plugin
+
+GeoServer supports clustering using JMS cluster plugin or using the ActiveMQ-broker.
+
+You can read more about how to set-up clustering in kartoza clustering
