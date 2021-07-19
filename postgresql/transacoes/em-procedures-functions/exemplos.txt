@@ -1,0 +1,177 @@
+-- https://blog.dbi-services.com/postgresql-11-procedures-and-transaction-control/
+-- https://stackoverflow.com/questions/55406735/can-a-postgres-commit-exist-in-procedure-that-has-an-exception-block
+
+home$ docker run --rm --name postgres -p 5432:5432 -d kartoza/postgis:12.1
+
+home$ docker exec -it -w / postgres bash
+
+root# PGPASSWORD=docker psql -h localhost -d gis -p 5432 -U docker
+
+//1) Transacoes com procedure:
+gis=# DROP TABLE IF EXISTS t1; create table t1 (a int primary key);
+
+gis=# DROP PROCEDURE IF EXISTS dummy_proc(int);
+
+gis=# 
+CREATE OR REPLACE PROCEDURE dummy_proc(id int) AS $$
+DECLARE
+  l_id int := id;
+BEGIN
+  raise notice 'id is %', l_id;
+  insert into t1 (a) values (l_id);
+  commit;
+  l_id := l_id + 1;
+  raise notice 'id is %', l_id;
+  insert into t1 (a) values (l_id);
+  commit;
+  raise notice 'id is %', l_id;
+  insert into t1 (a) values (l_id);
+END;
+$$ LANGUAGE plpgsql;
+
+gis=# call dummy_proc(1);
+
+	NOTICE:  id is 1
+	NOTICE:  id is 2
+	NOTICE:  id is 2
+	ERROR:  duplicate key value violates unique constraint "t1_pkey"
+	DETAIL:  Key (a)=(2) already exists.
+	CONTEXT:  SQL statement "insert into t1 (a) values (l_id)"
+	PL/pgSQL function dummy_proc(integer) line 13 at SQL statement
+
+gis=# select * from t1;
+
+//but because we can now commit (or rollback) in between we did not lose all the records:
+ a 
+---
+ 1
+ 2
+(2 rows)
+
+gis=# DROP TABLE IF EXISTS t1; DROP PROCEDURE IF EXISTS dummy_proc(int);
+
+
+//2) Transacoes com funcoes:
+gis=# DROP TABLE IF EXISTS t2; create table t2(a int primary key);
+
+gis=# DROP FUNCTION IF EXISTS dummy_func1;
+
+gis=# 
+CREATE OR REPLACE FUNCTION dummy_func1(id int) RETURNS VOID AS $$
+DECLARE
+  l_id int := id;
+BEGIN
+  raise notice 'id is %', l_id;
+  insert into t2 (a) values (l_id);
+  commit;
+  l_id := l_id + 1;
+  raise notice 'id is %', l_id;
+  insert into t2 (a) values (l_id);
+  commit;
+  raise notice 'id is %', l_id;
+  insert into t2 (a) values (l_id);
+END;
+$$ LANGUAGE plpgsql;
+
+gis=# select dummy_func1(1);
+	NOTICE:  id is 1
+	ERROR:  invalid transaction termination
+	CONTEXT:  PL/pgSQL function dummy_func1(integer) line 7 at COMMIT
+
+gis=# select * from t2;
+ a 
+---
+(0 rows)
+
+
+//--> HINT:  Use a BEGIN block with an EXCEPTION clause instead.
+gis=# DROP FUNCTION IF EXISTS dummy_func2;
+
+gis=# 
+CREATE OR REPLACE FUNCTION dummy_func2(id int) RETURNS VOID AS $$
+DECLARE
+  l_id int := id;
+  v_state   TEXT;
+  v_msg     TEXT;
+  v_detail  TEXT;
+  v_hint    TEXT;
+  v_context TEXT;
+BEGIN
+
+  raise notice 'id is %', l_id;
+
+	BEGIN
+	  
+	  insert into t2 (a) values (l_id);
+
+	EXCEPTION WHEN OTHERS THEN
+		GET STACKED DIAGNOSTICS
+			v_state   = RETURNED_SQLSTATE,
+			v_msg     = MESSAGE_TEXT,
+			v_detail  = PG_EXCEPTION_DETAIL,
+			v_hint    = PG_EXCEPTION_HINT,
+			v_context = PG_EXCEPTION_CONTEXT;
+		RAISE LOG E'[Error - %] Got exception:
+			state  : %
+			message: %
+			detail : %
+			hint   : %
+			context: %', now(), v_state, v_msg, v_detail, v_hint, v_context;
+	END;
+
+  COMMIT;
+
+  BEGIN
+
+	  l_id := l_id + 1;
+	  raise notice 'id is %', l_id;
+	  insert into t2 (a) values (l_id);
+
+	EXCEPTION WHEN OTHERS THEN
+		GET STACKED DIAGNOSTICS
+			v_state   = RETURNED_SQLSTATE,
+			v_msg     = MESSAGE_TEXT,
+			v_detail  = PG_EXCEPTION_DETAIL,
+			v_hint    = PG_EXCEPTION_HINT,
+			v_context = PG_EXCEPTION_CONTEXT;
+		RAISE LOG E'[Error - %] Got exception:
+			state  : %
+			message: %
+			detail : %
+			hint   : %
+			context: %', now(), v_state, v_msg, v_detail, v_hint, v_context;
+	END;
+
+  COMMIT;
+  
+	BEGIN
+
+	  raise notice 'id is %', l_id;
+	  insert into t2 (a) values (l_id);
+
+	EXCEPTION WHEN OTHERS THEN
+		GET STACKED DIAGNOSTICS
+			v_state   = RETURNED_SQLSTATE,
+			v_msg     = MESSAGE_TEXT,
+			v_detail  = PG_EXCEPTION_DETAIL,
+			v_hint    = PG_EXCEPTION_HINT,
+			v_context = PG_EXCEPTION_CONTEXT;
+		RAISE LOG E'[Error - %] Got exception:
+			state  : %
+			message: %
+			detail : %
+			hint   : %
+			context: %', now(), v_state, v_msg, v_detail, v_hint, v_context;
+	END;
+  
+END;
+$$ LANGUAGE plpgsql;
+
+gis=# select dummy_func1(1);
+
+gis=# select * from t2;
+
+
+
+
+
