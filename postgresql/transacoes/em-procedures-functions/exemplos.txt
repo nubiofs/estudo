@@ -1,5 +1,7 @@
 -- https://blog.dbi-services.com/postgresql-11-procedures-and-transaction-control/
 -- https://stackoverflow.com/questions/55406735/can-a-postgres-commit-exist-in-procedure-that-has-an-exception-block
+-- https://franckpachot.medium.com/postgresql-subtransactions-savepoints-and-exception-blocks-67e0fbd412af
+
 
 home$ docker run --rm --name postgres -p 5432:5432 -d kartoza/postgis:12.1
 

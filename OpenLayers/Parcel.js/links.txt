@@ -1,0 +1,34 @@
+
+//https://openlayers.org/en/latest/examples/reprojection-wgs84.html
+
+
+
+=============================================================================================
+
+
+https://www.codeinwp.com/blog/introduction-to-parcel-js/
+https://github.com/openlayers/ol-parcel
+
+//(Getting Started with Parcel.js - A Web Application Bundler):
+-> https://www.youtube.com/watch?v=ONwotPEpinI
+-> https://www.codeinwp.com/blog/introduction-to-parcel-js/
+
+$ npm install --save-dev parcel
+
+$ npm init -y
+
+$ npm run dev
+
+Obs.: colocar "parcel index.html" & "parcel build index.html" & "parcel watch index.html" na tag 'script' do arquivo package.json
+
+--> http://localhost:1234
+
+---------------------------
+Obs.: VS code extension:
+
+//Creates boilerplate files (html, css, and js) for web app:
+"web boilerplate" (James Quick)
+
+//Para chamar a exibição do .html (Open With Live Server):
+- Live Server (by Ritwick Dey) 
+

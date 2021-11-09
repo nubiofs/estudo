@@ -1,0 +1,24 @@
+--> https://openlayers.org/en/latest/doc/tutorials/bundle.html
+--> https://github.com/openlayers/ol-parcel
+
+//Criando projeto com Nextjs.org "The React Framework for Production":
+$
+npx create-ol-app reprojection-wgs84 --template parcel
+
+Obs.: You will need to have git installed for the above command to work.
+
+$
+cd reprojection-wgs84
+
+Obs.:
+//Copiar o arquivo (main.js) de 
+"https://openlayers.org/en/latest/examples/reprojection-wgs84.html"
+e substitui pelo conteúdo do arquivo local.
+
+$
+npm start
+
+// (To generate a build ready for production)
+//Then deploy the contents of the dist directory to your server.
+$
+npm run build
