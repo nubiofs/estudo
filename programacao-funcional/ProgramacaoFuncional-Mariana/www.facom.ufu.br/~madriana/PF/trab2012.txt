@@ -1,0 +1,42 @@
+
+
+Usando a solução do problema das N rainhas listado abaixo como modelo, escreva um 
+programa Haskell para resolver (facilmente) um quebra-cabeça Sudoku (www.sudoku.com)
+
+============================================================================================
+
+
+Problema das N rainhas
+
+
+O problema das N rainhas consiste em colocar N rainhas mutuamente antagônicas num tabuleiro N x N
+de forma que nenhuma rainha possa capturar outra rainha em um único movimento. O resultado deve conter uma
+lista de todas as soluções possíveis em que cada solução lista a posição da fila de cada rainha em ordem
+de coluna.
+
+
+
+queens n = solve n
+    
+    where
+    solve 0 = [[]]
+    solve (k+1) = [q:b | b <- solve k, q <- [0..(n-1)], safe q b]
+    safe q b = and [not (checks q b i) | i <- [0..(length b-1)]]
+    checks q b i = q == (b!!i) || abs (q - (b!!i)) == i+1
+
+
+
+Main> queens 1
+[[0]]
+Main> queens 2
+[]
+Main> queens 3
+[]
+Main> queens 4
+[[2,0,3,1],[1,3,0,2]]
+Main> queens 5
+[[3,1,4,2,0],[2,4,1,3,0],[4,2,0,3,1],[3,0,2,4,1],[4,1,3,0,2],[0,3,1,4,2],[1,4,2,0,3],[0,2,4,1,3],[2,0,3,1,4],[1,3,0,2,4]]
+Main> queens 8
+....
+
+

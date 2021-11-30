@@ -1,0 +1,5 @@
+http://www.facom.ufu.br/~madriana/PF/
+
+$
+wget --recursive --no-parent http://www.facom.ufu.br/~madriana/PF/
+

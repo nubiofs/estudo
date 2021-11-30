@@ -1,0 +1,16 @@
+https://www.haskell.org/documentation/
+http://learnyouahaskell.com/chapters
+
+*** Configuração ***
+
+$
+sudo apt-get install haskell-platform
+
+$
+ghci
+
+Prelude> :help
+Prelude> :quit
+
+
+

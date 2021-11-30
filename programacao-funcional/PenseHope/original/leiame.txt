@@ -1,0 +1,37 @@
+! ============================================================ !
+!                                                              !
+! Neste pacote você encontra o arquivo de módulo "mylist.hop"  !
+! que possui as funções de apoio necessárias a execução dos    !
+! exercícios do livro, além do próprio livro "Pense em Hope".  !
+!                                                              !
+! >>> Windows                                                  !
+! -----------                                                  !
+!                                                              !
+! Se estiver em uso o sistema operacional Windows copie o ar-  !
+! quivo "mylist.hop" para a mesma pasta onde se encontra o ar- !
+! quivo "hope.exe" ou "hopeless.exe".                          !
+!                                                              !
+! >>> Linux                                                    !
+! ---------                                                    !
+!                                                              !
+! Se estiver em uso o sistema operacional Linux copie o arqui- !
+! vo "mylist.hop" para o diretório "Pasta pessoal", a partir   !
+! do ambiente gráfico GNOME.                                   !
+!                                                              !
+! Esse procedimento foi testado nas distribuições:             !
+!                                                              !
+!  - Ubuntu 20.04.2.0 LTS                                      !
+!  - Fedora Linux 33                                           !
+!  - OpenSUSE Leap 15.2                                        !
+!                                                              !
+! Após providenciar a cópia do arquivo "mylist.hop" para o lo- !
+! cal apropriado execute dentro do ambiente Hope a instrução:  !
+!                                                              !
+! use mylist;                                                  !
+!                                                              !
+! e bom divertimento.                                          !
+!                                                              !
+! OBS: Para mais detalhes sobre aquisição e instalação do am-  !
+!      biente de programação Hope vide "Apêndice D".           !
+!                                                              !
+! ============================================================ !
