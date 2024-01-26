@@ -1,0 +1,22 @@
+https://docs.astronvim.com/
+
+//Configuração inicial:
+$
+docker run -w /root -it --rm alpine:edge sh -uelic '
+  apk add bash git lua nodejs npm lazygit bottom python3 go neovim ripgrep alpine-sdk --update
+  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  nvim
+'
+
+$ docker ps
+
+$
+docker commit 68f87f701fdc alpine-astronvim:versao1
+
+$ docker images
+
+//[IMPORTANTE] Agora depois das configuracoes sempre comecar executando:
+$
+docker container run -it alpine-astronvim:versao1 /bin/sh
+
+~ # nvim
