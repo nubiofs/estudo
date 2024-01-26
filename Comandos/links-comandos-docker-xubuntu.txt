@@ -45,4 +45,7 @@ docker run --rm \
 Obs.: 
 RDP_USER=user
 RDP_PASSWORD=password
-  
+
+OK:  
+-> Dá pra acessar o container como "root" via "explorador remoto" (no vscode para devContainer) "Basta abrir o terminal no vscode que está como Root!" 
+
