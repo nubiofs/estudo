@@ -2,6 +2,11 @@ https://www.ostechnix.com/create-animated-gif-ubuntu-16-04/
 https://github.com/fiji/fiji.github.io
 
 
+[https://linuxhandbook.com/clear-systemd-journal-logs/]
+Delete journal logs which are older than 60 days:
+ $  journalctl --vacuum-time=60d
+
+
 * Scheduling a shutdown run the command:
 
 $ sudo shutdown -P +90
