@@ -1,0 +1,48 @@
+[Usando Xubuntu via docker (com interface gráfica)]
+
+https://hub.docker.com/r/hectorm/xubuntu
+https://github.com/hectorm/docker-xubuntu
+
+$ docker pull hectorm/xubuntu
+
+$
+docker run --rm \
+  --name xubuntu \
+  --detach \
+  --shm-size 2g \
+  --publish 3322:3322/tcp \
+  --publish 3389:3389/tcp \
+  --device /dev/dri:/dev/dri \
+  docker.io/hectorm/xubuntu:latest
+  
+  Obs.: You will be able to connect to the container via SSH through 3322/TCP port and RDP through 3389/TCP port.
+  
+  -> Usando o software "Remmina": 0.0.0.0:3389
+  
+UNPRIVILEGED_USER_NAME: unprivileged user name ("user" by default).
+UNPRIVILEGED_USER_PASSWORD: unprivileged user password ("password" by default).
+RDP_HOST=127.0.0.1
+RDP_PORT=3389
+RDP_DOMAIN=Xorg
+RDP_USER=user
+RDP_PASSWORD=password
+
+[IMPORTANTE]:
+If you set the variable UNPRIVILEGED_USER_GROUPS to sudo and UNPRIVILEGED_USER_PASSWORD to an empty string you will be able to use sudo without a password.
+
+$
+docker run --rm \
+  --name xubuntu \
+  --detach \
+  --shm-size 2g \
+  --publish 3322:3322/tcp \
+  --publish 3389:3389/tcp \
+  --device /dev/dri:/dev/dri \
+  -e UNPRIVILEGED_USER_GROUPS="sudo" \
+  -e UNPRIVILEGED_USER_PASSWORD="" \
+  docker.io/hectorm/xubuntu:latest
+
+Obs.: 
+RDP_USER=user
+RDP_PASSWORD=password
+  
