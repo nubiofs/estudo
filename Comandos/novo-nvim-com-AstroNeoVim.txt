@@ -1,0 +1,19 @@
+//https://github.com/neovim/neovim/blob/master/INSTALL.md
+//https://docs.astronvim.com/#%EF%B8%8F-installation
+
+wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+
+tar xf nvim-linux64.tar.gz --directory=~/.config
+
+cd ~/.config
+
+mv nvim-linux64 nvim
+
+git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim2
+
+mv ./nvim2 ./nvim
+
+cd nvim/bin
+
+nvim
+
