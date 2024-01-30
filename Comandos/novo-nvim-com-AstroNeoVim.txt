@@ -11,7 +11,11 @@ mv nvim-linux64 nvim
 
 git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim2
 
-mv ./nvim2 ./nvim
+cd ./nvim2
+
+mv * ../nvim
+
+cd ..
 
 cd nvim/bin
 
