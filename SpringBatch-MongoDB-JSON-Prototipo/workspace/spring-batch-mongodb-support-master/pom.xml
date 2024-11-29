@@ -28,7 +28,7 @@
 		<spring.batch.version>2.1.9.RELEASE</spring.batch.version>
 		<mongo.driver.version>2.10.0</mongo.driver.version>
 		<spring.version>3.1.2.RELEASE</spring.version>
-		<junit.version>4.10</junit.version>
+		<junit.version>4.13.1</junit.version>
 	</properties>
 
 	<dependencies>
